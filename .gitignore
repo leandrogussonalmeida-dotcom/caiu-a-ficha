@@ -1,0 +1,9 @@
+# saídas de render: pesadas e reprodutíveis a partir do código
+out-*/
+/tmp/
+*.mp4
+*.wav
+_voz/
+_veloc/
+__pycache__/
+*.pyc

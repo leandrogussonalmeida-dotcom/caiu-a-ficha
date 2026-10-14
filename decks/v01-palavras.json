@@ -1,0 +1,348 @@
+{
+ "id": "v01-palavras-erradas",
+ "titulo": "30 palavras que quase todo mundo escreve errado",
+ "tema": "30 palavras que quase todo mundo escreve errado",
+ "tema_curto": "ESCREVE CERTO?",
+ "tempo": 7,
+ "tempo_short": 6,
+ "intro": "Trinta palavras do português do dia a dia. Em cada uma, só uma grafia está correta. Sete segundos para escolher, e depois eu explico de onde vem a palavra e por que ela se escreve assim.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Escreve no comentário. Se você passou de vinte e quatro, você escreve melhor que a maioria dos brasileiros. Na sexta tem quiz dos anos noventa.",
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "Qual palavra está escrita corretamente?",
+   "opts": [
+    "Previlégio",
+    "Privilégio",
+    "Previlegio"
+   ],
+   "ok": 1,
+   "fato": "Privilégio vem do latim privilegium: lei (lex) para um indivíduo (privus). O i da segunda sílaba está na origem da palavra, não há e nenhum.",
+   "fato_curto": "Privilégio com i. Vem de privus mais lex."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Beneficiente",
+    "Beneficente",
+    "Benificente"
+   ],
+   "ok": 1,
+   "fato": "Beneficente vem de beneficência, que já não tem o i. A confusão nasce de eficiente, que é outra formação. Benefício tem i, beneficente não.",
+   "fato_curto": "Beneficente, sem i. Benefício tem, ela não."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Exceção",
+    "Esceção",
+    "Excessão"
+   ],
+   "ok": 0,
+   "fato": "Exceção vem de excipere, excetuar. Excesso, com dois s, vem de excedere, passar do limite. São duas palavras diferentes com dois sentidos diferentes.",
+   "fato_curto": "Exceção com ç. Excesso com ss é outra palavra."
+  },
+  {
+   "q": "Qual é a forma correta?",
+   "opts": [
+    "Advogado",
+    "Adevogado",
+    "Advinhado"
+   ],
+   "ok": 0,
+   "fato": "Advogado tem d e v juntos, sem vogal entre eles. A pronúncia brasileira insere um e de apoio, mas ele não existe na escrita. Mesmo caso de advertir e de adivinhar.",
+   "fato_curto": "Advogado, sem e no meio. O e só existe na fala."
+  },
+  {
+   "q": "Qual está correta?",
+   "opts": [
+    "Meritíssimo",
+    "Meretíssimo",
+    "Meritissimo"
+   ],
+   "ok": 0,
+   "fato": "Meritíssimo vem de mérito. Nada a ver com o verbo merecer na forma meret. O juiz é tratado assim por ter mérito, e o superlativo pede acento no i.",
+   "fato_curto": "Meritíssimo, de mérito."
+  },
+  {
+   "q": "Qual palavra existe?",
+   "opts": [
+    "Entertenimento",
+    "Entretenimento",
+    "Entretimento"
+   ],
+   "ok": 1,
+   "fato": "Entretenimento vem de entreter, que vem de entre mais ter: segurar alguém entre uma coisa e outra. A forma com r extra é influência do inglês entertainment.",
+   "fato_curto": "Entretenimento. De entreter, segurar entre."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Cabeleireiro",
+    "Cabelereiro",
+    "Cabeleleiro"
+   ],
+   "ok": 0,
+   "fato": "Cabeleireiro vem de cabeleira, não de cabelo. Quem cuida da cabeleira é o cabeleireiro, com os dois e e o i no lugar certo.",
+   "fato_curto": "Cabeleireiro, de cabeleira."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Empecilho",
+    "Impecilho",
+    "Empecílio"
+   ],
+   "ok": 0,
+   "fato": "Empecilho vem do verbo empecer, que significa atrapalhar, hoje quase só usado nessa palavra. Por isso é com e, apesar de muita gente escrever com i.",
+   "fato_curto": "Empecilho com e. Vem de empecer, atrapalhar."
+  },
+  {
+   "q": "Qual é a forma correta?",
+   "opts": [
+    "Rúbrica",
+    "Rubrica",
+    "Rubríca"
+   ],
+   "ok": 1,
+   "fato": "Rubrica não tem acento: a sílaba tônica é bri, e paroxítona terminada em a não acentua. O nome vem de rubro, porque antigamente as iniciais eram escritas em vermelho.",
+   "fato_curto": "Rubrica, sem acento. A tônica é bri."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Mendingo",
+    "Mendigo",
+    "Mendiguo"
+   ],
+   "ok": 1,
+   "fato": "Mendigo vem do latim mendicus. Não existe n antes do g, assim como não existe em prodígio ou em digno. O n extra é só a fala puxando a palavra.",
+   "fato_curto": "Mendigo, sem n. Do latim mendicus."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Asterístico",
+    "Asterisco",
+    "Asterix"
+   ],
+   "ok": 1,
+   "fato": "Asterisco vem do grego asteriskos, estrelinha. A mesma raiz de astro e de astronomia. Não tem nada a ver com característico, que é de onde vem a confusão.",
+   "fato_curto": "Asterisco. Do grego asteriskos, estrelinha."
+  },
+  {
+   "q": "Qual a forma correta?",
+   "opts": [
+    "Seje",
+    "Seja",
+    "Sêja"
+   ],
+   "ok": 1,
+   "fato": "Seja é o presente do subjuntivo do verbo ser: que eu seja, que ele seja. A forma seje não existe em nenhuma conjugação do português.",
+   "fato_curto": "Seja. Seje não existe."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Beneficio",
+    "Benefício",
+    "Benefisio"
+   ],
+   "ok": 1,
+   "fato": "Benefício é proparoxítona e toda proparoxítona é acentuada, sem exceção. Vem de bene mais facere: fazer o bem.",
+   "fato_curto": "Benefício com acento. Toda proparoxítona tem."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Hesitar",
+    "Ezitar",
+    "Exitar"
+   ],
+   "ok": 0,
+   "fato": "Hesitar, com h e s, é ficar em dúvida. Existe também exitar, com x, mas vem de êxito e quase não se usa. Quem titubeia hesita.",
+   "fato_curto": "Hesitar com h e s. É ficar em dúvida."
+  },
+  {
+   "q": "Qual palavra está correta?",
+   "opts": [
+    "Supertição",
+    "Superstição",
+    "Supertissão"
+   ],
+   "ok": 1,
+   "fato": "Superstição tem dois s e o t antes do i, vindo do latim superstitio. A palavra significava originalmente sobrevivência de uma crença antiga.",
+   "fato_curto": "Superstição, do latim superstitio."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Impecável",
+    "Inpecável",
+    "Impecavel"
+   ],
+   "ok": 0,
+   "fato": "Impecável leva m antes de p, como toda palavra em português. E tem acento por ser paroxítona terminada em l. Vem de impeccabilis: que não peca.",
+   "fato_curto": "Impecável. Antes de p e b sempre vai m."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Frustado",
+    "Frustrado",
+    "Fustrado"
+   ],
+   "ok": 1,
+   "fato": "Frustrado tem dois r, um em cada sílaba: frus-tra-do. Vem de frustrar, do latim frustrari, enganar. A fala come o segundo r, a escrita não pode.",
+   "fato_curto": "Frustrado, com dois r. Frus-tra-do."
+  },
+  {
+   "q": "Qual a grafia correta?",
+   "opts": [
+    "Reinvindicar",
+    "Reivindicar",
+    "Revindicar"
+   ],
+   "ok": 1,
+   "fato": "Reivindicar vem de rei, que em latim significa da coisa, mais vindicare, reclamar. Não existe n depois do rei. É reclamar a posse de algo.",
+   "fato_curto": "Reivindicar, sem n. De rei mais vindicare."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Despesa",
+    "Dispesa",
+    "Despeza"
+   ],
+   "ok": 0,
+   "fato": "Despesa vem de despender, com des de afastamento. E termina em sa, não za, porque vem do particípio despeso do verbo despender.",
+   "fato_curto": "Despesa, com des e com s."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Concerteza",
+    "Com certeza",
+    "Com-certeza"
+   ],
+   "ok": 1,
+   "fato": "Com certeza são duas palavras separadas, porque é a preposição com mais o substantivo certeza. A forma junta não existe, do mesmo jeito que não se escreve comcuidado.",
+   "fato_curto": "Com certeza, separado. É preposição mais substantivo."
+  },
+  {
+   "q": "Qual palavra existe?",
+   "opts": [
+    "Prostar",
+    "Prostrar",
+    "Postrar"
+   ],
+   "ok": 1,
+   "fato": "Prostrar, com os dois r, significa derrubar ou abater. Vem de pro mais sternere, estender para frente. Quem fica de cama prostrado está derrubado.",
+   "fato_curto": "Prostrar, com dois r. É derrubar, abater."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Bem-vindo",
+    "Benvindo",
+    "Bemvindo"
+   ],
+   "ok": 0,
+   "fato": "Bem-vindo leva hífen, porque bem como advérbio sempre se liga por hífen ao que vem depois: bem-estar, bem-feito, bem-humorado.",
+   "fato_curto": "Bem-vindo, com hífen. Bem sempre pede hífen."
+  },
+  {
+   "q": "Qual está correta?",
+   "opts": [
+    "Previnir",
+    "Prevenir",
+    "Prevenír"
+   ],
+   "ok": 1,
+   "fato": "Prevenir vem de prae mais venire: vir antes. Por isso é com e na segunda sílaba. A forma com i aparece em previno, que é a conjugação.",
+   "fato_curto": "Prevenir com e. É vir antes."
+  },
+  {
+   "q": "Qual a forma certa?",
+   "opts": [
+    "Discrição",
+    "Descrição",
+    "Depende"
+   ],
+   "ok": 2,
+   "fato": "As duas existem e são palavras diferentes. Discrição, com i, é a qualidade de ser discreto. Descrição, com e, é o ato de descrever algo.",
+   "fato_curto": "As duas existem. Discrição é ser discreto, descrição é descrever."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Xícara",
+    "Chícara",
+    "Xicara"
+   ],
+   "ok": 0,
+   "fato": "Xícara vem do náuatle xicalli, uma cuia feita de cabaça, que chegou ao português pelo espanhol jícara. Por isso x, e proparoxítona leva acento.",
+   "fato_curto": "Xícara com x. Vem do náuatle xicalli."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Cassula",
+    "Caçula",
+    "Casula"
+   ],
+   "ok": 1,
+   "fato": "Caçula vem do quimbundo kazule, o filho mais novo. Entrou no português do Brasil pelos africanos trazidos para cá, e manteve o ç.",
+   "fato_curto": "Caçula, do quimbundo kazule."
+  },
+  {
+   "q": "Qual a grafia correta?",
+   "opts": [
+    "Enxergar",
+    "Encherga",
+    "Enchergar"
+   ],
+   "ok": 0,
+   "fato": "Enxergar é com x. A regra: depois da sílaba inicial en, escreve-se x, como em enxaqueca, enxame e enxoval. A exceção famosa é encher e seus derivados.",
+   "fato_curto": "Enxergar com x. Depois de en vai x."
+  },
+  {
+   "q": "Como se escreve?",
+   "opts": [
+    "Ancioso",
+    "Ansioso",
+    "Ansiozo"
+   ],
+   "ok": 1,
+   "fato": "Ansioso vem de ânsia, que é com s. E o sufixo oso é sempre com s, nunca com z: cheiroso, gostoso, famoso.",
+   "fato_curto": "Ansioso com s nos dois. De ânsia."
+  },
+  {
+   "q": "Qual está certa?",
+   "opts": [
+    "Á três dias",
+    "Há três dias",
+    "A três dias"
+   ],
+   "ok": 1,
+   "fato": "Há indica tempo passado e equivale a faz. A sem acento indica tempo futuro: daqui a três dias. E á sozinho não existe em português.",
+   "fato_curto": "Há três dias. Troque por faz para conferir."
+  },
+  {
+   "q": "Qual é a forma correta?",
+   "opts": [
+    "Estrupo",
+    "Estupro",
+    "Estrupro"
+   ],
+   "ok": 1,
+   "fato": "Estupro vem do latim stuprum. Não tem r na primeira sílaba. A troca de lugar das letras é tão comum que tem nome: metátese.",
+   "fato_curto": "Estupro, do latim stuprum. Sem r no começo."
+  }
+ ],
+ "titulo_short": "Você escreve essas 3 certo?",
+ "intro_short": "Três palavras. Só uma grafia certa em cada.",
+ "outro_short": "Acertou as três? Comenta. Tem trinta delas no vídeo completo."
+}

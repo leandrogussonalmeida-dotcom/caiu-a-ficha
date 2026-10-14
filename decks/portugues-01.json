@@ -1,0 +1,126 @@
+{
+ "id": "pt-01",
+ "titulo": "Você passaria nesta prova de português?",
+ "tema": "Portugues erros que quase todo mundo comete",
+ "tema_curto": "PORTUGUÊS NA PRÁTICA",
+ "theme": "estudio",
+ "tempo": 6,
+ "intro": "Dez frases do dia a dia. Em cada uma, só uma opção está correta. Cinco segundos para decidir, e eu explico o porquê de cada resposta.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Conta nos comentários. Na próxima rodada: crase, o terror dos concursos.",
+ "intro_s": 7.0,
+ "outro_s": 6.0,
+ "perguntas": [
+  {
+   "q": "Qual frase está correta?",
+   "opts": [
+    "Fazem dois anos que não o vejo",
+    "Faz dois anos que não o vejo",
+    "Fazem dois anos que não vejo ele"
+   ],
+   "ok": 1,
+   "fato": "O verbo fazer indicando tempo decorrido é impessoal: não tem sujeito e fica sempre no singular. Por isso faz dois anos, faz cinco meses, faz séculos.",
+   "fato_curto": "Faz, no singular: o verbo fazer de tempo não tem sujeito."
+  },
+  {
+   "q": "Ele se comportou ___ na reunião.",
+   "opts": [
+    "mau",
+    "mal",
+    "tanto faz"
+   ],
+   "ok": 1,
+   "fato": "Mal é o contrário de bem, e os dois têm L. Mau é o contrário de bom, e os dois têm U. Trocar bem na frase: se encaixa, é mal.",
+   "fato_curto": "Mal é o contrário de bem. Os dois com L."
+  },
+  {
+   "q": "___ você vai depois do trabalho?",
+   "opts": [
+    "Onde",
+    "Aonde",
+    "Há onde"
+   ],
+   "ok": 1,
+   "fato": "Aonde é usado com verbos de movimento, porque equivale a para onde. Quem vai, vai a algum lugar. Onde fica com verbos de permanência: onde você mora.",
+   "fato_curto": "Aonde, porque quem vai, vai a algum lugar."
+  },
+  {
+   "q": "Qual frase está correta?",
+   "opts": [
+    "A gente vamos resolver isso",
+    "A gente vai resolver isso",
+    "A gente iremos resolver isso"
+   ],
+   "ok": 1,
+   "fato": "A gente tem sentido de nós, mas é expressão de terceira pessoa do singular, igual a ele. Então combina com vai, fez, tem. Nunca com vamos.",
+   "fato_curto": "A gente vai. A gente é terceira pessoa do singular."
+  },
+  {
+   "q": "Ele saiu ___ cinco minutos.",
+   "opts": [
+    "há",
+    "a",
+    "à"
+   ],
+   "ok": 0,
+   "fato": "Há indica tempo que já passou, equivale a faz. A indica tempo que ainda vai chegar: daqui a cinco minutos. O truque é trocar por faz.",
+   "fato_curto": "Há, porque o tempo já passou. Troque por faz."
+  },
+  {
+   "q": "Ninguém me explicou ___ a reunião foi cancelada.",
+   "opts": [
+    "porque",
+    "por que",
+    "porquê"
+   ],
+   "ok": 1,
+   "fato": "Por que separado vale por qual motivo, em perguntas diretas e indiretas. Porque junto é resposta. Porquê com acento é substantivo: o porquê da decisão.",
+   "fato_curto": "Por que separado: vale por qual motivo."
+  },
+  {
+   "q": "A reunião começa ao meio-dia e ___.",
+   "opts": [
+    "meio",
+    "meia",
+    "os dois valem"
+   ],
+   "ok": 1,
+   "fato": "A concordância é com hora, palavra feminina: meio-dia e meia hora. Meia-noite e meia segue a mesma lógica.",
+   "fato_curto": "Meia, concordando com hora."
+  },
+  {
+   "q": "Este assunto fica ___.",
+   "opts": [
+    "entre eu e você",
+    "entre mim e você",
+    "entre eu e ti"
+   ],
+   "ok": 1,
+   "fato": "Depois de preposição entra o pronome oblíquo: mim, ti, si. Eu só aparece como sujeito, antes de um verbo: entre mim e você, mas para eu resolver.",
+   "fato_curto": "Entre mim. Depois de preposição não entra eu."
+  },
+  {
+   "q": "Comprei ingresso para a ___ das sete.",
+   "opts": [
+    "seção",
+    "sessão",
+    "cessão"
+   ],
+   "ok": 1,
+   "fato": "Sessão é período de tempo: cinema, terapia, congresso. Seção é divisão, a seção de frios. Cessão vem de ceder, é o ato de entregar algo.",
+   "fato_curto": "Sessão, que é período de tempo."
+  },
+  {
+   "q": "Qual frase está correta?",
+   "opts": [
+    "Houveram muitos problemas",
+    "Houve muitos problemas",
+    "Houveram problemas demais"
+   ],
+   "ok": 1,
+   "fato": "Haver no sentido de existir é impessoal e fica no singular: houve muitos problemas. O plural só aparece com o auxiliar: podem haver, não, deve haver.",
+   "fato_curto": "Houve. Haver de existir fica sempre no singular."
+  }
+ ],
+ "tempo_short": 5
+}

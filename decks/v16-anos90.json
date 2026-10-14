@@ -1,0 +1,347 @@
+{
+ "id": "v16-anos90",
+ "titulo": "Você viveu os anos 90 mesmo?",
+ "tema": "Voce viveu os anos 90 mesmo",
+ "tema_curto": "ANOS 90",
+ "fundo": "synthwave",
+ "paleta": "neon",
+ "tempo": 6,
+ "tempo_short": 5,
+ "intro": "Trinta perguntas sobre a década que inventou o Brasil que a gente conhece. Seis segundos para cada uma. Se você acertar mais de vinte e cinco, você viveu os anos noventa de verdade.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Comenta a sua pontuação. E conta qual dessas você tinha esquecido completamente. Na próxima rodada: a tecnologia que morreu e como ela funcionava por dentro.",
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "Em que ano o Real virou a moeda do Brasil?",
+   "opts": [
+    "1992",
+    "1994",
+    "1996"
+   ],
+   "ok": 1,
+   "fato": "O Real entrou em 1º de julho de 1994, substituindo o cruzeiro real. Antes dele veio a URV, uma moeda de conta que existia só para as pessoas se acostumarem com os novos preços antes das cédulas chegarem.",
+   "fato_curto": "1994. Antes dele veio a URV, que era moeda só no papel."
+  },
+  {
+   "q": "Qual seleção o Brasil venceu na final da Copa de 1994?",
+   "opts": [
+    "Alemanha",
+    "Argentina",
+    "Itália"
+   ],
+   "ok": 2,
+   "fato": "Foi contra a Itália, nos pênaltis, no Rose Bowl. Roberto Baggio, melhor jogador do mundo na época, mandou a última cobrança por cima do gol. Foi a primeira final de Copa decidida nos pênaltis.",
+   "fato_curto": "Itália, nos pênaltis. Baggio chutou pra fora."
+  },
+  {
+   "q": "O que era um bip?",
+   "opts": [
+    "Aparelho que recebia mensagens curtas",
+    "Telefone sem fio",
+    "Rádio de bolso"
+   ],
+   "ok": 0,
+   "fato": "O bip recebia mensagens de texto curtas, mas não respondia. Quem queria te falar ligava para uma central, ditava o recado para uma atendente, e ela digitava. Você lia e corria procurar um telefone.",
+   "fato_curto": "Recebia recado e não respondia. Você corria achar um telefone."
+  },
+  {
+   "q": "Para que servia soprar o cartucho de videogame?",
+   "opts": [
+    "Tirar poeira dos contatos",
+    "Esfriar o chip",
+    "Nada, era superstição"
+   ],
+   "ok": 2,
+   "fato": "Não funcionava. O que resolvia era tirar e recolocar, porque isso raspava a oxidação dos contatos. A umidade do sopro, na verdade, acelerava a corrosão. Toda uma geração fez o ritual errado e deu certo pelo motivo errado.",
+   "fato_curto": "Nada. O que resolvia era tirar e botar de novo."
+  },
+  {
+   "q": "Quanto cabia num disquete comum de 3,5 polegadas?",
+   "opts": [
+    "1,44 megabyte",
+    "14,4 megabytes",
+    "144 megabytes"
+   ],
+   "ok": 0,
+   "fato": "Cabia 1,44 MB. Uma única foto de celular hoje tem umas três mil vezes esse tamanho. Instalar um programa grande significava trocar de disquete dez, quinze vezes seguidas.",
+   "fato_curto": "1,44 megabyte. Uma foto de hoje não caberia."
+  },
+  {
+   "q": "O que acontecia se alguém atendesse o telefone enquanto você navegava na internet?",
+   "opts": [
+    "A conexão caía",
+    "Ficava mais lento",
+    "Nada"
+   ],
+   "ok": 0,
+   "fato": "A conexão caía na hora. A internet discada usava a mesma linha do telefone, então ou você navegava ou alguém falava. Era a origem do grito clássico: não atende o telefone!",
+   "fato_curto": "Caía na hora. Era a mesma linha do telefone."
+  },
+  {
+   "q": "Qual era o nome do mascote do Mundo da Lua?",
+   "opts": [
+    "Pepe",
+    "Lucas",
+    "Gabriel"
+   ],
+   "ok": 1,
+   "fato": "O protagonista era o Lucas Silva e Silva, vivido por Luciano Amaral, que imaginava aventuras no quarto. A série foi ao ar na TV Cultura a partir de 1991.",
+   "fato_curto": "Lucas Silva e Silva, na TV Cultura."
+  },
+  {
+   "q": "O Castelo Rá-Tim-Bum ficava onde?",
+   "opts": [
+    "Numa rua comum de cidade grande",
+    "Numa floresta",
+    "Numa ilha"
+   ],
+   "ok": 0,
+   "fato": "O castelo ficava espremido entre prédios numa rua movimentada, e ninguém de fora enxergava. Era essa a graça: mágica escondida no meio do cotidiano. Estreou na TV Cultura em 1994.",
+   "fato_curto": "Numa rua comum, espremido entre prédios."
+  },
+  {
+   "q": "O que era o Tamagotchi?",
+   "opts": [
+    "Bichinho virtual de chaveiro",
+    "Jogo de cartas",
+    "Brinquedo de montar"
+   ],
+   "ok": 0,
+   "fato": "Um bichinho virtual japonês que você alimentava, limpava e colocava para dormir apertando três botões. Se você esquecesse, ele morria. Chegou em 1996 e foi banido de várias escolas.",
+   "fato_curto": "Bichinho virtual. Se esquecesse, ele morria."
+  },
+  {
+   "q": "Quantas fitas cassete cabiam numa fita VHS de filme?",
+   "opts": [
+    "Nenhuma, eram coisas diferentes",
+    "Duas",
+    "Dez"
+   ],
+   "ok": 0,
+   "fato": "São coisas diferentes: a fita cassete gravava som, a VHS gravava imagem e som. Pareciam primas porque as duas eram fitas magnéticas em caixinha, mas não trocavam de aparelho.",
+   "fato_curto": "Nenhuma. Cassete era som, VHS era vídeo."
+  },
+  {
+   "q": "O que significava rebobinar?",
+   "opts": [
+    "Voltar a fita ao início",
+    "Limpar a fita",
+    "Gravar por cima"
+   ],
+   "ok": 0,
+   "fato": "Voltar a fita até o começo. As locadoras cobravam multa de quem devolvia sem rebobinar, porque o próximo cliente perderia minutos esperando. Virou até bordão: seja gentil, rebobine.",
+   "fato_curto": "Voltar a fita ao início. Locadora multava quem não fazia."
+  },
+  {
+   "q": "Qual console brigava com o Super Nintendo no Brasil?",
+   "opts": [
+    "Mega Drive",
+    "PlayStation 2",
+    "Nintendo 64"
+   ],
+   "ok": 0,
+   "fato": "O Mega Drive, da Sega, distribuído aqui pela Tectoy. A rivalidade entre Mega Drive e Super Nintendo dividiu o pátio de toda escola brasileira na primeira metade dos anos 90.",
+   "fato_curto": "Mega Drive, da Sega, trazido pela Tectoy."
+  },
+  {
+   "q": "O que era o ICQ?",
+   "opts": [
+    "Programa de conversa pela internet",
+    "Buscador",
+    "Jogo online"
+   ],
+   "ok": 0,
+   "fato": "Um dos primeiros mensageiros da internet, lançado em 1996. Cada pessoa tinha um número em vez de um nome de usuário, e o som de mensagem nova, um oh-oh, é lembrado até hoje por quem usou.",
+   "fato_curto": "Mensageiro de 1996. Cada um tinha um número."
+  },
+  {
+   "q": "Quem apresentava o Xou da Xuxa?",
+   "opts": [
+    "Angélica",
+    "Xuxa",
+    "Eliana"
+   ],
+   "ok": 1,
+   "fato": "Xuxa Meneghel, na Globo, de 1986 a 1992. O programa era tão grande que vendia discos aos milhões e exportava versão para a Espanha, para a Argentina e para os Estados Unidos.",
+   "fato_curto": "Xuxa, na Globo, de 1986 a 1992."
+  },
+  {
+   "q": "O que era um orelhão?",
+   "opts": [
+    "Telefone público",
+    "Caixa de correio",
+    "Ponto de ônibus"
+   ],
+   "ok": 0,
+   "fato": "O telefone público brasileiro, com aquela carenagem em forma de concha que dava nome a ele. Primeiro funcionava com ficha, depois com cartão. O design é de Chu Ming Silveira, de 1971.",
+   "fato_curto": "Telefone público. O nome vem do formato de concha."
+  },
+  {
+   "q": "O que era o Plano Collor?",
+   "opts": [
+    "Confisco das poupanças",
+    "Plano de habitação",
+    "Programa de TV"
+   ],
+   "ok": 0,
+   "fato": "Em 1990, o governo bloqueou os saldos acima de um certo valor em contas e poupanças por dezoito meses. Milhões de pessoas acordaram sem acesso ao próprio dinheiro de um dia para o outro.",
+   "fato_curto": "O bloqueio das poupanças, em 1990."
+  },
+  {
+   "q": "Qual destes era um walkman?",
+   "opts": [
+    "Tocador de fita portátil",
+    "Rádio de pilha",
+    "Televisão pequena"
+   ],
+   "ok": 0,
+   "fato": "Um tocador de fita cassete portátil, com fone de ouvido. Foi a primeira vez na história que uma pessoa pôde levar a própria trilha sonora para a rua, e isso mudou o jeito de ouvir música.",
+   "fato_curto": "Tocador de fita portátil, com fone."
+  },
+  {
+   "q": "Quanto tempo levava para baixar uma música na internet discada?",
+   "opts": [
+    "Poucos segundos",
+    "Cerca de 10 minutos",
+    "Cerca de 3 horas"
+   ],
+   "ok": 1,
+   "fato": "Uma música de 4 MB numa conexão de 56 kbps levava uns dez minutos, se ninguém atendesse o telefone no meio. Hoje a mesma música chega em menos de um segundo.",
+   "fato_curto": "Uns dez minutos. Se ninguém atendesse o telefone."
+  },
+  {
+   "q": "O que era a Sessão da Tarde?",
+   "opts": [
+    "Filme na TV à tarde",
+    "Jornal",
+    "Novela"
+   ],
+   "ok": 0,
+   "fato": "O filme que a Globo passava depois do almoço, com aquela vinheta que toda criança brasileira reconhece. Ficar em casa doente tinha uma compensação, que era pegar a Sessão da Tarde.",
+   "fato_curto": "O filme da tarde na Globo, com a vinheta famosa."
+  },
+  {
+   "q": "O que eram tazos?",
+   "opts": [
+    "Tampinhas de colecionar",
+    "Figurinhas de álbum",
+    "Peças de jogo de tabuleiro"
+   ],
+   "ok": 0,
+   "fato": "Discos de plástico que vinham dentro de pacotes de salgadinho, colecionados e usados num jogo de virar a pilha com a palma da mão. Viraram febre nacional na metade dos anos 90.",
+   "fato_curto": "Discos de plástico que vinham no salgadinho."
+  },
+  {
+   "q": "Qual era o apelido do Ayrton Senna nas pistas?",
+   "opts": [
+    "Magic",
+    "Rei",
+    "Professor"
+   ],
+   "ok": 0,
+   "fato": "Era chamado de Magic pelos colegas de pista, pela habilidade na chuva e em classificação. Morreu em Ímola, em 1º de maio de 1994, dois meses antes de o Brasil ganhar a Copa.",
+   "fato_curto": "Magic. Morreu em Ímola, em maio de 1994."
+  },
+  {
+   "q": "O que era preciso para gravar um programa da TV?",
+   "opts": [
+    "Fita VHS virgem no videocassete",
+    "Disquete",
+    "Nada, ficava salvo sozinho"
+   ],
+   "ok": 0,
+   "fato": "Você colocava uma fita virgem no videocassete e apertava gravar na hora exata. Esquecer significava perder o programa para sempre, porque não existia assistir depois.",
+   "fato_curto": "Fita virgem no videocassete, na hora exata."
+  },
+  {
+   "q": "Qual sistema operacional saiu em 1995 e tinha o botão Iniciar?",
+   "opts": [
+    "Windows 95",
+    "Windows XP",
+    "MS-DOS"
+   ],
+   "ok": 0,
+   "fato": "O Windows 95 trouxe o menu Iniciar e a barra de tarefas, que existem até hoje. A Microsoft licenciou a música Start Me Up, dos Rolling Stones, para a campanha de lançamento.",
+   "fato_curto": "Windows 95. Trouxe o botão Iniciar."
+  },
+  {
+   "q": "O que era um videocassete de dois tempos?",
+   "opts": [
+    "Aparelho que gravava e tocava",
+    "Aparelho com duas fitas",
+    "Aparelho com dois controles"
+   ],
+   "ok": 1,
+   "fato": "Era o aparelho com dois compartimentos de fita, usado para copiar de uma para a outra. Foi o jeito que uma geração inteira usou para fazer cópia de filme e de show antes do computador.",
+   "fato_curto": "Tinha duas fitas, para copiar uma na outra."
+  },
+  {
+   "q": "Qual era a função do botão TRACKING no videocassete?",
+   "opts": [
+    "Ajustar a imagem tremida",
+    "Aumentar o som",
+    "Acelerar a fita"
+   ],
+   "ok": 0,
+   "fato": "Ajustava o alinhamento da cabeça de leitura com a trilha gravada na fita. Quando a imagem ficava chuviscada ou com uma faixa tremendo, era nesse botão que você mexia até limpar.",
+   "fato_curto": "Corrigia a imagem tremida e chuviscada."
+  },
+  {
+   "q": "O que era o Trapalhões?",
+   "opts": [
+    "Grupo de humor com Renato Aragão",
+    "Banda",
+    "Desenho animado"
+   ],
+   "ok": 0,
+   "fato": "O grupo de Renato Aragão, Dedé Santana, Mussum e Zacarias, que teve programa semanal na Globo por décadas e dezenas de filmes. Chegaram a ser a maior bilheteria do cinema brasileiro.",
+   "fato_curto": "O grupo de Didi, Dedé, Mussum e Zacarias."
+  },
+  {
+   "q": "Como se mandava mensagem escrita antes do celular popular?",
+   "opts": [
+    "Telegrama ou fax",
+    "E-mail",
+    "Não existia"
+   ],
+   "ok": 0,
+   "fato": "Pelo telegrama, entregue pelos Correios, ou pelo fax, que mandava a imagem de uma folha pela linha telefônica. Empresa sem fax nos anos 90 era empresa fora do jogo.",
+   "fato_curto": "Telegrama ou fax. O fax mandava a folha pela linha."
+  },
+  {
+   "q": "Qual foi o primeiro CD a vender mais que o disco de vinil no Brasil?",
+   "opts": [
+    "Não houve um específico, foi uma virada gradual",
+    "Thriller",
+    "Abbey Road"
+   ],
+   "ok": 0,
+   "fato": "Não teve um disco único: a troca foi gradual ao longo dos anos 90, com o CD ficando mais barato e as lojas deixando de estocar vinil. O vinil só voltaria a crescer décadas depois.",
+   "fato_curto": "Nenhum. A troca foi gradual ao longo da década."
+  },
+  {
+   "q": "O que era a antena parabólica?",
+   "opts": [
+    "Antena grande para pegar canais via satélite",
+    "Antena de rádio",
+    "Antena de celular"
+   ],
+   "ok": 0,
+   "fato": "O prato grande que captava sinal de satélite e trazia canais que a antena comum não pegava. Em muita cidade pequena era a única forma de ver televisão com imagem limpa.",
+   "fato_curto": "O prato que pegava canal por satélite."
+  },
+  {
+   "q": "Em que ano a internet comercial chegou ao Brasil?",
+   "opts": [
+    "1995",
+    "1990",
+    "2000"
+   ],
+   "ok": 0,
+   "fato": "A internet comercial foi liberada no Brasil em 1995, até então restrita a universidades e centros de pesquisa. A Embratel começou a oferecer acesso discado naquele ano.",
+   "fato_curto": "1995. Antes era só universidade e pesquisa."
+  }
+ ]
+}

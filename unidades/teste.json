@@ -1,0 +1,9 @@
+{"id": "A1-02", "titulo": "1 CRISTO = 38 M", "paleta": "gelo",
+ "unidades": [
+  {"ref": {"nome": "CRISTO REDENTOR", "valor": 38, "un": "m", "forma": "cristo"},
+   "alvo": {"nome": "PAO DE ACUCAR", "valor": 396, "un": "m", "forma": "morro"},
+   "ancora": "10 CRISTOS EMPILHADOS"},
+  {"ref": {"nome": "CRISTO REDENTOR", "valor": 38, "un": "m", "forma": "cristo"},
+   "alvo": {"nome": "BURJ KHALIFA", "valor": 828, "un": "m", "forma": "predio"},
+   "ancora": "22 CRISTOS, UM EM CIMA DO OUTRO"}
+ ]}
