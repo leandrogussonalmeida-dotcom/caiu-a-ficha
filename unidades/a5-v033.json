@@ -1,0 +1,62 @@
+{
+ "id": "V033",
+ "titulo": "UMA VOLTA DE VANTAGEM",
+ "unidade": "KM/H",
+ "segundos": 26,
+ "voltas": 3,
+ "chamada": "Enquanto o som da duas voltas, o homem mais rapido do mundo ainda esta na primeira curva.",
+ "fonte": "Wikipedia, List of speed records in rail transport; Wikipedia, Fastest animals; velocidade do som no ar a 20 C, 343 m/s",
+ "confianca": "alta",
+ "nota": "Os mesmos numeros da corrida em raia, no outro tratamento. O tracado e gerado por harmonicas e muda a cada seed: NAO e uma pista real e nao representa nenhum autodromo com nome. O Maglev de Xangai e o trem COMERCIAL mais rapido: 431 km/h em servico. Os 574,8 do TGV e os 603 do Maglev L0 sao RECORDES de teste, nao velocidade de servico. Sao coisas diferentes e a corrida mistura as duas de proposito, para mostrar a distancia entre o que roda todo dia e o que ja se conseguiu.",
+ "tags": [
+  "#velocidade",
+  "#trem",
+  "#corrida",
+  "#autodromo"
+ ],
+ "corredores": [
+  {
+   "nome": "USAIN BOLT",
+   "v": 37.58,
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "nota": "o pico dele nos 100 m"
+  },
+  {
+   "nome": "FUXING HAO (CHINA)",
+   "v": 350,
+   "fonte": "Wikipedia, List of speed records in rail transport",
+   "confianca": "alta",
+   "nota": "trem comercial de alta velocidade"
+  },
+  {
+   "nome": "MAGLEV DE XANGAI",
+   "v": 431,
+   "fonte": "Wikipedia, List of speed records in rail transport",
+   "confianca": "alta",
+   "nota": "o comercial mais rapido do mundo"
+  },
+  {
+   "nome": "TGV, RECORDE 2007",
+   "v": 574.8,
+   "fonte": "Wikipedia, List of speed records in rail transport",
+   "confianca": "alta",
+   "nota": "trem de roda sobre trilho"
+  },
+  {
+   "nome": "MAGLEV L0, 2015",
+   "v": 603,
+   "fonte": "Wikipedia, List of speed records in rail transport",
+   "confianca": "alta",
+   "nota": "o recorde de trem, no Japao"
+  },
+  {
+   "nome": "A VELOCIDADE DO SOM",
+   "v": 1235,
+   "fonte": "velocidade do som no ar a 20 C, 343 m/s",
+   "confianca": "alta",
+   "nota": "nenhum trem chegou perto",
+   "destaque": true
+  }
+ ]
+}

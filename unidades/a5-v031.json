@@ -1,0 +1,75 @@
+{
+ "id": "V031",
+ "titulo": "45 ANOS DE RECORDE",
+ "unidade": "KM/H",
+ "segundos": 26,
+ "chamada": "Oito recordes mundiais dos 100 metros, correndo juntos. Em 45 anos o homem ganhou meio segundo.",
+ "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+ "confianca": "alta",
+ "nota": "So recordes HOMOLOGADOS. Ficaram de fora os de Ben Johnson (1987 e 1988), Tim Montgomery (2002) e Justin Gatlin (2006), que foram anulados. A velocidade de cada um e a media da prova: 100 metros divididos pelo tempo, vezes 3,6.",
+ "rodape": "A MEDIA DE CADA UM NOS 100 M",
+ "tags": [
+  "#atletismo",
+  "#recorde",
+  "#corrida"
+ ],
+ "corredores": [
+  {
+   "nome": "BOB HAYES, 1964",
+   "v": 35.79,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "10.06 s"
+  },
+  {
+   "nome": "JIM HINES, 1968",
+   "v": 36.18,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.95 s"
+  },
+  {
+   "nome": "CALVIN SMITH, 1983",
+   "v": 36.25,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.93 s"
+  },
+  {
+   "nome": "CARL LEWIS, 1991",
+   "v": 36.51,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.86 s"
+  },
+  {
+   "nome": "DONOVAN BAILEY, 1996",
+   "v": 36.59,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.84 s"
+  },
+  {
+   "nome": "MAURICE GREENE, 1999",
+   "v": 36.77,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.79 s"
+  },
+  {
+   "nome": "ASAFA POWELL, 2006",
+   "v": 36.87,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.763 s"
+  },
+  {
+   "nome": "USAIN BOLT, 2009",
+   "v": 37.58,
+   "fonte": "Wikipedia, Men's 100 metres world record progression (era do cronometro automatico)",
+   "confianca": "alta",
+   "nota": "9.58 s",
+   "destaque": true
+  }
+ ]
+}

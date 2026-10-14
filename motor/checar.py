@@ -46,6 +46,15 @@ def checar_unidades(arq):
     if d.get('itens') and not (d.get('ref') or {}).get('valor'):
         _erro(e, 'formato fileira sem ref.valor')
 
+    # Fonte que DESCREVE nao e fonte que CITA. 'velocidades maximas
+    # homologadas' passava no lugar de uma fonte de verdade, e como o item
+    # herda a fonte do documento, um video inteiro ficava sem citacao
+    # nenhuma. Fonte citada quase sempre tem virgula (autor, obra), ou um
+    # endereco, ou um parenteses com a precisao.
+    f = str(d.get('fonte') or '')
+    if f and not any(m in f for m in (',', 'http', '(', ':')) and len(f) < 60:
+        avisos.append(f'fonte sem cara de fonte: {f!r} descreve, nao cita')
+
     nomes = set()
     for i, it in enumerate(itens, 1):
         rot = it.get('nome') or (it.get('alvo') or {}).get('nome') or f'item {i}'

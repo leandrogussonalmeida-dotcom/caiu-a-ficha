@@ -66,9 +66,12 @@ SERIES = [
    'Todos os meios de transporte na mesma pista',
    'Os homens mais rápidos da história, correndo juntos']),
  ('A5', 'sim_autodromo', 'pixel', 'AUTÓDROMO', [
-   'Uma volta em Interlagos, no tempo de cada categoria',
-   'Os traçados mais famosos do mundo, um por um',
-   'A mesma volta, de bicicleta até Fórmula 1']),
+   # O traçado do AUTÓDROMO é gerado por harmônicas polares, diferente a
+   # cada seed: ele NÃO é Interlagos nem nenhuma pista real. Prometer uma
+   # pista com nome seria mentir no título, que é onde mais dói.
+   'Oito categorias na mesma pista',
+   'Quem da duas voltas enquanto o outro da uma',
+   'Do kart ate a Formula 1, lado a lado']),
  ('A6', 'sim_torre',     'pixel', 'A TORRE', [
    'Empilhando Cristos Redentores até a órbita',
    'Empilhando ônibus até passar das nuvens',

@@ -349,7 +349,7 @@
    "motor": "pixel",
    "aparencia": "gelo",
    "seed": 1032,
-   "tema": "Uma volta em Interlagos, no tempo de cada categoria",
+   "tema": "Oito categorias na mesma pista",
    "unidade": "a5-v032.json"
   },
   {
@@ -360,7 +360,7 @@
    "motor": "pixel",
    "aparencia": "carvao",
    "seed": 1033,
-   "tema": "Os traçados mais famosos do mundo, um por um",
+   "tema": "Quem da duas voltas enquanto o outro da uma",
    "unidade": "a5-v033.json"
   },
   {
@@ -371,7 +371,7 @@
    "motor": "pixel",
    "aparencia": "papelao",
    "seed": 1034,
-   "tema": "A mesma volta, de bicicleta até Fórmula 1",
+   "tema": "Do kart ate a Formula 1, lado a lado",
    "unidade": "a5-v034.json"
   },
   {
@@ -1200,7 +1200,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5032,
-   "tema": "Uma volta em Interlagos, no tempo de cada categoria"
+   "tema": "Oito categorias na mesma pista"
   },
   {
    "id": "S033",
@@ -1210,7 +1210,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5033,
-   "tema": "Os traçados mais famosos do mundo, um por um"
+   "tema": "Quem da duas voltas enquanto o outro da uma"
   },
   {
    "id": "S034",
@@ -1220,7 +1220,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5034,
-   "tema": "A mesma volta, de bicicleta até Fórmula 1"
+   "tema": "Do kart ate a Formula 1, lado a lado"
   },
   {
    "id": "S035",
@@ -2000,7 +2000,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5112,
-   "tema": "Uma volta em Interlagos, no tempo de cada categoria"
+   "tema": "Oito categorias na mesma pista"
   },
   {
    "id": "S113",
@@ -2010,7 +2010,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5113,
-   "tema": "Os traçados mais famosos do mundo, um por um"
+   "tema": "Quem da duas voltas enquanto o outro da uma"
   },
   {
    "id": "S114",
@@ -2020,7 +2020,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5114,
-   "tema": "A mesma volta, de bicicleta até Fórmula 1"
+   "tema": "Do kart ate a Formula 1, lado a lado"
   },
   {
    "id": "S115",
@@ -2800,7 +2800,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5192,
-   "tema": "Uma volta em Interlagos, no tempo de cada categoria"
+   "tema": "Oito categorias na mesma pista"
   },
   {
    "id": "S193",
@@ -2810,7 +2810,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5193,
-   "tema": "Os traçados mais famosos do mundo, um por um"
+   "tema": "Quem da duas voltas enquanto o outro da uma"
   },
   {
    "id": "S194",
@@ -2820,7 +2820,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5194,
-   "tema": "A mesma volta, de bicicleta até Fórmula 1"
+   "tema": "Do kart ate a Formula 1, lado a lado"
   },
   {
    "id": "S195",

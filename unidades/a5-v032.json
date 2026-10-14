@@ -1,44 +1,54 @@
 {
  "id": "V032",
- "titulo": "8 CARROS, 1 PISTA",
- "paleta": "asfalto",
+ "titulo": "OITO NA MESMA PISTA",
  "unidade": "KM/H",
- "segundos": 24,
+ "segundos": 26,
  "voltas": 3,
- "fonte": "velocidades maximas homologadas",
- "confianca": "media",
+ "chamada": "Os mesmos bichos da corrida, agora vistos de cima. Na raia voce ve quem e mais rapido; na pista voce ve o que isso significa.",
+ "fonte": "Wikipedia, Fastest animals",
+ "confianca": "alta",
+ "nota": "Os mesmos numeros da corrida em raia, no outro tratamento. O tracado e gerado por harmonicas e muda a cada seed: NAO e uma pista real e nao representa nenhum autodromo com nome. Cada bicho e campeao no seu meio: um corre, outro nada, outro voa, e o falcao mergulha. Nenhum deles disputaria a mesma prova.",
+ "tags": [
+  "#bichos",
+  "#velocidade",
+  "#autodromo"
+ ],
  "corredores": [
   {
-   "nome": "F1",
-   "v": 360
-  },
-  {
-   "nome": "MOTO GP",
-   "v": 350
-  },
-  {
-   "nome": "STOCK CAR",
-   "v": 280
-  },
-  {
-   "nome": "CARRO POPULAR",
-   "v": 170
-  },
-  {
-   "nome": "TREM BALA",
-   "v": 320
-  },
-  {
-   "nome": "LANCHA",
-   "v": 90
-  },
-  {
-   "nome": "BICICLETA",
-   "v": 45
-  },
-  {
-   "nome": "A PE",
+   "nome": "GOLFINHO (NADO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
    "v": 37
+  },
+  {
+   "nome": "USAIN BOLT",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 37.58
+  },
+  {
+   "nome": "ANTILOCAPRA",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 88.5
+  },
+  {
+   "nome": "GUEPARDO",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 104
+  },
+  {
+   "nome": "RABO-DE-ESPINHO (VOO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 169
+  },
+  {
+   "nome": "FALCAO (MERGULHO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 389
   }
  ]
 }
