@@ -1,12 +1,65 @@
-{"id": "A1-L02", "titulo": "1 CRISTO = 38 M", "paleta": "gelo",
+{
+ "id": "A1-L02",
+ "titulo": "1 CRISTO = 38 M",
+ "paleta": "gelo",
  "unidades": [
-  {"ref": {"nome": "CRISTO REDENTOR", "valor": 38, "un": "m", "forma": "cristo"},
-   "alvo": {"nome": "PAO DE ACUCAR", "valor": 396, "un": "m", "forma": "morro"},
-   "ancora": "10 CRISTOS ATE O TOPO"},
-  {"ref": {"nome": "CRISTO REDENTOR", "valor": 38, "un": "m", "forma": "cristo"},
-   "alvo": {"nome": "BURJ KHALIFA", "valor": 828, "un": "m", "forma": "predio"},
-   "ancora": "22 CRISTOS, UM SOBRE O OUTRO"},
-  {"ref": {"nome": "CRISTO REDENTOR", "valor": 38, "un": "m", "forma": "cristo"},
-   "alvo": {"nome": "SEQUOIA GIGANTE", "valor": 84, "un": "m", "forma": "arvore"},
-   "ancora": "A ARVORE GANHA DO CRISTO"}
- ]}
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo"
+   },
+   "alvo": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "10 CRISTOS ATE O TOPO",
+   "fonte": "IBGE, carta topografica do Rio de Janeiro",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo"
+   },
+   "alvo": {
+    "nome": "BURJ KHALIFA",
+    "valor": 828,
+    "un": "m",
+    "forma": "predio"
+   },
+   "ancora": "22 CRISTOS, UM SOBRE O OUTRO",
+   "fonte": "CTBUH, Council on Tall Buildings",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo"
+   },
+   "alvo": {
+    "nome": "SEQUOIA GIGANTE",
+    "valor": 84,
+    "un": "m",
+    "forma": "arvore"
+   },
+   "ancora": "A ARVORE GANHA DO CRISTO",
+   "fonte": "National Park Service, Sequoia NP",
+   "confianca": "alta"
+  }
+ ],
+ "fonte": "Santuario Cristo Redentor (38 m com pedestal)",
+ "confianca": "alta",
+ "chamada": "Quantos Cristos cabem nas coisas mais altas do mundo?",
+ "tags": [
+  "#escala",
+  "#riodejaneiro"
+ ]
+}
