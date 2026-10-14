@@ -1,0 +1,16 @@
+{
+ "id": "V022",
+ "titulo": "UM ESPIRRO NO METRO",
+ "geracoes": 12,
+ "por_geracao": 5,
+ "rodape": "COMECOU COM UM ESPIRRO",
+ "fecho": "244.1 MILHAO EM 12 PASSOS",
+ "chamada": "Cada um passa para cinco. Doze vezes.",
+ "fonte": "Progressao geometrica: 5 elevado a 12 = 244.140.625",
+ "confianca": "alta",
+ "nota": "E matematica, nao medida: o numero e exato. O que a cabeca nao faz e sentir o tamanho dele.",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "id": "V020",
+ "titulo": "UMA CELULA EM UM DIA",
+ "geracoes": 48,
+ "por_geracao": 2,
+ "rodape": "COMECOU COM UMA",
+ "fecho": "281.5 TRILHAO EM 48 PASSOS",
+ "chamada": "Uma bacteria se divide a cada meia hora. Em vinte e quatro horas sao quarenta e oito divisoes.",
+ "fonte": "Progressao geometrica: 2 elevado a 48 = 281.474.976.710.656",
+ "confianca": "alta",
+ "nota": "E matematica, nao medida: o numero e exato. O que a cabeca nao faz e sentir o tamanho dele.",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
+}

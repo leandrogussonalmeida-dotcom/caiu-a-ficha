@@ -14,13 +14,16 @@ import pixelengine as PX
 import quizaudio as A
 import soundfile as sf
 
-METRO_POR_BLOCO = 10
+METRO_POR_BLOCO = 10          # padrao; a unidade manda o seu em bloco.altura
 BLOCO_H = 9                      # altura do bloco em pixels da tela baixa
 BLOCO_W = 54
 
-# altura em metros, nome. Conferir antes de publicar.
-MARCOS = [(38, 'CRISTO REDENTOR'), (168, 'EDIFICIO ITALIA'),
-          (224, 'TORRE DE TV, DF'), (396, 'PAO DE ACUCAR')]
+# Marcos de referencia padrao, em metros. A unidade pode trazer os seus
+# proprios: empilhar pessoas ate 100 m e empilhar Cristos ate 2 km nao se
+# medem pelas mesmas referencias, e com os marcos chumbados aqui os cinco
+# videos da serie sairiam iguais.
+MARCOS_PADRAO = [(38, 'CRISTO REDENTOR'), (168, 'EDIFICIO ITALIA'),
+                 (224, 'TORRE DE TV, DF'), (396, 'PAO DE ACUCAR')]
 
 CORES = [6, 8, 9, 10, 12, 13, 5, 4]
 
@@ -33,6 +36,11 @@ def construir(u=None, seed=7, saida='torre.mp4', dirsaida='.'):
     u = u or {}
     blocos = u.get('blocos', 52)
     paleta = u.get('paleta', 'neon')
+    bloco = u.get('bloco', {'nome': 'BLOCO', 'altura': 1.0, 'un': 'm'})
+    MARCOS = [(m['v'], m['nome']) for m in u.get('marcos', [])] or MARCOS_PADRAO
+    MARCOS = sorted(MARCOS)
+    # a altura real de UM bloco: e ela que transforma a contagem em metros
+    mpb = float(bloco.get('altura', METRO_POR_BLOCO))
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
     # o vídeo termina 2,2 s depois do último bloco, para o número respirar
@@ -52,7 +60,7 @@ def construir(u=None, seed=7, saida='torre.mp4', dirsaida='.'):
 
     def quadro(t, i):
         n = altura_em(t)
-        topo_m = n * METRO_POR_BLOCO
+        topo_m = n * mpb
 
         # --- câmera: mantém o topo da pilha a 62% da tela, subindo suave
         alvo = n * BLOCO_H
@@ -80,7 +88,7 @@ def construir(u=None, seed=7, saida='torre.mp4', dirsaida='.'):
 
         # --- marcos já alcançados, descendo junto com a câmera
         for m, nome in MARCOS:
-            ym = PX.ALT - (m / METRO_POR_BLOCO * BLOCO_H - cam)
+            ym = PX.ALT - (m / mpb * BLOCO_H - cam)
             if -12 < ym < PX.ALT:
                 passou = topo_m >= m
                 c = 11 if passou else 14
@@ -142,9 +150,14 @@ def construir(u=None, seed=7, saida='torre.mp4', dirsaida='.'):
         tela.ret(0, 0, PX.LARG, 42, 0)
         tela.ret(0, 42, PX.LARG, 1, 3)
         tam = int(26 * esc)
-        tela.texto(f'{topo_m}', PX.LARG // 2, 18 - tam // 2, 11,
+        txt = (f'{topo_m:.0f}' if topo_m >= 10 or topo_m == 0
+               else f'{topo_m:.1f}'.replace('.', ','))
+        tela.texto(txt, PX.LARG // 2, 18 - tam // 2, 11,
                    tam=tam, centro=True, sombra=4)
-        tela.texto('METROS DE TORRE', PX.LARG // 2, 33, 14, tam=7, centro=True)
+        # o rotulo diz O QUE esta empilhado: 'metros de torre' servia para
+        # qualquer video, e cinco videos com o mesmo rotulo sao um video
+        tela.texto_ajustado(f"{n} {bloco.get('plural', bloco['nome'])}",
+                            PX.LARG // 2, 33, 14, 8, PX.LARG - 10, centro=True)
         tela.ret(0, 43, int(PX.LARG * n / blocos), 2, 12)
         return tela
 

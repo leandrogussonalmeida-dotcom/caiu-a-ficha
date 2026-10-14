@@ -1,0 +1,45 @@
+{
+ "id": "V037",
+ "titulo": "PESSOAS ATE O TOPO",
+ "blocos": 60,
+ "bloco": {
+  "nome": "PESSOA",
+  "plural": "PESSOAS EMPILHADAS",
+  "altura": 1.73,
+  "un": "m"
+ },
+ "marcos": [
+  {
+   "nome": "UM ONIBUS EM PE",
+   "v": 14,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "CRISTO REDENTOR",
+   "v": 38,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "ARVORE MAIS ALTA",
+   "v": 116,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "EDIFICIO ITALIA",
+   "v": 168,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "Uma pessoa tem 1,73 m. Sessenta, uma em cima da outra, dao um predio de trinta andares.",
+ "fonte": "IBGE, Pesquisa de Orcamentos Familiares 2008-2009 (altura media do homem adulto); Wikipedia, Christ the Redeemer",
+ "confianca": "alta",
+ "nota": "A altura de cada bloco tem fonte. O total e so multiplicacao: 60 x 1.73 = 103.8 m.",
+ "tags": [
+  "#escala",
+  "#torre"
+ ]
+}

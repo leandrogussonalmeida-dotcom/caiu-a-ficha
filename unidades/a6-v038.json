@@ -1,0 +1,45 @@
+{
+ "id": "V038",
+ "titulo": "FUSCAS EM PE",
+ "blocos": 55,
+ "bloco": {
+  "nome": "FUSCA",
+  "plural": "FUSCAS EM PE",
+  "altura": 4.08,
+  "un": "m"
+ },
+ "marcos": [
+  {
+   "nome": "CRISTO REDENTOR",
+   "v": 38,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "TORRE DE TV, DF",
+   "v": 224,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "YACHTHOUSE",
+   "v": 294,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "PAO DE ACUCAR",
+   "v": 396,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "Um Fusca tem 4,08 metros. Cinquenta e cinco em pe passam da Torre de TV de Brasilia.",
+ "fonte": "Dimensions.com, Volkswagen Beetle Type 1 (4,08 m); Wikipedia, Christ the Redeemer",
+ "confianca": "alta",
+ "nota": "A altura de cada bloco tem fonte. O total e so multiplicacao: 55 x 4.08 = 224.4 m.",
+ "tags": [
+  "#escala",
+  "#torre"
+ ]
+}

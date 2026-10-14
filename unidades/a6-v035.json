@@ -1,0 +1,45 @@
+{
+ "id": "V035",
+ "titulo": "CRISTOS ATE O CEU",
+ "blocos": 52,
+ "bloco": {
+  "nome": "CRISTO",
+  "plural": "CRISTOS REDENTORES",
+  "altura": 38,
+  "un": "m"
+ },
+ "marcos": [
+  {
+   "nome": "PAO DE ACUCAR",
+   "v": 396,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "YACHTHOUSE",
+   "v": 294,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "BURJ KHALIFA",
+   "v": 828,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "PICO DA NEBLINA",
+   "v": 2995,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "O Cristo Redentor tem 38 metros. Empilhe 52 e veja onde voce chega.",
+ "fonte": "Wikipedia, Christ the Redeemer (38 m com o pedestal); IBGE/INDE para as montanhas; Wikipedia para os predios",
+ "confianca": "alta",
+ "nota": "A altura de cada bloco tem fonte. O total e so multiplicacao: 52 x 38 = 1976 m.",
+ "tags": [
+  "#escala",
+  "#torre"
+ ]
+}

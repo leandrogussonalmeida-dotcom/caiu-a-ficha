@@ -1,0 +1,45 @@
+{
+ "id": "V036",
+ "titulo": "ONIBUS ATE AS NUVENS",
+ "blocos": 60,
+ "bloco": {
+  "nome": "ONIBUS",
+  "plural": "ONIBUS EMPILHADOS",
+  "altura": 14,
+  "un": "m"
+ },
+ "marcos": [
+  {
+   "nome": "YACHTHOUSE",
+   "v": 294,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "PAO DE ACUCAR",
+   "v": 396,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "TORRE EIFFEL",
+   "v": 330,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "BURJ KHALIFA",
+   "v": 828,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "Um onibus basico tem 14 metros. Sessenta em pe passam do predio mais alto do mundo.",
+ "fonte": "ABNT NBR 15570:2009 (onibus basico, 14 m); Wikipedia para os predios; IBGE/INDE para o Pao de Acucar",
+ "confianca": "alta",
+ "nota": "A altura de cada bloco tem fonte. O total e so multiplicacao: 60 x 14 = 840 m.",
+ "tags": [
+  "#escala",
+  "#torre"
+ ]
+}

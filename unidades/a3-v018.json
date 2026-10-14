@@ -1,0 +1,16 @@
+{
+ "id": "V018",
+ "titulo": "O TABULEIRO DE ARROZ",
+ "geracoes": 63,
+ "por_geracao": 2,
+ "rodape": "COMECOU COM UM GRAO",
+ "fecho": "9,2 QUINTILHOES NA ULTIMA CASA",
+ "chamada": "Um grao na primeira casa, dois na segunda, quatro na terceira. Na ultima casa o mundo inteiro nao tem arroz suficiente.",
+ "fonte": "Progressao geometrica: a casa 64 tem 2 elevado a 63 = 9.223.372.036.854.775.808 graos",
+ "confianca": "alta",
+ "nota": "Tres numeros diferentes que vivem sendo confundidos: a primeira casa tem 1 grao. a casa 64 tem 2^63 = 9.223.372.036.854.775.808 graos. e o TABULEIRO INTEIRO somado tem 2^64 menos 1 = 18.446.744.073.709.551.615 graos. O video conta a casa. nao a soma.",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
+}

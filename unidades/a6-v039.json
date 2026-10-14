@@ -1,0 +1,45 @@
+{
+ "id": "V039",
+ "titulo": "ELEFANTES ATE O ALTO",
+ "blocos": 48,
+ "bloco": {
+  "nome": "ELEFANTE",
+  "plural": "ELEFANTES EMPILHADOS",
+  "altura": 10.67,
+  "un": "m"
+ },
+ "marcos": [
+  {
+   "nome": "CRISTO REDENTOR",
+   "v": 38,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "EDIFICIO ITALIA",
+   "v": 168,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "TORRE DE TV, DF",
+   "v": 224,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  },
+  {
+   "nome": "YACHTHOUSE",
+   "v": 294,
+   "fonte": "ver fonte do documento",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "O maior elefante ja registrado tinha 10,67 metros da tromba ao rabo. Em pe, quarenta e oito deles.",
+ "fonte": "Wikipedia, Largest and heaviest animals (10,67 m, o maior elefante registrado, Angola 1974); Wikipedia, Christ the Redeemer",
+ "confianca": "alta",
+ "nota": "A altura de cada bloco tem fonte. O total e so multiplicacao: 48 x 10.67 = 512.2 m.",
+ "tags": [
+  "#escala",
+  "#torre"
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "id": "V021",
+ "titulo": "A CORRENTE DE TRES",
+ "geracoes": 20,
+ "por_geracao": 3,
+ "rodape": "COMECOU COM UM",
+ "fecho": "3.5 BILHAO EM 20 PASSOS",
+ "chamada": "Cada pessoa passa para tres. Vinte passos depois.",
+ "fonte": "Progressao geometrica: 3 elevado a 20 = 3.486.784.401",
+ "confianca": "alta",
+ "nota": "E matematica, nao medida: o numero e exato. O que a cabeca nao faz e sentir o tamanho dele.",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
+}

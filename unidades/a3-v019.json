@@ -1,0 +1,16 @@
+{
+ "id": "V019",
+ "titulo": "O BOATO EM UM MES",
+ "geracoes": 30,
+ "por_geracao": 2,
+ "rodape": "COMECOU COM VOCE",
+ "fecho": "1.1 BILHAO EM 30 PASSOS",
+ "chamada": "Voce conta para duas pessoas hoje. Cada uma conta para duas amanha. Em trinta dias.",
+ "fonte": "Progressao geometrica: 2 elevado a 30 = 1.073.741.824",
+ "confianca": "alta",
+ "nota": "E matematica, nao medida: o numero e exato. O que a cabeca nao faz e sentir o tamanho dele.",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
+}
