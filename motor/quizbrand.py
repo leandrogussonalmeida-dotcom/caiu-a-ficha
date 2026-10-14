@@ -15,17 +15,18 @@ ruído filtrado, a borda rasgada é um passeio aleatório, o meio-tom é uma gra
 de pontos, a tinta é blob gaussiano com limiar.
 """
 import math
+import fontes as FT
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # a mistura de fontes é o coração do visual: sans gorda, geométrica, serifada,
 # e máquina de escrever. Letra vizinha nunca repete a família.
-FONTES = ['/usr/share/fonts/opentype/inter/InterDisplay-Black.otf',
-          '/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf',
-          '/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf',
+FONTES = [FT.f('InterDisplay-Black.otf'),
+          FT.f('Poppins-Bold.ttf'),
+          FT.f('Lora-Variable.ttf'),
           '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf',
-          '/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf']
-F_MED = '/usr/share/fonts/opentype/inter/Inter-SemiBold.otf'
+          FT.f('DejaVuSansMono-Bold.ttf')]
+F_MED = FT.f('Inter-SemiBold.otf')
 
 LATAO = (206, 164, 88)
 LATAO_ESC = (124, 90, 38)

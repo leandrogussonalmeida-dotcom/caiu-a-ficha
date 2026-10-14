@@ -21,6 +21,7 @@ Um ESTILO reúne cor, fonte e textura. Trocar de estilo troca a cara do vídeo
 inteiro sem tocar no simulador.
 """
 import math, os, subprocess
+import fontes as FT
 import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageFont
 
@@ -29,12 +30,12 @@ SR = 48000
 LARG, ALT = 1080, 1920
 SS = 2                      # fator de superamostragem
 
-F_TITULO = '/usr/share/fonts/opentype/inter/InterDisplay-Black.otf'
-F_FORTE = '/usr/share/fonts/opentype/inter/Inter-Bold.otf'
-F_TEXTO = '/usr/share/fonts/opentype/inter/Inter-Medium.otf'
-F_MONO = '/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf'
-F_SERIF = '/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf'
-F_GEO = '/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf'
+F_TITULO = FT.f('InterDisplay-Black.otf')
+F_FORTE = FT.f('Inter-Bold.otf')
+F_TEXTO = FT.f('Inter-Medium.otf')
+F_MONO = FT.f('DejaVuSansMono-Bold.ttf')
+F_SERIF = FT.f('Lora-Variable.ttf')
+F_GEO = FT.f('Poppins-Bold.ttf')
 
 
 class Estilo:

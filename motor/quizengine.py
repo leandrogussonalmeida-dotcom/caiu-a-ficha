@@ -13,6 +13,7 @@ paleta, trilha, kit de percussao, voz e transicoes, entao dois videos nunca
 saem iguais. Registre o SEED usado de cada video na receita tecnica.
 """
 import sys, os, json, math, subprocess, numpy as np
+import fontes as FT
 import quizaudio as A
 import quizbg as BG
 
@@ -25,9 +26,9 @@ NARR = os.environ.get('NARR', '')        # pasta de onde vêm os .wav de narraç
 VELOC = float(os.environ.get('VELOC', 1.0))   # acelera a voz sem mudar o tom
 REUSO = os.environ.get('REUSO', '') == '1'    # Short reaproveita a fala do longo
 
-F_HEAVY = '/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf'
-F_MED = '/usr/share/fonts/opentype/inter/Inter-SemiBold.otf'
-F_TXT = '/usr/share/fonts/opentype/inter/Inter-Medium.otf'
+F_HEAVY = FT.f('Poppins-Bold.ttf')
+F_MED = FT.f('Inter-SemiBold.otf')
+F_TXT = FT.f('Inter-Medium.otf')
 
 PAD_Q = .35          # respiro depois da pergunta falada
 PAD_O = .30          # respiro depois das alternativas faladas

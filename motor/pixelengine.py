@@ -13,6 +13,7 @@ precisa detectar beat em áudio: o compasso é `60/bpm` e o tempo de cada
 batida é exato na amostra. A sincronia não é aproximada, é construída.
 """
 import json, math, os, subprocess
+import fontes as FT
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
@@ -33,7 +34,7 @@ LARG_H, ALT_H = 320, 180             # 1920x1080 dividido por 6
 # Fonte de bitmap: TTF renderizada SEM antialias. Em 8 px o antialias vira
 # borrão cinza e mata o visual; com fontmode='1' cada pixel é ligado ou
 # desligado, que é como fonte de console sempre foi.
-F_PIX = '/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf'
+F_PIX = FT.f('DejaVuSansMono-Bold.ttf')
 
 
 # =============================================================== paletas

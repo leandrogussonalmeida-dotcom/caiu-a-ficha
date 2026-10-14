@@ -125,7 +125,29 @@ def um(s, plano, forcar=False):
     return 'ok', f"{s['id']} em {time.time()-t0:.0f}s"
 
 
+def _portao_fontes():
+    """Confere as fontes ANTES de comecar. Falhar no primeiro segundo e
+    barato; falhar depois de duas horas de maquina, no video 178, nao e -
+    foi exatamente o que aconteceu na primeira vez que isso rodou fora da
+    minha maquina."""
+    try:
+        import fontes as FT
+    except ImportError:
+        return
+    faltam = FT.conferir()
+    if faltam:
+        print()
+        print('  [x] Faltam fontes, e sem elas NADA renderiza:')
+        for n in faltam: print('      -', n)
+        print()
+        print(f'      Elas deveriam estar em {FT.AQUI}')
+        print('      Se a pasta fontes nao veio junto, baixe o motor de novo.')
+        print()
+        raise SystemExit(1)
+
+
 def main():
+    _portao_fontes()
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     so_faltam = '--faltam' in sys.argv
     forcar = '--forcar' in sys.argv
