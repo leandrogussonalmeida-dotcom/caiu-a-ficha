@@ -1,0 +1,15 @@
+{
+ "id": "V075",
+ "titulo": "FOGUEIRA ACESA",
+ "cena": "fogueira",
+ "segundos": 3600,
+ "chamada": "Uma hora de fogueira. O fogo nunca repete o mesmo desenho.",
+ "fonte": "cena sintetizada por codigo; nao ha dado externo a conferir",
+ "confianca": "alta",
+ "nota": "O laco nao e perceptivel: cada elemento tem periodo proprio e primo entre si, entao nunca voltam todos a mesma posicao.",
+ "tags": [
+  "#relaxar",
+  "#modofoco",
+  "#umahora"
+ ]
+}

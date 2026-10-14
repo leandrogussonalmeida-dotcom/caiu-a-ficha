@@ -33,7 +33,11 @@ def checar_unidades(arq):
     itens = next((d[k] for k in CHAVES if isinstance(d.get(k), list) and d[k]), [])
     # a CADEIA nao tem lista: ela e descrita por um numero de geracoes e uma
     # taxa. Nesse caso o que se confere e a fonte do documento inteiro.
-    if not itens and isinstance(d.get('geracoes'), (int, float)):
+    # Formatos sem lista: a CADEIA (um numero de geracoes e uma taxa) e o
+    # MODO FOCO (so o nome de uma cena). Nos dois o que se confere e a fonte
+    # do documento. Cena sintetizada nao tem dado externo, mas tem de DIZER
+    # isso - 'nao ha dado a conferir' e uma declaracao, nao um silencio.
+    if not itens and (isinstance(d.get('geracoes'), (int, float)) or d.get('cena')):
         if not d.get('fonte'): _erro(e, 'sem fonte')
         if d.get('confianca') not in CONF: _erro(e, 'sem confianca valida')
         return e, avisos

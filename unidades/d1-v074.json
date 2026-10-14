@@ -1,0 +1,15 @@
+{
+ "id": "V074",
+ "titulo": "CHUVA NA JANELA",
+ "cena": "chuva",
+ "segundos": 3600,
+ "chamada": "Uma hora de chuva na janela. Sem corte, sem anuncio no meio.",
+ "fonte": "cena sintetizada por codigo; nao ha dado externo a conferir",
+ "confianca": "alta",
+ "nota": "O laco nao e perceptivel: cada elemento tem periodo proprio e primo entre si, entao nunca voltam todos a mesma posicao.",
+ "tags": [
+  "#relaxar",
+  "#modofoco",
+  "#umahora"
+ ]
+}

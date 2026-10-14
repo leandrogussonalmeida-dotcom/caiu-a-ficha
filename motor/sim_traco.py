@@ -80,17 +80,37 @@ def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
     rng = np.random.default_rng(seed * 29 + 11)
     q = AL.Quadro(est)
 
-    # cada desenho vira um caminho tremido, já em pixels da folha
+    # cada desenho vira um caminho tremido, já em pixels da folha.
+    # Um ponto nulo é a pena LEVANTANDO: a lousa não pode levantar o traço
+    # (é a regra do brinquedo), mas uma pena pode, e sem isso todo detalhe
+    # desenhado depois do contorno deixava um risco atravessando a figura.
     cams = []
     for d in des:
-        pts = [(CX - LADO / 2 + px / 100 * LADO, CY + LADO / 2 - py / 100 * LADO)
+        pts = [None if (px is None or py is None) else
+               (CX - LADO / 2 + px / 100 * LADO, CY + LADO / 2 - py / 100 * LADO)
                for px, py in d['pontos']]
-        p, c = tremido(pts, np.random.default_rng(seed * 7 + len(cams)),
-                       amp=LADO * .0030)
-        comp = [0.0]
-        for a, b in zip(p, p[1:]):
-            comp.append(comp[-1] + math.hypot(b[0] - a[0], b[1] - a[1]))
-        cams.append((p, c, comp))
+        # cada trecho entre levantadas e tremido por si; o comprimento
+        # acumulado atravessa os trechos para a mao nao acelerar nos saltos
+        p, c, comp, saltos = [], [], [0.0], set()
+        trecho, rg = [], np.random.default_rng(seed * 7 + len(cams))
+        def fechar():
+            if len(trecho) < 2: return
+            tp, tc = tremido(trecho, rg, amp=LADO * .0030)
+            if p: saltos.add(len(p))
+            for pt in tp:
+                if p: comp.append(comp[-1] + math.hypot(pt[0] - p[-1][0],
+                                                        pt[1] - p[-1][1]))
+                p.append(pt)
+            c.extend(tc)
+        # `pt`, nao `q`: `q` e a tela, e um `for q in pts` aqui sobrescrevia
+        # a tela com uma tupla. O erro so aparecia 1.800 quadros depois.
+        for pt in pts:
+            if pt is None:
+                fechar(); trecho = []
+            else:
+                trecho.append(pt)
+        fechar()
+        cams.append((p, c, comp, saltos))
 
     def caneta(px, py, pulso):
         """A pena. Precisa ser lida como pena no tamanho de miniatura, senão
@@ -118,7 +138,7 @@ def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
         k = min(n - 1, int(tl / DUR))
         tk = tl - k * DUR
         pulso = bat.pulso(t, .12)
-        pts, curv, comp = cams[k]
+        pts, curv, comp, saltos = cams[k]
         L = comp[-1]
         # desenhar ocupa tudo menos o palpite e a resposta
         t_des = DUR - T_PALPITE - 3.0
@@ -140,6 +160,8 @@ def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
             novo += 1
         if novo > j:
             for m in range(j, novo):
+                if m + 1 in saltos:        # aqui a pena estava no ar
+                    continue
                 # a pena pesa na quina e no começo do traço
                 esp = 5.0 + 4.2 * min(1.0, curv[m] * 2.4)
                 q.linha(pts[m][0], pts[m][1], pts[m + 1][0], pts[m + 1][1],

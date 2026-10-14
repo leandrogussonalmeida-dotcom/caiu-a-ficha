@@ -91,7 +91,61 @@ def _mar(tela, t, rng, est, pulso):
     tela.ret(0, int(H - 26 + mare), W, 40, 5)             # areia
 
 
-CENAS = dict(chuva=_chuva, fogueira=_fogueira, mar=_mar)
+
+def _vento(tela, t, rng, est, pulso):
+    """Vento no campo. O vento nao se ve: ve-se o que ele move. Entao a cena
+    inteira e capim, e o unico conteudo e a onda que atravessa o capim.
+
+    A onda e a soma de tres senoides de periodos primos entre si viajando na
+    horizontal. Uma senoide so daria uma ondulacao regular, que o olho
+    reconhece como animacao de computador em dez segundos."""
+    H, W = PX.ALT, PX.LARG
+    HOR = int(H * .42)
+    tela.limpar(0)
+    tela.ret(0, 0, W, HOR, 1)
+    tela.ret(0, HOR, W, H - HOR, 2)
+
+    # nuvens compridas atravessando devagar. Sem elas o ceu era uma faixa
+    # preta ocupando 40% da tela sem nada acontecendo nela.
+    for nx, ny, nw, nv in est['nuvens']:
+        x = (nx * (W + 120) - t * (3 + 7 * nv)) % (W + 140) - 70
+        y = int(ny * (HOR - 24)) + 6
+        tela.ret(int(x), y, int(nw), 3, 2 if nv < .5 else 3)
+        tela.ret(int(x + nw * .22), y - 3, int(nw * .5), 3, 2 if nv < .5 else 3)
+
+    nuv = math.sin(t * .041) * math.sin(t * .017)   # sombra de nuvem, lenta
+    if nuv > .55:
+        tela.ret(0, HOR, W, H - HOR, 1)
+
+    # os morros tinham a cor 1, a mesma do ceu, entao nao existiam. Silhueta
+    # so e silhueta contra um fundo de outra cor.
+    for mx, mw, mh in est['morros']:
+        tela.ret(mx, HOR - mh, mw, mh, 2)
+
+    def rajada(x, f):
+        return (math.sin(x * .07 - t * 2.1 + f) * 1.0 +
+                math.sin(x * .031 - t * 1.3 + f * 1.7) * .7 +
+                math.sin(x * .013 - t * 0.7) * .5) / 2.2
+
+    for cx, prof, alt, fase in est['capim']:
+        y0 = HOR + int((H - HOR) * prof)
+        h = int(alt * (.4 + prof))
+        dob = rajada(cx, fase) * (3 + 9 * prof)
+        cor = 3 if prof < .35 else (4 if prof < .7 else 6)
+        passos = max(2, h // 3)
+        for k in range(passos):
+            f = k / passos
+            tela.ret(int(cx + dob * f * f),
+                     y0 - int(h * (k + 1) / passos), 1,
+                     max(1, h // passos), cor)
+
+    for sx, sy, sv in est['sementes']:
+        x = (sx * W + t * (26 + 40 * sv)) % (W + 20) - 10
+        y = HOR + (H - HOR) * sy + math.sin(t * (1.1 + sv) + sx * 9) * 7
+        tela.px(int(x), int(y), 9 if sv > .7 else 8)
+
+
+CENAS = dict(chuva=_chuva, fogueira=_fogueira, mar=_mar, vento=_vento)
 
 
 def construir(u, seed=91, saida='ambiente.mp4', dirsaida='out-ambiente'):
@@ -103,6 +157,13 @@ def construir(u, seed=91, saida='ambiente.mp4', dirsaida='out-ambiente'):
     cena = CENAS[u.get('cena', 'chuva')]
     est = dict(
         gotas=[(rng.random(), rng.random(), .4 + rng.random()) for _ in range(110)],
+        capim=[(int(rng.integers(-6, PX.LARG + 6)), rng.random(),
+                int(rng.integers(9, 26)), rng.random() * 6.3) for _ in range(260)],
+        morros=[(x, int(rng.integers(30, 70)), int(rng.integers(6, 20)))
+                for x in range(-10, PX.LARG + 10, 34)],
+        sementes=[(rng.random(), rng.random(), rng.random()) for _ in range(34)],
+        nuvens=[(rng.random(), rng.random(), rng.integers(26, 70), rng.random())
+                for _ in range(7)],
         predios=[(x, int(rng.integers(14, 30)), int(rng.integers(20, 90)))
                  for x in range(-6, PX.LARG + 6, 26)],
         chamas=[(int(rng.integers(-16, 17)), .8 + rng.random() * 1.9,

@@ -119,8 +119,33 @@ def main():
         if st in ('erro', 'reprovado'): print('  ' + msg, flush=True)
 
     if so_faltam:
-        print(f'{len(faltam)} peças sem unidade de dado:')
-        for f in faltam: print('  ', f)
+        # painel por serie: e a unica forma de olhar 280 pecas e entender
+        # onde esta o trabalho. O total sozinho nao diz nada.
+        por = {}
+        for v in plano['videos']:
+            tem = os.path.exists(os.path.join(UNID, v['unidade']))
+            feito = os.path.exists(os.path.join(SAIDA, v['id'], v['id'] + '.mp4'))
+            d = por.setdefault((v['serie'], v['rotulo']), [0, 0, 0])
+            d[0] += 1
+            d[1] += 1 if tem else 0
+            d[2] += 1 if feito else 0
+        print()
+        print('  serie                          total  escritas  rendidas')
+        print('  ' + '-' * 56)
+        tt = ew = rr = 0
+        for (sr, rot), (t, w, r) in sorted(por.items()):
+            barra = '#' * round(w / t * 10) + '.' * (10 - round(w / t * 10))
+            print(f'  {sr} {rot[:24]:<25} {t:>4}  {w:>6}  {r:>7}  {barra}')
+            tt += t; ew += w; rr += r
+        print('  ' + '-' * 56)
+        print(f'  {"TOTAL":<29} {tt:>4}  {ew:>6}  {rr:>7}'
+              f'   ({ew/tt*100:.0f}% escrito)')
+        print(f'\n  Shorts: {len(plano["shorts"])} planejados, saem dos longos '
+              f'prontos.')
+        if faltam:
+            print(f'\n  as {len(faltam)} proximas sem unidade:')
+            for f in faltam[:12]: print('    ', f)
+            if len(faltam) > 12: print(f'     ... e mais {len(faltam)-12}')
         return
     dt = time.time() - t0
     print(f"\nfeitos {contas['ok']} · pulados {contas['pulou']} · "

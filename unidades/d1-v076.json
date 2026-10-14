@@ -1,0 +1,15 @@
+{
+ "id": "V076",
+ "titulo": "MAR BATENDO NA PRAIA",
+ "cena": "mar",
+ "segundos": 3600,
+ "chamada": "Uma hora de mar. A onda vem sempre, e nunca igual.",
+ "fonte": "cena sintetizada por codigo; nao ha dado externo a conferir",
+ "confianca": "alta",
+ "nota": "O laco nao e perceptivel: cada elemento tem periodo proprio e primo entre si, entao nunca voltam todos a mesma posicao.",
+ "tags": [
+  "#relaxar",
+  "#modofoco",
+  "#umahora"
+ ]
+}
