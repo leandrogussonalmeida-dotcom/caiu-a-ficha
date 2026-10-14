@@ -21,8 +21,13 @@ FORMAS = {
     'predio': [(22, 0, 56, 52, 0), (30, 52, 40, 30, 0), (40, 82, 20, 14, 0),
                (48, 96, 4, 4, 1)],
 
-    'morro': [(10, 0, 80, 10, 2), (18, 10, 64, 22, 0), (28, 32, 44, 26, 0),
-              (38, 58, 24, 22, 0), (46, 80, 8, 12, 1)],
+    # O morro tinha um pino fino de 8 de largura no topo, e num video de
+    # montanhas ele lia como antena de predio. Montanha nao tem pino: tem
+    # ombro largo e cume curto. Os degraus agora abrem mais embaixo e o
+    # topo fecha chato, que e o que sobrevive quando o simulador estreita
+    # a forma para caber na metade da tela.
+    'morro': [(2, 0, 96, 16, 2), (10, 16, 80, 20, 0), (20, 36, 60, 20, 0),
+              (30, 56, 40, 18, 0), (40, 74, 20, 16, 0), (44, 90, 12, 8, 1)],
 
     'torre': [(30, 0, 40, 6, 2), (38, 6, 24, 40, 0), (30, 46, 40, 10, 1),
               (42, 56, 16, 28, 0), (46, 84, 8, 16, 0)],

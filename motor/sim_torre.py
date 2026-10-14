@@ -29,7 +29,10 @@ SKYLINE = [(0, 22, 26), (24, 14, 38), (40, 18, 20), (60, 12, 30),
            (108, 16, 34), (126, 20, 22), (148, 13, 40), (163, 17, 28)]
 
 
-def construir(seed=7, blocos=52, paleta='neon', saida='torre.mp4', dirsaida='.'):
+def construir(u=None, seed=7, saida='torre.mp4', dirsaida='.'):
+    u = u or {}
+    blocos = u.get('blocos', 52)
+    paleta = u.get('paleta', 'neon')
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
     # o vídeo termina 2,2 s depois do último bloco, para o número respirar

@@ -93,7 +93,10 @@ def desenhar_unidade(tela, bat, u, t, pal_cores, dur=DUR_UNIDADE):
     txt = f'{n:.0f}' if n >= 10 else f'{n:.1f}'.replace('.0', '')
     esc = 1 + .16 * pulso * f['cresce']
     tela.texto(txt, PX.LARG // 2, 16, 11, tam=int(34 * esc), centro=True, sombra=escuro)
-    tela.texto(f"{ref['nome'].split()[0]}S".replace('SS', 'S'),
+    # O plural vem da unidade. Em português ele não se deriva: PAO vira
+    # PAES, ONIBUS não muda, e cortar a primeira palavra e colar um S
+    # produziu "6,9 PAOS" no vídeo das montanhas.
+    tela.texto(ref.get('rotulo') or f"{ref['nome'].split()[0]}S".replace('SS', 'S'),
                PX.LARG // 2, 52, claro, tam=9, centro=True)
 
     # --- a âncora, no fim
@@ -105,8 +108,14 @@ def desenhar_unidade(tela, bat, u, t, pal_cores, dur=DUR_UNIDADE):
         tela.texto_ajustado(u['ancora'], PX.LARG // 2, y, claro, 10, PX.LARG - 22, centro=True)
 
 
-def construir(unidades, seed=11, paleta='gelo', saida='escala.mp4',
+def construir(u, seed=11, saida='escala.mp4',
               dirsaida='out-escala', dur=DUR_UNIDADE):
+    # contrato único de todos os simuladores: recebem a unidade inteira e
+    # tiram dela a aparência. Enquanto este aqui recebia a lista e a paleta
+    # soltas, o executor passava o dicionário sem reclamar e o vídeo saía
+    # vazio — com 'ok' no relatório.
+    unidades = u['unidades']
+    paleta = u.get('paleta', 'gelo')
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
     total = len(unidades) * dur

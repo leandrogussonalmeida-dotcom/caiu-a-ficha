@@ -1,0 +1,122 @@
+{
+ "id": "V001",
+ "titulo": "1 CRISTO = 38 M",
+ "paleta": "gelo",
+ "chamada": "O Cristo Redentor tem 38 metros com o pedestal. Quantos cabem nas coisas mais altas do Brasil?",
+ "fonte": "Wikipedia, Christ the Redeemer (statue)",
+ "confianca": "alta",
+ "tags": [
+  "#escala",
+  "#brasil"
+ ],
+ "unidades": [
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "BRACOS ABERTOS",
+    "valor": 28,
+    "un": "m",
+    "forma": "cristo"
+   },
+   "ancora": "OS BRACOS SAO QUASE A ALTURA",
+   "fonte": "Wikipedia, Christ the Redeemer (statue)",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "ARMANI CASA",
+    "valor": 270,
+    "un": "m",
+    "forma": "predio"
+   },
+   "ancora": "7 CRISTOS EMPILHADOS",
+   "fonte": "myside, predios mais altos do Brasil",
+   "confianca": "media"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "ONE TOWER",
+    "valor": 290,
+    "un": "m",
+    "forma": "predio"
+   },
+   "ancora": "BALNEARIO CAMBORIU, SC",
+   "fonte": "myside, predios mais altos do Brasil",
+   "confianca": "media"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "YACHTHOUSE",
+    "valor": 294,
+    "un": "m",
+    "forma": "predio"
+   },
+   "ancora": "O MAIS ALTO JA CONCLUIDO",
+   "fonte": "myside, predios mais altos do Brasil",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "SENNA TOWER",
+    "valor": 544,
+    "un": "m",
+    "forma": "predio"
+   },
+   "ancora": "14 CRISTOS, E AINDA EM OBRA",
+   "fonte": "myside, predios mais altos do Brasil",
+   "confianca": "media"
+  },
+  {
+   "ref": {
+    "nome": "CRISTO REDENTOR",
+    "valor": 38,
+    "un": "m",
+    "forma": "cristo",
+    "rotulo": "CRISTOS"
+   },
+   "alvo": {
+    "nome": "MORRO DO CORCOVADO",
+    "valor": 700,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "O MORRO GANHA DE TODOS",
+   "fonte": "Wikipedia, Christ the Redeemer (statue)",
+   "confianca": "alta"
+  }
+ ]
+}

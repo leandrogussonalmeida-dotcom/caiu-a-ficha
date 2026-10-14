@@ -1,0 +1,42 @@
+{
+ "id": "V029",
+ "titulo": "QUEM CHEGA PRIMEIRO",
+ "paleta": "floresta",
+ "unidade": "KM/H",
+ "segundos": 20,
+ "rodape": "TODOS NA MESMA LARGADA",
+ "corredores": [
+  {
+   "nome": "FALCAO-PEREGRINO",
+   "v": 320
+  },
+  {
+   "nome": "ANDORINHA",
+   "v": 110
+  },
+  {
+   "nome": "ONCA-PINTADA",
+   "v": 80
+  },
+  {
+   "nome": "EMA",
+   "v": 60
+  },
+  {
+   "nome": "BOTO",
+   "v": 35
+  },
+  {
+   "nome": "HUMANO",
+   "v": 37
+  },
+  {
+   "nome": "CAPIVARA",
+   "v": 35
+  },
+  {
+   "nome": "PREGUICA",
+   "v": 0.24
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "id": "V032",
+ "titulo": "8 CARROS, 1 PISTA",
+ "paleta": "asfalto",
+ "unidade": "KM/H",
+ "segundos": 24,
+ "voltas": 3,
+ "fonte": "velocidades maximas homologadas",
+ "confianca": "media",
+ "corredores": [
+  {
+   "nome": "F1",
+   "v": 360
+  },
+  {
+   "nome": "MOTO GP",
+   "v": 350
+  },
+  {
+   "nome": "STOCK CAR",
+   "v": 280
+  },
+  {
+   "nome": "CARRO POPULAR",
+   "v": 170
+  },
+  {
+   "nome": "TREM BALA",
+   "v": 320
+  },
+  {
+   "nome": "LANCHA",
+   "v": 90
+  },
+  {
+   "nome": "BICICLETA",
+   "v": 45
+  },
+  {
+   "nome": "A PE",
+   "v": 37
+  }
+ ]
+}

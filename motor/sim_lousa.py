@@ -76,8 +76,10 @@ def botao(tela, cx, cy, ang, cor, cor_marca, r=7):
                cor_marca)
 
 
-def construir(desenhos, seed=21, paleta='papelao', saida='lousa.mp4',
+def construir(u, seed=21, saida='lousa.mp4',
               dirsaida='out-lousa', dur=DUR):
+    desenhos = u['desenhos']
+    paleta = u.get('paleta', 'papelao')
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
     total = len(desenhos) * dur

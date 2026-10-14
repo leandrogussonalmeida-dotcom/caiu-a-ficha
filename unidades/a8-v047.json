@@ -1,0 +1,18 @@
+{
+ "id": "V047",
+ "titulo": "20 MINUTOS DE ESTRADA",
+ "paleta": "neon",
+ "segundos": 24,
+ "velocidade": 34,
+ "km_por_unidade": 0.02,
+ "marcos": [
+  {
+   "km": 4,
+   "nome": "SEM DESTINO"
+  },
+  {
+   "km": 10,
+   "nome": "SO A BATIDA"
+  }
+ ]
+}

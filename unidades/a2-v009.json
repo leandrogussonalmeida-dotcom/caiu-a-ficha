@@ -1,0 +1,58 @@
+{
+ "id": "V009",
+ "titulo": "A LUZ DO SOL",
+ "paleta": "espaco",
+ "unidade": "min",
+ "viajante": {
+  "nome": "FOTON",
+  "forma": "gota"
+ },
+ "rodape": "A LUZ SAIU DO SOL AGORA",
+ "marcos": [
+  {
+   "nome": "SOL",
+   "t": 0,
+   "r": 16
+  },
+  {
+   "nome": "MERCURIO",
+   "t": 3.2,
+   "r": 5
+  },
+  {
+   "nome": "VENUS",
+   "t": 6.0,
+   "r": 7
+  },
+  {
+   "nome": "TERRA",
+   "t": 8.3,
+   "r": 8
+  },
+  {
+   "nome": "MARTE",
+   "t": 12.7,
+   "r": 6
+  },
+  {
+   "nome": "JUPITER",
+   "t": 43.3,
+   "r": 14
+  },
+  {
+   "nome": "SATURNO",
+   "t": 79.0,
+   "r": 12
+  },
+  {
+   "nome": "URANO",
+   "t": 159.0,
+   "r": 9
+  },
+  {
+   "nome": "NETUNO",
+   "t": 250.0,
+   "r": 9
+  }
+ ]
+}

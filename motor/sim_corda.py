@@ -135,7 +135,9 @@ def construir(u, seed=81, saida='corda.mp4', dirsaida='out-corda'):
     sf.write(wav, mix, AL.SR)
     PX.exportar_batidas(bat, total, os.path.join(dirsaida, 'batidas.json'))
     t0 = time.time()
-    nq = AL.gravar(quadro, total, wav, os.path.join(dirsaida, saida))
+    # cena de degrade com grao nao precisa de crf 19: o x264 gasta o dobro
+    # de bits guardando ruido que ninguem ve. 37 MB viram 12 sem diferenca.
+    nq = AL.gravar(quadro, total, wav, os.path.join(dirsaida, saida), crf=23)
     dt = time.time() - t0
     print(f"{len(marcas)} marcas · ate {fmt(fundo_m)} m · estilo {est.nome} · "
           f"{nq} quadros em {dt:.1f}s = {nq/dt:.1f} fps "

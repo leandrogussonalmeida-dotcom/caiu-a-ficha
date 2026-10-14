@@ -1,0 +1,34 @@
+{
+ "id": "V078",
+ "titulo": "DESCENDO ATE O TITANIC",
+ "estilo": "noturno",
+ "duracao": 100,
+ "fonte": "NOAA Ocean Exploration; Wikipedia, RMS Titanic; Wikipedia, Free-diving",
+ "confianca": "alta",
+ "tags": [
+  "#oceano",
+  "#relaxar"
+ ],
+ "marcas": [
+  {
+   "nome": "PISCINA OLIMPICA",
+   "v": 3
+  },
+  {
+   "nome": "MERGULHO COM CILINDRO",
+   "v": 40
+  },
+  {
+   "nome": "RECORDE DE APNEIA",
+   "v": 214
+  },
+  {
+   "nome": "LIMITE DA LUZ DO SOL",
+   "v": 1000
+  },
+  {
+   "nome": "TITANIC",
+   "v": 3800
+  }
+ ]
+}

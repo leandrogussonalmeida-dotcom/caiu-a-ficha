@@ -1,0 +1,122 @@
+{
+ "id": "V002",
+ "titulo": "1 PAO DE ACUCAR = 396 M",
+ "chamada": "O Pao de Acucar tem 396 metros. Parece alto ate voce ver as montanhas de verdade do Brasil.",
+ "fonte": "Wikipedia, Sugarloaf Mountain; IBGE/INDE, revisao das altitudes dos pontos culminantes (MAPGEO2015)",
+ "confianca": "alta",
+ "tags": [
+  "#escala",
+  "#brasil",
+  "#montanhas"
+ ],
+ "unidades": [
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "MONTE RORAIMA",
+    "valor": 2734.05,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "TRES PAISES SE ENCOSTAM NO TOPO",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "AGULHAS NEGRAS",
+    "valor": 2790.94,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "A MANTIQUEIRA, ENTRE RIO E MINAS",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "PEDRA DA MINA",
+    "valor": 2798.06,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "SETE PAES DE ACUCAR EMPILHADOS",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "PICO DA BANDEIRA",
+    "valor": 2891.32,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "O MAIS ALTO FORA DA AMAZONIA",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "PICO 31 DE MARCO",
+    "valor": 2974.18,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "O SEGUNDO, E NINGUEM SABE O NOME",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  },
+  {
+   "ref": {
+    "nome": "PAO DE ACUCAR",
+    "valor": 396,
+    "un": "m",
+    "forma": "morro",
+    "rotulo": "PAES DE ACUCAR"
+   },
+   "alvo": {
+    "nome": "PICO DA NEBLINA",
+    "valor": 2995.3,
+    "un": "m",
+    "forma": "morro"
+   },
+   "ancora": "O TETO DO BRASIL, NO AMAZONAS",
+   "fonte": "IBGE/INDE, pontos culminantes revisados",
+   "confianca": "alta"
+  }
+ ]
+}
