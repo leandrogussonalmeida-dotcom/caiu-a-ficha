@@ -1,0 +1,55 @@
+{
+ "id": "V024",
+ "titulo": "A ESCALA DO FRIO",
+ "unidade": "KELVIN",
+ "descendo": true,
+ "batidas_por_passo": 4,
+ "chamada": "Do gelo ate o lugar mais frio ja feito pelo homem. Sao treze casas decimais de distancia.",
+ "fonte": "Wikipedia, Orders of magnitude (temperature) — a mesma pagina do video do calor",
+ "confianca": "alta",
+ "nota": "Em kelvin, porque a escada e logaritmica e nao existe temperatura negativa em kelvin. Zero kelvin sao -273,15 graus Celsius, e o proprio artigo lembra que ele nao pode ser alcancado: a terceira lei da termodinamica proibe. O recorde de laboratorio, 38 picokelvin, esta no fecho e nao na escada: ele e tao distante que achatava todos os outros degraus num ponto so.",
+ "fecho": "38 PICOKELVIN NUM LABORATORIO",
+ "tags": [
+  "#frio",
+  "#ciencia",
+  "#limite"
+ ],
+ "passos": [
+  {
+   "nome": "AGUA CONGELANDO",
+   "v": 273.15,
+   "nota": "0 graus Celsius",
+   "fonte": "Wikipedia, Orders of magnitude (temperature)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "VOSTOK, ANTARTIDA",
+   "v": 183.9,
+   "nota": "-89,2 C, recorde natural, 1983",
+   "fonte": "Wikipedia, Orders of magnitude (temperature)",
+   "confianca": "alta",
+   "destaque": true
+  },
+  {
+   "nome": "NITROGENIO LIQUIDO",
+   "v": 77.35,
+   "nota": "-195,8 C",
+   "fonte": "Wikipedia, Orders of magnitude (temperature)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "HELIO LIQUIDO",
+   "v": 4.22,
+   "nota": "-268,9 C",
+   "fonte": "Wikipedia, Orders of magnitude (temperature)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "O FUNDO DO UNIVERSO",
+   "v": 2.725,
+   "nota": "a radiacao cosmica de fundo",
+   "fonte": "Wikipedia, Orders of magnitude (temperature)",
+   "confianca": "alta"
+  }
+ ]
+}

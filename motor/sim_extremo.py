@@ -37,13 +37,28 @@ def construir(u, seed=51, saida='extremo.mp4', dirsaida='out-extremo'):
     vals = [p['v'] for p in passos]
     # log puro quando tudo é positivo. Com um deslocamento grande o log vira
     # quase linear e esmaga a base — 37, 100 e 250 caíam no mesmo pixel.
-    base0 = 0.0 if min(vals) > 0 else min(vals) - (max(vals) - min(vals)) * .02 - 1e-6
-    lg = [math.log10(max(1e-9, v - base0)) for v in vals]
-    lo, hi = min(lg), max(lg)
+    # Escala LINEAR para grandezas que JA SAO logaritmicas: decibel, pH,
+    # Richter. Passar decibel pelo log seria log de log, e a escada sairia
+    # mentindo - alem de 0 dB quebrar o log10. Nessas, cada degrau igual na
+    # tela ja representa um salto de dez vezes na energia, que e o que a
+    # unidade significa.
+    linear = u.get('escala') == 'linear'
+    if linear:
+        lo, hi = min(vals), max(vals)
+        marg = (hi - lo) * .04 or 1.0
+        lo, hi = lo - marg, hi + marg
 
-    def ypos(v):
-        q = (math.log10(max(1e-9, v - base0)) - lo) / max(1e-9, hi - lo)
-        return BASE - q * (BASE - TOPO) if not desc else TOPO + q * (BASE - TOPO)
+        def ypos(v):
+            q = (v - lo) / max(1e-9, hi - lo)
+            return BASE - q * (BASE - TOPO) if not desc else TOPO + q * (BASE - TOPO)
+    else:
+        base0 = 0.0 if min(vals) > 0 else min(vals) - (max(vals) - min(vals)) * .02 - 1e-6
+        lg = [math.log10(max(1e-9, v - base0)) for v in vals]
+        lo, hi = min(lg), max(lg)
+
+        def ypos(v):
+            q = (math.log10(max(1e-9, v - base0)) - lo) / max(1e-9, hi - lo)
+            return BASE - q * (BASE - TOPO) if not desc else TOPO + q * (BASE - TOPO)
 
     def fmt(v):
         a = abs(v)
