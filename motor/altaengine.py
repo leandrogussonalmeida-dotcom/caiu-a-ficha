@@ -43,13 +43,14 @@ class Estilo:
 
     def __init__(self, nome, fundo, tinta, suave, acento, acento2, linha,
                  fonte_num=F_TITULO, fonte_rot=F_MONO, fonte_txt=F_TEXTO,
-                 grade=None, grao=0.0, vinheta=0.0, maiuscula=True):
+                 grade=None, grao=0.0, vinheta=0.0, maiuscula=True,
+                 grao_movel=False):
         self.nome = nome
         self.fundo, self.tinta, self.suave = fundo, tinta, suave
         self.acento, self.acento2, self.linha = acento, acento2, linha
         self.fonte_num, self.fonte_rot, self.fonte_txt = fonte_num, fonte_rot, fonte_txt
         self.grade, self.grao, self.vinheta = grade, grao, vinheta
-        self.maiuscula = maiuscula
+        self.maiuscula, self.grao_movel = maiuscula, grao_movel
 
 
 ESTILOS = {
@@ -95,18 +96,33 @@ class Quadro:
         """Tabelas que não mudam de quadro: ruído do grão e máscara da
         vinheta. Calculadas uma vez por vídeo, não 1800 vezes."""
         e = self.est
+        # Grão de **papel não se mexe**. Fibra é superfície, não é chuvisco:
+        # o grão parado é mais honesto e, de quebra, é o que torna o vídeo
+        # codificável — grão novo a cada quadro é ruído puro, o x264 não tem
+        # o que prever e o arquivo explode. Um desenho a traço de 77s saiu
+        # com 62 MB e o encoder virou o gargalo (9,7 fps com a cena pronta a
+        # 31 fps). Só grão de filme pede `grao_movel`.
         self._ruido = None
         if e.grao:
             rng = np.random.default_rng(7)
             self._ruido = [Image.fromarray(
                 np.repeat(rng.integers(0, 256, (self.h, self.w, 1), dtype=np.uint8), 3, 2))
-                for _ in range(4)]
+                for _ in range(4 if e.grao_movel else 1)]
         self._vin = None
         if e.vinheta:
             gy, gx = np.mgrid[0:self.h, 0:self.w].astype(np.float32)
             r = ((gx / self.w - .5) * 1.25) ** 2 + ((gy / self.h - .5) * 1.1) ** 2
             m = (np.clip(1 - e.vinheta * r * 2.2, 0, 1) * 255).astype(np.uint8)
             self._vin = Image.fromarray(np.repeat(m[..., None], 3, 2))
+
+    def fixar(self):
+        """Congela o que está desenhado como novo fundo. É o que permite
+        tinta que **acumula**: o traço de ontem não é redesenhado hoje, só
+        copiado. Sem isso um desenho de 600 segmentos é redesenhado 780
+        vezes ao longo do vídeo."""
+        if self._base is None: self._base = self.im.copy()
+        else: self._base.paste(self.im)
+        return self
 
     def limpar(self):
         """Começa o quadro seguinte. O fundo (cor e grade) é desenhado uma
@@ -218,7 +234,8 @@ class Quadro:
         é ele que troca a folha de grão, para o grão não congelar na tela."""
         im = self.im.reduce(SS) if SS > 1 else self.im
         if self._ruido is not None:
-            im = Image.blend(im, self._ruido[i & 3], self.est.grao)
+            im = Image.blend(im, self._ruido[(i & 3) % len(self._ruido)],
+                             self.est.grao)
         if self._vin is not None:
             im = ImageChops.multiply(im, self._vin)
         return im.tobytes()
