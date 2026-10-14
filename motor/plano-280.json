@@ -8,7 +8,7 @@
    "motor": "pixel",
    "aparencia": "brasa",
    "seed": 1001,
-   "tema": "Cristo Redentor contra os prédios mais altos do Brasil",
+   "tema": "Cristo Redentor contra os predios mais altos do Brasil",
    "unidade": "a1-v001.json"
   },
   {
@@ -19,7 +19,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 1002,
-   "tema": "O Pão de Açúcar contra as montanhas do Brasil",
+   "tema": "O Pao de Acucar contra as montanhas do Brasil",
    "unidade": "a1-v002.json"
   },
   {
@@ -30,40 +30,40 @@
    "motor": "pixel",
    "aparencia": "menta",
    "seed": 1003,
-   "tema": "Um ônibus contra os maiores bichos que já existiram",
+   "tema": "Uma pessoa contra as ondas mais altas ja surfadas",
    "unidade": "a1-v003.json"
   },
   {
    "id": "V004",
    "serie": "A1",
-   "rotulo": "ESCALA BRASIL",
-   "simulador": "sim_escala",
+   "rotulo": "QUANTOS CABEM",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "neon",
    "seed": 1004,
-   "tema": "Uma pessoa contra as ondas mais altas já surfadas",
+   "tema": "Quantos onibus cabem nos maiores bichos do planeta",
    "unidade": "a1-v004.json"
   },
   {
    "id": "V005",
    "serie": "A1",
-   "rotulo": "ESCALA BRASIL",
-   "simulador": "sim_escala",
+   "rotulo": "QUANTOS CABEM",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 1005,
-   "tema": "O Brasil de norte a sul, contra as distancias do mundo",
+   "tema": "Quantos carros cabem nos maiores veiculos que ja rodaram",
    "unidade": "a1-v005.json"
   },
   {
    "id": "V006",
    "serie": "A1",
-   "rotulo": "ESCALA EM PLANTA",
-   "simulador": "sim_planta",
-   "motor": "alta",
-   "aparencia": "planta",
+   "rotulo": "QUANTOS CABEM",
+   "simulador": "sim_fileira",
+   "motor": "pixel",
+   "aparencia": "gelo",
    "seed": 1006,
-   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto",
+   "tema": "O Brasil de ponta a ponta contra as distancias do mundo",
    "unidade": "a1-v006.json"
   },
   {
@@ -72,9 +72,9 @@
    "rotulo": "ESCALA EM PLANTA",
    "simulador": "sim_planta",
    "motor": "alta",
-   "aparencia": "editorial",
+   "aparencia": "planta",
    "seed": 1007,
-   "tema": "Uma pessoa contra as maiores árvores do mundo",
+   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto",
    "unidade": "a1-v007.json"
   },
   {
@@ -83,9 +83,9 @@
    "rotulo": "ESCALA EM PLANTA",
    "simulador": "sim_planta",
    "motor": "alta",
-   "aparencia": "bauhaus",
+   "aparencia": "editorial",
    "seed": 1008,
-   "tema": "Um carro popular contra os maiores veículos que já rodaram",
+   "tema": "Uma pessoa contra as maiores arvores do mundo",
    "unidade": "a1-v008.json"
   },
   {
@@ -94,7 +94,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1009,
    "tema": "A luz saindo do Sol até bater na sua janela",
    "unidade": "a2-v009.json"
@@ -105,7 +105,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1010,
    "tema": "De carro, sem parar, até a Lua",
    "unidade": "a2-v010.json"
@@ -116,7 +116,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1011,
    "tema": "Andando do Oiapoque ao Chuí",
    "unidade": "a2-v011.json"
@@ -127,7 +127,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1012,
    "tema": "Um avião até cada capital do Brasil",
    "unidade": "a2-v012.json"
@@ -138,7 +138,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "espaco",
+   "aparencia": "mostarda",
    "seed": 1013,
    "tema": "Um dado atravessando a internet e dando a volta no mundo",
    "unidade": "a2-v013.json"
@@ -149,7 +149,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "mostarda",
+   "aparencia": "sangria",
    "seed": 1014,
    "tema": "Uma carta de 1900 contra uma mensagem de hoje",
    "unidade": "a2-v014.json"
@@ -160,7 +160,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "sangria",
+   "aparencia": "brasa",
    "seed": 1015,
    "tema": "O som atravessando o Brasil de ponta a ponta",
    "unidade": "a2-v015.json"
@@ -171,7 +171,7 @@
    "rotulo": "QUANTO TEMPO LEVA",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "brasa",
+   "aparencia": "floresta",
    "seed": 1016,
    "tema": "Uma gota de chuva, da nuvem até o chão",
    "unidade": "a2-v016.json"
@@ -182,7 +182,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 1017,
    "tema": "Dobrando uma folha de papel 50 vezes",
    "unidade": "a3-v017.json"
@@ -193,7 +193,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "neon",
    "seed": 1018,
    "tema": "Um grão de arroz dobrando em cada casa do tabuleiro",
    "unidade": "a3-v018.json"
@@ -204,7 +204,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "neon",
+   "aparencia": "uva",
    "seed": 1019,
    "tema": "Um boato contado para duas pessoas por dia",
    "unidade": "a3-v019.json"
@@ -215,7 +215,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "uva",
+   "aparencia": "gelo",
    "seed": 1020,
    "tema": "Uma célula se dividindo por 24 horas",
    "unidade": "a3-v020.json"
@@ -226,7 +226,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1021,
    "tema": "Um real rendendo juros por cem anos",
    "unidade": "a3-v021.json"
@@ -237,7 +237,7 @@
    "rotulo": "REAÇÃO EM CADEIA",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1022,
    "tema": "Um espirro num vagão de metrô lotado",
    "unidade": "a3-v022.json"
@@ -248,7 +248,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1023,
    "tema": "Do morno até o mais quente que existe",
    "unidade": "a4-v023.json"
@@ -259,7 +259,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1024,
    "tema": "Do fresco até o zero absoluto",
    "unidade": "a4-v024.json"
@@ -270,7 +270,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "espaco",
+   "aparencia": "mostarda",
    "seed": 1025,
    "tema": "Da superfície até a Fossa das Marianas",
    "unidade": "a4-v025.json"
@@ -281,7 +281,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "mostarda",
+   "aparencia": "sangria",
    "seed": 1026,
    "tema": "Da caminhada até a velocidade da luz",
    "unidade": "a4-v026.json"
@@ -292,7 +292,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "sangria",
+   "aparencia": "brasa",
    "seed": 1027,
    "tema": "Da pressão do pneu até o centro de Júpiter",
    "unidade": "a4-v027.json"
@@ -303,7 +303,7 @@
    "rotulo": "O LIMITE",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "brasa",
+   "aparencia": "floresta",
    "seed": 1028,
    "tema": "Do sussurro até o som mais alto já registrado",
    "unidade": "a4-v028.json"
@@ -314,7 +314,7 @@
    "rotulo": "CORRIDA",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 1029,
    "tema": "Os bichos mais rápidos do Brasil, lado a lado",
    "unidade": "a5-v029.json"
@@ -325,7 +325,7 @@
    "rotulo": "CORRIDA",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "neon",
    "seed": 1030,
    "tema": "Todos os meios de transporte na mesma pista",
    "unidade": "a5-v030.json"
@@ -336,7 +336,7 @@
    "rotulo": "CORRIDA",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "neon",
+   "aparencia": "uva",
    "seed": 1031,
    "tema": "Os homens mais rápidos da história, correndo juntos",
    "unidade": "a5-v031.json"
@@ -347,7 +347,7 @@
    "rotulo": "AUTÓDROMO",
    "simulador": "sim_autodromo",
    "motor": "pixel",
-   "aparencia": "uva",
+   "aparencia": "gelo",
    "seed": 1032,
    "tema": "Uma volta em Interlagos, no tempo de cada categoria",
    "unidade": "a5-v032.json"
@@ -358,7 +358,7 @@
    "rotulo": "AUTÓDROMO",
    "simulador": "sim_autodromo",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1033,
    "tema": "Os traçados mais famosos do mundo, um por um",
    "unidade": "a5-v033.json"
@@ -369,7 +369,7 @@
    "rotulo": "AUTÓDROMO",
    "simulador": "sim_autodromo",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1034,
    "tema": "A mesma volta, de bicicleta até Fórmula 1",
    "unidade": "a5-v034.json"
@@ -380,7 +380,7 @@
    "rotulo": "A TORRE",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1035,
    "tema": "Empilhando Cristos Redentores até a órbita",
    "unidade": "a6-v035.json"
@@ -391,7 +391,7 @@
    "rotulo": "A TORRE",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1036,
    "tema": "Empilhando ônibus até passar das nuvens",
    "unidade": "a6-v036.json"
@@ -402,7 +402,7 @@
    "rotulo": "A TORRE",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "espaco",
+   "aparencia": "mostarda",
    "seed": 1037,
    "tema": "Empilhando notas de duzentos até um milhão de reais",
    "unidade": "a6-v037.json"
@@ -413,7 +413,7 @@
    "rotulo": "A TORRE",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "mostarda",
+   "aparencia": "sangria",
    "seed": 1038,
    "tema": "Empilhando pessoas até o topo do Everest",
    "unidade": "a6-v038.json"
@@ -424,7 +424,7 @@
    "rotulo": "A TORRE",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "sangria",
+   "aparencia": "brasa",
    "seed": 1039,
    "tema": "Empilhando celulares até a Estação Espacial",
    "unidade": "a6-v039.json"
@@ -435,7 +435,7 @@
    "rotulo": "A DESCIDA",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "brasa",
+   "aparencia": "floresta",
    "seed": 1040,
    "tema": "Descendo até o centro da Terra",
    "unidade": "a7-v040.json"
@@ -446,7 +446,7 @@
    "rotulo": "A DESCIDA",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 1041,
    "tema": "Descendo um prédio de cem andares",
    "unidade": "a7-v041.json"
@@ -457,7 +457,7 @@
    "rotulo": "A DESCIDA",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "neon",
    "seed": 1042,
    "tema": "Descendo a mina mais funda do mundo",
    "unidade": "a7-v042.json"
@@ -468,7 +468,7 @@
    "rotulo": "A DESCIDA",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "neon",
+   "aparencia": "uva",
    "seed": 1043,
    "tema": "Descendo o Rio Amazonas da nascente à foz",
    "unidade": "a7-v043.json"
@@ -479,7 +479,7 @@
    "rotulo": "A DESCIDA",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "uva",
+   "aparencia": "gelo",
    "seed": 1044,
    "tema": "Descendo da estratosfera até o chão",
    "unidade": "a7-v044.json"
@@ -490,7 +490,7 @@
    "rotulo": "ESTRADA INFINITA",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1045,
    "tema": "A BR-116 inteira, de Fortaleza a Jaguarão",
    "unidade": "a8-v045.json"
@@ -501,7 +501,7 @@
    "rotulo": "ESTRADA INFINITA",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1046,
    "tema": "A Transamazônica, do começo ao fim",
    "unidade": "a8-v046.json"
@@ -512,7 +512,7 @@
    "rotulo": "ESTRADA INFINITA",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1047,
    "tema": "Dirigindo a noite inteira sem parar",
    "unidade": "a8-v047.json"
@@ -523,7 +523,7 @@
    "rotulo": "ESTRADA INFINITA",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1048,
    "tema": "A estrada do amanhecer até o anoitecer",
    "unidade": "a8-v048.json"
@@ -534,7 +534,7 @@
    "rotulo": "ADIVINHA O DESENHO",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "espaco",
+   "aparencia": "mostarda",
    "seed": 1049,
    "tema": "Objetos que todo brasileiro teve em casa",
    "unidade": "b1-v049.json"
@@ -545,7 +545,7 @@
    "rotulo": "ADIVINHA O DESENHO",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "mostarda",
+   "aparencia": "sangria",
    "seed": 1050,
    "tema": "Bichos do Brasil, quadradinho por quadradinho",
    "unidade": "b1-v050.json"
@@ -556,7 +556,7 @@
    "rotulo": "ADIVINHA O DESENHO",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "sangria",
+   "aparencia": "brasa",
    "seed": 1051,
    "tema": "Ferramentas que ninguém mais usa",
    "unidade": "b1-v051.json"
@@ -567,7 +567,7 @@
    "rotulo": "ADIVINHA O DESENHO",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "brasa",
+   "aparencia": "floresta",
    "seed": 1052,
    "tema": "Comida brasileira em pixel",
    "unidade": "b1-v052.json"
@@ -578,7 +578,7 @@
    "rotulo": "ADIVINHA O DESENHO",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 1053,
    "tema": "Instrumentos musicais revelados aos poucos",
    "unidade": "b1-v053.json"
@@ -589,7 +589,7 @@
    "rotulo": "A LOUSA",
    "simulador": "sim_lousa",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "neon",
    "seed": 1054,
    "tema": "Desenhos de uma linha só: casa, barco, chave",
    "unidade": "b2-v054.json"
@@ -600,7 +600,7 @@
    "rotulo": "A LOUSA",
    "simulador": "sim_lousa",
    "motor": "pixel",
-   "aparencia": "neon",
+   "aparencia": "uva",
    "seed": 1055,
    "tema": "Meios de transporte sem levantar o traço",
    "unidade": "b2-v055.json"
@@ -611,7 +611,7 @@
    "rotulo": "A LOUSA",
    "simulador": "sim_lousa",
    "motor": "pixel",
-   "aparencia": "uva",
+   "aparencia": "gelo",
    "seed": 1056,
    "tema": "Animais numa linha contínua",
    "unidade": "b2-v056.json"
@@ -622,7 +622,7 @@
    "rotulo": "A LOUSA",
    "simulador": "sim_lousa",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1057,
    "tema": "Objetos da cozinha na lousa",
    "unidade": "b2-v057.json"
@@ -633,7 +633,7 @@
    "rotulo": "A LOUSA",
    "simulador": "sim_lousa",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1058,
    "tema": "Prédios e monumentos na lousa",
    "unidade": "b2-v058.json"
@@ -644,7 +644,7 @@
    "rotulo": "A NANQUIM",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 1059,
    "tema": "Desenhos a nanquim: o que a mão revela devagar",
    "unidade": "b4-v059.json"
@@ -655,7 +655,7 @@
    "rotulo": "A NANQUIM",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "jornal",
+   "aparencia": "noturno",
    "seed": 1060,
    "tema": "Plantas e folhas, traço por traço",
    "unidade": "b4-v060.json"
@@ -666,7 +666,7 @@
    "rotulo": "A NANQUIM",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "planta",
+   "aparencia": "jornal",
    "seed": 1061,
    "tema": "Objetos antigos desenhados à pena",
    "unidade": "b4-v061.json"
@@ -677,7 +677,7 @@
    "rotulo": "A NANQUIM",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "editorial",
+   "aparencia": "planta",
    "seed": 1062,
    "tema": "Bichos a nanquim",
    "unidade": "b4-v062.json"
@@ -688,7 +688,7 @@
    "rotulo": "A NANQUIM",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "bauhaus",
+   "aparencia": "editorial",
    "seed": 1063,
    "tema": "Arquitetura brasileira à mão livre",
    "unidade": "b4-v063.json"
@@ -699,7 +699,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1064,
    "tema": "Português que todo mundo erra",
    "unidade": "c1-v064.json"
@@ -710,7 +710,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1065,
    "tema": "Anos 80, 90 e 2000",
    "unidade": "c1-v065.json"
@@ -721,7 +721,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "espaco",
+   "aparencia": "mostarda",
    "seed": 1066,
    "tema": "Brasil de ponta a ponta",
    "unidade": "c1-v066.json"
@@ -732,7 +732,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "mostarda",
+   "aparencia": "sangria",
    "seed": 1067,
    "tema": "Países e bandeiras",
    "unidade": "c1-v067.json"
@@ -743,7 +743,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "sangria",
+   "aparencia": "brasa",
    "seed": 1068,
    "tema": "Ciência do dia a dia",
    "unidade": "c1-v068.json"
@@ -754,7 +754,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "brasa",
+   "aparencia": "floresta",
    "seed": 1069,
    "tema": "Bicho e natureza",
    "unidade": "c1-v069.json"
@@ -765,7 +765,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 1070,
    "tema": "Cinema, TV e música",
    "unidade": "c1-v070.json"
@@ -776,7 +776,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "menta",
+   "aparencia": "neon",
    "seed": 1071,
    "tema": "Lógica e pegadinha",
    "unidade": "c1-v071.json"
@@ -787,7 +787,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "neon",
+   "aparencia": "uva",
    "seed": 1072,
    "tema": "Comida e bebida",
    "unidade": "c1-v072.json"
@@ -798,7 +798,7 @@
    "rotulo": "QUIZ RELÂMPAGO",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "uva",
+   "aparencia": "gelo",
    "seed": 1073,
    "tema": "Objetos que sumiram",
    "unidade": "c1-v073.json"
@@ -809,7 +809,7 @@
    "rotulo": "MODO FOCO",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "gelo",
+   "aparencia": "carvao",
    "seed": 1074,
    "tema": "Chuva na janela, uma hora",
    "unidade": "d1-v074.json"
@@ -820,7 +820,7 @@
    "rotulo": "MODO FOCO",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "carvao",
+   "aparencia": "papelao",
    "seed": 1075,
    "tema": "Fogueira acesa, uma hora",
    "unidade": "d1-v075.json"
@@ -831,7 +831,7 @@
    "rotulo": "MODO FOCO",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 1076,
    "tema": "Mar batendo na praia, uma hora",
    "unidade": "d1-v076.json"
@@ -842,7 +842,7 @@
    "rotulo": "MODO FOCO",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "espaco",
    "seed": 1077,
    "tema": "Vento no campo, uma hora",
    "unidade": "d1-v077.json"
@@ -853,7 +853,7 @@
    "rotulo": "A CORDA",
    "simulador": "sim_corda",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 1078,
    "tema": "Descendo até o Titanic",
    "unidade": "d2-v078.json"
@@ -864,7 +864,7 @@
    "rotulo": "A CORDA",
    "simulador": "sim_corda",
    "motor": "alta",
-   "aparencia": "jornal",
+   "aparencia": "noturno",
    "seed": 1079,
    "tema": "Descendo até a Fossa das Marianas",
    "unidade": "d2-v079.json"
@@ -875,7 +875,7 @@
    "rotulo": "A CORDA",
    "simulador": "sim_corda",
    "motor": "alta",
-   "aparencia": "planta",
+   "aparencia": "jornal",
    "seed": 1080,
    "tema": "O elevador que não para de descer",
    "unidade": "d2-v080.json"
@@ -890,7 +890,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5001,
-   "tema": "Cristo Redentor contra os prédios mais altos do Brasil"
+   "tema": "Cristo Redentor contra os predios mais altos do Brasil"
   },
   {
    "id": "S002",
@@ -900,7 +900,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5002,
-   "tema": "O Pão de Açúcar contra as montanhas do Brasil"
+   "tema": "O Pao de Acucar contra as montanhas do Brasil"
   },
   {
    "id": "S003",
@@ -910,37 +910,37 @@
    "motor": "pixel",
    "aparencia": "papelao",
    "seed": 5003,
-   "tema": "Um ônibus contra os maiores bichos que já existiram"
+   "tema": "Uma pessoa contra as ondas mais altas ja surfadas"
   },
   {
    "id": "S004",
    "pai": "V004",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5004,
-   "tema": "Uma pessoa contra as ondas mais altas já surfadas"
+   "tema": "Quantos onibus cabem nos maiores bichos do planeta"
   },
   {
    "id": "S005",
    "pai": "V005",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5005,
-   "tema": "O Brasil de norte a sul, contra as distancias do mundo"
+   "tema": "Quantos carros cabem nos maiores veiculos que ja rodaram"
   },
   {
    "id": "S006",
    "pai": "V006",
    "serie": "A1",
-   "simulador": "sim_planta",
-   "motor": "alta",
-   "aparencia": "editorial",
+   "simulador": "sim_fileira",
+   "motor": "pixel",
+   "aparencia": "uva",
    "seed": 5006,
-   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
+   "tema": "O Brasil de ponta a ponta contra as distancias do mundo"
   },
   {
    "id": "S007",
@@ -950,7 +950,7 @@
    "motor": "alta",
    "aparencia": "jornal",
    "seed": 5007,
-   "tema": "Uma pessoa contra as maiores árvores do mundo"
+   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
   },
   {
    "id": "S008",
@@ -958,9 +958,9 @@
    "serie": "A1",
    "simulador": "sim_planta",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 5008,
-   "tema": "Um carro popular contra os maiores veículos que já rodaram"
+   "tema": "Uma pessoa contra as maiores arvores do mundo"
   },
   {
    "id": "S009",
@@ -988,7 +988,7 @@
    "serie": "A2",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5011,
    "tema": "Andando do Oiapoque ao Chuí"
   },
@@ -1048,7 +1048,7 @@
    "serie": "A3",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5017,
    "tema": "Dobrando uma folha de papel 50 vezes"
   },
@@ -1108,7 +1108,7 @@
    "serie": "A4",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5023,
    "tema": "Do morno até o mais quente que existe"
   },
@@ -1168,7 +1168,7 @@
    "serie": "A5",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5029,
    "tema": "Os bichos mais rápidos do Brasil, lado a lado"
   },
@@ -1228,7 +1228,7 @@
    "serie": "A6",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5035,
    "tema": "Empilhando Cristos Redentores até a órbita"
   },
@@ -1288,7 +1288,7 @@
    "serie": "A7",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5041,
    "tema": "Descendo um prédio de cem andares"
   },
@@ -1348,7 +1348,7 @@
    "serie": "A8",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5047,
    "tema": "Dirigindo a noite inteira sem parar"
   },
@@ -1408,7 +1408,7 @@
    "serie": "B1",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5053,
    "tema": "Instrumentos musicais revelados aos poucos"
   },
@@ -1478,7 +1478,7 @@
    "serie": "B4",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "jornal",
    "seed": 5060,
    "tema": "Plantas e folhas, traço por traço"
   },
@@ -1508,7 +1508,7 @@
    "serie": "B4",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 5063,
    "tema": "Arquitetura brasileira à mão livre"
   },
@@ -1568,7 +1568,7 @@
    "serie": "C1",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 5069,
    "tema": "Bicho e natureza"
   },
@@ -1628,7 +1628,7 @@
    "serie": "D1",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 5075,
    "tema": "Fogueira acesa, uma hora"
   },
@@ -1658,7 +1658,7 @@
    "serie": "D2",
    "simulador": "sim_corda",
    "motor": "alta",
-   "aparencia": "bauhaus",
+   "aparencia": "noturno",
    "seed": 5078,
    "tema": "Descendo até o Titanic"
   },
@@ -1690,7 +1690,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5081,
-   "tema": "Cristo Redentor contra os prédios mais altos do Brasil"
+   "tema": "Cristo Redentor contra os predios mais altos do Brasil"
   },
   {
    "id": "S082",
@@ -1700,7 +1700,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5082,
-   "tema": "O Pão de Açúcar contra as montanhas do Brasil"
+   "tema": "O Pao de Acucar contra as montanhas do Brasil"
   },
   {
    "id": "S083",
@@ -1710,37 +1710,37 @@
    "motor": "pixel",
    "aparencia": "papelao",
    "seed": 5083,
-   "tema": "Um ônibus contra os maiores bichos que já existiram"
+   "tema": "Uma pessoa contra as ondas mais altas ja surfadas"
   },
   {
    "id": "S084",
    "pai": "V004",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5084,
-   "tema": "Uma pessoa contra as ondas mais altas já surfadas"
+   "tema": "Quantos onibus cabem nos maiores bichos do planeta"
   },
   {
    "id": "S085",
    "pai": "V005",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5085,
-   "tema": "O Brasil de norte a sul, contra as distancias do mundo"
+   "tema": "Quantos carros cabem nos maiores veiculos que ja rodaram"
   },
   {
    "id": "S086",
    "pai": "V006",
    "serie": "A1",
-   "simulador": "sim_planta",
-   "motor": "alta",
-   "aparencia": "editorial",
+   "simulador": "sim_fileira",
+   "motor": "pixel",
+   "aparencia": "uva",
    "seed": 5086,
-   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
+   "tema": "O Brasil de ponta a ponta contra as distancias do mundo"
   },
   {
    "id": "S087",
@@ -1750,7 +1750,7 @@
    "motor": "alta",
    "aparencia": "jornal",
    "seed": 5087,
-   "tema": "Uma pessoa contra as maiores árvores do mundo"
+   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
   },
   {
    "id": "S088",
@@ -1758,9 +1758,9 @@
    "serie": "A1",
    "simulador": "sim_planta",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 5088,
-   "tema": "Um carro popular contra os maiores veículos que já rodaram"
+   "tema": "Uma pessoa contra as maiores arvores do mundo"
   },
   {
    "id": "S089",
@@ -1788,7 +1788,7 @@
    "serie": "A2",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5091,
    "tema": "Andando do Oiapoque ao Chuí"
   },
@@ -1848,7 +1848,7 @@
    "serie": "A3",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5097,
    "tema": "Dobrando uma folha de papel 50 vezes"
   },
@@ -1908,7 +1908,7 @@
    "serie": "A4",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5103,
    "tema": "Do morno até o mais quente que existe"
   },
@@ -1968,7 +1968,7 @@
    "serie": "A5",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5109,
    "tema": "Os bichos mais rápidos do Brasil, lado a lado"
   },
@@ -2028,7 +2028,7 @@
    "serie": "A6",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5115,
    "tema": "Empilhando Cristos Redentores até a órbita"
   },
@@ -2088,7 +2088,7 @@
    "serie": "A7",
    "simulador": "sim_descida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5121,
    "tema": "Descendo um prédio de cem andares"
   },
@@ -2148,7 +2148,7 @@
    "serie": "A8",
    "simulador": "sim_estrada",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5127,
    "tema": "Dirigindo a noite inteira sem parar"
   },
@@ -2208,7 +2208,7 @@
    "serie": "B1",
    "simulador": "sim_revelar",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5133,
    "tema": "Instrumentos musicais revelados aos poucos"
   },
@@ -2278,7 +2278,7 @@
    "serie": "B4",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "jornal",
    "seed": 5140,
    "tema": "Plantas e folhas, traço por traço"
   },
@@ -2308,7 +2308,7 @@
    "serie": "B4",
    "simulador": "sim_traco",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 5143,
    "tema": "Arquitetura brasileira à mão livre"
   },
@@ -2368,7 +2368,7 @@
    "serie": "C1",
    "simulador": "quizengine",
    "motor": "quiz",
-   "aparencia": "floresta",
+   "aparencia": "menta",
    "seed": 5149,
    "tema": "Bicho e natureza"
   },
@@ -2428,7 +2428,7 @@
    "serie": "D1",
    "simulador": "sim_ambiente",
    "motor": "pixel",
-   "aparencia": "papelao",
+   "aparencia": "asfalto",
    "seed": 5155,
    "tema": "Fogueira acesa, uma hora"
   },
@@ -2458,7 +2458,7 @@
    "serie": "D2",
    "simulador": "sim_corda",
    "motor": "alta",
-   "aparencia": "bauhaus",
+   "aparencia": "noturno",
    "seed": 5158,
    "tema": "Descendo até o Titanic"
   },
@@ -2490,7 +2490,7 @@
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5161,
-   "tema": "Cristo Redentor contra os prédios mais altos do Brasil"
+   "tema": "Cristo Redentor contra os predios mais altos do Brasil"
   },
   {
    "id": "S162",
@@ -2500,7 +2500,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5162,
-   "tema": "O Pão de Açúcar contra as montanhas do Brasil"
+   "tema": "O Pao de Acucar contra as montanhas do Brasil"
   },
   {
    "id": "S163",
@@ -2510,37 +2510,37 @@
    "motor": "pixel",
    "aparencia": "papelao",
    "seed": 5163,
-   "tema": "Um ônibus contra os maiores bichos que já existiram"
+   "tema": "Uma pessoa contra as ondas mais altas ja surfadas"
   },
   {
    "id": "S164",
    "pai": "V004",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5164,
-   "tema": "Uma pessoa contra as ondas mais altas já surfadas"
+   "tema": "Quantos onibus cabem nos maiores bichos do planeta"
   },
   {
    "id": "S165",
    "pai": "V005",
    "serie": "A1",
-   "simulador": "sim_escala",
+   "simulador": "sim_fileira",
    "motor": "pixel",
    "aparencia": "floresta",
    "seed": 5165,
-   "tema": "O Brasil de norte a sul, contra as distancias do mundo"
+   "tema": "Quantos carros cabem nos maiores veiculos que ja rodaram"
   },
   {
    "id": "S166",
    "pai": "V006",
    "serie": "A1",
-   "simulador": "sim_planta",
-   "motor": "alta",
-   "aparencia": "editorial",
+   "simulador": "sim_fileira",
+   "motor": "pixel",
+   "aparencia": "uva",
    "seed": 5166,
-   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
+   "tema": "O Brasil de ponta a ponta contra as distancias do mundo"
   },
   {
    "id": "S167",
@@ -2550,7 +2550,7 @@
    "motor": "alta",
    "aparencia": "jornal",
    "seed": 5167,
-   "tema": "Uma pessoa contra as maiores árvores do mundo"
+   "tema": "A Torre Eiffel contra o que o Brasil tem de mais alto"
   },
   {
    "id": "S168",
@@ -2558,9 +2558,9 @@
    "serie": "A1",
    "simulador": "sim_planta",
    "motor": "alta",
-   "aparencia": "noturno",
+   "aparencia": "bauhaus",
    "seed": 5168,
-   "tema": "Um carro popular contra os maiores veículos que já rodaram"
+   "tema": "Uma pessoa contra as maiores arvores do mundo"
   },
   {
    "id": "S169",
@@ -2588,7 +2588,7 @@
    "serie": "A2",
    "simulador": "sim_viagem",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5171,
    "tema": "Andando do Oiapoque ao Chuí"
   },
@@ -2648,7 +2648,7 @@
    "serie": "A3",
    "simulador": "sim_cadeia",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5177,
    "tema": "Dobrando uma folha de papel 50 vezes"
   },
@@ -2708,7 +2708,7 @@
    "serie": "A4",
    "simulador": "sim_extremo",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5183,
    "tema": "Do morno até o mais quente que existe"
   },
@@ -2768,7 +2768,7 @@
    "serie": "A5",
    "simulador": "sim_corrida",
    "motor": "pixel",
-   "aparencia": "menta",
+   "aparencia": "floresta",
    "seed": 5189,
    "tema": "Os bichos mais rápidos do Brasil, lado a lado"
   },
@@ -2828,7 +2828,7 @@
    "serie": "A6",
    "simulador": "sim_torre",
    "motor": "pixel",
-   "aparencia": "asfalto",
+   "aparencia": "papelao",
    "seed": 5195,
    "tema": "Empilhando Cristos Redentores até a órbita"
   },

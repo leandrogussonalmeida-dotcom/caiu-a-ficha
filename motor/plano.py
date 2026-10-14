@@ -24,18 +24,20 @@ ESTILOS = ['planta', 'editorial', 'bauhaus', 'noturno', 'jornal']
 # série: (simulador, motor, [temas...])
 SERIES = [
  ('A1', 'sim_escala',    'pixel', 'ESCALA BRASIL', [
-   # todo tema da ESCALA tem de ser uma grandeza LINEAR: o simulador
-   # escala a silhueta pela altura. Capacidade de estádio é contagem e
-   # entraria errado aqui — foi para a escada, onde é honesta.
-   'Cristo Redentor contra os prédios mais altos do Brasil',
-   'O Pão de Açúcar contra as montanhas do Brasil',
-   'Um ônibus contra os maiores bichos que já existiram',
-   'Uma pessoa contra as ondas mais altas já surfadas',
-   'O Brasil de norte a sul, contra as distancias do mundo']),
+   # ESCALA desenha tudo em pe e cresce para cima: so entra aqui o que e
+   # ALTURA. Comprimento e distancia vao para a FILEIRA, que e deitada.
+   # Desenhar uma baleia de 33 m em pe ao lado de um onibus em pe e bonito
+   # e errado, e e o mesmo engano da area de paises.
+   'Cristo Redentor contra os predios mais altos do Brasil',
+   'O Pao de Acucar contra as montanhas do Brasil',
+   'Uma pessoa contra as ondas mais altas ja surfadas']),
+ ('A1', 'sim_fileira',   'pixel', 'QUANTOS CABEM', [
+   'Quantos onibus cabem nos maiores bichos do planeta',
+   'Quantos carros cabem nos maiores veiculos que ja rodaram',
+   'O Brasil de ponta a ponta contra as distancias do mundo']),
  ('A1', 'sim_planta',    'alta',  'ESCALA EM PLANTA', [
    'A Torre Eiffel contra o que o Brasil tem de mais alto',
-   'Uma pessoa contra as maiores árvores do mundo',
-   'Um carro popular contra os maiores veículos que já rodaram']),
+   'Uma pessoa contra as maiores arvores do mundo']),
  ('A2', 'sim_viagem',    'pixel', 'QUANTO TEMPO LEVA', [
    'A luz saindo do Sol até bater na sua janela',
    'De carro, sem parar, até a Lua',

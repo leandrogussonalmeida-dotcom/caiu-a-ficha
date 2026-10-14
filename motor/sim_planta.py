@@ -65,7 +65,7 @@ def construir(u, seed=61, saida='planta.mp4', dirsaida='out-planta'):
         q.texto(txt, x + (10 if dentro > 0 else -10), ytopo - 40, cor, 28,
                 fonte=est.fonte_rot, anc='la' if dentro > 0 else 'ra')
 
-    def silhueta(nome, cx, base, alt, prog, cor, esp):
+    def silhueta(nome, cx, base, alt, prog, cor, esp, poche=True):
         """Desenha a forma em contorno, revelando um retângulo por vez.
         Em planta o objeto não é massa, é borda: é isso que diferencia um
         desenho técnico de um infográfico.
@@ -87,8 +87,12 @@ def construir(u, seed=61, saida='planta.mp4', dirsaida='out-planta'):
             f = max(0.0, min(1.0, m - j))
             if f <= 0: break
             c = cor if tom != 1 else est.acento
+            # poché: o preenchimento fraco que o desenho tecnico usa para
+            # dizer "aqui tem massa". So contorno, uma arvore virava uma
+            # pilha de caixas vazias - a silhueta sumia dentro das proprias
+            # linhas internas.
             q.ret(x0 + rx * kx, base - (ry + rh * f) * ky, rw * kx, rh * f * ky,
-                  None, borda=c, esp=esp)
+                  (c + (34,)) if poche else None, borda=c, esp=esp)
 
     def quadro(t, i):
         tl = max(0.0, t - 2.0)
@@ -136,6 +140,23 @@ def construir(u, seed=61, saida='planta.mp4', dirsaida='out-planta'):
                f"{fmt(valvo * cres)} {par['alvo'].get('un','m')}", est.acento, -1)
         q.ajustar(par['alvo']['nome'], _cx(1), CHAO + 36, est.acento, 30, LADO_W,
                   anc='ma', fonte=est.fonte_rot)
+
+        # --- detalhe ampliado: quando a referência fica menor que um
+        # carimbo, a comparação perde o lado que importa. Prancheta resolve
+        # isso ha um seculo com a bolha de detalhe, e ela e honesta porque
+        # diz na propria etiqueta quantas vezes ampliou.
+        if hr < 76:
+            rb = max(26, hr * .8 + 16)
+            q.circulo(_cx(0), CHAO - hr / 2, rb, borda=est.acento, esp=2)
+            dx, dy, dh = 300, 980, 240
+            q.linha(_cx(0) + rb * .7, CHAO - hr / 2 - rb * .7,
+                    dx + 150, dy + 40, est.acento, 1.6, traco=(12, 9))
+            silhueta(par['ref'].get('forma', 'pessoa'), dx, dy + 260, dh, 1.0,
+                     est.acento, 2)
+            # sem um segundo circulo em volta da copia ampliada: ele cortava
+            # os bracos da figura, que e justamente o que se quer ver
+            q.texto(f'DETALHE  ESC. {dh/max(1e-6, hr):.0f}:1', dx,
+                    dy + 306, est.acento, 26, fonte=est.fonte_rot, anc='ma')
 
         # --- a razão, que é a frase do vídeo em um número só
         raz = valvo * cres / max(1e-9, vr)

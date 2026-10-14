@@ -1,0 +1,69 @@
+{
+ "id": "V004",
+ "titulo": "QUANTOS ONIBUS CABEM",
+ "chamada": "Um onibus urbano basico tem ate 14 metros. Veja quantos cabem deitados em cada bicho.",
+ "fonte": "ABNT NBR 15570:2009 (comprimento maximo do onibus basico); Wikipedia, Largest and heaviest animals",
+ "confianca": "alta",
+ "tags": [
+  "#escala",
+  "#bichos",
+  "#oceano"
+ ],
+ "ref": {
+  "nome": "ONIBUS",
+  "rotulo": "ONIBUS DE 14 METROS",
+  "valor": 14,
+  "un": "m"
+ },
+ "batidas_por_item": 2,
+ "itens": [
+  {
+   "nome": "CROCODILO-DE-AGUA-SALGADA",
+   "valor": 6.32,
+   "un": "m",
+   "ancora": "NEM MEIO ONIBUS, E E O MAIOR REPTIL VIVO",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "alta"
+  },
+  {
+   "nome": "ELEFANTE AFRICANO",
+   "valor": 10.67,
+   "un": "m",
+   "ancora": "DA TROMBA AO RABO, O MAIOR JA REGISTRADO",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "alta"
+  },
+  {
+   "nome": "TUBARAO-BALEIA",
+   "valor": 18.8,
+   "un": "m",
+   "ancora": "O MAIOR PEIXE DO MUNDO",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "alta"
+  },
+  {
+   "nome": "BALEIA-AZUL",
+   "valor": 33.6,
+   "un": "m",
+   "ancora": "O MAIOR ANIMAL QUE JA EXISTIU",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "alta"
+  },
+  {
+   "nome": "AGUA-VIVA JUBA-DE-LEAO",
+   "valor": 36.6,
+   "un": "m",
+   "ancora": "MAIS COMPRIDA QUE A BALEIA-AZUL",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "alta"
+  },
+  {
+   "nome": "VERME-CADARCO",
+   "valor": 55,
+   "un": "m",
+   "ancora": "ACHADO NUMA PRAIA DA ESCOCIA EM 1864",
+   "fonte": "Wikipedia, Largest and heaviest animals",
+   "confianca": "media"
+  }
+ ]
+}
