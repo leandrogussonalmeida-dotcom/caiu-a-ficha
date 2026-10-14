@@ -5,5 +5,12 @@
  "geracoes": 40,
  "por_geracao": 2,
  "rodape": "COMECOU COM UM",
- "fecho": "1 TRILHAO EM 40 PASSOS"
+ "fecho": "1 TRILHAO EM 40 PASSOS",
+ "chamada": "Dobrar parece pouco. Quarenta vezes seguidas e um trilhao.",
+ "fonte": "Progressao geometrica: 2 elevado a 40 = 1.099.511.627.776",
+ "confianca": "alta",
+ "tags": [
+  "#matematica",
+  "#cadeia"
+ ]
 }

@@ -12,47 +12,74 @@
   {
    "nome": "SOL",
    "t": 0,
-   "r": 16
+   "r": 16,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "MERCURIO",
    "t": 3.2,
-   "r": 5
+   "r": 5,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "VENUS",
    "t": 6.0,
-   "r": 7
+   "r": 7,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "TERRA",
    "t": 8.3,
-   "r": 8
+   "r": 8,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "MARTE",
    "t": 12.7,
-   "r": 6
+   "r": 6,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "JUPITER",
    "t": 43.3,
-   "r": 14
+   "r": 14,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "SATURNO",
    "t": 79.0,
-   "r": 12
+   "r": 12,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "URANO",
    "t": 159.0,
-   "r": 9
+   "r": 9,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   },
   {
    "nome": "NETUNO",
    "t": 250.0,
-   "r": 9
+   "r": 9,
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
   }
+ ],
+ "chamada": "A luz sai do Sol e leva 8 minutos e 20 segundos para chegar ate voce. Ate Netuno, leva mais de quatro horas.",
+ "fonte": "NASA Planetary Fact Sheet (distancia media de cada planeta ao Sol); tempo = distancia / 299.792,458 km/s",
+ "confianca": "alta",
+ "nota": "Sao distancias MEDIAS: a orbita e eliptica, entao o tempo real varia conforme onde o planeta esta.",
+ "tags": [
+  "#espaco",
+  "#luz",
+  "#tempo"
  ]
 }

@@ -18,11 +18,29 @@ def checar_unidades(arq):
     d = json.load(open(arq, encoding='utf-8'))
     e, avisos = [], []
     if not d.get('titulo'): _erro(e, 'sem titulo')
-    if not d.get('paleta'): avisos.append('sem paleta: vai sortear')
+    # a paleta vem do plano (plano-280.json), nao da unidade: e o plano que
+    # garante que duas pecas nao saem com a mesma cara
+    if not d.get('paleta') and not str(d.get('id', '')).startswith('V'):
+        avisos.append('sem paleta: vai sortear')
 
-    itens = (d.get('unidades') or d.get('marcos') or d.get('passos')
-             or d.get('camadas') or d.get('corredores') or d.get('desenhos') or [])
-    if not itens: _erro(e, 'sem itens (unidades/marcos/passos/camadas/corredores/desenhos)')
+    # Toda chave de lista que algum simulador usa precisa estar aqui. Um
+    # verificador cego a um formato nao reprova nada nele - ele so diz
+    # "sem itens" e o conteudo passa sem conferencia nenhuma.
+    CHAVES = ('unidades', 'marcos', 'marcas', 'passos', 'camadas',
+              'corredores', 'desenhos', 'itens')
+    # so chave que carrega LISTA: 'geracoes' e um numero e entrava aqui como
+    # se fosse a lista de itens
+    itens = next((d[k] for k in CHAVES if isinstance(d.get(k), list) and d[k]), [])
+    # a CADEIA nao tem lista: ela e descrita por um numero de geracoes e uma
+    # taxa. Nesse caso o que se confere e a fonte do documento inteiro.
+    if not itens and isinstance(d.get('geracoes'), (int, float)):
+        if not d.get('fonte'): _erro(e, 'sem fonte')
+        if d.get('confianca') not in CONF: _erro(e, 'sem confianca valida')
+        return e, avisos
+    if not itens: _erro(e, 'sem itens (' + '/'.join(CHAVES) + ')')
+    # a FILEIRA tem um objeto de referencia fora da lista
+    if d.get('itens') and not (d.get('ref') or {}).get('valor'):
+        _erro(e, 'formato fileira sem ref.valor')
 
     nomes = set()
     for i, it in enumerate(itens, 1):

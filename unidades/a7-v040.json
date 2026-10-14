@@ -7,39 +7,61 @@
  "fecho": "6.371 KM ABAIXO DOS SEUS PES",
  "camadas": [
   {
-   "nome": "CROSTA",
+   "nome": "FIM DA CROSTA",
    "ate": 35,
    "cor": 3,
-   "nota": "A CASCA ONDE TUDO ACONTECE"
+   "nota": "A CASCA ONDE TUDO ACONTECE",
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "alta",
+   "v": 70
   },
   {
    "nome": "MANTO SUPERIOR",
    "ate": 410,
    "cor": 4,
-   "nota": "ROCHA QUE ESCORRE DEVAGAR"
+   "nota": "ROCHA QUE ESCORRE DEVAGAR",
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "media"
   },
   {
    "nome": "ZONA DE TRANSICAO",
    "ate": 660,
-   "cor": 5
+   "cor": 5,
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "media"
   },
   {
    "nome": "MANTO INFERIOR",
    "ate": 2890,
    "cor": 6,
-   "nota": "METADE DO PLANETA E ISTO"
+   "nota": "METADE DO PLANETA E ISTO",
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "alta"
   },
   {
    "nome": "NUCLEO EXTERNO",
    "ate": 5150,
    "cor": 9,
-   "nota": "FERRO LIQUIDO EM MOVIMENTO"
+   "nota": "FERRO LIQUIDO EM MOVIMENTO",
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "alta"
   },
   {
    "nome": "NUCLEO INTERNO",
    "ate": 6371,
    "cor": 11,
-   "nota": "SOLIDO, E MAIS QUENTE QUE A SUPERFICIE DO SOL"
+   "nota": "SOLIDO, E MAIS QUENTE QUE A SUPERFICIE DO SOL",
+   "fonte": "Wikipedia, Structure of Earth",
+   "confianca": "alta"
   }
+ ],
+ "chamada": "Se desse para descer num elevador ate o centro da Terra, seriam 6.371 quilometros.",
+ "fonte": "Wikipedia, Structure of Earth (limites das camadas e raio da Terra)",
+ "confianca": "alta",
+ "nota": "As descontinuidades de 410 km e 660 km sao batizadas pela propria profundidade em que ocorrem; o resto vem da mesma pagina.",
+ "tags": [
+  "#terra",
+  "#geologia",
+  "#descida"
  ]
 }

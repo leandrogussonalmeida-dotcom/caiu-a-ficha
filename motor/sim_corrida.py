@@ -71,7 +71,10 @@ def construir(u, seed=71, saida='corrida.mp4', dirsaida='out-corrida'):
         esc = 1 + .1 * pulso
         tela.texto(f"{lider['v']:g}", PX.LARG // 2, 20, 11, tam=int(34 * esc),
                    centro=True, sombra=3)
-        tela.texto(f"{un} · {lider['nome']}", PX.LARG // 2, 58, 8, tam=9, centro=True)
+        # ajustado, nao fixo: "FALCAO-PEREGRINO (MERGULHO)" estourava a tela
+        # pelos dois lados e virava um borrao cortado
+        tela.texto_ajustado(f"{un} · {lider['nome']}", PX.LARG // 2, 58, 8, 9,
+                            PX.LARG - 12, centro=True)
         tela.texto(f'{u_*100:.0f}%', PX.LARG - 6, 6, 6, tam=9, centro='d')
 
         # pódio no fim

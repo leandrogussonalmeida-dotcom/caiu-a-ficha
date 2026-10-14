@@ -48,8 +48,13 @@ FORMAS = {
     'baleia': [(6, 20, 76, 34, 0), (74, 44, 22, 24, 2), (24, 54, 22, 10, 1),
                (14, 36, 8, 8, 1)],
 
-    'onda': [(0, 0, 100, 26, 2), (6, 26, 40, 20, 0), (46, 26, 48, 28, 0),
-             (20, 46, 22, 14, 1), (58, 54, 26, 16, 1)],
+    # A onda eram dois montes lado a lado e lia como bloco. Onda que
+    # quebra tem UM corpo subindo e um labio que avanca de volta por cima
+    # dele: e o avanco contra o sentido da subida que diz "isso e onda".
+    'onda': [(0, 0, 100, 16, 2),
+             (16, 16, 84, 20, 0), (30, 36, 70, 18, 0), (42, 54, 58, 16, 0),
+             (52, 70, 48, 12, 0),
+             (38, 82, 54, 10, 1), (32, 92, 26, 8, 1)],
 
     'foguete': [(40, 0, 20, 10, 2), (30, 10, 10, 20, 2), (60, 10, 10, 20, 2),
                 (40, 10, 20, 64, 0), (44, 74, 12, 14, 1), (46, 88, 8, 10, 1)],

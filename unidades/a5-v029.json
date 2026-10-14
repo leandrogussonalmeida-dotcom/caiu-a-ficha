@@ -7,36 +7,48 @@
  "rodape": "TODOS NA MESMA LARGADA",
  "corredores": [
   {
-   "nome": "FALCAO-PEREGRINO",
-   "v": 320
-  },
-  {
-   "nome": "ANDORINHA",
-   "v": 110
-  },
-  {
-   "nome": "ONCA-PINTADA",
-   "v": 80
-  },
-  {
-   "nome": "EMA",
-   "v": 60
-  },
-  {
-   "nome": "BOTO",
-   "v": 35
-  },
-  {
-   "nome": "HUMANO",
+   "nome": "GOLFINHO (NADO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
    "v": 37
   },
   {
-   "nome": "CAPIVARA",
-   "v": 35
+   "nome": "USAIN BOLT",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 37.58
   },
   {
-   "nome": "PREGUICA",
-   "v": 0.24
+   "nome": "ANTILOCAPRA",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 88.5
+  },
+  {
+   "nome": "GUEPARDO",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 104
+  },
+  {
+   "nome": "RABO-DE-ESPINHO (VOO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 169
+  },
+  {
+   "nome": "FALCAO (MERGULHO)",
+   "fonte": "Wikipedia, Fastest animals",
+   "confianca": "alta",
+   "v": 389
   }
+ ],
+ "chamada": "O falcao faz 389 km/h, mas so DESPENCANDO. Numa corrida de verdade quem ganha e outro.",
+ "fonte": "Wikipedia, Fastest animals",
+ "confianca": "alta",
+ "nota": "Cada bicho e campeao no seu meio: um corre, outro nada, outro voa, e o falcao mergulha. Nenhum deles disputaria a mesma prova.",
+ "tags": [
+  "#bichos",
+  "#velocidade"
  ]
 }

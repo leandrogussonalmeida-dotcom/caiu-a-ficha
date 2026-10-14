@@ -66,6 +66,15 @@ def uma(v, forcar=False):
     if not os.path.exists(arq):
         return 'sem-unidade', f"{v['id']} {v['serie']} · {v['tema']}"
     u = json.load(open(arq, encoding='utf-8'))
+    # PORTAO: unidade que nao passa na conferencia nao vira video. Enquanto
+    # o checar.py era cego a metade dos formatos, ele so dizia "sem itens" e
+    # o conteudo passava sem conferencia nenhuma - quatro videos foram
+    # entregues com numeros sem fonte declarada. O portao fecha isso por
+    # construcao, nao por disciplina.
+    import checar
+    erros, _avisos = checar.checar_unidades(arq)
+    if erros:
+        return 'reprovado', f"{v['id']} reprovado na conferencia: " + '; '.join(erros)
     # a cara vem do plano, não da unidade: é o plano que garante que ninguém
     # repete. Uma unidade que traz a própria paleta seria um furo nisso.
     u['paleta' if v['motor'] == 'pixel' else 'estilo'] = v['aparencia']
@@ -93,7 +102,7 @@ def main():
         sys.exit(f'nada bate com {args!r}')
 
     os.makedirs(SAIDA, exist_ok=True)
-    contas = {'ok': 0, 'pulou': 0, 'sem-unidade': 0, 'erro': 0}
+    contas = {'ok': 0, 'pulou': 0, 'sem-unidade': 0, 'erro': 0, 'reprovado': 0}
     faltam, t0 = [], time.time()
     for n, v in enumerate(fila, 1):
         if so_faltam:
@@ -107,7 +116,7 @@ def main():
             st, msg = 'erro', f"{v['id']}\n{traceback.format_exc()}"
         contas[st] += 1
         if st == 'sem-unidade': faltam.append(msg)
-        if st == 'erro': print(msg, flush=True)
+        if st in ('erro', 'reprovado'): print('  ' + msg, flush=True)
 
     if so_faltam:
         print(f'{len(faltam)} peças sem unidade de dado:')
@@ -115,8 +124,8 @@ def main():
         return
     dt = time.time() - t0
     print(f"\nfeitos {contas['ok']} · pulados {contas['pulou']} · "
-          f"sem unidade {contas['sem-unidade']} · erros {contas['erro']} "
-          f"· {dt/60:.0f} min")
+          f"sem unidade {contas['sem-unidade']} · reprovados "
+          f"{contas['reprovado']} · erros {contas['erro']} · {dt/60:.0f} min")
     if faltam:
         print('\nfalta escrever a unidade de:')
         for f in faltam: print('  ', f)
