@@ -1,0 +1,74 @@
+{
+ "id": "V016",
+ "titulo": "DA NUVEM ATE O CHAO",
+ "unidade": "s",
+ "chamada": "Uma gota grande cai a 9 metros por segundo. De 2 km de altura, leva quase quatro minutos. Se for garoa, leva dezessete.",
+ "fonte": "Hypertextbook, Speed of a Falling Raindrop (Corbert, Physical Geography Manual: gota de 5 mm a 9 m/s; Holladay/Wonderquest: garoa abaixo de 0,5 mm a 2 m/s)",
+ "confianca": "alta",
+ "nota": "A gota atinge a velocidade final nos primeiros metros, entao o tempo e praticamente a distancia dividida pela velocidade. Medicoes variam de 9 a 13 m/s conforme temperatura e pressao; aqui esta o valor mais citado.",
+ "tags": [
+  "#chuva",
+  "#fisica",
+  "#tempo"
+ ],
+ "viajante": {
+  "nome": "A GOTA",
+  "forma": "gota"
+ },
+ "rodape": "9 METROS POR SEGUNDO",
+ "marcos": [
+  {
+   "nome": "A NUVEM",
+   "t": 0,
+   "r": 10,
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "nome": "10 M",
+   "t": 1.1,
+   "r": 4,
+   "nota": "um predio de 3 andares",
+   "fonte": "calculo a 9 m/s",
+   "confianca": "alta"
+  },
+  {
+   "nome": "100 M",
+   "t": 11.1,
+   "r": 5,
+   "fonte": "calculo a 9 m/s",
+   "confianca": "alta"
+  },
+  {
+   "nome": "500 M",
+   "t": 55.6,
+   "r": 6,
+   "fonte": "calculo a 9 m/s",
+   "confianca": "alta"
+  },
+  {
+   "nome": "1.000 M",
+   "t": 111.1,
+   "r": 7,
+   "fonte": "calculo a 9 m/s",
+   "confianca": "alta"
+  },
+  {
+   "nome": "O CHAO",
+   "t": 222.2,
+   "r": 10,
+   "nota": "de 2 km de altura",
+   "fonte": "calculo a 9 m/s",
+   "confianca": "alta"
+  },
+  {
+   "nome": "SE FOSSE GAROA",
+   "t": 1000,
+   "r": 12,
+   "nota": "16 min 40 s, a mesma queda",
+   "fonte": "Holladay/Wonderquest, garoa a 2 m/s",
+   "confianca": "media",
+   "destaque": true
+  }
+ ]
+}
