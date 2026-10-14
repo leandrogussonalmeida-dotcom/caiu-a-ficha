@@ -55,6 +55,29 @@ PALETAS = {
     'gelo':     ['#02121f', '#06283d', '#0b3d5c', '#13607f', '#1b86a8', '#2bb3cc',
                  '#6fd9e8', '#b3f0f7', '#ffffff', '#e0f7ff', '#f59e0b', '#ef4444',
                  '#1e3a5f', '#334155', '#94a3b8', '#fbbf24'],
+    'brasa':    ['#140603', '#2b0c05', '#4a150a', '#6e2010', '#9c3415', '#c75420',
+                 '#ef7b2e', '#ffa94d', '#ffd79a', '#fff3e0', '#ffffff', '#ffe066',
+                 '#7c2d12', '#431407', '#a16207', '#dc2626'],
+    'sangria':  ['#10040c', '#250919', '#420f2b', '#63153f', '#8c1c55', '#b52a6d',
+                 '#d94f8c', '#f287b3', '#ffc9dd', '#fff0f6', '#ffffff', '#fbbf24',
+                 '#5b21b6', '#1e1b4b', '#6b7280', '#22d3ee'],
+    'mostarda': ['#120e04', '#241d08', '#3d3010', '#5c481a', '#7f6425', '#a68432',
+                 '#cfa844', '#e8c76e', '#f7e3a8', '#fffbe8', '#ffffff', '#2563eb',
+                 '#166534', '#7c2d12', '#57534e', '#ef4444'],
+    'carvao':   ['#08090a', '#111315', '#1d2024', '#2c3036', '#424850', '#5e6670',
+                 '#858e99', '#b4bcc6', '#dfe4ea', '#ffffff', '#f97316', '#fb923c',
+                 '#1e3a8a', '#0f766e', '#7f1d1d', '#facc15'],
+    'uva':      ['#0b0614', '#180d2b', '#271247', '#3b1a69', '#53248f', '#7035b5',
+                 '#9354d6', '#b87ef0', '#dcb6ff', '#f5ecff', '#ffffff', '#4ade80',
+                 '#fbbf24', '#f43f5e', '#312e81', '#22d3ee'],
+    'menta':    ['#02110d', '#05241c', '#083a2d', '#0d5543', '#13765c', '#1c9a79',
+                 '#2fc39b', '#6fe0c0', '#b2f3e2', '#edfffa', '#ffffff', '#fbbf24',
+                 '#f43f5e', '#1e293b', '#475569', '#60a5fa'],
+    # paleta fixa da vinheta: a marca tem que sair igual em todo vídeo,
+    # qualquer que seja a paleta do conteúdo
+    'marca':    ['#0a0710', '#17102a', '#2a1b4d', '#000000', '#7c5a1e', '#b08436',
+                 '#d6aa5c', '#ffe2a0', '#ffffff', '#f72585', '#4cc9f0', '#fee440',
+                 '#06ffa5', '#3a2a0e', '#5b4a8a', '#ff8c42'],
     'floresta': ['#07130d', '#0d2818', '#14452a', '#1b6b3f', '#249456', '#35c46f',
                  '#7ee787', '#c6f6d5', '#fef3c7', '#f59e0b', '#b45309', '#78350f',
                  '#ffffff', '#1e293b', '#475569', '#ef4444'],
@@ -78,6 +101,7 @@ class Tela:
         self.rgb = paleta_rgb(paleta)
         self.buf = np.zeros((alt, larg), np.uint8)
         self._fontes = {}
+        self._cache = {}
 
     def limpar(self, cor=0):
         self.buf[:] = cor
@@ -126,29 +150,55 @@ class Tela:
             self._fontes[tam] = ImageFont.truetype(F_PIX, tam)
         return self._fontes[tam]
 
+    def _mascara(self, txt, tam):
+        """Máscara apertada do texto, em cache.
+
+        A versão ingênua alocava uma imagem do tamanho da TELA a cada chamada;
+        com cinco textos por quadro isso sozinho derrubava o render pela
+        metade. Aqui a máscara tem o tamanho das letras e é calculada uma vez
+        por (texto, corpo) — o mesmo rótulo em 1.800 quadros custa um.
+        """
+        ch = (txt, tam)
+        m = self._cache.get(ch)
+        if m is None:
+            f = self._fonte(tam)
+            d0 = ImageDraw.Draw(Image.new('L', (4, 4)))
+            d0.fontmode = '1'
+            cx0, cy0, cx1, cy1 = d0.textbbox((0, 0), txt, font=f)
+            w, h = max(1, cx1 - cx0 + 2), max(1, cy1 - cy0 + 2)
+            im = Image.new('L', (w, h), 0)
+            d = ImageDraw.Draw(im)
+            d.fontmode = '1'
+            d.text((-cx0 + 1, -cy0 + 1), txt, font=f, fill=255)
+            m = (np.asarray(im) > 127, cx0, cy0)
+            if len(self._cache) > 400: self._cache.clear()
+            self._cache[ch] = m
+        return m
+
+    def _blit(self, m, x, y, cor):
+        h, w = m.shape
+        x, y = int(round(x)), int(round(y))
+        x0, y0 = max(0, x), max(0, y)
+        x1, y1 = min(self.w, x + w), min(self.h, y + h)
+        if x1 <= x0 or y1 <= y0: return
+        sub = m[y0 - y:y1 - y, x0 - x:x1 - x]
+        self.buf[y0:y1, x0:x1][sub] = cor
+
     def texto(self, txt, x, y, cor, tam=10, centro=False, sombra=None):
-        # centro: True/'c' centraliza, 'd' alinha à direita
-        """Texto sem antialias. Desenha numa máscara 1-bit e carimba o
-        índice de cor — assim o texto nunca traz cor fora da paleta."""
-        f = self._fonte(tam)
-        im = Image.new('L', (self.w, self.h), 0)
-        d = ImageDraw.Draw(im)
-        d.fontmode = '1'                              # sem antialias
-        # centro True ou 'c' centraliza, 'd' alinha à direita, falso à esquerda.
-        # (True não é chave do dicionário: tratar antes, senão cai no 'la'.)
-        anc = 'ma' if centro is True else {'c': 'ma', 'd': 'ra'}.get(centro, 'la')
-        d.text((x, y), txt, font=f, fill=255, anchor=anc)
-        m = np.asarray(im) > 127
-        if sombra is not None:
-            ms = np.zeros_like(m)
-            ms[1:, 1:] = m[:-1, :-1]
-            self.buf[ms & ~m] = sombra
-        self.buf[m] = cor
+        """Texto sem antialias. `centro` True ou 'c' centraliza, 'd' alinha à
+        direita, falso à esquerda. (True não é chave de dicionário: tratar
+        antes, senão cai no alinhamento à esquerda.)"""
+        if not txt: return
+        m, bx, by = self._mascara(txt, tam)
+        h, w = m.shape
+        if centro is True or centro == 'c': x -= w / 2
+        elif centro == 'd': x -= w
+        y = y + by - 1
+        if sombra is not None: self._blit(m, x + 1, y + 1, sombra)
+        self._blit(m, x, y, cor)
 
     def largura_texto(self, txt, tam):
-        d = ImageDraw.Draw(Image.new('L', (4, 4)))
-        d.fontmode = '1'
-        return d.textlength(txt, font=self._fonte(tam))
+        return self._mascara(txt, tam)[0].shape[1]
 
     def texto_ajustado(self, txt, x, y, cor, tam, larg_max, **kw):
         """Encolhe a fonte até o texto caber na largura dada. Em 180 px de
