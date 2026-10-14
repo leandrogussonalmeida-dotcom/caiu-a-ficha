@@ -1,0 +1,17 @@
+{"id": "A1-L01",
+ "titulo": "4.378 KM DE NORTE A SUL",
+ "paleta": "mostarda",
+ "chamada": "O Brasil e quase um quadrado: 4.378 km de norte a sul e 4.326 km de leste a oeste. E o ponto mais ao norte nao e o Oiapoque.",
+ "fonte": "IBGE, Quadro Geografico do Brasil 2025",
+ "confianca": "alta",
+ "tags": ["#geografia", "#brasil"],
+ "unidades": [
+  {"ref": {"nome": "LESTE A OESTE", "valor": 4326, "un": "km", "forma": "pessoa"},
+   "alvo": {"nome": "NORTE A SUL", "valor": 4378, "un": "km", "forma": "torre"},
+   "ancora": "O BRASIL E QUASE UM QUADRADO",
+   "fonte": "IBGE, Quadro Geografico do Brasil 2025", "confianca": "alta"},
+  {"ref": {"nome": "ATE O CHUI", "valor": 4378, "un": "km", "forma": "torre"},
+   "alvo": {"nome": "NASCENTE DO RIO AILA", "valor": 4378, "un": "km", "forma": "morro"},
+   "ancora": "O NORTE E EM RORAIMA, NAO NO OIAPOQUE",
+   "fonte": "IBGE, Quadro Geografico do Brasil 2025", "confianca": "alta"}
+ ]}

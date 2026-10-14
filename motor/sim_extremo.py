@@ -72,9 +72,13 @@ def construir(u, seed=51, saida='extremo.mp4', dirsaida='out-extremo'):
         tela.ret(EIXO_X, TOPO - 6, 2, BASE - TOPO + 12, 3)
         # rótulo só entra se não encostar no anterior; o degrau atual tem
         # prioridade e empurra o vizinho para fora
+        # prioridade: o degrau em destaque primeiro, depois o atual, depois o
+        # resto. O item de que o vídeo trata nunca pode perder o rótulo para
+        # um vizinho — foi o que aconteceu com o BRASIL no primeiro render.
         atual_j = min(n - 1, int(round(pos)))
+        dest = [j for j, p in enumerate(passos) if p.get('destaque')]
         ocupado = []
-        ordem = [atual_j] + [j for j in range(n) if j != atual_j]
+        ordem = dest + [atual_j] + [j for j in range(n) if j != atual_j and j not in dest]
         rotulos = {}
         for j in ordem:
             yj = int(ypos(passos[j]['v']))
@@ -83,12 +87,15 @@ def construir(u, seed=51, saida='extremo.mp4', dirsaida='out-extremo'):
         for j, p in enumerate(passos):
             yj = int(ypos(p['v']))
             feito = j <= pos
-            tela.ret(EIXO_X - 8, yj, 18, 1, 11 if feito else 5)
+            d = p.get('destaque')
+            cor_m = 9 if d else (11 if feito else 5)
+            tela.ret(EIXO_X - (12 if d else 8), yj, 26 if d else 18, 1, cor_m)
+            if d: tela.ret(EIXO_X - 12, yj - 1, 26, 3, 9)
             if j in rotulos:
-                tela.texto_ajustado(p['nome'], EIXO_X - 14, yj - 4,
-                                    11 if feito else 5, 9, 112, centro='d')
-                tela.texto(fmt(p['v']), EIXO_X + 14, yj - 4,
-                           8 if feito else 4, tam=8)
+                tela.texto_ajustado(p['nome'], EIXO_X - (18 if d else 14), yj - 4,
+                                    cor_m, 10 if d else 9, 108, centro='d')
+                tela.texto(fmt(p['v']), EIXO_X + (20 if d else 14), yj - 4,
+                           cor_m if d else (8 if feito else 4), tam=8)
 
         # a coluna preenchida e o ponteiro
         if not desc:

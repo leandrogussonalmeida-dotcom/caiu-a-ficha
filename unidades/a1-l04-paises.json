@@ -1,0 +1,57 @@
+{
+ "id": "A1-L04",
+ "titulo": "O BRASIL CONTRA O MUNDO",
+ "paleta": "floresta",
+ "unidade": "MILHOES DE KM2",
+ "batidas_por_passo": 5,
+ "chamada": "O Brasil e o quinto maior pais do mundo. A Russia, primeira colocada, tem so dois Brasis.",
+ "fonte": "Worldometers, maiores paises do mundo",
+ "confianca": "alta",
+ "tags": [
+  "#geografia",
+  "#brasil"
+ ],
+ "fecho": "A RUSSIA TEM SO 2 BRASIS",
+ "passos": [
+  {
+   "nome": "ARGENTINA",
+   "v": 2.78,
+   "nota": "O VIZINHO CABE 3 VEZES NO BRASIL"
+  },
+  {
+   "nome": "INDIA",
+   "v": 3.29,
+   "nota": "1,4 BILHAO DE PESSOAS EM 3,3 MILHOES"
+  },
+  {
+   "nome": "AUSTRALIA",
+   "v": 7.69,
+   "nota": "UM CONTINENTE MENOR QUE O BRASIL"
+  },
+  {
+   "nome": "BRASIL",
+   "v": 8.52,
+   "nota": "QUINTO MAIOR DO PLANETA",
+   "destaque": true
+  },
+  {
+   "nome": "ESTADOS UNIDOS",
+   "v": 9.37,
+   "nota": "SO 10 POR CENTO MAIOR"
+  },
+  {
+   "nome": "CHINA",
+   "v": 9.71
+  },
+  {
+   "nome": "CANADA",
+   "v": 9.98,
+   "nota": "QUASE EMPATE COM A CHINA"
+  },
+  {
+   "nome": "RUSSIA",
+   "v": 17.1,
+   "nota": "DOIS BRASIS, E SOBRA POUCO"
+  }
+ ]
+}
