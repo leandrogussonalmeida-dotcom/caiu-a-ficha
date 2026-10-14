@@ -18,9 +18,9 @@ INTRO_S = 2.30
 OUTRO_S = 3.10
 T_BAT = .62                  # instante da batida; som e imagem usam o mesmo
 
-ESC, ESC_CLA, ESC_ESC = 6, 7, 4      # índices da ficha na paleta 'marca'
+ESC, ESC_CLA, ESC_ESC = 6, 7, 4      # latão da ficha, na paleta 'marca'
 FUNDO, FUNDO2, FENDA = 0, 1, 3
-NOME, ACC = 8, 9
+NOME, ACC = 11, 9     # nome em branco, FICHA no destaque
 
 
 def ficha(tela, cx, cy, r, giro):

@@ -1,0 +1,11 @@
+{"id": "A7-L40", "titulo": "ELEVADOR ATE O CENTRO", "paleta": "brasa",
+ "unidade": "KM", "batidas_por_camada": 7,
+ "fecho": "6.371 KM ABAIXO DOS SEUS PES",
+ "camadas": [
+  {"nome": "CROSTA", "ate": 35, "cor": 3, "nota": "A CASCA ONDE TUDO ACONTECE"},
+  {"nome": "MANTO SUPERIOR", "ate": 410, "cor": 4, "nota": "ROCHA QUE ESCORRE DEVAGAR"},
+  {"nome": "ZONA DE TRANSICAO", "ate": 660, "cor": 5},
+  {"nome": "MANTO INFERIOR", "ate": 2890, "cor": 6, "nota": "METADE DO PLANETA E ISTO"},
+  {"nome": "NUCLEO EXTERNO", "ate": 5150, "cor": 9, "nota": "FERRO LIQUIDO EM MOVIMENTO"},
+  {"nome": "NUCLEO INTERNO", "ate": 6371, "cor": 11, "nota": "SOLIDO, E MAIS QUENTE QUE A SUPERFICIE DO SOL"}
+ ]}

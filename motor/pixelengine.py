@@ -39,48 +39,64 @@ F_PIX = '/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf'
 # =============================================================== paletas
 # Paleta fechada, como um console de verdade. Desenhar com índice em vez de
 # RGB garante coerência: nenhuma cor "quase igual" entra sem querer.
+# CONVENÇÃO DOS ÍNDICES — toda paleta obedece, senão os simuladores mentem.
+# Eles desenham por índice, não por cor, então o significado de cada posição
+# tem que ser o mesmo em todas. Antes disso, "11" era branco numa paleta e
+# marrom escuro em outra, e o mesmo número saía ilegível sem aviso.
+#
+#  0      fundo mais escuro
+#  1  2   faixas de fundo
+#  3  4   traços e separadores
+#  5  6   tom médio
+#  7  8   tom claro
+#  9      destaque principal
+# 10      destaque secundário
+# 11      BRANCO, sempre
+# 12      acento frio (barra de progresso)
+# 13 14   apoio escuro
+# 15      alerta
 PALETAS = {
-    'espaco':   ['#07060f', '#140f2b', '#241a4d', '#3d2a73', '#6b46c1', '#a78bfa',
-                 '#f0abfc', '#fde68a', '#fbbf24', '#f97316', '#ef4444', '#ffffff',
-                 '#22d3ee', '#0ea5e9', '#64748b', '#1e293b'],
-    'asfalto':  ['#0a0a0c', '#17171c', '#26262e', '#3a3a46', '#5a5a6b', '#8b8b9c',
-                 '#c9c9d6', '#ffffff', '#fbbf24', '#f97316', '#ef4444', '#22c55e',
-                 '#06b6d4', '#a855f7', '#fde047', '#7f1d1d'],
-    'neon':     ['#0d0221', '#190535', '#2d0b57', '#4a0e7a', '#7209b7', '#b5179e',
-                 '#f72585', '#ff6ec7', '#4cc9f0', '#4895ef', '#3f37c9', '#ffffff',
-                 '#06ffa5', '#fee440', '#fb8500', '#390099'],
-    'papelao':  ['#1a1410', '#2e2318', '#4a3728', '#6b4f38', '#8f6b47', '#b08968',
-                 '#d4b595', '#f0e0c8', '#fffaf0', '#c1440e', '#e07a3f', '#2d6a4f',
-                 '#40916c', '#1d3557', '#457b9d', '#e63946'],
-    'gelo':     ['#02121f', '#06283d', '#0b3d5c', '#13607f', '#1b86a8', '#2bb3cc',
-                 '#6fd9e8', '#b3f0f7', '#ffffff', '#e0f7ff', '#f59e0b', '#ef4444',
-                 '#1e3a5f', '#334155', '#94a3b8', '#fbbf24'],
-    'brasa':    ['#140603', '#2b0c05', '#4a150a', '#6e2010', '#9c3415', '#c75420',
-                 '#ef7b2e', '#ffa94d', '#ffd79a', '#fff3e0', '#ffffff', '#ffe066',
-                 '#7c2d12', '#431407', '#a16207', '#dc2626'],
-    'sangria':  ['#10040c', '#250919', '#420f2b', '#63153f', '#8c1c55', '#b52a6d',
-                 '#d94f8c', '#f287b3', '#ffc9dd', '#fff0f6', '#ffffff', '#fbbf24',
-                 '#5b21b6', '#1e1b4b', '#6b7280', '#22d3ee'],
-    'mostarda': ['#120e04', '#241d08', '#3d3010', '#5c481a', '#7f6425', '#a68432',
-                 '#cfa844', '#e8c76e', '#f7e3a8', '#fffbe8', '#ffffff', '#2563eb',
-                 '#166534', '#7c2d12', '#57534e', '#ef4444'],
-    'carvao':   ['#08090a', '#111315', '#1d2024', '#2c3036', '#424850', '#5e6670',
-                 '#858e99', '#b4bcc6', '#dfe4ea', '#ffffff', '#f97316', '#fb923c',
-                 '#1e3a8a', '#0f766e', '#7f1d1d', '#facc15'],
-    'uva':      ['#0b0614', '#180d2b', '#271247', '#3b1a69', '#53248f', '#7035b5',
-                 '#9354d6', '#b87ef0', '#dcb6ff', '#f5ecff', '#ffffff', '#4ade80',
-                 '#fbbf24', '#f43f5e', '#312e81', '#22d3ee'],
-    'menta':    ['#02110d', '#05241c', '#083a2d', '#0d5543', '#13765c', '#1c9a79',
-                 '#2fc39b', '#6fe0c0', '#b2f3e2', '#edfffa', '#ffffff', '#fbbf24',
-                 '#f43f5e', '#1e293b', '#475569', '#60a5fa'],
-    # paleta fixa da vinheta: a marca tem que sair igual em todo vídeo,
-    # qualquer que seja a paleta do conteúdo
+    'espaco':   ['#07060f', '#140f2b', '#241a4d', '#3d2a73', '#4b3a86', '#6b46c1',
+                 '#a78bfa', '#c4b5fd', '#f0abfc', '#fbbf24', '#f97316', '#ffffff',
+                 '#22d3ee', '#1e293b', '#64748b', '#ef4444'],
+    'asfalto':  ['#0a0a0c', '#17171c', '#26262e', '#3a3a46', '#4a4a58', '#5a5a6b',
+                 '#8b8b9c', '#c9c9d6', '#e6e6ee', '#fbbf24', '#f97316', '#ffffff',
+                 '#06b6d4', '#2a2a33', '#7f1d1d', '#ef4444'],
+    'neon':     ['#0d0221', '#190535', '#2d0b57', '#4a0e7a', '#5d1192', '#7209b7',
+                 '#b5179e', '#f72585', '#ff6ec7', '#06ffa5', '#fee440', '#ffffff',
+                 '#4cc9f0', '#390099', '#3f37c9', '#fb8500'],
+    'papelao':  ['#1a1410', '#2e2318', '#4a3728', '#6b4f38', '#7d5d41', '#8f6b47',
+                 '#b08968', '#d4b595', '#f0e0c8', '#c1440e', '#e07a3f', '#ffffff',
+                 '#40916c', '#2d2219', '#457b9d', '#e63946'],
+    'gelo':     ['#02121f', '#06283d', '#0b3d5c', '#13607f', '#1673a0', '#1b86a8',
+                 '#2bb3cc', '#6fd9e8', '#b3f0f7', '#f59e0b', '#fbbf24', '#ffffff',
+                 '#60a5fa', '#0a2436', '#334155', '#ef4444'],
+    'floresta': ['#07130d', '#0d2818', '#14452a', '#1b6b3f', '#1f8049', '#249456',
+                 '#35c46f', '#7ee787', '#c6f6d5', '#f59e0b', '#fef3c7', '#ffffff',
+                 '#4cc9f0', '#0a1f14', '#475569', '#ef4444'],
+    'brasa':    ['#140603', '#2b0c05', '#4a150a', '#6e2010', '#852a12', '#9c3415',
+                 '#c75420', '#ef7b2e', '#ffa94d', '#ffd79a', '#ffe066', '#ffffff',
+                 '#60a5fa', '#431407', '#a16207', '#dc2626'],
+    'sangria':  ['#10040c', '#250919', '#420f2b', '#63153f', '#78194a', '#8c1c55',
+                 '#b52a6d', '#d94f8c', '#f287b3', '#ffc9dd', '#fbbf24', '#ffffff',
+                 '#22d3ee', '#1e1b4b', '#5b21b6', '#f43f5e'],
+    'mostarda': ['#120e04', '#241d08', '#3d3010', '#5c481a', '#6d5620', '#7f6425',
+                 '#a68432', '#cfa844', '#e8c76e', '#f7e3a8', '#fffbe8', '#ffffff',
+                 '#2563eb', '#1a1406', '#57534e', '#ef4444'],
+    'carvao':   ['#08090a', '#111315', '#1d2024', '#2c3036', '#373c43', '#424850',
+                 '#5e6670', '#858e99', '#b4bcc6', '#f97316', '#fb923c', '#ffffff',
+                 '#38bdf8', '#161a1e', '#1e3a8a', '#facc15'],
+    'uva':      ['#0b0614', '#180d2b', '#271247', '#3b1a69', '#471e7c', '#53248f',
+                 '#7035b5', '#9354d6', '#b87ef0', '#fbbf24', '#4ade80', '#ffffff',
+                 '#22d3ee', '#120a20', '#312e81', '#f43f5e'],
+    'menta':    ['#02110d', '#05241c', '#083a2d', '#0d5543', '#106550', '#13765c',
+                 '#1c9a79', '#2fc39b', '#6fe0c0', '#fbbf24', '#f9a8d4', '#ffffff',
+                 '#60a5fa', '#041a14', '#475569', '#f43f5e'],
+    # paleta fixa da vinheta: a marca sai igual em todo vídeo, qualquer que
+    # seja a paleta do conteúdo. Aqui 4..8 são o latão da ficha.
     'marca':    ['#0a0710', '#17102a', '#2a1b4d', '#000000', '#7c5a1e', '#b08436',
-                 '#d6aa5c', '#ffe2a0', '#ffffff', '#f72585', '#4cc9f0', '#fee440',
-                 '#06ffa5', '#3a2a0e', '#5b4a8a', '#ff8c42'],
-    'floresta': ['#07130d', '#0d2818', '#14452a', '#1b6b3f', '#249456', '#35c46f',
-                 '#7ee787', '#c6f6d5', '#fef3c7', '#f59e0b', '#b45309', '#78350f',
-                 '#ffffff', '#1e293b', '#475569', '#ef4444'],
+                 '#d6aa5c', '#ffe2a0', '#fff6dc', '#f72585', '#4cc9f0', '#ffffff',
+                 '#fee440', '#3a2a0e', '#5b4a8a', '#ff8c42'],
 }
 
 

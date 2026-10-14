@@ -1,0 +1,47 @@
+{
+ "id": "A4-L23",
+ "titulo": "A ESCALA DO CALOR",
+ "paleta": "brasa",
+ "unidade": "GRAUS CELSIUS",
+ "batidas_por_passo": 5,
+ "fecho": "O RAIO E 5 VEZES O SOL",
+ "passos": [
+  {
+   "nome": "CORPO HUMANO",
+   "v": 37,
+   "nota": "ONDE A GENTE VIVE"
+  },
+  {
+   "nome": "AGUA FERVENDO",
+   "v": 100,
+   "nota": "O LIMITE DA COZINHA"
+  },
+  {
+   "nome": "FORNO",
+   "v": 250
+  },
+  {
+   "nome": "VELA",
+   "v": 1400,
+   "nota": "A CHAMA DE UMA VELA"
+  },
+  {
+   "nome": "FERRO FUNDIDO",
+   "v": 1538
+  },
+  {
+   "nome": "SUPERFICIE DO SOL",
+   "v": 5500,
+   "nota": "O SOL QUE VOCE VE"
+  },
+  {
+   "nome": "RAIO",
+   "v": 30000,
+   "nota": "CINCO VEZES A SUPERFICIE DO SOL"
+  },
+  {
+   "nome": "LAVA",
+   "v": 1150
+  }
+ ]
+}
