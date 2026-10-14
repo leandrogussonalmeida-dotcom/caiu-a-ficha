@@ -1,0 +1,15 @@
+{
+ "id": "V068",
+ "titulo": "30 PERGUNTAS DE CIENCIA QUE PARECEM FACEIS E NAO SAO",
+ "deck": "v068-ciencia.json",
+ "narracao": "out-v068/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas de ciencia sobre coisas que voce usa todo dia e nunca parou para pensar.",
+ "fonte": "fisica e quimica de livro-texto; deck conferido pelo checar_deck()",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#ciencia",
+  "#quiz"
+ ]
+}

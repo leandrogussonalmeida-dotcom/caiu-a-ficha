@@ -1,0 +1,351 @@
+{
+ "id": "v066-brasil",
+ "titulo": "30 PERGUNTAS SOBRE O BRASIL QUE 90% DOS BRASILEIROS ERRAM 🇧🇷",
+ "tema": "Brasil de ponta a ponta",
+ "tema_curto": "O BRASIL",
+ "fundo": "grade",
+ "paleta": "floresta",
+ "tempo": 6,
+ "tempo_short": 5,
+ "intro": "Trinta perguntas sobre o país onde você mora. Seis segundos para cada uma. Aviso: as mais erradas são justamente as que todo mundo jura que sabe.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Comenta a sua pontuação. E conta qual dessas te pegou de surpresa, porque algumas aqui enganam até professor de geografia. Na próxima rodada: países e bandeiras.",
+ "chamadas_outro": [
+  "Você conhece o seu país?",
+  "Trinta perguntas. Nenhuma fácil."
+ ],
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "Qual é o ponto mais ao norte do Brasil?",
+   "opts": [
+    "Oiapoque, no Amapá",
+    "Monte Caburaí, em Roraima",
+    "Boa Vista, em Roraima"
+   ],
+   "ok": 1,
+   "fato": "É o Monte Caburaí, em Uiramutã, Roraima. O verso 'do Oiapoque ao Chuí' entrou na cabeça de todo mundo e está errado desde sempre: o Oiapoque é o extremo norte da costa, mas o Caburaí fica cerca de cem quilômetros mais ao norte, lá no interior da fronteira com a Guiana. O IBGE já reconhece o Caburaí, mas a frase antiga ganhou.",
+   "fato_curto": "Monte Caburaí, em Roraima. O Oiapoque perdeu o posto, mas a rima ficou."
+  },
+  {
+   "q": "Qual estado faz divisa com mais estados?",
+   "opts": [
+    "Minas Gerais",
+    "Bahia",
+    "Mato Grosso"
+   ],
+   "ok": 1,
+   "fato": "A Bahia, com oito vizinhos: Alagoas, Sergipe, Pernambuco, Piauí, Goiás, Tocantins, Minas Gerais e Espírito Santo. Quase todo mundo responde Minas, que faz divisa com seis. A Bahia leva porque é larga de leste a oeste e alta de norte a sul ao mesmo tempo.",
+   "fato_curto": "Bahia, com oito. Minas faz seis."
+  },
+  {
+   "q": "Qual é o maior município do Brasil em área?",
+   "opts": [
+    "Manaus, no Amazonas",
+    "Altamira, no Pará",
+    "Corumbá, no Mato Grosso do Sul"
+   ],
+   "ok": 1,
+   "fato": "Altamira, no Pará, com cerca de 159 mil quilômetros quadrados. É uma cidade maior que Portugal, maior que a Grécia e maior que a Coreia do Sul. Um município só, com prefeito só, e menos de um habitante por quilômetro quadrado na maior parte dele.",
+   "fato_curto": "Altamira, no Pará: 159 mil km², maior que Portugal."
+  },
+  {
+   "q": "Qual é o ponto mais alto do Brasil?",
+   "opts": [
+    "Pico da Bandeira",
+    "Pico da Neblina",
+    "Pico Paraná"
+   ],
+   "ok": 1,
+   "fato": "O Pico da Neblina, no Amazonas, com 2.995 metros. Ele fica na fronteira com a Venezuela, dentro de terra indígena Yanomami, e o nome é literal: passa a maior parte do ano dentro da nuvem. Por décadas se disse que tinha 3.014 metros, até uma medição mais precisa cortar quase vinte metros da montanha.",
+   "fato_curto": "Pico da Neblina, 2.995 m, no Amazonas."
+  },
+  {
+   "q": "Qual estado tem mais municípios?",
+   "opts": [
+    "São Paulo",
+    "Minas Gerais",
+    "Bahia"
+   ],
+   "ok": 1,
+   "fato": "Minas Gerais, com 853 municípios. São Paulo tem 645, com quase o dobro de gente. Minas fragmentou-se assim no ciclo do ouro: cada povoado de mineração virou sede, e as sedes nunca se juntaram de volta.",
+   "fato_curto": "Minas Gerais: 853. São Paulo tem 645."
+  },
+  {
+   "q": "Quantos países fazem fronteira com o Brasil?",
+   "opts": [
+    "Sete",
+    "Dez",
+    "Doze"
+   ],
+   "ok": 1,
+   "fato": "Dez. O Brasil faz fronteira com todos os países da América do Sul, menos dois: Chile e Equador. É a terceira maior extensão de fronteira terrestre do mundo, com cerca de 16 mil quilômetros.",
+   "fato_curto": "Dez. Só Chile e Equador não fazem."
+  },
+  {
+   "q": "Quantos fusos horários o Brasil tem hoje?",
+   "opts": [
+    "Dois",
+    "Três",
+    "Quatro"
+   ],
+   "ok": 2,
+   "fato": "Quatro. O mais a oeste é o Acre, o mais a leste é Fernando de Noronha, que vai uma hora à frente de Brasília. Em 2008 o país chegou a reduzir para três, juntando o Acre ao horário do Amazonas, e em 2013 voltou atrás por plebiscito: os acreanos quiseram o fuso de volta.",
+   "fato_curto": "Quatro. Noronha está uma hora à frente de Brasília."
+  },
+  {
+   "q": "Qual é o maior rio inteiramente dentro do Brasil?",
+   "opts": [
+    "Rio Amazonas",
+    "Rio São Francisco",
+    "Rio Paraná"
+   ],
+   "ok": 1,
+   "fato": "O São Francisco, com cerca de 2.800 quilômetros, nascendo na Serra da Canastra, em Minas, e desaguando na divisa de Alagoas com Sergipe. O Amazonas é muito maior, mas nasce no Peru; o Paraná continua para o Paraguai e a Argentina. O Velho Chico começa e termina em casa.",
+   "fato_curto": "São Francisco, cerca de 2.800 km, todo em território brasileiro."
+  },
+  {
+   "q": "Qual é a maior praia do mundo?",
+   "opts": [
+    "Praia do Cassino, no Rio Grande do Sul",
+    "Praia de Copacabana, no Rio",
+    "Praia do Futuro, no Ceará"
+   ],
+   "ok": 0,
+   "fato": "A Praia do Cassino, em Rio Grande, no Rio Grande do Sul: cerca de 250 quilômetros de areia sem interrupção, reconhecidos como a mais extensa do planeta. Copacabana tem quatro quilômetros. Dá para colocar sessenta Copacabanas em fila dentro do Cassino.",
+   "fato_curto": "Praia do Cassino, no RS: 250 km, a maior do mundo."
+  },
+  {
+   "q": "Qual foi a primeira capital do Brasil?",
+   "opts": [
+    "Rio de Janeiro",
+    "Salvador",
+    "Olinda"
+   ],
+   "ok": 1,
+   "fato": "Salvador, fundada em 1549 justamente para ser a capital, e foi por 214 anos, até 1763. Depois o Rio foi capital por 197 anos, e Brasília já passou de 66. Salvador segue sendo a que governou o país por mais tempo.",
+   "fato_curto": "Salvador, de 1549 a 1763: 214 anos de capital."
+  },
+  {
+   "q": "Qual é o ponto mais a leste do continente americano?",
+   "opts": [
+    "Ponta do Seixas, na Paraíba",
+    "Cabo Branco, em Pernambuco",
+    "Ponta Negra, no Rio Grande do Norte"
+   ],
+   "ok": 0,
+   "fato": "A Ponta do Seixas, em João Pessoa, Paraíba. Não é só o extremo leste do Brasil: é o ponto mais oriental de todo o continente americano, então é ali que o sol nasce primeiro nas Américas, se você não contar as ilhas.",
+   "fato_curto": "Ponta do Seixas, em João Pessoa: o sol nasce ali primeiro nas Américas."
+  },
+  {
+   "q": "Qual foi o último estado criado no Brasil?",
+   "opts": [
+    "Mato Grosso do Sul",
+    "Tocantins",
+    "Roraima"
+   ],
+   "ok": 1,
+   "fato": "Tocantins, criado pela Constituição de 1988, separando-se do norte de Goiás. Roraima e Amapá viraram estados na mesma Constituição, mas já existiam como territórios federais; Tocantins foi o único recortado de um estado existente, e é por isso que conta como o mais novo.",
+   "fato_curto": "Tocantins, em 1988, separado do norte de Goiás."
+  },
+  {
+   "q": "Qual é o menor estado brasileiro em área?",
+   "opts": [
+    "Alagoas",
+    "Sergipe",
+    "Espírito Santo"
+   ],
+   "ok": 1,
+   "fato": "Sergipe, com cerca de 21,9 mil quilômetros quadrados. É menor que a cidade de Altamira, no Pará, que tem 159 mil: cabem sete Sergipes dentro de um município só.",
+   "fato_curto": "Sergipe, 21,9 mil km². Cabem sete dentro de Altamira."
+  },
+  {
+   "q": "O Pantanal fica em quais estados brasileiros?",
+   "opts": [
+    "Mato Grosso e Mato Grosso do Sul",
+    "Mato Grosso e Goiás",
+    "Mato Grosso do Sul e Paraná"
+   ],
+   "ok": 0,
+   "fato": "Mato Grosso e Mato Grosso do Sul, e continua para a Bolívia e o Paraguai. É a maior planície alagável contínua do mundo, e a cheia não vem da chuva local: a água desce das chapadas em volta e leva meses atravessando, então o Pantanal inunda devagar, às vezes com o céu limpo.",
+   "fato_curto": "Mato Grosso e Mato Grosso do Sul. A cheia desce das chapadas, não cai do céu."
+  },
+  {
+   "q": "Quantos estados tem o Brasil?",
+   "opts": [
+    "25",
+    "26",
+    "27"
+   ],
+   "ok": 1,
+   "fato": "Vinte e seis estados, mais o Distrito Federal, que não é estado. São 27 unidades federativas, e é daí que vem a confusão: o DF tem representação no Congresso e governador, mas não é um estado, e Brasília, tecnicamente, não é um município.",
+   "fato_curto": "26 estados mais o Distrito Federal: 27 unidades, não 27 estados."
+  },
+  {
+   "q": "Qual é a maior ilha fluvial do mundo?",
+   "opts": [
+    "Ilha de Marajó, no Pará",
+    "Ilha do Bananal, em Tocantins",
+    "Ilha de Fernando de Noronha"
+   ],
+   "ok": 1,
+   "fato": "A Ilha do Bananal, em Tocantins, cercada só por rio: o Araguaia se divide em dois braços e volta a se juntar 350 quilômetros depois. Marajó é maior, mas é banhada também pelo mar, o que a torna fluviomarinha, não fluvial.",
+   "fato_curto": "Ilha do Bananal. Marajó é maior, mas tem mar de um lado."
+  },
+  {
+   "q": "Qual é o estado brasileiro com maior área?",
+   "opts": [
+    "Pará",
+    "Amazonas",
+    "Mato Grosso"
+   ],
+   "ok": 1,
+   "fato": "Amazonas, com cerca de 1,56 milhão de quilômetros quadrados: quase 18% do Brasil num estado só. É maior que qualquer país da União Europeia e maior que a soma de todo o Sul e Sudeste do Brasil.",
+   "fato_curto": "Amazonas: 1,56 milhão de km², quase 18% do país."
+  },
+  {
+   "q": "As Cataratas do Iguaçu ficam em qual estado?",
+   "opts": [
+    "Paraná",
+    "Santa Catarina",
+    "Mato Grosso do Sul"
+   ],
+   "ok": 0,
+   "fato": "Paraná, em Foz do Iguaçu, na fronteira com a Argentina. São cerca de 275 quedas, e a parte brasileira é a que dá a vista panorâmica, enquanto a argentina tem a maior parte das quedas por baixo. Por isso quem vai aos dois lados não está vendo a mesma coisa duas vezes.",
+   "fato_curto": "Paraná, em Foz do Iguaçu: cerca de 275 quedas."
+  },
+  {
+   "q": "Qual é o maior lago ou lagoa do Brasil?",
+   "opts": [
+    "Lagoa dos Patos, no Rio Grande do Sul",
+    "Lagoa Rodrigo de Freitas, no Rio",
+    "Lago de Furnas, em Minas"
+   ],
+   "ok": 0,
+   "fato": "A Lagoa dos Patos, no Rio Grande do Sul, com cerca de 10 mil quilômetros quadrados: a maior lagoa da América do Sul. O Lago de Furnas é enorme, mas é artificial, represado para uma hidrelétrica.",
+   "fato_curto": "Lagoa dos Patos, no RS: a maior lagoa da América do Sul."
+  },
+  {
+   "q": "Qual destas cidades é a capital mais alta do Brasil?",
+   "opts": [
+    "Curitiba",
+    "Belo Horizonte",
+    "Brasília"
+   ],
+   "ok": 0,
+   "fato": "Curitiba, a cerca de 930 metros de altitude, a capital mais alta do país. Brasília fica perto de 1.100 metros em alguns pontos do Distrito Federal, mas a altitude oficial da cidade é menor que a de Curitiba. É por isso que Curitiba tem frio de verdade sem estar tão ao sul.",
+   "fato_curto": "Curitiba, a cerca de 930 metros. O frio dela é altitude, não latitude."
+  },
+  {
+   "q": "Fernando de Noronha pertence a qual estado?",
+   "opts": [
+    "Rio Grande do Norte",
+    "Pernambuco",
+    "Ceará"
+   ],
+   "ok": 1,
+   "fato": "Pernambuco, apesar de ficar a 545 quilômetros da costa e muito mais perto do Rio Grande do Norte em linha reta. Noronha não é município: é um distrito estadual, administrado direto pelo governo de Pernambuco, caso único no Brasil.",
+   "fato_curto": "Pernambuco. E não é município: é distrito estadual."
+  },
+  {
+   "q": "Qual é a região com mais estados?",
+   "opts": [
+    "Nordeste",
+    "Norte",
+    "Sudeste"
+   ],
+   "ok": 0,
+   "fato": "O Nordeste, com nove estados. O Norte tem sete, o Sudeste quatro, o Centro-Oeste três mais o Distrito Federal, e o Sul só três. O Nordeste tem mais estados que o Sul e o Sudeste somados.",
+   "fato_curto": "Nordeste, com nove. O Sul tem três."
+  },
+  {
+   "q": "A Amazônia Legal cobre aproximadamente quanto do território brasileiro?",
+   "opts": [
+    "Um quarto",
+    "Metade",
+    "Cinco nonos"
+   ],
+   "ok": 2,
+   "fato": "Cerca de 59% do Brasil, perto de cinco nonos do país. A Amazônia Legal é uma divisão administrativa, criada para planejamento e incentivo fiscal, e por isso inclui todo o Maranhão a oeste de um meridiano e todo o Mato Grosso, mesmo onde a vegetação já é cerrado, não floresta.",
+   "fato_curto": "Cerca de 59% do país. E é um recorte administrativo, não só floresta."
+  },
+  {
+   "q": "Qual é o segundo bioma brasileiro em extensão?",
+   "opts": [
+    "Mata Atlântica",
+    "Cerrado",
+    "Caatinga"
+   ],
+   "ok": 1,
+   "fato": "O Cerrado, com cerca de 24% do país, atrás só da Amazônia. É a savana mais rica do mundo em espécies de plantas, e as árvores dele são tortas e de casca grossa por um motivo: o fogo é parte do ciclo, e a casca é blindagem. Muita coisa no Cerrado cresce para baixo, com raízes mais longas que o tronco.",
+   "fato_curto": "Cerrado, cerca de 24% do Brasil. A savana mais rica do mundo em plantas."
+  },
+  {
+   "q": "Qual é o estado mais populoso do Nordeste?",
+   "opts": [
+    "Pernambuco",
+    "Bahia",
+    "Ceará"
+   ],
+   "ok": 1,
+   "fato": "Bahia, com cerca de 14 milhões de habitantes: o quarto estado mais populoso do Brasil, atrás de São Paulo, Minas e Rio. Pernambuco e Ceará vêm depois, com cerca de 9 milhões cada.",
+   "fato_curto": "Bahia, cerca de 14 milhões: o quarto do país."
+  },
+  {
+   "q": "Em que ano Brasília foi inaugurada?",
+   "opts": [
+    "1957",
+    "1960",
+    "1964"
+   ],
+   "ok": 1,
+   "fato": "Em 21 de abril de 1960, depois de pouco mais de três anos de obra. A ideia de mudar a capital para o interior era muito mais antiga: aparece na Inconfidência Mineira, em 1789, e virou texto de Constituição em 1891, quase setenta anos antes de alguém pôr um tijolo.",
+   "fato_curto": "1960. A ideia já estava na Constituição de 1891."
+  },
+  {
+   "q": "Qual destes estados NÃO tem litoral?",
+   "opts": [
+    "Piauí",
+    "Sergipe",
+    "Tocantins"
+   ],
+   "ok": 2,
+   "fato": "Tocantins. O Piauí engana: tem litoral, só que o menor do Brasil, com cerca de 66 quilômetros. São onze as unidades sem litoral, e o Tocantins é uma delas desde que nasceu, em 1988.",
+   "fato_curto": "Tocantins. O Piauí tem litoral: 66 km, o menor do país."
+  },
+  {
+   "q": "Qual é a cidade mais populosa do Brasil depois de São Paulo?",
+   "opts": [
+    "Rio de Janeiro",
+    "Brasília",
+    "Salvador"
+   ],
+   "ok": 0,
+   "fato": "Rio de Janeiro, com cerca de 6,7 milhões de habitantes, contra pouco mais de 11 milhões de São Paulo. Brasília vem em terceiro, perto de 2,8 milhões, e ultrapassou Salvador na última década.",
+   "fato_curto": "Rio, cerca de 6,7 milhões. Brasília é a terceira."
+  },
+  {
+   "q": "Os Lençóis Maranhenses são um deserto?",
+   "opts": [
+    "Sim, o único do Brasil",
+    "Não, chove demais para isso",
+    "Sim, mas só na estação seca"
+   ],
+   "ok": 1,
+   "fato": "Não. Parece deserto e tem 1.500 quilômetros quadrados de dunas, mas chove cerca de 1.600 milímetros por ano ali, umas quarenta vezes mais que no Saara. É justamente essa chuva que enche as lagoas entre as dunas, e é por isso que o lugar existe como imagem: duna de deserto com água doce no meio.",
+   "fato_curto": "Não. Chove 1.600 mm por ano ali: é a chuva que forma as lagoas."
+  },
+  {
+   "q": "Quanto tempo o Brasil foi governado por Portugal a partir de Salvador e do Rio, somando os dois?",
+   "opts": [
+    "Cerca de 200 anos",
+    "Cerca de 300 anos",
+    "Cerca de 400 anos"
+   ],
+   "ok": 1,
+   "fato": "Cerca de 322 anos, de 1500 a 1822. O Brasil independente, em 2026, tem 204 anos: ainda falta mais de um século para o país livre durar mais que o período colonial. A conta costuma surpreender porque a escola passa muito mais tempo no Império e na República do que nos três séculos anteriores.",
+   "fato_curto": "Cerca de 322 anos de colônia. O Brasil independente tem 204."
+  }
+ ]
+}

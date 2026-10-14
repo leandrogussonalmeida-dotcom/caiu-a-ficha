@@ -1,0 +1,16 @@
+{
+ "id": "V073",
+ "titulo": "30 OBJETOS QUE SUMIRAM DA SUA CASA E VOCE NAO PERCEBEU",
+ "deck": "v073-objetos.json",
+ "narracao": "out-v073/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta objetos que estavam em toda casa brasileira e hoje quase ninguem tem.",
+ "fonte": "historia do design e da tecnologia domestica; orelhao: projeto de Chu Ming Silveira (1971)",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#nostalgia",
+  "#anos80",
+  "#quiz"
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "id": "V071",
+ "titulo": "30 PEGADINHAS DE LOGICA QUE DERRUBAM GENTE INTELIGENTE",
+ "deck": "v071-logica.json",
+ "narracao": "out-v071/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta pegadinhas de logica. A primeira resposta que vem a cabeca esta errada em quase todas.",
+ "fonte": "problemas classicos de raciocinio (teste de reflexao cognitiva, Monty Hall, paradoxo do aniversario); cada resposta demonstrada na propria explicacao",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#logica",
+  "#pegadinha",
+  "#quiz"
+ ]
+}

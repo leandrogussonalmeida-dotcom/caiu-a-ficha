@@ -1,0 +1,12 @@
+{
+ "id": "V066",
+ "titulo": "30 PERGUNTAS SOBRE O BRASIL QUE 90% DOS BRASILEIROS ERRAM",
+ "deck": "v066-brasil.json",
+ "narracao": "out-v066/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas sobre o pais onde voce mora. As mais erradas sao as que todo mundo jura que sabe.",
+ "fonte": "IBGE (pontos extremos e area dos municipios); deck conferido pelo checar_deck()",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": ["#brasil", "#geografia", "#quiz"]
+}

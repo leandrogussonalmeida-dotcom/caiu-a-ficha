@@ -1,0 +1,351 @@
+{
+ "id": "v073-objetos",
+ "titulo": "30 OBJETOS QUE SUMIRAM DA SUA CASA E VOCÊ NÃO PERCEBEU 📻",
+ "tema": "Objetos que sumiram",
+ "tema_curto": "SUMIRAM",
+ "fundo": "confete",
+ "paleta": "ferrugem",
+ "tempo": 6,
+ "tempo_short": 5,
+ "intro": "Trinta objetos que estavam em toda casa brasileira e hoje quase ninguém tem. Seis segundos para cada uma. Se você acertar mais de vinte e cinco, você é mais velho do que admite.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Comenta a sua pontuação. E conta qual desses você ainda tem guardado em casa, porque sempre tem alguém que tem. Na próxima rodada: trinta palavras que quase todo mundo escreve errado.",
+ "chamadas_outro": [
+  "Estava em toda casa. Hoje, em nenhuma.",
+  "Trinta objetos que sumiram."
+ ],
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "Para que servia o lápis enfiado na fita cassete?",
+   "opts": [
+    "Limpar a cabeça do toca-fitas",
+    "Rebobinar a fita à mão",
+    "Marcar onde a música começava"
+   ],
+   "ok": 1,
+   "fato": "Para rebobinar sem gastar a pilha do aparelho, girando o carretel com o lápis. Era também o conserto padrão quando a fita saía solta: enrolava com o lápis até a película voltar para dentro. Toda casa tinha um lápis com a ponta gasta de tanto girar fita.",
+   "fato_curto": "Rebobinar à mão, para poupar pilha. E para recolher a fita solta."
+  },
+  {
+   "q": "O que era um videocassete VHS capaz de gravar?",
+   "opts": [
+    "Apenas assistir filmes alugados",
+    "Gravar da televisão ao vivo",
+    "Gravar só áudio"
+   ],
+   "ok": 1,
+   "fato": "Gravar da TV, e foi por isso que ele mudou o hábito do país: pela primeira vez você podia ver o programa na hora que quisesse. Programar a gravação era um horror de relógio piscando, e os estúdios de cinema chegaram a processar os fabricantes alegando que gravar da TV era pirataria. Perderam.",
+   "fato_curto": "Gravar da TV. Os estúdios processaram os fabricantes por isso, e perderam."
+  },
+  {
+   "q": "O que era o orelhão?",
+   "opts": [
+    "Um telefone público",
+    "Um rádio comunitário",
+    "Uma caixa de correio"
+   ],
+   "ok": 0,
+   "fato": "O telefone público brasileiro, com aquela concha acústica que virou símbolo nacional. O desenho é de Chu Ming Silveira, arquiteta brasileira, de 1971, e a concha não era estilo: era isolamento de ruído sem precisar de cabine fechada. Funcionava com ficha, depois com cartão.",
+   "fato_curto": "O telefone público. A concha é projeto de Chu Ming Silveira, de 1971."
+  },
+  {
+   "q": "Para que servia o disquete?",
+   "opts": [
+    "Guardar arquivos",
+    "Limpar o monitor",
+    "Ligar a impressora"
+   ],
+   "ok": 0,
+   "fato": "Guardar arquivos: o de 3,5 polegadas levava 1,44 megabyte, ou seja, menos que uma única foto de celular hoje. A imagem dele continua na sua tela: o ícone de salvar de quase todo programa ainda é um disquete, um objeto que boa parte dos usuários nunca viu na vida.",
+   "fato_curto": "Arquivos: 1,44 MB, menos que uma foto. O ícone de salvar ainda é ele."
+  },
+  {
+   "q": "O que era um Walkman?",
+   "opts": [
+    "Um rádio de pilha",
+    "Um toca-fitas portátil com fone",
+    "Um videogame de mão"
+   ],
+   "ok": 1,
+   "fato": "Um toca-fitas portátil com fone de ouvido, lançado pela Sony em 1979. Ele inventou um comportamento que hoje é banal: ouvir a sua própria música no meio da rua, isolado de todo mundo. Antes dele, música em público era sempre música de alguém mais.",
+   "fato_curto": "Toca-fitas de bolso, de 1979. Ele inventou ouvir música sozinho na rua."
+  },
+  {
+   "q": "O que era a enciclopédia Barsa?",
+   "opts": [
+    "Uma coleção de livros de consulta",
+    "Uma revista semanal",
+    "Um atlas escolar"
+   ],
+   "ok": 0,
+   "fato": "Uma coleção de volumes de consulta, vendida de porta em porta e geralmente paga em muitas prestações. Ela era o Google da casa: trabalho de escola saía dali, copiado à mão. Ficava na estante da sala, bem à vista, porque também era sinal de status.",
+   "fato_curto": "A coleção de consulta da sala. Era o Google da casa, pago em prestações."
+  },
+  {
+   "q": "Para que servia a antena de orelhas de coelho na TV?",
+   "opts": [
+    "Captar o sinal aberto",
+    "Esfriar o aparelho",
+    "Melhorar o som"
+   ],
+   "ok": 0,
+   "fato": "Captar o sinal de TV aberta, e a sintonia era feita no braço: girava, abria, fechava, e às vezes alguém tinha que ficar segurando. Papel de alumínio na ponta era o remédio popular, e funcionava mesmo, aumentando a superfície que recebia o sinal.",
+   "fato_curto": "Captar o sinal aberto. E o papel de alumínio na ponta funcionava de verdade."
+  },
+  {
+   "q": "O que era um telegrama?",
+   "opts": [
+    "Uma mensagem entregue em papel pelos Correios",
+    "Um telefone sem fio",
+    "Um recado gravado em fita"
+   ],
+   "ok": 0,
+   "fato": "Uma mensagem transmitida por telégrafo e entregue impressa na sua casa, cobrada por palavra. Como cada palavra custava, as pessoas escreviam no mínimo possível, e daí veio um estilo seco e abreviado que o mundo só reencontrou no SMS, cem anos depois.",
+   "fato_curto": "Mensagem entregue em papel, cobrada por palavra. O SMS repetiu isso 100 anos depois."
+  },
+  {
+   "q": "O que era a máquina de escrever elétrica capaz de fazer que a comum não fazia?",
+   "opts": [
+    "Corrigir erros com uma fita branca",
+    "Imprimir em cores",
+    "Guardar o texto"
+   ],
+   "ok": 0,
+   "fato": "Corrigir, com uma fita corretiva que digitava branco em cima do erro. Na máquina comum, errar significava recomeçar a página ou passar corretivo líquido e esperar secar. Era por isso que escrever bem era, em parte, planejar a frase antes.",
+   "fato_curto": "Corrigir com fita branca por cima. Antes, errar era recomeçar a página."
+  },
+  {
+   "q": "O que era um slide ou diapositivo?",
+   "opts": [
+    "Uma foto projetada na parede",
+    "Um tipo de disco",
+    "Uma transparência de escola"
+   ],
+   "ok": 0,
+   "fato": "Uma foto em filme, montada num quadradinho, para ser projetada na parede. Sessão de slides em família era um ritual: luz apagada, projetor quente, cheiro de poeira queimando e alguém narrando as férias. O aplicativo que você usa para apresentações ainda se chama slide por causa disso.",
+   "fato_curto": "Uma foto projetada na parede. É daí que vem o nome 'slide' da apresentação."
+  },
+  {
+   "q": "Para que servia a lista telefônica?",
+   "opts": [
+    "Achar o telefone de qualquer pessoa da cidade",
+    "Consultar endereços de comércio só",
+    "Ver os códigos de área"
+   ],
+   "ok": 0,
+   "fato": "Para achar o número de qualquer pessoa ou empresa da cidade, porque todo mundo estava lá, com nome e endereço, por padrão. Ela era entregue de graça, era grossa como um tijolo, e a ideia de ter seu endereço impresso numa lista pública não incomodava ninguém.",
+   "fato_curto": "Achar o número de qualquer um: todos estavam lá, com endereço."
+  },
+  {
+   "q": "O que era um mimeógrafo?",
+   "opts": [
+    "Uma máquina de copiar folhas com tinta roxa",
+    "Um projetor de escola",
+    "Um tipo de microfone"
+   ],
+   "ok": 0,
+   "fato": "Uma máquina de copiar à manivela, com cheiro forte de álcool e tinta roxa. Toda prova de escola saía dali, e a folha chegava na sua mão ainda meio úmida. Uma geração inteira associa aquele cheiro a dia de prova, e a tinta borrava no dedo.",
+   "fato_curto": "A copiadora de manivela, tinta roxa e cheiro de álcool: a prova da escola."
+  },
+  {
+   "q": "O que o controle remoto de TV antigo tinha que o de hoje não tem?",
+   "opts": [
+    "Um fio ligando na TV",
+    "Um alto-falante",
+    "Uma tela pequena"
+   ],
+   "ok": 0,
+   "fato": "Um fio. Os primeiros controles eram literalmente ligados ao aparelho por cabo, e o apelido em inglês era lazy bones, ossos preguiçosos. O fio esticado na sala era uma armadilha de tropeço, e foi um dos motivos para inventarem o controle sem fio.",
+   "fato_curto": "Um fio ligado na TV. O apelido dele era 'ossos preguiçosos'."
+  },
+  {
+   "q": "Para que servia o cartão telefônico?",
+   "opts": [
+    "Pagar ligações em telefone público",
+    "Comprar crédito de celular",
+    "Entrar no clube"
+   ],
+   "ok": 0,
+   "fato": "Para pagar ligações no orelhão, substituindo a ficha: cada ligação furava ou descontava unidades do cartão. Os cartões vinham com estampas diferentes e virou febre colecioná-los nos anos 90, inclusive entre adultos.",
+   "fato_curto": "Pagar no orelhão, no lugar da ficha. E colecionar os cartões virou febre."
+  },
+  {
+   "q": "O que era o Fliperama?",
+   "opts": [
+    "Uma casa de máquinas de jogo",
+    "Um tipo de pinball doméstico",
+    "Uma revista de games"
+   ],
+   "ok": 0,
+   "fato": "O salão com máquinas de jogo onde se pagava por partida, em fichas. Era onde o videogame era social antes de existir internet: você enfrentava a pessoa ao lado e a fila esperava sua vez. Deixar uma ficha na beirada da máquina era a forma de dizer que você era o próximo.",
+   "fato_curto": "O salão de máquinas a ficha. A ficha na beirada marcava a sua vez."
+  },
+  {
+   "q": "O que era um pager ou bip?",
+   "opts": [
+    "Um aparelho que recebia recados curtos",
+    "Um telefone sem fio",
+    "Um relógio despertador"
+   ],
+   "ok": 0,
+   "fato": "Um aparelho de bolso que só recebia mensagens curtas, geralmente um número para você retornar a ligação de um telefone qualquer. Ele não falava nem respondia: era um aviso de que alguém queria falar com você. Médico, repórter e entregador viviam com um na cintura.",
+   "fato_curto": "Recebia recados curtos e nada mais. Você tinha que ligar de volta de outro telefone."
+  },
+  {
+   "q": "O que era um LP?",
+   "opts": [
+    "Um disco grande de vinil",
+    "Uma fita de vídeo",
+    "Um rádio de pilha"
+   ],
+   "ok": 0,
+   "fato": "Long play: o disco grande de vinil, com cerca de vinte minutos por lado. Esse limite físico moldou a música popular inteira: álbum com lado A e lado B, e a faixa de abertura de cada lado tratada como a mais importante. A ordem das músicas era uma decisão artística, porque ninguém pulava faixa facilmente.",
+   "fato_curto": "O disco de vinil grande. O limite de 20 minutos por lado criou o lado A e o lado B."
+  },
+  {
+   "q": "Para que servia o papel-carbono?",
+   "opts": [
+    "Fazer uma segunda via ao escrever",
+    "Limpar máquina de escrever",
+    "Proteger a mesa da tinta"
+   ],
+   "ok": 0,
+   "fato": "Para tirar cópia na hora: você colocava a folha escura entre duas folhas e o que escrevia em cima aparecia embaixo. É daí que vem o CC do e-mail, carbon copy, cópia carbono: o nome do campo é uma homenagem a um papel que quase ninguém mais usa.",
+   "fato_curto": "Segunda via na hora. O 'CC' do e-mail significa cópia carbono: é esse papel."
+  },
+  {
+   "q": "O que era um cinescópio, a parte volumosa da TV antiga?",
+   "opts": [
+    "Um tubo de vidro onde a imagem se formava",
+    "A caixa de som",
+    "O conversor de canais"
+   ],
+   "ok": 0,
+   "fato": "Um tubo de vidro grande, em vácuo, que atirava elétrons contra a tela para acender o fósforo e formar a imagem. É por isso que TV antiga era tão funda e tão pesada: o tubo precisava de espaço para a imagem se formar, e o vidro era grosso para aguentar o vácuo.",
+   "fato_curto": "O tubo de vácuo onde a imagem se formava. Era ele que deixava a TV funda e pesada."
+  },
+  {
+   "q": "Qual destes era uma forma de ouvir música comprando uma faixa só?",
+   "opts": [
+    "O compacto, ou single de vinil",
+    "A fita VHS",
+    "O disquete"
+   ],
+   "ok": 0,
+   "fato": "O compacto: um vinil pequeno com uma música de cada lado, mais barato que o álbum. Era assim que se comprava sucesso avulso, e as paradas de rádio eram montadas em cima dessas vendas. O modelo voltou inteiro no streaming, onde quase ninguém ouve álbum do começo ao fim.",
+   "fato_curto": "O compacto de vinil, uma música por lado. O streaming ressuscitou esse modelo."
+  },
+  {
+   "q": "O que era a locadora de vídeo?",
+   "opts": [
+    "Uma loja que alugava filmes por dia",
+    "Um cinema de bairro",
+    "Uma loja de consertos de TV"
+   ],
+   "ok": 0,
+   "fato": "Uma loja que alugava filmes por um ou dois dias, com multa por atraso e a regra sagrada de devolver rebobinado. Escolher filme ali era um programa: você lia a capa, pedia opinião ao balcão e às vezes voltava com outro porque o seu estava alugado.",
+   "fato_curto": "Alugava filmes por dia, com multa por atraso e a ordem de devolver rebobinado."
+  },
+  {
+   "q": "Para que servia a chave de fenda que vinha com o aparelho de som?",
+   "opts": [
+    "Ajustar a rotação ou o azimute",
+    "Abrir a embalagem",
+    "Trocar a pilha"
+   ],
+   "ok": 0,
+   "fato": "Para ajustar o próprio aparelho: rotação da vitrola, alinhamento da cabeça do toca-fitas, regulagem de agulha. Eletrônico daquela época vinha com manual de ajuste e esperava que o dono mexesse. Hoje o parafuso existe para impedir você de abrir.",
+   "fato_curto": "Para ajustar o próprio aparelho. O manual ensinava, e esperava que você mexesse."
+  },
+  {
+   "q": "O que era um projetor de filme Super 8?",
+   "opts": [
+    "Uma câmera e projetor de filme caseiro",
+    "Um tipo de slide colorido",
+    "Um cinema portátil de rua"
+   ],
+   "ok": 0,
+   "fato": "O formato de filme doméstico, antes do vídeo: a família filmava em rolo, mandava revelar e assistia projetado na parede, em silêncio, porque a maioria não gravava som. É de Super 8 que vem quase todo vídeo de família dos anos 60 e 70 que você já viu.",
+   "fato_curto": "O filme caseiro em rolo, revelado e projetado na parede. E quase sempre sem som."
+  },
+  {
+   "q": "O que era a vitrola de pilha ou radiola?",
+   "opts": [
+    "Um toca-discos portátil com alto-falante",
+    "Um rádio de onda curta",
+    "Um amplificador de guitarra"
+   ],
+   "ok": 0,
+   "fato": "Um toca-discos com alto-falante embutido, que você levava para onde quisesse: festa de rua, quintal, varanda. A qualidade era modesta e isso não importava: era o único jeito de ter música onde não havia aparelho de som.",
+   "fato_curto": "Toca-discos portátil com som embutido. Levava música para onde não havia aparelho."
+  },
+  {
+   "q": "Para que servia o despertador de corda com dois sinos?",
+   "opts": [
+    "Acordar sem depender de energia elétrica",
+    "Marcar tempo de cozinha",
+    "Avisar a hora cheia"
+   ],
+   "ok": 0,
+   "fato": "Acordar sem eletricidade nenhuma: você dava corda e ele guardava a energia numa mola. Falta de luz não atrapalhava, e o barulho era um martelinho batendo entre dois sinos de metal, impossível de ignorar. Ele não precisava de pilha nem de tomada.",
+   "fato_curto": "Acordar sem energia: a corda guardava a força numa mola."
+  },
+  {
+   "q": "O que era um ferro de passar a carvão?",
+   "opts": [
+    "Um ferro aquecido com brasa dentro",
+    "Um ferro aquecido no fogão",
+    "Um ferro a gás"
+   ],
+   "ok": 0,
+   "fato": "Um ferro oco, com brasa dentro, que você abanava para manter o calor. Controlar a temperatura era arte: brasa demais queimava o tecido, brasa de menos não passava nada. Havia também o ferro maciço, que se esquentava no fogão e esfriava rápido, obrigando a ter dois em rotação.",
+   "fato_curto": "Brasa dentro do ferro. Controlar a temperatura era arte, e queimava roupa."
+  },
+  {
+   "q": "O que era a leiteira na porta de casa?",
+   "opts": [
+    "Uma vasilha para o leiteiro deixar leite fresco",
+    "Uma caixa de correio",
+    "Um medidor de água"
+   ],
+   "ok": 0,
+   "fato": "Uma vasilha ou suporte onde o leiteiro deixava o leite de manhã, em garrafa de vidro, e levava a garrafa vazia do dia anterior. Era entrega diária, porque sem pasteurização e sem geladeira o leite não durava: a logística existia por causa da conservação, não por luxo.",
+   "fato_curto": "Onde o leiteiro deixava leite fresco todo dia e levava o vidro vazio."
+  },
+  {
+   "q": "O que era o telefone de disco?",
+   "opts": [
+    "Um telefone que discava girando um aro com furos",
+    "Um telefone com visor",
+    "Um telefone sem fio"
+   ],
+   "ok": 0,
+   "fato": "O telefone em que você girava um aro com dez furos e esperava ele voltar sozinho para discar o próximo número. Cada dígito levava um tempo diferente: o zero era o mais lento, porque a roda tinha que percorrer todo o caminho de volta. Discar errado significava recomeçar o número inteiro.",
+   "fato_curto": "Girava um aro com furos, e o zero era o dígito mais lento de discar."
+  },
+  {
+   "q": "Para que servia o esmalte de unha na meia-calça?",
+   "opts": [
+    "Travar o fio que começou a correr",
+    "Dar brilho ao tecido",
+    "Tirar manchas"
+   ],
+   "ok": 0,
+   "fato": "Para travar o fio que começou a desfiar: uma gota de esmalte transparente colava o ponto e impedia que a corrida andasse. É o tipo de conserto que sumiu junto com a cultura do remendo — hoje a meia estraga e vai para o lixo, e ninguém mais pensa em deter o fio.",
+   "fato_curto": "Travar o fio que começou a correr. Uma gota de esmalte segurava o ponto."
+  },
+  {
+   "q": "Para que servia o papel vegetal no caderno de desenho?",
+   "opts": [
+    "Copiar um desenho por cima",
+    "Proteger a folha da tinta",
+    "Fazer dobradura"
+   ],
+   "ok": 0,
+   "fato": "Para decalcar: você punha a folha translúcida sobre o desenho e copiava o contorno por cima. Era assim que uma geração aprendeu a desenhar personagem de gibi, e também como engenheiro e arquiteto tiravam cópia de planta antes da fotocopiadora. O papel vegetal continua existindo, mas ninguém mais usa para copiar: o celular fotografa.",
+   "fato_curto": "Decalcar o desenho por cima. Era assim que se copiava personagem de gibi e planta de obra."
+  }
+ ]
+}

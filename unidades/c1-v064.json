@@ -1,0 +1,15 @@
+{
+ "id": "V064",
+ "titulo": "30 PALAVRAS QUE QUASE TODO MUNDO ESCREVE ERRADO",
+ "deck": "v01-palavras.json",
+ "narracao": "outvoz/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta palavras que quase todo mundo escreve errado. Quantas voce acerta?",
+ "fonte": "deck conferido pelo checar_deck(); cada explicacao tem fato verificavel",
+ "confianca": "alta",
+ "nota": "Narrado com a voz clonada do Leandro (personagem SOSIA no yovoice). As 92 falas vieram gravadas; nenhuma foi sintetizada.",
+ "tags": [
+  "#portugues",
+  "#quiz"
+ ]
+}

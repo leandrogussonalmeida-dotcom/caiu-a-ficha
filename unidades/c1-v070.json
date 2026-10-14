@@ -1,0 +1,16 @@
+{
+ "id": "V070",
+ "titulo": "30 PERGUNTAS DE CINEMA, TV E MUSICA",
+ "deck": "v070-cultura.json",
+ "narracao": "out-v070/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas de cinema, televisao e musica, com bastante Brasil no meio.",
+ "fonte": "Academia (Oscar 2025); historia da TV brasileira (primeira transmissao 18/09/1950, TV Tupi); deck conferido pelo checar_deck()",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#cinema",
+  "#musica",
+  "#quiz"
+ ]
+}

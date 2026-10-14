@@ -1,0 +1,351 @@
+{
+ "id": "v071-logica",
+ "titulo": "30 PEGADINHAS DE LÓGICA QUE DERRUBAM GENTE INTELIGENTE 🧠",
+ "tema": "Logica e pegadinha",
+ "tema_curto": "LÓGICA",
+ "fundo": "grade",
+ "paleta": "grafite",
+ "tempo": 10,
+ "tempo_short": 9,
+ "intro": "Trinta pegadinhas de lógica. Dez segundos para cada uma, porque aqui você precisa pensar, não lembrar. Aviso justo: a primeira resposta que vem à cabeça está errada em quase todas.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Comenta a sua pontuação. E se você caiu na do bastão e da bola, saiba que a maioria dos alunos das melhores universidades do mundo cai também. Na próxima rodada: comida e bebida.",
+ "chamadas_outro": [
+  "Sua intuição vai te trair.",
+  "Trinta pegadinhas. Dez segundos cada."
+ ],
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "Um bastão e uma bola custam 1 real e 10 juntos. O bastão custa 1 real mais que a bola. Quanto custa a bola?",
+   "opts": [
+    "10 centavos",
+    "5 centavos",
+    "1 real"
+   ],
+   "ok": 1,
+   "fato": "Cinco centavos. Se a bola custasse 10, o bastão custaria 1 real e 10, e o total daria 1 real e 20. Com a bola a 5, o bastão fica a 1 real e 5, e o total fecha em 1 e 10. Essa pergunta é de um teste clássico de psicologia: a maioria dos estudantes de Harvard, MIT e Princeton respondeu 10 centavos.",
+   "fato_curto": "5 centavos. A maioria dos alunos de Harvard e do MIT erra essa."
+  },
+  {
+   "q": "Um lírio dobra de tamanho todo dia e cobre um lago em 48 dias. Em quantos dias ele cobre metade do lago?",
+   "opts": [
+    "24 dias",
+    "47 dias",
+    "12 dias"
+   ],
+   "ok": 1,
+   "fato": "Quarenta e sete. Se ele dobra cada dia, no dia anterior ao lago cheio ele estava exatamente na metade. A armadilha é o 24, que é metade de 48: nossa cabeça trata crescimento exponencial como se fosse linear, e é por isso que epidemia e juro composto sempre pegam todo mundo de surpresa.",
+   "fato_curto": "47 dias. No dia antes de encher, estava na metade."
+  },
+  {
+   "q": "Se 5 máquinas levam 5 minutos para fazer 5 peças, quanto tempo 100 máquinas levam para fazer 100 peças?",
+   "opts": [
+    "100 minutos",
+    "5 minutos",
+    "20 minutos"
+   ],
+   "ok": 1,
+   "fato": "Cinco minutos. Cada máquina faz uma peça em cinco minutos, e isso não muda se houver mais máquinas trabalhando ao mesmo tempo. A resposta 100 vem de multiplicar tudo junto, sem perceber que o trabalho é paralelo, não em fila.",
+   "fato_curto": "5 minutos. Cada máquina faz uma peça em cinco, trabalhando junto."
+  },
+  {
+   "q": "Quantos animais de cada espécie Moisés levou na arca?",
+   "opts": [
+    "Dois",
+    "Sete",
+    "Nenhum"
+   ],
+   "ok": 2,
+   "fato": "Nenhum: a arca era de Noé. Isso é tão conhecido em psicologia que tem nome, ilusão de Moisés: o cérebro reconhece o contexto bíblico, aceita o nome como plausível e nem confere. A gente lê o sentido geral, não as palavras.",
+   "fato_curto": "Nenhum: a arca era de Noé. Isso tem nome: ilusão de Moisés."
+  },
+  {
+   "q": "Você está numa corrida e ultrapassa o segundo colocado. Em que posição você está?",
+   "opts": [
+    "Primeiro",
+    "Segundo",
+    "Terceiro"
+   ],
+   "ok": 1,
+   "fato": "Segundo. Você tomou o lugar de quem era o segundo, então quem era primeiro continua na frente. Quase todo mundo responde primeiro, porque ultrapassar soa como vencer.",
+   "fato_curto": "Segundo. Você tomou o lugar do segundo, não do primeiro."
+  },
+  {
+   "q": "Se você tem 3 maçãs e tira 2, com quantas você fica?",
+   "opts": [
+    "Uma",
+    "Duas",
+    "Três"
+   ],
+   "ok": 1,
+   "fato": "Duas: as que você tirou estão com você. A pergunta não diz quantas sobraram na mesa, diz com quantas você ficou. É pegadinha de leitura, não de conta.",
+   "fato_curto": "Duas: as que você tirou estão com você."
+  },
+  {
+   "q": "Um tijolo pesa um quilo mais meio tijolo. Quanto pesa o tijolo?",
+   "opts": [
+    "1,5 kg",
+    "2 kg",
+    "3 kg"
+   ],
+   "ok": 1,
+   "fato": "Dois quilos. Se o tijolo é um quilo mais a metade dele, então a metade dele é um quilo, e o inteiro é dois. A resposta 1,5 aparece de somar 1 com meio sem pensar no que meio tijolo vale.",
+   "fato_curto": "2 kg. Se metade é 1 kg, o inteiro é 2."
+  },
+  {
+   "q": "Quantos meses do ano têm 28 dias?",
+   "opts": [
+    "Um",
+    "Dois",
+    "Todos"
+   ],
+   "ok": 2,
+   "fato": "Todos. Todo mês tem 28 dias; alguns têm mais. A pergunta não diz exatamente 28, e é nessa palavra ausente que a pegadinha vive.",
+   "fato_curto": "Todos. Todo mês tem 28 dias, só alguns têm mais."
+  },
+  {
+   "q": "Quanto é 30 dividido por meio, mais 10?",
+   "opts": [
+    "25",
+    "70",
+    "40"
+   ],
+   "ok": 1,
+   "fato": "Setenta. Dividir por meio é multiplicar por dois: 30 dividido por 0,5 é 60, mais 10 dá 70. Quase todo mundo divide por dois sem perceber, chega a 15 e responde 25.",
+   "fato_curto": "70. Dividir por meio é multiplicar por dois."
+  },
+  {
+   "q": "Uma camiseta leva 1 hora para secar no sol. Quanto tempo levam 5 camisetas no mesmo sol?",
+   "opts": [
+    "5 horas",
+    "1 hora",
+    "2 horas e meia"
+   ],
+   "ok": 1,
+   "fato": "Uma hora, se estiverem todas estendidas ao mesmo tempo. Secar não é uma fila: cada camiseta seca por conta própria. É o mesmo erro das máquinas, com roupa no lugar de peça.",
+   "fato_curto": "1 hora. Elas secam ao mesmo tempo, não uma depois da outra."
+  },
+  {
+   "q": "Um produto cai 50% e depois sobe 50%. Como ele fica em relação ao preço original?",
+   "opts": [
+    "Igual",
+    "25% mais barato",
+    "25% mais caro"
+   ],
+   "ok": 1,
+   "fato": "Vinte e cinco por cento mais barato. Cem reais caem para 50, e 50% de 50 é só 25, então volta a 75. Os percentuais não se cancelam porque incidem sobre bases diferentes, e é exatamente aí que promoção engana.",
+   "fato_curto": "25% mais barato: 100 vira 50, sobe 50% e dá 75."
+  },
+  {
+   "q": "Um caracol sobe 3 metros de dia e escorrega 2 de noite, num poço de 10 metros. Em quantos dias ele sai?",
+   "opts": [
+    "10 dias",
+    "8 dias",
+    "5 dias"
+   ],
+   "ok": 1,
+   "fato": "Oito. Ele avança um metro líquido por dia, mas no oitavo dia começa em 7 metros, sobe 3, alcança os 10 e sai — não escorrega mais. A conta de 1 metro por dia dá 10 dias e erra, porque ignora que no último dia não há noite dentro do poço.",
+   "fato_curto": "8 dias. No oitavo ele chega no topo e não escorrega mais."
+  },
+  {
+   "q": "Um trem elétrico viaja para o norte com vento sul. Para que lado vai a fumaça?",
+   "opts": [
+    "Para o sul",
+    "Para o norte",
+    "Não há fumaça"
+   ],
+   "ok": 2,
+   "fato": "Não há fumaça: o trem é elétrico. A pergunta é construída para você ir direto calcular direção de vento e nunca reler a palavra elétrico. O detalhe decisivo está na primeira frase, antes de a pergunta começar.",
+   "fato_curto": "Nenhuma: o trem é elétrico."
+  },
+  {
+   "q": "Qual pesa mais: um quilo de algodão ou um quilo de ferro?",
+   "opts": [
+    "O ferro",
+    "O algodão",
+    "Pesam igual"
+   ],
+   "ok": 2,
+   "fato": "Pesam igual: um quilo é um quilo. O que difere é o volume, não o peso. A sensação de que ferro pesa mais vem da densidade, que é peso por tamanho, e a pergunta já fixou o peso.",
+   "fato_curto": "Igual. O que muda é o volume, não o peso."
+  },
+  {
+   "q": "Um fazendeiro tem 17 ovelhas. Todas morrem, menos 9. Quantas sobram?",
+   "opts": [
+    "8",
+    "9",
+    "17"
+   ],
+   "ok": 1,
+   "fato": "Nove, que é exatamente o que a frase diz. A armadilha é a palavra menos, que puxa o cérebro para uma subtração: 17 menos 9 dá 8, e muita gente responde isso sem notar que já recebeu a resposta de graça.",
+   "fato_curto": "9. A frase já dá a resposta; a palavra 'menos' induz a subtrair."
+  },
+  {
+   "q": "Se 3 gatos pegam 3 ratos em 3 minutos, quanto tempo 100 gatos levam para pegar 100 ratos?",
+   "opts": [
+    "3 minutos",
+    "100 minutos",
+    "33 minutos"
+   ],
+   "ok": 0,
+   "fato": "Três minutos. Cada gato pega um rato em três minutos, e cem gatos trabalham ao mesmo tempo. Essa versão com gatos engana mais que a com máquinas, porque a gente imagina os gatos se atrapalhando — mas o enunciado não diz nada disso.",
+   "fato_curto": "3 minutos. Um gato, um rato, três minutos: em paralelo."
+  },
+  {
+   "q": "Um salário sobe 10% e no ano seguinte cai 10%. Ele fica como?",
+   "opts": [
+    "Igual ao inicial",
+    "1% menor",
+    "1% maior"
+   ],
+   "ok": 1,
+   "fato": "Um por cento menor. Mil reais sobem para 1.100, e 10% de 1.100 são 110, então cai para 990. A queda incide sobre um valor maior que o do aumento, e é por isso que a ordem não salva: inverter dá o mesmo 990.",
+   "fato_curto": "1% menor. A queda incide sobre um valor maior que o do aumento."
+  },
+  {
+   "q": "Quanto tempo levam 6 ovos para cozinhar, se 1 ovo leva 2 minutos na mesma panela?",
+   "opts": [
+    "12 minutos",
+    "2 minutos",
+    "6 minutos"
+   ],
+   "ok": 1,
+   "fato": "Dois minutos: eles cozinham juntos na mesma água. É o terceiro exemplo da mesma ilusão nesta rodada, e mesmo assim muita gente erra de novo quando a embalagem muda de máquina para gato e de gato para ovo.",
+   "fato_curto": "2 minutos: todos na mesma água, ao mesmo tempo."
+  },
+  {
+   "q": "O ano 1 antes de Cristo foi seguido por qual ano?",
+   "opts": [
+    "Ano zero",
+    "Ano 1 depois de Cristo",
+    "Ano 2 antes de Cristo"
+   ],
+   "ok": 1,
+   "fato": "Pelo ano 1 depois de Cristo: nunca houve ano zero. O monge que montou a contagem, no século 6, trabalhava com números romanos, e não existe algarismo romano para zero. É a mesma razão pela qual o século 21 começou em 2001, e não em 2000.",
+   "fato_curto": "Ano 1 d.C. Nunca houve ano zero: não há zero em número romano."
+  },
+  {
+   "q": "Em 12 horas, quantas vezes o ponteiro dos minutos passa por cima do das horas?",
+   "opts": [
+    "12 vezes",
+    "11 vezes",
+    "13 vezes"
+   ],
+   "ok": 1,
+   "fato": "Onze. O ponteiro das horas também anda, então cada encontro leva um pouco mais de uma hora, cerca de 65 minutos. Em doze horas cabem onze encontros, não doze, e os dois coincidem exatamente no meio-dia e na meia-noite.",
+   "fato_curto": "11, porque o ponteiro das horas também anda: cada encontro leva ~65 min."
+  },
+  {
+   "q": "Um avião cai exatamente na fronteira entre dois países. Onde se enterram os sobreviventes?",
+   "opts": [
+    "No país mais próximo",
+    "Metade em cada país",
+    "Não se enterra sobrevivente"
+   ],
+   "ok": 2,
+   "fato": "Em lugar nenhum: sobrevivente está vivo. A pergunta fornece um problema de jurisdição bem montado para a cabeça resolver, e quem entra no problema não volta para checar a palavra.",
+   "fato_curto": "Em lugar nenhum: sobrevivente está vivo."
+  },
+  {
+   "q": "Qual é mais provável numa família de quatro filhos: três meninas e um menino, ou quatro meninas?",
+   "opts": [
+    "Três meninas e um menino",
+    "Quatro meninas",
+    "São igualmente prováveis"
+   ],
+   "ok": 0,
+   "fato": "Três meninas e um menino, e por uma razão simples: existe uma única maneira de ter quatro meninas, e quatro maneiras diferentes de ter três meninas e um menino, dependendo de qual filho é o menino. Mais caminhos para o mesmo resultado tornam o resultado mais provável.",
+   "fato_curto": "Três e um: há quatro combinações para isso, e só uma para quatro meninas."
+  },
+  {
+   "q": "Você joga uma moeda honesta e dá cara cinco vezes seguidas. Qual a chance de dar cara na sexta?",
+   "opts": [
+    "Menor que a metade",
+    "Metade",
+    "Maior que a metade"
+   ],
+   "ok": 1,
+   "fato": "Metade, sempre. A moeda não guarda memória do que saiu antes. A sensação de que coroa está atrasada tem nome, falácia do apostador, e é exatamente o que sustenta cassino e aposta esportiva.",
+   "fato_curto": "Metade. A moeda não tem memória: é a falácia do apostador."
+  },
+  {
+   "q": "Qual é mais pesado: um litro de água ou um litro de gelo?",
+   "opts": [
+    "A água",
+    "O gelo",
+    "Pesam igual"
+   ],
+   "ok": 0,
+   "fato": "A água, porque o gelo é menos denso: o mesmo volume tem menos matéria. Um litro de água pesa cerca de um quilo; um litro de gelo, cerca de 920 gramas. É justamente essa diferença que faz o gelo flutuar.",
+   "fato_curto": "A água: 1 kg contra cerca de 920 g de gelo. É por isso que gelo flutua."
+  },
+  {
+   "q": "Quantas vezes você pode subtrair 5 de 25?",
+   "opts": [
+    "Cinco vezes",
+    "Uma vez",
+    "Infinitas vezes"
+   ],
+   "ok": 1,
+   "fato": "Uma vez: depois disso você não está mais subtraindo de 25, e sim de 20. A resposta cinco responde a outra pergunta, que é quantas vezes 5 cabe em 25. É pegadinha de enunciado, e é assim que questão de prova mal lida derruba gente que sabe a matéria.",
+   "fato_curto": "Uma vez. Depois já não é mais 25."
+  },
+  {
+   "q": "Numa sala há 23 pessoas. Qual a chance de duas fazerem aniversário no mesmo dia?",
+   "opts": [
+    "Cerca de 6%",
+    "Cerca de 50%",
+    "Cerca de 90%"
+   ],
+   "ok": 1,
+   "fato": "Cerca de 50%, e isso choca porque a gente pensa na chance de alguém coincidir com você, que é baixa. O que conta são todos os pares possíveis entre as 23 pessoas: são 253 pares, e basta um coincidir. Com 70 pessoas a chance passa de 99%.",
+   "fato_curto": "Cerca de 50%. São 253 pares possíveis, e basta um coincidir."
+  },
+  {
+   "q": "Um relógio atrasa 1 minuto por dia. Em quanto tempo ele volta a mostrar a hora certa?",
+   "opts": [
+    "12 horas",
+    "Cerca de 2 anos",
+    "Nunca mais"
+   ],
+   "ok": 1,
+   "fato": "Cerca de dois anos. Para a hora voltar a coincidir, o atraso tem que completar doze horas inteiras, que são 720 minutos: a um minuto por dia, 720 dias, perto de dois anos. Um relógio parado acerta duas vezes por dia; um atrasado leva anos.",
+   "fato_curto": "Cerca de 2 anos: precisa atrasar 720 minutos, um por dia."
+  },
+  {
+   "q": "Se metade de 5 fosse 3, quanto seria um terço de 10?",
+   "opts": [
+    "4",
+    "3,33",
+    "5"
+   ],
+   "ok": 0,
+   "fato": "Quatro. A pergunta pede para você aceitar uma regra inventada e aplicá-la: se metade de 5 vale 3, então a unidade vale 1,2, e um terço de 10 segue a mesma proporção, dando 4. É teste de raciocínio dentro de uma regra dada, não de aritmética comum — o tipo de coisa que separa quem calcula de quem entende o sistema.",
+   "fato_curto": "4, aplicando a regra inventada do enunciado em vez da aritmética normal."
+  },
+  {
+   "q": "Num programa há 3 portas, um carro atrás de uma. Você escolhe a 1. O apresentador, que sabe onde está o carro, abre a 3 e mostra que está vazia, e oferece a troca. Trocar melhora sua chance?",
+   "opts": [
+    "Sim, dobra",
+    "Não, fica em 50%",
+    "Não, piora"
+   ],
+   "ok": 0,
+   "fato": "Sim, e dobra: de um terço para dois terços. O segredo é que o apresentador sabe onde está o carro e nunca abre a porta dele, então a porta que ele deixa fechada carrega toda a probabilidade das duas que você não escolheu. Quando esse problema saiu numa revista americana, em 1990, cerca de mil pessoas com doutorado escreveram para dizer que a resposta estava errada. Estavam erradas elas.",
+   "fato_curto": "Sim, dobra: de 1/3 para 2/3. Mil doutores escreveram para dizer que isso estava errado."
+  },
+  {
+   "q": "Quantos aniversários tem uma pessoa de 40 anos?",
+   "opts": [
+    "Quarenta",
+    "Um",
+    "Trinta e nove"
+   ],
+   "ok": 1,
+   "fato": "Um: a pessoa nasceu em um único dia, e é esse o aniversário dela. O que acontece quarenta vezes é a comemoração, não o aniversário. É pegadinha de palavra, e é um bom fechamento para uma rodada em que quase todo erro veio de ler rápido, não de pensar errado.",
+   "fato_curto": "Um. O que acontece 40 vezes é a festa, não o aniversário."
+  }
+ ]
+}

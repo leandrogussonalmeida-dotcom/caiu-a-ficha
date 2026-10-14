@@ -107,7 +107,7 @@ SERIES = [
    'Objetos antigos desenhados à pena',
    'Bichos a nanquim',
    'Arquitetura brasileira à mão livre']),
- ('C1', 'quizengine',    'quiz',  'QUIZ RELÂMPAGO', [
+ ('C1', 'sim_quiz'   ,    'quiz',  'QUIZ RELÂMPAGO', [
    'Português que todo mundo erra',
    'Anos 80, 90 e 2000',
    'Brasil de ponta a ponta',

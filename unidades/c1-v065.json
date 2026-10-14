@@ -1,0 +1,15 @@
+{
+ "id": "V065",
+ "titulo": "VOCE VIVEU OS ANOS 90 MESMO?",
+ "deck": "v16-anos90.json",
+ "narracao": "narracao/V065",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas sobre os anos 90. Quem viveu acerta quantas?",
+ "fonte": "deck conferido pelo checar_deck(); cada explicacao tem fato verificavel",
+ "confianca": "alta",
+ "nota": "Aguardando a narracao. Sem os .wav em narracao/V065 o motor sintetiza com voz de reserva.",
+ "tags": [
+  "#anos90",
+  "#quiz"
+ ]
+}

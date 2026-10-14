@@ -24,7 +24,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 FONTES = [FT.f('InterDisplay-Black.otf'),
           FT.f('Poppins-Bold.ttf'),
           FT.f('Lora-Variable.ttf'),
-          '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf',
+          FT.f('DejaVuSerif-Bold.ttf'),
           FT.f('DejaVuSansMono-Bold.ttf')]
 F_MED = FT.f('Inter-SemiBold.otf')
 

@@ -24,6 +24,7 @@ SISTEMA = {
     'Inter-SemiBold.otf': _LINUX + 'opentype/inter/Inter-SemiBold.otf',
     'InterDisplay-Black.otf': _LINUX + 'opentype/inter/InterDisplay-Black.otf',
     'DejaVuSansMono-Bold.ttf': _LINUX + 'truetype/dejavu/DejaVuSansMono-Bold.ttf',
+    'DejaVuSerif-Bold.ttf': _LINUX + 'truetype/dejavu/DejaVuSerif-Bold.ttf',
     'Lora-Variable.ttf': _LINUX + 'truetype/google-fonts/Lora-Variable.ttf',
     'Poppins-Bold.ttf': _LINUX + 'truetype/google-fonts/Poppins-Bold.ttf',
 }

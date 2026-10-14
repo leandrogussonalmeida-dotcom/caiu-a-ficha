@@ -1,0 +1,16 @@
+{
+ "id": "V067",
+ "titulo": "30 PERGUNTAS DE PAISES E BANDEIRAS - DIFICIL",
+ "deck": "v067-paises.json",
+ "narracao": "out-v067/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas de paises e bandeiras, e varias tem a resposta obvia como armadilha.",
+ "fonte": "IBGE e ONU para dados de paises; Constituicao do Nepal para a bandeira; deck conferido pelo checar_deck()",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#paises",
+  "#bandeiras",
+  "#quiz"
+ ]
+}

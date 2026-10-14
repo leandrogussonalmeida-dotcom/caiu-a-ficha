@@ -1,0 +1,16 @@
+{
+ "id": "V072",
+ "titulo": "30 PERGUNTAS DE COMIDA E BEBIDA QUE QUASE NINGUEM ACERTA",
+ "deck": "v072-comida.json",
+ "narracao": "out-v072/narracao",
+ "formato": "16:9",
+ "chamada": "Trinta perguntas sobre o que voce come todo dia e nao sabe de onde veio.",
+ "fonte": "Camara Cascudo e historiadores da alimentacao (mito da feijoada); historia do brigadeiro (eleicao de 1945); deck conferido pelo checar_deck()",
+ "confianca": "alta",
+ "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "tags": [
+  "#comida",
+  "#curiosidades",
+  "#quiz"
+ ]
+}

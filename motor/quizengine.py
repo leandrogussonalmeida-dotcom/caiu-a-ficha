@@ -346,7 +346,10 @@ def exportar_srt(deck_path, D, vertical=False, i0=None, i1=None):
     json.dump(man, open(f'{D}/manifesto.json', 'w'), indent=1, ensure_ascii=False)
     print(f'{len(itens)} trechos -> {D}/narracao.srt')
     print(f'duracao estimada da linha do tempo: {t/60:.1f} min')
-    print('No yovoice: Story narration > Import subtitles > Generate speech > Export timeline')
+    # NUNCA 'Export timeline': falha em projeto longo e e desnecessario -
+    # o yovoice ja salva cada fala como .wav separado em ~/.yovoice/outputs.
+    print('No yovoice: Story narration > Import subtitles > narrador SOSIA > Generate speech')
+    print('Terminou, nao use Export timeline: os .wav de cada fala ja estao em disco.')
 
 
 def synth_all(deck, idxs, D, voice, curto=False):
@@ -880,12 +883,35 @@ def checar_deck(deck, path):
         if not (q.get('fato') or '').strip():
             erros.append(f'pergunta {i}: sem explicação (campo fato)')
         if not (q.get('q') or '').strip(): erros.append(f'pergunta {i}: sem enunciado')
+    # fundo e paleta fixados no deck tem que EXISTIR. Escrever 'mapa' num
+    # campo que so aceita onze familias nao da erro nenhum: o motor sorteia
+    # outro pelo SEED e o video sai com a cara errada, calado. E a mesma
+    # classe do valor fantasma que fez a crosta ter dois numeros diferentes.
+    import quizbg as _BG
+    if deck.get('fundo') and deck['fundo'] not in _BG.FAMILIAS:
+        erros.append(f"fundo {deck['fundo']!r} nao existe. Ha: "
+                     + ', '.join(_BG.FAMILIAS))
+    if deck.get('paleta') and deck['paleta'] not in _BG.PALETAS:
+        erros.append(f"paleta {deck['paleta']!r} nao existe. Ha: "
+                     + ', '.join(_BG.PALETAS))
     if erros:
         raise SystemExit('DECK RECUSADO (' + path + '):\n  ' + '\n  '.join(erros))
     sem_curto = [i for i, q in enumerate(deck['perguntas'], 1) if not (q.get('fato_curto') or '').strip()]
     if sem_curto:
         print(f'aviso: {len(sem_curto)} perguntas sem fato_curto; o Short vai usar o fato longo')
     print(f'deck ok: {len(deck["perguntas"])} perguntas, todas com explicação')
+
+
+def _rotulo_voz(clips, voice, D):
+    """O que ficou registrado em meta.json tem que ser o que se ouve.
+    Gravamos 92 falas na voz do Leandro e o meta dizia 'cadu', uma das
+    vozes sinteticas: o arquivo afirmava uma coisa e o video dizia outra."""
+    if not clips: return None
+    proprios = sum(1 for k in clips
+                   if os.path.exists(os.path.join(D, 'narracao', arquivo_narracao(k))))
+    if proprios == len(clips): return 'gravada'
+    if proprios: return f'gravada+{voice}'
+    return voice
 
 
 def render(deck_path, D, vertical=False, i0=None, i1=None):
@@ -924,7 +950,7 @@ def render(deck_path, D, vertical=False, i0=None, i1=None):
 
     meta = dict(deck=os.path.basename(deck_path), tema=deck.get('tema'), titulo=deck.get('titulo'),
                 seed=SEED, fundo=fam, paleta=pal_name, trilha=kit['name'], bpm=kit['bpm'],
-                voz=voice if clips else None, trechos_falados=nspoken,
+                voz=_rotulo_voz(clips, voice, D), trechos_falados=nspoken,
                 trechos_proprios=sum(1 for k in clips if os.path.exists(
                     os.path.join(D, 'narracao', arquivo_narracao(k)))),
                 vertical=vertical, idxs=idxs, total_s=round(total, 2), frames=NF, fps=FPS,
@@ -1005,7 +1031,14 @@ def verify(D):
     pr = subprocess.run(['ffprobe', '-v', 'error', '-show_entries',
                          'format=duration:stream=codec_type,width,height,r_frame_rate',
                          '-of', 'json', path], capture_output=True, text=True)
-    info = json.loads(pr.stdout); dur = float(info['format']['duration'])
+    if not os.path.exists(path):
+        raise SystemExit(f'VERIFY: {path} nao existe. O meta.json aponta para '
+                         f"{meta['out']!r}; se o arquivo foi renomeado depois do "
+                         'render, o meta tem que ser atualizado junto.')
+    info = json.loads(pr.stdout or '{}')
+    if 'format' not in info:
+        raise SystemExit(f'VERIFY: ffprobe nao leu {path}: {pr.stderr.strip()}')
+    dur = float(info['format']['duration'])
     v = [s for s in info['streams'] if s['codec_type'] == 'video'][0]
     a = [s for s in info['streams'] if s['codec_type'] == 'audio']
 

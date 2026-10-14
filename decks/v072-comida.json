@@ -1,0 +1,351 @@
+{
+ "id": "v072-comida",
+ "titulo": "30 PERGUNTAS DE COMIDA E BEBIDA QUE QUASE NINGUÉM ACERTA 🍲",
+ "tema": "Comida e bebida",
+ "tema_curto": "COMIDA",
+ "fundo": "aurora",
+ "paleta": "brasa",
+ "tempo": 6,
+ "tempo_short": 5,
+ "intro": "Trinta perguntas sobre o que você come todo dia e não sabe de onde veio. Seis segundos para cada uma. Várias respostas vão contra o que todo mundo repete na mesa do almoço.",
+ "outro_titulo": "Quantas você acertou?",
+ "outro": "Comenta a sua pontuação. E conta qual dessas histórias você jurava que era de outro jeito, porque comida é o assunto em que mais se repete lenda como se fosse fato. Na próxima rodada: objetos que sumiram da sua casa.",
+ "chamadas_outro": [
+  "Você come isso. Mas sabe de onde vem?",
+  "Trinta pratos. Trinta histórias."
+ ],
+ "intro_s": 3.0,
+ "outro_s": 5.0,
+ "perguntas": [
+  {
+   "q": "De onde vem o nome brigadeiro?",
+   "opts": [
+    "De um doceiro português",
+    "De um brigadeiro candidato a presidente",
+    "De uma marca de leite condensado"
+   ],
+   "ok": 1,
+   "fato": "Do brigadeiro Eduardo Gomes, candidato a presidente em 1945: apoiadoras vendiam o doce em comícios e ele ficou com o nome do candidato. Ele perdeu a eleição, concorreu de novo e perdeu outra vez — mas o doce virou o mais popular do Brasil e ficou com o nome dele para sempre.",
+   "fato_curto": "Do brigadeiro Eduardo Gomes, candidato em 1945. Ele perdeu; o doce ganhou."
+  },
+  {
+   "q": "A feijoada nasceu nas senzalas, com restos de porco?",
+   "opts": [
+    "Sim, é um prato de restos",
+    "Não, é um mito",
+    "Sim, mas só no Rio"
+   ],
+   "ok": 1,
+   "fato": "É mito, e historiadores como Câmara Cascudo rejeitam a história. Orelha, pé e rabo de porco eram considerados delicados na Europa e comidos pelos senhores, não descartados; a alimentação dos escravizados era principalmente feijão e farinha. A feijoada descende de cozidos europeus, como o cozido português, e a contribuição brasileira foi o feijão-preto, nativo da América do Sul.",
+   "fato_curto": "Mito. Orelha e pé de porco eram iguaria na Europa, e a feijoada vem do cozido português."
+  },
+  {
+   "q": "Qual é a fruta mais consumida do mundo?",
+   "opts": [
+    "Maçã",
+    "Banana",
+    "Tomate"
+   ],
+   "ok": 2,
+   "fato": "O tomate, que botanicamente é fruta: tem semente e vem da flor. Em volume produzido ele supera a banana e a maçã com folga. Na culinária é tratado como legume, e nos Estados Unidos uma decisão da Suprema Corte, em 1893, classificou o tomate como vegetal — por motivo de imposto, não de botânica.",
+   "fato_curto": "O tomate, que é fruta. A Suprema Corte americana o declarou vegetal por imposto."
+  },
+  {
+   "q": "O que é, tecnicamente, o chocolate branco?",
+   "opts": [
+    "Chocolate sem cacau",
+    "Chocolate com manteiga de cacau, mas sem a massa",
+    "Leite em pó com açúcar"
+   ],
+   "ok": 1,
+   "fato": "Ele leva manteiga de cacau, que é a gordura do grão, mas não leva a massa de cacau, que é a parte escura e amarga. Por isso não tem gosto de cacau e não tem a cafeína nem os antioxidantes do chocolate comum. Chamar de chocolate é discutível, e em alguns países houve briga legal sobre isso.",
+   "fato_curto": "Tem a gordura do cacau, mas não a parte escura. Daí não ter gosto de cacau."
+  },
+  {
+   "q": "Por que a pimenta arde?",
+   "opts": [
+    "Queima a língua de verdade",
+    "Ativa os sensores de calor sem calor nenhum",
+    "É muito ácida"
+   ],
+   "ok": 1,
+   "fato": "A capsaicina se encaixa nos receptores que avisam o cérebro sobre calor: o nervo manda sinal de queimadura sem que haja temperatura alguma. É por isso que água não resolve e leite sim: a capsaicina não se dissolve em água, mas se dissolve em gordura. Pássaros não sentem ardência, e é assim que a planta escolhe quem espalha sua semente.",
+   "fato_curto": "Ativa o sensor de calor sem calor. Leite resolve porque ela se dissolve em gordura."
+  },
+  {
+   "q": "Qual país consome mais café por pessoa no mundo?",
+   "opts": [
+    "Brasil",
+    "Finlândia",
+    "Itália"
+   ],
+   "ok": 1,
+   "fato": "A Finlândia, com cerca de doze quilos por pessoa ao ano, quase o dobro do consumo brasileiro. O Brasil é o maior produtor e está entre os maiores consumidores em volume total, mas por cabeça os nórdicos ganham de longe. A Itália, símbolo do café, consome menos por pessoa que a Finlândia — mas em doses muito menores.",
+   "fato_curto": "Finlândia, cerca de 12 kg por pessoa ao ano. O Brasil produz mais, mas bebe menos por cabeça."
+  },
+  {
+   "q": "O mel estraga?",
+   "opts": [
+    "Sim, em cerca de dois anos",
+    "Praticamente não",
+    "Só se não for refrigerado"
+   ],
+   "ok": 1,
+   "fato": "Praticamente não: já se encontrou mel comestível em tumbas egípcias de milhares de anos. Ele tem pouquíssima água livre, é ácido e as abelhas adicionam uma enzima que produz peróxido de hidrogênio. Bactéria nenhuma consegue viver nisso. Mel que cristaliza não estragou: é só o açúcar se organizando.",
+   "fato_curto": "Praticamente não. Já se achou mel comestível em tumba egípcia."
+  },
+  {
+   "q": "De onde vem a batata?",
+   "opts": [
+    "Da Irlanda",
+    "Dos Andes, na América do Sul",
+    "Da Ásia"
+   ],
+   "ok": 1,
+   "fato": "Dos Andes, onde foi domesticada há milhares de anos; existem milhares de variedades peruanas e bolivianas. Ela chegou à Europa só no século 16 e foi recebida com desconfiança, chegando a ser acusada de causar doenças. A Irlanda, que hoje é associada à batata, dependeu tanto dela que uma praga da lavoura, em 1845, causou uma fome que matou cerca de um milhão de pessoas.",
+   "fato_curto": "Dos Andes. A Europa a recebeu com desconfiança, achando que causava doença."
+  },
+  {
+   "q": "O que define um queijo como queijo azul?",
+   "opts": [
+    "Um corante natural",
+    "Um fungo cultivado dentro da massa",
+    "Longo tempo de maturação"
+   ],
+   "ok": 1,
+   "fato": "Um fungo do gênero Penicillium, cultivado de propósito dentro da massa: as veias azuis são colônias dele. Para crescer, o fungo precisa de ar, e por isso o queijo é perfurado com agulhas durante a cura. É mofo intencional, controlado, e parente próximo do fungo de onde saiu a penicilina.",
+   "fato_curto": "Um fungo cultivado de propósito. O queijo é furado com agulha para dar ar a ele."
+  },
+  {
+   "q": "Qual é a bebida mais consumida do mundo depois da água?",
+   "opts": [
+    "Café",
+    "Chá",
+    "Refrigerante"
+   ],
+   "ok": 1,
+   "fato": "O chá, por causa da Ásia: China e Índia sozinhas movem o ranking. No Brasil a impressão é oposta, porque aqui café domina e chá é coisa de ocasião. Chá-preto, chá-verde e chá-branco vêm todos da mesma planta: o que muda é o tratamento das folhas.",
+   "fato_curto": "O chá, por causa da Ásia. E preto, verde e branco são a mesma planta."
+  },
+  {
+   "q": "A tapioca, a goma e o polvilho vêm de qual planta?",
+   "opts": [
+    "Milho",
+    "Mandioca",
+    "Arroz"
+   ],
+   "ok": 1,
+   "fato": "Todos da mandioca: é o amido extraído da raiz. Mandioca crua contém compostos que liberam cianeto, e é por isso que ela sempre precisa de processamento — ralar, prensar, cozinhar ou fermentar. O povo indígena brasileiro resolveu essa química muito antes de existir laboratório.",
+   "fato_curto": "Da mandioca. Crua ela libera cianeto: o processamento é o que a torna comestível."
+  },
+  {
+   "q": "Por que o pão francês tem esse nome no Brasil?",
+   "opts": [
+    "Foi inventado na França",
+    "Brasileiros ricos quiseram copiar o pão de Paris",
+    "Veio com imigrantes franceses"
+   ],
+   "ok": 1,
+   "fato": "Porque brasileiros que voltavam de Paris, no começo do século 20, pediram às padarias um pão parecido com o que comiam lá: casca crocante e miolo claro. O resultado é uma invenção brasileira, e na França ninguém conhece pão francês com esse formato. Cada região do Brasil ainda o chama de um jeito: cacetinho, pão de sal, filão, carioquinha.",
+   "fato_curto": "Brasileiros copiaram o pão de Paris. Na França não existe esse pão."
+  },
+  {
+   "q": "O que é o umami?",
+   "opts": [
+    "Um tempero japonês",
+    "O quinto gosto básico da língua",
+    "Uma técnica de cozimento"
+   ],
+   "ok": 1,
+   "fato": "O quinto gosto básico, ao lado de doce, salgado, ácido e amargo. Ele foi identificado por um químico japonês em 1908 e corresponde ao glutamato, presente em tomate maduro, queijo curado, cogumelo, carne e molho de soja. A ciência levou quase um século para aceitar que era um gosto próprio, e não uma mistura dos outros.",
+   "fato_curto": "O quinto gosto básico, identificado em 1908. É o glutamato do tomate e do queijo curado."
+  },
+  {
+   "q": "Qual é a parte mais picante da pimenta?",
+   "opts": [
+    "A semente",
+    "A membrana branca que segura a semente",
+    "A casca"
+   ],
+   "ok": 1,
+   "fato": "A membrana branca interna, onde a capsaicina é produzida e concentrada. A semente arde porque está em contato com essa membrana, não porque ela mesma seja picante. Quem quer menos ardência tem que retirar a membrana, não só as sementes.",
+   "fato_curto": "A membrana branca interna, não a semente. A semente só encosta nela."
+  },
+  {
+   "q": "Por que a cebola faz chorar?",
+   "opts": [
+    "Libera um gás que irrita o olho",
+    "O cheiro é forte demais",
+    "Tem ácido na casca"
+   ],
+   "ok": 0,
+   "fato": "Ao ser cortada, ela rompe células e libera enzimas que formam um composto volátil de enxofre; em contato com a água do olho, ele gera uma substância irritante, e a lágrima é a defesa. Gelar a cebola reduz a volatilidade e ajuda. É um sistema químico de defesa da planta, acionado só quando ela é ferida.",
+   "fato_curto": "Ela libera um gás de enxofre que, na água do olho, vira irritante. É defesa da planta."
+  },
+  {
+   "q": "A banana é nativa de onde?",
+   "opts": [
+    "Brasil",
+    "Sudeste Asiático",
+    "África"
+   ],
+   "ok": 1,
+   "fato": "Do Sudeste Asiático. A banana que você come não tem semente viável e não existe na natureza: é resultado de milhares de anos de seleção humana, e cada pé é clone do outro. É justamente essa clonagem que a torna vulnerável: uma praga que vença a variedade dominante atinge todas as plantações iguais do mundo, e isso já aconteceu uma vez, nos anos 50.",
+   "fato_curto": "Sudeste Asiático. E ela é clone: uma praga já exterminou a variedade dominante nos anos 50."
+  },
+  {
+   "q": "O que é a água tônica que brilha na luz ultravioleta?",
+   "opts": [
+    "Corante artificial",
+    "Quinino, um remédio contra malária",
+    "Gás com flúor"
+   ],
+   "ok": 1,
+   "fato": "Quinino, que é fluorescente e foi usado como remédio contra malária. Oficiais britânicos na Índia misturavam a dose amarga com gim e açúcar para conseguir engolir, e assim nasceu o gim-tônica. A dose de hoje na bebida é pequena, sem efeito terapêutico.",
+   "fato_curto": "Quinino, remédio de malária. O gim-tônica nasceu para disfarçar o amargor do remédio."
+  },
+  {
+   "q": "O que acontece com o álcool quando a comida é cozida com vinho?",
+   "opts": [
+    "Evapora todo em segundos",
+    "Parte dele fica, mesmo depois de horas",
+    "Transforma-se em açúcar"
+   ],
+   "ok": 1,
+   "fato": "Parte fica: medições mostram que, depois de duas horas e meia de cozimento, ainda restam cerca de 5% do álcool original. Isso porque água e álcool formam uma mistura que não se separa totalmente por evaporação. A ideia de que o álcool desaparece inteiro no fogo é falsa.",
+   "fato_curto": "Parte fica: depois de 2h30 de panela, ainda restam cerca de 5%."
+  },
+  {
+   "q": "Qual é o grão mais consumido do mundo como alimento direto?",
+   "opts": [
+    "Trigo",
+    "Arroz",
+    "Milho"
+   ],
+   "ok": 1,
+   "fato": "O arroz, alimento básico de mais da metade da humanidade. O milho é produzido em maior volume, mas a maior parte dele vira ração animal, combustível e ingrediente industrial, não prato. É a diferença entre o que mais se planta e o que mais se come.",
+   "fato_curto": "O arroz. O milho se produz mais, mas a maior parte vira ração e combustível."
+  },
+  {
+   "q": "Por que o pão de queijo cresce sem fermento?",
+   "opts": [
+    "Pelo vapor da água dentro da massa",
+    "Pelo gás do queijo",
+    "Pelo bicarbonato do polvilho"
+   ],
+   "ok": 0,
+   "fato": "Pelo vapor: o polvilho forma uma estrutura elástica, e a água da massa vira vapor no forno e infla a bolinha de dentro para fora. É o mesmo princípio do pão de queijo ficar oco e do popover. Sem fermento biológico nenhum, só física.",
+   "fato_curto": "Pelo vapor da própria água inflando a massa. Nada de fermento: é física."
+  },
+  {
+   "q": "Qual é a origem do churrasco gaúcho?",
+   "opts": [
+    "Imigração italiana",
+    "Os peões e o gado dos campos do sul",
+    "Receita portuguesa da corte"
+   ],
+   "ok": 1,
+   "fato": "Dos peões dos campos do sul, que assavam a carne em espeto fincado no chão, ao redor do fogo, com sal grosso e nada mais. A simplicidade não era estilo, era circunstância: carne havia de sobra, tempero e panela não. O rodízio de churrascaria é invenção urbana, muito posterior.",
+   "fato_curto": "Dos peões do sul: espeto no chão, sal grosso e nada mais. O rodízio é invenção urbana."
+  },
+  {
+   "q": "O que é o açaí tradicionalmente, no Pará?",
+   "opts": [
+    "Uma sobremesa doce com granola",
+    "Um acompanhamento salgado, com peixe e farinha",
+    "Uma bebida fermentada"
+   ],
+   "ok": 1,
+   "fato": "Comida salgada, servida com farinha de mandioca e peixe frito ou charque, como acompanhamento de almoço. A versão doce com granola e banana é invenção do sudeste, levada depois para o resto do país e para o exterior. No Pará, açaí com açúcar costuma soar errado.",
+   "fato_curto": "Salgado, com peixe e farinha. O açaí doce com granola é invenção do sudeste."
+  },
+  {
+   "q": "Por que o sal conserva a carne?",
+   "opts": [
+    "Mata as bactérias por envenenamento",
+    "Retira a água de que a bactéria precisa",
+    "Esfria a superfície"
+   ],
+   "ok": 1,
+   "fato": "Ele puxa a água por osmose: sem água livre, bactéria não se multiplica. A carne-seca, o bacalhau e o charque são todos a mesma ideia, e foi essa técnica que permitiu travessias de navio e a existência de comércio de carne antes da refrigeração. Conservar comida foi, por milênios, a mesma coisa que tirar água dela.",
+   "fato_curto": "Tira a água de que a bactéria precisa. Sem geladeira, conservar era desidratar."
+  },
+  {
+   "q": "A cenoura melhora a visão?",
+   "opts": [
+    "Sim, melhora a vista de qualquer pessoa",
+    "Só previne um tipo de cegueira por falta de vitamina A",
+    "Não tem nenhuma relação com a visão"
+   ],
+   "ok": 1,
+   "fato": "A vitamina A é necessária para a visão, e a deficiência dela causa cegueira noturna — mas comer mais cenoura do que o necessário não melhora vista nenhuma. A fama exagerada tem origem em propaganda da Segunda Guerra: os britânicos espalharam que seus pilotos enxergavam no escuro por comer cenoura, para esconder que tinham radar.",
+   "fato_curto": "Só previne a falta de vitamina A. A fama veio de propaganda de guerra para esconder o radar."
+  },
+  {
+   "q": "O que é, de fato, o wasabi servido na maioria dos restaurantes?",
+   "opts": [
+    "Raiz de wasabi pura",
+    "Raiz-forte com corante verde",
+    "Mostarda japonesa"
+   ],
+   "ok": 1,
+   "fato": "Quase sempre raiz-forte com corante e mostarda, porque o wasabi verdadeiro é difícil de cultivar e caro. Ele também perde a ardência em cerca de quinze minutos depois de ralado, o que torna impraticável servi-lo em escala. Quem já provou o autêntico descreve um ardor mais sutil, que sobe pelo nariz e vai embora rápido.",
+   "fato_curto": "Raiz-forte com corante. O wasabi real perde a ardência 15 minutos depois de ralado."
+  },
+  {
+   "q": "Por que o abacaxi faz a boca arder e descasca a língua?",
+   "opts": [
+    "Pela acidez",
+    "Por uma enzima que digere proteína",
+    "Pelo açúcar"
+   ],
+   "ok": 1,
+   "fato": "Pela bromelina, uma enzima que quebra proteína: ela literalmente começa a digerir o tecido da sua boca enquanto você come. Por isso abacaxi amacia carne, e por isso ele impede que a gelatina endureça. Cozinhar desativa a enzima, e aí a ardência desaparece.",
+   "fato_curto": "Uma enzima que digere proteína: ela digere a sua boca. Por isso amacia carne."
+  },
+  {
+   "q": "O que é o leite condensado?",
+   "opts": [
+    "Leite com amido",
+    "Leite com parte da água retirada e muito açúcar",
+    "Creme de leite batido"
+   ],
+   "ok": 1,
+   "fato": "Leite com cerca de 60% da água removida e muito açúcar adicionado: é o açúcar que conserva, não a lata. Ele foi criado no século 19 para alimentar exércitos e cidades sem refrigeração, e o Brasil se apropriou dele de um jeito que o inventor nunca imaginou — brigadeiro, pudim, beijinho e metade das sobremesas de festa.",
+   "fato_curto": "Leite sem água e com muito açúcar. O açúcar é que conserva, não a lata."
+  },
+  {
+   "q": "A cachaça e o rum são feitos do quê?",
+   "opts": [
+    "Os dois de cana, mas de partes diferentes",
+    "Cachaça de cana e rum de milho",
+    "Os dois de melaço"
+   ],
+   "ok": 0,
+   "fato": "Os dois vêm da cana, e aí está a diferença: a cachaça é destilada do caldo fresco da cana, e a maior parte do rum, do melaço, que é o resíduo da produção de açúcar. É por isso que a cachaça tem gosto mais vegetal e o rum, mais caramelizado. A cachaça é brasileira por definição legal: feita fora do Brasil, não pode usar o nome.",
+   "fato_curto": "Os dois de cana: cachaça do caldo fresco, rum do melaço. E cachaça só pode ser brasileira."
+  },
+  {
+   "q": "Por que pão velho endurece mesmo embalado?",
+   "opts": [
+    "Perde água",
+    "O amido se reorganiza e expulsa a água",
+    "Absorve ar"
+   ],
+   "ok": 1,
+   "fato": "O amido se recristaliza: ele volta a uma estrutura ordenada e empurra a água para fora do próprio arranjo. É por isso que pão na geladeira endurece mais rápido, e por isso que aquecer o pão o deixa macio de novo por alguns minutos, desfazendo parcialmente essa reorganização. Não é secar: é o amido se arrumando.",
+   "fato_curto": "O amido se recristaliza e expulsa a água. Esquentar desfaz isso por alguns minutos."
+  },
+  {
+   "q": "Qual é o país que mais produz café no mundo?",
+   "opts": [
+    "Colômbia",
+    "Brasil",
+    "Vietnã"
+   ],
+   "ok": 1,
+   "fato": "O Brasil, há mais de 150 anos no primeiro lugar, respondendo por cerca de um terço da produção mundial. O Vietnã é o segundo e cresceu muito rápido desde os anos 90, concentrado em robusta; a Colômbia, mais associada ao café de qualidade, é a terceira.",
+   "fato_curto": "Brasil, há mais de 150 anos: cerca de um terço do café do mundo."
+  }
+ ]
+}
