@@ -1,0 +1,47 @@
+{
+ "id": "V046",
+ "titulo": "A TRANSAMAZONICA",
+ "segundos": 45,
+ "velocidade": 34,
+ "km_por_unidade": 2.81634,
+ "marcos": [
+  {
+   "km": 500,
+   "nome": "SAINDO DA PARAIBA",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 1500,
+   "nome": "O PIAUI FICA PARA TRAS",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 2500,
+   "nome": "DENTRO DA AMAZONIA",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 3500,
+   "nome": "HORAS SEM UMA CIDADE",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 4309,
+   "nome": "O FIM DA ESTRADA",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  }
+ ],
+ "chamada": "A BR-230 corta o pais de leste a oeste pela Amazonia: 4.309 km, boa parte sem asfalto.",
+ "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+ "confianca": "media",
+ "nota": "Os marcos sao distancias acumuladas ao longo da rodovia, nao cidades medidas uma a uma. A extensao total tem fonte; a posicao de cada marco e ilustrativa.",
+ "tags": [
+  "#estrada",
+  "#brasil"
+ ]
+}

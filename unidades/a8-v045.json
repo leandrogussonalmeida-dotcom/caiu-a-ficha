@@ -1,0 +1,47 @@
+{
+ "id": "V045",
+ "titulo": "A BR-116 INTEIRA",
+ "segundos": 45,
+ "velocidade": 34,
+ "km_por_unidade": 3.045752,
+ "marcos": [
+  {
+   "km": 500,
+   "nome": "AINDA NO NORDESTE",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 1500,
+   "nome": "ENTRANDO NO SUDESTE",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 2500,
+   "nome": "RIO E SAO PAULO",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 3500,
+   "nome": "O SUL COMECA",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  },
+  {
+   "km": 4660,
+   "nome": "JAGUARAO, NA FRONTEIRA",
+   "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+   "confianca": "media"
+  }
+ ],
+ "chamada": "A maior rodovia do Brasil tem 4.660 km, de Fortaleza a Jaguarao. Dirigindo sem parar a 80, sao 58 horas.",
+ "fonte": "Viagens e Caminhos, As 10 maiores rodovias do Brasil (a pagina cita o G1 como fonte, nao o DNIT; por isso a confianca e media)",
+ "confianca": "media",
+ "nota": "Os marcos sao distancias acumuladas ao longo da rodovia, nao cidades medidas uma a uma. A extensao total tem fonte; a posicao de cada marco e ilustrativa.",
+ "tags": [
+  "#estrada",
+  "#brasil"
+ ]
+}

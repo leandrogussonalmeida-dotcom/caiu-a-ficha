@@ -90,7 +90,9 @@ def construir(u, seed=81, saida='estrada.mp4', dirsaida='out-estrada'):
         km = d * km_por_u
         tela.ret(0, 0, PX.LARG, 56, 0)
         tela.texto(u['titulo'], PX.LARG // 2, 3, 6, tam=9, centro=True)
-        tela.texto(f'{km:.1f}'.replace('.0', ''), PX.LARG // 2, 15, 11,
+        # acima de 100 km a casa decimal e ruido: ninguem le '4660,3 km'
+        txt = f'{km:.0f}' if km >= 100 else f'{km:.1f}'.replace('.0', '')
+        tela.texto(txt, PX.LARG // 2, 15, 11,
                    tam=int(26 * (1 + .08 * pulso)), centro=True, sombra=3)
         tela.texto('KM', PX.LARG // 2, 45, 8, tam=9, centro=True)
         for mk in marcos:

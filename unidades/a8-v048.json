@@ -1,0 +1,47 @@
+{
+ "id": "V048",
+ "titulo": "DO AMANHECER AO ANOITECER",
+ "segundos": 40,
+ "velocidade": 34,
+ "km_por_unidade": 0.661765,
+ "marcos": [
+  {
+   "km": 100,
+   "nome": "O SOL NASCENDO",
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "km": 300,
+   "nome": "MEIO DA MANHA",
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "km": 500,
+   "nome": "MEIO-DIA",
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "km": 700,
+   "nome": "FIM DA TARDE",
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "km": 900,
+   "nome": "NOITE",
+   "fonte": "calculo",
+   "confianca": "alta"
+  }
+ ],
+ "chamada": "Um dia inteiro de estrada, do primeiro clarao ate a noite fechada.",
+ "fonte": "cena sintetizada por codigo; o trajeto e ilustrativo",
+ "confianca": "alta",
+ "nota": "Os marcos marcam o tempo do dia, nao lugares reais.",
+ "tags": [
+  "#estrada",
+  "#brasil"
+ ]
+}
