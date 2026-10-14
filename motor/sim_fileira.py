@@ -25,12 +25,17 @@ DUR = 30.0
 
 
 def construir(u, seed=121, saida='fileira.mp4', dirsaida='out-fileira'):
+    # a duracao por item vem da unidade quando ela traz: e isso que
+    # permite ao Short encurtar sem um simulador separado. Enquanto
+    # era so argumento de funcao, o ajuste que o shorts.py punha na
+    # unidade era silenciosamente ignorado e o Short saia com 60,0 s.
+    dur = float(u.get('dur', DUR))
     itens = u['itens']
     ref = u['ref']
     n = len(itens)
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
-    total = n * DUR
+    total = n * dur
     tela = PX.Tela(paleta=u.get('paleta', 'oceano' if 'oceano' in PX.PALETAS else 'gelo'))
     rng = np.random.default_rng(seed * 23 + 7)
     vr = float(ref['valor'])
@@ -45,8 +50,8 @@ def construir(u, seed=121, saida='fileira.mp4', dirsaida='out-fileira'):
                 f'{v:.1f}'.replace('.', ','))
 
     def quadro(t, i):
-        k = min(n - 1, int(t / DUR))
-        tl = t - k * DUR
+        k = min(n - 1, int(t / dur))
+        tl = t - k * dur
         it = itens[k]
         va = float(it['valor'])
         quantos = va / vr
@@ -114,8 +119,8 @@ def construir(u, seed=121, saida='fileira.mp4', dirsaida='out-fileira'):
         q = float(itens[k]['valor']) / vr
         passo = bat.spb * u.get('batidas_por_item', 1)
         for j in range(int(q) + 1):
-            tt = k * DUR + 2.0 + j * passo
-            if tt < (k + 1) * DUR - 1: A.put(mix, A.tick(rng, j, 12), tt, .42)
+            tt = k * dur + 2.0 + j * passo
+            if tt < (k + 1) * dur - 1: A.put(mix, A.tick(rng, j, 12), tt, .42)
     mix, lufs, tp = A.master(mix, -14.0)
     wav = os.path.join(dirsaida, '_fileira.wav')
     sf.write(wav, mix, PX.SR)

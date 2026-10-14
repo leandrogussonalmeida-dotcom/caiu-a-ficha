@@ -110,6 +110,11 @@ def desenhar_unidade(tela, bat, u, t, pal_cores, dur=DUR_UNIDADE):
 
 def construir(u, seed=11, saida='escala.mp4',
               dirsaida='out-escala', dur=DUR_UNIDADE):
+    # a duracao por item vem da unidade quando ela traz: e isso que
+    # permite ao Short encurtar sem um simulador separado. Enquanto
+    # era so argumento de funcao, o ajuste que o shorts.py punha na
+    # unidade era silenciosamente ignorado e o Short saia com 60,0 s.
+    dur = float(u.get('dur', dur))
     # contrato único de todos os simuladores: recebem a unidade inteira e
     # tiram dela a aparência. Enquanto este aqui recebia a lista e a paleta
     # soltas, o executor passava o dicionário sem reclamar e o vídeo saía

@@ -39,6 +39,11 @@ def ordem_revelacao(gx, gy, seed):
 
 def construir(b, seed=101, saida='revelar.mp4', dirsaida='out-revelar',
               dur=DUR):
+    # a duracao por item vem da unidade quando ela traz: e isso que
+    # permite ao Short encurtar sem um simulador separado. Enquanto
+    # era so argumento de funcao, o ajuste que o shorts.py punha na
+    # unidade era silenciosamente ignorado e o Short saia com 60,0 s.
+    dur = float(b.get('dur', dur))
     des = b['desenhos']
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])

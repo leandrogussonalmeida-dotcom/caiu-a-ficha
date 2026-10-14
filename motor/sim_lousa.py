@@ -78,6 +78,11 @@ def botao(tela, cx, cy, ang, cor, cor_marca, r=7):
 
 def construir(u, seed=21, saida='lousa.mp4',
               dirsaida='out-lousa', dur=DUR):
+    # a duracao por item vem da unidade quando ela traz: e isso que
+    # permite ao Short encurtar sem um simulador separado. Enquanto
+    # era so argumento de funcao, o ajuste que o shorts.py punha na
+    # unidade era silenciosamente ignorado e o Short saia com 60,0 s.
+    dur = float(u.get('dur', dur))
     desenhos = u['desenhos']
     paleta = u.get('paleta', 'papelao')
     kit = A.pick_kit(seed)

@@ -71,12 +71,17 @@ def tremido(pts, rng, amp=1.1, passo=1.6):
 
 
 def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
+    # a duracao por item vem da unidade quando ela traz: e isso que
+    # permite ao Short encurtar sem um simulador separado. Enquanto
+    # era so argumento de funcao, o ajuste que o shorts.py punha na
+    # unidade era silenciosamente ignorado e o Short saia com 60,0 s.
+    dur = float(u.get('dur', DUR))
     des = u['desenhos']
     n = len(des)
     est = AL.ESTILOS[u.get('estilo', 'jornal')]
     kit = A.pick_kit(seed)
     bat = PX.Batida(kit['bpm'])
-    total = 2.0 + n * DUR + 3.0
+    total = 2.0 + n * dur + 3.0
     rng = np.random.default_rng(seed * 29 + 11)
     q = AL.Quadro(est)
 
@@ -135,13 +140,13 @@ def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
 
     def quadro(t, i):
         tl = max(0.0, t - 2.0)
-        k = min(n - 1, int(tl / DUR))
-        tk = tl - k * DUR
+        k = min(n - 1, int(tl / dur))
+        tk = tl - k * dur
         pulso = bat.pulso(t, .12)
         pts, curv, comp, saltos = cams[k]
         L = comp[-1]
         # desenhar ocupa tudo menos o palpite e a resposta
-        t_des = DUR - T_PALPITE - 3.0
+        t_des = dur - T_PALPITE - 3.0
         prog = max(0.0, min(1.0, tk / t_des))
         alvo = prog * L
 
@@ -204,8 +209,8 @@ def construir(u, seed=71, saida='traco.mp4', dirsaida='out-traco'):
     os.makedirs(dirsaida, exist_ok=True)
     mix = A.groove(total, kit, seed, lambda tt: .28 + .5 * min(1, tt / total))
     for j in range(n):
-        A.put(mix, A.tick(rng, j, n), 2.0 + j * DUR + DUR - T_PALPITE - 3.0, .55)
-        A.put(mix, A.fanfare(rng, kit['root'], kit), 2.0 + j * DUR + DUR - 3.0, .4)
+        A.put(mix, A.tick(rng, j, n), 2.0 + j * dur + dur - T_PALPITE - 3.0, .55)
+        A.put(mix, A.fanfare(rng, kit['root'], kit), 2.0 + j * dur + dur - 3.0, .4)
     mix, lufs, tp = A.master(mix, -14.0)
     wav = os.path.join(dirsaida, '_traco.wav')
     sf.write(wav, mix, AL.SR)
