@@ -1,0 +1,76 @@
+{
+ "id": "V010",
+ "titulo": "DE CARRO ATE A LUA",
+ "unidade": "dias",
+ "chamada": "A 100 km/h sem parar nunca, quanto tempo leva para chegar na Lua de carro?",
+ "fonte": "NASA Moon Fact Sheet (distancia media Terra-Lua); FAI, linha de Karman a 100 km; altitude da orbita geoestacionaria, 35.786 km por definicao",
+ "confianca": "alta",
+ "nota": "Tempo = distancia dividida por 100 km/h, sem parada nenhuma. A distancia Terra-Lua varia de 357 mil a 407 mil km ao longo do ano; aqui esta a media. Distancias: aviao 11 km, linha de Karman 100 km, ISS 408 km, geoestacionaria 35.786 km, perigeu 363.300 km, media 384.400 km.",
+ "tags": [
+  "#espaco",
+  "#tempo",
+  "#lua"
+ ],
+ "viajante": {
+  "nome": "CARRO",
+  "forma": "carro"
+ },
+ "rodape": "VOCE SAIU AGORA, A 100 KM/H",
+ "marcos": [
+  {
+   "nome": "SAIDA",
+   "t": 0,
+   "r": 10,
+   "fonte": "calculo",
+   "confianca": "alta"
+  },
+  {
+   "nome": "AVIAO",
+   "t": 0.0046,
+   "r": 5,
+   "fonte": "altitude tipica de cruzeiro",
+   "confianca": "media",
+   "nota": "11 km"
+  },
+  {
+   "nome": "FIM DO AR",
+   "t": 0.042,
+   "r": 6,
+   "fonte": "FAI, linha de Karman",
+   "confianca": "alta",
+   "nota": "100 km"
+  },
+  {
+   "nome": "ESTACAO",
+   "t": 0.17,
+   "r": 7,
+   "fonte": "altitude media da ISS; varia entre 400 e 420 km",
+   "confianca": "media",
+   "nota": "408 km"
+  },
+  {
+   "nome": "SATELITES",
+   "t": 14.9,
+   "r": 8,
+   "fonte": "orbita geoestacionaria, altitude por definicao",
+   "confianca": "alta",
+   "nota": "35.786 km"
+  },
+  {
+   "nome": "PERIGEU",
+   "t": 151.4,
+   "r": 11,
+   "fonte": "NASA Moon Fact Sheet",
+   "confianca": "alta",
+   "nota": "363.300 km"
+  },
+  {
+   "nome": "A LUA",
+   "t": 160.2,
+   "r": 14,
+   "fonte": "NASA Moon Fact Sheet",
+   "confianca": "alta",
+   "nota": "384.400 km"
+  }
+ ]
+}
