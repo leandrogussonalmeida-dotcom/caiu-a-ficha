@@ -1,0 +1,58 @@
+{
+ "id": "V043",
+ "titulo": "DO ALTO DOS ANDES ATE O MAR",
+ "unidade": "METROS DESCIDOS",
+ "batidas_por_camada": 7,
+ "chamada": "O Amazonas nasce a mais de 5 mil metros, nos Andes, e termina no nivel do mar.",
+ "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+ "confianca": "media",
+ "nota": "A altitude da nascente e APROXIMADA: a reportagem diz \"pouco mais de 5 mil metros\". E o PONTO da nascente e disputado - uma equipe internacional apontou o Nevado Mismi, e um estudo do Inpe por imagem de satelite apontou o Pico Quehuicha, cerca de quatro quilometros ao sul. Os marcos intermediarios sao divisoes do trecho, nao pontos medidos.",
+ "fecho": "5 MIL METROS ATE O NIVEL DO MAR",
+ "tags": [
+  "#amazonas",
+  "#brasil",
+  "#descida"
+ ],
+ "camadas": [
+  {
+   "nome": "OS PRIMEIROS 500 M",
+   "ate": 500,
+   "cor": 3,
+   "nota": "AINDA NOS ANDES, COM GELO",
+   "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+   "confianca": "media"
+  },
+  {
+   "nome": "1.500 M DESCIDOS",
+   "ate": 1500,
+   "cor": 4,
+   "nota": "A AGUA JA CORRE FORTE",
+   "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+   "confianca": "media"
+  },
+  {
+   "nome": "3.000 M DESCIDOS",
+   "ate": 3000,
+   "cor": 5,
+   "nota": "COMECA A FLORESTA",
+   "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+   "confianca": "media"
+  },
+  {
+   "nome": "4.500 M DESCIDOS",
+   "ate": 4500,
+   "cor": 6,
+   "nota": "DAQUI ATE A FOZ E QUASE PLANO",
+   "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+   "confianca": "media"
+  },
+  {
+   "nome": "A FOZ, NO ATLANTICO",
+   "ate": 5000,
+   "cor": 8,
+   "nota": "NO NIVEL DO MAR",
+   "fonte": "Revista Pesquisa FAPESP, A nova nascente do Amazonas (nascente a pouco mais de 5 mil metros, no Nevado Mismi, sul do Peru)",
+   "confianca": "media"
+  }
+ ]
+}
