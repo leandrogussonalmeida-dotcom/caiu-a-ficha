@@ -84,6 +84,14 @@ def checar_unidades(arq):
         if 'ancora' in it and len(it['ancora']) > 34:
             avisos.append(f'{rot}: ancora longa, vai encolher')
 
+    # 'ate' e 'v' na mesma camada: o simulador usa 'ate' e o outro vira um
+    # numero fantasma que so existe no arquivo. Foi assim que a crosta ficou
+    # com 35 km no video e 70 km na fonte declarada.
+    for it in itens:
+        if isinstance(it, dict) and 'ate' in it and 'v' in it and it['ate'] != it['v']:
+            _erro(e, f"{it.get('nome','item')}: tem 'ate'={it['ate']} e 'v'={it['v']} "
+                     f"ao mesmo tempo, e o simulador so le um dos dois")
+
     # escadas e viagens tem que ser monotonicas, senao o ponteiro anda para tras
     for chave in ('t', 'ate'):
         vs = [it[chave] for it in itens if chave in it]

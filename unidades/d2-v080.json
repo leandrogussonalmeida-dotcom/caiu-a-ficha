@@ -1,0 +1,40 @@
+{
+ "id": "V080",
+ "titulo": "O ELEVADOR QUE NAO PARA",
+ "estilo": "noturno",
+ "duracao": 95,
+ "chamada": "Um elevador descendo pelos andares de um predio que nao existe. Nao tem terreo.",
+ "fonte": "cena sintetizada por codigo; as alturas dos marcos vem do IBGE/INDE e da Wikipedia",
+ "confianca": "alta",
+ "nota": "O predio e inventado; os marcos sao alturas reais usadas como referencia de quanto ja se desceu.",
+ "tags": [
+  "#relaxar",
+  "#modofoco"
+ ],
+ "marcas": [
+  {
+   "nome": "UM ANDAR",
+   "v": 3
+  },
+  {
+   "nome": "CRISTO REDENTOR",
+   "v": 38
+  },
+  {
+   "nome": "YACHTHOUSE",
+   "v": 294
+  },
+  {
+   "nome": "PAO DE ACUCAR",
+   "v": 396
+  },
+  {
+   "nome": "BURJ KHALIFA",
+   "v": 828
+  },
+  {
+   "nome": "PICO DA NEBLINA",
+   "v": 2995
+  }
+ ]
+}

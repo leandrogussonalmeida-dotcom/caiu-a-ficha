@@ -1,0 +1,57 @@
+{
+ "id": "V041",
+ "titulo": "CEM ANDARES PARA BAIXO",
+ "unidade": "KM",
+ "batidas_por_camada": 7,
+ "chamada": "Um predio de cem andares, descendo. Cada andar sao tres metros.",
+ "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+ "confianca": "media",
+ "nota": "Os 3 m por andar sao o valor usual de pe-direito de predio residencial, nao uma medida unica. O total, 300 m, e multiplicacao.",
+ "fecho": "300 METROS, CEM ANDARES",
+ "tags": [
+  "#descida",
+  "#profundidade"
+ ],
+ "camadas": [
+  {
+   "nome": "ANDAR 90",
+   "ate": 0.03,
+   "cor": 3,
+   "nota": "ONDE A VISTA AINDA E BONITA",
+   "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+   "confianca": "media"
+  },
+  {
+   "nome": "ANDAR 60",
+   "ate": 0.12,
+   "cor": 4,
+   "nota": "AQUI O VENTO JA ASSUSTA",
+   "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+   "confianca": "media"
+  },
+  {
+   "nome": "ANDAR 30",
+   "ate": 0.21,
+   "cor": 5,
+   "nota": "METADE DO CAMINHO",
+   "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+   "confianca": "media"
+  },
+  {
+   "nome": "ANDAR 10",
+   "ate": 0.27,
+   "cor": 6,
+   "nota": "DA PARA VER AS PESSOAS",
+   "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+   "confianca": "media"
+  },
+  {
+   "nome": "TERREO",
+   "ate": 0.3,
+   "cor": 8,
+   "nota": "VOCE DESCEU UM PAO DE ACUCAR",
+   "fonte": "Altura usual de pe-direito por andar, 3 m; Wikipedia, Christ the Redeemer e List of tallest buildings in Brazil para as referencias",
+   "confianca": "media"
+  }
+ ]
+}

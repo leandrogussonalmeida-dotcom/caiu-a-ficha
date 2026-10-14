@@ -1,0 +1,36 @@
+{
+ "id": "V079",
+ "titulo": "ATE A FOSSA DAS MARIANAS",
+ "estilo": "noturno",
+ "duracao": 110,
+ "chamada": "Onze quilometros para baixo. O Titanic esta a um terco do caminho.",
+ "fonte": "Guinness World Records, Deepest point in the sea (10.935 m, medido em 2020); NOAA Ocean Exploration e Wikipedia para os degraus intermediarios",
+ "confianca": "alta",
+ "nota": "A medida do fundo tem incerteza declarada: 10.935 m mais ou menos 6 m, com 95% de probabilidade.",
+ "tags": [
+  "#oceano",
+  "#relaxar"
+ ],
+ "marcas": [
+  {
+   "nome": "MERGULHO COM CILINDRO",
+   "v": 40
+  },
+  {
+   "nome": "RECORDE DE APNEIA",
+   "v": 214
+  },
+  {
+   "nome": "ACABA A LUZ DO SOL",
+   "v": 1000
+  },
+  {
+   "nome": "O TITANIC",
+   "v": 3800
+  },
+  {
+   "nome": "FOSSA DAS MARIANAS",
+   "v": 10935
+  }
+ ]
+}

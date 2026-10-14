@@ -8,12 +8,11 @@
  "camadas": [
   {
    "nome": "FIM DA CROSTA",
-   "ate": 35,
+   "ate": 70,
    "cor": 3,
-   "nota": "A CASCA ONDE TUDO ACONTECE",
+   "nota": "A CASCA: DE 5 A 70 KM",
    "fonte": "Wikipedia, Structure of Earth",
-   "confianca": "alta",
-   "v": 70
+   "confianca": "alta"
   },
   {
    "nome": "MANTO SUPERIOR",

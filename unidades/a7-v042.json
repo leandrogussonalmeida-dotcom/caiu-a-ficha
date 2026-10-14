@@ -1,0 +1,57 @@
+{
+ "id": "V042",
+ "titulo": "ATE O FUNDO DA MINA",
+ "unidade": "KM",
+ "batidas_por_camada": 7,
+ "chamada": "A mina mais funda do mundo tem quatro quilometros. La embaixo faz 60 graus.",
+ "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+ "confianca": "alta",
+ "nota": "O Guinness registra 4 km; o proprio texto diz que em 2012 a profundidade de operacao era 3,9 km e que escavacoes posteriores passaram dos 4 km.",
+ "fecho": "4 KM ABAIXO DA SUPERFICIE",
+ "tags": [
+  "#descida",
+  "#profundidade"
+ ],
+ "camadas": [
+  {
+   "nome": "500 METROS",
+   "ate": 0.5,
+   "cor": 3,
+   "nota": "MAIS FUNDO QUE QUALQUER METRO",
+   "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "1 KM",
+   "ate": 1.0,
+   "cor": 4,
+   "nota": "A ROCHA COMECA A ESQUENTAR",
+   "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "2 KM",
+   "ate": 2.0,
+   "cor": 5,
+   "nota": "METADE DO CAMINHO",
+   "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "3 KM",
+   "ate": 3.0,
+   "cor": 6,
+   "nota": "O AR TEM QUE SER BOMBEADO",
+   "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+   "confianca": "alta"
+  },
+  {
+   "nome": "MPONENG, 4 KM",
+   "ate": 4.0,
+   "cor": 8,
+   "nota": "O LUGAR MAIS FUNDO ONDE SE TRABALHA",
+   "fonte": "Guinness World Records, Deepest mine (Mponeng, Africa do Sul, 4 km, 2012)",
+   "confianca": "alta"
+  }
+ ]
+}

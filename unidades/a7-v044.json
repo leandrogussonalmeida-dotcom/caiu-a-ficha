@@ -1,0 +1,66 @@
+{
+ "id": "V044",
+ "titulo": "DA BORDA DO ESPACO ATE O CHAO",
+ "unidade": "KM DESCIDOS",
+ "batidas_por_camada": 7,
+ "chamada": "Do limite do espaco ate o chao sao cem quilometros. O Everest esta nos ultimos nove.",
+ "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+ "confianca": "alta",
+ "nota": "A linha de Karman, a 100 km, e uma CONVENCAO da FAI para separar aeronautica de astronautica, nao uma fronteira fisica: o ar vai rareando aos poucos. O Everest tem 8.848,86 m pela medicao conjunta de Nepal e China de 2020, 86 cm acima da medida de 1954.",
+ "fecho": "O EVEREST CABE NOS ULTIMOS 9 KM",
+ "tags": [
+  "#espaco",
+  "#descida",
+  "#altura"
+ ],
+ "camadas": [
+  {
+   "nome": "LINHA DE KARMAN",
+   "ate": 0,
+   "cor": 3,
+   "nota": "ACABA O ESPACO, COMECA O AR",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  },
+  {
+   "nome": "60 KM",
+   "ate": 40,
+   "cor": 4,
+   "nota": "O AR AINDA NAO SEGURA NADA",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  },
+  {
+   "nome": "20 KM",
+   "ate": 80,
+   "cor": 5,
+   "nota": "A ESTRATOSFERA",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  },
+  {
+   "nome": "AVIAO, 11 KM",
+   "ate": 89,
+   "cor": 6,
+   "nota": "DAQUI DA PARA VER A CURVATURA",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  },
+  {
+   "nome": "EVEREST, 8,8 KM",
+   "ate": 91.2,
+   "cor": 8,
+   "nota": "O PONTO MAIS ALTO EM TERRA FIRME",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  },
+  {
+   "nome": "O CHAO",
+   "ate": 100,
+   "cor": 10,
+   "nota": "VOCE DESCEU CEM QUILOMETROS",
+   "fonte": "Nepal e China, medicao conjunta anunciada em 8/12/2020: Everest com 8.848,86 m; FAI, linha de Karman a 100 km; altitude de cruzeiro tipica de aviao comercial, 11 km",
+   "confianca": "alta"
+  }
+ ]
+}
