@@ -507,3 +507,54 @@ def desenho(nome, levantar=True):
     if not levantar:
         pts = [p for p in pts if p[0] is not None]
     return {'nome': nome, 'pontos': arredondar(pts)}
+
+
+# ---------------------------------------------------- grade de caracteres
+def grade(nome, n=16, traco='6', dentro='8', preencher=True):
+    """Rasteriza o desenho numa grade de caracteres n x n, que e o formato
+    que o REVELAR consome.
+
+    A mesma figura serve aos tres tratamentos da serie B: a nanquim (com a
+    pena levantando), na lousa (num traco so) e aqui, em pixel. Digitar a
+    grade a mao era o terceiro trabalho pelo mesmo desenho.
+
+    Em 16 x 16 so o contorno fica ralo demais para reconhecer, entao o miolo
+    e preenchido por varredura: para cada linha, conta as bordas e pinta o
+    que esta entre a primeira e a ultima.
+    """
+    pts = caber(TUDO[nome]() if TUDO else desenho(nome)['pontos'] and TUDO[nome](),
+                margem=4) if TUDO else None
+    if pts is None:
+        desenho(nome)                      # popula TUDO
+        pts = caber(TUDO[nome](), margem=4)
+    g = [['.'] * n for _ in range(n)]
+
+    def marca(x, y):
+        cx, cy = int(x * n / 100), int((100 - y) * n / 100)
+        if 0 <= cx < n and 0 <= cy < n: g[cy][cx] = traco
+
+    ant = None
+    for p in pts:
+        if p[0] is None:
+            ant = None; continue
+        if ant is not None:
+            d = max(abs(p[0] - ant[0]), abs(p[1] - ant[1]))
+            passos = max(1, int(d * n / 50))
+            for k in range(passos + 1):
+                f = k / passos
+                marca(ant[0] + (p[0] - ant[0]) * f, ant[1] + (p[1] - ant[1]) * f)
+        else:
+            marca(*p)
+        ant = p
+
+    if preencher:
+        for r in range(n):
+            cols = [c for c in range(n) if g[r][c] == traco]
+            if len(cols) >= 2:
+                for c in range(cols[0] + 1, cols[-1]):
+                    if g[r][c] == '.': g[r][c] = dentro
+    return [''.join(l) for l in g]
+
+
+def desenho_grade(nome, n=16, **kw):
+    return {'nome': nome, 'grade': grade(nome, n, **kw)}

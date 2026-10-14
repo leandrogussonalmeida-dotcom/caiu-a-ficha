@@ -42,9 +42,9 @@ SERIES = [
    'A luz saindo do Sol até bater na sua janela',
    'De carro, sem parar, até a Lua',
    'Andando do Oiapoque ao Chuí',
-   'Um avião até cada capital do Brasil',
+   'Da estrela mais perto ate a luz que ja estava a caminho',
    'Um dado atravessando a internet e dando a volta no mundo',
-   'Uma carta de 1900 contra uma mensagem de hoje',
+   'Uma volta completa do seu sangue pelo corpo',
    'O som atravessando o Brasil de ponta a ponta',
    'Uma gota de chuva, da nuvem até o chão']),
  ('A3', 'sim_cadeia',    'pixel', 'REAÇÃO EM CADEIA', [

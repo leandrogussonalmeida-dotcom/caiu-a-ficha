@@ -1,0 +1,20 @@
+{"id": "V006",
+ "titulo": "QUANTOS BRASIS CABEM",
+ "chamada": "O Brasil tem 4.378 km de norte a sul. Na volta inteira da Terra cabem so nove. Nove.",
+ "fonte": "IBGE, extensao maxima do territorio brasileiro (4.378 km norte-sul e 4.326 km leste-oeste); NASA Earth Fact Sheet, raio equatorial de 6.378,137 km",
+ "confianca": "alta",
+ "nota": "A NASA publica RAIO, nao diametro nem circunferencia. O diametro equatorial e 2 x 6.378,137 = 12.756,3 km, e a circunferencia equatorial e 2 x pi x 6.378,137 = 40.075,0 km. As duas contas estao feitas aqui a partir do mesmo raio.",
+ "tags": ["#brasil", "#escala", "#terra"],
+ "ref": {"nome": "O BRASIL", "rotulo": "BRASIS DE NORTE A SUL", "valor": 4378, "un": "km"},
+ "batidas_por_item": 2,
+ "itens": [
+  {"nome": "O BRASIL DE LESTE A OESTE", "valor": 4326, "un": "km",
+   "ancora": "O BRASIL E QUASE UM QUADRADO",
+   "fonte": "IBGE, extensao maxima leste-oeste", "confianca": "alta"},
+  {"nome": "A TERRA DE LADO A LADO", "valor": 12756.3, "un": "km",
+   "ancora": "O PLANETA INTEIRO SAO TRES BRASIS",
+   "fonte": "NASA Earth Fact Sheet, 2 x raio equatorial", "confianca": "alta"},
+  {"nome": "A VOLTA INTEIRA DA TERRA", "valor": 40075.0, "un": "km",
+   "ancora": "SO NOVE. VOCE ESPERAVA MAIS",
+   "fonte": "NASA Earth Fact Sheet, 2 x pi x raio equatorial", "confianca": "alta"}
+ ]}

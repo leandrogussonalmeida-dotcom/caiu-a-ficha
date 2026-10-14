@@ -1,0 +1,70 @@
+{
+ "id": "V014",
+ "titulo": "UMA VOLTA DO SEU SANGUE",
+ "unidade": "min",
+ "chamada": "Seu coracao bombeia 5,25 litros por minuto. Voce tem uns 5 litros de sangue. Faca a conta.",
+ "fonte": "UFES, resumo do sistema circulatorio: debito cardiaco de 5,25 L/min (cerca de 70 mL por contracao x 75 contracoes por minuto)",
+ "confianca": "media",
+ "nota": "O debito cardiaco de 5,25 L/min tem fonte. O volume total de sangue, cerca de 5 litros, e o valor usual para um adulto de 70 kg e nao vem dessa fonte - por isso a confianca e media. Todos os outros numeros sao derivados do debito: litros = 5,25 x minutos.",
+ "tags": [
+  "#corpo",
+  "#coracao",
+  "#tempo"
+ ],
+ "viajante": {
+  "nome": "O SANGUE",
+  "forma": "gota"
+ },
+ "rodape": "5,25 LITROS POR MINUTO",
+ "marcos": [
+  {
+   "nome": "UMA BATIDA",
+   "t": 0.01333,
+   "r": 5,
+   "nota": "70 mL, um copinho",
+   "fonte": "UFES, 70 mL por contracao",
+   "confianca": "media"
+  },
+  {
+   "nome": "10 SEGUNDOS",
+   "t": 0.16667,
+   "r": 6,
+   "nota": "0,9 litro",
+   "fonte": "derivado de 5,25 L/min",
+   "confianca": "media"
+  },
+  {
+   "nome": "METADE DE VOCE",
+   "t": 0.47667,
+   "r": 7,
+   "nota": "2,5 litros",
+   "fonte": "derivado de 5,25 L/min",
+   "confianca": "media"
+  },
+  {
+   "nome": "UMA VOLTA INTEIRA",
+   "t": 0.95167,
+   "r": 11,
+   "nota": "5 litros",
+   "fonte": "derivado de 5,25 L/min",
+   "confianca": "media",
+   "destaque": true
+  },
+  {
+   "nome": "UMA HORA",
+   "t": 60.0,
+   "r": 9,
+   "nota": "315 litros",
+   "fonte": "derivado de 5,25 L/min",
+   "confianca": "media"
+  },
+  {
+   "nome": "UM DIA",
+   "t": 1440.0,
+   "r": 13,
+   "nota": "7.560 litros",
+   "fonte": "derivado de 5,25 L/min",
+   "confianca": "media"
+  }
+ ]
+}

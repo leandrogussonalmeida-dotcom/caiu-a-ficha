@@ -129,7 +129,7 @@
    "motor": "pixel",
    "aparencia": "espaco",
    "seed": 1012,
-   "tema": "Um avião até cada capital do Brasil",
+   "tema": "Da estrela mais perto ate a luz que ja estava a caminho",
    "unidade": "a2-v012.json"
   },
   {
@@ -151,7 +151,7 @@
    "motor": "pixel",
    "aparencia": "sangria",
    "seed": 1014,
-   "tema": "Uma carta de 1900 contra uma mensagem de hoje",
+   "tema": "Uma volta completa do seu sangue pelo corpo",
    "unidade": "a2-v014.json"
   },
   {
@@ -1000,7 +1000,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5012,
-   "tema": "Um avião até cada capital do Brasil"
+   "tema": "Da estrela mais perto ate a luz que ja estava a caminho"
   },
   {
    "id": "S013",
@@ -1020,7 +1020,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5014,
-   "tema": "Uma carta de 1900 contra uma mensagem de hoje"
+   "tema": "Uma volta completa do seu sangue pelo corpo"
   },
   {
    "id": "S015",
@@ -1800,7 +1800,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5092,
-   "tema": "Um avião até cada capital do Brasil"
+   "tema": "Da estrela mais perto ate a luz que ja estava a caminho"
   },
   {
    "id": "S093",
@@ -1820,7 +1820,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5094,
-   "tema": "Uma carta de 1900 contra uma mensagem de hoje"
+   "tema": "Uma volta completa do seu sangue pelo corpo"
   },
   {
    "id": "S095",
@@ -2600,7 +2600,7 @@
    "motor": "pixel",
    "aparencia": "mostarda",
    "seed": 5172,
-   "tema": "Um avião até cada capital do Brasil"
+   "tema": "Da estrela mais perto ate a luz que ja estava a caminho"
   },
   {
    "id": "S173",
@@ -2620,7 +2620,7 @@
    "motor": "pixel",
    "aparencia": "uva",
    "seed": 5174,
-   "tema": "Uma carta de 1900 contra uma mensagem de hoje"
+   "tema": "Uma volta completa do seu sangue pelo corpo"
   },
   {
    "id": "S175",

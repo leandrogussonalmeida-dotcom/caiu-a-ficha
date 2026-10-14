@@ -1,0 +1,67 @@
+{
+ "id": "V012",
+ "titulo": "A LUZ QUE JA ESTAVA A CAMINHO",
+ "unidade": "anos",
+ "chamada": "A luz do Sol leva 8 minutos para chegar aqui. Da estrela mais perto, leva mais de quatro anos. Voce ve o passado dela.",
+ "fonte": "Star Facts, The 103 Nearest Stars (distancias em anos-luz das estrelas a ate 20 anos-luz)",
+ "confianca": "media",
+ "nota": "A pagina nao nomeia o catalogo de onde tira as distancias, entao a confianca e media. Os valores sao medidas de paralaxe e variam na terceira casa conforme a fonte. Olhar para Sirius e ver a luz que saiu de la ha quase nove anos.",
+ "tags": [
+  "#espaco",
+  "#estrelas",
+  "#luz"
+ ],
+ "viajante": {
+  "nome": "A LUZ",
+  "forma": "gota"
+ },
+ "rodape": "VOCE ESTA VENDO O PASSADO",
+ "marcos": [
+  {
+   "nome": "O SOL",
+   "t": 1.58e-05,
+   "r": 14,
+   "nota": "8 min 20 s",
+   "fonte": "NASA Planetary Fact Sheet",
+   "confianca": "alta"
+  },
+  {
+   "nome": "PROXIMA CENTAURI",
+   "t": 4.2465,
+   "r": 7,
+   "nota": "a mais perto de todas",
+   "fonte": "Star Facts, The 103 Nearest Stars",
+   "confianca": "media",
+   "destaque": true
+  },
+  {
+   "nome": "ALFA CENTAURI A",
+   "t": 4.37,
+   "r": 8,
+   "fonte": "Star Facts, The 103 Nearest Stars",
+   "confianca": "media"
+  },
+  {
+   "nome": "ESTRELA DE BARNARD",
+   "t": 5.9629,
+   "r": 6,
+   "fonte": "Star Facts, The 103 Nearest Stars",
+   "confianca": "media"
+  },
+  {
+   "nome": "WOLF 359",
+   "t": 7.856,
+   "r": 5,
+   "fonte": "Star Facts, The 103 Nearest Stars",
+   "confianca": "media"
+  },
+  {
+   "nome": "SIRIUS",
+   "t": 8.6,
+   "r": 11,
+   "nota": "a mais brilhante do ceu",
+   "fonte": "Star Facts, The 103 Nearest Stars",
+   "confianca": "media"
+  }
+ ]
+}
