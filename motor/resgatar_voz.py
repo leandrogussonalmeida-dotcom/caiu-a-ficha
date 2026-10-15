@@ -31,6 +31,16 @@ def normal(s):
                   .encode('ascii', 'ignore').decode().lower())
 
 
+def _duracao(caminho):
+    """Segundos de um .wav, lendo so o cabecalho."""
+    try:
+        import wave, contextlib
+        with contextlib.closing(wave.open(caminho, 'rb')) as w:
+            return w.getnframes() / float(w.getframerate() or 1)
+    except Exception:
+        return 0.0
+
+
 def achar_state():
     cands = [os.path.join(os.path.expanduser('~'), '.yovoice', 'state.json')]
     if os.environ.get('USERPROFILE'):
@@ -53,6 +63,7 @@ def main(quais):
 
     livres = list(hist)
     relatorio = []
+    suspeitos = []
     for vid in ORDEM:
         cm = os.path.join(MANIF, vid + '.json')
         if not os.path.exists(cm): continue
@@ -76,8 +87,18 @@ def main(quais):
         for m, h in pares:
             orig = os.path.join(outputs, h.get('fileName') or '')
             if not os.path.exists(orig): continue
-            shutil.copy2(orig, os.path.join(destino, m['chave'].replace(':', '-') + '.wav'))
+            arq = m['chave'].replace(':', '-') + '.wav'
+            shutil.copy2(orig, os.path.join(destino, arq))
             copiados += 1
+            # take ruim: o yovoice as vezes desanda e gera minutos de fala
+            # onde cabiam segundos. Um 14-rev de 11 minutos passou despercebido
+            # porque nada conferia a DURACAO - so se o arquivo existia.
+            # a duracao vem do ARQUIVO, nao do registro do app: o state.json
+            # do yovoice ja declarou 20 s para um .wav de 11 minutos.
+            real = _duracao(os.path.join(destino, arq)) or (h.get('duration') or 0)
+            prev = m.get('dur') or 1
+            if real > prev * 2.2 + 5 or (real and real < prev * .35):
+                suspeitos.append((vid, arq, real, prev))
         relatorio.append((vid, copiados, len(man),
                           'completo' if not faltam else f'faltam {len(faltam)}'))
 
@@ -87,6 +108,11 @@ def main(quais):
     for vid, c, tot, est in relatorio:
         print(f'  {vid}    {c:>3}/{tot}   {est}')
     print()
+    if suspeitos:
+        print('TAKES SUSPEITOS (duracao fora do esperado) - regrave estes:')
+        for vid, arq, real, prev in suspeitos:
+            print(f'  {vid} {arq}: {real:.0f}s gravados contra {prev:.0f}s de texto')
+        print()
     incompletos = [v for v, c, t, e in relatorio if e != 'completo']
     if incompletos:
         print('Falta gravar no yovoice: ' + ', '.join(incompletos))
