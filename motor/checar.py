@@ -5,7 +5,7 @@ O mesmo princípio do `checar_deck()` do quiz. Erro de dado é o mais caro de
 todos — num canal cujo produto é "este número é maior do que você imagina",
 o número errado destrói o canal, e descobrir depois de publicado é tarde.
 """
-import json, math, sys
+import json, os, math, sys
 
 CONF = ('alta', 'media', 'baixa')
 MIN_CONF = 'media'
@@ -37,6 +37,26 @@ def checar_unidades(arq):
     # MODO FOCO (so o nome de uma cena). Nos dois o que se confere e a fonte
     # do documento. Cena sintetizada nao tem dado externo, mas tem de DIZER
     # isso - 'nao ha dado a conferir' e uma declaracao, nao um silencio.
+    # O QUIZ tambem nao tem lista: a unidade e fina e aponta para um deck.
+    # Conferir o deck e o que importa, e quem sabe fazer isso e o
+    # checar_deck() do motor - ele recusa alternativa repetida, resposta sem
+    # explicacao, fundo/paleta/trilha que nao existem.
+    if not itens and d.get('deck'):
+        if not d.get('fonte'): _erro(e, 'sem fonte')
+        if d.get('confianca') not in CONF: _erro(e, 'sem confianca valida')
+        cam = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'decks', d['deck'])
+        if not os.path.exists(cam):
+            _erro(e, f"deck {d['deck']} nao existe")
+        else:
+            try:
+                import json as _j, quizengine as _Q
+                _Q.checar_deck(_j.load(open(cam, encoding='utf-8')), cam)
+            except SystemExit as ex:
+                _erro(e, str(ex).replace('\n', ' ')[:200])
+            except ImportError:
+                avisos.append('motor do quiz nao importavel: deck nao conferido')
+        return e, avisos
+
     if not itens and (isinstance(d.get('geracoes'), (int, float)) or d.get('cena')):
         if not d.get('fonte'): _erro(e, 'sem fonte')
         if d.get('confianca') not in CONF: _erro(e, 'sem confianca valida')

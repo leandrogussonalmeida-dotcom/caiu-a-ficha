@@ -23,6 +23,37 @@ import json, os, shutil, subprocess, sys
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 
 
+def _falas_faltando(u, cam_deck, dirsaida):
+    """Chaves que o render vai precisar e para as quais nao existe .wav.
+
+    Para o Short so contam as duas perguntas escolhidas; para o longo, todas.
+    E so olha onde o motor realmente procura: a pasta do longo quando ha
+    `narr`, a pasta de saida quando nao ha.
+    """
+    deck = json.load(open(cam_deck, encoding='utf-8'))
+    n = len(deck.get('perguntas', []))
+    if u.get('formato') == '9:16':
+        idx = [i for i in (u.get('perguntas') or []) if 0 <= i < n]
+        partes = ('q', 'rev')          # no Short as alternativas nao sao lidas
+    else:
+        idx = list(range(n))
+        partes = ('q', 'opts', 'rev')
+
+    base = u.get('narr') or u.get('narracao') or ''
+    base = base if os.path.isabs(base) else os.path.join(RAIZ, base)
+    if os.path.basename(base.rstrip('/\\')) != 'narracao':
+        base = os.path.join(base, 'narracao')
+    if not os.path.isdir(base):
+        base = os.path.join(dirsaida, 'narracao')
+
+    falta = []
+    for i in idx:
+        for p in partes:
+            arq = f'{i}-{p}.wav'
+            if not os.path.exists(os.path.join(base, arq)): falta.append(arq)
+    return falta
+
+
 def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
     deck = u.get('deck')
     if not deck:
@@ -48,6 +79,19 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
             print(f'  {n} falas gravadas copiadas de {fonte}')
         else:
             print(f'  aviso: narracao {orig} nao existe, vai sintetizar tudo')
+
+    # ---- portao: nenhum video sai meio sintetizado sem avisar.
+    # O motor sintetiza o que faltar, e isso e util para rascunho - mas numa
+    # peca do catalogo significa a voz do canal trocando no meio do video,
+    # e o unico aviso era uma linha no log que ninguem le.
+    if not u.get('permitir_sintetico'):
+        falta = _falas_faltando(u, cam_deck, dirsaida)
+        if falta:
+            raise SystemExit(
+                f"{u.get('id')}: faltam {len(falta)} falas gravadas "
+                f"(a primeira e {falta[0]}). Grave no yovoice e rode o 3-VOZ, "
+                f"ou ponha \"permitir_sintetico\": true na unidade para aceitar "
+                f"a voz sintetica no lugar.")
 
     amb = dict(os.environ, SEED=str(seed))
     if u.get('voz'): amb['VOZ'] = u['voz']
