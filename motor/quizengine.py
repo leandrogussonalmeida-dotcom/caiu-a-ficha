@@ -346,10 +346,69 @@ def exportar_srt(deck_path, D, vertical=False, i0=None, i1=None):
     json.dump(man, open(f'{D}/manifesto.json', 'w'), indent=1, ensure_ascii=False)
     print(f'{len(itens)} trechos -> {D}/narracao.srt')
     print(f'duracao estimada da linha do tempo: {t/60:.1f} min')
+    partes = _partir_srt(D, itens, tc)
+    if partes:
+        print(f'o arquivo inteiro passa do limite do yovoice; '
+              f'partido em {len(partes)} partes:')
+        for p, qt, ch in partes:
+            print(f'  {p}  {qt} falas, {ch} caracteres')
+        print('importe uma parte por vez, NA ORDEM: o resgate dos .wav casa '
+              'pela ordem cronologica.')
     # NUNCA 'Export timeline': falha em projeto longo e e desnecessario -
     # o yovoice ja salva cada fala como .wav separado em ~/.yovoice/outputs.
     print('No yovoice: Story narration > Import subtitles > narrador SOSIA > Generate speech')
     print('Terminou, nao use Export timeline: os .wav de cada fala ja estao em disco.')
+
+
+def _partir_srt(D, itens, tc, teto=11000):
+    """O yovoice recusa legenda acima de 12.000 caracteres: 'Invalid subtitles'.
+    Um deck de 30 perguntas da 13 a 19 mil, entao o arquivo inteiro nunca entra.
+
+    Cada parte e um .srt valido por si: numeracao propria a partir de 1 e
+    tempos recomecando perto do zero. Isso nao atrapalha nada, porque o que
+    importa sao os .wav de cada fala, e eles sao casados pela ORDEM
+    cronologica no state.json, nao pelos tempos do arquivo.
+
+    Devolve [] quando cabe inteiro - ai nao ha motivo para partir.
+    """
+    CPS, GAP = 13.5, 0.9
+    def bloco(i, t, txt):
+        dur = max(1.2, len(txt) / CPS)
+        return [str(i), f'{tc(t)} --> {tc(t + dur)}', txt, ''], dur
+
+    inteiro = sum(len(t) for _, t in itens) + 40 * len(itens)
+    if inteiro <= 12000: return []
+
+    n_partes = math.ceil(inteiro / teto)
+    por_parte = math.ceil(len(itens) / n_partes)
+
+    # o corte cai no comeco de uma pergunta, nunca no meio dela: uma parte
+    # que comecasse pelas alternativas deixaria ele sem saber onde parou.
+    def inicio_de_pergunta(i):
+        return i >= len(itens) or itens[i][0].endswith(':q') or itens[i][0] == 'outro'
+
+    cortes = [0]
+    for p in range(1, n_partes):
+        i = min(p * por_parte, len(itens))
+        while i > cortes[-1] + 1 and not inicio_de_pergunta(i):
+            i -= 1
+        cortes.append(i)
+    cortes.append(len(itens))
+
+    saidas = []
+    for p in range(len(cortes) - 1):
+        fatia = itens[cortes[p]:cortes[p + 1]]
+        if not fatia: continue
+        linhas, t = [], 1.0
+        for i, (_, txt) in enumerate(fatia, 1):
+            bl, dur = bloco(i, t, txt)
+            linhas += bl
+            t += dur + GAP
+        nome = f'{D}/narracao-p{p + 1}.srt'
+        corpo = '\n'.join(linhas)
+        open(nome, 'w', encoding='utf-8-sig').write(corpo)
+        saidas.append((os.path.basename(nome), len(fatia), len(corpo)))
+    return saidas
 
 
 def synth_all(deck, idxs, D, voice, curto=False):
