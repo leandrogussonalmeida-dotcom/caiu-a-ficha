@@ -344,5 +344,8 @@
  ],
  "titulo_short": "Você escreve essas 3 certo?",
  "intro_short": "Três palavras. Só uma grafia certa em cada.",
- "outro_short": "Acertou as três? Comenta. Tem trinta delas no vídeo completo."
+ "outro_short": "Acertou as três? Comenta. Tem trinta delas no vídeo completo.",
+ "fundo": "losangos",
+ "paleta": "oceano",
+ "trilha": "pop"
 }

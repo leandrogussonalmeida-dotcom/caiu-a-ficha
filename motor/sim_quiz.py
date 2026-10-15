@@ -51,8 +51,45 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
 
     amb = dict(os.environ, SEED=str(seed))
     if u.get('voz'): amb['VOZ'] = u['voz']
+
+    curto = u.get('formato') == '9:16'
     cmd = [sys.executable, os.path.join(RAIZ, 'quizengine.py'),
-           'short' if u.get('formato') == '9:16' else 'render', cam_deck, dirsaida]
+           'short' if curto else 'render', cam_deck, dirsaida]
+
+    if curto:
+        # O Short NAO regrava voz: ele reaproveita os .wav do longo.
+        # NARR aponta para a pasta do longo, VELOC acelera sem mudar o tom e
+        # REUSO faz a tela mostrar o fato LONGO, que e o que existe gravado.
+        # Sem REUSO a fala e o texto na tela nao batem.
+        if u.get('narr'):
+            # NARR e a pasta do LONGO; o motor acrescenta 'narracao' sozinho.
+            # Apontar direto para .../narracao faz ele procurar em
+            # .../narracao/narracao e nao achar nada - e o Short sai todo
+            # sintetizado sem dizer uma palavra sobre isso.
+            n = u['narr'] if os.path.isabs(u['narr']) else os.path.join(RAIZ, u['narr'])
+            if os.path.basename(n.rstrip('/\\')) == 'narracao':
+                n = os.path.dirname(n.rstrip('/\\'))
+            amb['NARR'] = n
+            amb['REUSO'] = '1'
+            amb['VELOC'] = str(u.get('veloc', 1.18))
+        # duas perguntas, escolhidas a dedo: as melhores quase nunca sao vizinhas,
+        # e tres estouram os 60 s (abaixo de 60 o Short roda em laco)
+        perg = u.get('perguntas')
+        if not perg:
+            raise SystemExit(f"{u.get('id')}: Short de quiz sem 'perguntas'")
+        cmd += [','.join(str(i) for i in perg), '0']
+
+        # visual proprio: o Short nao pode parecer o longo nem os outros Shorts
+        if u.get('fundo') or u.get('paleta') or u.get('trilha'):
+            d = json.load(open(cam_deck, encoding='utf-8'))
+            for campo in ('fundo', 'paleta', 'trilha'):
+                if u.get(campo): d[campo] = u[campo]
+            d['fala_intro_short'] = ''      # a vinheta faz a abertura
+            d['fala_outro_short'] = ''
+            cam_deck = os.path.join(dirsaida, 'deck-derivado.json')
+            json.dump(d, open(cam_deck, 'w', encoding='utf-8'), ensure_ascii=False)
+            cmd[3] = cam_deck
+
     r = subprocess.run(cmd, env=amb, cwd=RAIZ)
     if r.returncode != 0:
         raise SystemExit(f'quizengine falhou com codigo {r.returncode}')

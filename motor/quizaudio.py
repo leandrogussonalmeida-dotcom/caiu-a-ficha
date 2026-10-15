@@ -146,6 +146,11 @@ KITS = [
     dict(name='lofi',    bpm=88,  bass='sub',  lead='pluck', drums='lazy',  hats='shaker'),
     dict(name='marcha',  bpm=118, bass='sub',  lead='stab',  drums='stomp', hats='none'),
     dict(name='tropical',bpm=108, bass='sub',  lead='bell',  drums='latin', hats='shaker'),
+    # eletronicas: o canal pediu musica eletronica de fundo, e as duas de baixo
+    # existem para isso. Bumbo em todos os tempos e chimbau de semicolcheia dao
+    # a pulsacao continua que segura a atencao sem exigir nada do ouvido.
+    dict(name='eletro',  bpm=124, bass='saw',  lead='pluck', drums='four',  hats='sixteenth'),
+    dict(name='neonwave',bpm=116, bass='sub',  lead='bell',  drums='four',  hats='eighth'),
 ]
 
 PROGS = [
@@ -159,9 +164,14 @@ PROGS = [
 TRI = dict(maj=[0, 4, 7, 11], min=[0, 3, 7, 10])
 
 
-def pick_kit(seed):
+def pick_kit(seed, nome=None):
+    """`nome` fixa a trilha pelo deck; sem ele, o SEED sorteia."""
     rng = np.random.default_rng(seed * 7919 + 13)
-    k = dict(KITS[rng.integers(len(KITS))])
+    escolha = next((k for k in KITS if k['name'] == nome), None) if nome else None
+    if nome and escolha is None:
+        raise SystemExit(f"trilha {nome!r} nao existe. Ha: "
+                         + ', '.join(k['name'] for k in KITS))
+    k = dict(escolha or KITS[rng.integers(len(KITS))])
     k['prog'] = PROGS[rng.integers(len(PROGS))]
     k['root'] = int(rng.integers(53, 62))          # F3..Bb3
     k['bpm'] = k['bpm'] + int(rng.integers(-5, 6))

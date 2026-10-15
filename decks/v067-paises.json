@@ -3,195 +3,350 @@
  "titulo": "30 PERGUNTAS DE PAÍSES E BANDEIRAS — DIFÍCIL 🌍",
  "tema": "Paises e bandeiras",
  "tema_curto": "O MUNDO",
- "fundo": "bauhaus",
+ "fundo": "pixel",
  "paleta": "oceano",
  "tempo": 6,
  "tempo_short": 5,
  "intro": "Trinta perguntas de países e bandeiras, e várias delas têm a resposta que parece óbvia como armadilha. Seis segundos para cada uma. Acertar vinte já é muita coisa.",
  "outro_titulo": "Quantas você acertou?",
  "outro": "Comenta a sua pontuação. E se você acertou a da bandeira do Nepal, comenta como, porque essa quase ninguém sabe. Na próxima rodada: ciência do dia a dia.",
- "chamadas_outro": ["Trinta países. Trinta armadilhas.", "Quanto do mundo você conhece?"],
+ "chamadas_outro": [
+  "Trinta países. Trinta armadilhas.",
+  "Quanto do mundo você conhece?"
+ ],
  "intro_s": 3.0,
  "outro_s": 5.0,
  "perguntas": [
-  {"q": "Qual é a única bandeira nacional que não é retangular nem quadrada?",
-   "opts": ["Butão", "Nepal", "Sri Lanka"],
+  {
+   "q": "Qual é a única bandeira nacional que não é retangular nem quadrada?",
+   "opts": [
+    "Butão",
+    "Nepal",
+    "Sri Lanka"
+   ],
    "ok": 1,
    "fato": "A do Nepal: dois triângulos empilhados, com um sol e uma lua dentro. O desenho vem de duas flâmulas separadas, das dinastias que governavam o país, que foram unidas numa bandeira só. A Constituição nepalesa chega a trazer as instruções geométricas para desenhá-la, passo por passo, com régua e compasso.",
-   "fato_curto": "Nepal. E a Constituição dele ensina a desenhar a bandeira com régua e compasso."},
-
-  {"q": "Qual país tem mais fusos horários no mundo?",
-   "opts": ["Rússia", "Estados Unidos", "França"],
+   "fato_curto": "Nepal. E a Constituição dele ensina a desenhar a bandeira com régua e compasso."
+  },
+  {
+   "q": "Qual país tem mais fusos horários no mundo?",
+   "opts": [
+    "Rússia",
+    "Estados Unidos",
+    "França"
+   ],
    "ok": 2,
    "fato": "A França, com doze, por causa dos territórios espalhados pelo Pacífico, pelo Caribe e pelo Índico. A Rússia, que é o maior país do mundo em área, tem onze. É o tipo de recorde que não se ganha por tamanho, e sim por herança colonial.",
-   "fato_curto": "França, com doze. A Rússia tem onze."},
-
-  {"q": "Com quantos países a China faz fronteira?",
-   "opts": ["Nove", "Quatorze", "Dezoito"],
+   "fato_curto": "França, com doze. A Rússia tem onze."
+  },
+  {
+   "q": "Com quantos países a China faz fronteira?",
+   "opts": [
+    "Nove",
+    "Quatorze",
+    "Dezoito"
+   ],
    "ok": 1,
    "fato": "Quatorze, empatada com a Rússia no primeiro lugar do mundo. O Brasil vem depois, com dez. Entre os vizinhos da China estão países que a gente nunca associa a ela, como o Afeganistão, que divide com ela uma fronteira de apenas 76 quilômetros no fim de um corredor de montanha.",
-   "fato_curto": "Quatorze, empatada com a Rússia. O Brasil tem dez."},
-
-  {"q": "Qual é a capital da Austrália?",
-   "opts": ["Sydney", "Melbourne", "Canberra"],
+   "fato_curto": "Quatorze, empatada com a Rússia. O Brasil tem dez."
+  },
+  {
+   "q": "Qual é a capital da Austrália?",
+   "opts": [
+    "Sydney",
+    "Melbourne",
+    "Canberra"
+   ],
    "ok": 2,
    "fato": "Canberra, e ela existe por birra: Sydney e Melbourne brigaram tanto pelo posto que o país decidiu construir uma capital nova no meio das duas, em 1913. É a mesma solução que o Brasil adotou em Brasília, quase cinquenta anos depois.",
-   "fato_curto": "Canberra, construída no meio do caminho entre Sydney e Melbourne."},
-
-  {"q": "Qual é a capital do Canadá?",
-   "opts": ["Toronto", "Ottawa", "Montreal"],
+   "fato_curto": "Canberra, construída no meio do caminho entre Sydney e Melbourne."
+  },
+  {
+   "q": "Qual é a capital do Canadá?",
+   "opts": [
+    "Toronto",
+    "Ottawa",
+    "Montreal"
+   ],
    "ok": 1,
    "fato": "Ottawa, e também foi escolhida por ser neutra: fica exatamente na fronteira entre o Canadá de língua inglesa e o de língua francesa. Toronto é bem maior, Montreal é mais antiga, e nenhuma das duas serviria sem a outra reclamar.",
-   "fato_curto": "Ottawa, na divisa entre o Canadá inglês e o francês."},
-
-  {"q": "Qual é a capital da Turquia?",
-   "opts": ["Istambul", "Ancara", "Esmirna"],
+   "fato_curto": "Ottawa, na divisa entre o Canadá inglês e o francês."
+  },
+  {
+   "q": "Qual é a capital da Turquia?",
+   "opts": [
+    "Istambul",
+    "Ancara",
+    "Esmirna"
+   ],
    "ok": 1,
    "fato": "Ancara, desde 1923. Istambul é muito maior e foi capital por quase mil e seiscentos anos, com três nomes diferentes: Bizâncio, Constantinopla e Istambul. Atatürk mudou a capital para o interior justamente para marcar que a Turquia republicana não era a continuação do império.",
-   "fato_curto": "Ancara, desde 1923. Istambul foi capital por 1.600 anos antes."},
-
-  {"q": "Qual é o menor país do mundo?",
-   "opts": ["Mônaco", "Vaticano", "Nauru"],
+   "fato_curto": "Ancara, desde 1923. Istambul foi capital por 1.600 anos antes."
+  },
+  {
+   "q": "Qual é o menor país do mundo?",
+   "opts": [
+    "Mônaco",
+    "Vaticano",
+    "Nauru"
+   ],
    "ok": 1,
    "fato": "O Vaticano, com 0,44 quilômetro quadrado: menos da metade do Parque Ibirapuera. Mônaco é o segundo, com cerca de 2 quilômetros quadrados, e é o país mais densamente povoado do planeta.",
-   "fato_curto": "Vaticano, 0,44 km²: menos da metade do Ibirapuera."},
-
-  {"q": "Qual é o país mais populoso do mundo hoje?",
-   "opts": ["China", "Índia", "Estados Unidos"],
+   "fato_curto": "Vaticano, 0,44 km²: menos da metade do Ibirapuera."
+  },
+  {
+   "q": "Qual é o país mais populoso do mundo hoje?",
+   "opts": [
+    "China",
+    "Índia",
+    "Estados Unidos"
+   ],
    "ok": 1,
    "fato": "A Índia, que passou a China em 2023. A China liderou por séculos, e a virada veio menos de um crescimento indiano explosivo do que da política chinesa do filho único, que durou de 1980 a 2015 e deixou uma geração faltando.",
-   "fato_curto": "Índia, desde 2023. A China liderou por séculos."},
-
-  {"q": "Quantas estrelas tem a bandeira do Brasil?",
-   "opts": ["26", "27", "33"],
+   "fato_curto": "Índia, desde 2023. A China liderou por séculos."
+  },
+  {
+   "q": "Quantas estrelas tem a bandeira do Brasil?",
+   "opts": [
+    "26",
+    "27",
+    "33"
+   ],
    "ok": 1,
    "fato": "Vinte e sete, uma para cada estado e uma para o Distrito Federal. E não é uma distribuição decorativa: é o céu do Rio de Janeiro na madrugada de 15 de novembro de 1889, visto de fora da esfera celeste, como se fosse de cima. Por isso o Cruzeiro do Sul aparece espelhado.",
-   "fato_curto": "27 estrelas, e são o céu do Rio na noite da Proclamação, visto de fora."},
-
-  {"q": "Qual país tem duas capitais oficiais?",
-   "opts": ["Bolívia", "Peru", "Chile"],
+   "fato_curto": "27 estrelas, e são o céu do Rio na noite da Proclamação, visto de fora."
+  },
+  {
+   "q": "Qual país tem duas capitais oficiais?",
+   "opts": [
+    "Bolívia",
+    "Peru",
+    "Chile"
+   ],
    "ok": 0,
    "fato": "A Bolívia: Sucre é a capital constitucional, onde fica o Judiciário, e La Paz é a sede do governo, onde ficam o presidente e o Congresso. A divisão veio de uma guerra civil em 1899, e nenhuma das duas cidades aceitou perder o título.",
-   "fato_curto": "Bolívia: Sucre é a constitucional, La Paz é a sede do governo."},
-
-  {"q": "Qual país ocupa um continente inteiro sozinho?",
-   "opts": ["Austrália", "Groenlândia", "Antártida"],
+   "fato_curto": "Bolívia: Sucre é a constitucional, La Paz é a sede do governo."
+  },
+  {
+   "q": "Qual país ocupa um continente inteiro sozinho?",
+   "opts": [
+    "Austrália",
+    "Groenlândia",
+    "Antártida"
+   ],
    "ok": 0,
    "fato": "A Austrália, único país que é também um continente inteiro. A Groenlândia é a maior ilha do mundo, mas é território da Dinamarca e fica na América do Norte; e a Antártida não é país nenhum: é governada por um tratado internacional, sem dono.",
-   "fato_curto": "Austrália. A Groenlândia é ilha, e a Antártida não é país."},
-
-  {"q": "Qual destes países não tem forças armadas?",
-   "opts": ["Costa Rica", "Uruguai", "Portugal"],
+   "fato_curto": "Austrália. A Groenlândia é ilha, e a Antártida não é país."
+  },
+  {
+   "q": "Qual destes países não tem forças armadas?",
+   "opts": [
+    "Costa Rica",
+    "Uruguai",
+    "Portugal"
+   ],
    "ok": 0,
    "fato": "A Costa Rica, que aboliu o exército em 1948, depois de uma guerra civil, e passou a gastar o dinheiro em educação e saúde. O prédio do antigo quartel-general virou museu nacional, e os buracos de bala ficaram de propósito na parede.",
-   "fato_curto": "Costa Rica, desde 1948. O quartel virou museu."},
-
-  {"q": "Qual é o maior país da África em área?",
-   "opts": ["Sudão", "Argélia", "República Democrática do Congo"],
+   "fato_curto": "Costa Rica, desde 1948. O quartel virou museu."
+  },
+  {
+   "q": "Qual é o maior país da África em área?",
+   "opts": [
+    "Sudão",
+    "Argélia",
+    "República Democrática do Congo"
+   ],
    "ok": 1,
    "fato": "A Argélia, com cerca de 2,38 milhões de quilômetros quadrados. O Sudão era o maior até 2011, quando o Sudão do Sul se separou e levou um quarto do território com ele. Mais de 80% da Argélia é Saara, e quase toda a população mora na faixa estreita perto do mar.",
-   "fato_curto": "Argélia. O Sudão era o maior até perder o Sudão do Sul em 2011."},
-
-  {"q": "Qual bandeira nacional é quadrada?",
-   "opts": ["Suíça", "Áustria", "Dinamarca"],
+   "fato_curto": "Argélia. O Sudão era o maior até perder o Sudão do Sul em 2011."
+  },
+  {
+   "q": "Qual bandeira nacional é quadrada?",
+   "opts": [
+    "Suíça",
+    "Áustria",
+    "Dinamarca"
+   ],
    "ok": 0,
    "fato": "A da Suíça, uma das duas únicas bandeiras nacionais quadradas do mundo; a outra é a do Vaticano. E a cruz vermelha da Cruz Vermelha é exatamente a bandeira suíça com as cores invertidas, em homenagem ao suíço que fundou a organização.",
-   "fato_curto": "Suíça, com o Vaticano. A Cruz Vermelha é ela com as cores trocadas."},
-
-  {"q": "Qual país tem um fuzil AK-47 desenhado na bandeira?",
-   "opts": ["Angola", "Moçambique", "Zimbábue"],
+   "fato_curto": "Suíça, com o Vaticano. A Cruz Vermelha é ela com as cores trocadas."
+  },
+  {
+   "q": "Qual país tem um fuzil AK-47 desenhado na bandeira?",
+   "opts": [
+    "Angola",
+    "Moçambique",
+    "Zimbábue"
+   ],
    "ok": 1,
    "fato": "Moçambique, a única bandeira nacional do mundo com uma arma de fogo moderna. Ao lado dela há uma enxada e um livro: luta, trabalho e educação. O desenho vem da independência, em 1975, e a retirada do fuzil já foi proposta várias vezes no Parlamento, sem sucesso até agora.",
-   "fato_curto": "Moçambique. Na bandeira há também uma enxada e um livro."},
-
-  {"q": "Qual cidade fica em dois continentes ao mesmo tempo?",
-   "opts": ["Istambul", "Cairo", "Moscou"],
+   "fato_curto": "Moçambique. Na bandeira há também uma enxada e um livro."
+  },
+  {
+   "q": "Qual cidade fica em dois continentes ao mesmo tempo?",
+   "opts": [
+    "Istambul",
+    "Cairo",
+    "Moscou"
+   ],
    "ok": 0,
    "fato": "Istambul, cortada pelo estreito de Bósforo: um lado na Europa, outro na Ásia, com pontes e um túnel de metrô ligando os dois. Cerca de dois terços da população mora no lado europeu, e muita gente atravessa de continente todos os dias para trabalhar.",
-   "fato_curto": "Istambul, cortada pelo Bósforo. Muita gente troca de continente para trabalhar."},
-
-  {"q": "Qual destes países não tem nenhum rio permanente?",
-   "opts": ["Arábia Saudita", "Egito", "Marrocos"],
+   "fato_curto": "Istambul, cortada pelo Bósforo. Muita gente troca de continente para trabalhar."
+  },
+  {
+   "q": "Qual destes países não tem nenhum rio permanente?",
+   "opts": [
+    "Arábia Saudita",
+    "Egito",
+    "Marrocos"
+   ],
    "ok": 0,
    "fato": "A Arábia Saudita, que não tem um único rio permanente em todo o território, apesar de ser maior que a Europa Ocidental. A água vem de aquíferos fósseis e de dessalinização do mar: o país é um dos maiores dessalinizadores do planeta.",
-   "fato_curto": "Arábia Saudita: nenhum rio permanente. A água vem do mar e do subsolo."},
-
-  {"q": "Qual país europeu está inteiramente cercado por um só país vizinho?",
-   "opts": ["Luxemburgo", "San Marino", "Andorra"],
+   "fato_curto": "Arábia Saudita: nenhum rio permanente. A água vem do mar e do subsolo."
+  },
+  {
+   "q": "Qual país europeu está inteiramente cercado por um só país vizinho?",
+   "opts": [
+    "Luxemburgo",
+    "San Marino",
+    "Andorra"
+   ],
    "ok": 1,
    "fato": "San Marino, totalmente cercado pela Itália. No mundo existem só três casos assim: San Marino e o Vaticano, dentro da Itália, e o Lesoto, dentro da África do Sul. San Marino se diz a república mais antiga do mundo ainda em funcionamento, fundada em 301.",
-   "fato_curto": "San Marino, dentro da Itália. Os outros casos são o Vaticano e o Lesoto."},
-
-  {"q": "Qual idioma tem mais falantes nativos no mundo?",
-   "opts": ["Inglês", "Mandarim", "Espanhol"],
+   "fato_curto": "San Marino, dentro da Itália. Os outros casos são o Vaticano e o Lesoto."
+  },
+  {
+   "q": "Qual idioma tem mais falantes nativos no mundo?",
+   "opts": [
+    "Inglês",
+    "Mandarim",
+    "Espanhol"
+   ],
    "ok": 1,
    "fato": "O mandarim, com cerca de 940 milhões de falantes nativos. O inglês ganha de longe quando se somam os que aprenderam depois, mas como língua materna ele é o terceiro, atrás do mandarim e do espanhol. O português é a sexta ou sétima, dependendo da contagem.",
-   "fato_curto": "Mandarim. O inglês só lidera quando se conta quem aprendeu depois."},
-
-  {"q": "Que país mudou oficialmente de nome para Essuatíni em 2018?",
-   "opts": ["Suazilândia", "Lesoto", "Botsuana"],
+   "fato_curto": "Mandarim. O inglês só lidera quando se conta quem aprendeu depois."
+  },
+  {
+   "q": "Que país mudou oficialmente de nome para Essuatíni em 2018?",
+   "opts": [
+    "Suazilândia",
+    "Lesoto",
+    "Botsuana"
+   ],
    "ok": 0,
    "fato": "A Suazilândia, que virou Reino de Essuatíni. O rei explicou o motivo de um jeito prático: cansou de ser confundido com a Suíça em viagens internacionais, porque em inglês Swaziland e Switzerland se parecem demais.",
-   "fato_curto": "Suazilândia. O rei dizia que confundiam o país com a Suíça."},
-
-  {"q": "Qual país tem mais vulcões ativos?",
-   "opts": ["Japão", "Indonésia", "Chile"],
+   "fato_curto": "Suazilândia. O rei dizia que confundiam o país com a Suíça."
+  },
+  {
+   "q": "Qual país tem mais vulcões ativos?",
+   "opts": [
+    "Japão",
+    "Indonésia",
+    "Chile"
+   ],
    "ok": 1,
    "fato": "A Indonésia, com cerca de 130 vulcões ativos. Ela fica no encontro de três placas tectônicas, e foi lá que explodiu o Krakatoa, em 1883: o estrondo foi ouvido a quase 5 mil quilômetros de distância, o som mais alto já registrado na história.",
-   "fato_curto": "Indonésia, cerca de 130. O Krakatoa foi ouvido a 5 mil km."},
-
-  {"q": "A Groenlândia é território de qual país?",
-   "opts": ["Noruega", "Dinamarca", "Islândia"],
+   "fato_curto": "Indonésia, cerca de 130. O Krakatoa foi ouvido a 5 mil km."
+  },
+  {
+   "q": "A Groenlândia é território de qual país?",
+   "opts": [
+    "Noruega",
+    "Dinamarca",
+    "Islândia"
+   ],
    "ok": 1,
    "fato": "Da Dinamarca, com governo próprio desde 1979. A ilha é cinquenta vezes maior que a Dinamarca continental e tem cerca de 56 mil habitantes: menos gente que um bairro médio de São Paulo, num território maior que todo o Nordeste brasileiro somado.",
-   "fato_curto": "Dinamarca. A ilha é 50 vezes maior que o país que a administra."},
-
-  {"q": "Qual é o país mais ao sul do mundo com território continental?",
-   "opts": ["Chile", "Argentina", "Nova Zelândia"],
+   "fato_curto": "Dinamarca. A ilha é 50 vezes maior que o país que a administra."
+  },
+  {
+   "q": "Qual é o país mais ao sul do mundo com território continental?",
+   "opts": [
+    "Chile",
+    "Argentina",
+    "Nova Zelândia"
+   ],
    "ok": 0,
    "fato": "O Chile, que vai até Punta Arenas e além, com Puerto Williams reivindicando o título de cidade mais austral do planeta. O Chile tem mais de 4.300 quilômetros de norte a sul, e em alguns pontos só 90 quilômetros de largura.",
-   "fato_curto": "Chile: 4.300 km de norte a sul, e 90 km de largura em alguns pontos."},
-
-  {"q": "Qual destes países NÃO faz fronteira com o Brasil?",
-   "opts": ["Peru", "Equador", "Colômbia"],
+   "fato_curto": "Chile: 4.300 km de norte a sul, e 90 km de largura em alguns pontos."
+  },
+  {
+   "q": "Qual destes países NÃO faz fronteira com o Brasil?",
+   "opts": [
+    "Peru",
+    "Equador",
+    "Colômbia"
+   ],
    "ok": 1,
    "fato": "O Equador. Com o Chile, é um dos dois únicos países da América do Sul que não tocam o Brasil, e falta pouco: o Equador chega a cerca de 300 quilômetros da fronteira brasileira, bloqueado pela faixa amazônica do Peru e da Colômbia.",
-   "fato_curto": "Equador. Ele e o Chile são os únicos sul-americanos que não fazem."},
-
-  {"q": "A bandeira do Japão tem quantos elementos?",
-   "opts": ["Um círculo vermelho", "Um círculo com raios", "Um sol com dezesseis raios"],
+   "fato_curto": "Equador. Ele e o Chile são os únicos sul-americanos que não fazem."
+  },
+  {
+   "q": "A bandeira do Japão tem quantos elementos?",
+   "opts": [
+    "Um círculo vermelho",
+    "Um círculo com raios",
+    "Um sol com dezesseis raios"
+   ],
    "ok": 0,
    "fato": "Um círculo vermelho num fundo branco, e nada mais: uma das bandeiras mais simples do mundo. O sol com dezesseis raios existe, mas é a bandeira naval, usada pela Marinha, não a bandeira nacional. O nome do Japão em japonês, Nippon, significa literalmente origem do sol.",
-   "fato_curto": "Só um círculo vermelho. O sol com raios é a bandeira naval."},
-
-  {"q": "Qual país tem a maior proporção de território coberta por floresta?",
-   "opts": ["Brasil", "Suriname", "Finlândia"],
+   "fato_curto": "Só um círculo vermelho. O sol com raios é a bandeira naval."
+  },
+  {
+   "q": "Qual país tem a maior proporção de território coberta por floresta?",
+   "opts": [
+    "Brasil",
+    "Suriname",
+    "Finlândia"
+   ],
    "ok": 1,
    "fato": "O Suriname, com mais de 90% do território coberto de floresta: a maior proporção do mundo. O Brasil tem muito mais floresta em área absoluta, mas em percentual fica perto de 60%. O Suriname também é o menor país da América do Sul.",
-   "fato_curto": "Suriname: mais de 90% de floresta, a maior proporção do mundo."},
-
-  {"q": "Em que continente fica o Suriname?",
-   "opts": ["África", "América do Sul", "Ásia"],
+   "fato_curto": "Suriname: mais de 90% de floresta, a maior proporção do mundo."
+  },
+  {
+   "q": "Em que continente fica o Suriname?",
+   "opts": [
+    "África",
+    "América do Sul",
+    "Ásia"
+   ],
    "ok": 1,
    "fato": "América do Sul, e faz fronteira com o Brasil. É o menor país do continente, foi colônia holandesa, e o idioma oficial é o holandês: o único país das Américas em que se fala holandês. Muito brasileiro erra essa porque o nome não soa sul-americano.",
-   "fato_curto": "América do Sul, vizinho do Brasil, e fala holandês."},
-
-  {"q": "Qual é o maior país do mundo em área?",
-   "opts": ["Canadá", "China", "Rússia"],
+   "fato_curto": "América do Sul, vizinho do Brasil, e fala holandês."
+  },
+  {
+   "q": "Qual é o maior país do mundo em área?",
+   "opts": [
+    "Canadá",
+    "China",
+    "Rússia"
+   ],
    "ok": 2,
    "fato": "A Rússia, com cerca de 17 milhões de quilômetros quadrados: quase o dobro do segundo colocado, o Canadá. Ela sozinha ocupa mais de 11% de toda a terra firme do planeta, e ainda assim tem menos habitantes que o Brasil.",
-   "fato_curto": "Rússia: 11% de toda a terra firme, e menos gente que o Brasil."},
-
-  {"q": "O Mar Morto fica na fronteira entre quais países?",
-   "opts": ["Israel e Jordânia", "Egito e Israel", "Síria e Líbano"],
+   "fato_curto": "Rússia: 11% de toda a terra firme, e menos gente que o Brasil."
+  },
+  {
+   "q": "O Mar Morto fica na fronteira entre quais países?",
+   "opts": [
+    "Israel e Jordânia",
+    "Egito e Israel",
+    "Síria e Líbano"
+   ],
    "ok": 0,
    "fato": "Israel e Jordânia, com a Cisjordânia na margem oeste. E não é mar: é um lago sem saída, a cerca de 430 metros abaixo do nível do mar, o ponto mais baixo de terra firme no planeta. É tão salgado que o corpo humano flutua sem esforço, e ele está encolhendo cerca de um metro por ano.",
-   "fato_curto": "Israel e Jordânia. E não é mar: é o ponto mais baixo da terra firme."},
-
-  {"q": "Quantos países existem hoje, reconhecidos pela ONU?",
-   "opts": ["175", "193", "212"],
+   "fato_curto": "Israel e Jordânia. E não é mar: é o ponto mais baixo da terra firme."
+  },
+  {
+   "q": "Quantos países existem hoje, reconhecidos pela ONU?",
+   "opts": [
+    "175",
+    "193",
+    "212"
+   ],
    "ok": 1,
    "fato": "Cento e noventa e três Estados-membros da ONU. O Vaticano e a Palestina têm status de observadores, e por isso muita contagem chega a 195. O último a entrar foi o Sudão do Sul, em 2011, e é por isso que mapa-múndi velho não serve para quiz.",
-   "fato_curto": "193 na ONU. Com Vaticano e Palestina como observadores, 195."}
- ]
+   "fato_curto": "193 na ONU. Com Vaticano e Palestina como observadores, 195."
+  }
+ ],
+ "trilha": "neonwave"
 }

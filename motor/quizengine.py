@@ -102,6 +102,13 @@ def acelerar(p, fator, cache):
     return dst
 
 
+# chaves cuja fala veio de um .wav gravado (nao da voz sintetica).
+# Existe porque o rotulo antigo olhava se o arquivo ESTAVA na pasta, e o
+# sim_quiz copia os .wav para la antes de renderizar: o meta dizia 'gravada'
+# num Short 100% sintetizado.
+_DE_ARQUIVO = set()
+
+
 def carregar_externo(D, key):
     """Lê um WAV de narração própria, se existir em <dir>/narracao/.
     É assim que a sua voz gravada (ou clonada) entra no lugar da sintética.
@@ -360,7 +367,7 @@ def exportar_srt(deck_path, D, vertical=False, i0=None, i1=None):
     print('Terminou, nao use Export timeline: os .wav de cada fala ja estao em disco.')
 
 
-def _partir_srt(D, itens, tc, teto=11000):
+def _partir_srt(D, itens, tc, teto=None):
     """O yovoice recusa legenda acima de 12.000 caracteres: 'Invalid subtitles'.
     Um deck de 30 perguntas da 13 a 19 mil, entao o arquivo inteiro nunca entra.
 
@@ -371,6 +378,8 @@ def _partir_srt(D, itens, tc, teto=11000):
 
     Devolve [] quando cabe inteiro - ai nao ha motivo para partir.
     """
+    # SRT_TETO parte mais fino quando o yovoice recusa mesmo dentro do limite
+    teto = int(os.environ.get('SRT_TETO', teto or 11000))
     CPS, GAP = 13.5, 0.9
     def bloco(i, t, txt):
         dur = max(1.2, len(txt) / CPS)
@@ -427,9 +436,10 @@ def synth_all(deck, idxs, D, voice, curto=False):
     todo = [(k, t) for k, t in todo if t.strip()]
 
     externos = 0
+    _DE_ARQUIVO.clear()
     for key, _ in todo:
         got = carregar_externo(D, key)
-        if got: clips[key] = got; externos += 1
+        if got: clips[key] = got; externos += 1; _DE_ARQUIVO.add(key)
     if externos:
         print(f'narração própria: {externos} de {len(todo)} trechos vindos de narracao/', flush=True)
     faltam = [(k, t) for k, t in todo if k not in clips]
@@ -486,7 +496,9 @@ def build_audio(deck, tl, total, D, clips, kit):
                 return .95 if t < s['tfact'] else .52
         return .30
 
-    mix = A.groove(total, kit, SEED, energy)
+    # a trilha entra ABAIXO do resto. Os efeitos (pop, tique, riser, acerto)
+    # continuam em cheio: sao eles o lado animado, e eles sao curtos.
+    mix = A.groove(total, kit, SEED, energy) * float(deck.get('musica', .72))
 
     wh_up = A.whoosh(rng, .72, True); wh_dn = A.whoosh(rng, .55, False)
     pops = [A.pop(rng, i) for i in range(6)]
@@ -524,7 +536,9 @@ def build_audio(deck, tl, total, D, clips, kit):
             lay(f"{s['k']}:rev", s['ttimer'] + .55)
         lay('outro', tl[-1]['t1'] + .8)
         # a trilha e os efeitos já estão somados; o duck age no conjunto
-        mix = A.duck(mix, spoken, depth=.42)
+        # 0.42 deixava a trilha so 4,7 dB abaixo sob a narracao, perto demais
+        # da voz. 0.62 poe ela a 8,4 dB, que e onde ela acompanha sem disputar.
+        mix = A.duck(mix, spoken, depth=float(deck.get('duck', .62)))
 
     mix, L, tp = A.master(mix, deck.get('lufs', -14.0))
     import soundfile as sf
@@ -636,7 +650,10 @@ def question_layers(q, n, L, pal, fonts):
     # no 9:16 o painel só tem o que sobra entre a alternativa certa (que sobe)
     # e o fim da área de segurança: a fonte encolhe até caber, em vez de o
     # texto vazar por baixo da interface do Shorts
-    if L['v']:
+    # vale para os dois formatos: no 16:9 as explicacoes longas vazavam ate
+    # 119 px para fora do quadro, e ninguem percebia porque o VERIFY mede
+    # duracao e loudness, nao se o texto coube na tela.
+    if True:
         topo = L['band_y0'] + L['opt_h'] + int(34 * s)
         disp = max(int(140 * s), L['band_y1'] - topo)
         tam = ff.size
@@ -842,7 +859,7 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
 
             # ---- alternativas
             revealed = t >= s['ttimer']
-            shrink = ease_io((t - s['tfact']) / .5) if (L['v'] and t >= s['tfact']) else 0.0
+            shrink = ease_io((t - s['tfact']) / .5) if t >= s['tfact'] else 0.0
             oy = L['band_y0']
             step = L['opt_h'] + L['opt_gap']
             for i, st in enumerate(ly['pills']):
@@ -857,7 +874,7 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
                     im = ly['pop'][min(10, max(0, int(b * 10)))] if b < 1 else st[1]
                 y = oy
                 vis = a * fade
-                if shrink > 0:                       # no 9:16 as erradas somem e a certa sobe
+                if shrink > 0:                       # as erradas somem e a certa sobe
                     if i != ok: vis *= (1 - shrink)
                     else: y = int(oy + (L['band_y0'] - oy) * shrink)
                 ox = L['opt_x'] + (L['opt_w'] - im.shape[1]) // 2
@@ -897,17 +914,13 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
             # ---- explicação
             if t >= s['tfact']:
                 a = ease((t - s['tfact']) / .45)
-                if L['v']:
-                    # logo abaixo da alternativa certa, que subiu para band_y0
-                    fy = L['band_y0'] + L['opt_h'] + int(34 * L['s'])
-                    fy = min(fy, L['band_y1'] - ly['fact'].shape[0])
-                    fy = max(fy, L['band_y0'] + L['opt_h'] + int(14 * L['s']))
-                    fy += int(26 * L['s'] * (1 - a))
-                else:
-                    # ancora abaixo da ultima alternativa, nunca por cima dela
-                    last = L['band_y0'] + s['nopt'] * (L['opt_h'] + L['opt_gap'])
-                    fy = max(last + int(18 * L['s']), L['band_y1'] - ly['fact'].shape[0])
-                    fy += int(30 * L['s'] * (1 - a))
+                # logo abaixo da alternativa certa, que subiu para band_y0.
+                # Ancorar na ULTIMA alternativa, como era no 16:9, empurrava a
+                # caixa para fora do quadro quando a explicacao era longa.
+                fy = L['band_y0'] + L['opt_h'] + int(34 * L['s'])
+                fy = min(fy, L['band_y1'] - ly['fact'].shape[0])
+                fy = max(fy, L['band_y0'] + L['opt_h'] + int(14 * L['s']))
+                fy += int(26 * L['s'] * (1 - a))
                 comp(img, ly['fact'], (L['opt_x'] + (L['opt_w'] - ly['fact'].shape[1]) // 2, fy), a * fade)
 
         # --- barra de progresso: quanto do quiz ja passou
@@ -953,6 +966,14 @@ def checar_deck(deck, path):
     if deck.get('paleta') and deck['paleta'] not in _BG.PALETAS:
         erros.append(f"paleta {deck['paleta']!r} nao existe. Ha: "
                      + ', '.join(_BG.PALETAS))
+    import quizaudio as _A
+    nomes = [k['name'] for k in _A.KITS]
+    if deck.get('trilha') and deck['trilha'] not in nomes:
+        erros.append(f"trilha {deck['trilha']!r} nao existe. Ha: " + ', '.join(nomes))
+    if 'duck' in deck and not (0.0 <= float(deck['duck']) < 1.0):
+        erros.append(f"duck {deck['duck']!r} fora da faixa 0..1")
+    if 'musica' in deck and not (0.0 <= float(deck['musica']) <= 1.5):
+        erros.append(f"musica {deck['musica']!r} fora da faixa 0..1,5")
     if erros:
         raise SystemExit('DECK RECUSADO (' + path + '):\n  ' + '\n  '.join(erros))
     sem_curto = [i for i, q in enumerate(deck['perguntas'], 1) if not (q.get('fato_curto') or '').strip()]
@@ -966,8 +987,7 @@ def _rotulo_voz(clips, voice, D):
     Gravamos 92 falas na voz do Leandro e o meta dizia 'cadu', uma das
     vozes sinteticas: o arquivo afirmava uma coisa e o video dizia outra."""
     if not clips: return None
-    proprios = sum(1 for k in clips
-                   if os.path.exists(os.path.join(D, 'narracao', arquivo_narracao(k))))
+    proprios = len(_DE_ARQUIVO & set(clips))
     if proprios == len(clips): return 'gravada'
     if proprios: return f'gravada+{voice}'
     return voice
@@ -994,7 +1014,7 @@ def render(deck_path, D, vertical=False, i0=None, i1=None):
     fam = deck.get('fundo') or BG.escolher(SEED)[0]
     pal_name = deck.get('paleta') or BG.escolher(SEED)[1]
     pal = BG.PALETAS[pal_name]
-    kit = A.pick_kit(SEED)
+    kit = A.pick_kit(SEED, deck.get('trilha'))
     # deck com "voz": null desliga a síntese: só entra o que existir em narracao/
     voice = VOZ or (deck['voz'] if 'voz' in deck else ['faber', 'cadu', 'jeff', 'dora'][int(rng.integers(4))])
     print(f'SEED {SEED} · fundo {fam} · paleta {pal_name} · trilha {kit["name"]} {kit["bpm"]}bpm · voz {voice}')
@@ -1010,8 +1030,7 @@ def render(deck_path, D, vertical=False, i0=None, i1=None):
     meta = dict(deck=os.path.basename(deck_path), tema=deck.get('tema'), titulo=deck.get('titulo'),
                 seed=SEED, fundo=fam, paleta=pal_name, trilha=kit['name'], bpm=kit['bpm'],
                 voz=_rotulo_voz(clips, voice, D), trechos_falados=nspoken,
-                trechos_proprios=sum(1 for k in clips if os.path.exists(
-                    os.path.join(D, 'narracao', arquivo_narracao(k)))),
+                trechos_proprios=len(_DE_ARQUIVO & set(clips)),
                 vertical=vertical, idxs=idxs, total_s=round(total, 2), frames=NF, fps=FPS,
                 lufs=L_, true_peak=tp, out=out, W=W, H=H,
                 marks=[dict(n=pos, deck_i=s['k'] + 1, t0=round(s['t0'], 2),

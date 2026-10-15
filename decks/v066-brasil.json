@@ -4,7 +4,7 @@
  "tema": "Brasil de ponta a ponta",
  "tema_curto": "O BRASIL",
  "fundo": "grade",
- "paleta": "floresta",
+ "paleta": "noite",
  "tempo": 6,
  "tempo_short": 5,
  "intro": "Trinta perguntas sobre o país onde você mora. Seis segundos para cada uma. Aviso: as mais erradas são justamente as que todo mundo jura que sabe.",
@@ -347,5 +347,6 @@
    "fato": "Cerca de 322 anos, de 1500 a 1822. O Brasil independente, em 2026, tem 204 anos: ainda falta mais de um século para o país livre durar mais que o período colonial. A conta costuma surpreender porque a escola passa muito mais tempo no Império e na República do que nos três séculos anteriores.",
    "fato_curto": "Cerca de 322 anos de colônia. O Brasil independente tem 204."
   }
- ]
+ ],
+ "trilha": "eletro"
 }

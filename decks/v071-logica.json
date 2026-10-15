@@ -3,7 +3,7 @@
  "titulo": "30 PEGADINHAS DE LÓGICA QUE DERRUBAM GENTE INTELIGENTE 🧠",
  "tema": "Logica e pegadinha",
  "tema_curto": "LÓGICA",
- "fundo": "grade",
+ "fundo": "bauhaus",
  "paleta": "grafite",
  "tempo": 10,
  "tempo_short": 9,
@@ -347,5 +347,6 @@
    "fato": "Um: a pessoa nasceu em um único dia, e é esse o aniversário dela. O que acontece quarenta vezes é a comemoração, não o aniversário. É pegadinha de palavra, e é um bom fechamento para uma rodada em que quase todo erro veio de ler rápido, não de pensar errado.",
    "fato_curto": "Um. O que acontece 40 vezes é a festa, não o aniversário."
   }
- ]
+ ],
+ "trilha": "eletro"
 }

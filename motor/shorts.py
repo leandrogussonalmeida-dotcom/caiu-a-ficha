@@ -92,6 +92,38 @@ def conferir(mp4):
     return None
 
 
+# ------------------------------------------------- Shorts de quiz
+# O Short de quiz nao se monta cortando itens: a unidade do quiz e fina
+# (aponta para um deck). Aqui ficam as DUAS perguntas de cada Short e o
+# visual proprio dele. Duas, nao tres: tres estouram os 60 s, e abaixo de
+# 60 o Short roda em laco - e o laco e o que segura a retencao.
+#
+# Nenhuma combinacao de fundo e paleta se repete entre os 20 Shorts, nem
+# bate com a do video longo de onde cada um saiu: o YouTube trata design
+# repetido como conteudo repetido.
+QUIZ_SHORTS = {
+    'S064': dict(perguntas=[4, 17], fundo='aurora', paleta='menta', trilha='eletro'),
+    'S065': dict(perguntas=[3, 17], fundo='grade', paleta='floresta', trilha='arcade'),
+    'S066': dict(perguntas=[0, 8], fundo='ondas', paleta='ferrugem', trilha='eletro'),
+    'S067': dict(perguntas=[0, 14], fundo='losangos', paleta='uva', trilha='arcade'),
+    'S068': dict(perguntas=[2, 20], fundo='pixel', paleta='papel', trilha='eletro'),
+    'S069': dict(perguntas=[0, 11], fundo='raios', paleta='floresta', trilha='arcade'),
+    'S070': dict(perguntas=[6, 0], fundo='bolhas', paleta='ferrugem', trilha='eletro'),
+    'S071': dict(perguntas=[0, 1], fundo='confete', paleta='uva', trilha='arcade'),
+    'S072': dict(perguntas=[1, 23], fundo='synthwave', paleta='oceano', trilha='eletro'),
+    'S073': dict(perguntas=[0, 17], fundo='pixel', paleta='menta', trilha='arcade'),
+    'S074': dict(perguntas=[23, 10], fundo='raios', paleta='noite', trilha='neonwave'),
+    'S075': dict(perguntas=[19, 24], fundo='bolhas', paleta='grafite', trilha='funk'),
+    'S076': dict(perguntas=[2, 28], fundo='confete', paleta='brasa', trilha='neonwave'),
+    'S077': dict(perguntas=[1, 16], fundo='bauhaus', paleta='oceano', trilha='funk'),
+    'S078': dict(perguntas=[9, 19], fundo='aurora', paleta='noite', trilha='neonwave'),
+    'S079': dict(perguntas=[2, 24], fundo='grade', paleta='grafite', trilha='funk'),
+    'S080': dict(perguntas=[16, 26], fundo='ondas', paleta='brasa', trilha='neonwave'),
+    'S081': dict(perguntas=[28, 25], fundo='losangos', paleta='neon', trilha='funk'),
+    'S082': dict(perguntas=[0, 24], fundo='bauhaus', paleta='papel', trilha='neonwave'),
+    'S083': dict(perguntas=[11, 12], fundo='hud', paleta='noite', trilha='funk'),
+}
+
 def um(s, plano, forcar=False):
     dest = os.path.join(SAIDA, s['id'])
     mp4 = os.path.join(dest, f"{s['id']}.mp4")
@@ -108,11 +140,21 @@ def um(s, plano, forcar=False):
     if erros:
         return 'reprovado', f"{s['id']}: o pai {pai['id']} nao passa na conferencia"
 
-    quantos, ajustes = RECEITA.get(s['simulador'], (2, {}))
-    u = cortar(u, quantos)
-    u.update(ajustes)
-    u['id'] = s['id']
-    u['paleta' if s['motor'] == 'pixel' else 'estilo'] = s['aparencia']
+    if s['simulador'] == 'sim_quiz':
+        rec = QUIZ_SHORTS.get(s['id'])
+        if not rec:
+            return 'sem-receita', f"{s['id']}: Short de quiz sem perguntas escolhidas"
+        u = dict(u, **rec)
+        u['formato'] = '9:16'
+        # a voz do longo vale para o Short: nunca regravar
+        u['narr'] = u.get('narracao')
+        u['id'] = s['id']
+    else:
+        quantos, ajustes = RECEITA.get(s['simulador'], (2, {}))
+        u = cortar(u, quantos)
+        u.update(ajustes)
+        u['id'] = s['id']
+        u['paleta' if s['motor'] == 'pixel' else 'estilo'] = s['aparencia']
 
     if RAIZ not in sys.path: sys.path.insert(0, RAIZ)
     mod = importlib.import_module(s['simulador'])
