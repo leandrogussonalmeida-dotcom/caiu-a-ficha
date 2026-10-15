@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta palavras do português do dia a dia. Em cada uma, só uma grafia está correta. Sete segundos para escolher, e depois eu explico de onde vem a palavra e por que ela se escreve assim.",
+  "inicio": 1.0,
+  "dur": 13.778
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Qual palavra está escrita corretamente?",
+  "inicio": 15.678,
+  "dur": 2.889
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Previlégio. B: Privilégio. C: Previlegio",
+  "inicio": 19.467,
+  "dur": 3.185
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: Privilégio. Privilégio vem do latim privilegium: lei (lex) para um indivíduo (privus). O i da segunda sílaba está na origem da palavra, não há e nenhum.",
+  "inicio": 23.552,
+  "dur": 12.222
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Qual está certa?",
+  "inicio": 36.674,
+  "dur": 1.2
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Beneficiente. B: Beneficente. C: Benificente",
+  "inicio": 38.774,
+  "dur": 3.481
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra B: Beneficente. Beneficente vem de beneficência, que já não tem o i. A confusão nasce de eficiente, que é outra formação. Benefício tem i, beneficente não.",
+  "inicio": 43.156,
+  "dur": 12.222
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "Como se escreve?",
+  "inicio": 56.278,
+  "dur": 1.2
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Exceção. B: Esceção. C: Excessão",
+  "inicio": 58.378,
+  "dur": 2.593
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra A: Exceção. Exceção vem de excipere, excetuar. Excesso, com dois s, vem de excedere, passar do limite. São duas palavras diferentes com dois sentidos diferentes.",
+  "inicio": 61.87,
+  "dur": 12.667
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Qual é a forma correta?",
+  "inicio": 75.437,
+  "dur": 1.704
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Advogado. B: Adevogado. C: Advinhado",
+  "inicio": 78.041,
+  "dur": 2.889
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra A: Advogado. Advogado tem d e v juntos, sem vogal entre eles. A pronúncia brasileira insere um e de apoio, mas ele não existe na escrita. Mesmo caso de advertir e de adivinhar.",
+  "inicio": 81.83,
+  "dur": 13.778
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "Qual está correta?",
+  "inicio": 96.507,
+  "dur": 1.333
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Meritíssimo. B: Meretíssimo. C: Meritissimo",
+  "inicio": 98.741,
+  "dur": 3.407
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra A: Meritíssimo. Meritíssimo vem de mérito. Nada a ver com o verbo merecer na forma meret. O juiz é tratado assim por ter mérito, e o superlativo pede acento no i.",
+  "inicio": 103.048,
+  "dur": 12.741
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Qual palavra existe?",
+  "inicio": 116.689,
+  "dur": 1.481
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Entertenimento. B: Entretenimento. C: Entretimento",
+  "inicio": 119.07,
+  "dur": 3.926
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra B: Entretenimento. Entretenimento vem de entreter, que vem de entre mais ter: segurar alguém entre uma coisa e outra. A forma com r extra é influência do inglês entertainment.",
+  "inicio": 123.896,
+  "dur": 13.704
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Como se escreve?",
+  "inicio": 138.5,
+  "dur": 1.2
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Cabeleireiro. B: Cabelereiro. C: Cabeleleiro",
+  "inicio": 140.6,
+  "dur": 3.481
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra A: Cabeleireiro. Cabeleireiro vem de cabeleira, não de cabelo. Quem cuida da cabeleira é o cabeleireiro, com os dois e e o i no lugar certo.",
+  "inicio": 144.981,
+  "dur": 11.111
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Qual está certa?",
+  "inicio": 156.993,
+  "dur": 1.2
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Empecilho. B: Impecilho. C: Empecílio",
+  "inicio": 159.093,
+  "dur": 2.963
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra A: Empecilho. Empecilho vem do verbo empecer, que significa atrapalhar, hoje quase só usado nessa palavra. Por isso é com e, apesar de muita gente escrever com i.",
+  "inicio": 162.956,
+  "dur": 12.741
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "Qual é a forma correta?",
+  "inicio": 176.596,
+  "dur": 1.704
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Rúbrica. B: Rubrica. C: Rubríca",
+  "inicio": 179.2,
+  "dur": 2.519
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra B: Rubrica. Rubrica não tem acento: a sílaba tônica é bri, e paroxítona terminada em a não acentua. O nome vem de rubro, porque antigamente as iniciais eram escritas em vermelho.",
+  "inicio": 182.619,
+  "dur": 13.926
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "Como se escreve?",
+  "inicio": 197.444,
+  "dur": 1.2
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Mendingo. B: Mendigo. C: Mendiguo",
+  "inicio": 199.544,
+  "dur": 2.667
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra B: Mendigo. Mendigo vem do latim mendicus. Não existe n antes do g, assim como não existe em prodígio ou em digno. O n extra é só a fala puxando a palavra.",
+  "inicio": 203.111,
+  "dur": 12.222
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Qual está certa?",
+  "inicio": 216.233,
+  "dur": 1.2
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Asterístico. B: Asterisco. C: Asterix",
+  "inicio": 218.333,
+  "dur": 2.963
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra B: Asterisco. Asterisco vem do grego asteriskos, estrelinha. A mesma raiz de astro e de astronomia. Não tem nada a ver com característico, que é de onde vem a confusão.",
+  "inicio": 222.196,
+  "dur": 13.185
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Qual a forma correta?",
+  "inicio": 236.281,
+  "dur": 1.556
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Seje. B: Seja. C: Sêja",
+  "inicio": 238.737,
+  "dur": 1.852
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra B: Seja. Seja é o presente do subjuntivo do verbo ser: que eu seja, que ele seja. A forma seje não existe em nenhuma conjugação do português.",
+  "inicio": 241.489,
+  "dur": 11.185
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "Como se escreve?",
+  "inicio": 253.574,
+  "dur": 1.2
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Beneficio. B: Benefício. C: Benefisio",
+  "inicio": 255.674,
+  "dur": 2.963
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra B: Benefício. Benefício é proparoxítona e toda proparoxítona é acentuada, sem exceção. Vem de bene mais facere: fazer o bem.",
+  "inicio": 259.537,
+  "dur": 9.926
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Qual está certa?",
+  "inicio": 270.363,
+  "dur": 1.2
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Hesitar. B: Ezitar. C: Exitar",
+  "inicio": 272.463,
+  "dur": 2.37
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra A: Hesitar. Hesitar, com h e s, é ficar em dúvida. Existe também exitar, com x, mas vem de êxito e quase não se usa. Quem titubeia hesita.",
+  "inicio": 275.733,
+  "dur": 10.963
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "Qual palavra está correta?",
+  "inicio": 287.596,
+  "dur": 1.926
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Supertição. B: Superstição. C: Supertissão",
+  "inicio": 290.422,
+  "dur": 3.333
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra B: Superstição. Superstição tem dois s e o t antes do i, vindo do latim superstitio. A palavra significava originalmente sobrevivência de uma crença antiga.",
+  "inicio": 294.656,
+  "dur": 12.296
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "Como se escreve?",
+  "inicio": 307.852,
+  "dur": 1.2
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Impecável. B: Inpecável. C: Impecavel",
+  "inicio": 309.952,
+  "dur": 2.963
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra A: Impecável. Impecável leva m antes de p, como toda palavra em português. E tem acento por ser paroxítona terminada em l. Vem de impeccabilis: que não peca.",
+  "inicio": 313.815,
+  "dur": 12.37
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Qual está certa?",
+  "inicio": 327.085,
+  "dur": 1.2
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Frustado. B: Frustrado. C: Fustrado",
+  "inicio": 329.185,
+  "dur": 2.815
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra B: Frustrado. Frustrado tem dois r, um em cada sílaba: frus-tra-do. Vem de frustrar, do latim frustrari, enganar. A fala come o segundo r, a escrita não pode.",
+  "inicio": 332.9,
+  "dur": 12.444
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Qual a grafia correta?",
+  "inicio": 346.244,
+  "dur": 1.63
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Reinvindicar. B: Reivindicar. C: Revindicar",
+  "inicio": 348.774,
+  "dur": 3.407
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra B: Reivindicar. Reivindicar vem de rei, que em latim significa da coisa, mais vindicare, reclamar. Não existe n depois do rei. É reclamar a posse de algo.",
+  "inicio": 353.081,
+  "dur": 12.148
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Como se escreve?",
+  "inicio": 366.13,
+  "dur": 1.2
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Despesa. B: Dispesa. C: Despeza",
+  "inicio": 368.23,
+  "dur": 2.519
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra A: Despesa. Despesa vem de despender, com des de afastamento. E termina em sa, não za, porque vem do particípio despeso do verbo despender.",
+  "inicio": 371.648,
+  "dur": 11.037
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "Qual está certa?",
+  "inicio": 383.585,
+  "dur": 1.2
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Concerteza. B: Com certeza. C: Com-certeza",
+  "inicio": 385.685,
+  "dur": 3.333
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra B: Com certeza. Com certeza são duas palavras separadas, porque é a preposição com mais o substantivo certeza. A forma junta não existe, do mesmo jeito que não se escreve comcuidado.",
+  "inicio": 389.919,
+  "dur": 14.222
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Qual palavra existe?",
+  "inicio": 405.041,
+  "dur": 1.481
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Prostar. B: Prostrar. C: Postrar",
+  "inicio": 407.422,
+  "dur": 2.593
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra B: Prostrar. Prostrar, com os dois r, significa derrubar ou abater. Vem de pro mais sternere, estender para frente. Quem fica de cama prostrado está derrubado.",
+  "inicio": 410.915,
+  "dur": 12.519
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "Como se escreve?",
+  "inicio": 424.333,
+  "dur": 1.2
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Bem-vindo. B: Benvindo. C: Bemvindo",
+  "inicio": 426.433,
+  "dur": 2.815
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra A: Bem-vindo. Bem-vindo leva hífen, porque bem como advérbio sempre se liga por hífen ao que vem depois: bem-estar, bem-feito, bem-humorado.",
+  "inicio": 430.148,
+  "dur": 11.111
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "Qual está correta?",
+  "inicio": 442.159,
+  "dur": 1.333
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Previnir. B: Prevenir. C: Prevenír",
+  "inicio": 444.393,
+  "dur": 2.741
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra B: Prevenir. Prevenir vem de prae mais venire: vir antes. Por isso é com e na segunda sílaba. A forma com i aparece em previno, que é a conjugação.",
+  "inicio": 448.033,
+  "dur": 11.63
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Qual a forma certa?",
+  "inicio": 460.563,
+  "dur": 1.407
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Discrição. B: Descrição. C: Depende",
+  "inicio": 462.87,
+  "dur": 2.815
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra C: Depende. As duas existem e são palavras diferentes. Discrição, com i, é a qualidade de ser discreto. Descrição, com e, é o ato de descrever algo.",
+  "inicio": 466.585,
+  "dur": 11.704
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Como se escreve?",
+  "inicio": 479.189,
+  "dur": 1.2
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Xícara. B: Chícara. C: Xicara",
+  "inicio": 481.289,
+  "dur": 2.37
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Xícara. Xícara vem do náuatle xicalli, uma cuia feita de cabaça, que chegou ao português pelo espanhol jícara. Por isso x, e proparoxítona leva acento.",
+  "inicio": 484.559,
+  "dur": 12.148
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "Qual está certa?",
+  "inicio": 497.607,
+  "dur": 1.2
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Cassula. B: Caçula. C: Casula",
+  "inicio": 499.707,
+  "dur": 2.37
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra B: Caçula. Caçula vem do quimbundo kazule, o filho mais novo. Entrou no português do Brasil pelos africanos trazidos para cá, e manteve o ç.",
+  "inicio": 502.978,
+  "dur": 11.111
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Qual a grafia correta?",
+  "inicio": 514.989,
+  "dur": 1.63
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Enxergar. B: Encherga. C: Enchergar",
+  "inicio": 517.519,
+  "dur": 2.815
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra A: Enxergar. Enxergar é com x. A regra: depois da sílaba inicial en, escreve-se x, como em enxaqueca, enxame e enxoval. A exceção famosa é encher e seus derivados.",
+  "inicio": 521.233,
+  "dur": 12.815
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "Como se escreve?",
+  "inicio": 534.948,
+  "dur": 1.2
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Ancioso. B: Ansioso. C: Ansiozo",
+  "inicio": 537.048,
+  "dur": 2.519
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra B: Ansioso. Ansioso vem de ânsia, que é com s. E o sufixo oso é sempre com s, nunca com z: cheiroso, gostoso, famoso.",
+  "inicio": 540.467,
+  "dur": 9.407
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "Qual está certa?",
+  "inicio": 550.774,
+  "dur": 1.2
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Á três dias. B: Há três dias. C: A três dias",
+  "inicio": 552.874,
+  "dur": 3.481
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra B: Há três dias. Há indica tempo passado e equivale a faz. A sem acento indica tempo futuro: daqui a três dias. E á sozinho não existe em português.",
+  "inicio": 557.256,
+  "dur": 11.704
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Qual é a forma correta?",
+  "inicio": 569.859,
+  "dur": 1.704
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: Estrupo. B: Estupro. C: Estrupro",
+  "inicio": 572.463,
+  "dur": 2.593
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra B: Estupro. Estupro vem do latim stuprum. Não tem r na primeira sílaba. A troca de lugar das letras é tão comum que tem nome: metátese.",
+  "inicio": 575.956,
+  "dur": 10.741
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Escreve no comentário. Se você passou de vinte e quatro, você escreve melhor que a maioria dos brasileiros. Na sexta tem quiz dos anos noventa.",
+  "inicio": 587.596,
+  "dur": 10.593
+ }
+]

@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas sobre a década que inventou o Brasil que a gente conhece. Seis segundos para cada uma. Se você acertar mais de vinte e cinco, você viveu os anos noventa de verdade.",
+  "inicio": 1.0,
+  "dur": 13.407
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Em que ano o Real virou a moeda do Brasil?",
+  "inicio": 15.307,
+  "dur": 3.111
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: 1992. B: 1994. C: 1996",
+  "inicio": 19.319,
+  "dur": 1.852
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: 1994. O Real entrou em 1º de julho de 1994, substituindo o cruzeiro real. Antes dele veio a URV, uma moeda de conta que existia só para as pessoas se acostumarem com os novos preços antes das cédulas chegarem.",
+  "inicio": 22.07,
+  "dur": 16.444
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Qual seleção o Brasil venceu na final da Copa de 1994?",
+  "inicio": 39.415,
+  "dur": 4.0
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Alemanha. B: Argentina. C: Itália",
+  "inicio": 44.315,
+  "dur": 2.667
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra C: Itália. Foi contra a Itália, nos pênaltis, no Rose Bowl. Roberto Baggio, melhor jogador do mundo na época, mandou a última cobrança por cima do gol. Foi a primeira final de Copa decidida nos pênaltis.",
+  "inicio": 47.881,
+  "dur": 15.778
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "O que era um bip?",
+  "inicio": 64.559,
+  "dur": 1.259
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Aparelho que recebia mensagens curtas. B: Telefone sem fio. C: Rádio de bolso",
+  "inicio": 66.719,
+  "dur": 5.926
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra A: Aparelho que recebia mensagens curtas. O bip recebia mensagens de texto curtas, mas não respondia. Quem queria te falar ligava para uma central, ditava o recado para uma atendente, e ela digitava. Você lia e corria procurar um telefone.",
+  "inicio": 73.544,
+  "dur": 18.444
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Para que servia soprar o cartucho de videogame?",
+  "inicio": 92.889,
+  "dur": 3.481
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Tirar poeira dos contatos. B: Esfriar o chip. C: Nada, era superstição",
+  "inicio": 97.27,
+  "dur": 5.407
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra C: Nada, era superstição. Não funcionava. O que resolvia era tirar e recolocar, porque isso raspava a oxidação dos contatos. A umidade do sopro, na verdade, acelerava a corrosão. Toda uma geração fez o ritual errado e deu certo pelo motivo errado.",
+  "inicio": 103.578,
+  "dur": 19.037
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "Quanto cabia num disquete comum de 3,5 polegadas?",
+  "inicio": 123.515,
+  "dur": 3.63
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: 1,44 megabyte. B: 14,4 megabytes. C: 144 megabytes",
+  "inicio": 128.044,
+  "dur": 3.926
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra A: 1,44 megabyte. Cabia 1,44 MB. Uma única foto de celular hoje tem umas três mil vezes esse tamanho. Instalar um programa grande significava trocar de disquete dez, quinze vezes seguidas.",
+  "inicio": 132.87,
+  "dur": 14.667
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "O que acontecia se alguém atendesse o telefone enquanto você navegava na internet?",
+  "inicio": 148.437,
+  "dur": 6.074
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: A conexão caía. B: Ficava mais lento. C: Nada",
+  "inicio": 155.411,
+  "dur": 3.556
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra A: A conexão caía. A conexão caía na hora. A internet discada usava a mesma linha do telefone, então ou você navegava ou alguém falava. Era a origem do grito clássico: não atende o telefone!",
+  "inicio": 159.867,
+  "dur": 14.815
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Qual era o nome do mascote do Mundo da Lua?",
+  "inicio": 175.581,
+  "dur": 3.185
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Pepe. B: Lucas. C: Gabriel",
+  "inicio": 179.667,
+  "dur": 2.148
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra B: Lucas. O protagonista era o Lucas Silva e Silva, vivido por Luciano Amaral, que imaginava aventuras no quarto. A série foi ao ar na TV Cultura a partir de 1991.",
+  "inicio": 182.715,
+  "dur": 12.815
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "O Castelo Rá-Tim-Bum ficava onde?",
+  "inicio": 196.43,
+  "dur": 2.444
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Numa rua comum de cidade grande. B: Numa floresta. C: Numa ilha",
+  "inicio": 199.774,
+  "dur": 4.889
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra A: Numa rua comum de cidade grande. O castelo ficava espremido entre prédios numa rua movimentada, e ninguém de fora enxergava. Era essa a graça: mágica escondida no meio do cotidiano. Estreou na TV Cultura em 1994.",
+  "inicio": 205.563,
+  "dur": 16.667
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "O que era o Tamagotchi?",
+  "inicio": 223.13,
+  "dur": 1.704
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Bichinho virtual de chaveiro. B: Jogo de cartas. C: Brinquedo de montar",
+  "inicio": 225.733,
+  "dur": 5.481
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra A: Bichinho virtual de chaveiro. Um bichinho virtual japonês que você alimentava, limpava e colocava para dormir apertando três botões. Se você esquecesse, ele morria. Chegou em 1996 e foi banido de várias escolas.",
+  "inicio": 232.115,
+  "dur": 16.593
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "Quantas fitas cassete cabiam numa fita VHS de filme?",
+  "inicio": 249.607,
+  "dur": 3.852
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Nenhuma, eram coisas diferentes. B: Duas. C: Dez",
+  "inicio": 254.359,
+  "dur": 3.778
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra A: Nenhuma, eram coisas diferentes. São coisas diferentes: a fita cassete gravava som, a VHS gravava imagem e som. Pareciam primas porque as duas eram fitas magnéticas em caixinha, mas não trocavam de aparelho.",
+  "inicio": 259.037,
+  "dur": 16.296
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "O que significava rebobinar?",
+  "inicio": 276.233,
+  "dur": 2.074
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Voltar a fita ao início. B: Limpar a fita. C: Gravar por cima",
+  "inicio": 279.207,
+  "dur": 4.741
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra A: Voltar a fita ao início. Voltar a fita até o começo. As locadoras cobravam multa de quem devolvia sem rebobinar, porque o próximo cliente perderia minutos esperando. Virou até bordão: seja gentil, rebobine.",
+  "inicio": 284.848,
+  "dur": 16.222
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Qual console brigava com o Super Nintendo no Brasil?",
+  "inicio": 301.97,
+  "dur": 3.852
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Mega Drive. B: PlayStation 2. C: Nintendo 64",
+  "inicio": 306.722,
+  "dur": 3.481
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra A: Mega Drive. O Mega Drive, da Sega, distribuído aqui pela Tectoy. A rivalidade entre Mega Drive e Super Nintendo dividiu o pátio de toda escola brasileira na primeira metade dos anos 90.",
+  "inicio": 311.104,
+  "dur": 14.667
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "O que era o ICQ?",
+  "inicio": 326.67,
+  "dur": 1.2
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Programa de conversa pela internet. B: Buscador. C: Jogo online",
+  "inicio": 328.77,
+  "dur": 4.889
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra A: Programa de conversa pela internet. Um dos primeiros mensageiros da internet, lançado em 1996. Cada pessoa tinha um número em vez de um nome de usuário, e o som de mensagem nova, um oh-oh, é lembrado até hoje por quem usou.",
+  "inicio": 334.559,
+  "dur": 17.481
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Quem apresentava o Xou da Xuxa?",
+  "inicio": 352.941,
+  "dur": 2.296
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Angélica. B: Xuxa. C: Eliana",
+  "inicio": 356.137,
+  "dur": 2.296
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra B: Xuxa. Xuxa Meneghel, na Globo, de 1986 a 1992. O programa era tão grande que vendia discos aos milhões e exportava versão para a Espanha, para a Argentina e para os Estados Unidos.",
+  "inicio": 359.333,
+  "dur": 14.296
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "O que era um orelhão?",
+  "inicio": 374.53,
+  "dur": 1.556
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Telefone público. B: Caixa de correio. C: Ponto de ônibus",
+  "inicio": 376.985,
+  "dur": 4.444
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra A: Telefone público. O telefone público brasileiro, com aquela carenagem em forma de concha que dava nome a ele. Primeiro funcionava com ficha, depois com cartão. O design é de Chu Ming Silveira, de 1971.",
+  "inicio": 382.33,
+  "dur": 15.852
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "O que era o Plano Collor?",
+  "inicio": 399.081,
+  "dur": 1.852
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Confisco das poupanças. B: Plano de habitação. C: Programa de TV",
+  "inicio": 401.833,
+  "dur": 4.963
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra A: Confisco das poupanças. Em 1990, o governo bloqueou os saldos acima de um certo valor em contas e poupanças por dezoito meses. Milhões de pessoas acordaram sem acesso ao próprio dinheiro de um dia para o outro.",
+  "inicio": 407.696,
+  "dur": 16.519
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Qual destes era um walkman?",
+  "inicio": 425.115,
+  "dur": 2.0
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Tocador de fita portátil. B: Rádio de pilha. C: Televisão pequena",
+  "inicio": 428.015,
+  "dur": 5.037
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra A: Tocador de fita portátil. Um tocador de fita cassete portátil, com fone de ouvido. Foi a primeira vez na história que uma pessoa pôde levar a própria trilha sonora para a rua, e isso mudou o jeito de ouvir música.",
+  "inicio": 433.952,
+  "dur": 16.741
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Quanto tempo levava para baixar uma música na internet discada?",
+  "inicio": 451.593,
+  "dur": 4.667
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Poucos segundos. B: Cerca de 10 minutos. C: Cerca de 3 horas",
+  "inicio": 457.159,
+  "dur": 4.667
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra B: Cerca de 10 minutos. Uma música de 4 MB numa conexão de 56 kbps levava uns dez minutos, se ninguém atendesse o telefone no meio. Hoje a mesma música chega em menos de um segundo.",
+  "inicio": 462.726,
+  "dur": 14.148
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "O que era a Sessão da Tarde?",
+  "inicio": 477.774,
+  "dur": 2.074
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Filme na TV à tarde. B: Jornal. C: Novela",
+  "inicio": 480.748,
+  "dur": 3.259
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra A: Filme na TV à tarde. O filme que a Globo passava depois do almoço, com aquela vinheta que toda criança brasileira reconhece. Ficar em casa doente tinha uma compensação, que era pegar a Sessão da Tarde.",
+  "inicio": 484.907,
+  "dur": 15.852
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "O que eram tazos?",
+  "inicio": 501.659,
+  "dur": 1.259
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Tampinhas de colecionar. B: Figurinhas de álbum. C: Peças de jogo de tabuleiro",
+  "inicio": 503.819,
+  "dur": 6.0
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra A: Tampinhas de colecionar. Discos de plástico que vinham dentro de pacotes de salgadinho, colecionados e usados num jogo de virar a pilha com a palma da mão. Viraram febre nacional na metade dos anos 90.",
+  "inicio": 510.719,
+  "dur": 15.852
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Qual era o apelido do Ayrton Senna nas pistas?",
+  "inicio": 527.47,
+  "dur": 3.407
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Magic. B: Rei. C: Professor",
+  "inicio": 531.778,
+  "dur": 2.222
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra A: Magic. Era chamado de Magic pelos colegas de pista, pela habilidade na chuva e em classificação. Morreu em Ímola, em 1º de maio de 1994, dois meses antes de o Brasil ganhar a Copa.",
+  "inicio": 534.9,
+  "dur": 14.296
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "O que era preciso para gravar um programa da TV?",
+  "inicio": 550.096,
+  "dur": 3.556
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Fita VHS virgem no videocassete. B: Disquete. C: Nada, ficava salvo sozinho",
+  "inicio": 554.552,
+  "dur": 5.778
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra A: Fita VHS virgem no videocassete. Você colocava uma fita virgem no videocassete e apertava gravar na hora exata. Esquecer significava perder o programa para sempre, porque não existia assistir depois.",
+  "inicio": 561.23,
+  "dur": 15.704
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "Qual sistema operacional saiu em 1995 e tinha o botão Iniciar?",
+  "inicio": 577.833,
+  "dur": 4.593
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Windows 95. B: Windows XP. C: MS-DOS",
+  "inicio": 583.326,
+  "dur": 2.889
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra A: Windows 95. O Windows 95 trouxe o menu Iniciar e a barra de tarefas, que existem até hoje. A Microsoft licenciou a música Start Me Up, dos Rolling Stones, para a campanha de lançamento.",
+  "inicio": 587.115,
+  "dur": 14.667
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "O que era um videocassete de dois tempos?",
+  "inicio": 602.681,
+  "dur": 3.037
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Aparelho que gravava e tocava. B: Aparelho com duas fitas. C: Aparelho com dois controles",
+  "inicio": 606.619,
+  "dur": 6.815
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra B: Aparelho com duas fitas. Era o aparelho com dois compartimentos de fita, usado para copiar de uma para a outra. Foi o jeito que uma geração inteira usou para fazer cópia de filme e de show antes do computador.",
+  "inicio": 614.333,
+  "dur": 16.444
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Qual era a função do botão TRACKING no videocassete?",
+  "inicio": 631.678,
+  "dur": 3.852
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Ajustar a imagem tremida. B: Aumentar o som. C: Acelerar a fita",
+  "inicio": 636.43,
+  "dur": 4.889
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Ajustar a imagem tremida. Ajustava o alinhamento da cabeça de leitura com a trilha gravada na fita. Quando a imagem ficava chuviscada ou com uma faixa tremendo, era nesse botão que você mexia até limpar.",
+  "inicio": 642.219,
+  "dur": 16.0
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "O que era o Trapalhões?",
+  "inicio": 659.119,
+  "dur": 1.704
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Grupo de humor com Renato Aragão. B: Banda. C: Desenho animado",
+  "inicio": 661.722,
+  "dur": 4.815
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra A: Grupo de humor com Renato Aragão. O grupo de Renato Aragão, Dedé Santana, Mussum e Zacarias, que teve programa semanal na Globo por décadas e dezenas de filmes. Chegaram a ser a maior bilheteria do cinema brasileiro.",
+  "inicio": 667.437,
+  "dur": 16.963
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Como se mandava mensagem escrita antes do celular popular?",
+  "inicio": 685.3,
+  "dur": 4.296
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Telegrama ou fax. B: E-mail. C: Não existia",
+  "inicio": 690.496,
+  "dur": 3.407
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra A: Telegrama ou fax. Pelo telegrama, entregue pelos Correios, ou pelo fax, que mandava a imagem de uma folha pela linha telefônica. Empresa sem fax nos anos 90 era empresa fora do jogo.",
+  "inicio": 694.804,
+  "dur": 14.444
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "Qual foi o primeiro CD a vender mais que o disco de vinil no Brasil?",
+  "inicio": 710.148,
+  "dur": 5.037
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Não houve um específico, foi uma virada gradual. B: Thriller. C: Abbey Road",
+  "inicio": 716.085,
+  "dur": 5.778
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: Não houve um específico, foi uma virada gradual. Não teve um disco único: a troca foi gradual ao longo dos anos 90, com o CD ficando mais barato e as lojas deixando de estocar vinil. O vinil só voltaria a crescer décadas depois.",
+  "inicio": 722.763,
+  "dur": 17.852
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "O que era a antena parabólica?",
+  "inicio": 741.515,
+  "dur": 2.222
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Antena grande para pegar canais via satélite. B: Antena de rádio. C: Antena de celular",
+  "inicio": 744.637,
+  "dur": 6.593
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra A: Antena grande para pegar canais via satélite. O prato grande que captava sinal de satélite e trazia canais que a antena comum não pegava. Em muita cidade pequena era a única forma de ver televisão com imagem limpa.",
+  "inicio": 752.13,
+  "dur": 16.815
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Em que ano a internet comercial chegou ao Brasil?",
+  "inicio": 769.844,
+  "dur": 3.63
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: 1995. B: 1990. C: 2000",
+  "inicio": 774.374,
+  "dur": 1.852
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra A: 1995. A internet comercial foi liberada no Brasil em 1995, até então restrita a universidades e centros de pesquisa. A Embratel começou a oferecer acesso discado naquele ano.",
+  "inicio": 777.126,
+  "dur": 13.852
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta qual dessas você tinha esquecido completamente. Na próxima rodada: a tecnologia que morreu e como ela funcionava por dentro.",
+  "inicio": 791.878,
+  "dur": 11.63
+ }
+]

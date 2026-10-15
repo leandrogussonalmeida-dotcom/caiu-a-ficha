@@ -2,7 +2,7 @@
  "id": "V064",
  "titulo": "30 PALAVRAS QUE QUASE TODO MUNDO ESCREVE ERRADO",
  "deck": "v01-palavras.json",
- "narracao": "outvoz/narracao",
+ "narracao": "out-v064/narracao",
  "formato": "16:9",
  "chamada": "Trinta palavras que quase todo mundo escreve errado. Quantas voce acerta?",
  "fonte": "deck conferido pelo checar_deck(); cada explicacao tem fato verificavel",

@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas sobre o país onde você mora. Seis segundos para cada uma. Aviso: as mais erradas são justamente as que todo mundo jura que sabe.",
+  "inicio": 1.0,
+  "dur": 10.741
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Qual é o ponto mais ao norte do Brasil?",
+  "inicio": 12.641,
+  "dur": 2.889
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Oiapoque, no Amapá. B: Monte Caburaí, em Roraima. C: Boa Vista, em Roraima",
+  "inicio": 16.43,
+  "dur": 5.704
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: Monte Caburaí, em Roraima. É o Monte Caburaí, em Uiramutã, Roraima. O verso 'do Oiapoque ao Chuí' entrou na cabeça de todo mundo e está errado desde sempre: o Oiapoque é o extremo norte da costa, mas o Caburaí fica cerca de cem quilômetros mais ao norte, lá no interior da fronteira com a Guiana. O IBGE já reconhece o Caburaí, mas a frase antiga ganhou.",
+  "inicio": 23.033,
+  "dur": 27.185
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Qual estado faz divisa com mais estados?",
+  "inicio": 51.119,
+  "dur": 2.963
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Minas Gerais. B: Bahia. C: Mato Grosso",
+  "inicio": 54.981,
+  "dur": 3.037
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra B: Bahia. A Bahia, com oito vizinhos: Alagoas, Sergipe, Pernambuco, Piauí, Goiás, Tocantins, Minas Gerais e Espírito Santo. Quase todo mundo responde Minas, que faz divisa com seis. A Bahia leva porque é larga de leste a oeste e alta de norte a sul ao mesmo tempo.",
+  "inicio": 58.919,
+  "dur": 20.296
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "Qual é o maior município do Brasil em área?",
+  "inicio": 80.115,
+  "dur": 3.185
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Manaus, no Amazonas. B: Altamira, no Pará. C: Corumbá, no Mato Grosso do Sul",
+  "inicio": 84.2,
+  "dur": 5.852
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra B: Altamira, no Pará. Altamira, no Pará, com cerca de 159 mil quilômetros quadrados. É uma cidade maior que Portugal, maior que a Grécia e maior que a Coreia do Sul. Um município só, com prefeito só, e menos de um habitante por quilômetro quadrado na maior parte dele.",
+  "inicio": 90.952,
+  "dur": 20.593
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Qual é o ponto mais alto do Brasil?",
+  "inicio": 112.444,
+  "dur": 2.593
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Pico da Bandeira. B: Pico da Neblina. C: Pico Paraná",
+  "inicio": 115.937,
+  "dur": 4.074
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra B: Pico da Neblina. O Pico da Neblina, no Amazonas, com 2.995 metros. Ele fica na fronteira com a Venezuela, dentro de terra indígena Yanomami, e o nome é literal: passa a maior parte do ano dentro da nuvem. Por décadas se disse que tinha 3.014 metros, até uma medição mais precisa cortar quase vinte metros da montanha.",
+  "inicio": 120.911,
+  "dur": 24.444
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "Qual estado tem mais municípios?",
+  "inicio": 146.256,
+  "dur": 2.37
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: São Paulo. B: Minas Gerais. C: Bahia",
+  "inicio": 149.526,
+  "dur": 2.889
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra B: Minas Gerais. Minas Gerais, com 853 municípios. São Paulo tem 645, com quase o dobro de gente. Minas fragmentou-se assim no ciclo do ouro: cada povoado de mineração virou sede, e as sedes nunca se juntaram de volta.",
+  "inicio": 153.315,
+  "dur": 16.889
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Quantos países fazem fronteira com o Brasil?",
+  "inicio": 171.104,
+  "dur": 3.259
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Sete. B: Dez. C: Doze",
+  "inicio": 175.263,
+  "dur": 1.778
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra B: Dez. Dez. O Brasil faz fronteira com todos os países da América do Sul, menos dois: Chile e Equador. É a terceira maior extensão de fronteira terrestre do mundo, com cerca de 16 mil quilômetros.",
+  "inicio": 177.941,
+  "dur": 15.333
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Quantos fusos horários o Brasil tem hoje?",
+  "inicio": 194.174,
+  "dur": 3.037
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Dois. B: Três. C: Quatro",
+  "inicio": 198.111,
+  "dur": 2.0
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra C: Quatro. Quatro. O mais a oeste é o Acre, o mais a leste é Fernando de Noronha, que vai uma hora à frente de Brasília. Em 2008 o país chegou a reduzir para três, juntando o Acre ao horário do Amazonas, e em 2013 voltou atrás por plebiscito: os acreanos quiseram o fuso de volta.",
+  "inicio": 201.011,
+  "dur": 21.481
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Qual é o maior rio inteiramente dentro do Brasil?",
+  "inicio": 223.393,
+  "dur": 3.63
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Rio Amazonas. B: Rio São Francisco. C: Rio Paraná",
+  "inicio": 227.922,
+  "dur": 3.852
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra B: Rio São Francisco. O São Francisco, com cerca de 2.800 quilômetros, nascendo na Serra da Canastra, em Minas, e desaguando na divisa de Alagoas com Sergipe. O Amazonas é muito maior, mas nasce no Peru; o Paraná continua para o Paraguai e a Argentina. O Velho Chico começa e termina em casa.",
+  "inicio": 232.674,
+  "dur": 22.37
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "Qual é a maior praia do mundo?",
+  "inicio": 255.944,
+  "dur": 2.222
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Praia do Cassino, no Rio Grande do Sul. B: Praia de Copacabana, no Rio. C: Praia do Futuro, no Ceará",
+  "inicio": 259.067,
+  "dur": 7.63
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra A: Praia do Cassino, no Rio Grande do Sul. A Praia do Cassino, em Rio Grande, no Rio Grande do Sul: cerca de 250 quilômetros de areia sem interrupção, reconhecidos como a mais extensa do planeta. Copacabana tem quatro quilômetros. Dá para colocar sessenta Copacabanas em fila dentro do Cassino.",
+  "inicio": 267.596,
+  "dur": 22.519
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "Qual foi a primeira capital do Brasil?",
+  "inicio": 291.015,
+  "dur": 2.815
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Rio de Janeiro. B: Salvador. C: Olinda",
+  "inicio": 294.73,
+  "dur": 3.037
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra B: Salvador. Salvador, fundada em 1549 justamente para ser a capital, e foi por 214 anos, até 1763. Depois o Rio foi capital por 197 anos, e Brasília já passou de 66. Salvador segue sendo a que governou o país por mais tempo.",
+  "inicio": 298.667,
+  "dur": 17.407
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Qual é o ponto mais a leste do continente americano?",
+  "inicio": 316.974,
+  "dur": 3.852
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Ponta do Seixas, na Paraíba. B: Cabo Branco, em Pernambuco. C: Ponta Negra, no Rio Grande do Norte",
+  "inicio": 321.726,
+  "dur": 7.481
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra A: Ponta do Seixas, na Paraíba. A Ponta do Seixas, em João Pessoa, Paraíba. Não é só o extremo leste do Brasil: é o ponto mais oriental de todo o continente americano, então é ali que o sol nasce primeiro nas Américas, se você não contar as ilhas.",
+  "inicio": 330.107,
+  "dur": 19.037
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Qual foi o último estado criado no Brasil?",
+  "inicio": 350.044,
+  "dur": 3.111
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Mato Grosso do Sul. B: Tocantins. C: Roraima",
+  "inicio": 354.056,
+  "dur": 3.481
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra B: Tocantins. Tocantins, criado pela Constituição de 1988, separando-se do norte de Goiás. Roraima e Amapá viraram estados na mesma Constituição, mas já existiam como territórios federais; Tocantins foi o único recortado de um estado existente, e é por isso que conta como o mais novo.",
+  "inicio": 358.437,
+  "dur": 21.852
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "Qual é o menor estado brasileiro em área?",
+  "inicio": 381.189,
+  "dur": 3.037
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Alagoas. B: Sergipe. C: Espírito Santo",
+  "inicio": 385.126,
+  "dur": 3.037
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra B: Sergipe. Sergipe, com cerca de 21,9 mil quilômetros quadrados. É menor que a cidade de Altamira, no Pará, que tem 159 mil: cabem sete Sergipes dentro de um município só.",
+  "inicio": 389.063,
+  "dur": 13.481
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "O Pantanal fica em quais estados brasileiros?",
+  "inicio": 403.444,
+  "dur": 3.333
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Mato Grosso e Mato Grosso do Sul. B: Mato Grosso e Goiás. C: Mato Grosso do Sul e Paraná",
+  "inicio": 407.678,
+  "dur": 6.741
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra A: Mato Grosso e Mato Grosso do Sul. Mato Grosso e Mato Grosso do Sul, e continua para a Bolívia e o Paraguai. É a maior planície alagável contínua do mundo, e a cheia não vem da chuva local: a água desce das chapadas em volta e leva meses atravessando, então o Pantanal inunda devagar, às vezes com o céu limpo.",
+  "inicio": 415.319,
+  "dur": 23.852
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "Quantos estados tem o Brasil?",
+  "inicio": 440.07,
+  "dur": 2.148
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: 25. B: 26. C: 27",
+  "inicio": 443.119,
+  "dur": 1.407
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra B: 26. Vinte e seis estados, mais o Distrito Federal, que não é estado. São 27 unidades federativas, e é daí que vem a confusão: o DF tem representação no Congresso e governador, mas não é um estado, e Brasília, tecnicamente, não é um município.",
+  "inicio": 445.426,
+  "dur": 18.889
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "Qual é a maior ilha fluvial do mundo?",
+  "inicio": 465.215,
+  "dur": 2.741
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Ilha de Marajó, no Pará. B: Ilha do Bananal, em Tocantins. C: Ilha de Fernando de Noronha",
+  "inicio": 468.856,
+  "dur": 6.815
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra B: Ilha do Bananal, em Tocantins. A Ilha do Bananal, em Tocantins, cercada só por rio: o Araguaia se divide em dois braços e volta a se juntar 350 quilômetros depois. Marajó é maior, mas é banhada também pelo mar, o que a torna fluviomarinha, não fluvial.",
+  "inicio": 476.57,
+  "dur": 19.63
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Qual é o estado brasileiro com maior área?",
+  "inicio": 497.1,
+  "dur": 3.111
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Pará. B: Amazonas. C: Mato Grosso",
+  "inicio": 501.111,
+  "dur": 2.667
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra B: Amazonas. Amazonas, com cerca de 1,56 milhão de quilômetros quadrados: quase 18% do Brasil num estado só. É maior que qualquer país da União Europeia e maior que a soma de todo o Sul e Sudeste do Brasil.",
+  "inicio": 504.678,
+  "dur": 16.0
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "As Cataratas do Iguaçu ficam em qual estado?",
+  "inicio": 521.578,
+  "dur": 3.259
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Paraná. B: Santa Catarina. C: Mato Grosso do Sul",
+  "inicio": 525.737,
+  "dur": 3.778
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra A: Paraná. Paraná, em Foz do Iguaçu, na fronteira com a Argentina. São cerca de 275 quedas, e a parte brasileira é a que dá a vista panorâmica, enquanto a argentina tem a maior parte das quedas por baixo. Por isso quem vai aos dois lados não está vendo a mesma coisa duas vezes.",
+  "inicio": 530.415,
+  "dur": 21.333
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Qual é o maior lago ou lagoa do Brasil?",
+  "inicio": 552.648,
+  "dur": 2.889
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Lagoa dos Patos, no Rio Grande do Sul. B: Lagoa Rodrigo de Freitas, no Rio. C: Lago de Furnas, em Minas",
+  "inicio": 556.437,
+  "dur": 7.852
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra A: Lagoa dos Patos, no Rio Grande do Sul. A Lagoa dos Patos, no Rio Grande do Sul, com cerca de 10 mil quilômetros quadrados: a maior lagoa da América do Sul. O Lago de Furnas é enorme, mas é artificial, represado para uma hidrelétrica.",
+  "inicio": 565.189,
+  "dur": 18.222
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "Qual destas cidades é a capital mais alta do Brasil?",
+  "inicio": 584.311,
+  "dur": 3.852
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Curitiba. B: Belo Horizonte. C: Brasília",
+  "inicio": 589.063,
+  "dur": 3.185
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra A: Curitiba. Curitiba, a cerca de 930 metros de altitude, a capital mais alta do país. Brasília fica perto de 1.100 metros em alguns pontos do Distrito Federal, mas a altitude oficial da cidade é menor que a de Curitiba. É por isso que Curitiba tem frio de verdade sem estar tão ao sul.",
+  "inicio": 593.148,
+  "dur": 21.926
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Fernando de Noronha pertence a qual estado?",
+  "inicio": 615.974,
+  "dur": 3.185
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Rio Grande do Norte. B: Pernambuco. C: Ceará",
+  "inicio": 620.059,
+  "dur": 3.481
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra B: Pernambuco. Pernambuco, apesar de ficar a 545 quilômetros da costa e muito mais perto do Rio Grande do Norte em linha reta. Noronha não é município: é um distrito estadual, administrado direto pelo governo de Pernambuco, caso único no Brasil.",
+  "inicio": 624.441,
+  "dur": 18.889
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "Qual é a região com mais estados?",
+  "inicio": 644.23,
+  "dur": 2.444
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Nordeste. B: Norte. C: Sudeste",
+  "inicio": 647.574,
+  "dur": 2.444
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra A: Nordeste. O Nordeste, com nove estados. O Norte tem sete, o Sudeste quatro, o Centro-Oeste três mais o Distrito Federal, e o Sul só três. O Nordeste tem mais estados que o Sul e o Sudeste somados.",
+  "inicio": 650.919,
+  "dur": 15.481
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "A Amazônia Legal cobre aproximadamente quanto do território brasileiro?",
+  "inicio": 667.3,
+  "dur": 5.259
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Um quarto. B: Metade. C: Cinco nonos",
+  "inicio": 673.459,
+  "dur": 2.889
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra C: Cinco nonos. Cerca de 59% do Brasil, perto de cinco nonos do país. A Amazônia Legal é uma divisão administrativa, criada para planejamento e incentivo fiscal, e por isso inclui todo o Maranhão a oeste de um meridiano e todo o Mato Grosso, mesmo onde a vegetação já é cerrado, não floresta.",
+  "inicio": 677.248,
+  "dur": 22.37
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Qual é o segundo bioma brasileiro em extensão?",
+  "inicio": 700.519,
+  "dur": 3.407
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Mata Atlântica. B: Cerrado. C: Caatinga",
+  "inicio": 704.826,
+  "dur": 3.111
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra B: Cerrado. O Cerrado, com cerca de 24% do país, atrás só da Amazônia. É a savana mais rica do mundo em espécies de plantas, e as árvores dele são tortas e de casca grossa por um motivo: o fogo é parte do ciclo, e a casca é blindagem. Muita coisa no Cerrado cresce para baixo, com raízes mais longas que o tronco.",
+  "inicio": 708.837,
+  "dur": 23.926
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Qual é o estado mais populoso do Nordeste?",
+  "inicio": 733.663,
+  "dur": 3.111
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Pernambuco. B: Bahia. C: Ceará",
+  "inicio": 737.674,
+  "dur": 2.444
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra B: Bahia. Bahia, com cerca de 14 milhões de habitantes: o quarto estado mais populoso do Brasil, atrás de São Paulo, Minas e Rio. Pernambuco e Ceará vêm depois, com cerca de 9 milhões cada.",
+  "inicio": 741.019,
+  "dur": 14.741
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "Em que ano Brasília foi inaugurada?",
+  "inicio": 756.659,
+  "dur": 2.593
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: 1957. B: 1960. C: 1964",
+  "inicio": 760.152,
+  "dur": 1.852
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra B: 1960. Em 21 de abril de 1960, depois de pouco mais de três anos de obra. A ideia de mudar a capital para o interior era muito mais antiga: aparece na Inconfidência Mineira, em 1789, e virou texto de Constituição em 1891, quase setenta anos antes de alguém pôr um tijolo.",
+  "inicio": 762.904,
+  "dur": 20.963
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Qual destes estados NÃO tem litoral?",
+  "inicio": 784.767,
+  "dur": 2.667
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Piauí. B: Sergipe. C: Tocantins",
+  "inicio": 788.333,
+  "dur": 2.519
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra C: Tocantins. Tocantins. O Piauí engana: tem litoral, só que o menor do Brasil, com cerca de 66 quilômetros. São onze as unidades sem litoral, e o Tocantins é uma delas desde que nasceu, em 1988.",
+  "inicio": 791.752,
+  "dur": 15.185
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "Qual é a cidade mais populosa do Brasil depois de São Paulo?",
+  "inicio": 807.837,
+  "dur": 4.444
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Rio de Janeiro. B: Brasília. C: Salvador",
+  "inicio": 813.181,
+  "dur": 3.185
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: Rio de Janeiro. Rio de Janeiro, com cerca de 6,7 milhões de habitantes, contra pouco mais de 11 milhões de São Paulo. Brasília vem em terceiro, perto de 2,8 milhões, e ultrapassou Salvador na última década.",
+  "inicio": 817.267,
+  "dur": 16.222
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "Os Lençóis Maranhenses são um deserto?",
+  "inicio": 834.389,
+  "dur": 2.815
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Sim, o único do Brasil. B: Não, chove demais para isso. C: Sim, mas só na estação seca",
+  "inicio": 838.104,
+  "dur": 6.593
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra B: Não, chove demais para isso. Não. Parece deserto e tem 1.500 quilômetros quadrados de dunas, mas chove cerca de 1.600 milímetros por ano ali, umas quarenta vezes mais que no Saara. É justamente essa chuva que enche as lagoas entre as dunas, e é por isso que o lugar existe como imagem: duna de deserto com água doce no meio.",
+  "inicio": 845.596,
+  "dur": 24.963
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Quanto tempo o Brasil foi governado por Portugal a partir de Salvador e do Rio, somando os dois?",
+  "inicio": 871.459,
+  "dur": 7.111
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: Cerca de 200 anos. B: Cerca de 300 anos. C: Cerca de 400 anos",
+  "inicio": 879.47,
+  "dur": 4.741
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra B: Cerca de 300 anos. Cerca de 322 anos, de 1500 a 1822. O Brasil independente, em 2026, tem 204 anos: ainda falta mais de um século para o país livre durar mais que o período colonial. A conta costuma surpreender porque a escola passa muito mais tempo no Império e na República do que nos três séculos anteriores.",
+  "inicio": 885.111,
+  "dur": 24.0
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta qual dessas te pegou de surpresa, porque algumas aqui enganam até professor de geografia. Na próxima rodada: países e bandeiras.",
+  "inicio": 910.011,
+  "dur": 11.926
+ }
+]

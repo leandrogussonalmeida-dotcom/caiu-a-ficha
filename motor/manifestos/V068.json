@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas de ciência sobre coisas que você usa todo dia e nunca parou para pensar. Sete segundos para cada uma. Metade delas tem a resposta que a escola ensinou errado.",
+  "inicio": 1.0,
+  "dur": 12.963
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Por que o céu é azul?",
+  "inicio": 14.863,
+  "dur": 1.556
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: O azul do mar reflete no céu. B: O ar espalha mais a luz azul. C: A atmosfera é azul",
+  "inicio": 17.319,
+  "dur": 6.444
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: O ar espalha mais a luz azul. As moléculas do ar espalham muito mais a luz de onda curta, o azul, do que a de onda longa, o vermelho. É o espalhamento de Rayleigh, e é também por isso que o pôr do sol é vermelho: com o sol baixo, a luz atravessa muito mais ar, todo o azul se espalha pelos lados e só sobra o vermelho vindo direto.",
+  "inicio": 24.663,
+  "dur": 25.481
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "A água do chuveiro elétrico esquenta por quê?",
+  "inicio": 51.044,
+  "dur": 3.333
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Resistência elétrica. B: Um gás que queima. C: Uma bomba comprime a água",
+  "inicio": 55.278,
+  "dur": 5.556
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra A: Resistência elétrica. Por uma resistência: um fio que se opõe à passagem da corrente e transforma eletricidade em calor. O chuveiro elétrico é o aparelho que mais consome energia na casa brasileira por minuto de uso, mas como fica ligado pouco tempo, o gasto no mês acaba perdendo para a geladeira, que não desliga nunca.",
+  "inicio": 61.733,
+  "dur": 24.741
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "O que faz a pipoca estourar?",
+  "inicio": 87.374,
+  "dur": 2.074
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: O óleo esquenta e explode. B: A água dentro do grão virar vapor. C: O amido queimar",
+  "inicio": 90.348,
+  "dur": 6.37
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra B: A água dentro do grão virar vapor. A água dentro do grão. Cada grão de milho de pipoca tem cerca de 14% de água presa por uma casca quase impermeável; a 180 graus esse vapor atinge pressão de quase dez atmosferas e arrebenta a casca, e o amido do interior se expande de uma vez. Milho comum não estoura porque a casca dele deixa o vapor escapar.",
+  "inicio": 97.619,
+  "dur": 26.519
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Por que a Lua sempre mostra a mesma face para a Terra?",
+  "inicio": 125.037,
+  "dur": 4.0
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Ela não gira. B: Ela gira exatamente no tempo de uma volta na Terra. C: A Terra a segura parada",
+  "inicio": 129.937,
+  "dur": 7.259
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra B: Ela gira exatamente no tempo de uma volta na Terra. Ela gira, e gira num tempo exatamente igual ao da volta em torno da Terra: cerca de 27 dias. Isso se chama rotação sincronizada, e aconteceu pela maré gravitacional da Terra, que freou a Lua ao longo de bilhões de anos até ela travar nesse ritmo. O lado oculto não é escuro: ele recebe tanto sol quanto o visível.",
+  "inicio": 138.096,
+  "dur": 28.0
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "O que é o relâmpago?",
+  "inicio": 166.996,
+  "dur": 1.481
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Uma descarga elétrica. B: Ar queimando. C: Atrito entre nuvens",
+  "inicio": 169.378,
+  "dur": 4.815
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra A: Uma descarga elétrica. Uma descarga elétrica entre regiões de carga oposta. O canal do relâmpago chega a cerca de 30 mil graus, cinco vezes a superfície do Sol, e é esse aquecimento brutal que expande o ar de uma vez: o trovão é o som dessa expansão. A luz chega na hora e o som demora, então cada três segundos de atraso equivalem a cerca de um quilômetro.",
+  "inicio": 175.093,
+  "dur": 27.407
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Por que o gelo flutua na água?",
+  "inicio": 203.4,
+  "dur": 2.222
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Tem ar preso dentro. B: O gelo é menos denso que a água líquida. C: É mais frio e sobe",
+  "inicio": 206.522,
+  "dur": 6.593
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra B: O gelo é menos denso que a água líquida. Porque a água é uma esquisitice: ao congelar, ela se expande e fica menos densa, cerca de 9%. Quase todas as substâncias ficam mais densas ao solidificar e afundam. Se a água fizesse o mesmo, os lagos congelariam de baixo para cima e a vida aquática em clima frio seria impossível.",
+  "inicio": 214.015,
+  "dur": 24.815
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Qual destes NÃO é um metal?",
+  "inicio": 239.73,
+  "dur": 2.0
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Mercúrio. B: Grafite. C: Chumbo",
+  "inicio": 242.63,
+  "dur": 2.519
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra B: Grafite. A grafite, que é carbono puro, não metal, apesar de conduzir eletricidade como um. O mercúrio é metal e é líquido à temperatura ambiente, o único assim. A grafite do lápis, o diamante e o carvão são os mesmos átomos arrumados de maneiras diferentes.",
+  "inicio": 246.048,
+  "dur": 20.074
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Quantos ossos tem o corpo humano adulto?",
+  "inicio": 267.022,
+  "dur": 2.963
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: 186. B: 206. C: 243",
+  "inicio": 270.885,
+  "dur": 1.63
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra B: 206. Cerca de 206 no adulto, mas o bebê nasce com uns 270: vários ossos se fundem ao longo do crescimento, principalmente no crânio e na bacia. É por isso que a contagem varia de pessoa para pessoa, e algumas têm uma costela ou um ossinho do pé a mais.",
+  "inicio": 273.415,
+  "dur": 19.63
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "A água ferve sempre a 100 graus?",
+  "inicio": 293.944,
+  "dur": 2.37
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Sim, é constante. B: Não, depende da pressão. C: Não, depende da quantidade",
+  "inicio": 297.215,
+  "dur": 5.778
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra B: Não, depende da pressão. Não: depende da pressão. A 100 graus é ao nível do mar. Em La Paz, a 3.600 metros, a água ferve perto de 88 graus, e por isso cozinhar leva mais tempo lá: ferver não é a mesma coisa que estar quente. A panela de pressão faz o contrário, elevando a pressão para a água passar dos 100 e cozinhar mais rápido.",
+  "inicio": 303.893,
+  "dur": 25.481
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "Por que o espelho inverte a sua imagem?",
+  "inicio": 330.274,
+  "dur": 2.889
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Ele troca a esquerda pela direita. B: Ele inverte a frente com o fundo. C: Ele gira a imagem 180 graus",
+  "inicio": 334.063,
+  "dur": 7.778
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra B: Ele inverte a frente com o fundo. O espelho não troca esquerda com direita: ele inverte o eixo que aponta para ele, a frente com o fundo. A sua mão direita continua à direita na imagem; o que acontece é que a figura refletida está de frente para você, e a gente interpreta como se ela tivesse se virado. A prova é a letra num papel: no espelho ela aparece deitada no mesmo lado, só espelhada em profundidade.",
+  "inicio": 342.741,
+  "dur": 31.185
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "O que acontece quando um avião voa e as orelhas tapam?",
+  "inicio": 374.826,
+  "dur": 4.0
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Falta oxigênio. B: A pressão dentro e fora do ouvido fica diferente. C: O barulho ensurdece",
+  "inicio": 379.726,
+  "dur": 6.963
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra B: A pressão dentro e fora do ouvido fica diferente. A pressão da cabine cai e o ar preso atrás do tímpano fica com pressão maior, empurrando a membrana para fora. Engolir ou bocejar abre a trompa de Eustáquio e iguala as duas pressões, e é aí que estala e volta ao normal.",
+  "inicio": 387.589,
+  "dur": 20.963
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Por que o sabão limpa a gordura?",
+  "inicio": 409.452,
+  "dur": 2.37
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Dissolve a gordura em ácido. B: Tem uma ponta que gosta de água e outra de gordura. C: Aumenta a temperatura da água",
+  "inicio": 412.722,
+  "dur": 8.815
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra B: Tem uma ponta que gosta de água e outra de gordura. Porque a molécula de sabão tem duas pontas de personalidades opostas: uma se dá bem com água, a outra com gordura. Ela agarra a gordura por um lado e é arrastada pela água pelo outro. É o mesmo princípio do detergente, e é por isso que lavar a mão só com água não resolve: a gordura não tem o que a leve embora.",
+  "inicio": 422.437,
+  "dur": 27.852
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "Por que o micro-ondas esquenta a comida?",
+  "inicio": 451.189,
+  "dur": 2.963
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Faz as moléculas de água vibrarem. B: Irradia a comida com calor. C: Queima o açúcar da superfície",
+  "inicio": 455.052,
+  "dur": 7.481
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra A: Faz as moléculas de água vibrarem. Ele emite uma onda na frequência em que a molécula de água gira e se agita, e essa agitação é calor. Por isso ele esquenta de dentro para fora, ao contrário do forno, e por isso prato seco não esquenta e comida descongela de forma desigual: onde já virou água líquida, absorve muito mais que onde ainda está gelo.",
+  "inicio": 463.433,
+  "dur": 26.741
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "O que são as estrelas cadentes?",
+  "inicio": 491.074,
+  "dur": 2.296
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Estrelas morrendo. B: Grãos de poeira queimando na atmosfera. C: Satélites reentrando",
+  "inicio": 494.27,
+  "dur": 6.519
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra B: Grãos de poeira queimando na atmosfera. Grãos de poeira e pedrinhas, muitas do tamanho de um grão de areia, entrando na atmosfera a dezenas de quilômetros por segundo. O risco de luz não é a pedra queimando: é o ar comprimido e ionizado na frente dela, que brilha. Quase nada chega ao chão.",
+  "inicio": 501.689,
+  "dur": 22.444
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "Qual é o elemento mais abundante do universo?",
+  "inicio": 525.033,
+  "dur": 3.333
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Oxigênio. B: Hidrogênio. C: Carbono",
+  "inicio": 529.267,
+  "dur": 2.815
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra B: Hidrogênio. Hidrogênio, cerca de 74% de toda a matéria comum, seguido do hélio. Todos os outros elementos juntos, incluindo tudo de que você é feito, são uma fração de 2%, e foram forjados dentro de estrelas. Na crosta da Terra o campeão é outro: o oxigênio.",
+  "inicio": 532.981,
+  "dur": 20.074
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "O que faz o pão crescer?",
+  "inicio": 553.956,
+  "dur": 1.778
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: O calor do forno. B: Gás produzido pela levedura. C: A água evaporando",
+  "inicio": 556.633,
+  "dur": 5.407
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra B: Gás produzido pela levedura. Gás carbônico produzido pela levedura, um fungo vivo que come o açúcar da farinha e solta gás e álcool. A rede de glúten segura esse gás como milhares de balõezinhos, e o forno só expande o que já estava lá e firma a estrutura. O álcool evapora no forno.",
+  "inicio": 562.941,
+  "dur": 21.926
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Por que ficamos tontos ao girar e parar?",
+  "inicio": 585.767,
+  "dur": 2.963
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: O sangue desce da cabeça. B: O líquido do ouvido interno continua girando. C: Os olhos demoram a focar",
+  "inicio": 589.63,
+  "dur": 7.778
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra B: O líquido do ouvido interno continua girando. Porque o líquido dentro dos canais do ouvido interno tem inércia e continua girando depois que você para. Os sensores de equilíbrio seguem avisando movimento, os olhos dizem que está parado, e esse desacordo é a tontura. Bailarina não tonteia porque treinou o cérebro a ignorar o aviso.",
+  "inicio": 598.307,
+  "dur": 25.556
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Qual é a velocidade do som no ar, aproximadamente?",
+  "inicio": 624.763,
+  "dur": 3.704
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: 340 metros por segundo. B: 3.400 metros por segundo. C: 34 metros por segundo",
+  "inicio": 629.367,
+  "dur": 5.926
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra A: 340 metros por segundo. Cerca de 340 metros por segundo, ou pouco mais de 1.200 km/h. Depende da temperatura: quanto mais quente o ar, mais rápido o som. Na água ele vai mais de quatro vezes mais rápido, e no aço, quinze vezes: som não precisa de ar, precisa de matéria, e matéria mais rígida conduz melhor.",
+  "inicio": 636.193,
+  "dur": 23.704
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Por que a banana fica preta na geladeira?",
+  "inicio": 660.796,
+  "dur": 3.037
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Congela por dentro. B: O frio rompe as células e libera uma enzima. C: Absorve cheiro dos outros alimentos",
+  "inicio": 664.733,
+  "dur": 8.074
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra B: O frio rompe as células e libera uma enzima. O frio rompe as paredes celulares da casca e libera uma enzima que, em contato com o oxigênio, produz pigmento escuro. É oxidação, a mesma reação que escurece a maçã cortada. A banana é tropical e não tem defesa para frio; a polpa continua boa um tempo mesmo com a casca preta.",
+  "inicio": 673.707,
+  "dur": 24.815
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "A Terra está mais perto do Sol em qual época?",
+  "inicio": 699.422,
+  "dur": 3.333
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: No verão do Brasil. B: No verão do hemisfério norte. C: A distância não muda",
+  "inicio": 703.656,
+  "dur": 5.852
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra A: No verão do Brasil. Em janeiro, que é verão no Brasil. Mas não é a distância que causa as estações: é a inclinação do eixo da Terra. A prova está aí: quando estamos mais perto do Sol, o hemisfério norte está no inverno. A diferença de distância ao longo do ano é de cerca de 3%, pouco demais para explicar estação alguma.",
+  "inicio": 710.407,
+  "dur": 24.741
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Como o pássaro pousa no fio de alta tensão sem morrer?",
+  "inicio": 736.048,
+  "dur": 4.0
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: As penas isolam. B: Ele toca um fio só. C: A corrente é baixa demais para ele",
+  "inicio": 740.948,
+  "dur": 5.926
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra B: Ele toca um fio só. Porque ele toca um fio só. Choque exige diferença de potencial entre dois pontos, e os dois pés dele estão praticamente no mesmo. Se ele esticar a asa e encostar em outro fio ou no poste aterrado, fecha o caminho e morre. É a mesma razão pela qual técnico de linha viva trabalha isolado do chão.",
+  "inicio": 747.774,
+  "dur": 24.296
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "O que é a ferrugem?",
+  "inicio": 772.97,
+  "dur": 1.407
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Um fungo no metal. B: Ferro reagindo com oxigênio e água. C: O metal secando",
+  "inicio": 775.278,
+  "dur": 5.852
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra B: Ferro reagindo com oxigênio e água. Ferro combinado com oxigênio e água: óxido de ferro. É uma reação química, não um bicho. O alumínio também oxida, mas a camada que ele forma é fina, dura e grudada, e protege o metal de baixo, em vez de descascar como a ferrugem. É por isso que panela de alumínio dura e portão de ferro precisa de tinta.",
+  "inicio": 782.03,
+  "dur": 26.148
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "Por que o mar é salgado?",
+  "inicio": 809.078,
+  "dur": 1.778
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Tem sal no fundo. B: A chuva e os rios arrancam sal das rochas e levam para o mar. C: O sol concentra o sal da água",
+  "inicio": 811.756,
+  "dur": 8.741
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra B: A chuva e os rios arrancam sal das rochas e levam para o mar. A chuva dissolve minerais das rochas, os rios levam esse material para o mar, e a água evapora deixando o sal para trás. A entrada é contínua e a saída é quase nenhuma, então o sal acumula há bilhões de anos. Por isso rio é doce mesmo sendo a origem do sal do mar: no rio a água não fica parada evaporando.",
+  "inicio": 821.396,
+  "dur": 28.222
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Quanto tempo a luz do Sol leva para chegar à Terra?",
+  "inicio": 850.519,
+  "dur": 3.778
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: 8 minutos. B: 8 segundos. C: 8 horas",
+  "inicio": 855.196,
+  "dur": 2.889
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra A: 8 minutos. Cerca de 8 minutos e 20 segundos. Isso significa que você nunca viu o Sol como ele é agora, e sim como estava há oito minutos. Da Lua a luz leva pouco mais de um segundo; da estrela mais próxima depois do Sol, mais de quatro anos.",
+  "inicio": 858.985,
+  "dur": 18.815
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Por que a roupa preta esquenta mais no sol?",
+  "inicio": 878.7,
+  "dur": 3.185
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Absorve mais luz e converte em calor. B: Atrai o calor do ar. C: É mais grossa",
+  "inicio": 882.785,
+  "dur": 6.0
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Absorve mais luz e converte em calor. Porque preto é o que não reflete quase nada: a luz que entra é absorvida e vira calor. Branco reflete a maior parte de volta. É por isso que telhado claro reduz a temperatura da casa, e por isso que roupa clara é mais fresca, com uma exceção famosa: no deserto, túnica preta e larga pode ser mais fresca, porque esquenta o ar entre o tecido e o corpo e cria corrente de ar.",
+  "inicio": 889.685,
+  "dur": 31.407
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "O que é o arco-íris?",
+  "inicio": 921.993,
+  "dur": 1.481
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Luz refletida nas nuvens. B: Luz branca separada pelas gotas de chuva. C: Vapor colorido",
+  "inicio": 924.374,
+  "dur": 6.741
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra B: Luz branca separada pelas gotas de chuva. Luz branca entrando em cada gota de chuva, se separando em cores por refração e voltando. A ordem é sempre a mesma, e o arco é sempre do lado oposto ao sol: se o arco está na sua frente, o sol está atrás de você. De avião às vezes se vê o arco-íris completo, um círculo inteiro.",
+  "inicio": 932.015,
+  "dur": 24.667
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Qual é o planeta mais quente do Sistema Solar?",
+  "inicio": 957.581,
+  "dur": 3.407
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Mercúrio. B: Vênus. C: Júpiter",
+  "inicio": 961.889,
+  "dur": 2.444
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra B: Vênus. Vênus, com cerca de 460 graus na superfície, mesmo sendo quase o dobro mais distante do Sol que Mercúrio. A culpa é da atmosfera: gás carbônico quase puro e noventa vezes mais densa que a nossa, um efeito estufa descontrolado. Em Vênus a temperatura é praticamente a mesma de dia e de noite.",
+  "inicio": 965.233,
+  "dur": 23.037
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "O que faz o avião voar?",
+  "inicio": 989.17,
+  "dur": 1.704
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: A diferença de pressão criada pela asa. B: O motor empurrando para cima. C: O ar quente dentro da cabine",
+  "inicio": 991.774,
+  "dur": 7.926
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: A diferença de pressão criada pela asa. A asa desvia o ar para baixo e, pela reação, é empurrada para cima; isso aparece como pressão menor em cima da asa e maior embaixo. O motor não empurra o avião para cima: ele dá velocidade, e é a velocidade que faz a asa funcionar. Sem velocidade a asa não sustenta nada, e é por isso que avião decola correndo.",
+  "inicio": 1000.6,
+  "dur": 26.963
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "Por que um corte na pele arde com álcool e não com água?",
+  "inicio": 1028.463,
+  "dur": 4.148
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: O álcool é ácido. B: O álcool ativa sensores de calor do corpo. C: O álcool congela a ferida",
+  "inicio": 1033.511,
+  "dur": 7.037
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra B: O álcool ativa sensores de calor do corpo. O álcool rebaixa a temperatura que ativa certos receptores da pele: eles passam a disparar a cerca de 34 graus, abaixo da temperatura do seu corpo. Resultado: o nervo manda sinal de queimadura sem que haja calor nenhum. É o mesmo tipo de truque da pimenta, que ativa esses sensores, e da menta, que ativa os de frio.",
+  "inicio": 1041.448,
+  "dur": 27.556
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Quanto do corpo humano é água, aproximadamente?",
+  "inicio": 1069.904,
+  "dur": 3.481
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: Um terço. B: Metade. C: Cerca de dois terços",
+  "inicio": 1074.285,
+  "dur": 3.481
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra C: Cerca de dois terços. Cerca de 60 a 65% no adulto, ou perto de dois terços. O bebê recém-nascido chega a 75%, e o número cai com a idade. E não é água solta: a maior parte está dentro das células, e só uma fração circula no sangue.",
+  "inicio": 1078.667,
+  "dur": 18.074
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta qual dessas você aprendeu errado na escola, porque várias aqui são mito de livro didático. Na próxima rodada: bicho e natureza.",
+  "inicio": 1097.641,
+  "dur": 11.852
+ }
+]

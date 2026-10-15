@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas sobre bichos, e muitas respostas são mais estranhas que qualquer ficção. Seis segundos para cada uma. Se você acertar mais de vinte, pode se chamar de biólogo amador.",
+  "inicio": 1.0,
+  "dur": 13.556
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Quantos corações tem um polvo?",
+  "inicio": 15.456,
+  "dur": 2.222
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Um. B: Três. C: Cinco",
+  "inicio": 18.578,
+  "dur": 1.778
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: Três. Três: dois bombeiam sangue para as brânquias e um para o resto do corpo. O sangue dele é azul, porque usa cobre em vez de ferro para carregar oxigênio. E o coração central para de bater quando o polvo nada, o que o deixa exausto: é por isso que polvo prefere andar pelo fundo a nadar.",
+  "inicio": 21.256,
+  "dur": 22.444
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Qual animal vivo tem a mordida mais forte?",
+  "inicio": 44.6,
+  "dur": 3.111
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Tubarão-branco. B: Crocodilo-de-água-salgada. C: Hipopótamo",
+  "inicio": 48.611,
+  "dur": 4.593
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra B: Crocodilo-de-água-salgada. O crocodilo-de-água-salgada: em um exemplar de 4,5 metros já se mediu força equivalente a mais de 1.700 quilos. A musculatura de fechar é monstruosa, e a de abrir é fraquíssima: por isso uma fita enrolada no focinho mantém a boca de um crocodilo fechada.",
+  "inicio": 54.104,
+  "dur": 21.778
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "A girafa tem quantas vértebras no pescoço?",
+  "inicio": 76.781,
+  "dur": 3.111
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Sete, como a gente. B: Vinte e quatro. C: Trinta e duas",
+  "inicio": 80.793,
+  "dur": 4.296
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra A: Sete, como a gente. Sete, o mesmo número que você tem: quase todos os mamíferos têm sete vértebras cervicais, do rato à girafa. A diferença é o tamanho de cada uma, que na girafa passa de vinte centímetros. A exceção é o peixe-boi, que tem seis.",
+  "inicio": 85.989,
+  "dur": 19.111
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Qual é o maior animal que já existiu na Terra?",
+  "inicio": 106.0,
+  "dur": 3.407
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Um dinossauro. B: A baleia-azul. C: O mamute",
+  "inicio": 110.307,
+  "dur": 3.481
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra B: A baleia-azul. A baleia-azul, que está viva hoje: até 30 metros e perto de 150 toneladas, mais que qualquer dinossauro conhecido. A língua dela pesa o que pesa um elefante, e o coração tem o tamanho de um carro pequeno. O bezerro ganha cerca de 90 quilos por dia só de leite.",
+  "inicio": 114.689,
+  "dur": 21.333
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "O morcego é cego?",
+  "inicio": 136.922,
+  "dur": 1.259
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Sim, totalmente. B: Não, todos enxergam. C: Só as espécies de caverna",
+  "inicio": 139.081,
+  "dur": 5.333
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra B: Não, todos enxergam. Nenhum morcego é cego: todos têm olhos funcionais, e os frugívoros enxergam muito bem, alguns até no ultravioleta. O que a ecolocalização faz é funcionar no escuro total, onde o olho não serve. A expressão cego como um morcego é só errada.",
+  "inicio": 145.315,
+  "dur": 20.222
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Quanto tempo uma formiga-rainha pode viver?",
+  "inicio": 166.437,
+  "dur": 3.185
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Cerca de um ano. B: Cerca de cinco anos. C: Mais de vinte anos",
+  "inicio": 170.522,
+  "dur": 4.815
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra C: Mais de vinte anos. Rainhas de algumas espécies passam de vinte anos, e há registro de uma que viveu quase trinta em laboratório. As operárias, que são irmãs dela e nasceram do mesmo material genético, vivem semanas ou meses: a diferença é só a alimentação que receberam quando larvas.",
+  "inicio": 176.237,
+  "dur": 22.074
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Qual destes não é um inseto?",
+  "inicio": 199.211,
+  "dur": 2.074
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Aranha. B: Barata. C: Formiga",
+  "inicio": 202.185,
+  "dur": 2.37
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra A: Aranha. A aranha, que é aracnídeo: oito patas, duas partes no corpo e nenhuma antena. Insetos têm seis patas, três partes e antenas. É a mesma diferença que separa escorpião e carrapato dos insetos, e é por isso que inseticida comum muitas vezes não resolve com aranha.",
+  "inicio": 205.456,
+  "dur": 20.889
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Qual ave é a mais rápida do mundo?",
+  "inicio": 227.244,
+  "dur": 2.519
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Falcão-peregrino. B: Andorinhão. C: Águia-real",
+  "inicio": 230.663,
+  "dur": 3.63
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra A: Falcão-peregrino. O falcão-peregrino, que passa de 380 km/h, mas só em voo picado, caindo. Em voo horizontal a ave mais rápida é o andorinhão, perto de 110 km/h. Comparar as duas marcas é como comparar quem corre com quem se joga de um prédio.",
+  "inicio": 235.193,
+  "dur": 18.963
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "Quantos dentes tem um tubarão ao longo da vida?",
+  "inicio": 255.056,
+  "dur": 3.481
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Cerca de 50. B: Cerca de 500. C: Mais de 20 mil",
+  "inicio": 259.437,
+  "dur": 3.704
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra C: Mais de 20 mil. Alguns passam de 20 mil, porque o tubarão troca dente a vida inteira: há fileiras de reposição deitadas atrás da que está em uso, e cada dente perdido é substituído em dias. Dente de tubarão não tem raiz na mandíbula, e é por isso que se solta com tanta facilidade.",
+  "inicio": 264.041,
+  "dur": 21.778
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "A cobra sente o gosto do ar com qual órgão?",
+  "inicio": 286.719,
+  "dur": 3.185
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: O nariz. B: A língua. C: A pele",
+  "inicio": 290.804,
+  "dur": 2.519
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra B: A língua. A língua, que recolhe partículas do ar e leva para um órgão no céu da boca. A língua bifurcada serve de estéreo: se o lado direito pega mais cheiro que o esquerdo, a presa está à direita. Ela não fareja no sentido comum: ela prova o ar.",
+  "inicio": 294.222,
+  "dur": 19.185
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Qual mamífero põe ovos?",
+  "inicio": 314.307,
+  "dur": 1.704
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Nenhum. B: O ornitorrinco. C: O tatu",
+  "inicio": 316.911,
+  "dur": 2.889
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra B: O ornitorrinco. O ornitorrinco e as équidnas, os únicos mamíferos que põem ovos. O ornitorrinco ainda é peludo, produz leite, tem bico de pato, detecta campo elétrico das presas e os machos têm esporão venenoso. Quando o primeiro exemplar chegou à Europa, os cientistas acharam que era uma fraude costurada.",
+  "inicio": 320.7,
+  "dur": 23.704
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Qual é o animal terrestre mais lento do mundo?",
+  "inicio": 345.304,
+  "dur": 3.407
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Preguiça. B: Tartaruga-gigante. C: Caracol",
+  "inicio": 349.611,
+  "dur": 3.333
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra A: Preguiça. A preguiça-de-três-dedos, que no chão anda cerca de 2 metros por minuto. A lentidão é estratégia: ela come folha, que dá pouquíssima energia, e leva até um mês para digerir uma refeição. Mover-se devagar também a esconde: a visão de muitos predadores detecta movimento, e ela quase não faz nenhum.",
+  "inicio": 353.844,
+  "dur": 23.704
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "A abelha operária vive quanto tempo no verão?",
+  "inicio": 378.448,
+  "dur": 3.333
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Cerca de seis semanas. B: Cerca de seis meses. C: Cerca de dois anos",
+  "inicio": 382.681,
+  "dur": 5.259
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra A: Cerca de seis semanas. Cerca de seis semanas, e literalmente morre de trabalho: as asas se desgastam. A rainha da mesma colmeia vive de três a cinco anos. Uma operária produz, em toda a vida, menos de uma colher de chá de mel.",
+  "inicio": 388.841,
+  "dur": 17.704
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Qual animal tem a gestação mais longa?",
+  "inicio": 407.444,
+  "dur": 2.815
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Baleia-azul. B: Elefante. C: Girafa",
+  "inicio": 411.159,
+  "dur": 2.815
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra B: Elefante. O elefante, com cerca de 22 meses, quase dois anos. O filhote nasce com uns 120 quilos e já de pé, porque uma manada em movimento não espera ninguém. A baleia-azul, muito maior, gesta cerca de 11 meses: na água o peso não é problema, e a cria pode nascer mais crua.",
+  "inicio": 414.874,
+  "dur": 21.333
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "O que o camaleão faz ao mudar de cor?",
+  "inicio": 437.107,
+  "dur": 2.741
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Imita o fundo para se esconder. B: Comunica humor e temperatura. C: Fica invisível",
+  "inicio": 440.748,
+  "dur": 6.296
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra B: Comunica humor e temperatura. Principalmente comunica: estado de ânimo, disposição para brigar, cortejo, e controle de temperatura, já que cor escura absorve mais calor. Camuflagem é uso secundário. Camaleão não copia estampa de xadrez nem padrão de tapete, como o desenho animado ensinou.",
+  "inicio": 447.944,
+  "dur": 22.37
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "Qual é o maior felino das Américas?",
+  "inicio": 471.215,
+  "dur": 2.593
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Onça-parda. B: Onça-pintada. C: Jaguatirica",
+  "inicio": 474.707,
+  "dur": 3.407
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra B: Onça-pintada. A onça-pintada, o terceiro maior felino do mundo, atrás do tigre e do leão. Ela tem a mordida mais forte entre os grandes felinos em relação ao tamanho, e caça de um jeito próprio: perfura o crânio da presa, em vez de sufocar pela garganta como os outros fazem.",
+  "inicio": 479.015,
+  "dur": 21.333
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Quantas espécies de aves existem no Brasil, aproximadamente?",
+  "inicio": 501.248,
+  "dur": 4.444
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Cerca de 600. B: Cerca de 1.900. C: Cerca de 4.000",
+  "inicio": 506.593,
+  "dur": 3.926
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra B: Cerca de 1.900. Perto de 1.900 espécies, o que coloca o Brasil entre os dois ou três países mais ricos em aves do planeta, disputando com a Colômbia. E a lista continua crescendo: espécies novas são descritas quase todo ano, a maioria na Amazônia.",
+  "inicio": 511.419,
+  "dur": 19.259
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "A água-viva tem cérebro?",
+  "inicio": 531.578,
+  "dur": 1.778
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Sim, pequeno. B: Não, nenhum. C: Só as maiores têm",
+  "inicio": 534.256,
+  "dur": 3.926
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra B: Não, nenhum. Nenhum. Não tem cérebro, coração, sangue nem ossos: tem uma rede de nervos espalhada pelo corpo, que já basta para nadar, caçar e reagir à luz. Água-viva existe há mais de 500 milhões de anos, muito antes dos dinossauros, e é cerca de 95% água.",
+  "inicio": 539.081,
+  "dur": 20.0
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Como o pinguim-imperador cuida do ovo?",
+  "inicio": 559.981,
+  "dur": 2.815
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: A fêmea choca no nido. B: O macho segura o ovo nos pés por dois meses. C: Os dois se alternam dia e noite",
+  "inicio": 563.696,
+  "dur": 8.0
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra B: O macho segura o ovo nos pés por dois meses. O macho equilibra o ovo sobre os pés, sob uma dobra de pele, e fica cerca de dois meses em pé no inverno antártico, sem comer, a 40 graus abaixo de zero, enquanto a fêmea vai ao mar se alimentar. Ele perde perto de 40% do peso nessa espera.",
+  "inicio": 572.596,
+  "dur": 22.074
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "Qual destes animais não existe mais?",
+  "inicio": 595.57,
+  "dur": 2.667
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Dodô. B: Quagga. C: Os dois",
+  "inicio": 599.137,
+  "dur": 2.222
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra C: Os dois. Os dois. O dodô, de Maurício, desapareceu no fim do século 17, cerca de oitenta anos depois da chegada dos navios. O quagga era uma zebra sul-africana com listras só na metade da frente, extinta em 1883; o último morreu num zoológico em Amsterdã.",
+  "inicio": 602.259,
+  "dur": 19.852
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "O que a vaca faz com o que rumina?",
+  "inicio": 623.011,
+  "dur": 2.519
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Mastiga a comida que volta do estômago. B: Limpa os dentes. C: Produz saliva para beber menos",
+  "inicio": 626.43,
+  "dur": 7.111
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra A: Mastiga a comida que volta do estômago. Ela devolve à boca a comida já parcialmente fermentada e mastiga de novo, para quebrar a fibra. A vaca tem um estômago com quatro compartimentos, e nenhum deles digere capim diretamente: isso é trabalho de bactérias que vivem lá dentro. Sem esses micróbios, a vaca morreria de fome comendo capim.",
+  "inicio": 634.441,
+  "dur": 25.852
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "Qual é o maior roedor do mundo?",
+  "inicio": 661.193,
+  "dur": 2.296
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Castor. B: Capivara. C: Porco-espinho",
+  "inicio": 664.389,
+  "dur": 2.963
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra B: Capivara. A capivara, que chega a 65 quilos: o maior roedor vivo do planeta, e brasileiríssima. Ela é parente próxima do porquinho-da-índia, nada muito bem e consegue ficar submersa por cerca de cinco minutos, com os olhos, orelhas e narinas alinhados no alto da cabeça.",
+  "inicio": 668.252,
+  "dur": 20.963
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "O cachorro enxerga em preto e branco?",
+  "inicio": 690.115,
+  "dur": 2.741
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Sim. B: Não, vê azul e amarelo. C: Não, vê como a gente",
+  "inicio": 693.756,
+  "dur": 4.296
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra B: Não, vê azul e amarelo. Não: ele vê cores, só menos que você. Tem dois tipos de sensor de cor contra os seus três, então distingue azul e amarelo mas confunde vermelho com verde, parecido com o daltonismo humano. Por outro lado enxerga muito melhor no escuro e detecta movimento antes.",
+  "inicio": 698.952,
+  "dur": 22.074
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Quanto mede a língua de um tamanduá-bandeira?",
+  "inicio": 721.926,
+  "dur": 3.333
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Cerca de 20 cm. B: Cerca de 60 cm. C: Cerca de um metro",
+  "inicio": 726.159,
+  "dur": 4.296
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra B: Cerca de 60 cm. Cerca de 60 centímetros, e ele a projeta até 150 vezes por minuto. O tamanduá não tem dente nenhum: engole as formigas inteiras e as tritura no estômago, com areia e pedrinhas que engole de propósito. Em um dia come dezenas de milhares de insetos.",
+  "inicio": 731.356,
+  "dur": 20.444
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Qual bicho é responsável por mais mortes humanas por ano?",
+  "inicio": 752.7,
+  "dur": 4.222
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Tubarão. B: Cobra. C: Mosquito",
+  "inicio": 757.822,
+  "dur": 2.444
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra C: Mosquito. O mosquito, de longe, por transmitir malária e dengue, entre outras: são centenas de milhares de mortes por ano. Cobras matam na ordem de dezenas de milhares; tubarões, menos de dez. A percepção de perigo é quase o inverso do risco real.",
+  "inicio": 761.167,
+  "dur": 19.259
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "A estrela-do-mar tem o quê no lugar do cérebro?",
+  "inicio": 781.326,
+  "dur": 3.481
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Um gânglio simples. B: Uma rede de nervos em anel. C: Ela tem cérebro pequeno",
+  "inicio": 785.707,
+  "dur": 5.926
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra B: Uma rede de nervos em anel. Um anel de nervos, com um ramo em cada braço: nenhum centro de comando. Ela também não tem sangue: bombeia água do mar pelo corpo. E cada braço tem um olho simples na ponta, que vê pouco mais que luz e sombra.",
+  "inicio": 792.533,
+  "dur": 18.519
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Qual planta cresce mais rápido no mundo?",
+  "inicio": 811.952,
+  "dur": 2.963
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Eucalipto. B: Bambu. C: Girassol",
+  "inicio": 815.815,
+  "dur": 2.593
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra B: Bambu. O bambu, com espécies que passam de 90 centímetros por dia: dá para ver crescer se você observar por algumas horas. Bambu é grama, não árvore, e algumas espécies florescem uma vez só, em sincronia, depois de décadas, e morrem todas juntas.",
+  "inicio": 819.307,
+  "dur": 19.185
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "Qual destes bichos pode sobreviver sem comer por mais de um ano?",
+  "inicio": 839.393,
+  "dur": 4.741
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Crocodilo. B: Rato. C: Pardal",
+  "inicio": 845.033,
+  "dur": 2.37
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: Crocodilo. O crocodilo, que tem metabolismo muito baixo e usa a gordura da cauda: em condições frias há registros de mais de um ano de jejum. Ele digere tudo, inclusive osso e casco, e o ácido do estômago dele é um dos mais fortes entre os vertebrados.",
+  "inicio": 848.304,
+  "dur": 19.63
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "A árvore mais antiga do mundo tem quantos anos, aproximadamente?",
+  "inicio": 868.833,
+  "dur": 4.741
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Cerca de 900. B: Cerca de 2.500. C: Mais de 4.800",
+  "inicio": 874.474,
+  "dur": 3.852
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra C: Mais de 4.800. Um pinheiro-bristlecone na Califórnia passa de 4.800 anos: ele já era adulto quando as pirâmides do Egito foram construídas. A localização exata é mantida em segredo, justamente para que ninguém vá lá cortar um pedaço de lembrança.",
+  "inicio": 879.226,
+  "dur": 19.185
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Por que o flamingo é rosa?",
+  "inicio": 899.311,
+  "dur": 1.926
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: É a cor natural das penas. B: Pela comida que ele come. C: Pelo sol forte",
+  "inicio": 902.137,
+  "dur": 5.63
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra B: Pela comida que ele come. Pela comida: ele come crustáceos e algas ricos em pigmentos carotenoides, os mesmos que deixam a cenoura laranja, e esses pigmentos se depositam nas penas. Flamingo em cativeiro com dieta errada fica branco. O filhote nasce cinza e vai rosando com o tempo.",
+  "inicio": 908.667,
+  "dur": 21.852
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta qual bicho aqui você não sabia que era assim, porque pelo menos um deles sempre pega todo mundo. Na próxima rodada: cinema, televisão e música.",
+  "inicio": 931.419,
+  "dur": 13.037
+ }
+]

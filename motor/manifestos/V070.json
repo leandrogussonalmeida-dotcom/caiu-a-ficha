@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas de cinema, televisão e música, com bastante Brasil no meio. Seis segundos para cada uma. A sétima derruba quase todo mundo, fique esperto nela.",
+  "inicio": 1.0,
+  "dur": 11.852
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Qual filme brasileiro ganhou o primeiro Oscar da história do país?",
+  "inicio": 13.752,
+  "dur": 4.889
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Cidade de Deus. B: Central do Brasil. C: Ainda Estou Aqui",
+  "inicio": 19.541,
+  "dur": 4.444
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra C: Ainda Estou Aqui. Ainda Estou Aqui, de Walter Salles, que levou o Oscar de melhor filme internacional em 2025: a primeira estatueta do Brasil em quase um século de indicações. Central do Brasil e Cidade de Deus foram indicados e perderam, e O Pagador de Promessas, de 1962, ganhou Cannes mas não o Oscar.",
+  "inicio": 24.885,
+  "dur": 23.481
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Quando foi a primeira transmissão oficial de TV no Brasil?",
+  "inicio": 49.267,
+  "dur": 4.296
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: 1938. B: 1950. C: 1962",
+  "inicio": 54.463,
+  "dur": 1.852
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra B: 1950. Em 18 de setembro de 1950, pela TV Tupi de São Paulo, de Assis Chateaubriand. Havia pouquíssimos aparelhos no país, e Chateaubriand importou centenas de televisores e os espalhou em vitrines e praças para que houvesse alguém assistindo à própria estreia.",
+  "inicio": 57.215,
+  "dur": 20.222
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "Qual destes instrumentos é de origem brasileira?",
+  "inicio": 78.337,
+  "dur": 3.556
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Cuíca. B: Bandolim. C: Cavaquinho",
+  "inicio": 82.793,
+  "dur": 2.667
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra A: Cuíca. A cuíca, desenvolvida no Brasil a partir de tambores de fricção africanos: o som vem de uma vareta interna atritada com um pano úmido, e não de bater no couro. O cavaquinho veio de Portugal, e o bandolim tem origem italiana — os dois foram adotados e transformados aqui.",
+  "inicio": 86.359,
+  "dur": 21.481
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Qual é o filme mais longo já exibido comercialmente no cinema entre estes?",
+  "inicio": 108.741,
+  "dur": 5.481
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: E o Vento Levou. B: Os Dez Mandamentos. C: O Poderoso Chefão",
+  "inicio": 115.122,
+  "dur": 4.667
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra A: E o Vento Levou. E o Vento Levou, com quase quatro horas, incluindo intervalo oficial no meio — algo comum na época e hoje quase extinto. Em valores corrigidos pela inflação, ele continua sendo a maior bilheteria da história do cinema mundial, à frente de qualquer lançamento recente.",
+  "inicio": 120.689,
+  "dur": 22.0
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "Quem compôs a música Garota de Ipanema?",
+  "inicio": 143.589,
+  "dur": 2.889
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Tom Jobim e Vinicius de Moraes. B: João Gilberto e Caetano Veloso. C: Chico Buarque e Tom Jobim",
+  "inicio": 147.378,
+  "dur": 7.259
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra A: Tom Jobim e Vinicius de Moraes. Tom Jobim na música e Vinicius de Moraes na letra, em 1962. É uma das canções mais gravadas da história, com centenas de versões, e foi ela que levou a bossa nova ao mundo. A garota existiu: Helô Pinheiro, adolescente que passava na frente do bar onde os dois se sentavam.",
+  "inicio": 155.537,
+  "dur": 23.481
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Qual foi a primeira novela brasileira gravada em cores?",
+  "inicio": 179.919,
+  "dur": 4.074
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: O Bem-Amado. B: Selva de Pedra. C: Irmãos Coragem",
+  "inicio": 184.893,
+  "dur": 3.852
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra A: O Bem-Amado. O Bem-Amado, de Dias Gomes, em 1973: a primeira novela brasileira inteiramente em cores. A televisão em cores no Brasil começou oficialmente em 1972, com a transmissão da Festa da Uva, em Caxias do Sul.",
+  "inicio": 189.644,
+  "dur": 16.889
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "No cinema, o que é um MacGuffin?",
+  "inicio": 207.433,
+  "dur": 2.37
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Um erro de continuidade. B: Um objeto que move a trama e não importa em si. C: Um corte entre duas cenas",
+  "inicio": 210.704,
+  "dur": 7.926
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra B: Um objeto que move a trama e não importa em si. Um objeto ou objetivo que faz a história andar e cujo conteúdo é irrelevante: a maleta misteriosa, o documento secreto, o microfilme. O termo é de Alfred Hitchcock, que dizia que o público não precisa nem saber o que há dentro — basta querer que o personagem consiga. Essa é a sétima pergunta, a que derruba todo mundo.",
+  "inicio": 219.53,
+  "dur": 28.148
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Quantas cordas tem um violão comum?",
+  "inicio": 248.578,
+  "dur": 2.593
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Seis. B: Sete. C: Doze",
+  "inicio": 252.07,
+  "dur": 1.852
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra A: Seis. Seis. O violão de sete cordas existe e é peça central do choro brasileiro, onde faz as linhas graves que respondem ao solo. O cavaquinho tem quatro, e o violão de doze cordas duplica cada uma para engrossar o som.",
+  "inicio": 254.822,
+  "dur": 17.185
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "Qual gênero musical nasceu no Brasil?",
+  "inicio": 272.907,
+  "dur": 2.741
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Choro. B: Tango. C: Bolero",
+  "inicio": 276.548,
+  "dur": 2.148
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra A: Choro. O choro, surgido no Rio de Janeiro no fim do século 19 e considerado a primeira música urbana genuinamente brasileira. Apesar do nome, choro não é triste: a maior parte do repertório é rápida, virtuosística e alegre. O tango é argentino e uruguaio, e o bolero é cubano.",
+  "inicio": 279.596,
+  "dur": 21.407
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "O que é um plano-sequência?",
+  "inicio": 301.904,
+  "dur": 2.0
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Uma cena inteira sem corte. B: A sequência de abertura. C: Uma cena com dois atores só",
+  "inicio": 304.804,
+  "dur": 6.593
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra A: Uma cena inteira sem corte. Uma cena filmada sem nenhum corte, com a câmera em movimento contínuo. É difícil porque qualquer erro de ator, foco ou marcação obriga a recomeçar do zero. Alguns filmes já se apresentaram como um plano-sequência único do início ao fim, embora com cortes escondidos digitalmente.",
+  "inicio": 312.296,
+  "dur": 23.704
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Quem foi Carmen Miranda?",
+  "inicio": 336.9,
+  "dur": 1.778
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Cantora e atriz que levou a música brasileira a Hollywood. B: Primeira atriz brasileira da TV. C: Compositora de sambas-enredo",
+  "inicio": 339.578,
+  "dur": 9.556
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra A: Cantora e atriz que levou a música brasileira a Hollywood. Cantora e atriz que se tornou a brasileira mais famosa do mundo nos anos 40, chegando a ser a artista mulher mais bem paga dos Estados Unidos. Ela nasceu em Portugal e veio bebê para o Rio. No Brasil foi criticada por americanizar-se, e respondeu com a canção Disseram que Voltei Americanizada.",
+  "inicio": 350.033,
+  "dur": 27.111
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "O que significa a sigla IMAX?",
+  "inicio": 378.044,
+  "dur": 2.148
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Um formato de tela e projeção de altíssima resolução. B: Um sistema de som. C: Uma rede de cinemas",
+  "inicio": 381.093,
+  "dur": 7.481
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra A: Um formato de tela e projeção de altíssima resolução. Um formato de imagem com tela gigante e negativo muito maior que o comum, de máxima imagem. A película IMAX original roda na horizontal e tem área muitas vezes maior que a de 35 milímetros, e é por isso que a nitidez é tão superior. Poucos filmes são rodados inteiramente nele: as câmeras são enormes e muito ruidosas.",
+  "inicio": 389.474,
+  "dur": 28.519
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "Qual destes é um instrumento de percussão do samba?",
+  "inicio": 418.893,
+  "dur": 3.778
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Tamborim. B: Bandoneón. C: Charango",
+  "inicio": 423.57,
+  "dur": 2.815
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra A: Tamborim. O tamborim, tocado com baqueta de pontas e virado no ar para mudar o ataque: quem toca gira o instrumento, não só bate nele. O bandoneón é a alma do tango argentino, e o charango é andino, feito originalmente com casco de tatu.",
+  "inicio": 427.285,
+  "dur": 18.519
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Quantos minutos tem, aproximadamente, um disco de vinil LP por lado?",
+  "inicio": 446.704,
+  "dur": 5.037
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Cerca de 10. B: Cerca de 22. C: Cerca de 45",
+  "inicio": 452.641,
+  "dur": 3.407
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra B: Cerca de 22. Cerca de 22 minutos por lado, com até uns 25 se o volume for reduzido: quanto mais música no lado, mais apertado o sulco e mais baixo o som. Esse limite físico definiu o tamanho do álbum de música popular por décadas, e o CD depois se fixou em cerca de 74 minutos.",
+  "inicio": 456.948,
+  "dur": 21.481
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "Quem dirigiu Cidade de Deus?",
+  "inicio": 479.33,
+  "dur": 2.074
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Fernando Meirelles. B: Walter Salles. C: José Padilha",
+  "inicio": 482.304,
+  "dur": 4.148
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra A: Fernando Meirelles. Fernando Meirelles, com codireção de Kátia Lund, em 2002. O filme foi indicado a quatro Oscars, incluindo direção, e grande parte do elenco era de atores não profissionais recrutados em comunidades do Rio e preparados em oficinas por quase um ano.",
+  "inicio": 487.352,
+  "dur": 20.741
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "O que é dublagem, em comparação com legendagem?",
+  "inicio": 508.993,
+  "dur": 3.481
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Substituir a voz original por outra gravada. B: Traduzir o roteiro antes de filmar. C: Gravar o som no set",
+  "inicio": 513.374,
+  "dur": 8.074
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra A: Substituir a voz original por outra gravada. Substituir a voz original por outra, sincronizada com os lábios. O Brasil tem uma das indústrias de dublagem mais respeitadas do mundo, com escola própria desde os anos 60, e muita gente aqui conhece atores estrangeiros pela voz brasileira deles, não pela própria.",
+  "inicio": 522.348,
+  "dur": 23.852
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Qual foi o primeiro longa de animação com som e cores da história?",
+  "inicio": 547.1,
+  "dur": 4.889
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Branca de Neve e os Sete Anões. B: Fantasia. C: Pinóquio",
+  "inicio": 552.889,
+  "dur": 4.37
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra A: Branca de Neve e os Sete Anões. Branca de Neve, de 1937: o primeiro longa de animação em cores e com som, feito quando todos diziam que ninguém aguentaria assistir a um desenho de hora e meia. Foram desenhados mais de 200 mil quadros à mão, e o estúdio hipotecou a casa do próprio dono para terminar.",
+  "inicio": 558.159,
+  "dur": 23.185
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Na linguagem de TV, o que é um horário nobre?",
+  "inicio": 582.244,
+  "dur": 3.333
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: A faixa de maior audiência, à noite. B: O intervalo comercial mais caro. C: A hora do telejornal",
+  "inicio": 586.478,
+  "dur": 7.333
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra A: A faixa de maior audiência, à noite. A faixa noturna de maior audiência, em geral das 18 às 23 horas, quando o anúncio custa mais caro. Toda a grade do dia é montada em função dela: o que vem antes serve para entregar público ao horário nobre, e o que vem depois tenta segurar quem já está ali.",
+  "inicio": 594.711,
+  "dur": 22.741
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Qual destes ritmos vem do Nordeste brasileiro?",
+  "inicio": 618.352,
+  "dur": 3.407
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Frevo. B: Chacarera. C: Cumbia",
+  "inicio": 622.659,
+  "dur": 2.444
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra A: Frevo. O frevo, de Pernambuco, criado no carnaval do Recife a partir de marchas e maxixe. O nome vem de ferver, pela agitação, e o passo nasceu dos movimentos de capoeira dos brigões que abriam caminho na frente das bandas. A chacarera é argentina e a cumbia é colombiana.",
+  "inicio": 626.004,
+  "dur": 21.111
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "O que faz um diretor de fotografia num filme?",
+  "inicio": 648.015,
+  "dur": 3.333
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Tira as fotos de divulgação. B: Define a luz e a imagem de cada cena. C: Edita as cenas depois",
+  "inicio": 652.248,
+  "dur": 7.185
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra B: Define a luz e a imagem de cada cena. Define a luz, o enquadramento, a lente e a cor: é quem transforma a intenção do diretor em imagem. Foto de divulgação é de outro profissional, o still, e a montagem é do editor. É das funções mais decisivas e das menos conhecidas pelo público.",
+  "inicio": 660.333,
+  "dur": 21.778
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Qual é o festival de cinema que entrega a Palma de Ouro?",
+  "inicio": 683.011,
+  "dur": 4.148
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Berlim. B: Cannes. C: Veneza",
+  "inicio": 688.059,
+  "dur": 2.296
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra B: Cannes. Cannes, na França. Berlim entrega o Urso de Ouro e Veneza o Leão de Ouro; os três são os festivais mais importantes da Europa. O Brasil já ganhou a Palma de Ouro uma vez, com O Pagador de Promessas, em 1962.",
+  "inicio": 691.256,
+  "dur": 16.889
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "Quem foi Pixinguinha?",
+  "inicio": 709.044,
+  "dur": 1.556
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Um compositor e arranjador fundamental do choro. B: Um cantor de rádio dos anos 50. C: Um maestro de orquestra sinfônica",
+  "inicio": 711.5,
+  "dur": 9.111
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra A: Um compositor e arranjador fundamental do choro. Compositor, flautista, saxofonista e, principalmente, arranjador: foi ele quem deu ao choro e ao samba a estrutura orquestrada que eles passaram a ter. Carinhoso, de sua autoria, é uma das músicas mais conhecidas do país, e levou anos para ser aceita porque misturava choro com elementos considerados estrangeiros na época.",
+  "inicio": 721.511,
+  "dur": 28.519
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "O que é uma trilha sonora diegética?",
+  "inicio": 750.93,
+  "dur": 2.667
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: A música que os personagens também ouvem. B: A música de abertura. C: A música composta para o filme",
+  "inicio": 754.496,
+  "dur": 7.63
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra A: A música que os personagens também ouvem. A música que existe dentro da história: um rádio ligado na cena, uma banda tocando no bar, alguém cantando. O personagem ouve. Já a trilha não diegética só o espectador ouve, e é a mais comum. Brincar com a fronteira entre as duas é um dos truques mais elegantes que o cinema tem.",
+  "inicio": 763.026,
+  "dur": 24.815
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Qual foi a primeira transmissão de Copa do Mundo pela TV no Brasil?",
+  "inicio": 788.741,
+  "dur": 4.963
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: 1950. B: 1958. C: 1970",
+  "inicio": 794.604,
+  "dur": 1.852
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra C: 1970. A de 1970, no México: a primeira Copa transmitida ao vivo para o Brasil, e também a primeira em cores no mundo — embora aqui tenha sido vista em preto e branco, porque a TV em cores só chegou em 1972. Em 1950 o Brasil tinha TV há semanas, e em 1958 a final foi acompanhada pelo rádio.",
+  "inicio": 797.356,
+  "dur": 22.444
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "O que significa, no rádio e na música, a sigla BPM?",
+  "inicio": 820.7,
+  "dur": 3.778
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Batidas por minuto. B: Banda principal da música. C: Base pré-mixada",
+  "inicio": 825.378,
+  "dur": 5.259
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Batidas por minuto. Batidas por minuto, a medida de velocidade de uma música. Um samba fica perto de 100, o forró pé de serra na faixa de 120, e muito funk brasileiro trabalha acima de 130. É pelo BPM que DJ encaixa uma faixa na outra sem que a pista perceba a troca.",
+  "inicio": 831.537,
+  "dur": 20.741
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "Quem escreveu a maioria das novelas consideradas marcos da TV brasileira nos anos 70 e 80 ao lado de Dias Gomes?",
+  "inicio": 853.178,
+  "dur": 8.296
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Janete Clair. B: Glória Perez. C: Manoel Carlos",
+  "inicio": 862.374,
+  "dur": 3.704
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra A: Janete Clair. Janete Clair, chamada de a rainha da novela das oito, autora de dezenas de títulos e casada com Dias Gomes. Ela escrevia sob pressão diária e ficou conhecida por reinventar a trama em função da reação do público, prática que virou padrão da teledramaturgia brasileira.",
+  "inicio": 866.978,
+  "dur": 21.852
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Em que velocidade um filme de cinema é tradicionalmente projetado?",
+  "inicio": 889.73,
+  "dur": 4.889
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: 24 quadros por segundo. B: 30 quadros por segundo. C: 60 quadros por segundo",
+  "inicio": 895.519,
+  "dur": 5.852
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra A: 24 quadros por segundo. Vinte e quatro quadros por segundo, padrão fixado no fim dos anos 20 por ser o mínimo que dava som aceitável na trilha óptica da película. Não foi escolha estética: foi economia de filme com qualidade de áudio. Quase um século depois, a aparência de 24 quadros é o que o público reconhece como cinema.",
+  "inicio": 902.27,
+  "dur": 25.037
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "O que é o chamado quarto de hora de fama, ou quinze minutos de fama?",
+  "inicio": 928.207,
+  "dur": 5.037
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Uma frase atribuída a Andy Warhol. B: Uma regra de contrato de TV. C: Um formato de programa",
+  "inicio": 934.144,
+  "dur": 7.037
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: Uma frase atribuída a Andy Warhol. Uma frase atribuída a Andy Warhol, nos anos 60, dizendo que no futuro todo mundo teria quinze minutos de fama. Ela virou a descrição mais usada do que a televisão e depois a internet fizeram com a celebridade: fama rápida, intensa e descartável.",
+  "inicio": 942.081,
+  "dur": 21.704
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "Qual destes é um formato de som envolvente no cinema?",
+  "inicio": 964.685,
+  "dur": 3.926
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Dolby Surround. B: Dolby Panorama. C: Dolby Vision",
+  "inicio": 969.511,
+  "dur": 3.926
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra A: Dolby Surround. Dolby Surround, que distribui o som por caixas ao redor da plateia. Dolby Vision existe, mas é imagem, não som: é um padrão de alto contraste e cor. Confundir os dois é comum justamente porque a mesma empresa batizou tecnologias de áudio e de vídeo com a mesma marca.",
+  "inicio": 974.337,
+  "dur": 21.926
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Qual é o país que produz mais filmes por ano no mundo?",
+  "inicio": 997.163,
+  "dur": 4.0
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: Estados Unidos. B: Índia. C: China",
+  "inicio": 1002.063,
+  "dur": 2.741
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra B: Índia. A Índia, com cerca de 1.500 a 2.000 longas por ano, muito mais que os Estados Unidos em quantidade. E não é só Bollywood: o país produz em mais de vinte idiomas, com indústrias regionais fortes em tâmil, télugo e malaiala, cada uma com suas próprias estrelas.",
+  "inicio": 1005.704,
+  "dur": 20.667
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta se você acertou a sétima, porque essa é a que mais gera discussão nos comentários. Na próxima rodada: lógica e pegadinha.",
+  "inicio": 1027.27,
+  "dur": 11.407
+ }
+]

@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta perguntas de países e bandeiras, e várias delas têm a resposta que parece óbvia como armadilha. Seis segundos para cada uma. Acertar vinte já é muita coisa.",
+  "inicio": 1.0,
+  "dur": 12.074
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Qual é a única bandeira nacional que não é retangular nem quadrada?",
+  "inicio": 13.974,
+  "dur": 4.963
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Butão. B: Nepal. C: Sri Lanka",
+  "inicio": 19.837,
+  "dur": 2.37
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: Nepal. A do Nepal: dois triângulos empilhados, com um sol e uma lua dentro. O desenho vem de duas flâmulas separadas, das dinastias que governavam o país, que foram unidas numa bandeira só. A Constituição nepalesa chega a trazer as instruções geométricas para desenhá-la, passo por passo, com régua e compasso.",
+  "inicio": 23.107,
+  "dur": 23.926
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "Qual país tem mais fusos horários no mundo?",
+  "inicio": 47.933,
+  "dur": 3.185
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Rússia. B: Estados Unidos. C: França",
+  "inicio": 52.019,
+  "dur": 2.889
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra C: França. A França, com doze, por causa dos territórios espalhados pelo Pacífico, pelo Caribe e pelo Índico. A Rússia, que é o maior país do mundo em área, tem onze. É o tipo de recorde que não se ganha por tamanho, e sim por herança colonial.",
+  "inicio": 55.807,
+  "dur": 18.815
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "Com quantos países a China faz fronteira?",
+  "inicio": 75.522,
+  "dur": 3.037
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Nove. B: Quatorze. C: Dezoito",
+  "inicio": 79.459,
+  "dur": 2.37
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra B: Quatorze. Quatorze, empatada com a Rússia no primeiro lugar do mundo. O Brasil vem depois, com dez. Entre os vizinhos da China estão países que a gente nunca associa a ela, como o Afeganistão, que divide com ela uma fronteira de apenas 76 quilômetros no fim de um corredor de montanha.",
+  "inicio": 82.73,
+  "dur": 22.074
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Qual é a capital da Austrália?",
+  "inicio": 105.704,
+  "dur": 2.222
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Sydney. B: Melbourne. C: Canberra",
+  "inicio": 108.826,
+  "dur": 2.667
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra C: Canberra. Canberra, e ela existe por birra: Sydney e Melbourne brigaram tanto pelo posto que o país decidiu construir uma capital nova no meio das duas, em 1913. É a mesma solução que o Brasil adotou em Brasília, quase cinquenta anos depois.",
+  "inicio": 112.393,
+  "dur": 18.815
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "Qual é a capital do Canadá?",
+  "inicio": 132.107,
+  "dur": 2.0
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Toronto. B: Ottawa. C: Montreal",
+  "inicio": 135.007,
+  "dur": 2.519
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra B: Ottawa. Ottawa, e também foi escolhida por ser neutra: fica exatamente na fronteira entre o Canadá de língua inglesa e o de língua francesa. Toronto é bem maior, Montreal é mais antiga, e nenhuma das duas serviria sem a outra reclamar.",
+  "inicio": 138.426,
+  "dur": 18.37
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "Qual é a capital da Turquia?",
+  "inicio": 157.696,
+  "dur": 2.074
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Istambul. B: Ancara. C: Esmirna",
+  "inicio": 160.67,
+  "dur": 2.519
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra B: Ancara. Ancara, desde 1923. Istambul é muito maior e foi capital por quase mil e seiscentos anos, com três nomes diferentes: Bizâncio, Constantinopla e Istambul. Atatürk mudou a capital para o interior justamente para marcar que a Turquia republicana não era a continuação do império.",
+  "inicio": 164.089,
+  "dur": 22.0
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Qual é o menor país do mundo?",
+  "inicio": 186.989,
+  "dur": 2.148
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Mônaco. B: Vaticano. C: Nauru",
+  "inicio": 190.037,
+  "dur": 2.37
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra B: Vaticano. O Vaticano, com 0,44 quilômetro quadrado: menos da metade do Parque Ibirapuera. Mônaco é o segundo, com cerca de 2 quilômetros quadrados, e é o país mais densamente povoado do planeta.",
+  "inicio": 193.307,
+  "dur": 15.333
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "Qual é o país mais populoso do mundo hoje?",
+  "inicio": 209.541,
+  "dur": 3.111
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: China. B: Índia. C: Estados Unidos",
+  "inicio": 213.552,
+  "dur": 2.741
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra B: Índia. A Índia, que passou a China em 2023. A China liderou por séculos, e a virada veio menos de um crescimento indiano explosivo do que da política chinesa do filho único, que durou de 1980 a 2015 e deixou uma geração faltando.",
+  "inicio": 217.193,
+  "dur": 17.926
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "Quantas estrelas tem a bandeira do Brasil?",
+  "inicio": 236.019,
+  "dur": 3.111
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: 26. B: 27. C: 33",
+  "inicio": 240.03,
+  "dur": 1.407
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra B: 27. Vinte e sete, uma para cada estado e uma para o Distrito Federal. E não é uma distribuição decorativa: é o céu do Rio de Janeiro na madrugada de 15 de novembro de 1889, visto de fora da esfera celeste, como se fosse de cima. Por isso o Cruzeiro do Sul aparece espelhado.",
+  "inicio": 242.337,
+  "dur": 21.259
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "Qual país tem duas capitais oficiais?",
+  "inicio": 264.496,
+  "dur": 2.741
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Bolívia. B: Peru. C: Chile",
+  "inicio": 268.137,
+  "dur": 2.148
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra A: Bolívia. A Bolívia: Sucre é a capital constitucional, onde fica o Judiciário, e La Paz é a sede do governo, onde ficam o presidente e o Congresso. A divisão veio de uma guerra civil em 1899, e nenhuma das duas cidades aceitou perder o título.",
+  "inicio": 271.185,
+  "dur": 18.889
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Qual país ocupa um continente inteiro sozinho?",
+  "inicio": 290.974,
+  "dur": 3.407
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Austrália. B: Groenlândia. C: Antártida",
+  "inicio": 295.281,
+  "dur": 3.111
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra A: Austrália. A Austrália, único país que é também um continente inteiro. A Groenlândia é a maior ilha do mundo, mas é território da Dinamarca e fica na América do Norte; e a Antártida não é país nenhum: é governada por um tratado internacional, sem dono.",
+  "inicio": 299.293,
+  "dur": 19.63
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "Qual destes países não tem forças armadas?",
+  "inicio": 319.822,
+  "dur": 3.111
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Costa Rica. B: Uruguai. C: Portugal",
+  "inicio": 323.833,
+  "dur": 2.815
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra A: Costa Rica. A Costa Rica, que aboliu o exército em 1948, depois de uma guerra civil, e passou a gastar o dinheiro em educação e saúde. O prédio do antigo quartel-general virou museu nacional, e os buracos de bala ficaram de propósito na parede.",
+  "inicio": 327.548,
+  "dur": 19.037
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "Qual é o maior país da África em área?",
+  "inicio": 347.485,
+  "dur": 2.815
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Sudão. B: Argélia. C: República Democrática do Congo",
+  "inicio": 351.2,
+  "dur": 4.074
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra B: Argélia. A Argélia, com cerca de 2,38 milhões de quilômetros quadrados. O Sudão era o maior até 2011, quando o Sudão do Sul se separou e levou um quarto do território com ele. Mais de 80% da Argélia é Saara, e quase toda a população mora na faixa estreita perto do mar.",
+  "inicio": 356.174,
+  "dur": 20.889
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Qual bandeira nacional é quadrada?",
+  "inicio": 377.963,
+  "dur": 2.519
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Suíça. B: Áustria. C: Dinamarca",
+  "inicio": 381.381,
+  "dur": 2.519
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra A: Suíça. A da Suíça, uma das duas únicas bandeiras nacionais quadradas do mundo; a outra é a do Vaticano. E a cruz vermelha da Cruz Vermelha é exatamente a bandeira suíça com as cores invertidas, em homenagem ao suíço que fundou a organização.",
+  "inicio": 384.8,
+  "dur": 18.815
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "Qual país tem um fuzil AK-47 desenhado na bandeira?",
+  "inicio": 404.515,
+  "dur": 3.778
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Angola. B: Moçambique. C: Zimbábue",
+  "inicio": 409.193,
+  "dur": 2.741
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra B: Moçambique. Moçambique, a única bandeira nacional do mundo com uma arma de fogo moderna. Ao lado dela há uma enxada e um livro: luta, trabalho e educação. O desenho vem da independência, em 1975, e a retirada do fuzil já foi proposta várias vezes no Parlamento, sem sucesso até agora.",
+  "inicio": 412.833,
+  "dur": 22.0
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "Qual cidade fica em dois continentes ao mesmo tempo?",
+  "inicio": 435.733,
+  "dur": 3.852
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Istambul. B: Cairo. C: Moscou",
+  "inicio": 440.485,
+  "dur": 2.37
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra A: Istambul. Istambul, cortada pelo estreito de Bósforo: um lado na Europa, outro na Ásia, com pontes e um túnel de metrô ligando os dois. Cerca de dois terços da população mora no lado europeu, e muita gente atravessa de continente todos os dias para trabalhar.",
+  "inicio": 443.756,
+  "dur": 20.148
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "Qual destes países não tem nenhum rio permanente?",
+  "inicio": 464.804,
+  "dur": 3.63
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Arábia Saudita. B: Egito. C: Marrocos",
+  "inicio": 469.333,
+  "dur": 2.963
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra A: Arábia Saudita. A Arábia Saudita, que não tem um único rio permanente em todo o território, apesar de ser maior que a Europa Ocidental. A água vem de aquíferos fósseis e de dessalinização do mar: o país é um dos maiores dessalinizadores do planeta.",
+  "inicio": 473.196,
+  "dur": 19.333
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Qual país europeu está inteiramente cercado por um só país vizinho?",
+  "inicio": 493.43,
+  "dur": 4.963
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Luxemburgo. B: San Marino. C: Andorra",
+  "inicio": 499.293,
+  "dur": 2.963
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra B: San Marino. San Marino, totalmente cercado pela Itália. No mundo existem só três casos assim: San Marino e o Vaticano, dentro da Itália, e o Lesoto, dentro da África do Sul. San Marino se diz a república mais antiga do mundo ainda em funcionamento, fundada em 301.",
+  "inicio": 503.156,
+  "dur": 20.519
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "Qual idioma tem mais falantes nativos no mundo?",
+  "inicio": 524.574,
+  "dur": 3.481
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Inglês. B: Mandarim. C: Espanhol",
+  "inicio": 528.956,
+  "dur": 2.593
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra B: Mandarim. O mandarim, com cerca de 940 milhões de falantes nativos. O inglês ganha de longe quando se somam os que aprenderam depois, mas como língua materna ele é o terceiro, atrás do mandarim e do espanhol. O português é a sexta ou sétima, dependendo da contagem.",
+  "inicio": 532.448,
+  "dur": 20.593
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "Que país mudou oficialmente de nome para Essuatíni em 2018?",
+  "inicio": 553.941,
+  "dur": 4.37
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: Suazilândia. B: Lesoto. C: Botsuana",
+  "inicio": 559.211,
+  "dur": 2.815
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra A: Suazilândia. A Suazilândia, que virou Reino de Essuatíni. O rei explicou o motivo de um jeito prático: cansou de ser confundido com a Suíça em viagens internacionais, porque em inglês Swaziland e Switzerland se parecem demais.",
+  "inicio": 562.926,
+  "dur": 17.704
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "Qual país tem mais vulcões ativos?",
+  "inicio": 581.53,
+  "dur": 2.519
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Japão. B: Indonésia. C: Chile",
+  "inicio": 584.948,
+  "dur": 2.37
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra B: Indonésia. A Indonésia, com cerca de 130 vulcões ativos. Ela fica no encontro de três placas tectônicas, e foi lá que explodiu o Krakatoa, em 1883: o estrondo foi ouvido a quase 5 mil quilômetros de distância, o som mais alto já registrado na história.",
+  "inicio": 588.219,
+  "dur": 19.63
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "A Groenlândia é território de qual país?",
+  "inicio": 608.748,
+  "dur": 2.963
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Noruega. B: Dinamarca. C: Islândia",
+  "inicio": 612.611,
+  "dur": 2.741
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra B: Dinamarca. Da Dinamarca, com governo próprio desde 1979. A ilha é cinquenta vezes maior que a Dinamarca continental e tem cerca de 56 mil habitantes: menos gente que um bairro médio de São Paulo, num território maior que todo o Nordeste brasileiro somado.",
+  "inicio": 616.252,
+  "dur": 19.852
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "Qual é o país mais ao sul do mundo com território continental?",
+  "inicio": 637.004,
+  "dur": 4.593
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Chile. B: Argentina. C: Nova Zelândia",
+  "inicio": 642.496,
+  "dur": 2.963
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra A: Chile. O Chile, que vai até Punta Arenas e além, com Puerto Williams reivindicando o título de cidade mais austral do planeta. O Chile tem mais de 4.300 quilômetros de norte a sul, e em alguns pontos só 90 quilômetros de largura.",
+  "inicio": 646.359,
+  "dur": 17.926
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "Qual destes países NÃO faz fronteira com o Brasil?",
+  "inicio": 665.185,
+  "dur": 3.704
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Peru. B: Equador. C: Colômbia",
+  "inicio": 669.789,
+  "dur": 2.37
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra B: Equador. O Equador. Com o Chile, é um dos dois únicos países da América do Sul que não tocam o Brasil, e falta pouco: o Equador chega a cerca de 300 quilômetros da fronteira brasileira, bloqueado pela faixa amazônica do Peru e da Colômbia.",
+  "inicio": 673.059,
+  "dur": 18.667
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "A bandeira do Japão tem quantos elementos?",
+  "inicio": 692.626,
+  "dur": 3.111
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Um círculo vermelho. B: Um círculo com raios. C: Um sol com dezesseis raios",
+  "inicio": 696.637,
+  "dur": 5.778
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Um círculo vermelho. Um círculo vermelho num fundo branco, e nada mais: uma das bandeiras mais simples do mundo. O sol com dezesseis raios existe, mas é a bandeira naval, usada pela Marinha, não a bandeira nacional. O nome do Japão em japonês, Nippon, significa literalmente origem do sol.",
+  "inicio": 703.315,
+  "dur": 22.37
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "Qual país tem a maior proporção de território coberta por floresta?",
+  "inicio": 726.585,
+  "dur": 4.963
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Brasil. B: Suriname. C: Finlândia",
+  "inicio": 732.448,
+  "dur": 2.667
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra B: Suriname. O Suriname, com mais de 90% do território coberto de floresta: a maior proporção do mundo. O Brasil tem muito mais floresta em área absoluta, mas em percentual fica perto de 60%. O Suriname também é o menor país da América do Sul.",
+  "inicio": 736.015,
+  "dur": 18.741
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "Em que continente fica o Suriname?",
+  "inicio": 755.656,
+  "dur": 2.519
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: África. B: América do Sul. C: Ásia",
+  "inicio": 759.074,
+  "dur": 2.741
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra B: América do Sul. América do Sul, e faz fronteira com o Brasil. É o menor país do continente, foi colônia holandesa, e o idioma oficial é o holandês: o único país das Américas em que se fala holandês. Muito brasileiro erra essa porque o nome não soa sul-americano.",
+  "inicio": 762.715,
+  "dur": 20.37
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "Qual é o maior país do mundo em área?",
+  "inicio": 783.985,
+  "dur": 2.741
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Canadá. B: China. C: Rússia",
+  "inicio": 787.626,
+  "dur": 2.222
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra C: Rússia. A Rússia, com cerca de 17 milhões de quilômetros quadrados: quase o dobro do segundo colocado, o Canadá. Ela sozinha ocupa mais de 11% de toda a terra firme do planeta, e ainda assim tem menos habitantes que o Brasil.",
+  "inicio": 790.748,
+  "dur": 17.63
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "O Mar Morto fica na fronteira entre quais países?",
+  "inicio": 809.278,
+  "dur": 3.63
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Israel e Jordânia. B: Egito e Israel. C: Síria e Líbano",
+  "inicio": 813.807,
+  "dur": 4.296
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra A: Israel e Jordânia. Israel e Jordânia, com a Cisjordânia na margem oeste. E não é mar: é um lago sem saída, a cerca de 430 metros abaixo do nível do mar, o ponto mais baixo de terra firme no planeta. É tão salgado que o corpo humano flutua sem esforço, e ele está encolhendo cerca de um metro por ano.",
+  "inicio": 819.004,
+  "dur": 23.185
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Quantos países existem hoje, reconhecidos pela ONU?",
+  "inicio": 843.089,
+  "dur": 3.778
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: 175. B: 193. C: 212",
+  "inicio": 847.767,
+  "dur": 1.63
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra B: 193. Cento e noventa e três Estados-membros da ONU. O Vaticano e a Palestina têm status de observadores, e por isso muita contagem chega a 195. O último a entrar foi o Sudão do Sul, em 2011, e é por isso que mapa-múndi velho não serve para quiz.",
+  "inicio": 850.296,
+  "dur": 19.111
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E se você acertou a da bandeira do Nepal, comenta como, porque essa quase ninguém sabe. Na próxima rodada: ciência do dia a dia.",
+  "inicio": 870.307,
+  "dur": 11.333
+ }
+]

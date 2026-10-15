@@ -1,0 +1,646 @@
+[
+ {
+  "n": 1,
+  "chave": "intro",
+  "texto": "Trinta objetos que estavam em toda casa brasileira e hoje quase ninguém tem. Seis segundos para cada uma. Se você acertar mais de vinte e cinco, você é mais velho do que admite.",
+  "inicio": 1.0,
+  "dur": 13.111
+ },
+ {
+  "n": 2,
+  "chave": "0:q",
+  "texto": "Para que servia o lápis enfiado na fita cassete?",
+  "inicio": 15.011,
+  "dur": 3.556
+ },
+ {
+  "n": 3,
+  "chave": "0:opts",
+  "texto": "A: Limpar a cabeça do toca-fitas. B: Rebobinar a fita à mão. C: Marcar onde a música começava",
+  "inicio": 19.467,
+  "dur": 6.889
+ },
+ {
+  "n": 4,
+  "chave": "0:rev",
+  "texto": "É a letra B: Rebobinar a fita à mão. Para rebobinar sem gastar a pilha do aparelho, girando o carretel com o lápis. Era também o conserto padrão quando a fita saía solta: enrolava com o lápis até a película voltar para dentro. Toda casa tinha um lápis com a ponta gasta de tanto girar fita.",
+  "inicio": 27.256,
+  "dur": 21.481
+ },
+ {
+  "n": 5,
+  "chave": "1:q",
+  "texto": "O que era um videocassete VHS capaz de gravar?",
+  "inicio": 49.637,
+  "dur": 3.407
+ },
+ {
+  "n": 6,
+  "chave": "1:opts",
+  "texto": "A: Apenas assistir filmes alugados. B: Gravar da televisão ao vivo. C: Gravar só áudio",
+  "inicio": 53.944,
+  "dur": 6.37
+ },
+ {
+  "n": 7,
+  "chave": "1:rev",
+  "texto": "É a letra B: Gravar da televisão ao vivo. Gravar da TV, e foi por isso que ele mudou o hábito do país: pela primeira vez você podia ver o programa na hora que quisesse. Programar a gravação era um horror de relógio piscando, e os estúdios de cinema chegaram a processar os fabricantes alegando que gravar da TV era pirataria. Perderam.",
+  "inicio": 61.215,
+  "dur": 24.815
+ },
+ {
+  "n": 8,
+  "chave": "2:q",
+  "texto": "O que era o orelhão?",
+  "inicio": 86.93,
+  "dur": 1.481
+ },
+ {
+  "n": 9,
+  "chave": "2:opts",
+  "texto": "A: Um telefone público. B: Um rádio comunitário. C: Uma caixa de correio",
+  "inicio": 89.311,
+  "dur": 5.333
+ },
+ {
+  "n": 10,
+  "chave": "2:rev",
+  "texto": "É a letra A: Um telefone público. O telefone público brasileiro, com aquela concha acústica que virou símbolo nacional. O desenho é de Chu Ming Silveira, arquiteta brasileira, de 1971, e a concha não era estilo: era isolamento de ruído sem precisar de cabine fechada. Funcionava com ficha, depois com cartão.",
+  "inicio": 95.544,
+  "dur": 22.815
+ },
+ {
+  "n": 11,
+  "chave": "3:q",
+  "texto": "Para que servia o disquete?",
+  "inicio": 119.259,
+  "dur": 2.0
+ },
+ {
+  "n": 12,
+  "chave": "3:opts",
+  "texto": "A: Guardar arquivos. B: Limpar o monitor. C: Ligar a impressora",
+  "inicio": 122.159,
+  "dur": 4.667
+ },
+ {
+  "n": 13,
+  "chave": "3:rev",
+  "texto": "É a letra A: Guardar arquivos. Guardar arquivos: o de 3,5 polegadas levava 1,44 megabyte, ou seja, menos que uma única foto de celular hoje. A imagem dele continua na sua tela: o ícone de salvar de quase todo programa ainda é um disquete, um objeto que boa parte dos usuários nunca viu na vida.",
+  "inicio": 127.726,
+  "dur": 21.778
+ },
+ {
+  "n": 14,
+  "chave": "4:q",
+  "texto": "O que era um Walkman?",
+  "inicio": 150.404,
+  "dur": 1.556
+ },
+ {
+  "n": 15,
+  "chave": "4:opts",
+  "texto": "A: Um rádio de pilha. B: Um toca-fitas portátil com fone. C: Um videogame de mão",
+  "inicio": 152.859,
+  "dur": 5.926
+ },
+ {
+  "n": 16,
+  "chave": "4:rev",
+  "texto": "É a letra B: Um toca-fitas portátil com fone. Um toca-fitas portátil com fone de ouvido, lançado pela Sony em 1979. Ele inventou um comportamento que hoje é banal: ouvir a sua própria música no meio da rua, isolado de todo mundo. Antes dele, música em público era sempre música de alguém mais.",
+  "inicio": 159.685,
+  "dur": 21.704
+ },
+ {
+  "n": 17,
+  "chave": "5:q",
+  "texto": "O que era a enciclopédia Barsa?",
+  "inicio": 182.289,
+  "dur": 2.296
+ },
+ {
+  "n": 18,
+  "chave": "5:opts",
+  "texto": "A: Uma coleção de livros de consulta. B: Uma revista semanal. C: Um atlas escolar",
+  "inicio": 185.485,
+  "dur": 6.0
+ },
+ {
+  "n": 19,
+  "chave": "5:rev",
+  "texto": "É a letra A: Uma coleção de livros de consulta. Uma coleção de volumes de consulta, vendida de porta em porta e geralmente paga em muitas prestações. Ela era o Google da casa: trabalho de escola saía dali, copiado à mão. Ficava na estante da sala, bem à vista, porque também era sinal de status.",
+  "inicio": 192.385,
+  "dur": 21.852
+ },
+ {
+  "n": 20,
+  "chave": "6:q",
+  "texto": "Para que servia a antena de orelhas de coelho na TV?",
+  "inicio": 215.137,
+  "dur": 3.852
+ },
+ {
+  "n": 21,
+  "chave": "6:opts",
+  "texto": "A: Captar o sinal aberto. B: Esfriar o aparelho. C: Melhorar o som",
+  "inicio": 219.889,
+  "dur": 4.889
+ },
+ {
+  "n": 22,
+  "chave": "6:rev",
+  "texto": "É a letra A: Captar o sinal aberto. Captar o sinal de TV aberta, e a sintonia era feita no braço: girava, abria, fechava, e às vezes alguém tinha que ficar segurando. Papel de alumínio na ponta era o remédio popular, e funcionava mesmo, aumentando a superfície que recebia o sinal.",
+  "inicio": 225.678,
+  "dur": 20.815
+ },
+ {
+  "n": 23,
+  "chave": "7:q",
+  "texto": "O que era um telegrama?",
+  "inicio": 247.393,
+  "dur": 1.704
+ },
+ {
+  "n": 24,
+  "chave": "7:opts",
+  "texto": "A: Uma mensagem entregue em papel pelos Correios. B: Um telefone sem fio. C: Um recado gravado em fita",
+  "inicio": 249.996,
+  "dur": 7.556
+ },
+ {
+  "n": 25,
+  "chave": "7:rev",
+  "texto": "É a letra A: Uma mensagem entregue em papel pelos Correios. Uma mensagem transmitida por telégrafo e entregue impressa na sua casa, cobrada por palavra. Como cada palavra custava, as pessoas escreviam no mínimo possível, e daí veio um estilo seco e abreviado que o mundo só reencontrou no SMS, cem anos depois.",
+  "inicio": 258.452,
+  "dur": 22.963
+ },
+ {
+  "n": 26,
+  "chave": "8:q",
+  "texto": "O que era a máquina de escrever elétrica capaz de fazer que a comum não fazia?",
+  "inicio": 282.315,
+  "dur": 5.778
+ },
+ {
+  "n": 27,
+  "chave": "8:opts",
+  "texto": "A: Corrigir erros com uma fita branca. B: Imprimir em cores. C: Guardar o texto",
+  "inicio": 288.993,
+  "dur": 5.852
+ },
+ {
+  "n": 28,
+  "chave": "8:rev",
+  "texto": "É a letra A: Corrigir erros com uma fita branca. Corrigir, com uma fita corretiva que digitava branco em cima do erro. Na máquina comum, errar significava recomeçar a página ou passar corretivo líquido e esperar secar. Era por isso que escrever bem era, em parte, planejar a frase antes.",
+  "inicio": 295.744,
+  "dur": 21.259
+ },
+ {
+  "n": 29,
+  "chave": "9:q",
+  "texto": "O que era um slide ou diapositivo?",
+  "inicio": 317.904,
+  "dur": 2.519
+ },
+ {
+  "n": 30,
+  "chave": "9:opts",
+  "texto": "A: Uma foto projetada na parede. B: Um tipo de disco. C: Uma transparência de escola",
+  "inicio": 321.322,
+  "dur": 6.222
+ },
+ {
+  "n": 31,
+  "chave": "9:rev",
+  "texto": "É a letra A: Uma foto projetada na parede. Uma foto em filme, montada num quadradinho, para ser projetada na parede. Sessão de slides em família era um ritual: luz apagada, projetor quente, cheiro de poeira queimando e alguém narrando as férias. O aplicativo que você usa para apresentações ainda se chama slide por causa disso.",
+  "inicio": 328.444,
+  "dur": 24.296
+ },
+ {
+  "n": 32,
+  "chave": "10:q",
+  "texto": "Para que servia a lista telefônica?",
+  "inicio": 353.641,
+  "dur": 2.593
+ },
+ {
+  "n": 33,
+  "chave": "10:opts",
+  "texto": "A: Achar o telefone de qualquer pessoa da cidade. B: Consultar endereços de comércio só. C: Ver os códigos de área",
+  "inicio": 357.133,
+  "dur": 8.444
+ },
+ {
+  "n": 34,
+  "chave": "10:rev",
+  "texto": "É a letra A: Achar o telefone de qualquer pessoa da cidade. Para achar o número de qualquer pessoa ou empresa da cidade, porque todo mundo estava lá, com nome e endereço, por padrão. Ela era entregue de graça, era grossa como um tijolo, e a ideia de ter seu endereço impresso numa lista pública não incomodava ninguém.",
+  "inicio": 366.478,
+  "dur": 23.556
+ },
+ {
+  "n": 35,
+  "chave": "11:q",
+  "texto": "O que era um mimeógrafo?",
+  "inicio": 390.933,
+  "dur": 1.778
+ },
+ {
+  "n": 36,
+  "chave": "11:opts",
+  "texto": "A: Uma máquina de copiar folhas com tinta roxa. B: Um projetor de escola. C: Um tipo de microfone",
+  "inicio": 393.611,
+  "dur": 7.185
+ },
+ {
+  "n": 37,
+  "chave": "11:rev",
+  "texto": "É a letra A: Uma máquina de copiar folhas com tinta roxa. Uma máquina de copiar à manivela, com cheiro forte de álcool e tinta roxa. Toda prova de escola saía dali, e a folha chegava na sua mão ainda meio úmida. Uma geração inteira associa aquele cheiro a dia de prova, e a tinta borrava no dedo.",
+  "inicio": 401.696,
+  "dur": 21.926
+ },
+ {
+  "n": 38,
+  "chave": "12:q",
+  "texto": "O que o controle remoto de TV antigo tinha que o de hoje não tem?",
+  "inicio": 424.522,
+  "dur": 4.815
+ },
+ {
+  "n": 39,
+  "chave": "12:opts",
+  "texto": "A: Um fio ligando na TV. B: Um alto-falante. C: Uma tela pequena",
+  "inicio": 430.237,
+  "dur": 4.741
+ },
+ {
+  "n": 40,
+  "chave": "12:rev",
+  "texto": "É a letra A: Um fio ligando na TV. Um fio. Os primeiros controles eram literalmente ligados ao aparelho por cabo, e o apelido em inglês era lazy bones, ossos preguiçosos. O fio esticado na sala era uma armadilha de tropeço, e foi um dos motivos para inventarem o controle sem fio.",
+  "inicio": 435.878,
+  "dur": 20.741
+ },
+ {
+  "n": 41,
+  "chave": "13:q",
+  "texto": "Para que servia o cartão telefônico?",
+  "inicio": 457.519,
+  "dur": 2.667
+ },
+ {
+  "n": 42,
+  "chave": "13:opts",
+  "texto": "A: Pagar ligações em telefone público. B: Comprar crédito de celular. C: Entrar no clube",
+  "inicio": 461.085,
+  "dur": 6.519
+ },
+ {
+  "n": 43,
+  "chave": "13:rev",
+  "texto": "É a letra A: Pagar ligações em telefone público. Para pagar ligações no orelhão, substituindo a ficha: cada ligação furava ou descontava unidades do cartão. Os cartões vinham com estampas diferentes e virou febre colecioná-los nos anos 90, inclusive entre adultos.",
+  "inicio": 468.504,
+  "dur": 19.556
+ },
+ {
+  "n": 44,
+  "chave": "14:q",
+  "texto": "O que era o Fliperama?",
+  "inicio": 488.959,
+  "dur": 1.63
+ },
+ {
+  "n": 45,
+  "chave": "14:opts",
+  "texto": "A: Uma casa de máquinas de jogo. B: Um tipo de pinball doméstico. C: Uma revista de games",
+  "inicio": 491.489,
+  "dur": 6.593
+ },
+ {
+  "n": 46,
+  "chave": "14:rev",
+  "texto": "É a letra A: Uma casa de máquinas de jogo. O salão com máquinas de jogo onde se pagava por partida, em fichas. Era onde o videogame era social antes de existir internet: você enfrentava a pessoa ao lado e a fila esperava sua vez. Deixar uma ficha na beirada da máquina era a forma de dizer que você era o próximo.",
+  "inicio": 498.981,
+  "dur": 23.185
+ },
+ {
+  "n": 47,
+  "chave": "15:q",
+  "texto": "O que era um pager ou bip?",
+  "inicio": 523.067,
+  "dur": 1.926
+ },
+ {
+  "n": 48,
+  "chave": "15:opts",
+  "texto": "A: Um aparelho que recebia recados curtos. B: Um telefone sem fio. C: Um relógio despertador",
+  "inicio": 525.893,
+  "dur": 6.815
+ },
+ {
+  "n": 49,
+  "chave": "15:rev",
+  "texto": "É a letra A: Um aparelho que recebia recados curtos. Um aparelho de bolso que só recebia mensagens curtas, geralmente um número para você retornar a ligação de um telefone qualquer. Ele não falava nem respondia: era um aviso de que alguém queria falar com você. Médico, repórter e entregador viviam com um na cintura.",
+  "inicio": 533.607,
+  "dur": 23.481
+ },
+ {
+  "n": 50,
+  "chave": "16:q",
+  "texto": "O que era um LP?",
+  "inicio": 557.989,
+  "dur": 1.2
+ },
+ {
+  "n": 51,
+  "chave": "16:opts",
+  "texto": "A: Um disco grande de vinil. B: Uma fita de vídeo. C: Um rádio de pilha",
+  "inicio": 560.089,
+  "dur": 5.259
+ },
+ {
+  "n": 52,
+  "chave": "16:rev",
+  "texto": "É a letra A: Um disco grande de vinil. Long play: o disco grande de vinil, com cerca de vinte minutos por lado. Esse limite físico moldou a música popular inteira: álbum com lado A e lado B, e a faixa de abertura de cada lado tratada como a mais importante. A ordem das músicas era uma decisão artística, porque ninguém pulava faixa facilmente.",
+  "inicio": 566.248,
+  "dur": 25.481
+ },
+ {
+  "n": 53,
+  "chave": "17:q",
+  "texto": "Para que servia o papel-carbono?",
+  "inicio": 592.63,
+  "dur": 2.37
+ },
+ {
+  "n": 54,
+  "chave": "17:opts",
+  "texto": "A: Fazer uma segunda via ao escrever. B: Limpar máquina de escrever. C: Proteger a mesa da tinta",
+  "inicio": 595.9,
+  "dur": 7.111
+ },
+ {
+  "n": 55,
+  "chave": "17:rev",
+  "texto": "É a letra A: Fazer uma segunda via ao escrever. Para tirar cópia na hora: você colocava a folha escura entre duas folhas e o que escrevia em cima aparecia embaixo. É daí que vem o CC do e-mail, carbon copy, cópia carbono: o nome do campo é uma homenagem a um papel que quase ninguém mais usa.",
+  "inicio": 603.911,
+  "dur": 21.63
+ },
+ {
+  "n": 56,
+  "chave": "18:q",
+  "texto": "O que era um cinescópio, a parte volumosa da TV antiga?",
+  "inicio": 626.441,
+  "dur": 4.074
+ },
+ {
+  "n": 57,
+  "chave": "18:opts",
+  "texto": "A: Um tubo de vidro onde a imagem se formava. B: A caixa de som. C: O conversor de canais",
+  "inicio": 631.415,
+  "dur": 6.593
+ },
+ {
+  "n": 58,
+  "chave": "18:rev",
+  "texto": "É a letra A: Um tubo de vidro onde a imagem se formava. Um tubo de vidro grande, em vácuo, que atirava elétrons contra a tela para acender o fósforo e formar a imagem. É por isso que TV antiga era tão funda e tão pesada: o tubo precisava de espaço para a imagem se formar, e o vidro era grosso para aguentar o vácuo.",
+  "inicio": 638.907,
+  "dur": 23.407
+ },
+ {
+  "n": 59,
+  "chave": "19:q",
+  "texto": "Qual destes era uma forma de ouvir música comprando uma faixa só?",
+  "inicio": 663.215,
+  "dur": 4.815
+ },
+ {
+  "n": 60,
+  "chave": "19:opts",
+  "texto": "A: O compacto, ou single de vinil. B: A fita VHS. C: O disquete",
+  "inicio": 668.93,
+  "dur": 4.667
+ },
+ {
+  "n": 61,
+  "chave": "19:rev",
+  "texto": "É a letra A: O compacto, ou single de vinil. O compacto: um vinil pequeno com uma música de cada lado, mais barato que o álbum. Era assim que se comprava sucesso avulso, e as paradas de rádio eram montadas em cima dessas vendas. O modelo voltou inteiro no streaming, onde quase ninguém ouve álbum do começo ao fim.",
+  "inicio": 674.496,
+  "dur": 23.259
+ },
+ {
+  "n": 62,
+  "chave": "20:q",
+  "texto": "O que era a locadora de vídeo?",
+  "inicio": 698.656,
+  "dur": 2.222
+ },
+ {
+  "n": 63,
+  "chave": "20:opts",
+  "texto": "A: Uma loja que alugava filmes por dia. B: Um cinema de bairro. C: Uma loja de consertos de TV",
+  "inicio": 701.778,
+  "dur": 6.963
+ },
+ {
+  "n": 64,
+  "chave": "20:rev",
+  "texto": "É a letra A: Uma loja que alugava filmes por dia. Uma loja que alugava filmes por um ou dois dias, com multa por atraso e a regra sagrada de devolver rebobinado. Escolher filme ali era um programa: você lia a capa, pedia opinião ao balcão e às vezes voltava com outro porque o seu estava alugado.",
+  "inicio": 709.641,
+  "dur": 21.926
+ },
+ {
+  "n": 65,
+  "chave": "21:q",
+  "texto": "Para que servia a chave de fenda que vinha com o aparelho de som?",
+  "inicio": 732.467,
+  "dur": 4.815
+ },
+ {
+  "n": 66,
+  "chave": "21:opts",
+  "texto": "A: Ajustar a rotação ou o azimute. B: Abrir a embalagem. C: Trocar a pilha",
+  "inicio": 738.181,
+  "dur": 5.481
+ },
+ {
+  "n": 67,
+  "chave": "21:rev",
+  "texto": "É a letra A: Ajustar a rotação ou o azimute. Para ajustar o próprio aparelho: rotação da vitrola, alinhamento da cabeça do toca-fitas, regulagem de agulha. Eletrônico daquela época vinha com manual de ajuste e esperava que o dono mexesse. Hoje o parafuso existe para impedir você de abrir.",
+  "inicio": 744.563,
+  "dur": 21.407
+ },
+ {
+  "n": 68,
+  "chave": "22:q",
+  "texto": "O que era um projetor de filme Super 8?",
+  "inicio": 766.87,
+  "dur": 2.889
+ },
+ {
+  "n": 69,
+  "chave": "22:opts",
+  "texto": "A: Uma câmera e projetor de filme caseiro. B: Um tipo de slide colorido. C: Um cinema portátil de rua",
+  "inicio": 770.659,
+  "dur": 7.481
+ },
+ {
+  "n": 70,
+  "chave": "22:rev",
+  "texto": "É a letra A: Uma câmera e projetor de filme caseiro. O formato de filme doméstico, antes do vídeo: a família filmava em rolo, mandava revelar e assistia projetado na parede, em silêncio, porque a maioria não gravava som. É de Super 8 que vem quase todo vídeo de família dos anos 60 e 70 que você já viu.",
+  "inicio": 779.041,
+  "dur": 22.444
+ },
+ {
+  "n": 71,
+  "chave": "23:q",
+  "texto": "O que era a vitrola de pilha ou radiola?",
+  "inicio": 802.385,
+  "dur": 2.963
+ },
+ {
+  "n": 72,
+  "chave": "23:opts",
+  "texto": "A: Um toca-discos portátil com alto-falante. B: Um rádio de onda curta. C: Um amplificador de guitarra",
+  "inicio": 806.248,
+  "dur": 7.556
+ },
+ {
+  "n": 73,
+  "chave": "23:rev",
+  "texto": "É a letra A: Um toca-discos portátil com alto-falante. Um toca-discos com alto-falante embutido, que você levava para onde quisesse: festa de rua, quintal, varanda. A qualidade era modesta e isso não importava: era o único jeito de ter música onde não havia aparelho de som.",
+  "inicio": 814.704,
+  "dur": 20.296
+ },
+ {
+  "n": 74,
+  "chave": "24:q",
+  "texto": "Para que servia o despertador de corda com dois sinos?",
+  "inicio": 835.9,
+  "dur": 4.0
+ },
+ {
+  "n": 75,
+  "chave": "24:opts",
+  "texto": "A: Acordar sem depender de energia elétrica. B: Marcar tempo de cozinha. C: Avisar a hora cheia",
+  "inicio": 840.8,
+  "dur": 7.037
+ },
+ {
+  "n": 76,
+  "chave": "24:rev",
+  "texto": "É a letra A: Acordar sem depender de energia elétrica. Acordar sem eletricidade nenhuma: você dava corda e ele guardava a energia numa mola. Falta de luz não atrapalhava, e o barulho era um martelinho batendo entre dois sinos de metal, impossível de ignorar. Ele não precisava de pilha nem de tomada.",
+  "inicio": 848.737,
+  "dur": 22.222
+ },
+ {
+  "n": 77,
+  "chave": "25:q",
+  "texto": "O que era um ferro de passar a carvão?",
+  "inicio": 871.859,
+  "dur": 2.815
+ },
+ {
+  "n": 78,
+  "chave": "25:opts",
+  "texto": "A: Um ferro aquecido com brasa dentro. B: Um ferro aquecido no fogão. C: Um ferro a gás",
+  "inicio": 875.574,
+  "dur": 6.444
+ },
+ {
+  "n": 79,
+  "chave": "25:rev",
+  "texto": "É a letra A: Um ferro aquecido com brasa dentro. Um ferro oco, com brasa dentro, que você abanava para manter o calor. Controlar a temperatura era arte: brasa demais queimava o tecido, brasa de menos não passava nada. Havia também o ferro maciço, que se esquentava no fogão e esfriava rápido, obrigando a ter dois em rotação.",
+  "inicio": 882.919,
+  "dur": 24.074
+ },
+ {
+  "n": 80,
+  "chave": "26:q",
+  "texto": "O que era a leiteira na porta de casa?",
+  "inicio": 907.893,
+  "dur": 2.815
+ },
+ {
+  "n": 81,
+  "chave": "26:opts",
+  "texto": "A: Uma vasilha para o leiteiro deixar leite fresco. B: Uma caixa de correio. C: Um medidor de água",
+  "inicio": 911.607,
+  "dur": 7.259
+ },
+ {
+  "n": 82,
+  "chave": "26:rev",
+  "texto": "É a letra A: Uma vasilha para o leiteiro deixar leite fresco. Uma vasilha ou suporte onde o leiteiro deixava o leite de manhã, em garrafa de vidro, e levava a garrafa vazia do dia anterior. Era entrega diária, porque sem pasteurização e sem geladeira o leite não durava: a logística existia por causa da conservação, não por luxo.",
+  "inicio": 919.767,
+  "dur": 24.444
+ },
+ {
+  "n": 83,
+  "chave": "27:q",
+  "texto": "O que era o telefone de disco?",
+  "inicio": 945.111,
+  "dur": 2.222
+ },
+ {
+  "n": 84,
+  "chave": "27:opts",
+  "texto": "A: Um telefone que discava girando um aro com furos. B: Um telefone com visor. C: Um telefone sem fio",
+  "inicio": 948.233,
+  "dur": 7.481
+ },
+ {
+  "n": 85,
+  "chave": "27:rev",
+  "texto": "É a letra A: Um telefone que discava girando um aro com furos. O telefone em que você girava um aro com dez furos e esperava ele voltar sozinho para discar o próximo número. Cada dígito levava um tempo diferente: o zero era o mais lento, porque a roda tinha que percorrer todo o caminho de volta. Discar errado significava recomeçar o número inteiro.",
+  "inicio": 956.615,
+  "dur": 25.926
+ },
+ {
+  "n": 86,
+  "chave": "28:q",
+  "texto": "Para que servia o esmalte de unha na meia-calça?",
+  "inicio": 983.441,
+  "dur": 3.556
+ },
+ {
+  "n": 87,
+  "chave": "28:opts",
+  "texto": "A: Travar o fio que começou a correr. B: Dar brilho ao tecido. C: Tirar manchas",
+  "inicio": 987.896,
+  "dur": 5.852
+ },
+ {
+  "n": 88,
+  "chave": "28:rev",
+  "texto": "É a letra A: Travar o fio que começou a correr. Para travar o fio que começou a desfiar: uma gota de esmalte transparente colava o ponto e impedia que a corrida andasse. É o tipo de conserto que sumiu junto com a cultura do remendo — hoje a meia estraga e vai para o lixo, e ninguém mais pensa em deter o fio.",
+  "inicio": 994.648,
+  "dur": 22.889
+ },
+ {
+  "n": 89,
+  "chave": "29:q",
+  "texto": "Para que servia o papel vegetal no caderno de desenho?",
+  "inicio": 1018.437,
+  "dur": 4.0
+ },
+ {
+  "n": 90,
+  "chave": "29:opts",
+  "texto": "A: Copiar um desenho por cima. B: Proteger a folha da tinta. C: Fazer dobradura",
+  "inicio": 1023.337,
+  "dur": 5.852
+ },
+ {
+  "n": 91,
+  "chave": "29:rev",
+  "texto": "É a letra A: Copiar um desenho por cima. Para decalcar: você punha a folha translúcida sobre o desenho e copiava o contorno por cima. Era assim que uma geração aprendeu a desenhar personagem de gibi, e também como engenheiro e arquiteto tiravam cópia de planta antes da fotocopiadora. O papel vegetal continua existindo, mas ninguém mais usa para copiar: o celular fotografa.",
+  "inicio": 1030.089,
+  "dur": 27.778
+ },
+ {
+  "n": 92,
+  "chave": "outro",
+  "texto": "Comenta a sua pontuação. E conta qual desses você ainda tem guardado em casa, porque sempre tem alguém que tem. Na próxima rodada: trinta palavras que quase todo mundo escreve errado.",
+  "inicio": 1058.767,
+  "dur": 13.556
+ }
+]
