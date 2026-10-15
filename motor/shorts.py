@@ -214,7 +214,9 @@ def main():
               f"{s['aparencia']}", flush=True)
         try:
             st, msg = um(s, plano, forcar)
-        except Exception:
+        # SystemExit NAO e Exception: sem isto, uma peca reprovada
+        # derruba a fila inteira e as outras nunca rodam.
+        except (Exception, SystemExit):
             st, msg = 'erro', f"{s['id']}\n{traceback.format_exc()}"
         contas[st] += 1
         if st == 'sem-unidade': faltam.append(msg)

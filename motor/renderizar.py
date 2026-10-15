@@ -134,7 +134,9 @@ def main():
         print(f"[{n}/{len(fila)}] {v['id']} {v['simulador']} {v['aparencia']}", flush=True)
         try:
             st, msg = uma(v, forcar)
-        except Exception:
+        # SystemExit NAO e Exception: sem isto, uma peca reprovada
+        # derruba a fila inteira e as outras nunca rodam.
+        except (Exception, SystemExit):
             st, msg = 'erro', f"{v['id']}\n{traceback.format_exc()}"
         contas[st] += 1
         if st == 'sem-unidade': faltam.append(msg)

@@ -58,10 +58,10 @@ def _falas_faltando(u, cam_deck, dirsaida):
 def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
     deck = u.get('deck')
     if not deck:
-        raise SystemExit("unidade de quiz sem 'deck'")
+        raise RuntimeError("unidade de quiz sem 'deck'")
     cam_deck = deck if os.path.isabs(deck) else os.path.join(RAIZ, 'decks', deck)
     if not os.path.exists(cam_deck):
-        raise SystemExit(f'deck nao encontrado: {cam_deck}')
+        raise RuntimeError(f'deck nao encontrado: {cam_deck}')
 
     os.makedirs(dirsaida, exist_ok=True)
     # a narracao gravada entra ANTES do render: o motor procura por ela em
@@ -88,7 +88,7 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
     if not u.get('permitir_sintetico'):
         falta = _falas_faltando(u, cam_deck, dirsaida)
         if falta:
-            raise SystemExit(
+            raise RuntimeError(
                 f"{u.get('id')}: faltam {len(falta)} falas gravadas "
                 f"(a primeira e {falta[0]}). Grave no yovoice e rode o 3-VOZ, "
                 f"ou ponha \"permitir_sintetico\": true na unidade para aceitar "
@@ -127,7 +127,7 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
         # e tres estouram os 60 s (abaixo de 60 o Short roda em laco)
         perg = u.get('perguntas')
         if not perg:
-            raise SystemExit(f"{u.get('id')}: Short de quiz sem 'perguntas'")
+            raise RuntimeError(f"{u.get('id')}: Short de quiz sem 'perguntas'")
         cmd += [','.join(str(i) for i in perg), '0']
 
         # visual proprio: o Short nao pode parecer o longo nem os outros Shorts
@@ -153,7 +153,7 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
 
     r = subprocess.run(cmd, env=amb, cwd=RAIZ)
     if r.returncode != 0:
-        raise SystemExit(f'quizengine falhou com codigo {r.returncode}')
+        raise RuntimeError(f'quizengine falhou com codigo {r.returncode}')
 
     # o quizengine escreve final.mp4 no 16:9 e short.mp4 no 9:16;
     # o catalogo espera <ID>.mp4
