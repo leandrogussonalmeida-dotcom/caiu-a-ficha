@@ -1,16 +1,34 @@
 {
  "id": "V069",
- "titulo": "30 PERGUNTAS SOBRE BICHOS QUE VAO TE SURPREENDER",
+ "titulo": "15 PERGUNTAS SOBRE BICHOS QUE VAO TE SURPREENDER",
  "deck": "v069-bichos.json",
  "narracao": "out-v069/narracao",
  "formato": "16:9",
  "chamada": "Trinta perguntas sobre bichos, e muitas respostas sao mais estranhas que qualquer ficcao.",
  "fonte": "National Geographic Brasil (mordida do crocodilo); zoologia de referencia; deck conferido pelo checar_deck()",
  "confianca": "alta",
- "nota": "Narracao a gravar na voz clonada (SOSIA). O que faltar, o motor sintetiza.",
+ "nota": "Montado so com as 15 perguntas que tem narracao gravada na voz do Leandro. Nenhuma fala sintetizada. As outras 15 do deck ficam para uma segunda peca quando a gravacao sair.",
  "tags": [
   "#bichos",
   "#natureza",
   "#quiz"
- ]
+ ],
+ "perguntas": [
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29
+ ],
+ "intro": ""
 }

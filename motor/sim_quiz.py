@@ -36,7 +36,8 @@ def _falas_faltando(u, cam_deck, dirsaida):
         idx = [i for i in (u.get('perguntas') or []) if 0 <= i < n]
         partes = ('q', 'rev')          # no Short as alternativas nao sao lidas
     else:
-        idx = list(range(n))
+        # o longo pode levar um subconjunto: so cobra o que vai ao ar
+        idx = [i for i in (u.get('perguntas') or range(n)) if 0 <= i < n]
         partes = ('q', 'opts', 'rev')
 
     base = u.get('narr') or u.get('narracao') or ''
@@ -100,6 +101,12 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
     cmd = [sys.executable, os.path.join(RAIZ, 'quizengine.py'),
            'short' if curto else 'render', cam_deck, dirsaida]
 
+    # O longo normalmente leva o deck inteiro, mas pode levar um subconjunto:
+    # e assim que uma peca sai so com as perguntas que tem voz gravada, em vez
+    # de meio video na voz dele e meio numa voz sintetica.
+    if not curto and u.get('perguntas'):
+        cmd += [','.join(str(i) for i in u['perguntas']), '0']
+
     if curto:
         # O Short NAO regrava voz: ele reaproveita os .wav do longo.
         # NARR aponta para a pasta do longo, VELOC acelera sem mudar o tom e
@@ -133,6 +140,16 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
             cam_deck = os.path.join(dirsaida, 'deck-derivado.json')
             json.dump(d, open(cam_deck, 'w', encoding='utf-8'), ensure_ascii=False)
             cmd[3] = cam_deck
+
+    # intro/outro desligaveis pela unidade. Fala vazia o motor descarta, entao
+    # nao ha o que sintetizar: a vinheta faz a abertura.
+    if any(k in u for k in ('intro', 'outro')):
+        d = json.load(open(cam_deck, encoding='utf-8'))
+        for k in ('intro', 'outro'):
+            if k in u: d[k] = u[k]
+        cam_deck = os.path.join(dirsaida, 'deck-ajustado.json')
+        json.dump(d, open(cam_deck, 'w', encoding='utf-8'), ensure_ascii=False)
+        cmd[3] = cam_deck
 
     r = subprocess.run(cmd, env=amb, cwd=RAIZ)
     if r.returncode != 0:
