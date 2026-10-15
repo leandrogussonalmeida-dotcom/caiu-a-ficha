@@ -98,6 +98,9 @@ def main(quais):
             real = _duracao(os.path.join(destino, arq)) or (h.get('duration') or 0)
             prev = m.get('dur') or 1
             if real > prev * 2.2 + 5 or (real and real < prev * .35):
+                # nao deixa o take ruim no lugar: apagado, o motor nao o usa,
+                # e a unidade decide se a fala fica muda ou se a pergunta sai
+                os.remove(os.path.join(destino, arq)); copiados -= 1
                 suspeitos.append((vid, arq, real, prev))
         relatorio.append((vid, copiados, len(man),
                           'completo' if not faltam else f'faltam {len(faltam)}'))

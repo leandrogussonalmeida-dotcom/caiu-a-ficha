@@ -435,6 +435,17 @@ def synth_all(deck, idxs, D, voice, curto=False):
         for part in ('q', 'opts', 'rev'):
             todo.append((f'{k}:{part}', plan[k][part]))
     todo = [(k, t) for k, t in todo if t.strip()]
+    # falas MUDAS: entram sem voz nenhuma, nem gravada nem sintetica.
+    # Serve para o take que saiu ruim numa fala que a tela ja resolve - as
+    # alternativas estao escritas, entao perde-se pouco e nao se mistura
+    # a voz do canal com uma voz sintetica no meio do video.
+    mudas = set(deck.get('mudas') or [])
+    if mudas:
+        antes = len(todo)
+        todo = [(k, t) for k, t in todo if k not in mudas]
+        if antes != len(todo):
+            print(f'{antes - len(todo)} falas mudas (sem voz, por take ruim): '
+                  + ', '.join(sorted(mudas)), flush=True)
 
     externos = 0
     _DE_ARQUIVO.clear()

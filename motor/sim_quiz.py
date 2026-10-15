@@ -47,9 +47,11 @@ def _falas_faltando(u, cam_deck, dirsaida):
     if not os.path.isdir(base):
         base = os.path.join(dirsaida, 'narracao')
 
+    mudas = set(u.get('mudas') or [])
     falta = []
     for i in idx:
         for p in partes:
+            if f'{i}:{p}' in mudas: continue      # fala muda nao se cobra
             arq = f'{i}-{p}.wav'
             if not os.path.exists(os.path.join(base, arq)): falta.append(arq)
     return falta
@@ -143,10 +145,11 @@ def construir(u, seed=201, saida='quiz.mp4', dirsaida='out-quiz'):
 
     # intro/outro desligaveis pela unidade. Fala vazia o motor descarta, entao
     # nao ha o que sintetizar: a vinheta faz a abertura.
-    if any(k in u for k in ('intro', 'outro')):
+    if any(k in u for k in ('intro', 'outro', 'mudas')):
         d = json.load(open(cam_deck, encoding='utf-8'))
         for k in ('intro', 'outro'):
             if k in u: d[k] = u[k]
+        if u.get('mudas'): d['mudas'] = u['mudas']
         cam_deck = os.path.join(dirsaida, 'deck-ajustado.json')
         json.dump(d, open(cam_deck, 'w', encoding='utf-8'), ensure_ascii=False)
         cmd[3] = cam_deck
