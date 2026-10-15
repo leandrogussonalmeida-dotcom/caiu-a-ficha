@@ -16,6 +16,7 @@ import sys, os, json, math, subprocess, numpy as np
 import fontes as FT
 import quizaudio as A
 import quizbg as BG
+import quizcolagem as COL
 
 SR = 48000
 FPS = 30
@@ -596,7 +597,13 @@ def rr(d, box, r, **kw): d.rounded_rectangle(box, radius=r, **kw)
 
 
 # =============================================================== camadas
-def question_layers(q, n, L, pal, fonts):
+def question_layers(q, n, L, pal, fonts, colagem=False):
+    if colagem:
+        return COL.camadas(q, n, L, pal, fonts, SEED)
+    return _question_layers_liso(q, n, L, pal, fonts)
+
+
+def _question_layers_liso(q, n, L, pal, fonts):
     from PIL import ImageFont
     from PIL import Image, ImageDraw
     fo, fh, fn, ff = fonts[1:]
@@ -718,9 +725,15 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
              ImageFont.truetype(F_HEAVY, L['f_n']), ImageFont.truetype(F_TXT, L['f_f']))
     fh, fn, ff = fonts[2], fonts[3], fonts[4]
 
-    chrome = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(chrome)
+    colagem = deck.get('visual') == 'colagem'
     topo = deck.get('tema_curto', deck.get('tema', '')).upper()
-    d.text((W / 2, L['head_y']), '   '.join(topo), font=fh, fill=tuple(pal['head']) + (205,), anchor='ma')
+    if colagem:
+        chrome = COL.chrome(W, H, L, pal, topo, SEED)
+        d = ImageDraw.Draw(chrome)
+    else:
+        chrome = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(chrome)
+        d.text((W / 2, L['head_y']), '   '.join(topo), font=fh,
+               fill=tuple(pal['head']) + (205,), anchor='ma')
 
     # trilho da barra de progresso, no topo absoluto da tela
     bar_h = max(4, int(7 * L['s']))
@@ -731,24 +744,35 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
     del vy, vx
 
     HOLD, NUNIQ = 4, 75        # 10 s de loop de fundo
-    lows = BG.render(fam, pal, W, H, NUNIQ, SEED)
+    if colagem:
+        # o palco de papel e fixo: um quadro so, repetido. Fundo parado e o
+        # que o x264 sabe prever - fundo que se mexe e ruido puro e estoura
+        # o arquivo sem ninguem ganhar nada.
+        HOLD, NUNIQ = 4, 1
+        lows = COL.fundo(W, H, pal, SEED, 1)
+    else:
+        lows = BG.render(fam, pal, W, H, NUNIQ, SEED)
     bg = []
     for lo in lows:
-        im = np.asarray(Image.fromarray(lo).resize((W, H), Image.BICUBIC), np.float32) * vig
+        im = np.asarray(Image.fromarray(lo).resize((W, H), Image.BICUBIC), np.float32)
+        if not colagem: im = im * vig          # papel nao leva vinheta de tela
         comp(im, arr(chrome), (0, 0))
         bg.append(np.clip(im, 0, 255).astype(np.uint8))
     del lows, vig
-    print(f'fundo {fam} pronto', flush=True)
+    print(f"fundo {'colagem' if colagem else fam} pronto", flush=True)
 
     STEPS = 48
-    rings = [[tuple((arr(a), b) for a, b in [ring_layer(L, pal, i / STEPS, hot)])[0]
+    _anel = (lambda l, p, f, h: COL.carimbo_tempo(l, p, f, h)) if colagem else ring_layer
+    rings = [[tuple((arr(a), b) for a, b in [_anel(L, pal, i / STEPS, hot)])[0]
               for i in range(STEPS + 1)] for hot in (False, True)]
     maxt = int(math.ceil(max(s['timer'] for s in tl)))
     digits = {}
     for n in range(maxt + 1):
         im = Image.new('RGBA', (L['ring'][2] * 2, L['ring'][2] * 2), (0, 0, 0, 0))
+        # na colagem o numero e tinta no papel, nao luz na tela
+        cor_num = (32, 26, 22) if colagem else tuple(pal['head'])
         ImageDraw.Draw(im).text((L['ring'][2], L['ring'][2]), str(n), font=fn,
-                                fill=tuple(pal['head']) + (242,), anchor='mm')
+                                fill=cor_num + (242,), anchor='mm')
         digits[n] = arr(im)
     print('anéis prontos', flush=True)
 
@@ -758,7 +782,7 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
     # as perguntas 24 e 25 do deck longo tem que mostrar 1 e 2
     for pos, s in enumerate(tl, 1):
         q = dict(s['q'])
-        ly = question_layers(q, pos, L, pal, fonts)
+        ly = question_layers(q, pos, L, pal, fonts, colagem)
         src = ly['pills'][q['ok']][1]
         ly['pop'] = [arr(src.resize((int(src.size[0] * (1 + .07 * math.sin(math.pi * j / 10))),
                                      int(src.size[1] * (1 + .07 * math.sin(math.pi * j / 10)))), Image.BICUBIC))
