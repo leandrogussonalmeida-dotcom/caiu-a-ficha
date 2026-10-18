@@ -17,6 +17,7 @@ import fontes as FT
 import quizaudio as A
 import quizbg as BG
 import quizcolagem as COL
+import quizmidia as QM
 
 SR = 48000
 FPS = 30
@@ -577,6 +578,10 @@ def layout(W, H, nopt_max):
                  opt_x=int(370 * s), opt_w=int(1180 * s),
                  band_y0=int(430 * s), band_y1=int(930 * s),
                  f_q=int(60 * s), f_o=int(43 * s), f_h=int(31 * s), f_n=int(48 * s), f_f=int(35 * s))
+    # a explicacao pode descer alem das alternativas: no 9:16 as erradas
+    # somem na revelacao e sobra a faixa ate o rodape seguro. Presa em
+    # band_y1, uma explicacao longa saia em corpo 23 - ilegivel no celular.
+    L['fact_y1'] = int(1580 * s) if v else L['band_y1']
     gap = int((26 if v else 22) * s)
     band = L['band_y1'] - L['band_y0']
     L['opt_gap'] = gap
@@ -673,7 +678,7 @@ def _question_layers_liso(q, n, L, pal, fonts):
     # duracao e loudness, nao se o texto coube na tela.
     if True:
         topo = L['band_y0'] + L['opt_h'] + int(34 * s)
-        disp = max(int(140 * s), L['band_y1'] - topo)
+        disp = max(int(140 * s), L['fact_y1'] - topo)
         tam = ff.size
         while tam > int(23 * s):
             fteste = ImageFont.truetype(F_TXT, tam)
@@ -802,6 +807,10 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
             ly[key] = arr(ly[key])
         ly['pills'] = [[arr(x) for x in st] for st in ly['pills']]
         ly['trans'] = TRANS[int(rng.integers(len(TRANS)))]
+        # a prova na tela: bandeira ou imagem que bate no papel na revelacao
+        mid = QM.polaroide(q, L, SEED)
+        if mid is not None:
+            ly['midia'] = (mid, arr(mid), QM.posicao(L, mid))
         layers[s['k']] = ly
     print(f'cartões prontos: {len(layers)}', flush=True)
 
@@ -953,10 +962,20 @@ def render_video(deck, tl, total, D, pal, fam, W, H, out_name):
                 # Ancorar na ULTIMA alternativa, como era no 16:9, empurrava a
                 # caixa para fora do quadro quando a explicacao era longa.
                 fy = L['band_y0'] + L['opt_h'] + int(34 * L['s'])
-                fy = min(fy, L['band_y1'] - ly['fact'].shape[0])
+                fy = min(fy, L['fact_y1'] - ly['fact'].shape[0])
                 fy = max(fy, L['band_y0'] + L['opt_h'] + int(14 * L['s']))
                 fy += int(26 * L['s'] * (1 - a))
                 comp(img, ly['fact'], (L['opt_x'] + (L['opt_w'] - ly['fact'].shape[1]) // 2, fy), a * fade)
+
+            # ---- a foto da resposta (bandeira, imagem), por cima de tudo
+            if 'midia' in ly and t >= s['ttimer'] + .12:
+                pim, parr, (px, py) = ly['midia']
+                u = (t - s['ttimer'] - .12) / .45
+                if u < 1:
+                    g, dx, dy, al = QM.quadro(pim, u)
+                    comp(img, arr(g), (px + dx, py + dy), al * fade)
+                else:
+                    comp(img, parr, (px, py), fade)
 
         # --- barra de progresso: quanto do quiz ja passou
         if tl[0]['t0'] <= t < tl[-1]['t1']:
@@ -990,6 +1009,7 @@ def checar_deck(deck, path):
         if not (q.get('fato') or '').strip():
             erros.append(f'pergunta {i}: sem explicação (campo fato)')
         if not (q.get('q') or '').strip(): erros.append(f'pergunta {i}: sem enunciado')
+        erros += [f'pergunta {i}: {m}' for m in QM.checar(q)]
     # fundo e paleta fixados no deck tem que EXISTIR. Escrever 'mapa' num
     # campo que so aceita onze familias nao da erro nenhum: o motor sorteia
     # outro pelo SEED e o video sai com a cara errada, calado. E a mesma

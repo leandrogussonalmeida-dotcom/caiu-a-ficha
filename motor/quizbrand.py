@@ -314,11 +314,19 @@ def desenhar_ficha(d_px, rng):
         g.polygon(pts, fill=LATAO_ESC + (255,))
 
     g.ellipse([c - r * .94, c - r * .94, c + r * .94, c + r * .94], fill=LATAO + (255,))
-    g.ellipse([c - r * .86, c - r * .90, c + r * .70, c + r * .62], fill=LATAO_CLA + (95,))
-    g.ellipse([c - r * .80, c - r * .80, c + r * .80, c + r * .80],
-              outline=LATAO_ESC + (215,), width=int(S * 2.2))
-    g.ellipse([c - r * .62, c - r * .62, c + r * .62, c + r * .62],
-              outline=LATAO_CLA + (165,), width=int(S * 1.6))
+    # brilho e frisos em camada propria, MISTURADOS por cima. Desenhados
+    # direto com alfa parcial, o ImageDraw SUBSTITUIA o alfa do latao: a
+    # ficha ficava com um buraco translucido e a faixa de tras aparecia
+    # atraves dela (visivel no banner e na vinheta).
+    cam = Image.new('RGBA', (D, D), (0, 0, 0, 0))
+    gc = ImageDraw.Draw(cam)
+    gc.ellipse([c - r * .86, c - r * .90, c + r * .70, c + r * .62], fill=LATAO_CLA + (95,))
+    gc.ellipse([c - r * .80, c - r * .80, c + r * .80, c + r * .80],
+               outline=LATAO_ESC + (215,), width=int(S * 2.2))
+    gc.ellipse([c - r * .62, c - r * .62, c + r * .62, c + r * .62],
+               outline=LATAO_CLA + (165,), width=int(S * 1.6))
+    im.alpha_composite(cam)
+    g = ImageDraw.Draw(im)
 
     fw, fh = r * .17, r * 1.02                          # a fenda do orelhão
     g.rounded_rectangle([c - fw / 2, c - fh / 2, c + fw / 2, c + fh / 2],

@@ -256,7 +256,7 @@ def camadas(q, n, L, pal, fonts, seed):
              else q.get('fato', ''))
     ff = ImageFont.truetype(F_EXP, L['f_f'])
     topo = L['band_y0'] + L['opt_h'] + int(34 * s)
-    disp = max(int(140 * s), L['band_y1'] - topo)
+    disp = max(int(140 * s), L.get('fact_y1', L['band_y1']) - topo)
     tam = ff.size
     while tam > int(23 * s):
         ft = ImageFont.truetype(F_EXP, tam)
