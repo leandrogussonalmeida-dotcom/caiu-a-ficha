@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NO RITMO — a moldura comum dos 30 Shorts.
+"""RITMO PIXEL (série NO RITMO) — a moldura comum dos Shorts.
 
 Cada cena desenha o mundo. Esta base põe por cima o que é do canal:
 
@@ -8,7 +8,8 @@ Cada cena desenha o mundo. Esta base põe por cima o que é do canal:
   hud         BPM atual e uma luz que pisca em cada bumbo
   cartão      no último trecho: pedido de inscrição com o botão apertado
               na batida e uma pergunta para os comentários
-  vinheta     a ficha 8-bit de `pixelmarca`, no fim, com o som dela
+  vinheta     RITMO PIXEL (`ritmo_marca`): o pixel que quica e vira o nome
+  acabamento  luz, vinheta, flash e transição (`ritmo_acabamento`)
 
 Tudo que se mexe na moldura também obedece aos eventos da faixa.
 
@@ -21,7 +22,8 @@ import bisect, json, math, os, subprocess, sys
 import numpy as np
 import soundfile as sf
 import pixelengine as PX
-import pixelmarca as PM
+import ritmo_marca as PM
+import ritmo_acabamento as AC
 import quizaudio as QA
 import ritmo_musica as M
 import ritmo_paletas  # noqa: registra as paletas das cenas
@@ -130,98 +132,129 @@ def back(u):
 
 
 # =================================================================== moldura
+def painel(tela, x, y, w, h, borda=9, fundo=0, luz=None, sombra=0):
+    """Painel de HUD de jogo: sombra de 1 px, borda com cantos arredondados
+    (o pixel do canto fica de fora) e um filete de luz por dentro do topo."""
+    x, y, w, h = int(x), int(y), int(w), int(h)
+    if sombra is not None:
+        tela.ret(x + 2, y + h, w - 2, 1, sombra); tela.ret(x + w, y + 2, 1, h - 2, sombra)
+        tela.ret(x + 1, y + h, 1, 1, sombra)
+    tela.ret(x + 1, y, w - 2, 1, borda); tela.ret(x + 1, y + h - 1, w - 2, 1, borda)
+    tela.ret(x, y + 1, 1, h - 2, borda); tela.ret(x + w - 1, y + 1, 1, h - 2, borda)
+    tela.ret(x + 1, y + 1, w - 2, h - 2, fundo)
+    if luz is not None:
+        tela.ret(x + 2, y + 1, w - 4, 1, luz)
+
+
+def quebrar(tela, txt, tam, larg):
+    """Quebra em linhas que cabem em `larg` (palavra inteira, nunca no meio)."""
+    linhas, cur = [], ''
+    for p in txt.split():
+        tent = (cur + ' ' + p).strip()
+        if cur and tela.largura_texto(tent, tam) > larg:
+            linhas.append(cur); cur = p
+        else:
+            cur = tent
+    if cur: linhas.append(cur)
+    return linhas
+
+
 class Moldura:
-    """Gancho, placas, HUD e cartão final. As cores vêm da paleta da cena,
-    pelos índices da convenção (11 branco, 9 destaque, 10 secundário, 0
-    fundo)."""
+    """Gancho, placa de gênero, HUD e cartão final, desenhados como interface
+    de jogo: fonte de pixel com contorno (sem tarja preta), painéis com borda
+    e cantos, fases como pontinhos e não como texto. Em inglês: o canal é
+    global. As cores vêm da paleta da cena pela convenção dos índices (11
+    branco, 9 destaque, 10 secundário, 0 fundo, 3 traço)."""
 
     def __init__(self, F, L, cfg):
         self.F, self.L, self.cfg = F, L, cfg
-        self.gancho = cfg.get('gancho', ['ESPERA O DROP'])
+        self.gancho = cfg.get('gancho', ['WAIT FOR', 'THE DROP'])
         self.sub = cfg.get('sub_gancho', '')
-        self.pergunta = cfg.get('pergunta', 'QUAL FASE FOI A MELHOR?')
-        self.n_fases = len([s for s in F.secoes if s['papel'] in ('drop',)])
+        self.pergunta = cfg.get('pergunta', 'WHICH STAGE WAS BEST?')
+        self.drops = [s for s in F.secoes if s['papel'] == 'drop']
         self.t_fim = next(e['t'] for e in F.eventos if e['tipo'] == 'fim')
         sec_fim = [s for s in F.secoes if s['papel'] == 'fim']
         self.t_cartao = sec_fim[0]['t0'] if sec_fim else self.t_fim - 3.0
         self.placas = cfg.get('placas', True)
         self.hud = cfg.get('hud', True)
+        self.dur_g = cfg.get('dur_gancho', 2.6)
 
-    def faixa_texto(self, tela, txt, y, tam, cor, fundo, larg_max=None, pad=3):
-        larg_max = larg_max or (SAFE_X1 - SAFE_X0 + 20)
-        tam_ok = tam
-        while tam_ok > 6 and tela.largura_texto(txt, tam_ok) > larg_max: tam_ok -= 1
-        w = tela.largura_texto(txt, tam_ok)
-        x = W // 2 - w // 2
-        if fundo is not None:
-            tela.ret(x - pad, y - pad + 1, w + 2 * pad, tam_ok + 2 * pad - 1, fundo)
-        tela.texto(txt, W // 2, y, cor, tam=tam_ok, centro=True)
-        return tam_ok
-
+    # ------------------------------------------------------------ desenhar
     def desenhar(self, tela, t):
+        if t < self.dur_g: self._gancho(tela, t)
+        if self.placas and t >= .2 and t < self.t_cartao: self._placa(tela, t)
+        if self.hud and self.dur_g - .2 < t < self.t_cartao: self._hud(tela, t)
+        if t >= self.t_cartao: self._cartao(tela, t - self.t_cartao, t)
+
+    def _gancho(self, tela, t):
+        """Duas linhas grandes que entram de cima uma depois da outra e
+        quicam no bumbo. Já estão inteiras no quadro 0: ele é a capa."""
+        L, dur = self.L, self.dur_g
+        pk = L.env('kick', t, .10)
+        sai = ease(max(0.0, (t - (dur - .3)) / .3))
+        y0 = 58
+        for k, linha in enumerate(self.gancho):
+            tam = 17   # o verificador garante que cabe em 2x dentro da margem segura
+            yy = y0 + k * 19 - int(pk * 2 * (1 if k == 0 else -1)) - int(sai * (90 + 20 * k))
+            tela.texto(linha, W // 2, yy, 11 if k == 0 else 9, tam=tam, centro=True, contorno=0, sombra=0)
+        if self.sub:
+            yy = y0 + len(self.gancho) * 19 + 4 - int(sai * 130)
+            tela.texto(self.sub, W // 2, yy, 10, tam=9, centro=True, contorno=0)
+        if t < dur - .4:
+            self._falante(tela, W // 2, y0 - 14, L.env('kick', t, .14))
+
+    def _placa(self, tela, t):
+        """Placa do gênero entrando na troca de seção: painel com o nome em
+        grande e o BPM embaixo; entra pela esquerda com rebote, sai pela
+        direita."""
         L = self.L
-        # ------------------------------------------------ gancho (0 a ~2.6 s)
-        dur_g = self.cfg.get('dur_gancho', 2.6)
-        if t < dur_g:
-            pk = L.env('kick', t, .10)
-            sai = max(0.0, (t - (dur_g - .35)) / .35)
-            y0 = int(54 - 40 * ease(sai) ** 2)
-            for k, linha in enumerate(self.gancho):
-                tam = 17 if len(linha) <= 11 else (14 if len(linha) <= 14 else 12)
-                yy = y0 + k * (tam + 7) - int(pk * 2)
-                cor = 11 if k == 0 else 9
-                self.faixa_texto(tela, linha, yy, tam, cor if sai < .9 else 0, 0 if sai < .5 else None, pad=4)
-            if self.sub and sai < .5:
-                self.faixa_texto(tela, self.sub, y0 + len(self.gancho) * 22 + 2, 9, 10, 0)
-            # alto-falante piscando: "liga o som"
-            if t < dur_g - .4:
-                self._falante(tela, W // 2, y0 - 16, L.env('kick', t, .14))
+        s = L.secao(t)
+        mostrar = (s['papel'] in ('drop', 'intro', 'break') and s['i'] > 0) or s['i'] == 0
+        if not mostrar or s['papel'] == 'fim': return
+        t_ref = s['t0'] if s['i'] > 0 else self.dur_g
+        u = t - t_ref
+        if not 0 <= u < 1.9: return
+        ent = back(u / .28)
+        sai = ease((u - 1.55) / .3)
+        x_off = int((1 - ent) * -W + sai * W)
+        y = self.cfg.get('y_placa', 66)
+        nome, bpm = s['nome'], f"{int(round(s['bpm']))} BPM"
+        tam = 17 if tela.largura_texto(nome, 17) <= 150 else 9
+        w = max(tela.largura_texto(nome, tam), tela.largura_texto(bpm, 9)) + 16
+        h = (14 if tam == 17 else 7) + 7 + 12
+        x = W // 2 - w // 2 + x_off
+        painel(tela, x, y, w, h, borda=9, fundo=0, luz=3)
+        tela.texto(nome, x + w // 2, y + 4, 11, tam=tam, centro=True)
+        yb = y + 4 + (14 if tam == 17 else 7) + 3
+        tela.texto(bpm, x + w // 2, yb, 9, tam=9, centro=True)
 
-        # ------------------------------------------------ placa de seção
-        if self.placas and t >= .2:
-            s = L.secao(t)
-            dt = t - s['t0']
-            mostrar = s['papel'] in ('drop', 'intro', 'break') and s['i'] > 0 or (s['i'] == 0 and dt > dur_g)
-            if mostrar and s['papel'] != 'fim' and t < self.t_cartao:
-                t_ref = s['t0'] if s['i'] > 0 else dur_g
-                u = t - t_ref
-                if 0 <= u < 1.9:
-                    ent = back(u / .28)
-                    sai = ease((u - 1.55) / .3)
-                    x_off = int((1 - ent) * -W + sai * W)
-                    y = self.cfg.get('y_placa', 66)
-                    nome = s['nome']
-                    bpm = f"{int(round(s['bpm']))} BPM"
-                    tam = 15 if len(nome) <= 9 else 12
-                    w = max(tela.largura_texto(nome, tam), tela.largura_texto(bpm, 9)) + 14
-                    x = W // 2 - w // 2 + x_off
-                    tela.ret(x + 2, y + 2, w, tam + 16, 0)
-                    tela.ret(x, y, w, tam + 16, 9)
-                    tela.ret(x + 1, y + 1, w - 2, tam + 14, 0)
-                    tela.texto(nome, x + w // 2, y + 3, 11, tam=tam, centro=True)
-                    tela.texto(bpm, x + w // 2, y + tam + 5, 9, tam=9, centro=True)
-
-        # ------------------------------------------------ HUD (BPM + luz)
-        if self.hud and t > dur_g - .2 and t < self.t_cartao:
-            s = L.secao(t)
-            bpm = f"{int(round(s['bpm']))}"
-            x, y = SAFE_X0, 30
-            tela.ret(x - 2, y - 2, 44, 13, 0)
-            luz = L.env('kick', t, .09)
-            tela.disco(x + 3, y + 4, 2.6, 15 if luz > .4 else 3)
-            tela.texto(bpm, x + 9, y, 11, tam=9)
-            tela.texto('BPM', x + 9 + tela.largura_texto(bpm, 9) + 2, y + 1, 10, tam=8)
-            if self.n_fases > 1:
-                drops = [q for q in self.F.secoes if q['papel'] == 'drop']
-                k = sum(1 for q in drops if q['t0'] <= t + 1e-6)
-                txt = f"FASE {max(1, k)}/{len(drops)}"
-                wv = tela.largura_texto(txt, 8)
-                tela.ret(SAFE_X1 - wv - 2, y - 2, wv + 4, 13, 0)
-                tela.texto(txt, SAFE_X1 - wv, y + 1, 10, tam=8)
-
-        # ------------------------------------------------ cartão final
-        if t >= self.t_cartao:
-            self.cartao(tela, t - self.t_cartao, t)
+    def _hud(self, tela, t):
+        """À esquerda o andamento com a luz do bumbo; à direita as fases em
+        pontinhos (cheio = passou, aceso = agora)."""
+        L = self.L
+        s = L.secao(t)
+        bpm = f"{int(round(s['bpm']))}"
+        x, y = SAFE_X0, 28
+        w = tela.largura_texto(bpm, 9) + tela.largura_texto('BPM', 9) + 18
+        painel(tela, x - 2, y - 2, w, 12, borda=3, fundo=0)
+        luz = L.env('kick', t, .09)
+        tela.ret(x + 1, y + 1, 4, 4, 15 if luz > .4 else 3)
+        if luz > .4: tela.ret(x + 2, y + 2, 1, 1, 11)
+        tela.texto(bpm, x + 8, y, 11, tam=9)
+        tela.texto('BPM', x + 12 + tela.largura_texto(bpm, 9), y, 10, tam=9)
+        n = len(self.drops)
+        if n > 1:
+            k = sum(1 for q in self.drops if q['t0'] <= t + 1e-6)
+            wv = n * 7 + 4
+            xv = SAFE_X1 - wv
+            painel(tela, xv, y - 2, wv, 12, borda=3, fundo=0)
+            for j in range(n):
+                px = xv + 3 + j * 7
+                if j < k - 1: tela.ret(px, y + 1, 5, 5, 10)
+                elif j == k - 1:
+                    tela.ret(px, y + 1, 5, 5, 9)
+                    if L.env('kick', t, .12) > .4: tela.ret(px + 1, y + 2, 3, 3, 11)
+                else: tela.ret_vazado(px, y + 1, 5, 5, 3)
 
     def _falante(self, tela, cx, cy, p):
         tela.ret(cx - 7, cy - 3, 4, 6, 11)
@@ -233,46 +266,24 @@ class Moldura:
                     aa = math.radians(a)
                     tela.px(cx + 2 + r * math.cos(aa), cy + r * math.sin(aa), 9)
 
-    def cartao(self, tela, u, t):
+    def _cartao(self, tela, u, t):
+        """Fim: o mundo continua tocando; por cima, um painel com a pergunta
+        para os comentários. O pedido de inscrição fica com a vinheta."""
         L = self.L
-        ent = ease(u / .35)
-        # escurece o mundo atrás em faixas (pixel, sem transparência)
-        h_cx = int(150 * ent)
-        y0 = 120 - h_cx // 2
-        tela.ret(0, y0, W, h_cx, 0)
-        tela.ret(0, y0, W, 1, 9); tela.ret(0, y0 + h_cx - 1, W, 1, 9)
-        if ent < .9: return
-        tela.texto_ajustado(self.cfg.get('cartao_titulo', 'CURTIU O SOM?'), W // 2, 62, 11, 15, 150, centro=True)
-        # botão: afunda em cada bumbo, como se alguém batesse nele no tempo
-        p = L.env('kick', t, .10)
-        bw, bh = 120, 26
-        bx, by = W // 2 - bw // 2, 92 + int(p * 3)
-        tela.ret(bx + 2, 92 + bh + 2 - 0, bw, 4 - int(p * 3), 13)
-        tela.ret(bx, by, bw, bh, 15)
-        tela.ret(bx, by, bw, 2, 11 if p > .5 else 15)
-        tela.texto('INSCREVA-SE', W // 2, by + 7, 11, tam=13, centro=True)
-        # cursor de mão que bate no botão
-        mx, my = bx + bw - 14, by + bh - 4 - int((1 - p) * 6)
-        mao = [
-            "..X.....",
-            ".XWX....",
-            ".XWX....",
-            ".XWXXX..",
-            "XXWWWWX.",
-            "XWWWWWWX",
-            "XWWWWWWX",
-            ".XWWWWX.",
-            "..XXXX..",
-        ]
-        Sprite(mao, {'X': 0, 'W': 11}).por(tela, mx, my)
-        # sininho
-        sx, sy = W // 2, 132
-        tela.texto(self.pergunta, W // 2, 140, 9, tam=9, centro=True) if tela.largura_texto(self.pergunta, 9) < 160 else \
-            tela.texto_ajustado(self.pergunta, W // 2, 140, 9, 9, 160, centro=True)
-        tela.texto('COMENTA AQUI', W // 2, 156, 10, tam=9, centro=True)
-        seta_y = 172 + int(3 * math.sin(t * 9))
-        for k in range(5):
-            tela.ret(W // 2 - 4 + k, seta_y + k, 9 - 2 * k, 1, 9)
+        ent = back(u / .3)
+        linhas = quebrar(tela, self.pergunta, 9, 132)
+        h = 12 + 10 * len(linhas) + 12
+        w = max(tela.largura_texto(l, 9) for l in linhas) + 20
+        y = 96 + int((1 - ent) * 220)
+        x = W // 2 - w // 2
+        painel(tela, x, y, w, h, borda=9, fundo=0, luz=3)
+        for k, l in enumerate(linhas):
+            tela.texto(l, W // 2, y + 7 + 10 * k, 11, tam=9, centro=True)
+        p = L.env('kick', t, .12)
+        tela.texto('TELL ME BELOW', W // 2, y + h - 12 + int(p * 1), 9, tam=9, centro=True)
+        seta = y + h + 4 + int(2 * math.sin(t * 8))
+        for k in range(4):
+            tela.ret(W // 2 - 3 + k, seta + k, 7 - 2 * k, 1, 9)
 
 
 # =================================================================== pós
@@ -322,7 +333,8 @@ def renderizar(cena_cls, cfg, saida, dirsaida):
     wav = os.path.join(dirsaida, saida.replace('.mp4', '.wav'))
     sf.write(wav, mix, M.SR, subtype='PCM_16')
 
-    vin_q = list(PM.encerramento(W, H, FPS, cfg.get('chamadas', ['INSCREVA-SE', 'TEM MAIS SOM NO CANAL']), seed))
+    vin_q = list(PM.encerramento(W, H, FPS, cfg.get('chamadas', ['SUBSCRIBE', 'FOR MORE BEATS']), seed))
+    acab = AC.Acabamento(L, cfg, W, H)
     scan = cfg.get('scanlines', False)
     pal_atual = [cfg['paleta']]
 
@@ -339,7 +351,8 @@ def renderizar(cena_cls, cfg, saida, dirsaida):
         mold.desenhar(tela, t)
         dx, dy = cena.tremor(t) if hasattr(cena, 'tremor') else (0, 0)
         tremer(tela, dx, dy)
-        rgb = tela.quadro()
+        baixo = acab.aplicar(tela, t)
+        rgb = np.repeat(np.repeat(baixo, PX.ESCALA, 0), PX.ESCALA, 1)
         if scan: rgb = scanlines(rgb)
         return rgb
 
@@ -375,6 +388,7 @@ def amostra(cena_cls, cfg, tempos, saida_png, escala=2):
     cena = cena_cls(F, L, cfg, np.random.default_rng(cfg['seed'] * 13 + 1))
     mold = Moldura(F, L, cfg)
     tela = PX.Tela(W, H, paleta=cfg['paleta'])
+    acab = AC.Acabamento(L, cfg, W, H)
     ims = []
     for t in tempos:
         if cfg.get('paletas_secao'):
@@ -382,7 +396,7 @@ def amostra(cena_cls, cfg, tempos, saida_png, escala=2):
             tela.pal = p; tela.rgb = PX.paleta_rgb(p)
         cena.desenhar(tela, t, int(t * FPS))
         mold.desenhar(tela, t)
-        im = Image.fromarray(tela.rgb[tela.buf]).resize((W * escala, H * escala), Image.NEAREST)
+        im = Image.fromarray(acab.aplicar(tela, t)).resize((W * escala, H * escala), Image.NEAREST)
         ims.append(im)
     out = Image.new('RGB', (len(ims) * (W * escala + 8), H * escala), (40, 40, 40))
     for k, im in enumerate(ims): out.paste(im, (k * (W * escala + 8), 0))

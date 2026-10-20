@@ -293,8 +293,7 @@ class Cena:
             tam = 11 + (2 if pc > .5 else 0)
             txt = f"COMBO {nb}"
             w = tela.largura_texto(txt, tam)
-            tela.ret(W // 2 - w // 2 - 3, 44, w + 6, 17, 0)
-            tela.texto(txt, W // 2, 46 + (1 if pc <= .5 else 0), 11, tam=tam, centro=True)
+            tela.texto(txt, W // 2, 46 + (1 if pc <= .5 else 0), 11, tam=tam, centro=True, contorno=0)
             if drop:
                 tela.ret(W // 2 + w // 2 + 4, 44, 18, 13, 15)
                 tela.texto('x2', W // 2 + w // 2 + 13, 46, 11, tam=10, centro=True)

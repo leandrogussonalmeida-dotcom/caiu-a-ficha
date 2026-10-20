@@ -14,6 +14,7 @@ batida é exato na amostra. A sincronia não é aproximada, é construída.
 """
 import json, math, os, subprocess
 import fontes as FT
+import pixelfonte as PF
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
@@ -35,6 +36,9 @@ LARG_H, ALT_H = 320, 180             # 1920x1080 dividido por 6
 # borrão cinza e mata o visual; com fontmode='1' cada pixel é ligado ou
 # desligado, que é como fonte de console sempre foi.
 F_PIX = FT.f('DejaVuSansMono-Bold.ttf')
+# RITMO PIXEL: o texto sai da fonte 5x7 desenhada à mão (`pixelfonte`), que só
+# cresce por múltiplos inteiros. FONTE=ttf no ambiente volta para a antiga.
+FONTE_BITMAP = os.environ.get('FONTE', 'bitmap') != 'ttf'
 
 
 # =============================================================== paletas
@@ -168,13 +172,13 @@ class Tela:
         return self._fontes[tam]
 
     def _mascara(self, txt, tam):
-        """Máscara apertada do texto, em cache.
+        """Máscara apertada do texto, em cache: (máscara, dx, dy).
 
-        A versão ingênua alocava uma imagem do tamanho da TELA a cada chamada;
-        com cinco textos por quadro isso sozinho derrubava o render pela
-        metade. Aqui a máscara tem o tamanho das letras e é calculada uma vez
-        por (texto, corpo) — o mesmo rótulo em 1.800 quadros custa um.
-        """
+        Com FONTE_BITMAP a máscara vem da grade 5x7 em escala inteira
+        (`pixelfonte`); o corpo antigo só escolhe a escala. Sem ela, a TTF
+        sem antialias (o caminho velho, mantido para comparar)."""
+        if FONTE_BITMAP:
+            return (PF.mascara(txt, PF.escala_de(tam)), 0, 1)
         ch = (txt, tam)
         m = self._cache.get(ch)
         if m is None:
@@ -201,17 +205,25 @@ class Tela:
         sub = m[y0 - y:y1 - y, x0 - x:x1 - x]
         self.buf[y0:y1, x0:x1][sub] = cor
 
-    def texto(self, txt, x, y, cor, tam=10, centro=False, sombra=None):
+    def texto(self, txt, x, y, cor, tam=10, centro=False, sombra=None, contorno=None):
         """Texto sem antialias. `centro` True ou 'c' centraliza, 'd' alinha à
         direita, falso à esquerda. (True não é chave de dicionário: tratar
-        antes, senão cai no alinhamento à esquerda.)"""
+        antes, senão cai no alinhamento à esquerda.)
+
+        `contorno`: cor de 1 pixel em volta das letras. É como jogo escreve
+        por cima do cenário: legível em qualquer fundo sem tarja preta."""
         if not txt: return
         m, bx, by = self._mascara(txt, tam)
         h, w = m.shape
-        if centro is True or centro == 'c': x -= w / 2
+        if centro is True or centro == 'c': x -= w // 2
         elif centro == 'd': x -= w
         y = y + by - 1
-        if sombra is not None: self._blit(m, x + 1, y + 1, sombra)
+        if contorno is not None:
+            d = PF.dilatar(m, 1)
+            if sombra is not None: self._blit(PF.dilatar(m, 1), x, y + 1, sombra)
+            self._blit(d, x - 1, y - 1, contorno)
+        elif sombra is not None:
+            self._blit(m, x + 1, y + 1, sombra)
         self._blit(m, x, y, cor)
 
     def largura_texto(self, txt, tam):

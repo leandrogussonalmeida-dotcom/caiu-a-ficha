@@ -170,8 +170,7 @@ class Cena(CenaBase):
         n = sum(1 for b in self.barreiras if b['t'] <= t + 1e-6)
         if n > 0 and 2.6 < t < self.F.secoes[-1]['t0']:
             p = L.env('kick', t, .1)
-            txt = f"{n} BARREIRAS"
+            txt = f"{n} GATES"
             tam = 11 + (1 if p > .5 else 0)
             w = tela.largura_texto(txt, tam)
-            tela.ret(90 - w // 2 - 3, 44, w + 6, 16, 0)
-            tela.texto(txt, 90, 46, 11, tam=tam, centro=True)
+            tela.texto(txt, 90, 46, 11, tam=tam, centro=True, contorno=0)

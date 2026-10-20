@@ -22,8 +22,8 @@ class Cena(CenaBase):
         L = self.L
         v = self.v
         quarta = v.get('quarta', 'lead')
-        self.pistas = [('BUMBO', 'kick', 15), ('CAIXA', 'costas', 9), ('CHIMBAL', 'hatf', 12),
-                       ('BAIXO' if quarta == 'baixo' else 'MELODIA', quarta, 10)]
+        self.pistas = [('KICK', 'kick', 15), ('SNARE', 'costas', 9), ('HI-HAT', 'hatf', 12),
+                       ('BASS' if quarta == 'baixo' else 'LEAD', quarta, 10)]
         self.ev = []
         for k, (_, tp, _) in enumerate(self.pistas):
             ts = []
@@ -111,12 +111,11 @@ class Cena(CenaBase):
         L = self.L
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = sum(int(np.searchsorted(ts, t, 'right')) for ts in self.ev)
-        txt = f"{n} NOTAS"
+        txt = f"{n} NOTES"
         w = tela.largura_texto(txt, 11)
-        tela.ret(W // 2 - w // 2 - 3, 44, w + 6, 16, 0)
-        tela.texto(txt, W // 2, 46, 11, tam=11, centro=True)
+        tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)
         d = L.desde('drop', t)
         if t > 3 and d < .9:
             e = min(1, d / .15)
             tam = int(12 + 6 * e)
-            tela.texto('PERFEITO!', W // 2, 120, 9, tam=tam, centro=True, sombra=0)
+            tela.texto('PERFECT!', W // 2, 120, 9, tam=tam, centro=True, sombra=0)

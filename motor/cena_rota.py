@@ -278,7 +278,6 @@ class Cena(CenaBase):
         # contador de passos no rodapé seguro
         nb = L.conta('batida', t)
         if nb > 0 and 2.6 < t < self.F.secoes[-1]['t0']:
-            txt = f"{nb} PASSOS"
+            txt = f"{nb} STEPS"
             w = tela.largura_texto(txt, 10)
-            tela.ret(W // 2 - w // 2 - 3, 44, w + 6, 15, 0)
-            tela.texto(txt, W // 2, 46, 11, tam=10, centro=True)
+            tela.texto(txt, W // 2, 46, 11, tam=10, centro=True, contorno=0)

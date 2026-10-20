@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Renderiza os Shorts NO RITMO.
+"""Renderiza os Shorts NO RITMO (canal RITMO PIXEL).
 
     python3 ritmo_render.py <dir_saida> [r01 r02 ...]
 
@@ -21,13 +21,17 @@ def arquivo(p):
 
 def probe(c):
     try:
-        o = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'stream=codec_type,width,height',
+        o = subprocess.run(['ffprobe', '-v', 'error', '-count_packets', '-show_entries',
+                            'stream=codec_type,width,height,nb_read_packets',
                             '-show_entries', 'format=duration', '-of', 'json', c], capture_output=True, text=True)
         j = json.loads(o.stdout)
         tipos = [s['codec_type'] for s in j['streams']]
         v = [s for s in j['streams'] if s['codec_type'] == 'video'][0]
-        return dict(ok='video' in tipos and 'audio' in tipos and v['width'] == 1080 and v['height'] == 1920,
-                    dur=float(j['format']['duration']))
+        dur = float(j['format']['duration'])
+        quadros = int(v.get('nb_read_packets', 0))
+        # vídeo e áudio presentes não bastam: tem que ter um quadro a cada 1/30 s
+        return dict(ok='video' in tipos and 'audio' in tipos and v['width'] == 1080 and v['height'] == 1920
+                    and abs(quadros - dur * B.FPS) <= 3, dur=dur, quadros=quadros)
     except Exception as e:
         return dict(ok=False, erro=str(e))
 

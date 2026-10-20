@@ -22,6 +22,10 @@ import numpy as np
 from ritmo_base import CenaBase, Sprite, W, H, ease, hsh, nova_paleta
 
 
+def ordinal(n):
+    return f"{n}{'ST' if n % 10 == 1 and n != 11 else 'ND' if n % 10 == 2 and n != 12 else 'RD' if n % 10 == 3 and n != 13 else 'TH'}"
+
+
 CARRO = [
     "....kkkkkkkk....",
     "...kvvvvvvvvk...",
@@ -208,14 +212,12 @@ class Cena(CenaBase):
         feitos = sum(1 for p in self.passes if p['t'] <= t + 1e-6)
         posicao = max(1, self.n_pass + 1 - feitos)
         p = L.env('costas', t, .15)
-        txt = f"{posicao}º"
+        txt = ordinal(posicao)
         tam = 18 + (3 if p > .5 and feitos else 0)
         w = tela.largura_texto(txt, tam)
-        tela.ret(W // 2 - w // 2 - 5, 44, w + 10, tam + 6, 0)
-        tela.texto(txt, W // 2, 46, 9 if posicao == 1 else 11, tam=tam, centro=True)
+        tela.texto(txt, W // 2, 46, 9 if posicao == 1 else 11, tam=tam, centro=True, contorno=0)
         sec = L.secao(t)
         kmh = int(sec['bpm'] * 2 * (1.25 if sec['papel'] == 'drop' else 1))
         txt = f"{kmh} KM/H"
         w = tela.largura_texto(txt, 9)
-        tela.ret(W // 2 - w // 2 - 3, 72, w + 6, 13, 0)
-        tela.texto(txt, W // 2, 74, 12, tam=9, centro=True)
+        tela.texto(txt, W // 2, 74, 12, tam=9, centro=True, contorno=0)

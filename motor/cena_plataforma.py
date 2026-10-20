@@ -174,7 +174,6 @@ class Cena(CenaBase):
         L = self.L
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = sum(1 for p in self.pulos if p['t0'] <= t)
-        txt = f"{n} PULOS"
+        txt = f"{n} JUMPS"
         w = tela.largura_texto(txt, 11)
-        tela.ret(W // 2 - w // 2 - 3, 44, w + 6, 16, 0)
-        tela.texto(txt, W // 2, 46, 11, tam=11, centro=True)
+        tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)

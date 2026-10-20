@@ -18,6 +18,9 @@ import numpy as np
 import tracos as TR
 from ritmo_base import CenaBase, W, H, ease, back, hsh
 
+# o desenho tem nome interno em português; na tela o canal fala inglês
+NOME_EN = {'AMPULHETA': 'HOURGLASS', 'AVIAO': 'PLANE', 'BARCO': 'BOAT', 'BICICLETA': 'BICYCLE', 'CACTO': 'CACTUS', 'CARACOL': 'SNAIL', 'CARRO': 'CAR', 'CASA': 'HOUSE', 'CHAVE': 'KEY', 'COGUMELO': 'MUSHROOM', 'FAROL': 'LIGHTHOUSE', 'FLOR': 'FLOWER', 'FOLHA': 'LEAF', 'GARRAFA': 'BOTTLE', 'GATO': 'CAT', 'GUARDA-CHUVA': 'UMBRELLA', 'IGREJA': 'CHURCH', 'LAMPADA': 'LIGHT BULB', 'OCULOS': 'GLASSES', 'PEIXE': 'FISH', 'PONTE': 'BRIDGE', 'RELOGIO': 'CLOCK', 'XICARA': 'CUP', 'TESOURA': 'SCISSORS', 'PANELA': 'POT'}
+
 BX, BY, BW, BH = 12, 64, 156, 170          # moldura
 VX, VY, VW, VH = BX + 9, BY + 10, BW - 18, BH - 42   # vidro
 
@@ -171,15 +174,13 @@ class Cena(CenaBase):
             u = t - d['t1']
             if 0 <= u < (d['fim_sec'] - d['t1']) + .5:
                 e = back(u / .22)
-                txt = d['nome'].replace('-', ' ') + '!'
+                txt = NOME_EN.get(d['nome'], d['nome']).replace('-', ' ') + '!'
                 tam = int(10 + 8 * min(1, e))
                 y = BY + 6
                 w = tela.largura_texto(txt, tam)
-                tela.ret(W // 2 - w // 2 - 4, y - 3, w + 8, tam + 7, 0)
-                tela.texto(txt, W // 2, y, 9, tam=tam, centro=True)
+                tela.texto(txt, W // 2, y, 9, tam=tam, centro=True, contorno=0)
             # contagem: "DESENHO 2/5"
             if d['t0'] <= t < d['t1'] and t > 2.6:
-                txt = f"DESENHO {k + 1}/{len(self.des)}"
+                txt = f"DRAWING {k + 1}/{len(self.des)}"
                 w = tela.largura_texto(txt, 10)
-                tela.ret(W // 2 - w // 2 - 3, 44, w + 6, 15, 0)
-                tela.texto(txt, W // 2, 46, 11, tam=10, centro=True)
+                tela.texto(txt, W // 2, 46, 11, tam=10, centro=True, contorno=0)

@@ -87,13 +87,23 @@ class Bateria:
     """Os timbres de percussão de um gênero, sintetizados uma vez e reusados.
     Cada gênero escolhe o seu sabor de bumbo, caixa e chimbal."""
 
+    # Round-robin: cada golpe de caixa, palma e chimbal pega uma de N versões
+    # sintetizadas com ruído diferente. Com uma versão só, o mesmo arquivo
+    # tocava 300 vezes idêntico, o "metralhadora" que denuncia bateria de
+    # máquina. O bumbo fica com 2 (o peso dele tem que ser constante).
+    RR = dict(kick=2, snare=4, clap=4, hat=6, rim=3, shaker=4, crash=2, ride=3, tom=2, cow=1)
+
     def __init__(self, rng, sabor):
         self.rng = rng
         self.s = sabor
         self.cache = {}
+        self.vez = {}
 
     def get(self, nome, **kw):
-        ch = (nome, tuple(sorted(kw.items())))
+        base = (nome, tuple(sorted(kw.items())))
+        k = self.vez.get(base, 0)
+        self.vez[base] = k + 1
+        ch = base + (k % self.RR.get(nome, 1),)
         if ch not in self.cache:
             self.cache[ch] = getattr(self, '_' + nome)(**kw)
         return self.cache[ch]
@@ -504,9 +514,27 @@ def compor(secoes, seed=1, raiz=None, cauda=1.2):
 
     F.total = t + cauda
     F.ev(t, 'fim')
+    _humanizar(F, seed)
     F.eventos.sort(key=lambda e: e['t'])
     _sintetizar(F, seed, raiz)
     return F
+
+
+def _humanizar(F, seed):
+    """Mão de baterista: chimbal e percussão saem até 6 ms do grid e cada
+    golpe tem força um pouco diferente. Bumbo e caixa ficam no grid exato.
+
+    Mexe no EVENTO, não no áudio: o instante novo vale para o som e para a
+    tela ao mesmo tempo, então a sincronia continua sendo por construção."""
+    rng = np.random.default_rng(seed * 6007 + 5)
+    sig_t = dict(hat=.0025, perc=.003, crash=.002)
+    sig_v = dict(kick=.04, snare=.06, clap=.07, hat=.13, perc=.10, lead=.05, acorde=.04)
+    for e in F.eventos:
+        tp = e['tipo']
+        if tp in sig_t:
+            e['t'] = max(0.0, e['t'] + float(np.clip(rng.normal(0, sig_t[tp]), -.006, .006)))
+        if tp in sig_v:
+            e['vel'] = float(np.clip(e.get('vel', 1.0) * math.exp(rng.normal(0, sig_v[tp])), .15, 1.15))
 
 
 def _motivos(rng):
@@ -843,6 +871,7 @@ def _sintetizar(F, seed, raiz):
     efx = np.zeros((n, 2), np.float32)
     kits = {}
     cache_n = {}
+    n_hat = 0
 
     def kit_de(t):
         for s in reversed(F.secoes):
@@ -870,7 +899,8 @@ def _sintetizar(F, seed, raiz):
             _put(bat, K.get('clap'), t, g(GANHO['clap']) * v, .05)
         elif tp == 'hat':
             s = K.get('hat', aberto=bool(e.get('aberto')))
-            _put(bat, s, t, g(GANHO['hat']) * v, .25)
+            n_hat = n_hat + 1
+            _put(bat, s, t, g(GANHO['hat']) * v, .3 if n_hat % 2 else -.1)
         elif tp == 'perc':
             if e['nome'] == 'tom': s = K.get('tom', nota=e['m'])
             else: s = K.get('rim')
@@ -931,7 +961,7 @@ def _sintetizar(F, seed, raiz):
     sub = np.stack([_lp(mix[:, c], 90) for c in range(2)], 1)
     ar = np.stack([_hp(mix[:, c], 5500) for c in range(2)], 1)
     pres = np.stack([_bp(mix[:, c], 1800, 5200) for c in range(2)], 1)
-    mix = (mix - .42 * sub + .8 * ar + 1.1 * pres).astype(np.float32)
+    mix = (mix - .42 * sub + .45 * ar + .5 * pres).astype(np.float32)   # era +.8 ar, +1.1 presença: estridente
     mix = mix[:int(F.total * SR)]
     # cola: saturação leve no barramento
     mix = (np.tanh(mix * 1.15) / 1.15).astype(np.float32)
