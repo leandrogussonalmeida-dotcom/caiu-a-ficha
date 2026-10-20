@@ -159,6 +159,12 @@ def quebrar(tela, txt, tam, larg):
     return linhas
 
 
+def nome_placa(tela, nome):
+    """Nome do gênero que cabe em 2x na margem segura (136 px): 'AND' vira '&'."""
+    if tela.largura_texto(nome, 17) > 136: nome = nome.replace(' AND ', ' & ')
+    return nome
+
+
 class Moldura:
     """Gancho, placa de gênero, HUD e cartão final, desenhados como interface
     de jogo: fonte de pixel com contorno (sem tarja preta), painéis com borda
@@ -218,8 +224,8 @@ class Moldura:
         sai = ease((u - 1.55) / .3)
         x_off = int((1 - ent) * -W + sai * W)
         y = self.cfg.get('y_placa', 66)
-        nome, bpm = s['nome'], f"{int(round(s['bpm']))} BPM"
-        tam = 17 if tela.largura_texto(nome, 17) <= 150 else 9
+        nome, bpm = nome_placa(tela, s['nome']), f"{int(round(s['bpm']))} BPM"
+        tam = 17 if tela.largura_texto(nome, 17) <= 136 else 9
         w = max(tela.largura_texto(nome, tam), tela.largura_texto(bpm, 9)) + 16
         h = (14 if tam == 17 else 7) + 7 + 12
         x = W // 2 - w // 2 + x_off

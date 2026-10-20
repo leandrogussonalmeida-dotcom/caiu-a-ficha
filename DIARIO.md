@@ -27,5 +27,7 @@ Peça de referência: r01 (masmorra), mais r16 (cidade) e r28 (túnel). Antes = 
 
 **Teste novo de texto:** `ritmo_verificar.py --plano` reprova gancho que não cabe na margem segura em 2x (136 px), caractere sem glifo e palavra em português. Pegou 9 ganchos largos demais no primeiro rascunho em inglês.
 
+**Defeito pego na revisão visual:** a placa "DRUM AND BASS" em 2x ocupava a tela inteira e passava sob os botões. Agora vira "DRUM & BASS" (122 px) e o `--plano` reprova placa de gênero acima de 136 px.
+
 Arquivos novos: `pixelfonte.py`, `ritmo_acabamento.py`, `ritmo_marca.py`.
 Arquivos mudados: `pixelengine.py`, `ritmo_base.py`, `ritmo_musica.py`, `ritmo_plano.py`, `ritmo_publicar.py`, `ritmo_render.py`, `ritmo_verificar.py`, as 10 `cena_*.py`.

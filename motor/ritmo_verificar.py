@@ -65,6 +65,10 @@ def textos_do_plano():
     t = PX.Tela()
     PT = re.compile(r"[ãõçáéíóúâêô]|\b(você|voce|não|nao|batida|inscreva|comenta|fase|gênero|música)\b", re.I)
     erros = []
+    import ritmo_musica as M
+    from ritmo_base import nome_placa
+    for g, G in M.GENEROS.items():
+        if t.largura_texto(nome_placa(t, G['nome']), 17) > 136: erros.append(f"placa larga: {G['nome']}")
     for p in PLANO:
         for l in p['gancho']:
             if t.largura_texto(l, 17) > 136: erros.append(f"{p['id']} gancho largo: {l}")
