@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """RITMO PIXEL, série NO RITMO — os 30 Shorts (textos em inglês: canal global).
 
-10 cenas x 3. Nenhum par (cena, paleta) se repete, e cada Short tem trilha
+9 cenas x 3 (a cidade saiu em 22/10). Nenhum par (cena, paleta) se repete, e cada Short tem trilha
 própria (seed, tônica, gêneros e andamentos). O BPM sempre sobe dentro do
 Short: é a promessa do gancho e o que segura até o fim.
 
@@ -133,22 +133,8 @@ PLANO = [
          pergunta='FUNK OR DRUM AND BASS?',
          secoes=J(('dembow', 4), ('funk', 5), 'B', ('trap', 5), 'B', ('dnb', 6)),
          titulo='A desert race to Brazilian funk 🏜️'),
-    # ---------------------------------------------------------------- cidade
-    dict(id='r16', cena='cidade', paleta='neon', seed=1016, variante=dict(chuva=True),
-         gancho=['THE CITY', 'DANCES'], sub_gancho='WATCH THE TOWERS',
-         pergunta='WHICH TOWER IS YOURS?',
-         secoes=J(('lofi', 3), ('synthwave', 4), 'B', ('future', 8)),
-         titulo='The city that dances to the music 🌃'),
-    dict(id='r17', cena='cidade', paleta='gelo', seed=1017,
-         gancho=['EACH TOWER', 'IS A NOTE'], sub_gancho='BASS IN THE MIDDLE',
-         pergunta='DID YOU FEEL THE BASS?',
-         secoes=J(('house', 4), ('garage', 4), 'B', ('trance', 8)),
-         titulo='Every building is a frequency of the song'),
-    dict(id='r18', cena='cidade', paleta='brasa', seed=1018, variante=dict(chuva=True), scanlines=True,
-         gancho=['WAIT FOR', 'THE DROP'], sub_gancho='THE CITY SHAKES',
-         pergunta='WHICH DROP HIT HARDER?',
-         secoes=J(('trap', 4), 'B', ('dubstep', 6), 'B', ('dnb', 8)),
-         titulo='Wait for the drop… the whole city shakes'),
+    # cidade (r16-r18) saiu em 22/10/2026: prédios pulando como equalizador não
+    # têm protagonista, objetivo nem progressão. Visualizador abstrato não é vídeo.
     # ---------------------------------------------------------------- plataforma
     dict(id='r19', cena='plataforma', paleta='floresta', seed=1019, scanlines=True,
          variante=dict(fundo='colinas', roupa=10, espinho=15),
@@ -224,7 +210,7 @@ PLANO = [
 # nenhuma combinação (cena, paleta) repete
 assert len({(p['cena'], p['paleta']) for p in PLANO}) == len(PLANO)
 assert len({p['seed'] for p in PLANO}) == len(PLANO)
-assert len(PLANO) == 30
+assert len(PLANO) == 27
 # desenhos da lousa: nenhum repete entre os três vídeos e todos da lista boa
 _des = [d for p in PLANO if p['cena'] == 'lousa' for d in p['variante']['desenhos']]
 assert len(_des) == len(set(_des)) and all(d in DESENHOS_OK for d in _des)

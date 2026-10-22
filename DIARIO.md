@@ -31,3 +31,7 @@ Peça de referência: r01 (masmorra), mais r16 (cidade) e r28 (túnel). Antes = 
 
 Arquivos novos: `pixelfonte.py`, `ritmo_acabamento.py`, `ritmo_marca.py`.
 Arquivos mudados: `pixelengine.py`, `ritmo_base.py`, `ritmo_musica.py`, `ritmo_plano.py`, `ritmo_publicar.py`, `ritmo_render.py`, `ritmo_verificar.py`, as 10 `cena_*.py`.
+
+## 22/10/2026 — a cidade saiu
+
+Leandro aprovou masmorra (r01) e túnel (r28) e reprovou a cidade (r16): "não faz o menor sentido". O motivo: prédios pulando como equalizador não têm protagonista, objetivo nem progressão. r16 a r18 saíram do plano (30 -> 27). Virou o **teste da cena** no ESTADO.md: protagonista, objetivo que sobe, progressão, música como regra do jogo.
