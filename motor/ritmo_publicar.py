@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Título, descrição e hashtags dos Shorts NO RITMO (canal RITMO PIXEL) -> titulos.txt
+"""Título, descrição e hashtags dos Shorts NO RITMO (canal NOSSO MUNDO PIXEL) -> titulos.txt
 
 Em inglês (canal global). A descrição muda de forma de peça para peça: a
 política de conteúdo repetitivo olha o canal inteiro, e trinta descrições com
@@ -38,7 +38,7 @@ def montar():
         desc = (f"{ABRE[k % len(ABRE)]}\n\n"
                 f"Tracklist (BPM): {' → '.join(gens)}\n\n"
                 f"{p['pergunta'].capitalize()}\n\n"
-                f"#shorts #electronicmusic {TAGS[p['cena']]} #ritmopixel")
+                f"#shorts #electronicmusic {TAGS[p['cena']]} #nossomundopixel")
         out.append(f"===== {p['id']}-{p['cena']}.mp4\nTITLE: {p['titulo']}\n\n{desc}\n")
     return out
 

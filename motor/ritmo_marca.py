@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vinheta RITMO PIXEL.
+"""Vinheta NOSSO MUNDO PIXEL (nasceu como RITMO PIXEL; o nome mudou em 29/10).
 
 O gesto (instrução do projeto): um pixel cai, quica no tempo da música e se
 multiplica até formar o nome do canal bloco a bloco.
@@ -28,10 +28,13 @@ SR = 48000
 PAL = 'ritmo_pixel'
 PX.PALETAS[PAL] = ['#0b0a14', '#14112a', '#221b44', '#3a2f66', '#5a4a98', '#ff8fb5',
                    '#a8f2ff', '#6b5bb0', '#9d8fe0', '#ff3d7f', '#3de0ff', '#ffffff',
-                   '#ffd23f', '#8a1f4a', '#17708c', '#ffe9a8']
+                   '#ffd23f', '#8a1f4a', '#17708c', '#ffe9a8', '#a8770f']
 ROSA, ROSA_L, ROSA_E = 9, 5, 13
 CIANO, CIANO_L, CIANO_E = 10, 6, 14
 AMARELO, BRANCO, CHAO = 12, 11, 3
+AMARELO_L, AMARELO_E = 15, 16
+NOME = (('NOSSO', ROSA, ROSA_L, ROSA_E), ('MUNDO', AMARELO, AMARELO_L, AMARELO_E),
+        ('PIXEL', CIANO, CIANO_L, CIANO_E))
 
 OUTRO_S = 2.8
 INTRO_S = 1.8
@@ -44,16 +47,28 @@ def _tempos(spb):
 
 
 def _alvos(W, H):
-    """Casas dos blocos: as células acesas de RITMO e PIXEL na grade 5x7."""
+    """Casas dos blocos: as células acesas do nome na grade 5x7. Tela larga
+    (16:9) põe as palavras numa linha; tela alta (9:16), uma embaixo da outra."""
     out = []
-    for k, (palavra, cor, luz, esc) in enumerate((('RITMO', ROSA, ROSA_L, ROSA_E),
-                                                  ('PIXEL', CIANO, CIANO_L, CIANO_E))):
-        m = PF.mascara(palavra, 1)
-        h, w = m.shape
-        x0 = W // 2 - (w * B) // 2
-        y0 = H // 2 - 40 + k * (h * B + 7)
+    mascaras = [PF.mascara(p, 1) for p, *_ in NOME]
+    h = mascaras[0].shape[0]
+    linha = W > H
+    if linha:
+        gap = 3
+        larg = sum(m.shape[1] for m in mascaras) + gap * (len(mascaras) - 1)
+        x0 = W // 2 - (larg * B) // 2
+        y0 = H // 2 - 30
+    col0 = 0
+    for k, ((palavra, cor, luz, esc), m) in enumerate(zip(NOME, mascaras)):
+        if linha:
+            xk, yk = x0 + col0 * B, y0
+            col0 += m.shape[1] + gap
+        else:
+            xk = W // 2 - (m.shape[1] * B) // 2
+            yk = H // 2 - 62 + k * (h * B + 7)
         for yy, xx in zip(*np.nonzero(m)):
-            out.append(dict(x=x0 + xx * B, y=y0 + yy * B, cor=cor, luz=luz, esc=esc, col=xx + k * 2))
+            out.append(dict(x=xk + xx * B, y=yk + yy * B, cor=cor, luz=luz, esc=esc,
+                            col=(xk + xx * B) / B if linha else xx + k * 2))
     return out
 
 
@@ -63,11 +78,11 @@ def _bloco(tela, x, y, cor, luz, esc, lado=B):
     if lado > 2: tela.px(x + lado - 1, y + lado - 1, esc)
 
 
-def _rodar(W, H, fps, dur, spb, linhas_txt, seed):
+def _rodar(W, H, fps, dur, spb, linhas_txt, seed, baixo=False):
     T = _tempos(spb)
     alvos = _alvos(W, H)
     rng = np.random.default_rng(seed + 404)
-    chao = H // 2 + 40
+    chao = max(a['y'] for a in alvos) + B + 8
     cx = W // 2
     n = len(alvos)
     # ordem de pouso: coluna (esquerda -> direita), com um tremor pequeno
@@ -116,7 +131,8 @@ def _rodar(W, H, fps, dur, spb, linhas_txt, seed):
         # brilho que corre pelas letras depois de fechar, uma volta por batida
         if t >= T['b4']:
             fase = ((t - T['b4']) / spb) % 1.0
-            xs = W // 2 - 60 + fase * 150
+            xa, xb = min(a['x'] for a in alvos), max(a['x'] for a in alvos)
+            xs = xa - 10 + fase * (xb - xa + 20)
             for a in alvos:
                 if abs(a['x'] - xs) < 3: tela.ret(a['x'], a['y'], B, 1, BRANCO)
             if linhas_txt and t >= T['b4'] + spb * .5:
@@ -134,11 +150,11 @@ def _rodar(W, H, fps, dur, spb, linhas_txt, seed):
         rest = dur - t
         if rest < 4 / fps: x = x * (rest * fps / 4)
         rgb = (np.clip(x, 0, 1) * 255).astype(np.uint8)
-        yield np.repeat(np.repeat(rgb, PX.ESCALA, 0), PX.ESCALA, 1)
+        yield rgb if baixo else np.repeat(np.repeat(rgb, PX.ESCALA, 0), PX.ESCALA, 1)
 
 
-def encerramento(W, H, fps, linhas_txt=('SUBSCRIBE',), seed=0):
-    return _rodar(W, H, fps, OUTRO_S, OUTRO_S / 7.0, list(linhas_txt), seed)
+def encerramento(W, H, fps, linhas_txt=('SUBSCRIBE',), seed=0, baixo=False):
+    return _rodar(W, H, fps, OUTRO_S, OUTRO_S / 7.0, list(linhas_txt), seed, baixo)
 
 
 def abertura(W, H, fps, seed=0):

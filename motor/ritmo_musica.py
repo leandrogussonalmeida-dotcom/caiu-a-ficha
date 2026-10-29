@@ -444,12 +444,14 @@ class Faixa:
         return d
 
 
-def compor(secoes, seed=1, raiz=None, cauda=1.2):
+def compor(secoes, seed=1, raiz=None, cauda=1.2, suave=False):
     """Monta a faixa inteira: eventos primeiro, áudio depois, a partir deles.
 
     secoes: [{'gen': 'house', 'bars': 4, 'papel': 'drop', 'bpm': opcional,
               'rotulo': opcional}, ...]
     papel: intro | build | drop | break | fim
+    suave: trilha de fundo (vídeo longo): sem prato, impacto, riser nem
+    reverso na entrada das seções, que ficam pedindo atenção que é da imagem.
     """
     rng = np.random.default_rng(seed * 7717 + 3)
     F = Faixa()
@@ -514,6 +516,9 @@ def compor(secoes, seed=1, raiz=None, cauda=1.2):
 
     F.total = t + cauda
     F.ev(t, 'fim')
+    if suave:
+        F.eventos = [e for e in F.eventos if not (e['tipo'] == 'crash' or (
+            e['tipo'] == 'fx' and e.get('nome') in ('impacto', 'riser', 'reverso')))]
     _humanizar(F, seed)
     F.eventos.sort(key=lambda e: e['t'])
     _sintetizar(F, seed, raiz)
