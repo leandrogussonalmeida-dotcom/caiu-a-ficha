@@ -26,7 +26,8 @@ FATOS E FONTES (cada número na tela aponta para uma destas):
   F7  Volante: mantém o momento entre os impulsos. Univ. of Windsor (idem F4).
   F8  Ordem de ignição mais comum do 4 cilindros em linha: 1-3-4-2.
       Rick's Free Auto Repair Advice, "What is the firing order for a 4-cylinder engine".
-  F9  Só 12-30% da energia do combustível move o carro (combinado 16-25%);
+  F9  Só 12-30% da energia do combustível move o carro (combinado 16-25%, o
+      número da tela, para bater com o gráfico; checagem de 29/10);
       perdas no motor 68-72% no uso combinado, principalmente calor.
       fueleconomy.gov (U.S. DOE), "Where the Energy Goes: Gasoline Vehicles".
   F10 Otto construiu um motor de quatro tempos em 1876 ("ciclo Otto").
@@ -91,7 +92,7 @@ LEGENDAS = {
     ],
     'potencia': [
         (3.0, 12.0, "JUST BEFORE THE PISTON REACHES THE", "TOP, THE *SPARK PLUG* FIRES.", ('F4',)),
-        (12.5, 22.5, "THE MIXTURE BURNS IN A FLASH. HOT", "GAS EXPANDS AND PUSHES THE PISTON.", ('F1',)),
+        (12.5, 22.5, "THE MIXTURE BURNS FAST. HOT GAS", "EXPANDS AND PUSHES THE PISTON DOWN.", ('F1',)),
         (23.0, 35.6, "THIS IS THE *ONLY STROKE*", "THAT MAKES POWER.", ('F1',)),
     ],
     'escape': [
@@ -116,12 +117,12 @@ LEGENDAS = {
         (0.5, 11.5, "ONLY 1 STROKE IN 4 PUSHES.", "SO WHAT KEEPS IT TURNING?", ('F1',)),
         (12.0, 23.5, "A HEAVY *FLYWHEEL* ON THE CRANKSHAFT", "KEEPS IT SPINNING BETWEEN PUSHES.", ('F7',)),
         (24.0, 35.5, "AND *MORE CYLINDERS*: IN A 4-CYLINDER", "ENGINE, THEY TAKE TURNS.", ()),
-        (36.0, 47.5, "A COMMON FIRING ORDER IS *1-3-4-2*.", "ONE CYLINDER IS ALWAYS PUSHING.", ('F8',)),
+        (36.0, 47.5, "A COMMON FIRING ORDER IS *1-3-4-2*.", "A NEW PUSH STARTS EVERY HALF TURN.", ('F8',)),
         (48.0, 59.6, "LISTEN: EACH CYLINDER'S SPARK", "PLAYS ITS OWN NOTE.", ()),
     ],
     'energia': [
         (0.5, 11.5, "WHERE DOES THE FUEL'S ENERGY GO?", "", ()),
-        (12.0, 23.5, "IN A TYPICAL GASOLINE CAR, ONLY ABOUT", "*12-30%* MOVES IT DOWN THE ROAD.", ('F9',)),
+        (12.0, 23.5, "IN A TYPICAL GASOLINE CAR, ONLY ABOUT", "*16-25%* MOVES IT DOWN THE ROAD.", ('F9',)),
         (24.0, 35.6, "MOST IS LOST IN THE ENGINE,", "MAINLY AS *HEAT*.", ('F9',)),
     ],
     'resumo': [
