@@ -1,37 +1,36 @@
-# ESTADO — RITMO PIXEL
+# ESTADO — NOSSO MUNDO PIXEL
 
-Atualizado em 22/10/2026. Ler só isto no começo de cada sessão.
+Atualizado em 29/10/2026. Ler só isto no começo de cada sessão.
 
 ## O canal
-- Nome: **RITMO PIXEL** (decidido em 20/10). Público **global**: tudo na tela e nos títulos em inglês.
-- Identidade: pixel art que a música controla (jogo + música), música sintetizada por código, sem voz.
-- Sai o "tamanho das coisas". Os vídeos e Shorts antigos foram apagados; ficou só a série NO RITMO.
+- Nome: **NOSSO MUNDO PIXEL** (decidido em 29/10; antes RITMO PIXEL). Público **global**: tela, títulos e descrições em inglês.
+- **Vídeo longo (o que monetiza):** "como funciona" em pixel detalhado, sem voz, com música baixa e legendas grandes. Piloto: ep01, o motor de 4 tempos.
+- **Shorts:** a série NO RITMO (jogo que a música controla) e, depois, recortes dos vídeos longos.
+
+## Teste da cena (22/10)
+Uma cena só entra se tiver: 1) protagonista que a gente acompanha; 2) objetivo que sobe na tela; 3) progressão (o mundo muda de fase); 4) a música, ou o mecanismo, é a regra (as coisas acontecem NA batida). Visualizador abstrato reprova (a cidade saiu por isso).
+
+## Vídeo longo: como é feito
+- `longo.py`: tela 480x270 ampliada 4x (1080p), legenda 2x em faixa embaixo (até 37 letras, 2 linhas, *palavra* em amarelo), trilha baixa por capítulo, efeitos, troca em blocos.
+- `epNN_roteiro.py`: capítulos, legendas com tempo e **cada fato com fonte** (FONTES). `epNN_motor.py`: o desenho de cada capítulo.
+- Antes do render: `longo_verificar.py --roteiro epNN_roteiro`. Depois: `longo_verificar.py video.mp4 epNN_roteiro` (1080p, quadros, -17 a -15 LUFS, pico ≤ -1).
+- Toda explicação passa por uma **checagem de fatos independente** antes de publicar (no ep01 pegou 2 legendas).
+- `longo_publicar.py`: título, descrição com capítulos (0:00...) e fontes.
 
 ## O que existe
-- `_motor\`: o motor. Ainda tem arquivos do quiz e dos simuladores antigos (pode apagar: `quiz*.py`, `voice.py`, `resgatar_voz.py`, `sim_*.py`, `decks\`, `out-v0*\`).
-- Série NO RITMO: 27 Shorts no plano (`ritmo_plano.py`), 9 cenas x 3. A cidade saiu em 22/10.
-- `REELS\NO RITMO\`: os 30 Shorts ANTIGOS (vinheta CAIU A FICHA, texto em português). Não publicar.
-- Motor revisado em 20/10 (ver DIARIO.md): fonte de pixel própria, HUD de jogo, luz, vinheta RITMO PIXEL, bateria humanizada, inglês, verificador que pega arquivo vazio.
-
-## Teste da cena (22/10, do julgamento do Leandro)
-Masmorra e túnel aprovados; cidade reprovada ("não faz o menor sentido"). Uma cena só entra se tiver:
-1. **Protagonista** que a gente acompanha (herói, nave).
-2. **Objetivo que sobe** na tela (combo, portais passados).
-3. **Progressão**: o mundo muda de fase (cor, perigo, velocidade).
-4. **A música é a regra do jogo** (ele anda, pula ou passa NA batida), não enfeite.
-Visualizador abstrato (prédio pulando como equalizador) reprova.
+- ep01 "How a Car Engine Works" (8 min 19 s): roteiro checado, render verificado. Aguardando o Leandro julgar a qualidade.
+- 27 Shorts NO RITMO no plano (9 cenas); 7 cenas aguardando julgamento (r04, r07, r10, r13, r19, r22, r25).
+- `_motor\` ainda tem o quiz e os simuladores antigos (pode apagar: `quiz*.py`, `voice.py`, `resgatar_voz.py`, `sim_*.py`, `decks\`, `out-v0*\`).
 
 ## Como rodar no PC
-- `2-RENDERIZAR.bat`: T (os 27), U (um), V (verificar), P (títulos em inglês).
-- Saída: `SHORTS\`. Publicar só o que o V marcar PASSOU.
+`2-RENDERIZAR.bat`: L (vídeo longo ep01), T (27 Shorts), U (um Short), V (verificar Shorts), P (títulos).
 
 ## O que falta
-1. Leandro julgar as outras 7 cenas (r04 rota, r07 foguete, r10 lousa, r13 corrida, r19 plataforma, r22 bolinha, r25 pistas). Masmorra e túnel já aprovados.
-2. Renderizar no PC só as cenas aprovadas e verificar.
-3. **Formato longo (16:9, 8-20 min)**: o motor só faz Shorts 9:16 de ~35 s. É o que monetiza; próximo grande passo.
-4. Banner, foto de perfil e marca d'água RITMO PIXEL (`marca_canal.py` serve de modelo).
-5. Repositório próprio do canal (hoje o código está no `caiu-a-ficha`, ramo `ritmo-pixel`).
-6. Calendário: 1 a 2 Shorts por dia, alternando cena e paleta.
+1. Leandro julgar o ep01 (imagem, legendas, ritmo, som).
+2. Próximos temas (lista no documento do projeto): avião voando é o segundo sugerido.
+3. Biblioteca de peças reutilizáveis (engrenagem, fluido, ar, corte) para acelerar os próximos episódios.
+4. Banner, foto de perfil e marca d'água NOSSO MUNDO PIXEL; criar o canal no YouTube.
+5. Repositório próprio do canal (hoje: `caiu-a-ficha`, ramo `ritmo-pixel`).
 
 ## Próximo passo
-Leandro julgar as 7 cenas; depois, o modo longo ("jornada") construído a partir da masmorra e do túnel, que passaram no teste da cena.
+Opinião do Leandro sobre o ep01; ajustar o que ele apontar e escolher o ep02.

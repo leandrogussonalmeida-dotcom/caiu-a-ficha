@@ -300,6 +300,19 @@ class Acabamento16:
         return out
 
 
+def limitar(x, teto, A=480):
+    """Limitador com antecipação de 10 ms: o ganho desce antes do pico e
+    volta suave (sem distorcer), até nenhuma amostra passar do teto."""
+    import scipy.signal as sg
+    from scipy.ndimage import minimum_filter1d
+    req = np.minimum(1.0, teto / (np.abs(x).max(1) + 1e-12)).astype(np.float32)
+    if req.min() >= 1.0: return x
+    gmin = minimum_filter1d(req, 2 * A + 1)
+    win = np.hanning(2 * A + 3)[1:-1]; win /= win.sum()
+    gs = np.minimum(sg.oaconvolve(np.pad(gmin, A + 1, mode='edge'), win.astype(np.float32), 'same')[A + 1:-(A + 1)], 1.0)
+    return (x * gs[:, None]).astype(np.float32)
+
+
 # =================================================================== render
 def renderizar_episodio(ep, saida, crf=18, so=None, quadros_amostra=None):
     """`ep` é o módulo do episódio. `so` = lista de ids de capítulo (teste).
@@ -340,6 +353,8 @@ def renderizar_episodio(ep, saida, crf=18, so=None, quadros_amostra=None):
     k = int(1.5 * SR)
     mix[-k:] *= np.linspace(1, 0, k)[:, None] ** 2
     mix, lufs, tp = QA.master(mix.astype(np.float32), ep.LUFS)
+    mix = limitar(mix, QA.g(-2.2))           # folga: o AAC sobe o pico ~0,5 dB (reprovou em -0,7)
+    lufs = round(float(QA.lufs(mix)), 2)
     os.makedirs(os.path.dirname(os.path.abspath(saida)), exist_ok=True)
     wav = saida.replace('.mp4', '.wav')
     sf.write(wav, mix, SR, subtype='PCM_16')

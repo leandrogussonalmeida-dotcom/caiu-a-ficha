@@ -128,21 +128,21 @@ class Cena:
         """Sons de um cilindro seguindo teta=fn(t) entre t0 e t1 (relativos)."""
         g0 = self.t0
         for t in cruzamentos(fn, t0, t1, MP.FAISCA):
-            fx.put(fx.faisca(), g0 + t, .35 * ganho, .05)
+            fx.put(fx.faisca(), g0 + t, .5 * ganho, .05)
         for t in cruzamentos(fn, t0, t1, MP.FAISCA + 6):
             fx.put(fx.explosao(lento), g0 + t, .9 * ganho)
         for alvo in (180.0, 720.0):                     # válvula assentando
             for t in cruzamentos(fn, t0, t1, alvo):
-                fx.put(fx.clique(3000, .02), g0 + t, .18 * ganho, -.3 if alvo == 180 else .3)
+                fx.put(fx.clique(3000, .02), g0 + t, .3 * ganho, -.3 if alvo == 180 else .3)
         if chiado:
             ini_a = cruzamentos(fn, t0, t1, 0.0); fim_a = cruzamentos(fn, t0, t1, 180.0)
             for a in ini_a:
                 b = next((x for x in fim_a if x > a), None)
-                if b and b - a > .05: fx.put(fx.chiado(b - a, 250, 1800), g0 + a, .22 * ganho, -.4)
+                if b and b - a > .05: fx.put(fx.chiado(b - a, 250, 1800), g0 + a, .55 * ganho, -.4)
             ini_e = cruzamentos(fn, t0, t1, 540.0); fim_e = cruzamentos(fn, t0, t1, 720.0)
             for a in ini_e:
                 b = next((x for x in fim_e if x > a), None)
-                if b and b - a > .05: fx.put(fx.chiado(b - a, 120, 900), g0 + a, .3 * ganho, .4)
+                if b and b - a > .05: fx.put(fx.chiado(b - a, 120, 900), g0 + a, .65 * ganho, .4)
 
 
 # ============================================================ 0 gancho
@@ -167,7 +167,7 @@ class Gancho(Cena):
     def sons(self, fx):
         # rápido: um pulso por ignição (25 por segundo) vira ronco
         for k in range(int(6.0 * 25)):
-            fx.put(fx.pulso(), self.t0 + .02 + k / 25.0, .5)
+            fx.put(fx.pulso(), self.t0 + .02 + k / 25.0, .22)
         self.sons_do_ciclo(fx, self.teta, 6.0, 12.0, lento=3.0, ganho=1.0, chiado=False)
 
 
@@ -543,9 +543,9 @@ class Rpm(Cena):
             t = float(ts[i + 1])
             r = self.rpm(t)
             if r < 150:
-                fx.put(fx.explosao(1.0), self.t0 + t, .7)
+                fx.put(fx.explosao(1.0), self.t0 + t, .6)
             else:
-                fx.put(fx.pulso(), self.t0 + t, .55)
+                fx.put(fx.pulso(), self.t0 + t, .26)
 
 
 # ============================================================ 11 vários cilindros
@@ -596,13 +596,13 @@ class Cilindros(Cena):
                 if aceso: tela.texto("POWER", 414, y + 6, AMARELO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
-        self.sons_do_ciclo(fx, self.teta, 0.0, 24.0, lento=1.0, ganho=.7)
+        self.sons_do_ciclo(fx, self.teta, 0.0, 24.0, lento=1.0, ganho=.5)
         for k in range(4):
             fn = lambda t, k=k: self.teta(t) - self.desloc[k]
             for t in cruzamentos(fn, 24.0, self.dur, MP.FAISCA):
                 if t < 24.0: continue
                 fx.put(fx.faisca(), self.t0 + t, .2)
-                fx.put(fx.explosao(.7), self.t0 + t + .015, .35)
+                fx.put(fx.explosao(.7), self.t0 + t + .015, .22)
                 if t >= 48.0:
                     fx.put(fx.sino(self.NOTAS[k]), self.t0 + t, .5, -.45 + .3 * k)
 

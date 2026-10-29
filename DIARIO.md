@@ -35,3 +35,24 @@ Arquivos mudados: `pixelengine.py`, `ritmo_base.py`, `ritmo_musica.py`, `ritmo_p
 ## 22/10/2026 — a cidade saiu
 
 Leandro aprovou masmorra (r01) e túnel (r28) e reprovou a cidade (r16): "não faz o menor sentido". O motivo: prédios pulando como equalizador não têm protagonista, objetivo nem progressão. r16 a r18 saíram do plano (30 -> 27). Virou o **teste da cena** no ESTADO.md: protagonista, objetivo que sobe, progressão, música como regra do jogo.
+
+## 29/10/2026 — NOSSO MUNDO PIXEL e o primeiro vídeo longo
+
+Nome do canal: NOSSO MUNDO PIXEL. Formato longo novo: "como funciona" sem voz, música baixa, legendas grandes. Piloto: ep01, o motor de 4 tempos (8 min 19 s, 15 capítulos).
+
+| o quê | medida |
+| --- | --- |
+| resolução | 480x270 desenhado, 4x = 1920x1080 (Shorts: 180x320 x6) |
+| geometria | pistão pela fórmula da biela; comando a meia rotação; abertura da válvula lida do perfil do came; faísca a 20° antes do PMS; taxa visual ~9,8:1 |
+| legenda | fonte 2x (14 px = 56 px em 1080p), até 37 letras, mínimo 4 s no ar |
+| render | 13 min para 8 min 19 s (2 núcleos) |
+| áudio | -16 LUFS integrado; trilha a -10 dB dos efeitos; limitador final a -2,2 dBFS |
+
+**Defeitos pegos antes de entregar:**
+- Fonte: a vírgula parecia ponto ("3,000" lido como "3.000") e depois barra; o V parecia U ("VALVES" -> "UALUES"). Glifos refeitos; testadas 3 vírgulas lado a lado.
+- Comando de válvulas girava ao contrário do virabrequim (no motor real giram no mesmo sentido).
+- Dutos convergiam para o meio (funil); agora cada um desce até a sua válvula.
+- Fonte de marcha lenta: eu tinha montado um endereço; trocado pelo endereço que foi lido de fato.
+- Áudio: pico -0,7 dBTP depois do AAC (reprovou); capítulos rápidos 5 dB acima dos lentos; efeitos da câmera lenta inaudíveis. Limitador com folga e ganhos refeitos.
+
+**Checagem independente de fatos (agente separado, 41 legendas):** 39 OK. Corrigidas: "one cylinder is always pushing" (exagero: o impulso começa a cada meia volta, mas não dura a meia volta toda) e 12-30% na legenda contra 16-25% no gráfico (mesma fonte, medidas diferentes; ficou 16-25%). "Burns in a flash" virou "burns fast".
