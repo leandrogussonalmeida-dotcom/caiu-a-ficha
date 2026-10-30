@@ -120,7 +120,7 @@ LEGENDAS = {
         (7.6, 14.4, "PARA ERGUER 1 KG, SÃO PRECISOS", "UNS *3,9 METROS CÚBICOS*.", ('F3',)),
         (14.6, 21.4, "POR ISSO O ENVELOPE É ENORME: O", "MAIS USADO TEM *2.800 METROS CÚBICOS*.", ('F3',)),
         (21.6, 28.4, "LEVA DE *3 A 5 PESSOAS* E TEM QUASE", "20 METROS DE ALTURA.", ('F3', 'F11')),
-        (28.6, 35.6, "MAIS QUENTE LEVANTA MAIS, MAS O LIMITE", "É UNS *120 °C*: O TECIDO NÃO AGUENTA.", ('F3',)),
+        (28.6, 35.6, "MAIS QUENTE LEVANTA MAIS. O LIMITE", "É UNS *120 °C*: O TECIDO NÃO AGUENTA.", ('F3',)),
     ],
     'partes': [
         (0.3, 8.0, "O *ENVELOPE* É O BALÃO EM SI:", "NÁILON QUE AGUENTA CALOR.", ('F5', 'F6')),
@@ -171,7 +171,7 @@ LEGENDAS = {
     'historia': [
         (0.5, 7.4, "A IDEIA É ANTIGA. EM *1709*, EM LISBOA,", "BARTOLOMEU DE GUSMÃO...", ('F9',)),
         (7.6, 14.4, "...NASCIDO EM *SANTOS*, NO BRASIL,", "FEZ UM BALÃOZINHO SUBIR ATÉ O TETO.", ('F9',)),
-        (14.6, 21.4, "ELE USOU A CHAMA DE UM FOGO,", "NUMA SALA, DIANTE DA CORTE.", ('F9',)),
+        (14.6, 21.4, "ELE USOU UMA PEQUENA CHAMA,", "NUMA SALA, DIANTE DA CORTE.", ('F9',)),
         (21.6, 28.4, "EM *1783*, NA FRANÇA, OS IRMÃOS", "*MONTGOLFIER* FIZERAM BALÕES GRANDES.", ('F3',)),
         (28.6, 35.4, "EM *21 DE NOVEMBRO DE 1783*: O", "PRIMEIRO VOO LIVRE COM PESSOAS.", ('F3',)),
         (35.6, 41.6, "O PRINCÍPIO É O MESMO ATÉ HOJE:", "*AR QUENTE SOBE*.", ('F2',)),
@@ -222,7 +222,8 @@ Capítulos
 
 Simplificado de propósito
 - As moléculas foram desenhadas enormes, poucas e lentas. De 20 °C para 99 °C elas ficam só cerca de 13% mais rápidas; no desenho a diferença foi exagerada para dar para ver.
-- O balão é genérico (listras inventadas). O voo dos capítulos de subida e descida é uma simulação feita para o vídeo: 2.800 metros cúbicos, 700 kg no total, um queimador de 2 MW de calor útil, perda de calor pelo tecido, arrasto do ar e atmosfera padrão. Um balão de verdade faz algo parecido, com números diferentes.
+- O balão deste vídeo é tripulado, conduzido por um piloto. A lei citada no fim trata de fabricar, vender, transportar ou soltar balões que possam provocar incêndios.
+- O balão é genérico (listras inventadas). O voo dos capítulos de subida e descida é uma simulação feita para o vídeo: 2.800 metros cúbicos, 700 kg no total, um queimador de 2,5 MW de calor útil, perda de calor pelo tecido, arrasto do ar e atmosfera padrão. Um balão de verdade faz algo parecido, com números diferentes.
 - As contas usam ar seco a 20 °C no chão e o ar de dentro na mesma pressão do ar de fora.
 - Os 3.380 kg e 2.660 kg do capítulo do empuxo são contas a partir dos números da Wikipedia para 2.800 metros cúbicos a 99 °C (723,5 kg de sobra); arredondamos para 720 kg.
 - As camadas de vento do mapa (para a direita embaixo, para a esquerda em cima) são um exemplo inventado, e esse trecho está acelerado 20 vezes. O balão desenhado no mapa está fora de escala.

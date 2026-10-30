@@ -18,7 +18,7 @@
              (atmosfera padrão).
 
 Escala: 100 unidades do perfil = altura do envelope. O volume do perfil é
-calculado e a escala sai dele: 2.800 metros cúbicos -> cerca de 19,5 m de
+calculado e a escala sai dele: 2.800 metros cúbicos -> cerca de 19,4 m de
 altura e 17,5 m de largura.
 """
 import math
