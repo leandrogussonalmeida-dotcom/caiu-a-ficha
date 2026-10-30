@@ -436,10 +436,10 @@ class Cilindro:
                         brilho(tela, X, self.Y_S, 9, VERMELHO, 1.0)
                         tela.ret(X - 6, self.Y_S - 1, 13, 2, VERMELHO)
 
-    def desenhar_chave(self, tela, seg, o, theta=0.0, mat='chave', cabeca=True, brilho_cortes=None):
+    def desenhar_chave(self, tela, seg, o, theta=0.0, mat='chave', cabeca=True, brilho_cortes=None, dy=0.0):
         c = math.cos(math.radians(theta))
         yc = self.yc
-        P = lambda y: yc + (y - yc) * c
+        P = lambda y: yc + (y - yc) * c + dy
         xs0 = self.x0 - o                               # encosto da chave
         xa, xb = int(math.floor(xs0)), int(math.ceil(xs0 + self.u_tip))
         Mk = Mascara()
@@ -462,8 +462,8 @@ class Cilindro:
                       P(self.Y_PB + 12) if c >= 0 else P(self.Y_S - 12))
         if cabeca and abs(c) > .25:
             # furo da argola e o sulco do perfil ao longo da lâmina
-            tela.disco(xs0 - 26, yc, 6 * abs(c) + .5, FUNDO)
-            tela.anel(xs0 - 26, yc, 6 * abs(c) + .5, PRETO)
+            tela.disco(xs0 - 26, yc + dy, 6 * abs(c) + .5, FUNDO)
+            tela.anel(xs0 - 26, yc + dy, 6 * abs(c) + .5, PRETO)
         if abs(c) > .25:
             yv = int(round(P(140)))
             x_a, x_b = int(max(xs0 + 2, self.x0 - 200)), int(xs0 + self.u_tip - 26)
@@ -590,118 +590,135 @@ def checar(C=None):
 
 # ================================================================ a caixa da fechadura (vista de frente)
 class Caixa:
-    """Fechadura de embutir genérica, vista de frente com a tampa aberta:
-    o cilindro no meio, o came que gira com o rotor e a lingueta (sem mola)
-    embaixo dele, e o trinco (com mola, ponta inclinada) em cima, puxado pela
-    maçaneta. A lingueta só anda quando a ponta do came está dentro do dente
-    dela (|phi| < PHI_ENG em volta de 'para baixo'): x = r sen(phi)."""
-    PHI_ENG = 53.0
+    """Fechadura de embutir genérica, vista de frente com a tampa aberta: o
+    cilindro no meio, o came que gira com o rotor e a lingueta (sem mola)
+    embaixo dele, e o trinco (com mola) em cima, puxado pela maçaneta.
 
-    def __init__(self, x0=52, y0=18, larg=164, alt=176):
+    phi = ângulo do came (graus; 0 = apontando para baixo; cresce no sentido
+    de trancar). A ponta do came (raio RT) só entra no dente da lingueta
+    quando passa abaixo do topo dela (y = cy + 15): |phi| < PHI_ENG =
+    acos(15 / RT). Engatada, a lingueta anda junto com a ponta:
+    x = RT sen(phi); fora disso fica parada. Uma volta inteira = um curso."""
+    RT = 23.0
+    YTOPO = 15.0
+
+    def __init__(self, x0=52, y0=16, larg=164, alt=176):
         self.x0, self.y0, self.larg, self.alt = x0, y0, larg, alt
-        self.xt = x0 + larg                         # testa (a placa da borda da porta)
-        self.cc = (x0 + 62, y0 + 104)               # centro do cilindro
-        self.rc = 20                                # raio do came
-        self.yl = self.cc[1] + self.rc + 4          # topo da lingueta
-        self.mc = (x0 + 62, y0 + 40)                # cubo da maçaneta
-        self.curso = 2 * self.rc * math.sin(math.radians(self.PHI_ENG))
+        self.xt = x0 + larg                         # testa (a chapa da borda da porta)
+        self.cc = (x0 + 64, y0 + 108)               # centro do cilindro
+        self.yl = self.cc[1] + self.YTOPO           # topo da lingueta
+        self.mc = (x0 + 64, y0 + 40)                # cubo da maçaneta
+        self.PHI_ENG = math.degrees(math.acos(self.YTOPO / self.RT))
+        self.curso = 2 * self.RT * math.sin(math.radians(self.PHI_ENG))
 
     def lingueta(self, phi):
-        """Deslocamento da lingueta (0 = recolhida) para o came no ângulo phi
-        (graus; 0 = para baixo; positivo = sentido de trancar)."""
+        """Deslocamento da lingueta (0 = recolhida, curso = toda para fora)."""
+        if phi >= 180: return self.curso
+        if phi <= -180: return 0.0
         p = max(-self.PHI_ENG, min(self.PHI_ENG, phi))
-        return self.rc * (math.sin(math.radians(p)) + math.sin(math.radians(self.PHI_ENG)))
+        return self.RT * (math.sin(math.radians(p)) + math.sin(math.radians(self.PHI_ENG)))
 
-    def desenhar(self, tela, phi, trinco=0.0, macaneta=0.0, rotulos=None, chave=True):
-        """phi: ângulo do came; trinco: 0 (pra fora) a 1 (recolhido)."""
+    def ponta(self, phi):
+        cx, cy = self.cc
+        return cx + self.RT * math.sin(math.radians(phi)), cy + self.RT * math.cos(math.radians(phi))
+
+    def desenhar(self, tela, phi, trinco=0.0, macaneta=0.0, chave=True, batente=True):
+        """phi: ângulo do came; trinco: 0 (para fora) a 1 (recolhido)."""
         x0, y0, L, A = self.x0, self.y0, self.larg, self.alt
-        # caixa (fundo de chapa)
+        cx, cy = self.cc
+        # caixa (chapa do fundo)
         Mk = Mascara(); Mk.ret(x0, y0, L, A)
         pintar_tela(tela, Mk, 'placa', brilho=False)
         for yy in range(y0 + 6, y0 + A - 4, 8):
             tela.ret(x0 + 4, yy, L - 8, 1, FUNDO2)
-        # testa
-        Mk = Mascara(); Mk.ret(self.xt, y0 - 10, 7, A + 20)
-        pintar_tela(tela, Mk, 'latao')
-        for yy in (y0 - 4, y0 + A + 2):
-            tela.disco(self.xt + 3, yy, 2, OLEO0)
-        # ---- trinco (em cima)
-        ty = self.mc[1] - 6
-        ex = 26 * (1 - trinco)
-        xe = self.xt + 7 + ex - 26 + 22
+        for (a, b) in ((x0 + 8, y0 + 8), (x0 + L - 10, y0 + 8), (x0 + 8, y0 + A - 10), (x0 + L - 10, y0 + A - 10)):
+            tela.disco(a, b, 2.5, ACO0); tela.px(a - 1, b - 1, ACO2)
+        # batente (a parede ao lado da porta) com o buraco da lingueta
+        if batente:
+            xb = self.xt + 10
+            Mk = Mascara(); Mk.ret(xb, y0 - 14, 46, A + 28)
+            Mk.buf[int(self.yl) - 3:int(self.yl) + 25, xb:xb + 40] = False
+            Mk.buf[int(self.mc[1] - 12):int(self.mc[1] + 12), xb:xb + 28] = False
+            pintar_tela(tela, Mk, 'madeira', cx=xb + 20, cy=y0, R=90)
+            Mk = Mascara(); Mk.ret(xb, y0 + 10, 3, A - 20)
+            Mk.buf[int(self.yl) - 3:int(self.yl) + 25, :] = False
+            Mk.buf[int(self.mc[1] - 12):int(self.mc[1] + 12), :] = False
+            pintar_tela(tela, Mk, 'aco')
+        # ---- trinco (em cima): sai 24 px pela testa; a mola atrás empurra
+        e = 24 * (1 - trinco)
+        ty = self.mc[1]
+        xe = self.xt + 7 + e
+        xi = xe - 58
         Mk = Mascara()
-        Mk.ret(self.mc[0] + 14, ty + 2, xe - (self.mc[0] + 14) - 12, 8)
-        poligono(Mk, [(xe - 14, ty - 2), (xe, ty - 2), (xe - 12 + 14 - 2, ty + 10 + 4), (xe - 14, ty + 14)], 1)
-        Mk.ret(xe - 14, ty - 2, 4, 16)
-        cl = (xe - 14 - (self.mc[0] + 14))
+        Mk.ret(xi, ty - 7, xe - xi - 6, 14)
+        poligono(Mk, [(xe - 7, ty - 7), (xe, ty - 2), (xe, ty + 2), (xe - 7, ty + 7)], 1)
         pintar_tela(tela, Mk, 'latao')
-        # mola do trinco (atrás, comprime quando ele recolhe)
-        mx0 = self.mc[0] + 16
-        mx1 = xe - 16
-        if mx1 > mx0 + 2:
-            n = 6
-            pts = [(mx0 + (mx1 - mx0) * k / (2 * n), ty + 6 + (3 if k % 2 else -3)) for k in range(2 * n + 1)]
+        tela.ret(int(xi) + 4, ty - 1, 18, 3, OLEO0)
+        # mola do trinco: do cubo até a cauda do trinco (encolhe quando ele recolhe)
+        m0, m1 = self.mc[0] + 12, xi
+        if m1 > m0 + 2:
+            n = 5
+            pts = [(m0 + (m1 - m0) * k / (2 * n), ty + (3 if k % 2 else -3)) for k in range(2 * n + 1)]
             for (ax, ay), (bx, by) in zip(pts, pts[1:]):
-                tela.linha(ax, ay - 8, bx, by - 8, ACO4)
-        # cubo da maçaneta (quadrado que gira) e a alavanca que puxa o trinco
-        a = -35 * macaneta
+                tela.linha(ax, ay + 1, bx, by + 1, ACO1)
+            for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+                tela.linha(ax, ay, bx, by, ACO4)
+        # cubo da maçaneta (furo quadrado) e o braço que puxa a cauda do trinco
+        a = -40 * macaneta
+        mx, my = self.mc
         Mk = Mascara()
-        poligono(Mk, rot_pts(ret_pts(self.mc[0] - 9, self.mc[1] - 9, self.mc[0] + 9, self.mc[1] + 9), *self.mc, a), 1)
-        Mk.disco(*self.mc, 10)
-        pintar_tela(tela, Mk, 'aco')
-        q = rot_pts(ret_pts(self.mc[0] - 4, self.mc[1] - 4, self.mc[0] + 4, self.mc[1] + 4), *self.mc, a)
-        poligono(tela, q, FUNDO)
-        p1 = rot_pts([(self.mc[0] + 2, self.mc[1] - 16)], *self.mc, a)[0]
-        Mk = Mascara(); linha_grossa(Mk, self.mc[0], self.mc[1], p1[0], p1[1], 5, 1)
-        pintar_tela(tela, Mk, 'aco')
+        poligono(Mk, rot_pts([(mx, my - 4), (mx + 4, my - 22), (mx + 9, my - 20), (mx + 6, my)], mx, my, -a), 1)
+        Mk.disco(mx, my, 11)
+        pintar_tela(tela, Mk, 'aco', cx=mx, cy=my, R=14)
+        poligono(tela, rot_pts(ret_pts(mx - 4, my - 4, mx + 4, my + 4), mx, my, a), FUNDO)
         # ---- lingueta (embaixo do cilindro)
         d = self.lingueta(phi)
-        xl0 = self.cc[0] - 34 + d
-        xl1 = self.xt + 7 - self.curso + d + 2
+        xl0 = cx - 40 + d
+        xl1 = self.xt + 2 + d
         Mk = Mascara()
         Mk.ret(xl0, self.yl, xl1 - xl0, 22)
-        pintar_tela(tela, Mk, 'aco', cx=xl0 + 30, cy=self.yl, R=60)
-        # o dente onde o came engancha
-        nx = self.cc[0] + d - self.rc * math.sin(math.radians(self.PHI_ENG))
-        tela.ret(int(nx + self.rc * math.sin(math.radians(self.PHI_ENG)) - 4), self.yl, 9, 9, FUNDO)
-        tela.ret(int(nx + self.rc * math.sin(math.radians(self.PHI_ENG)) - 4), self.yl + 9, 9, 1, ACO0)
-        # guia (rasgo) da lingueta com o pino
-        tela.ret(int(xl0 + 10), self.yl + 14, int(self.curso) + 8, 3, FUNDO)
-        tela.disco(self.cc[0] - 24 + self.curso / 2 + 8, self.yl + 15, 2.5, ACO3)
-        # ---- cilindro (frente) + came
-        cx, cy = self.cc
+        pintar_tela(tela, Mk, 'aco', cx=xl0 + 30, cy=self.yl, R=70)
+        nx = cx + d - self.RT * math.sin(math.radians(self.PHI_ENG))   # dente: onde a ponta engata
+        tela.ret(int(round(nx - 5)), int(self.yl), 11, 10, FUNDO)
+        tela.ret(int(round(nx - 5)), int(self.yl) + 10, 11, 1, ACO0)
+        # rasgo de guia com o pino fixo
+        tela.ret(int(xl0 + 46), int(self.yl) + 14, int(self.curso) + 8, 4, FUNDO)
+        tela.disco(cx + 10 + self.curso, self.yl + 15.5, 2.0, ACO4)        # pino fixo (fica no rasgo)
+        # ---- came (atrás do cilindro) + cilindro de frente
         Mk = Mascara()
-        tip = rot_pts([(cx, cy + self.rc + 3)], cx, cy, phi)[0]
+        tip = self.ponta(phi)
         linha_grossa(Mk, cx, cy, tip[0], tip[1], 9, 1)
         Mk.disco(cx, cy, 12)
-        pintar_tela(tela, Mk, 'aco', cx=cx, cy=cy, R=20)
-        Mk = Mascara(); Mk.disco(cx, cy, 16); Mk.ret(cx - 8, cy - 30, 16, 20)
+        pintar_tela(tela, Mk, 'aco', cx=cx, cy=cy, R=24)
+        Mk = Mascara(); Mk.disco(cx, cy, 14); Mk.ret(cx - 7, cy - 30, 14, 20)
         pintar_tela(tela, Mk, 'latao')
-        Mk = Mascara(); Mk.disco(cx, cy, 10)
-        pintar_tela(tela, Mk, 'aco', cx=cx, cy=cy, R=10)
-        pts = rot_pts(ret_pts(cx - 2, cy - 6, cx + 2, cy + 7), cx, cy, phi)
+        Mk = Mascara(); Mk.disco(cx, cy, 9)
+        pintar_tela(tela, Mk, 'aco', cx=cx, cy=cy, R=9)
+        pts = rot_pts(ret_pts(cx - 2, cy - 6, cx + 2, cy + 7), cx, cy, -phi + 180)
         poligono(tela, pts, FUNDO)
         if chave:
-            pts = rot_pts(ret_pts(cx - 1, cy - 5, cx + 1, cy + 6), cx, cy, phi)
+            pts = rot_pts(ret_pts(cx - 1, cy - 5, cx + 1, cy + 6), cx, cy, -phi + 180)
             poligono(tela, pts, ACO4)
         return d
 
     def ancoras(self, phi=0.0):
         d = self.lingueta(phi)
-        return dict(cilindro=(self.cc[0] - 12, self.cc[1] - 12), came=(self.cc[0], self.cc[1] + 16),
-                    lingueta=(self.xt + 2 + d - self.curso + 14, self.yl + 11), trinco=(self.xt + 4, self.mc[1]),
-                    macaneta=(self.mc[0] - 8, self.mc[1] - 8), caixa=(self.x0 + 8, self.y0 + self.alt - 10))
+        return dict(cilindro=(self.cc[0] - 10, self.cc[1] - 10), came=self.ponta(phi),
+                    lingueta=(self.xt - 10 + d, self.yl + 6), trinco=(self.xt + 2, self.mc[1] - 4),
+                    macaneta=(self.mc[0] - 8, self.mc[1] + 8), caixa=(self.x0 + 10, self.y0 + self.alt - 14),
+                    batente=(self.xt + 40, self.y0 + 30))
 
 
 def checar_caixa():
     K = Caixa()
-    assert abs(K.lingueta(-90)) < 1e-9 and abs(K.lingueta(-K.PHI_ENG)) < 1e-9
-    assert abs(K.lingueta(90) - K.curso) < 1e-9 and abs(K.lingueta(270) - K.curso) < 1e-9
-    # fora do engate a ponta do came fica acima do topo da lingueta (não bate)
-    for p in range(-180, 181):
-        tip_y = K.cc[1] + (K.rc + 3) * math.cos(math.radians(p))
-        if abs(p) > K.PHI_ENG + 4:
-            assert tip_y < K.yl + 1, p
+    assert abs(K.lingueta(-180)) < 1e-9 and abs(K.lingueta(-K.PHI_ENG)) < 1e-9
+    assert abs(K.lingueta(K.PHI_ENG) - K.curso) < 1e-9 and abs(K.lingueta(180) - K.curso) < 1e-9
+    for p in np.arange(-180, 180.01, .25):
+        tx, ty = K.ponta(p)
+        d = K.lingueta(p)
+        nx = K.cc[0] + d - K.RT * math.sin(math.radians(K.PHI_ENG))
+        if ty > K.yl + 1e-6:                     # a ponta está abaixo do topo: tem que estar no dente
+            assert abs(tx - nx) < 5.0, (p, tx, nx)
     return True
 
 
@@ -734,13 +751,14 @@ def porta(tela, x0, y0, larg, alt, cil_xy, mac_ang=0.0, raio_x=0.0):
 
 # ================================================================ a porta (vista de cima) com o trinco
 class TrincoCima:
-    """Vista de cima: a porta (uma placa grossa) fecha andando em +y contra o
-    batente; o trinco sai da borda dela em +x. A face do trinco que chega
-    primeiro (lado +y) é inclinada a 45 graus. O canto da contratesta
-    (xL, yF..yF+3) tem que ficar fora do trinco: e <= xL - xd + (yc - (yd - 6))."""
+    """Vista de cima: a porta (uma placa grossa) fecha andando em +y ao longo
+    do batente; o trinco sai da borda dela em +x. A face que chega primeiro
+    (lado +y) é inclinada a 45 graus. A chapa da contratesta tem a quina em
+    (XL, YF) e (XL, YF + 3): ela tem que ficar fora do trinco, então
+    e <= XL - XD + (yq - (yd - W2)). Passou, o trinco salta para o buraco."""
     XD = 172                                     # borda da porta
     XL = 176                                     # face do batente
-    YF = 80                                      # começo da contratesta
+    YF = 78                                      # começo da chapa (a quina)
     E_MAX = 18
     W2 = 6                                       # meia largura do trinco
 
@@ -750,67 +768,68 @@ class TrincoCima:
     def ext(self, yd, puxado=0.0):
         """Quanto o trinco sai (px) com a porta em yd e a maçaneta puxando `puxado` (0..1)."""
         e = self.E_MAX * (1 - puxado)
-        for ycn in (self.YF, self.YF + 3):
-            if yd - self.W2 <= ycn <= yd + self.W2:
-                e = min(e, self.XL - self.XD + (ycn - (yd - self.W2)))
+        for yq in (self.YF, self.YF + 3):
+            if yd - self.W2 <= yq <= yd + self.W2:
+                e = min(e, self.XL - self.XD + (yq - (yd - self.W2)))
         return max(0.0, e)
 
     def bloqueia_abrir(self, yd, e):
-        """Indo para trás (-y), a face reta encosta na contratesta se o trinco
-        estiver para fora além da face do batente."""
+        """Indo para trás (-y), a face reta encosta na chapa se o trinco
+        estiver para dentro do batente."""
         return e > self.XL - self.XD + .01 and yd - self.W2 >= self.YF + 3 - .01
 
-    def desenhar(self, tela, yd, e, macaneta=0.0, lingueta=0.0):
+    def desenhar(self, tela, yd, e):
         XD, XL, YF = self.XD, self.XL, self.YF
-        # batente (parede) com o buraco da contratesta e o rebaixo (batente da porta)
-        Mk = Mascara(); Mk.ret(XL, 20, 70, 170)
-        Mk.buf[int(YF + 3):int(YF + 19), XL:XL + self.E_MAX + 4] = False
-        Mk.buf[int(YF + 34):int(YF + 50), XL:XL + 26] = False
-        pintar_tela(tela, Mk, 'madeira', cx=XL + 30, cy=40, R=90)
-        Mk = Mascara(); Mk.ret(XD - 40, self.yd_fechado() + 14, XL - XD + 40 + 2, 0)
-        # contratesta (chapa)
-        Mk = Mascara(); Mk.ret(XL - 2, YF - 10, 3, 66); Mk.ret(XL - 6, YF - 10, 5, 3)
+        yf = self.yd_fechado()
+        # batente (parede de madeira) com o buraco onde o trinco entra
+        Mk = Mascara(); Mk.ret(XL, 6, 72, 196)
+        Mk.buf[int(YF + 3):int(YF + 19), XL:XL + self.E_MAX + 5] = False
+        pintar_tela(tela, Mk, 'madeira', cx=XL + 30, cy=20, R=90)
+        for y in range(10, 200, 7):
+            tela.px(XL + 8 + (y * 5) % 50, y, OLEO0)
+        tela.ret(XL + 1, int(YF + 3), self.E_MAX + 4, 16, FUNDO)
+        # o encosto (a porta para aqui)
+        Mk = Mascara(); Mk.ret(XL - 8, yf + 15, 9, 60)
+        pintar_tela(tela, Mk, 'madeira')
+        # contratesta (chapa de aço na face do batente)
+        Mk = Mascara(); Mk.ret(XL, YF - 14, 3, 56); Mk.ret(XL - 5, YF - 14, 6, 3)
+        Mk.buf[int(YF + 3):int(YF + 19), :] = False
         pintar_tela(tela, Mk, 'aco')
-        tela.ret(XL - 1, int(YF + 3), 3, 16, FUNDO)
-        tela.ret(XL - 1, int(YF + 34), 3, 16, FUNDO)
-        # batente de encosto (a porta para aqui)
-        Mk = Mascara(); Mk.ret(XD - 60, self.yd_fechado() + 15 + 18, 64, 8)
         # porta (placa grossa)
-        Mk = Mascara(); Mk.ret(10, yd - 15, XD - 10, 30)
-        pintar_tela(tela, Mk, 'porta', cx=60, cy=yd - 10, R=80)
-        for x in range(16, XD - 4, 9):
-            tela.px(x, yd - 8 + (x * 3) % 7, BRASA)
+        Mk = Mascara(); Mk.ret(6, yd - 15, XD - 6, 30)
+        pintar_tela(tela, Mk, 'porta', cx=50, cy=yd - 12, R=90)
+        for x in range(12, XD - 4, 9):
+            tela.px(x, yd - 9 + (x * 3) % 7, BRASA)
+            tela.px(x + 4, yd + 6 - (x * 5) % 5, BRASA)
+        # caixinha do trinco dentro da porta
+        tela.ret(XD - 46, int(yd - 9), 46, 18, FUNDO)
+        # mola do trinco (comprime quando ele entra)
+        xm0, xm1 = XD - 44, XD - 22 - (self.E_MAX - e)
+        n = 5
+        pts = [(xm0 + (xm1 - xm0) * k / (2 * n), yd + (3 if k % 2 else -3)) for k in range(2 * n + 1)]
+        for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+            tela.linha(ax, ay + 1, bx, by + 1, ACO1)
+        for (ax, ay), (bx, by) in zip(pts, pts[1:]):
+            tela.linha(ax, ay, bx, by, ACO4)
         # trinco
         Mk = Mascara()
-        poligono(Mk, [(XD - 20, yd - self.W2), (XD + e, yd - self.W2), (XD + e - 2 * self.W2, yd + self.W2),
-                      (XD - 20, yd + self.W2)], 1)
+        x_tras = XD - 22 - (self.E_MAX - e)
+        poligono(Mk, [(x_tras, yd - self.W2), (XD + e, yd - self.W2), (XD + e - 2 * self.W2, yd + self.W2),
+                      (x_tras, yd + self.W2)], 1)
         pintar_tela(tela, Mk, 'latao')
-        # mola dele (dentro da porta)
-        mola_h = 20 - (self.E_MAX - e) * .6
-        for k in range(8):
-            xk = XD - 22 - k * (mola_h / 8)
-            tela.ret(int(xk), int(yd - 4), 1, 9, ACO4 if k % 2 else ACO2)
-        # lingueta (embaixo, sem mola, só com a chave)
-        yl = yd + 31
-        if lingueta > 0 or True:
-            Mk = Mascara(); Mk.ret(XD - 24, yd + 7, 24 + lingueta * 22, 6)
-            # desenhada como chapa reta (vista de cima, embaixo do trinco)
-        return yl
 
     def ancoras(self, yd, e):
-        return dict(trinco=(self.XD + e - 4, yd - 4), contratesta=(self.XL, self.YF - 6),
-                    batente=(self.XL + 40, 40), porta=(60, yd))
+        return dict(trinco=(self.XD + e - 6, yd - 3), chapa=(self.XL + 1, self.YF - 10),
+                    batente=(self.XL + 50, 30), porta=(70, yd), mola=(self.XD - 34, yd + 2))
 
 
 def checar_trinco():
     T = TrincoCima()
     yf = T.yd_fechado()
-    # aberto, longe: todo para fora; passando pela contratesta: recolhe até a folga
     assert T.ext(20) == T.E_MAX
     assert min(T.ext(y) for y in np.arange(20, yf, .25)) <= T.XL - T.XD + 1e-9
     assert T.ext(yf) == T.E_MAX
-    # trinco no buraco: cabe (y do trinco dentro do buraco da contratesta)
-    assert yf - T.W2 >= T.YF + 3 and yf + T.W2 <= T.YF + 19
+    assert yf - T.W2 >= T.YF + 3 and yf + T.W2 <= T.YF + 19        # cabe no buraco
     assert T.bloqueia_abrir(yf, T.ext(yf)) and not T.bloqueia_abrir(yf, T.ext(yf, 1.0))
     return True
 
@@ -819,68 +838,100 @@ def checar_trinco():
 class Egipcia:
     """Fechadura de pinos de madeira (Britannica): um ferrolho de madeira com
     furos em cima; numa peça presa na porta, pinos caem nesses furos e prendem
-    o ferrolho. A chave (uma barra com pinos em pé) entra por baixo no ferrolho
-    oco e é ERGUIDA: os pinos sobem até o topo do ferrolho e ele desliza."""
+    o ferrolho. A chave (uma barra com pinos em pé) entra no oco do ferrolho e
+    é ERGUIDA: os pinos sobem até o topo do ferrolho e ele desliza.
 
-    def __init__(self, x0=30, y0=60):
+    ferrolho  topo em yf; furos de yf a yf + 14; oco de yf + 14 a yf + 24
+    pinos     soltos: base em yf + 13 (dentro do furo); erguidos: base em yf
+    chave     barra de yf + 20 a yf + 24 e pinos de yf + 14 a yf + 20;
+              erguer = subir 14 px (o topo dos pinos dela chega a yf)"""
+
+    def __init__(self, x0=20, y0=70):
         self.x0, self.y0 = x0, y0
-        self.furos = [x0 + 60 + 22 * k for k in range(4)]
-        self.yf = y0 + 40                         # topo do ferrolho
+        self.yf = y0 + 26
+        self.furos = [x0 + 80 + 26 * k for k in range(4)]
+        self.ferrolho = (x0 + 20, x0 + 270)          # x do ferrolho fechado
+        self.k_dentro = x0 + 40                      # x da barra da chave toda dentro
 
-    def desenhar(self, tela, chave_x, ergue, desliza):
-        """chave_x: quanto a chave entrou (0..1); ergue: 0..1; desliza: px."""
-        x0, y0 = self.x0, self.y0
-        yf = self.yf
+    def pinos_chave(self, kx):
+        return [X - self.k_dentro + kx for X in self.furos]
+
+    def estado(self, entra, ergue, desliza):
+        """entra 0..1, ergue 0..1, desliza px (negativo = abre)."""
+        kx = self.k_dentro - 200 * (1 - entra) + desliza
+        ky = self.yf + 14 - 14 * ergue
+        base = []
+        for X, P in zip(self.furos, self.pinos_chave(kx)):
+            b = self.yf + 13
+            if abs(P - X) < 4.5 and entra >= .999:
+                b = min(b, ky)
+            base.append(b)
+        return kx, ky, base
+
+    def desenhar(self, tela, entra, ergue, desliza):
+        x0, y0, yf = self.x0, self.y0, self.yf
+        kx, ky, base = self.estado(entra, ergue, desliza)
         # porta (tábuas) atrás
-        Mk = Mascara(); Mk.ret(0, 10, 300, 190)
+        Mk = Mascara(); Mk.ret(0, 8, 296, 196)
         pintar_tela(tela, Mk, 'madeira', brilho=False)
-        for x in range(0, 300, 30):
-            tela.ret(x, 10, 1, 190, OLEO0)
-        # peça fixa (onde ficam os pinos), em cima do ferrolho
-        Mk = Mascara(); Mk.ret(x0 + 40, y0 - 20, 110, 60)
-        for X in self.furos: Mk.buf[int(y0 - 14):int(yf), X - 4:X + 5] = False
-        pintar_tela(tela, Mk, 'porta', cx=x0 + 60, cy=y0 - 10, R=70)
-        for X in self.furos:
-            tela.ret(X - 4, int(y0 - 14), 9, int(yf - y0 + 14), OLEO0)
-        # ferrolho (oco por baixo, com os furos)
-        lift = 12 * ergue
-        Mk = Mascara(); Mk.ret(x0 + desliza, yf, 250, 24)
-        Mk.buf[int(yf + 14):int(yf + 24), int(x0 + desliza + 30):int(x0 + desliza + 200)] = False
-        for X in self.furos:
-            xx = int(X + desliza)
-            Mk.buf[int(yf):int(yf + 14), xx - 4:xx + 5] = False
-        pintar_tela(tela, Mk, 'madeira', cx=x0 + 100, cy=yf, R=120)
-        # chave (barra com pinos em pé), entra por baixo, no oco
-        kx = x0 - 160 + 190 * chave_x + desliza
-        ky = yf + 20 - lift
-        Mk = Mascara(); Mk.ret(kx, ky, 200, 6)
-        for X in self.furos:
-            px = X - x0 - 30 + kx - x0 + x0 + 30 - (x0 - 160 + 190) + x0 - x0
-            px = kx + (X - (x0 - 160 + 190 + 0))
-            Mk.ret(px - 3, ky - 6, 7, 6)
-        pintar_tela(tela, Mk, 'latao')
-        # pinos: caem nos furos do ferrolho; a chave ergue até o topo dele
-        for k, X in enumerate(self.furos):
-            base = yf + 13
-            if chave_x >= .999:
-                base = min(base, ky - 6)
-            top = base - 26
-            Mk = Mascara(); Mk.ret(X - 3, top, 7, base - top)
+        for x in range(0, 296, 32):
+            tela.ret(x, 8, 1, 196, OLEO0)
+        # suportes do ferrolho
+        for xs in (x0 + 10, x0 + 214):
+            Mk = Mascara(); Mk.ret(xs, yf - 6, 22, 36)
             pintar_tela(tela, Mk, 'porta')
-        return ky
+        # peça fixa com os pinos
+        Mk = Mascara(); Mk.ret(self.furos[0] - 14, y0 - 30, self.furos[-1] - self.furos[0] + 28, yf - y0 + 30)
+        pintar_tela(tela, Mk, 'porta', cx=x0 + 90, cy=y0 - 20, R=70)
+        for X in self.furos:
+            tela.ret(X - 4, y0 - 24, 9, yf - y0 + 24, OLEO0)
+        # ferrolho com furos e o oco
+        a, b = self.ferrolho
+        a, b = a + desliza, b + desliza
+        Mk = Mascara(); Mk.ret(a, yf, b - a, 24)
+        Mk.buf[int(yf + 14):int(yf + 24), int(a):int(a + 200)] = False
+        for X in self.furos:
+            xx = int(round(X + desliza))
+            Mk.buf[int(yf):int(yf + 14), xx - 4:xx + 5] = False
+        pintar_tela(tela, Mk, 'porta', cx=a + 60, cy=yf, R=140)
+        tela.ret(int(a), int(yf + 14), 200, 10, OLEO0)
+        for X in self.furos:
+            tela.ret(int(round(X + desliza)) - 4, int(yf), 9, 14, OLEO0)
+        # chave
+        Mk = Mascara(); Mk.ret(kx - 60, ky + 6, 260, 4)
+        Mk.ret(kx - 74, ky - 2, 16, 16)
+        for P in self.pinos_chave(kx):
+            Mk.ret(P - 3, ky, 7, 6)
+        pintar_tela(tela, Mk, 'latao')
+        # pinos (pendem da peça fixa)
+        for X, bb in zip(self.furos, base):
+            Mk = Mascara(); Mk.ret(X - 3, bb - 30, 7, 30)
+            pintar_tela(tela, Mk, 'madeira', cx=X - 2, cy=bb - 20, R=12)
+        return base
 
     def ancoras(self, desliza=0.0):
-        return dict(pinos=(self.furos[1], self.y0 - 6), ferrolho=(self.x0 + 230 + desliza, self.yf + 10))
+        return dict(pinos=(self.furos[1], self.y0 - 10), ferrolho=(self.ferrolho[1] + desliza - 20, self.yf + 8),
+                    chave=(self.k_dentro - 66, self.yf + 20))
 
 
-# ================================================================ chave tetra (corte)
-def tetra_frente(tela, cx, cy, r, ang, cortes=(3, 6, 2, 5)):
-    """Chave cruzada vista de frente: 4 lâminas, cada uma com o seu corte."""
+def checar_egipcia():
+    E = Egipcia()
+    for entra in np.arange(0, 1.001, .01):
+        kx, ky, base = E.estado(entra, 0, 0)
+        assert all(b == E.yf + 13 for b in base)              # a chave passa no oco sem tocar
+        assert ky >= E.yf + 14 > E.yf + 13
+    kx, ky, base = E.estado(1, 1, 0)
+    assert all(abs(b - E.yf) < 1e-9 for b in base)            # erguidos: soltam o ferrolho
+    return True
+
+
+# ================================================================ chave tetra (de frente)
+def tetra_frente(tela, cx, cy, ang, raios):
+    """Chave cruzada vista de frente: 4 lâminas; `raios` = alcance de cada uma
+    neste corte (o dente)."""
     Mk = Mascara()
     for k in range(4):
-        a = ang + 90 * k
-        L = r - cortes[k] * 1.4
-        pts = rot_pts(ret_pts(cx - 3.5, cy - L, cx + 3.5, cy), cx, cy, a)
+        pts = rot_pts(ret_pts(cx - 3.5, cy - raios[k], cx + 3.5, cy), cx, cy, ang + 90 * k)
         poligono(Mk, pts, 1)
     Mk.disco(cx, cy, 6)
-    pintar_tela(tela, Mk, 'chave', cx=cx, cy=cy, R=r)
+    pintar_tela(tela, Mk, 'chave', cx=cx, cy=cy, R=max(raios))
