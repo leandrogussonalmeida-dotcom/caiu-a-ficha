@@ -598,11 +598,13 @@ class Equilibrio(Cena):
         tit(tela, 'NÍVEL', 110, ACO3, 9)
         D.nivel_bolha(tela, PX0 + 80, 128, 140, a)
         tit(tela, 'NIVELADO' if abs(a) < 1 else 'NARIZ PARA BAIXO', 140, VERDE if abs(a) < 1 else VERMELHO, 9)
-        tit(tela, 'AJUSTE: PROA  POPA', 158, ACO3, 9)
-        D.medidor_tanque(tela, PX0 + 62, 170, 26, 26, tf, None, t)
-        D.medidor_tanque(tela, PX0 + 100, 170, 26, 26, 1 - tf, None, t)
+        tit(tela, 'TANQUES DE COMPENSAÇÃO', 151, ACO3, 9)
+        tela.texto('PROA', PX0 + 75, 191, ACO3, tam=9, centro=True, contorno=PRETO)
+        tela.texto('POPA', PX0 + 113, 191, ACO3, tam=9, centro=True, contorno=PRETO)
+        D.medidor_tanque(tela, PX0 + 62, 162, 26, 26, tf, None, t)
+        D.medidor_tanque(tela, PX0 + 100, 162, 26, 26, 1 - tf, None, t)
         if 9.0 <= t < 20.0:
-            seta(tela, PX0 + 96, 183, 1, 0, MISTURA2, 4) if int(t * 3) % 2 else None
+            seta(tela, PX0 + 96, 175, 1, 0, MISTURA2, 4) if int(t * 3) % 2 else None
 
     def sons(self, fx):
         fx.put(zumbido(11.0, 85), self.t0 + 9.0, .04)

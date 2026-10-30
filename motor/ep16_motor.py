@@ -592,7 +592,7 @@ class Portas(Cena):
                 tela.texto("SAÍDA LIGADA AO 0", 176, 118, CIANO, tam=9, contorno=PRETO)
             nome = 'NAO'
             linhas = [[0, 1], [1, 0]]
-            atual = C.val('in', t - self.d_in - .15)
+            atual = C.val('in', t - self.d_in - .15 - self.fo.L / self.VEL)
             vistos = {0, 1} if t > 4 else {atual}
         else:
             nome = 'E' if t < 32.0 else 'OU'
@@ -832,15 +832,19 @@ class Soma4(Cena):
             x = self.bx(i)
             celula(tela, x + 9, 150, 16, 16, bits[i], tam=9)
         celula(tela, 43, 107, 14, 14, k, tam=9)
-        tela.texto("VAI", 41, 97, ACO2, tam=9, contorno=PRETO)
+        tela.texto("VAI", 45, 97, ACO2, tam=9, contorno=PRETO)
         for x, y in fr: bit_luz(tela, x, y, 1, 2.6)
         r = sum(bv << i for i, bv in enumerate(bits)) + (k << 4)
         ok = r == a + b and t >= 4.0
         cor = VERDE if ok else LARANJA
-        centro_preso(tela, f"= {r}" + ("" if ok else " ?"), 133, 176, cor if t >= 4.0 else ACO2, tam=17, xmin=44, xmax=222)
+        if VERTICAL:
+            centro_preso(tela, f"{binario(a)} + {binario(b)} = {r}" + ("" if ok else " ?"), 133, 4,
+                         cor if t >= 4.0 else ACO2, tam=9, xmin=44, xmax=222)
+        else:
+            centro_preso(tela, f"= {r}" + ("" if ok else " ?"), 133, 176, cor if t >= 4.0 else ACO2, tam=17,
+                         xmin=44, xmax=222)
         for i in range(4):
-            centro_preso(tela, f"CASA {i}", self.bx(i) + 17, 8, ACO2, xmin=0, xmax=298)
-        self.vtxt(tela, f"{binario(a)} + {binario(b)}", AMARELO, y=192, tam=9)
+            if not VERTICAL: centro_preso(tela, f"CASA {i}", self.bx(i) + 17, 8, ACO2, xmin=0, xmax=298)
         # painel
         self.ptit(tela, "SOMANDO 4 BITS")
         self.ptxt(tela, f"A = {binario(a)}  ({a})", 22, BRANCO)
@@ -898,7 +902,7 @@ class Relogio(Cena):
             bit = (n >> (5 - j)) & 1
             pul = math.exp(-self.desde_batida(t) / .15)
             celula(tela, x0 + j * 17, 114, 15, 18, bit, tam=9, pulso=pul if bit else 0)
-        tela.texto("REGISTRADOR", 172, 102, ACO3, tam=9, contorno=PRETO)
+        tela.texto("REGISTRADOR", 100, 101, ACO3, tam=9, contorno=PRETO)
         # +1: o somador que conta
         bloco(tela, 44, 112, 72, 134, D.POR1, ACO4, D.POR0)
         tela.texto("+1", 58, 118, AMARELO, tam=9, centro=True, contorno=PRETO)
@@ -926,7 +930,8 @@ class Relogio(Cena):
                     tela.ret(250 + math.cos(a) * r, 50 + math.sin(a) * r, 2, 2, AMARELO)
             centro_preso(tela, f"{self.nb(t)}", 250, 44, PRETO if pul > .3 else ACO3, tam=17, xmin=200, xmax=296)
         # a onda do relógio no tempo
-        gx0, gx1 = (44, 218) if VERTICAL else (16, 290)
+        if VERTICAL: gx0, gx1 = 44, 44
+        else: gx0, gx1 = 16, 290
         gy0, gy1 = 168, 196
         gw = gx1 - gx0
         janela = 3.0
@@ -936,9 +941,10 @@ class Relogio(Cena):
             tela.px(gx0 + c, gy0 + 2 if v else gy1 - 2, AMARELO if v else ACO2)
             tt2 = t - (gw - c) / gw * janela
             if self.clk(tt2) != v: tela.ret(gx0 + c, gy0 + 2, 1, gy1 - gy0 - 4, ACO3 if v else ACO1)
-        tela.ret(gx1, gy0 - 2, 1, gy1 - gy0 + 4, BRANCO)
-        tela.texto("AGORA", gx1 - 32, gy0 - 10, BRANCO, tam=9, contorno=PRETO)
-        tela.texto("SOBE, DESCE: 1 TIQUE", gx0, gy0 - 10, ACO2, tam=9, contorno=PRETO)
+        if not VERTICAL:
+            tela.ret(gx1, gy0 - 2, 1, gy1 - gy0 + 4, BRANCO)
+            tela.texto("AGORA", gx1 - 32, gy0 - 10, BRANCO, tam=9, contorno=PRETO)
+            tela.texto("SOBE, DESCE: 1 TIQUE", gx0, gy0 - 10, ACO2, tam=9, contorno=PRETO)
         self.vtxt(tela, f"TIQUE Nº {self.nb(t)}", AMARELO, y=70, tam=17)
         # painel
         self.ptit(tela, "O RELÓGIO")
@@ -1296,7 +1302,6 @@ class Ciclo(Cena):
             Dg.pacote(tela, pac[0], clamp(pac[1]), pac[2])
             if e == 2 and op == 3 and u < .3: Dg.pacote(tela, *self._pac2)
         nome = ETAPAS[e]
-        self.vtxt(tela, f"{e + 1}: {nome}", AMARELO, y=196, tam=9)
         self.painel(tela, t, a1, e, i)
 
     def painel(self, tela, t, st, e, i):

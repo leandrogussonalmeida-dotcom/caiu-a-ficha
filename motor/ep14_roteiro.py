@@ -116,7 +116,7 @@ LEGENDAS = {
     'equilibrio': [
         (0.5, 7.6, "AGORA O PESO É IGUAL AO EMPUXO:", "ELE *PARA* NO MEIO DA ÁGUA.", ('F1', 'F3')),
         (7.8, 14.6, "MAS ESTÁ DE NARIZ PARA BAIXO:", "TEM MAIS PESO NA FRENTE.", ('F3',)),
-        (14.8, 21.6, "OS *TANQUES DE AJUSTE* PASSAM ÁGUA", "DA FRENTE PARA TRÁS.", ('F2', 'F3')),
+        (14.8, 21.6, "OS *TANQUES DE COMPENSAÇÃO* PASSAM", "ÁGUA DA FRENTE PARA TRÁS.", ('F2', 'F3')),
         (21.8, 29.6, "NIVELADO E EQUILIBRADO, ELE FICA", "PARADO A *50 METROS*.", ('F1',)),
     ],
     'subir': [
@@ -159,7 +159,7 @@ LEGENDAS = {
         (14.8, 21.6, "HOJE, OS DE AÇO: CERCA DE", "*250 A 400 METROS*.", ('F3',)),
         (21.8, 28.6, "A *PROFUNDIDADE DE TESTE* É O LIMITE", "DO USO NORMAL, SEM GUERRA.", ('F6',)),
         (28.8, 35.6, "NA MARINHA DOS EUA, ELA É *2/3*", "DA PROFUNDIDADE DE PROJETO.", ('F6',)),
-        (35.8, 41.6, "MAIS FUNDO, O CASCO É *ESMAGADO*.", "O NÚMERO DE CADA UM É *SEGREDO*.", ('F6', 'F7')),
+        (35.8, 41.6, "ALÉM DO PROJETO, O CASCO É *ESMAGADO*.", "O NÚMERO DE CADA UM É *SEGREDO*.", ('F6', 'F7')),
     ],
     'sonar': [
         (0.5, 7.6, "LÁ EMBAIXO É ESCURO. O SUBMARINO", "ENXERGA COM O *SOM*: É O SONAR.", ('F3',)),
@@ -211,6 +211,7 @@ Simplificado de propósito
 - O submarino desenhado é genérico e de casco simples (tanques de lastro na proa e na popa); muitos submarinos têm casco duplo, com tanques em volta do casco resistente.
 - Peso e empuxo aparecem como barras, sem números. Na superfície, o quanto ele afunda foi calculado como se o casco tivesse paredes retas.
 - O contador de fundura mede o eixo do casco. As fundas do mergulho (50 m, 100 m) são exemplos da animação, não de um submarino real.
+- Para subir, o submarino de verdade costuma usar os lemes e soprar os tanques já perto da superfície; soprar lá embaixo é mais comum numa subida de emergência.
 - Mostramos um tanque de ajuste no meio e dois de compensação (proa e popa); cada projeto tem o seu arranjo.
 - Na superfície, submarinos de verdade costumam terminar de esvaziar os tanques com um soprador de baixa pressão; aqui o ar comprimido faz tudo.
 - "Cerca de 1 kg por centímetro quadrado" arredonda 1,03 kg-força. A pressão do ar (1 atm) já existe na superfície; a fundura soma mais 1 atm a cada 10 m.
