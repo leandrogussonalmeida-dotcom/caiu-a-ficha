@@ -105,8 +105,8 @@ LEGENDAS = {
     ],
     'texto': [
         (0.5, 7.4, "AGORA, A FRASE: *NOSSO MUNDO PIXEL*.", "17 LETRAS, CONTANDO OS ESPAÇOS.", ('F8',)),
-        (7.8, 14.8, "CADA LETRA VIRA UM NÚMERO, E O", "NÚMERO VIRA *8 BITS*: 1 BYTE.", ('F1', 'F7')),
-        (15.2, 22.2, "O *N*, POR EXEMPLO, É 78:", "EM BITS, *01001110*.", ('F7', 'F8')),
+        (7.8, 14.8, "O *N*, POR EXEMPLO, É O NÚMERO 78.", "EM BITS: *01001110*.", ('F7', 'F8')),
+        (15.2, 22.2, "CADA LETRA VIRA UM NÚMERO, E O", "NÚMERO VIRA *8 BITS*: 1 BYTE.", ('F1', 'F7')),
         (22.6, 29.6, "NA FRENTE VÃO 4 BITS DE *MODO*", "E 8 COM O TAMANHO: *17*.", ('F3', 'F8')),
     ],
     'bytes': [
@@ -229,7 +229,7 @@ CORTES = [
     dict(id='c5', de=('versoes', 0.0), ate=('versoes', 31.0), x=13, gancho=['DE 21 A 177', 'MÓDULOS'],
          titulo='As 40 versões do QR code, de 21 X 21 a 177 X 177',
          descricao='Cada versão ganha 4 módulos de lado. A versão 40 tem 31.329 módulos e guarda até 2.953 bytes.'),
-    dict(id='c6', de=('pix', 0.0), ate=('pix', 23.6), x=13, gancho=['O PIX E O', 'QR CODE'],
+    dict(id='c6', de=('pix', 0.0), ate=('pix', 23.6), x=118, gancho=['O PIX E O', 'QR CODE'],
          titulo='O QR code do Pix por dentro 🇧🇷',
          descricao='O Pix usa o padrão BR Code. No QR estático tudo o que o pagamento precisa vai dentro do código; no dinâmico, o código leva um endereço que o app consulta.'),
 ]

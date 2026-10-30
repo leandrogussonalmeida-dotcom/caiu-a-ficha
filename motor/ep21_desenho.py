@@ -116,7 +116,7 @@ def estado_txt(e):
     return s
 
 
-ETAPAS = [('APERTAR', 'A COMPORTA ABRE', VERMELHO),
+ETAPAS = [('APERTAR', 'A VEDAÇÃO ABRE', VERMELHO),
           ('A ÁGUA DESCE', 'ARO E JATO', MISTURA2),
           ('O SIFÃO PUXA', 'CANO CHEIO', AMARELO),
           ('GLUG!', 'O AR ENTRA', CIANO),

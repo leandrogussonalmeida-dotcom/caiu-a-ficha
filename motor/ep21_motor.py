@@ -127,7 +127,7 @@ def painel_etapa(tela, e, t, k_at=None, titulo=True):
     tit(tela, 'USADOS', 90, ACO3, 9, PX0 + 32)
     tit(tela, f"{dec(e['usados'])} L", 101, AMARELO, 17, PX0 + 32)
     # estados
-    linhas = [('COMPORTA', 'ABERTA' if e['flap'] > .05 else 'FECHADA', VERMELHO if e['flap'] > .05 else ACO2),
+    linhas = [('VEDAÇÃO', 'ABERTA' if e['flap'] > .05 else 'FECHADA', VERMELHO if e['flap'] > .05 else ACO2),
               ('ENTRADA', 'ABERTA' if e['entrada'] else 'FECHADA', VERDE if e['entrada'] else ACO2),
               ('SIFÃO',) + D.estado_txt(e)]
     for j, (a, b, c) in enumerate(linhas):
@@ -329,7 +329,7 @@ class Vaso(Cena):
 # ============================================================ as peças
 PECAS = [('caixa', 'CAIXA', '6 LITROS GUARDADOS'),
          ('botao', 'BOTÃO E ALAVANCA', 'PUXAM A CORRENTE'),
-         ('comporta', 'COMPORTA', 'VEDAÇÃO DO FURO'),
+         ('comporta', 'VEDAÇÃO', 'OBTURADOR DO FURO'),
          ('ladrao', 'LADRÃO', 'NÃO DEIXA TRANSBORDAR'),
          ('boia', 'BOIA E VÁLVULA', 'ENCHEM A CAIXA'),
          ('aro', 'ARO E JATO', 'LEVAM A ÁGUA'),
@@ -576,8 +576,8 @@ class SifaoDemo(Cena):
         medidor(tela, PX0 + 2, 86, 18, 50, (146 - self.yl(t)) / 74, t)
         tit(tela, 'BALDE DE BAIXO', 74, ACO3, 9, PX0 + 84)
         medidor(tela, PX0 + 86, 86, 18, 50, (193 - self.yr(t)) / 43, t)
-        tit(tela, 'LADO QUE DESCE', 150, ACO3, 9)
-        tit(tela, 'É O MAIS COMPRIDO', 162, BRANCO, 9)
+        tit(tela, 'SAÍDA ABAIXO', 150, ACO3, 9)
+        tit(tela, 'DA ÁGUA DE CIMA', 162, BRANCO, 9)
         tit(tela, 'SEM BOMBA', 182, VERDE, 17)
 
     def sons(self, fx):
@@ -589,10 +589,10 @@ class SifaoDemo(Cena):
 # ============================================================ as 5 etapas (câmera lenta)
 ROT_ETAPA = {
     0: [('BOTÃO', 120, 22, 'botao', BRANCO), ('ALAVANCA', 262, 30, 'alavanca', ACO4), ('CORRENTE', 262, 66, (180, 75), ACO3),
-        ('COMPORTA', 262, 100, 'comporta', VERMELHO)],
+        ('VEDAÇÃO', 262, 100, 'comporta', VERMELHO)],
     1: [('FUROS DO ARO', 90, 70, 'furos', MISTURA2), ('JATO', 22, 160, 'jato', CIANO),
         ('CRISTA', 262, 140, 'crista', AMARELO)],
-    2: [('SIFÃO CHEIO', 262, 140, 'sifao', AMARELO), ('COMPORTA', 262, 100, 'comporta', VERMELHO)],
+    2: [('SIFÃO CHEIO', 262, 140, 'sifao', AMARELO), ('VEDAÇÃO', 262, 100, 'comporta', VERMELHO)],
     3: [('AR ENTRANDO', 262, 140, (128, 180), CIANO)],
     4: [('BOIA', 100, 40, 'boia', VERDE), ('VÁLVULA DE ENTRADA', 100, 84, 'entrada', VERDE),
         ('TUBINHO', 262, 30, 'refil', CIANO), ('LADRÃO', 262, 74, 'ladrao', ACO4)],
@@ -692,7 +692,7 @@ class Duplo(Cena):
         medidor(tela, PX0 + 2, 36, 20, 60, e['V'] / 6.0, t, marca=.5)
         tit(tela, 'CAIXA', 36, ACO3, 9, PX0 + 32)
         tit(tela, f"{dec(e['V'])} L", 47, MISTURA2, 17, PX0 + 32)
-        tit(tela, 'COMPORTA', 72, ACO3, 9, PX0 + 32)
+        tit(tela, 'VEDAÇÃO', 72, ACO3, 9, PX0 + 32)
         tit(tela, 'ABERTA' if e['flap'] > .05 else 'FECHADA', 83, VERMELHO if e['flap'] > .05 else ACO2, 9, PX0 + 32)
         u_meia = 3.0 if t >= self.B0 - .3 else e['usados']
         u_comp = e['usados'] if t >= self.B0 - .3 else 0.0

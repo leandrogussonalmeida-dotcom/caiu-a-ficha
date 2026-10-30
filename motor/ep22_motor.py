@@ -363,11 +363,14 @@ class Particulas_(Cena):
                 tela.ret(x + w // 2 - gw // 2, y + h - 1, gw, 1, FUNDO)
             nome = 'AR QUENTE' if quente else 'AR FRIO'
             tela.texto(nome, x + w // 2, y - 17, LARANJA if quente else CIANO, tam=9, centro=True, contorno=PRETO)
-            tela.texto('1 METRO CÚBICO', x + w // 2, y + h + 8, ACO3, tam=9, centro=True, contorno=PRETO)
+            tela.texto('1 METRO CÚBICO', x + w // 2, y - 30, ACO3, tam=9, centro=True, contorno=PRETO)
         if acesa:
-            D.chama(tela, gx, B[1] + B[3] + 34, 1.1, .9 + .1 * math.sin(t * 9), t, 3)
-            tela.ret(gx - 6, B[1] + B[3] + 34, 12, 6, ACO2)
-            tela.ret(gx - 6, B[1] + B[3] + 34, 12, 1, ACO4)
+            yq = B[1] + B[3] + 26
+            tela.ret(gx - 7, yq - 1, 14, 8, PRETO)
+            tela.ret(gx - 6, yq, 12, 6, ACO2)
+            tela.ret(gx - 6, yq, 12, 1, ACO4)
+            tela.ret(gx - 1, yq + 6, 2, 20, ACO1)
+            D.chama(tela, gx, yq, 1.2, .9 + .1 * math.sin(t * 9), t, 3)
         # moléculas
         fa = .22 * t
         fb = self.fase(t)
@@ -455,7 +458,7 @@ class Empuxo(Cena):
             tela.ret(x, PAIS.morro1[x] + 100, 1, PALCO_H, MORRO0)
         # tanque de água (o navio do ep06)
         if not VERTICAL:
-            x0, y0, w, h = 16, 62, 112, 104
+            x0, y0, w, h = 12, 62, 100, 104
             painel(tela, x0 - 4, y0 - 4, w + 8, h + 8, borda=TRACO, fundo=PRETO, luz=FUNDO3)
             dither(tela, x0, y0, w, h, FUNDO2, FUNDO)
             ya = y0 + 46
@@ -616,7 +619,7 @@ class Conta(Cena):
                 y = 48 + j * 30
                 tit(tela, f"{T} °C", y, temp_cor(T), 17)
                 if j == 0 or u > .5:
-                    tela.texto(f"{milhar(kg)} KG", W - 12, y + 4, AMARELO, tam=9, centro='d', contorno=PRETO)
+                    tela.texto(f"{dec(kg, 1)} KG", W - 12, y + 4, AMARELO, tam=9, centro="d", contorno=PRETO)
             T = 99 + 21 * u
             barra(tela, PX0, 112, 156, 8, (T - 20) / 110, temp_cor(T))
             tela.ret(PX0 + int(156 * 100 / 110), 108, 1, 16, VERMELHO)

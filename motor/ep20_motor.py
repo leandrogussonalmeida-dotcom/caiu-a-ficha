@@ -132,7 +132,9 @@ class Cena:
 
     def vtxt(self, tela, txt, cor=BRANCO, y=8, tam=9):
         """Leitura curta no topo do recorte vertical (só nos Shorts)."""
-        if VERTICAL: centro_preso(tela, txt, self.XV, y, cor, tam=tam, xmin=self.XV - 88, xmax=self.XV + 88)
+        if not VERTICAL: return
+        if y >= 150: y = 19          # o pé do recorte é da legenda do Short: tudo vai para o topo
+        centro_preso(tela, txt, self.XV, y, cor, tam=tam, xmin=self.XV - 88, xmax=self.XV + 88)
 
     def rot(self, tela, *a, **k):
         if not VERTICAL: rotulo(tela, *a, **k)
@@ -1484,7 +1486,7 @@ class Historia(Cena):
         sx = self.scan_x
         bloco(tela, sx - 4, 70, sx + 4, 152, ACO1, ACO3, ACO0)
         bloco(tela, sx - 16, 64, sx + 16, 72, ACO1, ACO3, ACO0)
-        ativo = any(sx - 52 < x + 4 < sx - 20 for k, x in self.caixas(t))
+        ativo = any(abs(x + 28 - sx) < 26 for k, x in self.caixas(t))
         tela.ret(sx - 12, 72, 24, 2, VERMELHO if ativo else BRASA_)
         if ativo:
             for k in range(3):
@@ -1499,7 +1501,7 @@ class Historia(Cena):
             self.ptxt(tela, "DENSO WAVE", 52, BRANCO, 17)
             self.ptxt(tela, "ETIQUETAS DE PEÇAS DE CARRO", 72, ACO3)
             self.ptit(tela, "CAIXAS LIDAS", 90)
-            nl = int((t * self.vel + 80 * 4 + 70 - (sx - 30)) // 80)
+            nl = int((t * self.vel - (sx + 362) % 80) // 80) + 1
             for j in range(5):
                 num = nl - j
                 if num <= 0: continue
@@ -1520,10 +1522,9 @@ class Historia(Cena):
         self.vtxt(tela, "1994: PEÇAS DE CARRO", AMARELO, y=192)
 
     def sons(self, fx):
-        for k in range(30):
-            x0 = -70 + k * 80 - 80 * 4
-            t_ = (self.scan_x - 36 - x0) / self.vel
-            t_ = t_ % (12 * 80 / self.vel)
+        f = (self.scan_x + 362) % 80
+        for j in range(40):
+            t_ = (f + 80 * j) / self.vel
             if 0 < t_ < self.dur: self.bipe(fx, t_, 91, .035)
         self.nota(fx, 15.8, 67, .2, .05)
 

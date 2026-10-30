@@ -54,7 +54,7 @@ EPISODIOS = [
     dict(id='ep18', serie='voa', titulo='Como um foguete chega ao espaço', estado='pronto', onda=5),
     dict(id='ep19', serie='jornada', titulo='A jornada de um contêiner pelo porto', estado='pronto', onda=5),
     dict(id='ep20', serie='pixels', titulo='Como funciona o QR code', estado='fazendo', onda=5),
-    dict(id='ep21', serie='dentro', titulo='Como funciona a descarga do vaso', estado='fazendo', onda=5),
+    dict(id='ep21', serie='dentro', titulo='Como funciona a descarga do vaso', estado='pronto', onda=5),
     # ---------------------------------------------------------------- onda 6
     dict(id='ep22', serie='voa', titulo='Como o balão de ar quente sobe', estado='fazendo', onda=6),
     dict(id='ep23', serie='jornada', titulo='A jornada de uma gota de chuva', estado='fazendo', onda=6),

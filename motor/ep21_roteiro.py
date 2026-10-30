@@ -2,7 +2,7 @@
 """NOSSO MUNDO PIXEL — ep21 (série POR DENTRO): Como funciona a descarga do vaso.
 
 A ideia: um vaso com caixa acoplada cortado ao meio, rodando. O botão puxa a
-corrente, a comporta (vedação de borracha) abre e a água da caixa desce pelo
+corrente, a vedação (vedação de borracha) abre e a água da caixa desce pelo
 aro e pelo jato; a bacia enche até o cano curvo (o sifão) ficar cheio; aí ele
 vira sifão de verdade e puxa a água; quando o nível baixa, entra ar e o sifão
 para (o "glug"); a boia, que desceu com a água, abriu a válvula de entrada; um
@@ -26,7 +26,7 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       nível; sem caixa, a válvula (flushometer) usa a pressão do cano, muita
       vazão por pouco tempo; antes de 1994 nos EUA: 13 L; depois, 6,1 L.
   F2  Mr. Rooter, "How Does a Toilet Tank Work?": a alavanca puxa a corrente e
-      levanta a comporta; a boia desce, a válvula abre; enche e fecha no nível;
+      levanta a vedação; a boia desce, a válvula abre; enche e fecha no nível;
       o tubo de reabastecimento liga ao ladrão para encher a bacia; o ladrão é
       a segurança contra transbordar a caixa.
   F3  USP (Superintendência do Espaço Físico), especificação de equipamentos
@@ -91,7 +91,7 @@ LEGENDAS = {
     'pecas': [
         (0 * _P + .3, 0 * _P + 6.9, "A *CAIXA*: 6 LITROS ESPERANDO", "A PRÓXIMA DESCARGA.", ('F3',)),
         (1 * _P + .3, 1 * _P + 6.9, "O *BOTÃO* EMPURRA UMA ALAVANCA,", "QUE PUXA UMA CORRENTE.", ('F2',)),
-        (2 * _P + .3, 2 * _P + 6.9, "A *COMPORTA*: UMA VEDAÇÃO DE BORRACHA", "QUE TAMPA O FURO DO FUNDO.", ('F1',)),
+        (2 * _P + .3, 2 * _P + 6.9, "A *VEDAÇÃO* (OBTURADOR): UMA BORRACHA", "QUE TAMPA O FURO DO FUNDO.", ('F1',)),
         (3 * _P + .3, 3 * _P + 6.9, "O *LADRÃO*: SE A CAIXA ENCHER DEMAIS,", "A SOBRA ESCAPA POR ELE.", ('F2',)),
         (4 * _P + .3, 4 * _P + 6.9, "A *BOIA* E A *VÁLVULA DE ENTRADA*:", "ELAS ENCHEM A CAIXA DE NOVO.", ('F1', 'F2')),
         (5 * _P + .3, 5 * _P + 6.9, "O *ARO* É OCO, CHEIO DE FUROS. NA", "FRENTE, UM CANAL LEVA AO *JATO*.", ('F1',)),
@@ -111,7 +111,7 @@ LEGENDAS = {
     ],
     'etapa1': [
         (0.5, 7.0, "ETAPA 1: *APERTAR*. O BOTÃO DESCE", "E A ALAVANCA SOBE DO OUTRO LADO.", ('F2',)),
-        (7.3, 14.3, "A CORRENTE LEVANTA A *COMPORTA*.", "O FURO DO FUNDO FICA ABERTO.", ('F1', 'F2')),
+        (7.3, 14.3, "A CORRENTE LEVANTA A *VEDAÇÃO*.", "O FURO DO FUNDO FICA ABERTO.", ('F1', 'F2')),
         (14.6, 23.4, "A ÁGUA DA CAIXA DESCE PELO FURO", "E CORRE PELO *CANAL DO ARO*.", ('F1',)),
     ],
     'etapa2': [
@@ -123,7 +123,7 @@ LEGENDAS = {
         (0.5, 7.5, "ETAPA 3: *O SIFÃO PUXA*. CHEGA TANTA", "ÁGUA QUE O CANO CURVO *ENCHE TODO*.", ('F1',)),
         (7.8, 15.0, "CHEIO, ELE VIRA UM SIFÃO: A ÁGUA QUE", "DESCE *PUXA* A ÁGUA DA BACIA.", ('F1', 'F5')),
         (15.3, 22.5, "A BACIA ESVAZIA DEPRESSA, LEVANDO", "TUDO PARA O ESGOTO.", ('F1',)),
-        (22.8, 29.6, "A CAIXA SECOU: A COMPORTA", "CAI DE VOLTA E *TAMPA O FURO*.", ('F1',)),
+        (22.8, 29.6, "A CAIXA ESVAZIOU: A VEDAÇÃO", "CAI DE VOLTA E *TAMPA O FURO*.", ('F1',)),
     ],
     'etapa4': [
         (0.5, 8.5, "ETAPA 4: *GLUG!* A BACIA BAIXOU TANTO", "QUE O *AR* ENTRA NO SIFÃO.", ('F1',)),
@@ -145,16 +145,16 @@ LEGENDAS = {
     ],
     'duplo': [
         (0.5, 5.4, "MUITAS CAIXAS TÊM *DOIS BOTÕES*.", "O MENOR É PARA LÍQUIDOS.", ('F4',)),
-        (5.6, 12.6, "A COMPORTA FECHOU NA METADE:", "SAÍRAM CERCA DE *3 LITROS*.", ('F4',)),
+        (5.6, 12.6, "A VEDAÇÃO FECHOU NA METADE:", "SAÍRAM CERCA DE *3 LITROS*.", ('F4',)),
         (15.1, 22.1, "O MAIOR, PARA SÓLIDOS, SOLTA", "A CAIXA TODA: *6 LITROS*.", ('F4', 'F3')),
-        (22.4, 29.4, "AGORA A COMPORTA SÓ FECHA", "QUANDO A CAIXA ESVAZIA.", ()),
+        (22.4, 29.4, "AGORA A VEDAÇÃO SÓ FECHA", "QUANDO A CAIXA ESVAZIA.", ()),
         (29.7, 35.6, "UMA ESPECIFICAÇÃO DA USP ACEITA MEIA", "DESCARGA DE ATÉ *2/3* DA COMPLETA.", ('F3',)),
     ],
     'litros': [
         (0.5, 7.5, "QUANTA ÁGUA VAI EM UMA DESCARGA?", "CADA GARRAFA AQUI É *1 LITRO*.", ()),
         (7.8, 14.8, "UM VASO ANTIGO GASTAVA CERCA", "DE *12 LITROS* (DADO DA SABESP).", ('F8',)),
         (15.1, 22.1, "OS DE HOJE: *6 LITROS*, A METADE.", "MEIA DESCARGA: CERCA DE *3 LITROS*.", ('F3', 'F4')),
-        (22.4, 29.6, "O VASO É UM DOS QUE MAIS GASTAM:", "CERCA DE *29%* DA ÁGUA DA CASA.", ('F7',)),
+        (22.4, 29.6, "NUM ESTUDO EM SP, O VASO GASTOU", "CERCA DE *29%* DA ÁGUA DA CASA.", ('F10',)),
     ],
     'parede': [
         (0.5, 7.5, "MUITO VASO NO BRASIL NÃO TEM CAIXA:", "TEM *VÁLVULA DE PAREDE*.", ('F7',)),
@@ -165,7 +165,7 @@ LEGENDAS = {
         (36.3, 41.6, "AS DE DESCARGA REDUZIDA:", "CERCA DE *6 LITROS*.", ('F8',)),
     ],
     'resumo': [
-        (0.5, 6.6, "1. *APERTAR*: A CORRENTE", "LEVANTA A COMPORTA.", ('F1', 'F2')),
+        (0.5, 6.6, "1. *APERTAR*: A CORRENTE", "LEVANTA A VEDAÇÃO.", ('F1', 'F2')),
         (6.9, 12.9, "2. *A ÁGUA DESCE* PELO ARO", "E PELO JATO.", ('F1',)),
         (13.2, 19.3, "3. *O SIFÃO ENCHE* E PUXA", "A ÁGUA DA BACIA.", ('F1',)),
         (19.6, 25.6, "4. *GLUG*: O AR ENTRA", "E O SIFÃO PARA.", ('F1',)),
@@ -186,6 +186,7 @@ FONTES = {
            'https://engenharia360.com/diferentes-tipos-de-descargas-utilizadas-em-bacias-sanitarias/'),
     'F8': ('Fecomercio-SP, cartilha "Água: preservar" (tabela com fonte Sabesp, 2014)',
            'https://www.fecomercio.com.br/upload/pdf/2015/13/cartilha-agua-preservar.pdf'),
+    'F10': ('Ambiente Construído (UFRGS), artigo sobre usos finais de água, citando SABESP 2003: num apartamento estudado em SP, a bacia gastou cerca de 29% da água', 'https://seer.ufrgs.br/index.php/ambienteconstruido/article/download/3681/2047/12438'),
     'F9': ('Conta a partir de F3 (1 m de coluna d\'água = cerca de 9,8 kPa; 20 kPa = cerca de 2 m)', None),
 }
 
@@ -196,7 +197,7 @@ CAPITULOS_YT = {'gancho': 'Introdução', 'vaso': 'O vaso com caixa acoplada', '
                 'duplo': 'Dois botões: 3 ou 6 litros', 'litros': 'Quanta água vai embora',
                 'parede': 'A válvula de parede', 'resumo': 'Resumo'}
 
-DESCRICAO = """O que acontece quando você aperta o botão da descarga? A gente corta um vaso com caixa acoplada ao meio e acompanha uma gota: a comporta abre, a água desce pelo aro e pelo jato, o cano curvo enche e vira um sifão que puxa a água da bacia, o ar entra (o famoso "glug") e a boia abre a válvula que enche tudo de novo, até o nível certo.
+DESCRICAO = """O que acontece quando você aperta o botão da descarga? A gente corta um vaso com caixa acoplada ao meio e acompanha uma gota: a vedação abre, a água desce pelo aro e pelo jato, o cano curvo enche e vira um sifão que puxa a água da bacia, o ar entra (o famoso "glug") e a boia abre a válvula que enche tudo de novo, até o nível certo.
 
 Depois: por que sempre fica água no fundo (o fecho hídrico contra o gás do esgoto), o que é um sifão, os dois botões de 3 e 6 litros, quanto um vaso antigo gastava e como funciona a válvula de parede, que não tem caixa.
 
@@ -206,9 +207,10 @@ Capítulos
 {capitulos}
 
 Simplificado de propósito
+- Desenhamos botão, alavanca e corrente; em muitas caixas acopladas brasileiras o botão de cima levanta a vedação por uma haste ou um cabo.
 - O vaso é genérico e desenhado de lado. Cada fabricante arruma o mecanismo de um jeito; aqui a boia é um copo que corre na coluna da válvula de entrada.
 - As 5 etapas aparecem em câmera lenta e, no capítulo da música, uma por compasso. De verdade, encher a caixa leva bem mais tempo que esvaziar.
-- Nos dois botões, desenhamos a comporta fechando na metade da caixa. Muitos mecanismos de duplo acionamento usam outra peça (um "copo" que sobe), mas a ideia é a mesma: soltar só parte da água.
+- Nos dois botões, desenhamos a vedação fechando na metade da caixa. Muitos mecanismos de duplo acionamento usam outra peça (um "copo" que sobe), mas a ideia é a mesma: soltar só parte da água.
 - O nível da água parada na bacia é a crista do sifão (a beira de baixo do cano no ponto mais alto). Os 5 cm do fecho hídrico são o mínimo da norma de esgoto para desconectores.
 - Na válvula de parede, o fim da própria descarga repõe a água da bacia. A pressão de 20 kPa virar "uns 2 metros de caixa d'água" é conta nossa.
 - Os 12 litros do vaso antigo e os 10 litros da válvula regulada são da tabela da Sabesp (2014) citada pela cartilha da Fecomercio-SP; nos EUA, antes de 1994, eram cerca de 13 litros.

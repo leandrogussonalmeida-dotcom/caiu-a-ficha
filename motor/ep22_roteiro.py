@@ -65,7 +65,7 @@ FATOS E FONTES (todas lidas em 30/10/2026)
   F11 Contas / simulação deste vídeo: 1,2041 x 293,15 / 372,15 = 0,95 kg/m³
       (gás ideal, mesma pressão); 2.800 x 1,207 = 3.380 kg de ar frio deslocado,
       2.800 x 0,9486 = 2.656 kg de ar quente: sobram ~720 kg (F3); 723,5 / 2.800
-      = 0,26 kg por metro cúbico; o perfil desenhado com 2.800 m³ tem ~19,5 m de
+      = 0,26 kg por metro cúbico; o perfil desenhado com 2.800 m³ tem ~19,4 m de
       altura e ~17,5 m de largura; velocidade das moléculas proporcional à raiz
       da temperatura absoluta: raiz(372/293) = 1,13 (13% mais rápidas); voo
       calculado com 700 kg: decola com o ar a ~97 °C.
@@ -216,7 +216,7 @@ Simplificado de propósito
 - Os 3.380 kg e 2.660 kg do capítulo do empuxo são contas a partir dos números da Wikipedia para 2.800 metros cúbicos a 99 °C (723,5 kg de sobra); arredondamos para 720 kg.
 - As camadas de vento do mapa (para a direita embaixo, para a esquerda em cima) são um exemplo inventado, e esse trecho está acelerado 20 vezes. O balão desenhado no mapa está fora de escala.
 - A ventoinha, o balão de 1709 e o de 1783 são desenhos genéricos, sem pessoas.
-- O tamanho do balão saiu da conta: um envelope com o nosso perfil e 2.800 metros cúbicos tem cerca de 19,5 m de altura e 17,5 m de largura.
+- O tamanho do balão saiu da conta: um envelope com o nosso perfil e 2.800 metros cúbicos tem cerca de 19,4 m de altura e 17,5 m de largura.
 
 Fontes
 {fontes}
