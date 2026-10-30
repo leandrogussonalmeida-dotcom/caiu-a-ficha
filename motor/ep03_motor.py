@@ -236,7 +236,7 @@ class Cena:
             tx(tela, cab, PX0, 11, BRANCO, 17)
         elif etapa:
             texto_marcado(tela, f"ETAPA *{etapa}* DE 8", PX0, 11, 17)
-        for k in range(8):
+        for k in range(8 if etapa else 0):
             x = PX0 + k * 20
             if etapa and k + 1 < etapa: c = VERDE
             elif etapa and k + 1 == etapa: c = AMARELO if (t * 2) % 1 < .7 else CHAMA1
@@ -400,8 +400,9 @@ class Despacho(Cena):
         tela.ret(90, 100, 22, 2, PRETO)
         tela.px(112, 104, VERDE if (t * 2) % 1 < .5 else AGUA0)
         # visor da balança na frente do balcão
-        painel(tela, 82, 136, 40, 16, borda=ACO0)
-        tela.texto(idioma.decimal(max(0.0, self.peso(t)), 1), 86, 140, VERDE, tam=9)
+        if not VERTICAL:
+            painel(tela, 82, 136, 40, 16, borda=ACO0)
+            tela.texto(idioma.decimal(max(0.0, self.peso(t)), 1), 86, 140, VERDE, tam=9)
         # balança + esteira de saída
         tela.ret(126, 172, 128, 24, PRETO)
         D.caixa(tela, 127, 176, 126, 20, ACO0, ACO1, FUNDO3)
@@ -413,7 +414,7 @@ class Despacho(Cena):
         tela.ret(254, 100, 46, 70, FUNDO3); tela.ret(254, 100, 2, 70, TRACO)
         tela.ret(258, 132, 42, 38, PRETO)
         tela.ret(259, 133, 40, 37, FUNDO)
-        tx(tela, 'BAGAGEM', 256, 118, ACO2)
+        if not VERTICAL: tx(tela, 'BAGAGEM', 256, 118, ACO2)
         # a mala
         cx = self.x_mala(t)
         yb = 170
@@ -510,7 +511,7 @@ class Etiqueta(Cena):
         tela.buf[:PALCO_H] = FUNDO
         for x in range(0, W, 24): tela.ret(x, 0, 1, PALCO_H, FUNDO2)
         for y in range(12, PALCO_H, 24): tela.ret(0, y, W, 1, FUNDO2)
-        dy = int(round(math.sin(t * 1.3) * 1.5))
+        dy = int(round(math.sin(t * 1.3) * 1.5)) - (12 if VERTICAL else 0)
         laser = None
         if 21.4 <= t < 26.0:
             laser = ((t - 21.4) / 1.4) % 1.0
@@ -548,6 +549,22 @@ class Etiqueta(Cena):
                 tela.linha(ax, ay, PX0 - 8, ay, TRACO) if False else None
         if self.hud(tela, t, tg, u=0.0):
             self.miolo(tela, t)
+        else:
+            self.miolo_vertical(tela, t, self.xv(tg))
+
+    def miolo_vertical(self, tela, t, xc):
+        cx, y = (xc + 52 if 25.0 <= t < 29.0 else xc + 90), 168
+        if t < 7.4: l = [('10 DÍGITOS', AMARELO)]
+        elif t < 14.4: l = [('1º DÍGITO: O TIPO', AMARELO), ('0 = NORMAL', BRANCO)]
+        elif t < 21.4: l = [('042 = COMPANHIA', CIANO), ('314159 = MALA', VERDE)]
+        elif t < 25.0: l = [('LEITOR DE BARRAS', VERMELHO)]
+        elif t < 29.0: l = [('AEROPORTO', LARANJA), ('DE CHEGADA:', LARANJA)]
+        else: l = [('NÚMERO -> VOO 314', CIANO), ('E PASSAGEIRO', CIANO)]
+        if t >= 25.0 and t < 29.0:
+            painel(tela, xc + 112, 150, 60, 20, borda=LARANJA)
+            tx(tela, 'PXL', xc + 142, 153, LARANJA, 17, centro=True)
+        for k, (a, c) in enumerate(l):
+            tx(tela, a, cx, 150 + k * 11, c, centro=True)
 
     def uniao(self, cxs):
         a, b = cxs[0], cxs[-1]
@@ -742,7 +759,7 @@ class Inspecao(Cena):
         D.esteira(tela, -10, 300, 165, t, 30, chao=196)
         subir = True
         D.rampa(tela, 254, 165, 300, 136, t, 30)
-        tx(tela, 'INSPEÇÃO', 250, 180, VERMELHO)
+        if not VERTICAL: tx(tela, 'INSPEÇÃO', 250, 180, VERMELHO)
         # malas fora da máquina
         def mala(x, cor, tag=True):
             if x < 254:
@@ -815,7 +832,9 @@ class Inspecao(Cena):
                 yb = 165 if xp < 254 else 165 - 29 * min(1.0, (xp - 254) / 46.0)
                 rot = None
                 if xp >= 240: rot = 'LIBERADA' if t >= 30.4 else 'AGUARDE'
-                D.marcador(tela, min(xp + 15, 290), yb - 16, t, rot, VERDE if rot == 'LIBERADA' else AMARELO)
+                xc = self.xv(tg)
+                D.marcador(tela, min(xp + 15, 290), yb - 16, t, rot, VERDE if rot == 'LIBERADA' else AMARELO,
+                           xmax=296 if xc is None else xc + 178)
         if self.hud(tela, t, tg, u=suave((t - 4.0) / 30.0)):
             self.miolo(tela, t, xp, xg)
 
@@ -992,7 +1011,7 @@ class Triagem(Cena):
             o = int((t * 30 * -sentido)) % 4
             tela.ret(x - 8, yy + o, 16, 1, TRACO)
         tela.ret(x - 9, y0, 1, y1 - y0, ACO1); tela.ret(x + 8, y0, 1, y1 - y0, ACO1)
-        yl = y0 + 3 if sentido < 0 else y1 - 11
+        yl = (y0 + (21 if VERTICAL else 3)) if sentido < 0 else y1 - 11
         cor = AMARELO if destaque else CIANO
         painel(tela, x - 12, yl - 2, 24, 11, borda=cor)
         tx(tela, cod, x, yl, cor, centro=True)
@@ -1576,7 +1595,8 @@ class Chegada(Cena):
     def preparar(self):
         rng = np.random.default_rng(9)
         self.estrelas = [(int(rng.integers(0, 300)), int(rng.integers(0, 120)), float(rng.uniform(0, 6))) for _ in range(40)]
-        self.malas = [(k * 2 * math.pi / 9 + .3, D.outra(k)) for k in range(9)]
+        base = -math.pi / 2 - 24.6 * .33          # vaga da nossa mala (ela pousa nela)
+        self.malas = [(base + k * 2 * math.pi / 10, D.outra(k)) for k in range(1, 10)]
         self.RAMPA = [(-10, 196), (236, 86)]
 
     def th_prota(self, t):
@@ -1647,6 +1667,7 @@ class Chegada(Cena):
         # boca e escorregador
         tela.ret(118, 42, 64, 40, PRETO); tela.ret(119, 43, 62, 39, FUNDO)
         tela.ret(116, 40, 68, 3, ACO1)
+        D.cortina(tela, 121, 44, 58, 36, t, .5 if 22.6 < t < 23.6 else 0)
         poligono(tela, [(120, 82), (180, 82), (196, 118), (104, 118)], ACO1)
         poligono(tela, [(122, 83), (178, 83), (192, 116), (108, 116)], ACO2)
         for k in range(5): tela.linha(126 + k * 12, 84, 116 + k * 17, 115, ACO1)
@@ -1690,7 +1711,7 @@ class Chegada(Cena):
             D.mala_lado(tela, x - 13, y + 4, 26, 10, 'prota', t, tag=True)
             D.marcador(tela, x, y - 12, t)
         # silhuetas de passageiros na frente
-        for k, (x, h) in enumerate(((40, 52), (88, 48), (226, 54), (270, 46))):
+        for k, (x, h) in enumerate(((18, 52), (56, 46), (244, 54), (282, 46))):
             D.silhueta(tela, x, PALCO_H + 6, h, PRETO, t, k)
 
     def miolo(self, tela, t):
@@ -1866,24 +1887,20 @@ class Resumo(Cena):
         if t < 16.0:
             D.mala_lado(tela, p[0] - 8, p[1] - 15, 16, 7, 'prota', t, tag=True)
         if t >= 16.4:
-            escurecer(tela, 0, 0, 300, PALCO_H)
             u = ease((t - 16.4) / .6)
+            escurecer(tela, 0, 0, 300, PALCO_H)
+            if u >= 1:
+                tela.buf[:PALCO_H, :300] = FUNDO
+                for x in range(0, 300, 24): tela.ret(x, 0, 1, PALCO_H, FUNDO2)
+                for y in range(12, PALCO_H, 24): tela.ret(0, y, 300, 1, FUNDO2)
             dy = int((1 - u) * 120)
-            stub = suave((t - 24.4) / 1.2)
-            salvo = None
-            P = etiqueta_grande(tela, t, dy + 6)
-            if stub > 0:
-                # o canhoto se solta e desce
-                xp = P['canhoto']
-                y0 = TAG['y'] + dy + 6
-                reg = tela.buf[y0 - 1:y0 + TAG['h'] + 1, xp + 1:TAG['x'] + TAG['w'] + 1].copy()
-                tela.buf[y0 - 1:y0 + TAG['h'] + 1, xp + 1:TAG['x'] + TAG['w'] + 2] = FUNDO
-                oy = int(stub * 40)
-                h_ = min(reg.shape[0], PALCO_H - (y0 - 1 + oy))
-                if h_ > 0:
-                    tela.buf[y0 - 1 + oy:y0 - 1 + oy + h_, xp + 5:xp + 5 + reg.shape[1]] = reg[:h_]
-                if stub >= 1:
-                    tx(tela, 'GUARDE!', xp + 18, y0 + TAG['h'] + 4 + 40 - 30, AMARELO, centro=True) if False else None
+            etiqueta_grande(tela, t, dy - 8)
+            if t >= 24.4:
+                u2 = ease((t - 24.4) / .8)
+                cy_ = int(128 + 46 * u2)
+                canhoto(tela, 226, cy_)
+                if u2 >= 1 and (t * 2) % 1 < .8:
+                    tx(tela, 'COMPROVANTE', 160, cy_ + 10, AMARELO, centro=True)
         if self.hud(tela, t, tg, cab='RESUMO', nome='A JORNADA', etapa=0, u=1.0):
             self.miolo(tela, t)
 

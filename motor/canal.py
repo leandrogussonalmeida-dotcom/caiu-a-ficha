@@ -64,7 +64,6 @@ def textos():
 
 
 def longos(ids=None):
-    import longo as LG
     os.makedirs(VIDEOS, exist_ok=True)
     for e in prontos(ids):
         c = arquivo_longo(e)
@@ -72,13 +71,12 @@ def longos(ids=None):
         if ok_longo(c, rot):
             print(e['id'], 'já pronto', flush=True); continue
         print(e['id'], 'renderizando (10-30 min)...', flush=True)
-        ep = importlib.import_module(f"{e['id']}_motor")
-        LG.renderizar_episodio(ep, c)
+        # cada episódio no seu próprio processo: paleta e estado de um não vazam para o outro
+        subprocess.run([sys.executable, f"{e['id']}_motor.py", c], check=False)
         print(e['id'], 'PASSOU' if ok_longo(c, rot) else 'REPROVOU: rode de novo ou me mande a tela', flush=True)
 
 
 def cortes(ids=None):
-    import longo_short as LS
     os.makedirs(CORTES, exist_ok=True)
     for e in prontos(ids):
         R = importlib.import_module(f"{e['id']}_roteiro")
@@ -86,7 +84,7 @@ def cortes(ids=None):
                   if not os.path.exists(os.path.join(CORTES, f"{R.PREFIXO}-{c['id']}.mp4"))]
         if not faltam:
             print(e['id'], 'cortes já prontos', flush=True); continue
-        LS.renderizar(f"{e['id']}_motor", CORTES, faltam)
+        subprocess.run([sys.executable, 'longo_short.py', f"{e['id']}_motor", CORTES] + faltam, check=False)
 
 
 def ritmo():

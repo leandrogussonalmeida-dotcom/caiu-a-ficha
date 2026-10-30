@@ -21,7 +21,7 @@ SERIES = {
 EPISODIOS = [
     # ---------------------------------------------------------------- onda 1
     dict(id='ep01', serie='dentro', titulo='Como funciona o motor do carro', estado='pronto', onda=1),
-    dict(id='ep02', serie='voa', titulo='Como um avião de 400 toneladas voa', estado='fila', onda=1,
+    dict(id='ep02', serie='voa', titulo='Como um avião de 400 toneladas voa', estado='pronto', onda=1,
          ideia='Sustentação (asa desvia o ar para baixo, diferença de pressão), empuxo, arrasto, peso; '
                'flaps na decolagem; ângulo de ataque; o que acontece no estol. Protagonista: o avião da '
                'pista ao cruzeiro, com o ar em partículas passando pela asa.'),

@@ -951,7 +951,7 @@ class Cruzeiro(Voo):
         tela.texto('~900 KM/H', x, 55, BRANCO, tam=17, contorno=PRETO)
         tela.texto('MACH 0,85', x, 75, AMARELO, tam=9, contorno=PRETO)
         tela.texto('LÁ FORA', x, 92, ACO3, tam=9, contorno=PRETO)
-        tela.texto('-56 °C', x, 103, CIANO, tam=17, contorno=PRETO)
+        tela.texto('-56,5 °C', x, 103, CIANO, tam=17, contorno=PRETO)
         if t >= 11.2:
             tela.texto('EQUILÍBRIO', x, 128, VERDE, tam=17, contorno=PRETO)
         if t >= 16.6:

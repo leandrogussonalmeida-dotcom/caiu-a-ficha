@@ -211,7 +211,7 @@ CORTES = [
     dict(id='c1', de=('despacho', 0.0), ate=('despacho', 29.0), x=96, gancho=['SUA MALA', 'NA BALANÇA'],
          titulo='O que acontece com a sua mala no balcão do aeroporto 🧳',
          descricao='A mala sobe na balança (o recomendado é até 23 kg; em muitos países o máximo é 32 kg) e ganha uma etiqueta com um número de 10 dígitos.'),
-    dict(id='c2', de=('etiqueta', 0.0), ate=('etiqueta', 36.0), x=70, gancho=['O SEGREDO', 'DA ETIQUETA'],
+    dict(id='c2', de=('etiqueta', 0.0), ate=('etiqueta', 36.0), x=100, gancho=['O SEGREDO', 'DA ETIQUETA'],
          titulo='O que os números da etiqueta da mala significam',
          descricao='10 dígitos: o tipo da etiqueta, o código da companhia e o número da mala. As 3 letras grandes são o aeroporto de chegada.'),
     dict(id='c3', de=('inspecao', 0.0), ate=('inspecao', 39.0), x=96, gancho=['O RAIO-X', 'DA SUA MALA'],
@@ -223,7 +223,7 @@ CORTES = [
     dict(id='c5', de=('patio', 0.0), ate=('patio', 36.0), x=76, gancho=['O CONTÊINER', 'DO PORÃO'],
          titulo='Como as malas entram no avião ✈️',
          descricao='As malas vão num contêiner LD3 (4,5 metros cúbicos). Um elevador ergue o contêiner até a porta do porão.'),
-    dict(id='c6', de=('numeros', 0.0), ate=('numeros', 42.0), x=60, gancho=['QUANTAS', 'SE PERDEM?'],
+    dict(id='c6', de=('numeros', 1.5), ate=('numeros', 42.0), x=60, gancho=['QUANTAS', 'SE PERDEM?'],
          titulo='Quantas malas os aviões perdem por ano?',
          descricao='Em 2025, 24 milhões de malas tiveram algum problema, umas 5 a cada 1.000 passageiros (SITA). 3 em cada 4 só atrasaram; só 4% se perderam de vez.'),
 ]
