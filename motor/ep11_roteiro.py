@@ -14,7 +14,7 @@ Legenda: até 2 linhas, até 37 caracteres (fonte 2x, 448 px). *palavra* sai
 em amarelo. Mínimo de leitura: 4 s.
 
 A tensão do exemplo (todas padronizadas no Brasil, F9):
-  gerador 13,8 kV (gerador grande sai com 480 V a 22 kV, F7)
+  gerador 18 kV em Itaipu (F16; gerador grande sai com 480 V a 22 kV, F7)
   -> transformador elevador 500 kV -> linha de transmissão 500 kV
   -> subestação 138 kV -> 13,8 kV (distribuição) -> poste 220/127 V
 
@@ -116,7 +116,7 @@ LEGENDAS = {
         (30.4, 35.6, "TODA ESSA FORÇA VAI DIRETO", "PARA A *TURBINA*.", ('F1',)),
     ],
     'turbina': [
-        (0.5, 7.0, "ETAPA 4: A *TURBINA*. NAS GRANDES", "USINAS É COMUM A *FRANCIS*.", ('F3', 'F4')),
+        (0.5, 7.0, "ETAPA 4: A *TURBINA*. NAS GRANDES", "USINAS, A MAIS COMUM É A *FRANCIS*.", ('F3', 'F4')),
         (7.2, 13.8, "A ÁGUA ENTRA NUM *CARACOL*", "QUE DÁ A VOLTA NA TURBINA.", ('F3',)),
         (14.0, 20.6, "*PALHETAS* ABREM E FECHAM:", "CONTROLAM QUANTA ÁGUA PASSA.", ('F3',)),
         (20.8, 27.4, "ALI A PRESSÃO VIRA *VELOCIDADE*.", "A GOTA EMPURRA AS PÁS DO *ROTOR*.", ('F3',)),
@@ -138,15 +138,15 @@ LEGENDAS = {
     'itaipu': [
         (0.5, 7.4, "PARA TER IDEIA DO TAMANHO:", "*ITAIPU*, NO RIO PARANÁ.", ('F4',)),
         (7.6, 14.6, "SÃO *20 UNIDADES* DE 700 MW:", "*14.000 MW* AO TODO.", ('F4',)),
-        (14.8, 21.8, "CADA TURBINA RECEBE *700 M³*", "DE ÁGUA POR SEGUNDO.", ('F4',)),
-        (22.0, 28.8, "700 M³/S CAINDO 118 M DÃO UNS", "*810 MW*. SAEM 700: A MAIOR PARTE.", ('F11',)),
+        (14.8, 21.8, "CADA TURBINA RECEBE *700 MIL LITROS*", "DE ÁGUA POR SEGUNDO.", ('F4',)),
+        (22.0, 28.8, "ESSA ÁGUA CAINDO 118 M DÁ UNS", "*810 MW*. SAEM 700: A MAIOR PARTE.", ('F11',)),
         (29.0, 35.6, "10 GERAM EM 60 HZ, PARA O BRASIL;", "10 EM *50 HZ*, PARA O PARAGUAI.", ('F4',)),
     ],
     'elevador': [
         (0.5, 7.4, "ETAPA 6: NA SAÍDA DA USINA,", "UM *TRANSFORMADOR*.", ('F7',)),
         (7.6, 14.6, "DUAS *BOBINAS* DE FIO DE COBRE EM", "VOLTA DE UM *NÚCLEO* MAGNÉTICO.", ('F6',)),
         (14.8, 21.8, "A CORRENTE QUE VAI E VOLTA NUMA", "BOBINA *INDUZ* TENSÃO NA OUTRA.", ('F6',)),
-        (22.0, 29.6, "MAIS VOLTAS DE FIO, MAIS TENSÃO:", "DE 13,8 KV PARA *500 KV*.", ('F6', 'F9')),
+        (22.0, 29.6, "MAIS VOLTAS DE FIO, MAIS TENSÃO:", "EM ITAIPU: DE 18 KV PARA *500 KV*.", ('F6', 'F16')),
     ],
     'linhas': [
         (0.5, 6.8, "ETAPA 7: AS *LINHAS DE TRANSMISSÃO*", "LEVAM A ENERGIA PARA LONGE.", ('F7',)),
@@ -206,6 +206,8 @@ FONTES = {
     'F14': ('Water (MDPI), 2022, 14(17), 2609: grades (trash racks) protegem as turbinas',
             'https://www.mdpi.com/2073-4441/14/17/2609'),
     'F15': ('Wikipedia, "Penstock"', 'https://en.wikipedia.org/wiki/Penstock'),
+    'F16': ('ABC Color, 06/07/2023: em Itaipu, os 18.000 volts do gerador viram 500.000 volts',
+            'https://www.abc.com.py/economia/2023/07/06/en-la-central-itaipu-sustituyen-transformador-de-la-grupo-productor-18a/'),
 }
 
 CAPITULOS_YT = {'gancho': 'Introdução', 'chuva': 'Etapa 1: a chuva', 'represa': 'Etapa 2: a represa e a queda',
@@ -231,7 +233,8 @@ Simplificado de propósito
 - No conduto forçado a velocidade da água quase não muda (o tubo tem a mesma largura); o que cresce com a profundidade é a pressão. As palhetas e o rotor transformam essa pressão em velocidade e giro.
 - O caracol, as palhetas e o rotor aparecem vistos de cima, com menos peças do que uma turbina real. O gerador tem 12 polos no desenho; os de Itaipu têm muito mais e giram mais rápido do que mostramos (câmera lenta).
 - A luz amarela que anda pelos fios representa a energia. Na corrente alternada os elétrons não viajam da usina até a sua casa: eles vão e voltam no lugar, 60 vezes por segundo, e a energia é que segue pela rede.
-- O caminho de tensões (13,8 kV, 500 kV, 138 kV, 13,8 kV, 220/127 V) é um exemplo com tensões padronizadas no Brasil; cada usina e cada cidade tem o seu. O transformador do desenho tem poucas voltas de fio; o de verdade tem a proporção certa para ir de 13,8 para 500 kV.
+- O caminho de tensões (18 kV no gerador de Itaipu, 500 kV, 138 kV, 13,8 kV, 220/127 V) é um exemplo; cada usina e cada cidade tem o seu. O transformador do desenho tem poucas voltas de fio; o de verdade tem a proporção certa para ir de 18 para 500 kV.
+- Nos geradores grandes, os "ímãs" do rotor são eletroímãs alimentados com corrente contínua.
 - As perdas de 4,2% e 0,5% a 1,1% são um exemplo de 1.000 MW por 160 km, citado pela Wikipedia; cada linha perde diferente.
 - A participação das hidrelétricas (55,3%) é da oferta interna de eletricidade de 2024, no Balanço Energético Nacional 2025 da EPE.
 - Nem toda unidade de Itaipu fica do lado que pintamos: separamos 10 de 60 Hz e 10 de 50 Hz no desenho só para contar.

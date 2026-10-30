@@ -43,7 +43,7 @@ ETAPAS = [('CHUVA', AGC), ('REPRESA', ESPUMA), ('CONDUTO', CONC2), ('TURBINA', L
           ('SUBESTAÇÃO', VERDE), ('SUA CASA', CHAMA1)]
 FORMAS = [('POTENCIAL', AGC), ('MOVIMENTO', LARANJA), ('ELÉTRICA', AMARELO)]
 
-V_GERADOR = 13_800.0          # exemplo: 13,8 kV (padronizada; gerador de 480 V a 22 kV)
+V_GERADOR = 18_000.0          # Itaipu: 18 kV (F16) (padronizada; gerador de 480 V a 22 kV)
 V_LINHA = 500_000.0           # 500 kV (padronizada)
 V_SUB = 138_000.0             # 138 kV
 V_DIST = 13_800.0             # 13,8 kV, distribuição primária
@@ -162,8 +162,11 @@ def nuvem(tela, cx, cy, w, cor=NUVEM1, escura=NUVEM0, luz_=ACO3, chuva=False):
         tela.disco(cx + dx * w, cy + dy * w, r * w, escura if chuva else cor)
     for dx, dy, r in bolas:
         tela.disco(cx + dx * w - r * w * .18, cy + dy * w - r * w * .22, r * w * .7, cor if chuva else luz_)
-    tela.ret(cx - .62 * w, cy + .2 * w, 1.24 * w, .2 * w + 1, PRETO)
-    dither(tela, cx - .6 * w, cy + .14 * w, 1.2 * w, .08 * w + 1, escura, cor if chuva else escura)
+    # sombra na barriga da nuvem (degradê pontilhado, sem tarja)
+    for dx, dy, r in bolas:
+        if dy >= .0:
+            halo(tela, cx + dx * w + r * w * .2, cy + dy * w + r * w * .45, r * w * .5, escura if not chuva else NUVEM0)
+
 
 
 def chuva(tela, x0, x1, ytop, ybase, t, n=40, vel=150.0, cor=AGC, seed=0, chao=None):
@@ -500,7 +503,6 @@ class Caracol:
         cx, cy, RR = self.cx, self.cy, self.RR
         tela.disco(cx, cy, RR + 1, PRETO)
         tela.disco(cx, cy, RR, FUNDO3)
-        dither(tela, cx - RR, cy - RR, 2 * RR, 2 * RR, FUNDO3, FUNDO3)
         tela.disco(cx, cy, RR, AGP)
         nb = 13
         for b in range(nb):

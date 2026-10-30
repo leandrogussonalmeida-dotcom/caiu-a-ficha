@@ -315,7 +315,6 @@ class Represa(Cena):
             pulso = 1 + .3 * math.sin(t * 5)
             cor = AMARELO if t < 29 else AGC
             tela.ret(281, NIVEL + 4, 3, CAUDA - NIVEL - 8, PRETO); tela.ret(282, NIVEL + 4, 1, CAUDA - NIVEL - 8, cor)
-            seta(tela, 282, NIVEL + 1, 0, -1, cor, 4) if False else None
             for k in range(4):
                 tela.ret(282 - k, NIVEL + 1 + k, 2 * k + 1, 1, cor)
                 tela.ret(282 - k, CAUDA - 1 - k, 2 * k + 1, 1, cor)
@@ -424,22 +423,22 @@ class Conduto(Cena):
             if u < .02: gx = lerp(20, gx, um((t - 11.0) / .6))
         gota(tela, gx, gy, 1.1, t)
         if t > 1.0:
-            marca_gota(tela, gx, gy, t, 'A GOTA', lado=1 if gx < 200 else -1, dy=16)
+            if u is None: marca_gota(tela, gx, gy, t, 'A GOTA', lado=1, dy=-30)
+            else: marca_gota(tela, gx, gy, t, 'A GOTA', lado=1 if gx < 200 else -1, dy=16)
         # rótulos
         if t > .5 and t < 12.4:
-            self.rot(tela, "TOMADA D'ÁGUA", 62, 96, BRANCO, alvo=(44, 82))
+            self.rot(tela, "TOMADA D'ÁGUA", 40, 112, BRANCO, alvo=(44, 84))
         if 6.4 < t < 18.4:
-            self.rot(tela, 'GRADE', 2, 92, ACO4, alvo=(38, 80))
+            self.rot(tela, 'GRADE', 2, 92, ACO4, alvo=(37, 76))
             self.rot(tela, 'COMPORTA', 66, 20, ACO4, alvo=(58, gy + 6))
         if t > 12.4:
             p = no_tubo(.62, ESP_TUBO / 2 + 2)
             self.rot(tela, 'CONDUTO FORÇADO', 96, 168, BRANCO, alvo=(p[0], p[1]))
         # caixa da queda livre
         if 24.4 <= t < 30.4 and not VERTICAL:
-            painel(tela, 150, 8, 140, 34, borda=AMARELO)
+            painel(tela, 150, 8, 140, 30, borda=AMARELO)
             tela.texto('QUEDA LIVRE DE 118 M', 220, 13, BRANCO, tam=9, centro=True)
             tela.texto('UNS 170 KM/H', 220, 24, AMARELO, tam=9, centro=True)
-            tela.texto('(SEM ATRITO)', 220, 33, ACO3, tam=9, centro=True) if False else None
         # pressão
         prof = 0 if u is None else gy / 200.0
         nome = 'BAIXA' if prof < .45 else ('MÉDIA' if prof < .75 else 'ALTA')
@@ -513,7 +512,7 @@ class Turbina(Cena):
             gota(tela, gx, gy, s * 1.1, t)
             if t > 27.6:
                 halo(tela, C.cx, C.cy, 8 + 3 * math.sin(t * 6), AGC)
-        if t > 1.0 and t < 31.6:
+        if t > 1.0 and t < 27.6:
             lado = -1 if gx > 200 else 1
             marca_gota(tela, gx, gy, t, 'A GOTA', lado=lado, dy=-24 if gy > 40 else 12)
         if t > 28.0:
@@ -522,7 +521,7 @@ class Turbina(Cena):
             for j in range(3):
                 tela.disco(C.cx, C.cy, 2 + ((k + j) % 3) * 3, AGC if j == 0 else AGM)
             tela.disco(C.cx, C.cy, 2, PRETO)
-            self.rot(tela, 'A ÁGUA DESCE', C.cx + 18, C.cy - 4, ESPUMA)
+            self.rot(tela, 'A ÁGUA DESCE PELO MEIO', C.cx, 197, ESPUMA, centro=True)
         # rótulos
         self.rot(tela, 'VISTA DE CIMA', 4, 196, ACO3)
         self.rot(tela, 'DO CONDUTO →', 4, 52, ACO3) if not VERTICAL else None
@@ -652,7 +651,7 @@ class Saida(Cena):
         # rótulos
         self.rot(tela, 'GERADOR', 96, 47, BRANCO) if t < 17.0 else None
         self.rot(tela, 'ROTOR', 52, 140, ACO4, alvo=(100, 114))
-        if t > 6.2: self.rot(tela, 'TUBO DE SUCÇÃO', 158, 142, ESPUMA, alvo=(178, 166))
+        if t > 6.2: self.rot(tela, 'TUBO DE SUCÇÃO', 24, 178, ESPUMA, alvo=(110, 160))
         if t > 12.0: self.rot(tela, 'RIO', 270, 196, ESPUMA)
         est = ('A GOTA', onde, AGC) if t < 18.0 else ('A ENERGIA', 'SOBE PELO EIXO', AMARELO)
         self.painel(tela, t, forma=1, tensao=0, estado=est)
@@ -702,8 +701,6 @@ class Gerador(Cena):
         # o gráfico da corrente na bobina de cima
         if not VERTICAL:
             self.grafico(tela, t, 214, 30, 76, 66)
-        else:
-            self.grafico(tela, t, cx - 34, 186 - 18, 68, 18, mini=True)
         forma = 1 if t < 14.8 else 2
         v = V_GERADOR * suave((t - 15.0) / 3.0)
         if t < 22.0: est = ('O ROTOR', 'GIRA', LARANJA) if t < 14.8 else ('NA BOBINA', 'CORRENTE!', AMARELO)
@@ -794,7 +791,6 @@ class Itaipu(Cena):
                 c = CHAMA0 if on else FUNDO3
             tela.ret(x + 2, 156, 9, 8, PRETO); tela.ret(x + 3, 157, 7, 6, c if on else FUNDO3)
             if on: tela.px(x + 4, 158, BRANCO)
-            tela.texto(str(i + 1), x + 6, 168, ACO1 if not on else PRETO, tam=9, centro=True) if False else None
         # canal de fuga com espuma das unidades ligadas
         agua(tela, 0, 300, 182, PALCO_H, t, onda=.5)
         for i in range(n_on):
@@ -808,13 +804,14 @@ class Itaipu(Cena):
             for k in range(5):
                 yy = 58 + ((t * 70 + k * 18) % 90)
                 tela.ret(x - 1, yy, 2, 4, ESPUMA)
-            self.rot(tela, '700 M³ POR SEGUNDO', x - 54, 14, AMARELO, alvo=(x, 86))
+            self.rot(tela, '700 MIL LITROS POR SEGUNDO', x - 78, 14, AMARELO, alvo=(x, 86))
         if 22.0 <= t < 29.0 and not VERTICAL:
-            painel(tela, 22, 62, 252, 70, borda=AMARELO)
+            painel(tela, 22, 60, 252, 78, borda=AMARELO)
             tela.texto('VAZÃO × QUEDA × GRAVIDADE', 148, 70, ACO3, tam=9, centro=True)
-            tela.texto('700 M³/S × 118 M × 9,8', 148, 84, BRANCO, tam=17, centro=True)
+            tela.texto('700 MIL LITROS POR SEGUNDO', 148, 82, BRANCO, tam=9, centro=True)
+            tela.texto('CAINDO 118 METROS', 148, 92, BRANCO, tam=9, centro=True)
             tela.texto('= UNS 810 MW NA ÁGUA', 148, 104, AMARELO, tam=17, centro=True)
-            if t > 25.0: tela.texto('A UNIDADE ENTREGA 700 MW', 148, 121, VERDE, tam=9, centro=True)
+            if t > 25.0: tela.texto('A UNIDADE ENTREGA 700 MW', 148, 124, VERDE, tam=9, centro=True)
         if brasil:
             self.rot(tela, '10 × 60 HZ: BRASIL', 78, 194, VERDE, centro=True)
             self.rot(tela, '10 × 50 HZ: PARAGUAI', 214, 194, CIANO, centro=True)
@@ -825,7 +822,7 @@ class Itaipu(Cena):
             D.selo_vertical(tela, 0, self.VX, f"ITAIPU: {n_on} UNIDADES, {I.milhar(mw)} MW")
             return
         est = None
-        if 14.8 <= t < 22.0: est = ('ÁGUA POR TURBINA', '700 M³/S', AGC)
+        if 14.8 <= t < 22.0: est = ('ÁGUA POR TURBINA', '700 MIL L/S', AGC)
         elif 22.0 <= t < 29.0: est = ('FORÇA DA ÁGUA', 'UNS 810 MW', AMARELO)
         elif t >= 29.0: est = ('FREQUÊNCIA', '60 HZ E 50 HZ', VERDE)
         D.painel_jornada(tela, 4, t, cab=('TAMANHO REAL', 'ITAIPU', CIANO), estado=est,
@@ -875,8 +872,8 @@ class Elevador(Cena):
         # rótulos
         if not VERTICAL:
             self.rot(tela, 'DO GERADOR', 2, 26, ACO3)
-            tela.texto('13,8 KV', 2, 172, AMARELO, tam=9, contorno=PRETO)
-            self.rot(tela, 'PARA A LINHA', 232, 26, ACO3)
+            tela.texto('18 KV', 2, 172, AMARELO, tam=9, contorno=PRETO)
+            self.rot(tela, 'PARA A LINHA', 220, 26, ACO3)
             tela.texto(fmt_v(self.tensao(t)) if t > 22.0 else '?', 238, 172, AMARELO, tam=9, contorno=PRETO)
         if t > 7.6:
             self.rot(tela, 'NÚCLEO', 150, 8, ACO4, alvo=(150, 30), centro=True)
@@ -909,7 +906,7 @@ class Linhas(Cena):
             est = ('O FIO', 'ESQUENTA', LARANJA)
         elif t < 27.4:
             self.quadrados(tela, t)
-            est = ('PERDA', 'R × CORRENTE²', LARANJA)
+            est = ('A PERDA CRESCE COM', 'CORRENTE × CORRENTE', LARANJA)
         else:
             self.comparar(tela, t)
             est = ('1.000 MW, 160 KM', 'MAIS TENSÃO, MENOS PERDA', VERDE)
@@ -984,16 +981,17 @@ class Linhas(Cena):
         cx = x + w // 2
         if tens: tela.texto(tens, cx, y + 5, CIANO, tam=9, centro=True)
         tela.texto(f'CORRENTE {corr}', cx, y + 16, AMARELO, tam=9, centro=True)
-        yf = y + 32
+        c = h < 100                                  # cartão baixo (Short)
+        yf = y + (28 if c else 32)
         tela.ret(x + 6, yf - 2, w - 12, 5, PRETO); tela.ret(x + 6, yf - 1, w - 12, 3, ACO2)
         for k in range(corr * 4):
             xx = x + 6 + ((k * (w - 12) / (corr * 4) + t * 40) % (w - 12))
             tela.disco(xx, yf, 1.5, AMARELO)
         # blocos de calor: corrente² quadradinhos
-        lado = 14
+        lado = 10 if c else 14
         n = corr
         bx = cx - (n * (lado + 2)) // 2
-        by = yf + 10
+        by = yf + (6 if c else 10)
         for i in range(n):
             for j in range(n):
                 xx, yy = bx + i * (lado + 2), by + j * (lado + 2)
@@ -1001,13 +999,13 @@ class Linhas(Cena):
                 fl = int(t * 6 + i * 2 + j) % 3
                 tela.ret(xx, yy, lado, lado, (CHAMA2, CHAMA1, LARANJA)[fl])
                 tela.ret(xx, yy, lado, 1, CHAMA0)
-        tela.texto(f'PERDA {perda}', cx, y + h - 13, LARANJA, tam=9, centro=True)
+        tela.texto(f'PERDA {perda}', cx, y + h - (11 if c else 13), LARANJA, tam=9, centro=True)
 
     def quadrados(self, tela, t):
         grade(tela, 0, 300)
         segunda = t >= 20.6
         if VERTICAL:
-            xa, xb, ya, yb, w, h = self.VX - 84, self.VX - 84, 18, 112, 168, 90
+            xa, xb, ya, yb, w, h = self.VX - 84, self.VX - 84, 17, 96, 168, 76
         else:
             xa, xb, ya, yb, w, h = 10, 152, 26, 26, 134, 120
         if not segunda:
@@ -1018,7 +1016,7 @@ class Linhas(Cena):
             self.cartao(tela, xa, ya, w, h, 'TENSÃO 1', 2, '4', t, False)
             self.cartao(tela, xb, yb, w, h, 'TENSÃO 2', 1, '4 VEZES MENOR', t, True)
             if not VERTICAL: tela.texto('A MESMA ENERGIA PASSANDO', 150, 160, ACO3, tam=9, centro=True, contorno=PRETO)
-        if not VERTICAL: tela.texto('PERDA = RESISTÊNCIA × CORRENTE²', 150, 8, ACO3, tam=9, centro=True, contorno=PRETO)
+        if not VERTICAL: tela.texto('PERDA = RESISTÊNCIA × CORRENTE × CORRENTE', 150, 8, ACO3, tam=9, centro=True, contorno=PRETO)
 
     # ----- 27,4..40,8: 345 kV x 765 kV
     def comparar(self, tela, t):
@@ -1130,8 +1128,8 @@ class Subestacao(Cena):
             D.catenaria(tela, 228 + dy, 84, 268 + dy, 84, 5, ACO2)
             D.catenaria(tela, 268 + dy, 84, 300, 86, 4, ACO2)
         # brilho do transformador trabalhando
-        if 9.0 <= t < 12.5: halo(tela, 120, 150, 26, AMARELO)
-        if 16.5 <= t < 19.5: halo(tela, 183, 156, 18, AMARELO)
+        if 9.0 <= t < 12.5: halo(tela, 120, 150, 16 + 2 * math.sin(t * 8), CHAMA1)
+        if 16.5 <= t < 19.5: halo(tela, 183, 156, 12 + 2 * math.sin(t * 8), CHAMA1)
         if t >= 1.0:
             x, y = self.energia(t)
             faisca(tela, x, y, t, 2.6)
@@ -1209,6 +1207,10 @@ class Casa(Cena):
         tela.ret(x0, 96, 6, 82, PRETO); tela.ret(x0 + 1, 97, 4, 80, CERAMICA)
         tela.ret(x0 + 1, 97, 1, 80, BRANCO)
         tela.ret(x0, 174, x1 - x0 + 8, 3, TERRA0)
+        # sofá e mesinha
+        caixa(tela, 196, 158, 40, 12, ROXO if acesa else FUNDO3, ROSA if acesa else ACO0, PRETO)
+        caixa(tela, 196, 150, 6, 20, ROXO if acesa else FUNDO3, None, None); caixa(tela, 230, 150, 6, 20, ROXO if acesa else FUNDO3, None, None)
+        caixa(tela, 244, 162, 14, 3, TERRA1, LATAO, TERRA0); tela.ret(250, 165, 2, 9, TERRA0)
         # janela e quadro na parede
         caixa(tela, 244, 112, 30, 24, CEU0 if not acesa else CEU1, ACO2, ACO0)
         tela.ret(258, 112, 2, 24, ACO2)
@@ -1222,7 +1224,7 @@ class Casa(Cena):
         # medidor do lado de fora, mastro e ramal
         D.medidor(tela, 132, 112, t, ligado=t > 17.0)
         tela.ret(155, 86, 3, 26, PRETO); tela.ret(156, 86, 1, 26, ACO2)
-        D.tomada(tela, 270, 158, 1, t, viva=1.0 if t > 25.0 else 0.0) if False else self.tomada_parede(tela, t)
+        self.tomada_parede(tela, t)
         D.interruptor(tela, 176, 140, t >= 35.5)
         D.lampada(tela, 226, 112, acesa, t, fio_ate=100)
         # poste e transformador
@@ -1249,7 +1251,7 @@ class Casa(Cena):
         if t < 6.8 and not VERTICAL:
             self.rot(tela, '13,8 KV', 4, 32, ACO3)
         if 13.6 <= t < 27.2:
-            self.rot(tela, 'MEDIDOR', 116, 136, BRANCO, alvo=(132, 124)) if not VERTICAL else self.rot(tela, 'MEDIDOR', 114, 136, BRANCO)
+            self.rot(tela, 'MEDIDOR', 92, 146, BRANCO, alvo=(134, 130))
         if 20.4 <= t < 27.2:
             self.rot(tela, 'TOMADA', 236, 160, BRANCO, alvo=(262, 158))
         if t >= 34.0:
@@ -1271,12 +1273,13 @@ class Casa(Cena):
     def zoom_tomada(self, tela, t):
         cx = self.VX if VERTICAL else 214
         x0 = cx - 70
-        painel(tela, x0, 104 - 96, 140, 82, borda=AMARELO, fundo=FUNDO2)
+        painel(tela, x0, 8, 140, 86, borda=AMARELO, fundo=FUNDO2)
         D.tomada(tela, x0 + 34, 46, 2, t, viva=1.0)
         tela.texto('127 V', x0 + 90, 22, AMARELO, tam=17, centro=True, contorno=PRETO)
         tela.texto('OU', x0 + 90, 40, ACO3, tam=9, centro=True)
         tela.texto('220 V', x0 + 90, 52, AMARELO, tam=17, centro=True, contorno=PRETO)
         tela.texto('DEPENDE DA', x0 + 90, 70, ACO3, tam=9, centro=True)
+        tela.texto('CIDADE', x0 + 90, 80, ACO3, tam=9, centro=True)
         tela.linha(x0 + 70, 90, 266, 150, AMARELO) if not VERTICAL else None
 
     def sons(self, fx):
@@ -1302,7 +1305,7 @@ class Brasil(Cena):
     def desenhar(self, tela, t, tg):
         if t < 21.8:
             self.grafico(tela, t)
-            est = ('HIDRELÉTRICAS', '55,3%', AGC)
+            est = ('DEPOIS', 'VENTO E SOL', CIANO) if t >= 14.8 else None
         else:
             self.ciclo(tela, t - 21.8)
             est = ('A GOTA', 'EVAPORA' if t < 29.0 else 'VIRA CHUVA', AGC)
@@ -1316,13 +1319,13 @@ class Brasil(Cena):
     def grafico(self, tela, t):
         grade(tela, 0, 300)
         if VERTICAL:
-            x0, wmax, y0, dy = self.VX - 84, 166, 22, 30
+            x0, wmax, y0, dy = self.VX - 84, 166, 20, 26
         else:
-            x0, wmax, y0, dy = 12, 186, 26, 24
-        tela.texto('ELETRICIDADE DO BRASIL, 2024', (x0 + (x0 + wmax + (0 if VERTICAL else 90))) // 2 if False else x0, 8, ACO3, tam=9, contorno=PRETO)
+            x0, wmax, y0, dy = 12, 150, 26, 24
+        tela.texto('ELETRICIDADE DO BRASIL, 2024', x0, 8, ACO3, tam=9, contorno=PRETO)
         esc = wmax / 56.0
         for i, (nome, pct, cor) in enumerate(BARRAS):
-            a = .6 + i * .5
+            a = i * .5
             if t < a: continue
             u = ease((t - a) / 1.4)
             if VERTICAL:
@@ -1343,11 +1346,11 @@ class Brasil(Cena):
                 tela.ret(bx, by, w, hh, cor); tela.ret(bx, by, w, 1, BRANCO if cor != ACO2 else ACO4)
             txt = f"{I.decimal(pct, 1)}%"
             tx = bx + w + 4
-            if not VERTICAL or tx + tela.largura_texto(txt, 9) < x0 + 176:
+            if VERTICAL:
+                tela.texto(txt, x0 + 168, ty, AMARELO if i == 0 else BRANCO, tam=9, centro='d', contorno=PRETO)
+            else:
                 tela.texto(txt, tx, by + (2 if i == 0 else 1), AMARELO if i == 0 else BRANCO, tam=9, contorno=PRETO)
-            if i == 0 and t > 7.6:
-                mira(tela, bx + w / 2, by + hh / 2, t, max(8, hh))
-        if t > 14.8:
+        if t > 14.8 and not VERTICAL:
             yy = y0 + 6 * dy + 6
             tela.texto('OUTRAS: NUCLEAR, CARVÃO, PETRÓLEO,', x0, yy, ACO2, tam=9, contorno=PRETO)
             tela.texto('ENERGIA IMPORTADA', x0, yy + 10, ACO2, tam=9, contorno=PRETO)
@@ -1396,7 +1399,7 @@ class Brasil(Cena):
 class Resumo(Cena):
     LIGA = [0.8, 2.6, 4.4, 7.8, 10.0, 15.0, 16.8, 18.6, 22.2]
     FORMA = [0, 0, 0, 1, 2, 2, 2, 2, 2]
-    TENS = [None, None, None, None, '13,8 KV', '500 KV', '500 KV', '13,8 KV', '220 V']
+    TENS = [None, None, None, None, '18 KV', '500 KV', '500 KV', '13,8 KV', '220 V']
 
     def desenhar(self, tela, t, tg):
         grade(tela)
@@ -1406,9 +1409,8 @@ class Resumo(Cena):
             D.icone(tela, i, ICX[i], 72, t, aceso=aceso)
             tela.texto(str(i + 1), ICX[i], 98, ETAPAS[i][1] if aceso else ACO1, tam=9, centro=True, contorno=PRETO)
             if aceso:
-                nm = ETAPAS[i][0] if i != 5 else 'TRANSF.'
-                tela.texto(nm, ICX[i], 110, BRANCO, tam=9, centro=True, contorno=PRETO) if len(nm) <= 8 else \
-                    tela.texto(nm[:8], ICX[i], 110, BRANCO, tam=9, centro=True, contorno=PRETO)
+                nm = ['CHUVA', 'REPRESA', 'CONDUTO', 'TURBINA', 'GERADOR', 'TRAFO', 'LINHAS', 'SUBEST.', 'CASA'][i]
+                tela.texto(nm, ICX[i], 110, BRANCO, tam=9, centro=True, contorno=PRETO)
                 f = D.FORMAS[self.FORMA[i]]
                 tela.ret(ICX[i] - 22, 126, 45, 4, f[1])
                 if self.TENS[i]: tela.texto(self.TENS[i], ICX[i], 136, AMARELO, tam=9, centro=True, contorno=PRETO)
@@ -1427,7 +1429,7 @@ class Resumo(Cena):
             if self.FORMA[k] == 0: gota(tela, x, 42, 1.0, t)
             else: faisca(tela, x, 44, t, 2.4)
         if t > 22.2:
-            D.lampada(tela, ICX[8], 186, 1.0, t)
+            D.lampada(tela, ICX[8] - 4, 178, .6, t, fio_ate=150)
 
     def sons(self, fx):
         for i, a in enumerate(self.LIGA):

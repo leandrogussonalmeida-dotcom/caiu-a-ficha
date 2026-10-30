@@ -252,8 +252,8 @@ class ArCena(CenaAr):
                 centro_preso(tela, txt, xc, 14, cor, xmin=x0, xmax=x1)
                 seta(tela, xc, 23, xc, 30, cor, esp=1, ponta=3)
         if 1.0 < t < 30:
-            seta(tela, 200, 186, 250, 186, ACO3, esp=1, ponta=4)
-            tela.texto("ONDA", 168, 182, ACO3, tam=9, contorno=PRETO)
+            seta(tela, 142, 186, 182, 186, ACO3, esp=1, ponta=4)
+            tela.texto("ONDA", 112, 182, ACO3, tam=9, contorno=PRETO)
         if t >= 29.8:
             u = suave((t - 29.8) / .6)
             if u > .5:
@@ -326,7 +326,7 @@ class Velocidade(Cena):
                     tela.ret(xx, y - h // 2, 1, h, cor)
             if xf <= XB:
                 tela.ret(xf, y - h // 2 - 3, 1, h + 6, BRANCO)
-                if xf > XA + 90:
+                if xf > XA + 90 and m < (C_SOM if not agua else 1481.0) - 1:
                     tela.texto("FRENTE DA ONDA", int(xf - tela.largura_texto("FRENTE DA ONDA", 9) - 3), y - h // 2 - 12,
                                BRANCO, tam=9, contorno=PRETO)
         # régua
@@ -357,11 +357,11 @@ class Velocidade(Cena):
             self.Fw.desenhar(tela, d * .3, t=t, pecas=('ima', 'cone', 'borda', 'carcaca'))
         # marcas de chegada
         if u >= 1:
-            xm = self.XA + C_SOM / mpp
-            centro_preso(tela, "343 M", xm, 34, AMARELO, xmin=4, xmax=296)
-            if agua:
-                xw = self.XA + 1481 / mpp
-                centro_preso(tela, "1.481 M", xw, 100, CIANO, xmin=4, xmax=296)
+            for txt, mm, yy, cor in (("343 M", C_SOM, 62, AMARELO), ("1.481 M", 1481.0, 128, CIANO)):
+                if yy == 128 and not agua: continue
+                xm = self.XA + mm / mpp
+                tw = tela.largura_texto(txt, 9)
+                tela.texto(txt, int(xm + 5 if xm < 220 else xm - tw - 5), yy - 4, cor, tam=9, contorno=PRETO)
         # lupa na molécula rosa
         if t >= 21.8:
             painel(tela, 30, 160, 114, 44, borda=ROSA)
@@ -574,7 +574,8 @@ class Amostras(Cena):
             x = pos[-1]; v = vals[-1]
             n16 = int(round(v * 32767 * .9))
             yy = cy - v * (GH / 2 - 4)
-            centro_preso(tela, sinal(n16), x, yy - 14 if v >= 0 else yy + 6, AMARELO, xmin=GX, xmax=GX + GW)
+            centro_preso(tela, sinal(n16), x, yy - 14 if v >= 0 else yy + 6, AMARELO, xmin=GX,
+                         xmax=(GX + 178) if VERTICAL else GX + GW)
         if self.nyq(t) and t >= 31.0:
             centro_preso(tela, "2 AMOSTRAS POR VAIVÉM", 150, GY + GH + 10, LARANJA, xmin=10, xmax=296)
         elif not VERTICAL:
@@ -848,7 +849,8 @@ class Dac(Cena):
         tela.texto("FILA", 12, 28, PCB1, tam=9, contorno=PRETO)
         for j in range(5):
             idx = k + j
-            y = 44 if j == 0 else 44 + j * 15 - suave(fr * 3) * 15
+            y = 44 + (j - suave(fr * 2.5)) * 15
+            if j == 0 and fr > .1: continue
             if y > 118: continue
             v = self.N[idx % len(self.N)]
             painel(tela, 12, y - 3, 60, 13, borda=AMARELO if j == 0 else ACO1)
@@ -931,7 +933,7 @@ class Pecas(Cena):
              ('aranha', 30.0, 'ARANHA'), ('borda', 37.4, 'BORDA'), ('carcaca', 44.8, 'CARCAÇA E FIOS')]
 
     def preparar(self):
-        self.F = Corte(116, 104, 1.45)
+        self.F = Corte(112, 104, 1.55)
 
     def desenhar(self, tela, t, tg):
         self.fundo(tela, t)
@@ -984,9 +986,20 @@ class Pecas(Cena):
             tela.ret(PX0, y + 1, 8, 8, (AMARELO if p == atual else VERDE) if ok else FUNDO2)
             if ok: tela.ret(PX0 + 2, y + 3, 4, 4, PRETO)
             tela.texto(nome, PX0 + 13, y, BRANCO if p == atual else (ACO3 if ok else ACO0), tam=9, contorno=PRETO)
-        self.ptxt(tela, "CORTE AO MEIO: O FALANTE", 160, ACO2)
-        self.ptxt(tela, "É REDONDO, O DESENHO", 171, ACO2)
-        self.ptxt(tela, "MOSTRA SÓ A FATIA", 182, ACO2)
+        if atual == 'bobina' or (15.2 <= t < 22.6):
+            # zoom na bobina: o fio enrolado, cortado
+            if not VERTICAL:
+                painel(tela, PX0, 148, 160, 52, borda=COBRE2)
+                for r in range(3):
+                    for c in range(13):
+                        x = PX0 + 12 + c * 11 + (r % 2) * 5; y = 160 + r * 10
+                        tela.disco(x, y, 4.6, PRETO); tela.disco(x, y, 3.8, COBRE2)
+                        tela.px(x - 1, y - 2, COBRE3); tela.px(x + 1, y + 2, D.COBRE0)
+                tela.texto("ZOOM: CADA BOLINHA É O FIO", PX0 + 4, 190, BRANCO, tam=9, contorno=PRETO)
+        else:
+            self.ptxt(tela, "CORTE AO MEIO: O FALANTE", 160, ACO2)
+            self.ptxt(tela, "É REDONDO, O DESENHO", 171, ACO2)
+            self.ptxt(tela, "MOSTRA SÓ A FATIA", 182, ACO2)
 
     def sons(self, fx):
         for k, (p, a, _) in enumerate(self.ORDEM):
@@ -1002,9 +1015,11 @@ class Empurra(CenaAr):
     XV = 112
 
     def corrente(self, t):
+        # empurrões (só para fora), depois puxões (só para dentro), depois vaivém
         if t < 3.0: return 0.0
-        if t < 15.0: return suave((t - 3.0) / .8)
-        if t < 22.6: return 1 - 2 * suave((t - 15.0) / .9)
+        if t < 15.0: return .5 - .5 * math.cos(2 * math.pi * (t - 3.0) / 3.0)
+        if t < 22.6: return -(.5 - .5 * math.cos(2 * math.pi * (t - 15.0) / 3.0)) * suave((22.6 - t) / .4) \
+            - suave((t - 22.0) / .6)
         return -math.cos(2 * math.pi * .55 * (t - 22.6))
 
     def d(self, t): return 5.0 * self.corrente(t)

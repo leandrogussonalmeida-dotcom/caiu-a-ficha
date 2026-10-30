@@ -596,18 +596,17 @@ class HeliTopo:
 
 # =================================================================== ar passando pelo rotor (de lado)
 class ArRotor:
-    """Filetes de ar que atravessam o rotor: entram por cima, saem por baixo
-    mais rápidos (e se espalham no chão), ou o contrário na autorrotação.
-    Cada partícula anda num caminho fixo: qualquer quadro sai igual."""
+    """Filetes de ar que atravessam o rotor (como os do túnel de vento do ep02):
+    colunas fixas, com traços que andam ao longo delas. Para baixo: o ar entra
+    por cima, sai mais rápido por baixo e se espalha no chão. Para cima
+    (autorrotação): o ar entra por baixo e sai por cima."""
 
-    def __init__(self, n=64, seed=4):
+    def __init__(self, n=9, seed=4):
+        self.cols = np.linspace(-.9, .9, n)
         rng = np.random.default_rng(seed)
-        self.u = rng.uniform(0, 1, n)
-        self.x = np.concatenate([np.linspace(-.92, .92, n // 2), rng.uniform(-.95, .95, n - n // 2)])
-        self.w = rng.uniform(.8, 1.2, n)
+        self.fase = rng.uniform(0, 1, n)
 
-    def _pos(self, i, s, hx, hy, R, baixo, chao):
-        x0 = self.x[i]
+    def _pos(self, x0, s, hx, hy, R, baixo, chao):
         cima = 30.0
         if s < .22:
             u = s / .22
@@ -624,27 +623,26 @@ class ArRotor:
     def desenhar(self, tela, hx, hy, R, t, sentido=1.0, forca=1.0, chao=None, vel=1.0, cor=CIANO, alt=90):
         """hx, hy = cubo na tela; R = raio em px; sentido 1 = para baixo, -1 = para cima."""
         if abs(sentido) < .05 or forca <= 0: return
-        n = int(len(self.u) * min(1.0, max(0.0, forca)))
         baixo = (chao - hy + 40) if chao is not None else alt
         up = sentido < 0
-        for i in range(n):
-            s = (self.u[i] + t * .55 * vel * self.w[i] * abs(sentido)) % 1.0
-            pts = []
-            for d in (0, .02, .04, .06):
-                ss = s - d
-                if ss < 0: break
-                if up:
-                    pts.append(self._pos(i, 1 - ss, hx, hy, R, alt, None))
-                else:
-                    pts.append(self._pos(i, ss, hx, hy, R, baixo, chao))
-            if len(pts) < 2: continue
-            x, y = pts[0]
-            if not (0 <= y < PALCO_H) or abs(x - hx) > R * 2.4: continue
-            for (xa, ya), (xb, yb) in zip(pts, pts[1:]):
-                tela.linha(xa, ya, xb, yb, ACO1 if abs(xa - hx) > R * 1.3 else ACO2)
-            perto = abs(y - hy) < 50
-            tela.px(x, y, cor if perto else ACO3)
-            if perto: tela.px(pts[1][0], pts[1][1], cor)
+        n_tr = 12
+        for c, x0 in enumerate(self.cols):
+            for k in range(n_tr):
+                s = (k / n_tr + self.fase[c] * .08 + t * .32 * vel * abs(sentido)) % 1.0
+                if (k + c) % 3 == 0 and forca < .6: continue
+                pts = []
+                for d in (0, .018, .036):
+                    ss = s - d
+                    if ss < 0: break
+                    pts.append(self._pos(x0, 1 - ss, hx, hy, R, alt, None) if up else
+                               self._pos(x0, ss, hx, hy, R, baixo, chao))
+                if len(pts) < 2: continue
+                x, y = pts[0]
+                if not (0 <= y < PALCO_H) or abs(x - hx) > R * 2.3: continue
+                perto = abs(y - hy) < 46
+                for (xa, ya), (xb, yb) in zip(pts, pts[1:]):
+                    tela.linha(xa, ya, xb, yb, cor if perto else ACO2)
+                tela.px(x, y, BRANCO if perto else ACO3)
 
 
 # =================================================================== chão de lado

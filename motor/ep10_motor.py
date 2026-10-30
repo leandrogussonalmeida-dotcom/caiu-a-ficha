@@ -189,7 +189,7 @@ class Voo(Cena):
     def preparar(self):
         self.ceu = Ceu(seed=3)
         self.campo = Campo(seed=5)
-        self.ar = ArRotor(80, seed=4)
+        self.ar = ArRotor(9, seed=4)
 
     def cenario(self, tela, t, alt_ceu=0.0, xm=0.0, gy=176, heliponto=150, vento=0.0, vento_x=None, sol_xy=None):
         self.ceu.fundo(tela, alt_ceu, t, sol_xy=sol_xy)
@@ -376,7 +376,7 @@ class Asa(Voo):
                 tela.texto('FORÇA DO ROTOR', hx + 8, hy - 44, CIANO, tam=9, contorno=PRETO)
                 tela.texto('PESO', 138, oy + 56, VERMELHO, tam=9, contorno=PRETO)
         if not VERTICAL:
-            tela.texto('AR PARA BAIXO', 8, 120, CIANO, tam=9, contorno=PRETO)
+            tela.texto('AR PARA BAIXO', 8, 186, CIANO, tam=9, contorno=PRETO)
             painel_voo(tela, .55, (0, 0), 100, 3, extra=[('FORÇA = PESO', VERDE)] if u >= 5.6 else [])
 
     def sons(self, fx):
@@ -555,10 +555,13 @@ class Coletivo(Voo):
 
     def desenhar(self, tela, t, tg):
         c, a = self.col(t), self.alt(t)
-        sk = 176 - a * 4
+        # no corte vertical o chão sobe 40 px: a legenda do celular cobre o pé do palco
+        dv = 40 if VERTICAL else 0
+        gy = 176 - dv
+        sk = gy - a * 4
         bob = math.sin(t * 1.5) * .8 if a > .5 else 0
-        self.cenario(tela, t, vento=min(1.0, c * 1.5), vento_x=self.OX)
-        self.heli(tela, self.OX, sk + bob, self.K, t, psi=self.fase(t), ar=.3 + .7 * min(1.0, self.forca(t)))
+        self.cenario(tela, t, alt_ceu=-dv * 1000 / 52, gy=gy, vento=min(1.0, c * 1.5), vento_x=self.OX)
+        self.heli(tela, self.OX, sk + bob, self.K, t, psi=self.fase(t), ar=.3 + .7 * min(1.0, self.forca(t)), chao=gy)
         th = CAB.passo(0, c, 0, 0)
         if VERTICAL:
             hud_vertical(tela, 'coletivo', [(f"COLETIVO {int(round(c * 100))}%", AMARELO), (f"ÂNGULO {int(round(th))}°", BRANCO),
@@ -852,7 +855,7 @@ class Torque(Cena):
         R = TOPO.R * s
         # o rotor gira para um lado (anti-horário)
         arco_seta(tela, cx, cy, R + 8, R + 8, 10, 70, CIANO, cab=6)
-        tela.texto('ROTOR', cx + R - 4, cy - R + 4, CIANO, tam=9, contorno=PRETO)
+        tela.texto('ROTOR', cx + 24, cy - R - 14, CIANO, tam=9, contorno=PRETO)
         w = self.omega(t)
         if abs(w) > 5 and t < 23.5:
             # o corpo gira para o outro (horário)
@@ -1175,7 +1178,7 @@ class Resumo(Cena):
 
     def preparar(self):
         self.fase = Fase(lambda t: .4, self.dur)
-        self.ar = ArRotor(24, seed=9)
+        self.ar = ArRotor(9, seed=9)
 
     def desenhar(self, tela, t, tg):
         fundo_oficina(tela)
@@ -1233,7 +1236,7 @@ class Fim(Voo):
     def desenhar(self, tela, t, tg):
         tela.buf[:] = FUNDO
         if t >= RM.OUTRO_S:
-            self.ceu.fundo(tela, 3000, t)
+            self.ceu.fundo(tela, 3000, t, sol_xy=(440, 58))
             self.ceu.camada(tela, 190, t * 40, esc=1.2, densa=True, seed=3)
             tela.buf[PALCO_H:] = FUNDO
             tela.texto("OBRIGADO POR ASSISTIR!", W // 2, 24, BRANCO, tam=17, centro=True, contorno=PRETO)

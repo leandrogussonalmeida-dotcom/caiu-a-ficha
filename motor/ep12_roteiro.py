@@ -238,7 +238,7 @@ CORTES = [
     dict(id='c2', de=('frequencia', 0.0), ate=('frequencia', 28.6), x=6, gancho=['GRAVE OU', 'AGUDO?'],
          titulo='Grave ou agudo: o que é frequência? 🎵',
          descricao='Frequência é quantas vezes por segundo o cone vai e volta, em hertz. Frequência baixa, som grave; alta, agudo. O ouvido humano vai de uns 20 Hz até uns 20.000 Hz.'),
-    dict(id='c3', de=('amostras', 7.8), ate=('amostras', 36.6), x=40, gancho=['O SOM VIRA', 'NÚMERO'],
+    dict(id='c3', de=('amostras', 7.8), ate=('amostras', 36.6), x=14, gancho=['O SOM VIRA', 'NÚMERO'],
          titulo='Como o som vira números: 44.100 amostras por segundo',
          descricao='O som digital é a onda medida muitas vezes por segundo. No CD são 44.100 amostras por segundo em cada canal; no vídeo, o padrão é 48.000.'),
     dict(id='c4', de=('bumbo', 0.0), ate=('bumbo', 36.0), x=0, gancho=['UM BUMBO', 'EM NÚMEROS'],
