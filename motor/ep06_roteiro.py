@@ -214,7 +214,7 @@ CORTES = [
     dict(id='c3', de=('carga', 0.0), ate=('carga', 40.0), x=70, gancho=['CARREGANDO', 'O GIGANTE'],
          titulo='O que acontece quando um navio é carregado?',
          descricao='Cada tonelada que entra no navio faz ele empurrar 1 tonelada de água a mais. Um porta-contêineres gigante leva até 156.907 toneladas e fica com o fundo 16 metros abaixo da água.'),
-    dict(id='c4', de=('plimsoll', 0.0), ate=('plimsoll', 30.0), x=40, gancho=['A LINHA', 'DO LIMITE'],
+    dict(id='c4', de=('plimsoll', 0.0), ate=('plimsoll', 30.0), x=34, gancho=['A LINHA', 'DO LIMITE'],
          titulo='Para que serve essa marca no casco dos navios?',
          descricao='É a marca de Plimsoll, obrigatória desde 1876: a água não pode passar da linha. S é verão, W inverno, T trópicos e F água doce.'),
     dict(id='c5', de=('doce', 0.0), ate=('doce', 36.0), x=70, gancho=['RIO OU', 'MAR?'],

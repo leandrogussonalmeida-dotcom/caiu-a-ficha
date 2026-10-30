@@ -109,9 +109,15 @@ def agua_fundo(tela, x0, yw, x1, y1, doce=False):
         dither(tela, x0, ya, x1 - x0, yb - ya, a, b)
 
 
-def agua_por_cima(tela, x0, yw, x1, y1, t, doce=False, onda=True, ondas_de=None):
+OBJ_MAR = [FUNDO3, FUNDO2, FUNDO]          # tom do que está embaixo d'água (mar)
+OBJ_DOCE = [AGUA1, AGUA0, FUNDO2]
+OBJ_RIO = [AGUA0, FUNDO2, FUNDO]
+
+
+def agua_por_cima(tela, x0, yw, x1, y1, t, doce=False, onda=True, ondas_de=None, excluir=(), obj=None):
     """Água por cima do que está dentro: xadrez + linha da superfície com ondinhas.
-    `ondas_de` = função x -> desvio da superfície (opcional)."""
+    `excluir` = retângulos (x, y, w, h) que NÃO estão na água (o ar dentro da caixa,
+    os porões do navio em corte)."""
     x0, x1 = max(0, int(x0)), min(W, int(x1))
     yw = int(yw); y1 = min(PALCO_H, int(y1))
     if x1 <= x0 or y1 <= yw: return
@@ -121,11 +127,17 @@ def agua_por_cima(tela, x0, yw, x1, y1, t, doce=False, onda=True, ondas_de=None)
     sub = tela.buf[yw:y1, x0:x1]
     banda = np.minimum(2, ((yy - yw) * 3) // h)
     cor = np.array([c[0] for c in cores], np.uint8)[banda]
+    obj = np.array(obj or (OBJ_DOCE if doce else OBJ_MAR), np.uint8)[banda]
+    agua = np.isin(sub, [c for par in cores for c in par])
     m = (xx + yy) % 2 == 0
-    sub[m] = cor[m]
+    for ex, ey, ew, eh in excluir:
+        m &= ~((xx >= ex) & (xx < ex + ew) & (yy >= ey) & (yy < ey + eh))
+    sub[m & agua] = cor[m & agua]
+    sub[m & ~agua] = obj[m & ~agua]
     # superfície: linha clara com ondinhas que correm
     sup = MISTURA2 if not doce else AGUA1
     for x in range(x0, x1):
+        if any(ex <= x < ex + ew and ey <= yw < ey + eh for ex, ey, ew, eh in excluir): continue
         d = 0
         if onda:
             d = 1 if math.sin(x * .21 - t * 2.6) + .6 * math.sin(x * .07 + t * 1.3) > 1.0 else 0
@@ -161,9 +173,9 @@ class Tanque:
             x = X0 + 4 + (k * 37) % (X1 - X0 - 8)
             tela.ret(x, Y1 - 2 - (k % 2), 4, 2 + (k % 2), ACO1 if k % 3 else ACO2)
 
-    def frente(self, tela, nivel, t):
+    def frente(self, tela, nivel, t, excluir=()):
         X0, X1, Y0, Y1 = self.TX0, self.TX1, self.TY0, self.TY1
-        agua_por_cima(tela, X0, int(nivel), X1, Y1, t, doce=True)
+        agua_por_cima(tela, X0, int(nivel), X1, Y1, t, doce=True, excluir=excluir)
         # vidro: paredes, borda, reflexo
         for x in (X0 - 3, X1):
             tela.ret(x, Y0 - 2, 3, Y1 - Y0 + 5, PRETO)
@@ -305,6 +317,12 @@ def caixa(tela, cx, y_base, larg, alt, t=0.0, agua_dentro=0.0, furo=False, ar=Tr
         tela.ret(hx, yb - 2, 3, 2, PRETO)
 
 
+def caixa_ar(cx, y_base, larg, alt):
+    """Retângulo do interior da caixa (o ar, que não está na água)."""
+    x0 = int(cx - larg / 2)
+    return [(x0 + 2, int(y_base - alt) - 2, int(larg) - 4, int(alt))]
+
+
 def chapa(tela, cx, y_base, larg, esp=2):
     x0 = int(cx - larg / 2)
     tela.ret(x0 - 1, int(y_base) - esp - 1, int(larg) + 2, esp + 2, PRETO)
@@ -369,10 +387,9 @@ class Navio:
                       (L - 30, 0), (L - 20, 1), (L - 12, 3), (L - 8, 7), (L - 10, 11), (L - 17, 13),
                       (L - 15, 20), (L - 8, 32), (L + 2, D + 6), (L - 24, D + 5), (L - 40, D + 3)]
         # anteparas (u) e porões
-        self.ante = [50] + [self.U_CARGA0 + 10 * k * 2 + 6 for k in range(1, 9)
-                            if self.U_CARGA0 + 20 * k + 6 < L - 26]
-        self.ante.append(L - 26)
-        self.n_comp = len(self.ante) - 1
+        nc = 8 if L >= 220 else 5
+        self.ante = [int(round(50 + (L - 26 - 50) * k / nc)) for k in range(nc + 1)]
+        self.n_comp = nc
         self.slots = [(i, j) for j in range(self.ANDARES) for i in range(self.BAIAS)]
         self.slots.sort(key=lambda s: (s[1] // 2, s[0], s[1]))
 
@@ -380,11 +397,6 @@ class Navio:
 
     def _poli(self, x0, yq, pts):
         return [(x0 + u, yq - v) for u, v in pts]
-
-    def mascara_casco(self, x0, yq):
-        """Máscara booleana (H, W) do casco (para recortes)."""
-        from pixelengine import Tela
-        return None
 
     def desenhar(self, tela, x0, yq, t, n_cont=0, corte=False, alagados=(), nivel_agua_v=None,
                  marcas=True, plimsoll=True, fumaca=True, holofote=None, rotulos=None, inclina=0.0,
@@ -399,31 +411,35 @@ class Navio:
         # contorno (1 px em volta) e corpo
         for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
             poligono(tela, [(x + dx, y + dy) for x, y in casco], PRETO)
-        poligono(tela, casco, FUNDO3)
+        SENT = 250                                   # cor provisória: só o casco
+        poligono(tela, casco, SENT)
         # pintura: obras vivas vermelhas até a linha S, faixa clara, costado escuro
         vs = self.V_MAX
-        for y in range(yq - D - 6, yq + 1):
-            v = yq - y
-            if v <= vs:
-                row = tela.buf[y, max(0, x0 - 2):min(W, x0 + L + 4)]
-                m = row == FUNDO3
-                xs = np.arange(max(0, x0 - 2), min(W, x0 + L + 4))
-                c = np.where((xs + y) % 2 == 0, BRASA, VERMELHO) if v > 3 else np.full(xs.shape, BRASA)
-                row[m] = c[m]
-            elif v <= vs + 2:
-                row = tela.buf[y, max(0, x0 - 2):min(W, x0 + L + 4)]
-                row[row == FUNDO3] = ACO0
-            elif v >= D - 2:
-                row = tela.buf[y, max(0, x0 - 2):min(W, x0 + L + 4)]
-                row[row == FUNDO3] = ACO1
+        ya, yb_ = max(0, yq - D - 8), min(H, yq + 2)
+        xa, xb = max(0, x0 - 4), min(W, x0 + L + 6)
+        if yb_ > ya and xb > xa:
+            sub = tela.buf[ya:yb_, xa:xb]
+            yy, xx = np.mgrid[ya:yb_, xa:xb]
+            v = yq - yy
+            cor = np.full(sub.shape, FUNDO3, np.uint8)
+            cor[(v >= D - 2)] = ACO1
+            cor[(v > vs) & (v <= vs + 2)] = ACO0
+            cor[v <= vs] = np.where((xx + yy) % 2 == 0, BRASA, VERMELHO)[v <= vs]
+            cor[v <= 3] = BRASA
+            m = sub == SENT
+            sub[m] = cor[m]
+        tela.buf[tela.buf == SENT] = FUNDO3
         tela.ret(x0 + 2, yq - D - 3, L - 42, 1, ACO3)              # borda do convés
         tela.ret(x0 + L - 40, yq - D - 4, 30, 1, ACO3)
         # chapas do costado (linhas verticais discretas)
         for u in range(40, L - 30, 16):
             for v in range(vs + 4, D - 2, 2):
                 tela.px(x0 + u, yq - v, TRACO)
+        ex = []
         if corte:
             self._interior(tela, x0, yq, t, n_cont, alagados, nivel_agua_v, agua_comp)
+            a0, a1 = self.ante[0], self.ante[-1]
+            ex = [(x0 + a0 + 2, yq - D + 1, a1 - a0 - 3, D - 6), (x0 + 23, yq - 29, 24, 22)]
         # hélice e leme (popa, embaixo)
         hx, hy = x0 + 18, yq - 8
         ang = t * 6
@@ -490,6 +506,7 @@ class Navio:
         for i in range(self.BAIAS):
             if not any(self.slots[k][0] == i for k in range(min(n, len(self.slots)))):
                 tela.ret(x0 + self.U_CARGA0 + i * 10 + 1, yq - D - 5, 8, 2, ACO2)
+        return ex
 
     def _interior(self, tela, x0, yq, t, n_cont, alagados, nivel_v, agua_comp=None):
         L, D = self.L, self.D
@@ -566,35 +583,41 @@ def regua_calado(tela, x, y, h, calado_m, cor_agua=MISTURA, rotulo_max=True, vma
         tela.ret(x + 4, yy, 6, 1, BRANCO)
         tela.texto(str(m), x + 12, yy - 3, BRANCO, tam=9, contorno=PRETO)
     if yw < y + h:
-        yy, xx = np.mgrid[yw:y + h, x:x + 44]
-        sub = tela.buf[yw:y + h, x:x + 44]
-        sub[(xx + yy) % 2 == 0] = cor_agua
+        dither(tela, x, yw, 44, y + h - yw, cor_agua, FUNDO3)
+        for m in range(2, vmax + 1, 2):
+            yy = int(y + h - m * pxm)
+            if yy > yw + 1:
+                tela.ret(x + 4, yy, 6, 1, ACO3)
+                tela.texto(str(m), x + 12, yy - 3, ACO3, tam=9)
         tela.ret(x, yw, 44, 1, MISTURA2 if cor_agua == MISTURA else AGUA1)
 
 
-def marca_plimsoll(tela, cx, cy, esc, nivel_y=None, ativa=None, t=0.0):
+def marca_plimsoll(tela, cx, cy, esc, nivel_y=None, ativa=None, t=0.0, rotulos=True, linhas=True, letras=None):
     """A marca de Plimsoll em close (esc = px por unidade). Linhas à direita:
     T, S, W, WNA; à esquerda: TF, F. S fica na altura do centro do disco.
     Devolve {letra: y}."""
     cor = BRANCO
     r = 9 * esc
-    # linha do convés acima
-    tela.ret(cx - int(14 * esc), cy - int(16 * esc), int(28 * esc), max(2, int(1.2 * esc)), cor)
-    tela.anel(cx, cy, r, cor, max(1.0, .9 * esc))
-    tela.ret(cx - int(13 * esc), cy - max(1, int(.6 * esc)), int(26 * esc), max(2, int(1.2 * esc)), cor)
-    xv = cx + int(18 * esc)
-    tela.ret(xv, cy - int(8 * esc), max(2, int(1.2 * esc)), int(16 * esc), cor)
-    ys = {'TF': -6.5, 'F': -4.0, 'T': -2.5, 'S': 0.0, 'W': 2.5, 'WNA': 5.0}
+    e = max(2, int(1.2 * esc))
+    xv = cx + int(20 * esc)
+    ys = {'TF': -8.0, 'F': -5.0, 'T': -3.0, 'S': 0.0, 'W': 3.0, 'WNA': 6.0}
+    if linhas:
+        tela.ret(cx - int(14 * esc), cy - int(16 * esc), int(28 * esc), e, cor)     # linha do convés
+        tela.anel(cx, cy, r, cor, max(1.0, .9 * esc))
+        tela.ret(cx - int(13 * esc), cy - e // 2, int(26 * esc), e, cor)
+        tela.ret(xv, cy - int(9 * esc), e, int(16 * esc), cor)
     out = {}
     for k, d in ys.items():
-        y = cy + int(d * esc) - (max(1, int(.6 * esc)) if k == 'S' else 0)
+        y = cy + int(d * esc) - (e // 2 if k == 'S' else 0)
         out[k] = y
         esq = k in ('TF', 'F')
         c = AMARELO if ativa == k else cor
         if esq:
-            tela.ret(xv - int(6 * esc), y, int(6 * esc), max(2, int(1.2 * esc)), c)
-            tela.texto(k, xv - int(6 * esc) - 3, y - 3, c, tam=9, centro='d', contorno=PRETO)
+            if linhas: tela.ret(xv - int(6 * esc), y, int(6 * esc), e, c)
+            if rotulos and (letras is None or k in letras):
+                tela.texto(k, xv - int(6 * esc) - 3, y - 3, c, tam=9, centro='d', contorno=PRETO)
         else:
-            tela.ret(xv, y, int(6 * esc), max(2, int(1.2 * esc)), c)
-            tela.texto(k, xv + int(6 * esc) + 4, y - 3, c, tam=9, contorno=PRETO)
+            if linhas: tela.ret(xv, y, int(6 * esc), e, c)
+            if rotulos and (letras is None or k in letras):
+                tela.texto(k, xv + int(6 * esc) + 4, y - 3, c, tam=9, contorno=PRETO)
     return out

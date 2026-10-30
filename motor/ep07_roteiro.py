@@ -250,8 +250,8 @@ Fontes
 
 # ---------------------------------------------------------------- Shorts (cortes verticais)
 # x = coluna da tela larga onde começa o recorte de 180 px. O protagonista de
-# cada cena fica em x ~60..240 (celular, fibra, cabo, data center); no mapa, a
-# rota fica em x ~95..235.
+# cada cena fica em x ~60..240 (celular, fibra, cabo, data center); o mapa e o
+# gráfico da conta ficam em x 66..246.
 PREFIXO = 'ep07-mensagem'
 CORTES = [
     dict(id='c1', de=('bits', 0.0), ate=('bits', 28.8), x=60, gancho=['OI! EM', 'ZEROS E UNS'],
@@ -269,7 +269,7 @@ CORTES = [
     dict(id='c5', de=('chegada', 7.6), ate=('chegada', 35.6), x=60, gancho=['FORA DE', 'ORDEM?'],
          titulo='Os pedaços da sua foto chegam fora de ordem 🧩',
          descricao='A foto viaja em mais de 200 pacotes. Eles chegam fora de ordem e o celular usa os números para montar tudo. Faltou um? Ele pede de novo.'),
-    dict(id='c6', de=('conta', 0.0), ate=('conta', 28.8), x=96, gancho=['8.350 KM', 'EM 42 MS'],
+    dict(id='c6', de=('conta', 0.0), ate=('conta', 28.8), x=66, gancho=['8.350 KM', 'EM 42 MS'],
          titulo='Quanto tempo uma mensagem leva para cruzar o oceano? ⏱️',
          descricao='De São Paulo a Lisboa em linha reta são uns 8.350 km. Pelo ar e pela fibra, o sinal leva uns 42 milésimos de segundo. Um piscar de olhos dura 100 a 150 ms.'),
 ]
