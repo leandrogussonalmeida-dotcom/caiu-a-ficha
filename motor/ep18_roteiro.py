@@ -96,7 +96,7 @@ LEGENDAS = {
     ],
     'newton': [
         (0.5, 7.4, "SOLTE UM BALÃO CHEIO: O AR SAI", "PARA UM LADO E O BALÃO VAI PARA O OUTRO.", ()),
-        (7.6, 14.4, "É A *3ª LEI DE NEWTON*: TODA AÇÃO", "TEM UMA REAÇÃO IGUAL E CONTRÁRIA.", ('F1',)),
+        (7.6, 14.4, "É A *TERCEIRA LEI DE NEWTON*: TODA AÇÃO", "TEM UMA REAÇÃO IGUAL E CONTRÁRIA.", ('F1',)),
         (14.6, 21.4, "O FOGUETE FAZ O MESMO: JOGA *GÁS*", "*QUENTE* PARA BAIXO, MUITO RÁPIDO.", ('F1',)),
         (21.6, 28.4, "O FOGUETE EMPURRA O GÁS, E O GÁS", "EMPURRA O FOGUETE *PARA CIMA*.", ('F1',)),
         (28.6, 35.4, "ELE NÃO PRECISA DE AR PARA", "SE APOIAR. NO ESPAÇO, O GÁS SAI LIVRE.", ('F1',)),
@@ -146,8 +146,8 @@ LEGENDAS = {
         (0.5, 5.8, "TANQUES DO 1º ESTÁGIO VAZIOS:", "O MOTOR *DESLIGA*.", ('F6', 'F14')),
         (6.0, 11.8, "O ESTÁGIO VAZIO É *SOLTO*:", "MENOS PESO MORTO PARA CARREGAR.", ('F6',)),
         (12.0, 18.8, "O *2º ESTÁGIO* ACENDE", "O SEU PRÓPRIO MOTOR.", ('F6',)),
-        (19.0, 25.8, "FOGUETES DE 2 ESTÁGIOS SÃO BEM", "COMUNS. MAIS DE 3 É *RARO*.", ('F6',)),
-        (26.0, 29.8, "E O 1º ESTÁGIO CAI DE VOLTA.", "", ()),
+        (19.0, 25.4, "FOGUETES DE 2 ESTÁGIOS SÃO BEM", "COMUNS. MAIS DE 3 É *RARO*.", ('F6',)),
+        (25.6, 29.8, "E O 1º ESTÁGIO CAI DE VOLTA.", "", ()),
     ],
     'karman': [
         (0.5, 7.6, "ONDE COMEÇA O ESPAÇO?", "O AR NÃO ACABA DE UMA VEZ.", ('F8',)),

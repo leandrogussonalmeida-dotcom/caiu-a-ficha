@@ -450,7 +450,8 @@ class Cilindro:
                 if np.isnan(tp): continue
                 a, b = sorted((P(tp), P(self.Y_KB)))
                 y0, y1 = int(round(a)), int(round(b))
-                if y1 > y0: Mk.buf[max(0, y0):min(H, y1), x] = True
+                if y1 - y0 < 3: y0, y1 = int(round((a + b) / 2)) - 1, int(round((a + b) / 2)) + 2   # de lado: fica uma lâmina fina
+                Mk.buf[max(0, y0):min(H, y1), x] = True
         if cabeca:
             # cabeça (a parte que a mão segura) e o ressalto do encosto
             a, b = sorted((P(self.Y_S + 2), P(self.Y_PB + 2)))

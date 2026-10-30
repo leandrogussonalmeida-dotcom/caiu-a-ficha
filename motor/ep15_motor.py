@@ -817,7 +817,7 @@ class Esofago(Cena):
         mostra_anel = 6.0 < t < tq + .4
         if not mostra_anel or anel_y > 70: self.rot(tela, 'ESÔFAGO', 196, 24, MUC3, alvo=(160, 30))
         if mostra_anel:
-            self.rot(tela, 'ANEL APERTA', 200, max(8, anel_y - 24), AMARELO, alvo=(164, anel_y - 2))
+            self.rot(tela, 'ANEL APERTA', 186, max(8, anel_y - 24), AMARELO, alvo=(164, anel_y - 2))
         if t > tq - 2:
             self.rot(tela, 'ESFÍNCTER', 200, 150, MUCO if ab_esf > .3 else ACO3, alvo=(162, ESO_Y1 + 3))
             self.rot(tela, 'ESTÔMAGO', 210, 190, ACI1, alvo=(200, 200))
@@ -825,8 +825,8 @@ class Esofago(Cena):
         if 11.6 < t < tq + 1 and not VERTICAL:
             # pulsa no bumbo
             r = 7 + 3 * aperto
-            tela.disco(258, 60, r + 1, PRETO); tela.disco(258, 60, r, AMARELO if aperto > .3 else LARANJA)
-            tela.texto('BUM', 258, 76, AMARELO, tam=9, centro=True, contorno=PRETO)
+            tela.disco(272, 26, r + 1, PRETO); tela.disco(272, 26, r, AMARELO if aperto > .3 else LARANJA)
+            tela.texto('BUM', 272, 42, AMARELO, tam=9, centro=True, contorno=PRETO)
         if t > tq + 5.0 and not VERTICAL:
             # a próxima garfada já vem descendo
             garfada(tela, 147, ESO_Y0 + (t - tq - 5.0) * 8, .9, t, 'bolo', prota=False)
@@ -1257,7 +1257,7 @@ class Vilosidades(Cena):
         if s > .9:
             vx, larg = vs[3]
             self.rot(tela, 'VILOSIDADE', 210, 22, MUC3, alvo=(vs[5][0] - 4, base - h + 4))
-            self.rot(tela, 'VASINHOS DE SANGUE', 6, 186, SANG2, alvo=(vs[0][0] - 4, base - 30))
+            self.rot(tela, 'VASINHOS DE SANGUE', 6, 186, BRANCO, alvo=(vs[0][0] - 4, base - 30))
             if 12.2 < t < 24:
                 lx = 66 if VERTICAL else 12
                 dyv = 8 if VERTICAL else 0
@@ -1514,9 +1514,16 @@ class Saida(Cena):
         # placa
         caixa(tela, 218, 30, 46, 16, VERDE, BRANCO, PRETO)
         tela.texto('SAÍDA', 241, 34, PRETO, tam=9, centro=True)
-        # o tubo até a porta (estilizado)
-        f = guardado('sai_tubo', lambda: tubo([(-10, 120), (100, 118), (196, 116)], 20))
-        pintar(tela, f.ox, f.oy, f.m, f.cilindro(), [RES0, INT1, INT2, INT3], PRETO)
+        # uma esteira neutra até a porta (o caminho final, sem mostrar o corpo)
+        tela.ret(0, 121, 212, 10, PRETO)
+        tela.ret(0, 122, 212, 7, ACO1)
+        tela.ret(0, 122, 212, 1, ACO3)
+        for k in range(-1, 24):
+            xr = int(k * 10 + (t * 30) % 10)
+            if 0 <= xr < 210:
+                tela.ret(xr, 124, 2, 3, ACO2)
+        for xr in range(8, 212, 24):
+            tela.disco(xr, 135, 3, PRETO); tela.disco(xr, 135, 2, ACO2)
         # o resto anda até a porta e sai
         if t < 10:
             u = ease(fase(t, .3, 8.0))
@@ -1693,7 +1700,7 @@ class Fim(Cena):
         return baixo
 
     def sons(self, fx):
-        fx.put(RM.som_encerramento(SEED), self.t0, .8)
+        fx.put(RM.som_encerramento(SEED), self.t0, .5)     # a .8 o pico passava a música em 5 dB
 
 
 # longo.py chama `cena.pos(baixo, t)` para a cena que entrega RGB pronto (a vinheta).
