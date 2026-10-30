@@ -39,7 +39,7 @@ EPISODIOS = [
     dict(id='ep06', serie='voa', titulo='Por que um navio de aço flutua', estado='pronto', onda=2),
     dict(id='ep07', serie='jornada', titulo='A jornada de uma mensagem de celular', estado='pronto', onda=2),
     dict(id='ep08', serie='pixels', titulo='Como um videogame desenha um quadro', estado='pronto', onda=2),
-    dict(id='ep09', serie='dentro', titulo='Como funciona o relógio mecânico', estado='fazendo', onda=2),
+    dict(id='ep09', serie='dentro', titulo='Como funciona o relógio mecânico', estado='pronto', onda=2),
     # ---------------------------------------------------------------- onda 3
     dict(id='ep10', serie='voa', titulo='Como o helicóptero voa', estado='fazendo', onda=3),
     dict(id='ep11', serie='jornada', titulo='A jornada da água: da represa até a sua tomada', estado='fazendo', onda=3),

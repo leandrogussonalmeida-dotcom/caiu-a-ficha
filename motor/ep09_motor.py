@@ -854,7 +854,7 @@ class Ponteiros(Cena):
         if VERTICAL:
             hud_vertical(tela, [(f"MINUTOS {int(voltas)} VOLTAS", BRANCO), (f"HORAS {int(voltas) % 12 if voltas < 12 else 12}/12", AMARELO)], x=132)
             return
-        etiqueta(tela, 'PINHÃO DOS MINUTOS', 8, 196, C[0] - 8, C[1] + 12, ACO3)
+        etiqueta(tela, 'CANHÃO', 8, 196, C[0] - 8, C[1] + 12, ACO3)
         etiqueta(tela, 'RODA DAS HORAS', 8, 8, C[0] - 30, C[1] - 22, AMARELO)
         etiqueta(tela, 'RODA DE MINUTOS', 196, 8, int(Mn[0]) + 18, int(Mn[1]) - 24, AMARELO)
         titulo_painel(tela, 'REDUÇÃO', '12 PARA 1', BRANCO, AMARELO, y=8)
@@ -1064,7 +1064,7 @@ class Historia(Cena):
         titulo_painel(tela, 'ERRO POR DIA', None, BRANCO, y=8)
         painel(tela, PX0 - 6, 34, 172, 44, borda=VERMELHO)
         tela.texto('BOLSO, ANTIGO', PX0 + 2, 40, ACO3, tam=9, contorno=PRETO)
-        tela.texto('ATÉ 15 MIN', PX0 + 2, 54, VERMELHO, tam=17, contorno=PRETO)
+        tela.texto('~15 MIN', PX0 + 2, 54, VERMELHO, tam=17, contorno=PRETO)
         if t >= 15.8:
             painel(tela, PX0 - 6, 90, 172, 44, borda=VERDE)
             tela.texto('MECÂNICO BOM, HOJE', PX0 + 2, 96, ACO3, tam=9, contorno=PRETO)

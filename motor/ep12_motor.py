@@ -85,6 +85,26 @@ class Cena:
         if curva is not None: e = e * curva(tt)
         fx.put((y * e * .6).astype(np.float32), self.t0 + t, ganho, pan)
 
+    def faixa_musica(self, tela, tg, gx, gy, gw, gh):
+        """A trilha de verdade em volta do agora (passado claro, futuro apagado),
+        com uma marca amarela em cada bumbo."""
+        if VERTICAL: return
+        a = self.T.audio
+        painel(tela, gx - 2, gy - 2, gw + 4, gh + 4)
+        n = int(tg * SR)
+        meio = gw // 2
+        passo = 160
+        for c in range(gw):
+            i0 = n + (c - meio) * passo
+            if i0 < 0 or i0 + passo >= len(a): continue
+            seg = a[i0:i0 + passo, 0]
+            hi, lo = float(seg.max()), float(seg.min())
+            tela.ret(gx + c, gy + gh / 2 - hi * gh * .9, 1, max(1, (hi - lo) * gh * .9), CIANO if c < meio else ACO1)
+        for e in self.L.entre('kick', tg - meio * passo / SR, tg + meio * passo / SR):
+            xk = gx + meio + (e['t'] - tg) * SR / passo
+            tela.ret(xk, gy - 1, 1, 3, AMARELO)
+        tela.ret(gx + meio, gy - 3, 1, gh + 6, BRANCO)
+
     def rastro(self, tela, x, y, w, h, fn, t, janela=4.0, cor=ROSA, ymax=6.0, titulo=None):
         if VERTICAL: return
         ts = np.linspace(t - janela, t, 80)
@@ -630,6 +650,21 @@ class Bits(Cena):
         tela.texto("SINAL", x0, 52, ACO2, tam=9, contorno=PRETO)
         tela.texto("16 BITS", x0 + 16 * 17 - tela.largura_texto("16 BITS", 9), 52, ACO2, tam=9, contorno=PRETO)
         centro_preso(tela, "= " + sinal(v), 150, 64, BRANCO, tam=26, xmin=10, xmax=296)
+        if t < 7.6:
+            gx, gy, gw, gh = 20, 100, 264, 80
+            N = 14400
+            painel(tela, gx - 3, gy - 3, gw + 6, gh + 6)
+            tela.ret(gx, gy + gh // 2, gw, 1, FUNDO3)
+            for c in range(gw):
+                seg = KICK16[c * N // gw:(c + 1) * N // gw]
+                hi, lo = int(seg.max()), int(seg.min())
+                ya = gy + gh / 2 - hi / 32767 * (gh / 2 - 2); yb = gy + gh / 2 - lo / 32767 * (gh / 2 - 2)
+                tela.ret(gx + c, ya, 1, max(1, yb - ya + 1), ACO1)
+            xm = gx + i / N * gw
+            ym = gy + gh / 2 - v / 32767 * (gh / 2 - 2)
+            tela.ret(xm, gy, 1, gh, AMARELO)
+            tela.disco(xm, ym, 3, PRETO); tela.disco(xm, ym, 2, AMARELO)
+            tela.texto("O BUMBO (0,3 S)", gx, gy + gh + 6, ACO2, tam=9, contorno=PRETO)
         if 7.6 <= t < 15.2:
             # a régua dos 65.536 degraus
             y = 120
@@ -809,15 +844,16 @@ class Dac(Cena):
         tela.ret_vazado(4, 24, 162, 104, PCB1)
         for j in range(5):
             tela.ret(8, 36 + j * 18, 70, 1, PCB1)
-        # fita de números entrando no chip
-        for j in range(4):
+        # fila de números subindo para o chip
+        tela.texto("FILA", 12, 28, PCB1, tam=9, contorno=PRETO)
+        for j in range(5):
             idx = k + j
-            x = 70 - j * 20 - fr * 20
-            if x < 6: continue
+            y = 44 if j == 0 else 44 + j * 15 - suave(fr * 3) * 15
+            if y > 118: continue
             v = self.N[idx % len(self.N)]
-            y = 40 + j * 18
-            painel(tela, x - 50, y - 3, 56, 13, borda=AMARELO if j == 0 else ACO1)
-            tela.texto(sinal(v), x - 47, y, AMARELO if j == 0 else ACO3, tam=9)
+            painel(tela, 12, y - 3, 60, 13, borda=AMARELO if j == 0 else ACO1)
+            tela.texto(sinal(v), 16, y, AMARELO if j == 0 else ACO3, tam=9)
+        seta(tela, 74, 47, 88, 62, AMARELO, esp=1, ponta=3)
         # o chip
         cx0, cy0 = 96, 50
         for j in range(5):
@@ -1044,24 +1080,7 @@ class Ritmo(CenaAr):
         I = float(self.D(t)) / 6
         cols, lev, dd = self.palco_ar(tela, t, corrente=I)
         nb = self.L.conta('kick', tg) - self.L.conta('kick', self.t0 - .01)
-        # a trilha de verdade, em volta do agora
-        if not VERTICAL:
-            a = self.T.audio
-            gx, gy, gw, gh = 8, 176, 284, 26
-            painel(tela, gx - 2, gy - 2, gw + 4, gh + 4)
-            n = int(tg * SR)
-            meio = gw // 2
-            passo = 160
-            for c in range(gw):
-                i0 = n + (c - meio) * passo
-                if i0 < 0 or i0 + passo >= len(a): continue
-                seg = a[i0:i0 + passo, 0]
-                hi, lo = float(seg.max()), float(seg.min())
-                tela.ret(gx + c, gy + gh / 2 - hi * gh * .9, 1, max(1, (hi - lo) * gh * .9), CIANO if c < meio else ACO1)
-            for e in self.L.entre('kick', tg - meio * passo / SR, tg + meio * passo / SR):
-                xk = gx + meio + (e['t'] - tg) * SR / passo
-                tela.ret(xk, gy - 1, 1, 3, AMARELO)
-            tela.ret(gx + meio, gy - 3, 1, gh + 6, BRANCO)
+        self.faixa_musica(tela, tg, 8, 176, 284, 26)
         self.vtxt(tela, f"BUMBO Nº {nb}", AMARELO, y=4, tam=17)
         # painel
         self.ptit(tela, "A MÚSICA DESTE VÍDEO")
@@ -1099,11 +1118,12 @@ class Woofer(Cena):
             fase = (t * vel) % lam
             r = 70 - lam + fase if lam > 20 else 30 + fase
             while r < 200:
-                for k in range(-12, 13):
-                    a = k * .07
+                for k in range(-40, 41):
+                    a = k * .02
                     x = cx + math.cos(a) * r; y = cy + math.sin(a) * r
                     if 152 < x < 296 and 2 < y < 204:
-                        tela.px(x, y, cor if r < 150 else D.AR1)
+                        tela.px(x, y, cor if r < 190 else D.AR1)
+                        if lam > 20: tela.px(x - 1, y, cor if r < 190 else D.AR1)
                 r += lam
         falante_frente(tela, cw[0], cw[1], 44, dw, t)
         falante_frente(tela, ct[0], ct[1], 15, dt_, t)
@@ -1117,19 +1137,19 @@ class Woofer(Cena):
         # painel
         self.ptit(tela, "QUEM TOCA O QUÊ")
         if not VERTICAL:
-            y = 44
+            y = 58
             faixa_hz(tela, PX0, y - 18, 160, 20, 20000, ACO1, alto=3)
-            tela.texto("OUVIDO", PX0, y - 30, ACO2, tam=9, contorno=PRETO)
+            tela.texto("OUVIDO HUMANO", PX0, y - 30, ACO2, tam=9, contorno=PRETO)
             if t >= 7.8:
                 faixa_hz(tela, PX0, y - 9, 160, 50, 2000, LARANJA, alto=4)
             if t >= 22.6:
                 faixa_hz(tela, PX0, y - 9, 160, 2000, 20000, CIANO, alto=4)
             regua_hz(tela, PX0, y, 160)
-            self.ptxt(tela, "WOOFER", 76, LARANJA)
-            self.ptxt(tela, "50 A 2.000 HZ" if t >= 7.8 else "GRAVES", 87, BRANCO, 17)
+            self.ptxt(tela, "WOOFER", 84, LARANJA)
+            self.ptxt(tela, "50 A 2.000 HZ" if t >= 7.8 else "GRAVES", 95, BRANCO, 17)
             if t >= 15.2:
-                self.ptxt(tela, "TWEETER", 116, CIANO)
-                self.ptxt(tela, "2.000 A 20.000 HZ" if t >= 22.6 else "AGUDOS", 127, BRANCO, 17)
+                self.ptxt(tela, "TWEETER" + (" (HZ)" if t >= 22.6 else ""), 120, CIANO)
+                self.ptxt(tela, "2.000 A 20.000" if t >= 22.6 else "AGUDOS", 131, BRANCO, 17)
             self.ptxt(tela, "FAIXAS TÍPICAS: CADA", 160, ACO2)
             self.ptxt(tela, "MODELO TEM A SUA", 171, ACO2)
 
@@ -1139,7 +1159,7 @@ class Microfone(Cena):
     C = 70.0
 
     def preparar(self):
-        self.Fs = Corte(24, 100, .55)
+        self.Fs = Corte(30, 100, .55)
         self.Fm = Corte(252, 100, .85, espelho=-1)
         self.ar = Ar(46, 222, 36, 164, passo=6, seed=31, xa=self.Fs.face_x() + 2)
         self.D = Curva(lambda t: 4.5 * math.sin(2 * math.pi * .7 * t) * suave((t + 1) / 1.0), -6, self.dur + 2)
@@ -1238,11 +1258,10 @@ class Resumo(Cena):
         self.ar.desenhar(tela, t, self.D, 70.0, escala=.35)
         self.F.desenhar(tela, float(self.D(t)), t=t, corrente=float(self.D(t)) / 4)
         # 6 ouvido (forma genérica)
-        ox, oy = 272, 96
-        for k in range(3):
-            tela.anel(ox, oy, 14 - k * 5, PRETO, esp=1.6)
-            tela.anel(ox, oy, 14 - k * 5, (AMARELO if ativo == 5 else CERAMICA) if k == 0 else D.LATAO if k == 1 else D.MAD1, esp=.9)
-        tela.disco(ox + 1, oy + 1, 2.4, PRETO)
+        D.ouvido(tela, 274, 96, .95, cor=LATAO, luz=AMARELO if ativo == 5 else D.MAD2)
+        self.faixa_musica(tela, tg, 8, 166, 284, 28)
+        if not VERTICAL:
+            tela.texto("A TRILHA DESTE VÍDEO, AGORA", 8, 154, ACO2, tam=9, contorno=PRETO)
         for j, (x, nome) in enumerate(etapas):
             centro_preso(tela, nome, x, 136, AMARELO if j == ativo else ACO3)
         # contagem dos números do vídeo

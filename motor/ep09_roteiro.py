@@ -94,19 +94,19 @@ LEGENDAS = {
         (0.5, 8.6, "A ENERGIA FICA NA *MOLA REAL*: UMA", "FITA DE AÇO ENROLADA NUM TAMBOR.", ('F2',)),
         (8.8, 17.6, "GIRAR A *COROA* ENROLA A MOLA. UMA", "LINGUETA NÃO DEIXA ELA VOLTAR.", ('F2',)),
         (17.8, 26.6, "DESENROLANDO, A MOLA GIRA O TAMBOR.", "E O TAMBOR TEM *DENTES*.", ('F2',)),
-        (26.8, 35.6, "CHEIA, ELA TOCA O RELÓGIO POR", "*36 A 72 HORAS*, CONFORME O MODELO.", ('F2',)),
+        (26.8, 35.6, "CHEIA, ELA FAZ O RELÓGIO ANDAR", "*36 A 72 HORAS*, CONFORME O MODELO.", ('F2',)),
     ],
     'engrenagens': [
         (0.5, 8.6, "O TAMBOR GIRA DEVAGAR E EMPURRA", "UMA FILA DE *RODAS*.", ('F2',)),
         (8.8, 17.6, "RODA GRANDE TOCA PINHÃO PEQUENO:", "A CADA PASSO, O GIRO *MULTIPLICA*.", ('F2',)),
-        (17.8, 26.6, "A *RODA DO CENTRO* DÁ 1 VOLTA", "POR HORA: É O PONTEIRO DOS MINUTOS.", ('F2',)),
+        (17.8, 26.6, "A *RODA DO CENTRO* DÁ 1 VOLTA", "POR HORA: LEVA O DOS MINUTOS.", ('F2',)),
         (26.8, 35.6, "A *QUARTA RODA* DÁ 1 VOLTA POR", "MINUTO: LEVA O DOS SEGUNDOS.", ('F2',)),
     ],
     'escape': [
         (0.5, 8.6, "O *ESCAPE* SOLTA A FORÇA DA MOLA", "AOS POUQUINHOS, NUM PASSO FIXO.", ('F4',)),
         (8.8, 17.6, "PARADA, UMA PEDRA DA ÂNCORA", "*TRAVA* UM DENTE DA RODA.", ('F3',)),
-        (17.8, 26.6, "O BALANÇO PASSA, PUXA O GARFO", "E *DESTRAVA* A RODA.", ('F3',)),
-        (26.8, 35.6, "O DENTE ESCORREGA NA PEDRA E", "EMPURRA O BALANÇO: É O *IMPULSO*.", ('F3',)),
+        (17.8, 26.6, "O PINO DO BALANÇO EMPURRA O GARFO", "E *DESTRAVA* A RODA.", ('F3',)),
+        (26.8, 35.6, "O DENTE ESCORREGA NA PEDRA; O GARFO", "EMPURRA O BALANÇO: É O *IMPULSO*.", ('F3',)),
         (35.8, 41.6, "A RODA *CAI* UM POUQUINHO E", "TRAVA NA OUTRA PEDRA.", ('F3',)),
         (41.8, 47.6, "ESSA BATIDA SECA É O *TIC-TAC*", "QUE A GENTE OUVE.", ('F4',)),
     ],
@@ -136,7 +136,7 @@ LEGENDAS = {
     'automatico': [
         (0.5, 8.6, "MUITOS RELÓGIOS SÃO *AUTOMÁTICOS*:", "DÃO CORDA SOZINHOS, NO PULSO.", ('F6',)),
         (8.8, 17.6, "UM PESO EM MEIA-LUA, O *ROTOR*, GIRA", "NUM EIXO QUANDO O BRAÇO MEXE.", ('F6',)),
-        (17.8, 26.6, "CADA BALANÇO DO ROTOR DÁ", "UM POUCO DE CORDA NA MOLA REAL.", ('F6',)),
+        (17.8, 26.6, "O VAIVÉM DO ROTOR DÁ, AOS POUCOS,", "CORDA NA MOLA REAL.", ('F6',)),
         (26.8, 35.6, "CHEIA, UMA *EMBREAGEM* DESLIZA E A", "MOLA NÃO PASSA DO PONTO.", ('F6',)),
     ],
     'precisao': [
@@ -146,7 +146,7 @@ LEGENDAS = {
         (26.8, 35.6, "UM RELÓGIO A *QUARTZO* COMUM ERRA", "CERCA DE *15 SEGUNDOS POR MÊS*.", ('F8', 'F2')),
     ],
     'historia': [
-        (0.5, 7.6, "OS PRIMEIROS RELÓGIOS DE BOLSO PODIAM", "ERRAR ATÉ *15 MINUTOS POR DIA*.", ('F2',)),
+        (0.5, 7.6, "OS PRIMEIROS RELÓGIOS DE BOLSO, MESMO", "OS BONS, ERRAVAM *15 MINUTOS POR DIA*.", ('F2',)),
         (7.8, 15.6, "POR VOLTA DE *1754*, THOMAS MUDGE", "INVENTOU O ESCAPE DE ÂNCORA.", ('F3',)),
         (15.8, 23.6, "DESDE O SÉCULO 19, ELE ESTÁ NA", "*GRANDE MAIORIA* DOS RELÓGIOS.", ('F4',)),
     ],

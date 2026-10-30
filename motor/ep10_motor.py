@@ -255,7 +255,7 @@ class Titulo(Voo):
 
 # ============================================================ 2 a pá é uma asa
 class Asa(Voo):
-    CX, CY, S = 130, 104, 2.0
+    CX, CY, S = 130, 98, 1.8
     T_LADO = 39.0
     INSET = (PX0, 8, 164, 92)
 
@@ -390,7 +390,7 @@ class Asa(Voo):
 
 # ============================================================ 3 o giro de verdade
 class Giro(Voo):
-    CX, CY, S = 130, 104, 2.0
+    CX, CY, S = 130, 98, 1.8
     T_LADO = 23.4
 
     def voltas(self, t):
@@ -492,32 +492,42 @@ class Prato(Cena):
         psi = self.fase(t)
         anc = CAB.desenhar(tela, self.CX, self.CY, self.S, psi, h=self.h(t), rb=5.0, destaque=dest, t=t)
         etiqueta(tela, 'CÂMERA LENTA', 8, 10, CIANO, 9)
-        # rótulos fixos de "gira / não gira"
+        # rótulos "gira / não gira" colados nos pratos
         if 6.0 <= t < 24.0:
             fx_, fy_ = anc['fixo']
-            tela.texto('NÃO GIRA', 18, fy_ + 6, ACO3, tam=9, contorno=PRETO)
-            gx_, gy_ = anc['giratorio']
-            tela.texto('GIRA', 18, gy_ - 10, LATAO, tam=9, contorno=PRETO)
-            arco_seta(tela, 60, gy_ - 6, 10, 3, 200, 340, LATAO, cab=4)
-        if t >= 6.0 and t < 12.0:
+            xe = self.CX - CAB.RF * self.S - 6
+            tela.texto('NÃO GIRA', xe - tela.largura_texto('NÃO GIRA', 9), fy_ + 2, ACO3, tam=9, contorno=PRETO)
+            if t >= 12.0:
+                gy_ = self.CY - (CAB.zc(self.h(t)) + .5) * self.S
+                tela.texto('GIRA', xe - 26, gy_ - 16, LATAO, tam=9, contorno=PRETO)
+                arco_seta(tela, xe - 14, gy_ - 2, 12, 4, 200, 340, LATAO, cab=4)
+        if 6.0 <= t < 12.0:
             x, y = anc['comando']
             tela.texto('COMANDOS', x + 14, y + 10, ACO3, tam=9, contorno=PRETO)
-        # ---- lista de peças com fio
+            tela.texto('DO PILOTO', x + 14, y + 20, ACO3, tam=9, contorno=PRETO)
+        # ---- a peça da vez em letra grande + a lista com fio
         fundo_painel(tela)
+        partes = nome.split(' ')
+        l1 = partes[0] if len(partes) > 1 and len(nome) > 12 else nome
+        l2 = ' '.join(partes[1:]) if l1 != nome else ''
+        u = ease((t - t0) / .3)
+        tit(tela, l1, 10 - int((1 - u) * 6), AMARELO, 17)
+        if l2: tit(tela, l2, 28 - int((1 - u) * 6), AMARELO, 17)
         for i, (n, an, de, tt) in enumerate(self.PARTES):
             if t < tt: continue
-            y = 12 + i * 22
+            y = 58 + i * 15
             atual = i == k_at
-            tela.texto(n, PX0, y, AMARELO if atual else ACO2, tam=17 if len(n) < 14 else 9, contorno=PRETO)
+            tela.texto(n, PX0 + 8, y, AMARELO if atual else ACO2, tam=9, contorno=PRETO)
+            tela.ret(PX0, y + 2, 4, 4, AMARELO if atual else ACO1)
             if atual and t - tt > .3:
                 ax, ay = anc[an]
-                tela.linha(PX0 - 4, y + 6, ax, ay, AMARELO)
+                tela.linha(PX0 - 4, y + 4, ax, ay, AMARELO)
                 tela.disco(ax, ay, 1.8, AMARELO)
-                tela.ret(PX0 - 6, y + 5, 3, 3, AMARELO)
+                tela.ret(PX0 - 6, y + 3, 3, 3, AMARELO)
         if t >= 30.0:
             th = CAB.passo(psi, self.h(t), 0, 0)
-            perfil_icone(tela, PX0 + 70, 178, 50, th)
-            tela.texto('PÁ AMARELA', PX0, 152, ACO3, tam=9, contorno=PRETO)
+            perfil_icone(tela, PX0 + 80, 182, 46, th)
+            tela.texto('PÁ AMARELA', PX0, 156, ACO3, tam=9, contorno=PRETO)
 
     def sons(self, fx):
         for _, _, _, tt in self.PARTES:
@@ -616,8 +626,9 @@ class Pairar(Voo):
             u = ease((t - .4) / .6)
             seta_forca(tela, hx, hy - 6, hx, hy - 6 - 42 * u, CIANO)
             seta_forca(tela, self.OX + dx, oy + 28, self.OX + dx, oy + 28 + 42 * u, VERMELHO)
-            if u > .8:
-                tela.texto('=', hx + 10, hy + 4, VERDE, tam=26, contorno=PRETO)
+            if u > .8 and not VERTICAL:
+                tela.texto('FORÇA', hx + 8, hy - 44, CIANO, tam=9, contorno=PRETO)
+                tela.texto('PESO', self.OX + dx + 8, oy + 62, VERMELHO, tam=9, contorno=PRETO)
         if VERTICAL: return
         dest = ('col', 'cic') if t >= 16.8 else ()
         painel_voo(tela, col, cic, 100 + math.sin(t * 2) * .6, 5, dest=dest)
@@ -635,7 +646,7 @@ class Pairar(Voo):
 
 # ============================================================ 7 cíclico
 class Ciclico(Voo):
-    CX, CY, S = 118, 102, 1.9
+    CX, CY, S = 118, 100, 1.8
     INSET = (204, 8, 94, 160)
     T_LADO, T_TOPO, T_VOLTA = 33.8, 45.0, 50.6
     INC = 6.0                                    # inclinação do prato com o cíclico todo (graus)
@@ -652,11 +663,6 @@ class Ciclico(Voo):
 
     def vel(self, t):   # px/s do chão passando
         return rampa(t, [(self.T_LADO, 0.0), (41.0, 120.0)])
-
-    def cic_topo(self, t):
-        """Cíclico na parte vista de cima: esquerda, trás, direita."""
-        u = t - self.T_TOPO
-        return rampa(u, [(0, (0)), (.01, 0)]) if False else None
 
     def desenhar(self, tela, t, tg):
         if t >= self.T_TOPO and t < self.T_VOLTA:
@@ -697,7 +703,7 @@ class Ciclico(Voo):
         tela.texto('FRENTE', cx - 18, 2, ACO3, tam=9, contorno=PRETO)
         if t >= 17.0:
             tela.texto('+ÂNGULO', cx - R - 12 if not VERTICAL else cx - R + 2, cy + 6, LARANJA, tam=9, contorno=PRETO)
-            tela.texto('-ÂNGULO', cx + R - 30, cy + 6, CIANO, tam=9, contorno=PRETO)
+            tela.texto('-ÂNGULO', cx + R - 44, cy + 6, CIANO, tam=9, contorno=PRETO)
         if t >= 22.6:
             u = ease((t - 22.6) / .8)
             arco_seta(tela, cx, cy, R * .55, R * .55, 180, 180 + 90 * u, AMARELO, cab=5)
@@ -845,8 +851,8 @@ class Torque(Cena):
         TOPO.rotor(tela, cx, cy, s, 0, self.fase(t))
         R = TOPO.R * s
         # o rotor gira para um lado (anti-horário)
-        arco_seta(tela, cx, cy, R + 8, R + 8, 100, 160, CIANO, cab=6)
-        tela.texto('ROTOR', cx - R - 6, cy - R + 2, CIANO, tam=9, contorno=PRETO)
+        arco_seta(tela, cx, cy, R + 8, R + 8, 10, 70, CIANO, cab=6)
+        tela.texto('ROTOR', cx + R - 4, cy - R + 4, CIANO, tam=9, contorno=PRETO)
         w = self.omega(t)
         if abs(w) > 5 and t < 23.5:
             # o corpo gira para o outro (horário)
@@ -1010,25 +1016,25 @@ class Dois(Cena):
         fundo_oficina(tela)
         ps = self.fase(t)
         # ---- coaxial
-        ox, oy, k = 84, 150, 1.05
+        ox, oy, k = 95, 146, 1.35
         rot = [dict(hub=(0, -27.0), R=40, psi=-ps + .7, giro=0), dict(hub=(0, -20.5), R=40, psi=ps, giro=0)]
         HELI.desenhar(tela, ox, oy, k, 0, t, rotores=rot, cauda_rotor=False, sombra_y=None)
         P = HELI.P_(ox, oy, k, 0)
         a1, a2 = P(0, -27), P(0, -20.5)
-        sentido(tela, a1[0], a1[1] - 2, 46, 8, False, LARANJA)
-        sentido(tela, a2[0], a2[1] + 4, 46, 8, True, CIANO)
+        sentido(tela, a1[0], a1[1] - 2, 58, 9, False, LARANJA)
+        sentido(tela, a2[0], a2[1] + 4, 58, 9, True, CIANO)
         tela.texto('COAXIAL', ox - 30, 186, BRANCO if t < 11.2 or t >= 22.2 else ACO3, tam=17, contorno=PRETO)
         # ---- tandem
-        tx, ty, tk = 236, 150, .95
+        tx, ty, tk = 238, 146, 1.05
         tandem(tela, tx, ty, tk, t, ps, -ps + 1.0, 0)
         f1, f2 = (tx + 22 * tk, ty - 20 * tk), (tx - 44 * tk, ty - 32 * tk)
-        sentido(tela, f1[0], f1[1] + 4, 32, 7, True, CIANO)
-        sentido(tela, f2[0], f2[1] + 4, 32, 7, False, LARANJA)
+        sentido(tela, f1[0], f1[1] + 4, 36, 7, True, CIANO)
+        sentido(tela, f2[0], f2[1] + 4, 36, 7, False, LARANJA)
         tela.texto('TANDEM', tx - 30, 186, BRANCO if 11.2 <= t < 22.2 or t < 5.8 else ACO3, tam=17, contorno=PRETO)
         if 5.8 <= t < 11.2 and int(t * 3) % 2 == 0:
-            tela.ret_vazado(ox - 70, 40, 128, 140, AMARELO)
+            tela.ret_vazado(ox - 90, 50, 150, 130, AMARELO)
         if 11.2 <= t < 16.4 and int(t * 3) % 2 == 0:
-            tela.ret_vazado(tx - 80, 40, 132, 140, AMARELO)
+            tela.ret_vazado(tx - 86, 50, 146, 130, AMARELO)
         etiqueta(tela, 'CÂMERA LENTA', 8, 10, CIANO, 9)
         # ---- painel
         fundo_painel(tela)
@@ -1112,13 +1118,12 @@ class Autorrotacao(Voo):
         sk = 176 - 3 * min(a, 30.0)
         gy = 176 if a < 30 else 176 + 3 * (a - 30)
         self.ceu.fundo(tela, a, t)
-        # nuvens que sobem enquanto ele desce
-        for hc, esc, sd in ((230.0, 1.1, 2), (130.0, 1.4, 5)):
-            yc = sk + (a - hc) * .9
-            if -30 < yc < PALCO_H + 30:
-                self.ceu.camada(tela, yc, xm * 1.2, esc=esc, densa=False, seed=sd)
         hy = self.ceu.horizonte(a)
         self.campo.desenhar(tela, hy, gy, xm, t, heliponto=None, vento=1.0 if a < 8 else 0.0, vento_x=self.OX)
+        # uma camada de nuvens soltas que sobe enquanto ele desce
+        yc = sk + (a - 210.0) * .8
+        if -30 < yc < PALCO_H + 30:
+            self.ceu.camada(tela, yc, xm * 1.2, esc=1.0, densa=False, seed=2)
         motor = t < self.T_PANE
         hx, hy_, oy = self.heli(tela, self.OX, sk, self.K, t, ang=self.ang(t), psi=self.fase(t),
                                 giro=self.fase.fn(t), disco=self.disco(t), ar=.9 if t < self.T_TOCA else .2,
@@ -1187,21 +1192,22 @@ class Resumo(Cena):
             tela.texto(l2, bx + 30, by2 + 24, AMARELO if atual else ACO3, tam=17, contorno=PRETO)
             cx, cy = bx + 150, by2 + 64
             if j == 0:
-                TOPO.rotor(tela, bx + 60, by2 + 66, .55, 0, ps)
+                TOPO.rotor(tela, bx + 64, by2 + 66, .62, 0, ps)
+                arco_seta(tela, bx + 64, by2 + 66, 32, 26, 20, 80, CIANO, cab=4)
+                perfil_icone(tela, bx + 168, by2 + 60, 40, 8, texto=False, ref=False)
                 for q in range(3):
-                    x = bx + 140 + q * 22
-                    yy = by2 + 50 + ((t * 30 + q * 9) % 30)
-                    seta_forca(tela, x, yy, x, yy + 8, CIANO, esp=2, cab=4)
-                perfil_icone(tela, bx + 190, by2 + 58, 30, 8, texto=False, ref=False)
+                    x = bx + 192 + q * 10
+                    yy = by2 + 66 + ((t * 20 + q * 7) % 16)
+                    seta_forca(tela, x, yy, x + 3, yy + 8, CIANO, esp=2, cab=4)
             elif j == 1:
                 hgt = 6 * math.sin(t * 1.5)
                 HELI.desenhar(tela, bx + 64, by2 + 62 - hgt, .5, 0, t, psi=ps * 20, giro=VOLTAS_S, giro_c=40, psi_c=t * 30)
                 CAB.desenhar(tela, bx + 168, by2 + 66, 5.5, ps, h=.5 + .4 * math.sin(t * 1.5), f=.08 * math.sin(t * .9),
                              rb=3.6)
             elif j == 2:
-                T = TOPO.corpo(tela, bx + 110, by2 + 48, .5, -90, t, sombra=False, giro_c=40, psi_c=t * 30)
-                TOPO.rotor(tela, bx + 110, by2 + 48, .5, -90, ps)
-                a0 = T(1.0, -61); a1 = T(1.0 + 16, -61)
+                T = TOPO.corpo(tela, bx + 150, by2 + 66, .62, -90, t, sombra=False, giro_c=40, psi_c=t * 30)
+                TOPO.rotor(tela, bx + 150, by2 + 66, .62, -90, ps)
+                a0 = T(1.0, -61); a1 = T(1.0 + 22, -61)
                 seta_forca(tela, *a0, *a1, AMARELO, esp=3, cab=5)
             else:
                 yy = by2 + 52 + ((t * 6) % 10)
