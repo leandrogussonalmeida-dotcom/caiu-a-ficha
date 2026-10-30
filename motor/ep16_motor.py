@@ -455,9 +455,9 @@ class Transistor(Cena):
         # rótulos com fio
         R = M.regioes()
         rot = [(7.8, "FONTE", R['fonte']), (8.8, "DRENO", R['dreno']), (9.8, "PORTA", (g[0] + 6 * M.s, M.y - 18 * M.s)),
-               (11.0, "ISOLANTE", R['oxido']), (12.2, "SILÍCIO", R['silicio'])]
+               (11.0, "ISOLANTE", M.P(142, -3)), (12.2, "SILÍCIO", R['silicio'])]
         posr = {"FONTE": (M.x + 4, M.y + 50 * M.s), "DRENO": (M.x + M.w - 34, M.y + 50 * M.s),
-                "PORTA": (g[0] + 30 * M.s, M.y - 40 * M.s), "ISOLANTE": (g[0] + 32 * M.s, M.y - 12 * M.s),
+                "PORTA": M.P(116, -70), "ISOLANTE": M.P(150, -52),
                 "SILÍCIO": (M.x + M.w / 2 - 20, M.y + M.h - 12)}
         if 7.8 <= t < 29.8:
             for a, nome, (ax, ay) in rot:
@@ -538,6 +538,7 @@ def inversor(tela, cx, vp, vo, t, yt=22, yb=186, yp=64, yn=144, yo=104, rot=True
 
 class Portas(Cena):
     VEL = 150.0
+    VEL2 = 300.0
 
     def preparar(self):
         # porta NÃO em transistores
@@ -559,8 +560,9 @@ class Portas(Cena):
             C2 = Circuito()
             C2.entrada('a', (lambda t0: lambda t: self.combo(t, t0)[0])(t0))
             C2.entrada('b', (lambda t0: lambda t: self.combo(t, t0)[1])(t0))
-            C2.porta('s', nome, [('a', fa.L / self.VEL), ('b', fb.L / self.VEL)], .15)
-            self.g[nome] = dict(t0=t0, fa=fa, fb=fb, fo=fo, C=C2, ent=ent, out=out)
+            C2.porta('s', nome, [('a', fa.L / self.VEL2), ('b', fb.L / self.VEL2)], .15)
+            lat = max(fa.L, fb.L) / self.VEL2 + .15 + fo.L / self.VEL2
+            self.g[nome] = dict(t0=t0, fa=fa, fb=fb, fo=fo, C=C2, ent=ent, out=out, lat=lat)
 
     def combo(self, t, t0):
         if t < t0: return (0, 0)
@@ -596,15 +598,15 @@ class Portas(Cena):
             nome = 'E' if t < 32.0 else 'OU'
             G = self.g[nome]
             C = G['C']
-            fr = G['fa'].desenhar(tela, C.no_fio('a', G['fa'].L / self.VEL, t), t, herois=False)
-            fr += G['fb'].desenhar(tela, C.no_fio('b', G['fb'].L / self.VEL, t), t, herois=False)
-            fr += G['fo'].desenhar(tela, C.no_fio('s', G['fo'].L / self.VEL, t), t, herois=False)
+            fr = G['fa'].desenhar(tela, C.no_fio('a', G['fa'].L / self.VEL2, t), t, herois=False)
+            fr += G['fb'].desenhar(tela, C.no_fio('b', G['fb'].L / self.VEL2, t), t, herois=False)
+            fr += G['fo'].desenhar(tela, C.no_fio('s', G['fo'].L / self.VEL2, t), t, herois=False)
             vs = C.val('s', t)
             porta(tela, nome, 120, 104, 2.2, saida=vs, destaque=vs == 1)
             for x, y in fr: bit_luz(tela, x, y, 1, 2.8)
             celula(tela, 16, 66, 18, 18, C.val('a', t), tam=9)
             celula(tela, 16, 126, 18, 18, C.val('b', t), tam=9)
-            so = C.val('s', t - G['fo'].L / self.VEL)
+            so = C.val('s', t - G['fo'].L / self.VEL2)
             celula(tela, 248, 92, 26, 26, so, tam=17, pulso=0)
             tela.texto("A", 6, 70, BRANCO, tam=9, contorno=PRETO)
             tela.texto("B", 6, 130, BRANCO, tam=9, contorno=PRETO)
@@ -612,11 +614,14 @@ class Portas(Cena):
             tela.texto("PORTA " + ("E (AND)" if nome == 'E' else "OU (OR)"), 96, 18, BRANCO, tam=17, contorno=PRETO)
             f = D.FUNCOES[nome]
             linhas = [[a, b, f([a, b])] for a in (0, 1) for b in (0, 1)]
-            k_at = self.nb(t) - self.nb(G['t0'] - 1e-3)
-            a_, b_ = self.combo(t - .9, G['t0']) if t - .9 >= G['t0'] else (0, 0)
-            atual = a_ * 2 + b_ if t - .9 >= G['t0'] else -1
-            nvis = max(0, (k_at - 1) // 2)
-            vistos = set(range(min(4, nvis))) | ({atual} if atual >= 0 else set())
+            ta = t - G['lat']
+            a_, b_ = self.combo(ta, G['t0'])
+            atual = a_ * 2 + b_ if ta >= G['t0'] else -1
+            vistos = set()
+            for j in range(5):
+                tj = ta - j * 1.5
+                if tj >= G['t0']:
+                    a2, b2 = self.combo(tj, G['t0']); vistos.add(a2 * 2 + b2)
         # painel: a tabela-verdade (calculada pela função da porta)
         self.ptit(tela, "TABELA-VERDADE")
         if not VERTICAL:
@@ -643,7 +648,7 @@ class Portas(Cena):
                 v = self.Cn.val('out', t - self.fo.L / self.VEL)
             else:
                 G = self.g['E' if t < 32 else 'OU']
-                v = G['C'].val('s', t - G['fo'].L / self.VEL)
+                v = G['C'].val('s', t - G['fo'].L / self.VEL2)
             if ant is not None and v != ant: self.nota(fx, t, 81 if v else 69, .07, .045)
             ant = v
 
@@ -833,7 +838,8 @@ class Soma4(Cena):
         ok = r == a + b and t >= 4.0
         cor = VERDE if ok else LARANJA
         centro_preso(tela, f"= {r}" + ("" if ok else " ?"), 133, 176, cor if t >= 4.0 else ACO2, tam=17, xmin=44, xmax=222)
-        tela.texto("CASA:  3   2   1   0", 66, 8, ACO2, tam=9, contorno=PRETO)
+        for i in range(4):
+            centro_preso(tela, f"CASA {i}", self.bx(i) + 17, 8, ACO2, xmin=0, xmax=298)
         self.vtxt(tela, f"{binario(a)} + {binario(b)}", AMARELO, y=192, tam=9)
         # painel
         self.ptit(tela, "SOMANDO 4 BITS")
@@ -883,30 +889,42 @@ class Relogio(Cena):
         on = self.clk(t)
         tela.disco(86, 30, 2.5, PRETO); tela.disco(86, 30, 1.8, VERDE if on else D.PCB0)
         # fio do relógio até o registrador
-        fc = Fio([(92, 41), (162, 41), (162, 112)])
+        fc = Fio([(92, 41), (168, 41), (168, 112)])
         fc.desenhar(tela, lambda u: self.clk(t - u * .12), t, r=2.6)
+        tela.texto("TIQUE", 100, 30, ACO3, tam=9, contorno=PRETO)
         # registrador de 6 bits
-        x0 = 108
+        x0 = 118
         for j in range(6):
             bit = (n >> (5 - j)) & 1
             pul = math.exp(-self.desde_batida(t) / .15)
-            celula(tela, x0 + j * 18, 114, 16, 18, bit, tam=9, pulso=pul if bit else 0)
-        tela.texto("REGISTRADOR", 120, 140, ACO3, tam=9, contorno=PRETO)
+            celula(tela, x0 + j * 17, 114, 15, 18, bit, tam=9, pulso=pul if bit else 0)
+        tela.texto("REGISTRADOR", 172, 102, ACO3, tam=9, contorno=PRETO)
         # +1: o somador que conta
-        bloco(tela, 54, 112, 88, 134, D.POR1, ACO4, D.POR0)
-        tela.texto("+1", 71, 118, AMARELO, tam=9, centro=True, contorno=PRETO)
-        volta = Fio([(160, 150), (160, 158), (70, 158), (70, 135)])
+        bloco(tela, 44, 112, 72, 134, D.POR1, ACO4, D.POR0)
+        tela.texto("+1", 58, 118, AMARELO, tam=9, centro=True, contorno=PRETO)
+        volta = Fio([(168, 133), (168, 148), (58, 148), (58, 135)])
         volta.desenhar(tela, lambda u: 1 if n else 0, t, herois=False, fluxo=False)
-        ida = Fio([(89, 123), (106, 123)])
+        ida = Fio([(73, 123), (116, 123)])
         ida.desenhar(tela, lambda u: 1, t, herois=False, fluxo=False)
         # o número viajando: sai do registrador, passa no +1 e espera o tique
-        u = clamp(self.desde_batida(t) / .4)
-        x, y = volta.ponto(u) if u < 1 else (80, 123)
+        u = clamp(self.desde_batida(t) / .45)
+        x, y = volta.ponto(u) if u < 1 else (95, 123)
         lbl = binario(n, 6) if u < 1 else binario(n + 1, 6)
-        if t >= 0:
-            w = tela.largura_texto(lbl, 9) + 6
-            painel(tela, x - w / 2, y - 6, w, 11, borda=CIANO, fundo=PRETO)
-            tela.texto(lbl, int(x - w / 2 + 3), int(y - 4), CIANO, tam=9)
+        w = tela.largura_texto(lbl, 9) + 6
+        painel(tela, x - w / 2, y - 6, w, 11, borda=CIANO, fundo=PRETO)
+        tela.texto(lbl, int(x - w / 2 + 3), int(y - 4), CIANO, tam=9)
+        # a lâmpada do tique, grande
+        if not VERTICAL:
+            pul = math.exp(-self.desde_batida(t) / .12)
+            tela.disco(250, 50, 20, PRETO)
+            tela.disco(250, 50, 18, AMARELO if pul > .3 else FUNDO3)
+            if pul > .3:
+                tela.disco(250, 50, 10, CHAMA0)
+                for k in range(12):
+                    a = k * math.pi / 6
+                    r = 22 + 6 * (1 - pul)
+                    tela.ret(250 + math.cos(a) * r, 50 + math.sin(a) * r, 2, 2, AMARELO)
+            centro_preso(tela, f"{self.nb(t)}", 250, 44, PRETO if pul > .3 else ACO3, tam=17, xmin=200, xmax=296)
         # a onda do relógio no tempo
         gx0, gx1 = (44, 218) if VERTICAL else (16, 290)
         gy0, gy1 = 168, 196
@@ -1300,8 +1318,10 @@ class Ciclo(Cena):
             self.ptxt(tela, str(self.est[i]['a']), 94, VERDE, 26, x=PX0 + 60)
             self.ptxt(tela, f"INSTRUÇÕES FEITAS: {self.est[i]['n']}", 126, ACO3)
             d = self.fim[i] - self.ini[i]
-            por_s = 1.0 / d
-            self.ptxt(tela, f"AQUI: {dec(por_s, 0 if por_s >= 1 else 2)} ETAPA(S) POR SEGUNDO", 144, ACO2)
+            if d > 1.01: txt = f"AQUI: 1 ETAPA A CADA {dec(d, 0)} S"
+            elif d > .99: txt = "AQUI: 1 ETAPA POR SEGUNDO"
+            else: txt = f"AQUI: {dec(1.0 / d, 0)} ETAPAS POR SEGUNDO"
+            self.ptxt(tela, txt, 144, ACO2)
             if t >= 40.0:
                 self.ptxt(tela, "NA VIDA REAL: BILHÕES", 160, AMARELO)
                 self.ptxt(tela, "DE TIQUES POR SEGUNDO", 171, AMARELO)
@@ -1523,7 +1543,7 @@ class Escala(Cena):
     def desenhar_1971(self, tela, t):
         # 2.250 transistores: uma grade de 50 x 45, um pixel aceso cada
         gx, gy = 20, 40
-        painel(tela, gx - 6, gy - 22, 112, 122, borda=VERDE)
+        painel(tela, gx - 6, gy - 22, 112, 126, borda=VERDE)
         tela.texto("1971", gx, gy - 16, VERDE, tam=9, contorno=PRETO)
         n = 0
         for r in range(45):
@@ -1535,7 +1555,7 @@ class Escala(Cena):
         tela.texto("2.250", gx, gy + 92, BRANCO, tam=9, contorno=PRETO)
         # hoje: a mesma área nem mostra
         hx = 150
-        painel(tela, hx - 6, gy - 22, 146, 122, borda=AMARELO)
+        painel(tela, hx - 6, gy - 22, 146, 126, borda=AMARELO)
         tela.texto("HOJE", hx, gy - 16, AMARELO, tam=9, contorno=PRETO)
         dither(tela, hx, gy, 134, 90, DIE3, DIE2)
         fase = int(t * 20)
@@ -1579,7 +1599,7 @@ class Luz(Cena):
         for c in range(cm + 1):
             xx = x0 + c * ppc
             tela.ret(xx, y, 1, 4 if c % 5 else 8, PRETO)
-            if c % 10 == 0:
+            if c % 10 == 0 and c < cm - 3:
                 tela.texto(f"{c}", int(xx - 2), y + 12, ACO3, tam=9, contorno=PRETO)
         tela.texto("CM", int(x0 + cm * ppc - 12), y + 12, ACO2, tam=9, contorno=PRETO)
         # o chip que manda o sinal
@@ -1604,7 +1624,8 @@ class Luz(Cena):
                 tela.texto(f"{m} TIQUE" + ("S" if m > 1 else ""), int(xm - 18), 46 - 12 - 26, AMARELO, tam=9,
                            contorno=PRETO) if False else None
             xm = x0 + cm_tique * ppc
-            centro_preso(tela, "1 TIQUE", xm, 76, AMARELO, xmin=2, xmax=x0 + cm * ppc + 4)
+            centro_preso(tela, "1 TIQUE", xm, 82, AMARELO, xmin=2, xmax=x0 + cm * ppc + 4)
+            tela.ret(xm, 70, 1, 10, AMARELO)
         # placa vista de cima: processador, memória e o alcance de 1 tique
         if not VERTICAL:
             bx, by = 24, 98
@@ -1662,10 +1683,9 @@ class Nucleos(Cena):
 
     def passos(self, t, j):
         """Etapas que o núcleo j já fez: os grandes 1 por batida, os pequenos 1 a cada 2."""
-        f = self.fase(t)
-        t_ini = (0.0, 7.8, 15.2)[f] if j > 0 or f > 0 else 0.0
+        t_ini = 0.0 if j == 0 else (7.8 if j < 4 else 15.2)
         n = max(0, self.nb(t) - self.nb(t_ini - 1e-3))
-        if f == 2 and j >= 4: n //= 2
+        if j >= 4: n //= 2
         return min(n, 200)
 
     def caixas(self, f):
@@ -1704,8 +1724,8 @@ class Nucleos(Cena):
                     celula(tela, cx + 18 + b * 9, cy + 14, 8, 9, bit, rotulo_txt=False)
                 tela.texto(f"A = {st['a']}", int(cx + 3), int(cy + 28), VERDE, tam=9, contorno=PRETO)
                 if ch >= 60:
-                    tela.texto(ETAPAS[st['etapa']], int(cx + 3), int(cy + 44), AMARELO, tam=9, contorno=PRETO)
-                    tela.texto(f"INSTRUÇÕES: {st['n']}", int(cx + 3), int(cy + ch - 12), ACO3, tam=9, contorno=PRETO)
+                    tela.texto(ETAPAS[st['etapa']], int(cx + 3), int(cy + 40), AMARELO, tam=9, contorno=PRETO)
+                    tela.texto(f"INSTRUÇÕES: {st['n']}", int(cx + 3), int(cy + ch - 10), ACO3, tam=9, contorno=PRETO)
             else:
                 for b in range(4):
                     bit = (st['pc'] >> (3 - b)) & 1
@@ -1751,7 +1771,7 @@ class Nucleos(Cena):
 # ============================================================ 14 resumo
 class Resumo(Cena):
     XS = [34, 92, 150, 208, 266]
-    NOMES = ["TRANSISTOR", "PORTA", "SOMADOR", "PROCESSADOR", "CHIP"]
+    NOMES = ["TRANSISTOR", "PORTA", "SOMADOR", "NÚCLEO", "CHIP"]
 
     def preparar(self):
         self.f = Fio([(14, 70), (286, 70)])

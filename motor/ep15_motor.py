@@ -402,7 +402,7 @@ def etapa_de_u(u):
 class Mapa(Cena):
     K, VX = 0, 147
 
-    def u(self, t): return ease(fase(t, .5, 18.0) ** .8)
+    def u(self, t): return suave(fase(t, .5, 18.0))
 
     def desenhar(self, tela, t, tg):
         grade(tela, 0, 294)
@@ -1410,7 +1410,7 @@ class Grosso(Cena):
         garfada(tela, x, y, 1.2, t, 'resto')
         marca(tela, x, y, 'O QUE SOBROU', lado=1, dy=-22 if y > 60 else 18)
         self.rot(tela, 'INTESTINO GROSSO', 92, 96, PAN2, alvo=(64, 110))
-        self.rot(tela, 'DELGADO (ATRÁS)', 104, 64, INT2)
+        self.rot(tela, 'DELGADO (ATRÁS)', 106, 160, INT2)
         if t > 12.2: self.rot(tela, 'ÁGUA E SAIS', 196, 92, MISTURA2, alvo=(236, 100))
         est = 'FIBRA E ÁGUA' if t < 12.2 else 'MAIS FIRME'
         self.painel(tela, t, linhas=[('TAMANHO', 'UNS 1,8 M', PAN2), ('TEMPO AQUI (EM GERAL)', '12 H A 2 DIAS', AMARELO)],
