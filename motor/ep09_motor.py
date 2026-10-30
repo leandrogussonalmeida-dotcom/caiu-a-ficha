@@ -387,26 +387,28 @@ class Mola(Cena):
         q = self.carga(t)
         ae, at = self.ang_eixo(t), self.ang_tambor(t)
         tambor(tela, cx, cy, R, at, ae + at, q)
-        # catraca por cima (fantasma: só o contorno, para ver a mola embaixo)
-        Rc = R * .62
+        # catraca por cima, em fantasma (dá para ver a mola embaixo)
+        Rc = R * .42
         a_c = ae + at
-        M, x0, y0 = D.mascara_roda(cx, cy, Rc, self.DENTES_CATRACA, a_c, perfil='catraca', furo=None, oco=Rc - 5)
-        pintar(tela, M, x0, y0, 'aco', cx=cx, cy=cy, R=Rc)
+        D.fantasma(tela, lambda: roda(tela, cx, cy, Rc, self.DENTES_CATRACA, a_c, 'aco', perfil='catraca',
+                                      h=4, aro=3, raios=3, cubo=7, furo=None))
+        tela.disco(cx, cy, 5, PRETO); Mk = Mascara(); Mk.ret(cx - 3, cy - 3, 7, 7); pintar_tela(tela, Mk, 'aco')
         # lingueta (trava a catraca): pula a cada dente quando se dá corda
         u = ((a_c / (360.0 / self.DENTES_CATRACA)) % 1.0)
-        pa = math.radians(-115)
-        px_, py_ = cx + math.cos(pa) * (Rc + 9), cy + math.sin(pa) * (Rc + 9)
-        tip = math.radians(-115 + 9)
-        lev = 2.5 * (1 - u) if self.T_CORDA[0] <= t < self.T_CORDA[1] else 0
+        girando = self.T_CORDA[0] <= t < self.T_CORDA[1]
+        lev = 3.0 * u if girando else 0
+        pa = math.radians(-150)
+        px_, py_ = cx + math.cos(pa) * (Rc + 16), cy + math.sin(pa) * (Rc + 16)
+        tip = math.radians(-128)
         tx, ty = cx + math.cos(tip) * (Rc - 2 + lev), cy + math.sin(tip) * (Rc - 2 + lev)
-        Mk = Mascara(); linha_grossa(Mk, px_ - 14, py_ - 2, tx, ty, 4, 1); Mk.disco(px_ - 14, py_ - 2, 3.5)
+        Mk = Mascara(); linha_grossa(Mk, px_, py_, tx, ty, 4, 1); Mk.disco(px_, py_, 4)
         pintar_tela(tela, Mk, 'aco')
-        tela.px(px_ - 14, py_ - 2, PRETO)
+        tela.px(px_, py_, PRETO)
         # roda de coroa + haste + coroa (à direita)
-        a = math.radians(-20)
-        rx, ry = cx + math.cos(a) * (Rc + 11), cy + math.sin(a) * (Rc + 11)
+        a = math.radians(-12)
+        rx, ry = cx + math.cos(a) * (Rc + 12), cy + math.sin(a) * (Rc + 12)
         Mk = Mascara(); linha_grossa(Mk, rx, ry, 262, ry, 5, 1); pintar_tela(tela, Mk, 'aco')
-        roda(tela, rx, ry, 11, 14, -a_c * Rc / 11, 'aco', furo=None)
+        roda(tela, rx, ry, 12, 14, -a_c * Rc / 12, 'aco', furo=None)
         Mk = Mascara(); Mk.ret(258, ry - 12, 16, 24); pintar_tela(tela, Mk, 'aco')
         girando = self.T_CORDA[0] <= t < self.T_CORDA[1]
         for k in range(6):
@@ -425,8 +427,9 @@ class Mola(Cena):
         etiqueta(tela, 'MOLA REAL', 8, 16, cx - 46, cy - 40, AMARELO)
         etiqueta(tela, 'TAMBOR', 8, 190, cx - 64, cy + 50, AMARELO)
         etiqueta(tela, 'COROA', 246, 150, 266, ry + 12, AMARELO)
+        etiqueta(tela, 'CATRACA', 196, 190, cx + 20, cy + 28, ACO3)
         if t > 9:
-            etiqueta(tela, 'LINGUETA', 150, 6, int(px_ - 10), int(py_), CIANO)
+            etiqueta(tela, 'LINGUETA', 150, 6, int(px_), int(py_) - 3, CIANO)
         # painel
         titulo_painel(tela, 'ENERGIA', 'NA MOLA', BRANCO, VERDE, y=10)
         painel(tela, PX0 - 6, 54, 172, 40, borda=VERDE)
@@ -467,15 +470,13 @@ class Engrenagens(Cena):
     X = 60.0
 
     def preparar(self):
-        self.Bc, self.RB = (40, 168), 58
-        a = math.radians(-50)
-        self.Cc = (self.Bc[0] + math.cos(a) * (self.RB + 6), self.Bc[1] + math.sin(a) * (self.RB + 6)); self.RC = 34
-        a = math.radians(-8)
-        self.Tc = (self.Cc[0] + math.cos(a) * (self.RC + 5), self.Cc[1] + math.sin(a) * (self.RC + 5)); self.RT = 28
-        a = math.radians(40)
-        self.Fc = (self.Tc[0] + math.cos(a) * (self.RT + 4), self.Tc[1] + math.sin(a) * (self.RT + 4)); self.RF = 25
-        a = math.radians(-35)
-        self.Ec = (self.Fc[0] + math.cos(a) * (self.RF + 3), self.Fc[1] + math.sin(a) * (self.RF + 3)); self.RE = 16
+        def apos(p, ang, d):
+            return (p[0] + math.cos(math.radians(ang)) * d, p[1] + math.sin(math.radians(ang)) * d)
+        self.Bc, self.RB = (62, 148), 54
+        self.Cc, self.RC = apos(self.Bc, -50, 54 + 8), 44
+        self.Tc, self.RT = apos(self.Cc, 8, 44 + 7), 36
+        self.Fc, self.RF = apos(self.Tc, -48, 36 + 6), 30
+        self.Ec, self.RE = apos(self.Fc, 30, 30 + 5), 20
 
     def angs(self, t):
         seg = t * self.X                           # segundos do relógio
@@ -494,20 +495,22 @@ class Engrenagens(Cena):
     def desenhar(self, tela, t, tg):
         fundo_bancada(tela)
         tb, ce, te, qu, es = self.angs(t)
-        roda(tela, *self.Bc, self.RB, 80, tb, 'latao', furo=None)
-        tela.disco(*self.Bc, self.RB * .6, OLEO0)
-        tela.disco(*self.Bc, 6, ACO2)
-        roda(tela, *self.Cc, self.RC, 80, ce, 'latao', aro=4, raios=4, furo=None)
-        pinhao(tela, *self.Cc, 6, 10, ce)
-        roda(tela, *self.Tc, self.RT, 75, te, 'latao', aro=3.5, raios=4, furo=None)
-        pinhao(tela, *self.Tc, 5, 10, te)
-        roda(tela, *self.Fc, self.RF, 80, qu, 'latao', aro=3.5, raios=4, furo=None)
-        pinhao(tela, *self.Fc, 4.5, 8, qu)
+        # quem empurra fica por cima; o pinhão de cada roda aparece por cima de tudo
+        roda(tela, *self.Bc, self.RB, 90, tb, 'latao', furo=None)
+        tela.disco(*self.Bc, self.RB * .8, OLEO0)
+        tela.anel(*self.Bc, self.RB * .8, LATAO, .6)
+        roda(tela, *self.Bc, self.RB * .55, 30, tb, 'aco', perfil='catraca', aro=3, raios=3, cubo=8, furo=None)
         borrao(tela, *self.Ec, self.RE, 'aco')
-        pinhao(tela, *self.Ec, 3.5, 7, es)
+        roda(tela, *self.Fc, self.RF, 80, qu, 'latao', aro=3.5, raios=4, furo=None)
+        roda(tela, *self.Tc, self.RT, 75, te, 'latao', aro=3.5, raios=4, furo=None)
+        roda(tela, *self.Cc, self.RC, 80, ce, 'latao', aro=4, raios=4, furo=None)
+        pinhao(tela, *self.Cc, 8, 10, ce)
+        pinhao(tela, *self.Tc, 7, 10, te)
+        pinhao(tela, *self.Fc, 6, 8, qu)
+        pinhao(tela, *self.Ec, 5, 7, es)
         # ponteiros presos nos eixos: minutos na roda do centro, segundos na quarta
         foco = self.foco(t)
-        for (c, ang, comp, cor, larg) in ((self.Cc, -ce, 44, ACO4, 3), (self.Fc, -qu, 34, VERMELHO, 1)):
+        for (c, ang, comp, cor, larg) in ((self.Cc, -ce, 50, ACO4, 3), (self.Fc, -qu, 40, VERMELHO, 1)):
             a = math.radians(ang - 90)
             x1, y1 = c[0] + math.cos(a) * comp, c[1] + math.sin(a) * comp
             if larg > 1:
@@ -530,13 +533,13 @@ class Engrenagens(Cena):
         if alvo and int(t * 3) % 2 == 0:
             tela.anel(alvo[0][0], alvo[0][1], alvo[1] + 3, AMARELO, .5)
         if VERTICAL:
-            hud_vertical(tela, [("60X MAIS RÁPIDO", CIANO)], x=120)
+            hud_vertical(tela, [("60X MAIS RÁPIDO", CIANO)], x=130)
             return
-        etiqueta(tela, 'TAMBOR', 104, 196, self.Bc[0] + 30, self.Bc[1] - 30, AMARELO)
-        etiqueta(tela, 'CENTRO', 16, 18, self.Cc[0] - 20, self.Cc[1] - 22, AMARELO if foco == 1 else ACO3)
-        etiqueta(tela, 'TERCEIRA', 112, 12, self.Tc[0], self.Tc[1] - 26, AMARELO if foco == 2 else ACO3)
-        etiqueta(tela, 'QUARTA', 230, 160, self.Fc[0] + 14, self.Fc[1] + 18, AMARELO if foco == 3 else ACO3)
-        etiqueta(tela, 'ESCAPE', 244, 30, self.Ec[0] + 8, self.Ec[1] - 12, ACO3)
+        etiqueta(tela, 'TAMBOR', 140, 192, int(self.Bc[0] + 44), int(self.Bc[1] + 24), AMARELO if foco == 0 else ACO3)
+        etiqueta(tela, 'CENTRO', 8, 12, int(self.Cc[0] - 26), int(self.Cc[1] - 22), AMARELO if foco == 1 else ACO3)
+        etiqueta(tela, 'TERCEIRA', 232, 170, int(self.Tc[0] + 20), int(self.Tc[1] + 26), AMARELO if foco == 2 else ACO3)
+        etiqueta(tela, 'QUARTA', 120, 8, int(self.Fc[0] - 16), int(self.Fc[1] - 22), AMARELO if foco == 3 else ACO3)
+        etiqueta(tela, 'ESCAPE', 244, 12, int(self.Ec[0] + 10), int(self.Ec[1] - 14), ACO3)
         titulo_painel(tela, 'VOLTAS', 'DE CADA RODA', BRANCO, ACO3, y=8)
         linhas = [('CENTRO', '1 POR HORA', 1), ('TERCEIRA', '8 POR HORA', 2), ('QUARTA', '1 POR MINUTO', 3)]
         for j, (a, b, k) in enumerate(linhas):
@@ -592,6 +595,7 @@ class EscapeCena(Cena):
         E.desenhar_rolete(tela, b, brilhar=.9 if fase in ('IMPULSO', 'DESTRAVA') else 0)
         fr = tau - math.floor(tau)
         if fr < .03:
+            fase = 'TRAVADA'
             kk = round(tau)
             ang = E.e_sup if kk % 2 == 0 else E.e_inf
             x, y = E._polar(E.Rw, ang + 1)
@@ -679,9 +683,14 @@ class Balanco(Cena):
             if tt < 0: continue
             bb = E.beta(self.tau(tt))
             y = gy0 + gh // 2 - bb / E.A * (gh // 2 - 3)
-            cor = AMARELO if abs(bb) < E.betaw else CIANO
-            tela.px(gx0 + i, y, cor)
-            if cor == AMARELO: tela.px(gx0 + i, y + 1, AMARELO)
+            tela.px(gx0 + i, y, CIANO)
+        k0 = math.ceil(self.tau(max(0.0, t - janela)) - E.tau0)
+        k1 = math.floor(self.tau(t) - E.tau0)
+        for k in range(k0, k1 + 1):
+            tc = (k + E.tau0) * self.spb                 # passagem pelo centro (beta = 0)
+            i = int((tc - (t - janela)) / janela * gw)
+            if 0 <= i < gw:
+                tela.ret(gx0 + i - 1, gy0 + gh // 2 - 6, 3, 13, AMARELO)
         tela.ret(gx0 + gw - 1, gy0, 1, gh, BRANCO)
         tela.texto('SOLTO', PX0, 128, CIANO, tam=9, contorno=PRETO)
         tela.texto('TOCA O GARFO', PX0 + 54, 128, AMARELO, tam=9, contorno=PRETO)
@@ -906,12 +915,12 @@ class Automatico(Cena):
         Mk.disco(150, 104, 12)
         a = math.radians(rel)
         linha_grossa(Mk, 150, 104, 150 + math.cos(a) * 40, 104 + math.sin(a) * 40, 10, 1)
-        pintar_tela(tela, Mk, 'latao', cx=150, cy=104, R=96)
+        pintar_tela(tela, Mk, 'rotor', cx=150, cy=104, R=96)
         # gravação simples no rotor (riscos concêntricos), sem marca
         for r in (60, 74):
             for k in range(0, 61, 2):
                 b = math.radians(rel - 90 + k * 3)
-                tela.px(150 + math.cos(b) * r, 104 + math.sin(b) * r, LATAO)
+                tela.px(150 + math.cos(b) * r, 104 + math.sin(b) * r, OLEO0)
         rubi(tela, 150, 104, 3.2)
         cheia = q >= .999
         if VERTICAL:
@@ -919,22 +928,21 @@ class Automatico(Cena):
             return
         etiqueta(tela, 'ROTOR', 8, 14, int(150 + math.cos(math.radians(rel)) * 70), int(104 + math.sin(math.radians(rel)) * 70), AMARELO)
         # braço com o relógio, balançando (no alto do painel)
-        bx, by = PX0 + 20, 58
-        al = self.em(self.al, t)
-        for sx, sy, cor in ((0, 0, LATAO),):
-            pass
-        ex, ey = bx + math.cos(al) * 110, by + math.sin(al) * 110 * .35
-        Mk = Mascara(); linha_grossa(Mk, bx, by, ex, ey, 14, 1); pintar_tela(tela, Mk, 'couro', cx=bx + 50, cy=by, R=60)
-        Mk = Mascara(); linha_grossa(Mk, bx, by, bx + math.cos(al) * 70, by + math.sin(al) * 70 * .35, 18, 1)
-        pintar_tela(tela, Mk, 'azul', cx=bx + 30, cy=by, R=40)
-        wx, wy = bx + math.cos(al) * 88, by + math.sin(al) * 88 * .35
-        tela.disco(wx, wy, 9, PRETO); tela.disco(wx, wy, 8, ACO2); tela.disco(wx, wy, 6, FUNDO2)
-        tela.linha(wx, wy, wx + math.cos(math.radians(rel)) * 5, wy + math.sin(math.radians(rel)) * 5, AMARELO)
+        bx, by = PX0 + 6, 52
+        al = self.em(self.al, t) * .8
+        P = lambda d: (bx + math.cos(al) * d, by + math.sin(al) * d * .5)
+        Mk = Mascara(); linha_grossa(Mk, *P(0), *P(70), 15, 1); pintar_tela(tela, Mk, 'azul', cx=bx + 30, cy=by, R=40)
+        Mk = Mascara(); linha_grossa(Mk, *P(66), *P(128), 11, 1); Mk.disco(*P(134), 8)
+        pintar_tela(tela, Mk, 'pele', cx=bx + 100, cy=by, R=40)
+        wx, wy = P(104)
+        Mk = Mascara(); linha_grossa(Mk, *P(100), *P(108), 13, 1); pintar_tela(tela, Mk, 'couro')
+        tela.disco(wx, wy, 6, PRETO); tela.disco(wx, wy, 5, ACO2); tela.disco(wx, wy, 3.5, FUNDO2)
+        tela.linha(wx, wy, wx + math.cos(math.radians(rel)) * 3, wy + math.sin(math.radians(rel)) * 3, AMARELO)
         tela.texto('O BRAÇO MEXE', PX0, 8, ACO3, tam=9, contorno=PRETO)
         painel(tela, PX0 - 6, 96, 172, 56, borda=AMARELO if cheia else VERDE)
         tela.texto('MOLA REAL', PX0 + 2, 102, ACO3, tam=9, contorno=PRETO)
-        barra(tela, PX0 + 2, 116, 120, 10, q, AMARELO if cheia else VERDE)
-        tela.texto(f"{int(round(q * 100))}%", PX0 + 162, 114, BRANCO, tam=17, centro='d', contorno=PRETO)
+        barra(tela, PX0 + 2, 116, 108, 10, q, AMARELO if cheia else VERDE)
+        tela.texto(f"{int(round(q * 100))}%", PX0 + 160, 114, BRANCO, tam=17, centro='d', contorno=PRETO)
         if cheia:
             tela.texto('CHEIA: A EMBREAGEM', PX0 + 2, 130, AMARELO, tam=9, contorno=PRETO)
             tela.texto('DESLIZA', PX0 + 2, 140, AMARELO, tam=9, contorno=PRETO)

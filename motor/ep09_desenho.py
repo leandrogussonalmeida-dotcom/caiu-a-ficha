@@ -40,6 +40,8 @@ MAT = {
     'azul':  (PRETO, FUNDO3, MISTURA, CIANO, MISTURA2),
     'couro': (PRETO, OLEO0, BRASA, LATAO, OLEO1),
     'mostr': (PRETO, FUNDO, FUNDO2, FUNDO3, TRACO),
+    'rotor': (OLEO0, OLEO0, LATAO, OLEO1, AMARELO),
+    'pele':  (PRETO, BRASA, OLEO1, LATAO, CHAMA1),
 }
 
 
@@ -221,6 +223,16 @@ def borrao(tela, cx, cy, R, mat='latao'):
         cor = np.where((xx + yy) % 2 == 0, ca, cb)
         tela.buf[yy[m], xx[m]] = cor[m]
     tela.disco(cx, cy, max(2, R * .22), c[2])
+
+
+def fantasma(tela, desenho):
+    """Desenha por cima em xadrez: metade dos pixels some e deixa ver o que
+    está embaixo (peça que fica na frente, como uma ponte de vidro)."""
+    antes = tela.buf.copy()
+    desenho()
+    yy, xx = np.mgrid[0:tela.h, 0:tela.w]
+    m = (xx + yy) % 2 == 0
+    tela.buf[m] = antes[m]
 
 
 # ================================================================ espiral (linha de mola)
@@ -573,12 +585,12 @@ def tambor(tela, cx, cy, R, ang_tambor, ang_eixo, carga, catraca_ang=None):
     corda, as voltas se apertam no eixo; sem corda, encostam na parede."""
     roda(tela, cx, cy, R, 60, ang_tambor, 'latao', h=max(1.6, R * .06), furo=None)
     Rin = R * .86
-    tela.disco(cx, cy, Rin, PRETO)
-    dither(tela, int(cx - Rin), int(cy - Rin), int(2 * Rin), int(2 * Rin), FUNDO2, FUNDO)  # fundo do tambor
-    yy, xx = np.mgrid[0:tela.h, 0:tela.w]
-    fora = (xx - cx) ** 2 + (yy - cy) ** 2 > Rin * Rin
-    anel = fora & ((xx - cx) ** 2 + (yy - cy) ** 2 <= (R * .9) ** 2)
-    tela.buf[anel & (yy < PALCO_H)] = LATAO
+    yy, xx = np.mgrid[0:PALCO_H, 0:tela.w]
+    d2 = (xx - cx) ** 2 + (yy - cy) ** 2
+    dentro = d2 <= Rin * Rin
+    sub = tela.buf[:PALCO_H]
+    sub[dentro] = np.where(((xx + yy) % 2 == 0) & ((xx - cx) + (yy - cy) < 0), FUNDO2, FUNDO)[dentro]   # fundo do tambor
+    sub[(d2 > Rin * Rin) & (d2 <= (R * .9) ** 2)] = LATAO
     tela.anel(cx, cy, Rin, PRETO, .6)
     # a mola: N voltas, raio de cada ponto entre "apertada no eixo" e "na parede"
     N = 9
@@ -745,12 +757,12 @@ class Movimento:
         self.cx, self.cy, self.R = cx, cy, R
         s = R / 100.0
         self.s = s
-        self.E = Escape(cx - 40 * s, cy + 46 * s, 14 * s, Lf=18 * s, rp=5 * s, Rb=32 * s, A=220)
+        self.E = Escape(cx + 10 * s, cy + 50 * s, 14 * s, Lf=18 * s, rp=5 * s, Rb=28 * s, A=220)
         self.C = (cx, cy)
         Es = (self.E.ex, self.E.ey)
-        a = math.radians(-62)
+        a = math.radians(-165)
         self.F = (Es[0] + 23.5 * s * math.cos(a), Es[1] + 23.5 * s * math.sin(a))
-        self.T = _intersec(self.C, 35 * s, self.F, 28 * s, 1)
+        self.T = _intersec(self.C, 35 * s, self.F, 28 * s, -1)
         b = math.radians(-40)
         self.B0 = (cx + 48 * s * math.cos(b), cy + 48 * s * math.sin(b))
         self.Rc, self.Rt, self.Rf, self.Rbar = 30 * s, 24 * s, 20 * s, 41 * s
@@ -767,7 +779,7 @@ class Movimento:
         s, E = self.s, self.E
         return dict(tambor=(self.B0[0] + 20 * s, self.B0[1] - 30 * s), rodas=(self.T[0], self.T[1] - 18 * s),
                     escape=(E.ex - 10 * s, E.ey + 6 * s), ancora=(E.px + 1 * s, E.py - 8 * s),
-                    balanco=(E.bx + 22 * s, E.by + 22 * s), rubis=self.C,
+                    balanco=(E.bx - 2 * s, E.by + 26 * s), rubis=self.C,
                     centro=self.C, terceira=self.T, quarta=self.F)
 
     def desenhar(self, tela, tau, vis=None, desl=None, brilho_rubis=0.0, rubis_acesos=None, placa_on=True, so_placa=False):
@@ -827,7 +839,7 @@ class Movimento:
             E.desenhar_rolete(tela, A['beta'])
             # ponte do balanço (galo) por cima, sem esconder a espiral
             Mk = Mascara()
-            linha_grossa(Mk, E.bx, E.by, E.bx + 44 * s, E.by + 26 * s, 6 * s, 1)
+            linha_grossa(Mk, E.bx, E.by, E.bx + 36 * s, E.by - 22 * s, 6 * s, 1)
             Mk.disco(E.bx, E.by, 5 * s)
             pintar_tela(tela, Mk, 'aco', cx=E.bx, cy=E.by, R=20 * s)
             E.bx -= ox; E.by -= oy

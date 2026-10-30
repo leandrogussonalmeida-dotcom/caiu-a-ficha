@@ -95,7 +95,7 @@ CAPITULOS = [
 LEGENDAS = {
     'gancho': [
         (0.5, 5.8, "VOCÊ APERTA *ENVIAR*.", "A MENSAGEM SAI DE SÃO PAULO...", ()),
-        (6.0, 11.6, "...E CRUZA O OCEANO ATÉ LISBOA EM", "UNS *42 MILÉSIMOS DE SEGUNDO*.", ('F21',)),
+        (6.0, 11.6, "...E CRUZA O OCEANO ATÉ LISBOA EM", "NO MÍNIMO *42 MILÉSIMOS DE SEGUNDO*.", ('F21',)),
     ],
     'enviar': [
         (0.8, 7.0, "UM CELULAR COMUM, UM APLICATIVO", "DE MENSAGENS. UM *OI* E UMA FOTO.", ()),
@@ -112,7 +112,7 @@ LEGENDAS = {
     ],
     'cadeado': [
         (0.5, 7.4, "ETAPA 2: ANTES DE SAIR, OS BITS", "SÃO *EMBARALHADOS* COM UMA CHAVE.", ('F3',)),
-        (7.6, 14.6, "É A *CRIPTOGRAFIA DE PONTA A*", "*PONTA*.", ('F3',)),
+        (7.6, 14.6, "É A *CRIPTOGRAFIA*", "*DE PONTA A PONTA*.", ('F3',)),
         (14.8, 21.8, "SÓ O SEU CELULAR E O DE QUEM", "RECEBE CONSEGUEM *LER*.", ('F3',)),
         (22.0, 28.8, "NO CAMINHO, QUEM PEGAR OS BITS", "SÓ VÊ UMA BAGUNÇA DE ZEROS E UNS.", ('F3',)),
         (29.0, 35.6, "NEM A EMPRESA DO APLICATIVO", "CONSEGUE *ABRIR*.", ('F3',)),
@@ -127,7 +127,7 @@ LEGENDAS = {
     'radio': [
         (0.5, 7.4, "ETAPA 4: O CELULAR TRANSFORMA", "OS BITS EM *ONDAS DE RÁDIO*.", ('F7', 'F8')),
         (7.6, 14.6, "ELAS VÃO ATÉ A *ANTENA* MAIS", "PERTO, NO ALTO DE UMA TORRE.", ('F7',)),
-        (14.8, 21.8, "NA CIDADE, AS ANTENAS FICAM", "A *400 A 800 METROS* UMAS DAS OUTRAS.", ('F7',)),
+        (14.8, 21.8, "NA CIDADE, AS ANTENAS PODEM FICAR", "*DE 400 A 800 METROS* UMAS DAS OUTRAS.", ('F7',)),
         (22.0, 29.6, "E O RÁDIO VIAJA NA VELOCIDADE", "DA LUZ: *300.000 KM POR SEGUNDO*.", ('F8', 'F9')),
     ],
     'fibra': [
@@ -141,7 +141,7 @@ LEGENDAS = {
         (0.5, 7.4, "ETAPA 6: A REDE DA OPERADORA", "É FEITA DE *ROTEADORES*.", ('F19',)),
         (7.6, 14.6, "CADA ROTEADOR LÊ O ENDEREÇO", "E ESCOLHE O *PRÓXIMO TRECHO*.", ('F19',)),
         (14.8, 21.8, "OUTROS PACOTES DA FOTO PODEM IR", "POR *OUTROS CAMINHOS*.", ('F4',)),
-        (22.0, 28.4, "SÃO PAULO ATÉ FORTALEZA: *2.360 KM*", "EM LINHA RETA. UNS 12 MS.", ('F13', 'F21')),
+        (22.0, 28.4, "DE SÃO PAULO A FORTALEZA: *2.360 KM*", "EM LINHA RETA. UNS 12 MS.", ('F13', 'F21')),
         (28.6, 32.8, "EM FORTALEZA, O CABO", "*ENTRA NO MAR*.", ('F14',)),
     ],
     'oceano': [
@@ -156,13 +156,13 @@ LEGENDAS = {
     'servidor': [
         (0.5, 7.4, "ETAPA 8: O PACOTE CHEGA A UM", "*DATA CENTER*, PRÉDIO DE COMPUTADORES.", ('F20',)),
         (7.6, 14.6, "LÁ ESTÁ O *SERVIDOR* DO APLICATIVO.", "NESTE EXEMPLO, PERTO DE LISBOA.", ('F16',)),
-        (14.8, 21.8, "ELE LÊ O CABEÇALHO: SABE PARA", "QUEM É A MENSAGEM...", ('F4',)),
+        (14.8, 21.8, "ELE LÊ O *ENVELOPE*: SABE PARA", "QUEM É A MENSAGEM...", ('F4',)),
         (22.0, 28.4, "...MAS NÃO LÊ A MENSAGEM:", "ELA CONTINUA *TRANCADA*.", ('F3',)),
-        (28.6, 32.8, "E MANDA O PACOTE ADIANTE.", "", ()),
+        (28.6, 32.8, "E A REENVIA EM *NOVOS PACOTES*.", "", ()),
     ],
     'chegada': [
         (0.5, 7.4, "ETAPA 9: FIBRA ATÉ A ANTENA E", "RÁDIO ATÉ O *OUTRO CELULAR*.", ('F7', 'F12')),
-        (7.6, 14.6, "OS PACOTES DA FOTO CHEGAM", "*FORA DE ORDEM*.", ('F4',)),
+        (7.6, 14.6, "ÀS VEZES, OS PACOTES DA FOTO", "CHEGAM *FORA DE ORDEM*.", ('F4',)),
         (14.8, 21.8, "O CELULAR USA OS NÚMEROS", "PARA *MONTAR* TUDO DE NOVO.", ('F4', 'F17')),
         (22.0, 28.8, "FALTOU UM? ELE AVISA, E", "O PACOTE É *MANDADO DE NOVO*.", ('F17',)),
         (29.0, 35.6, "AGORA A MENSAGEM ESTÁ INTEIRA.", "MAS AINDA *TRANCADA*.", ('F3',)),
@@ -176,14 +176,14 @@ LEGENDAS = {
     'conta': [
         (0.5, 7.4, "A VIAGEM INTEIRA, EM LINHA RETA:", "UNS *8.350 KM*.", ('F21',)),
         (7.6, 14.6, "SÓ VIAJANDO PELO AR E PELA FIBRA:", "UNS *42 MILÉSIMOS DE SEGUNDO*.", ('F21',)),
-        (14.8, 21.8, "NA VIDA REAL É UM POUCO MAIS: O CABO", "FAZ CURVAS E CADA PARADA SOMA.", ('F9', 'F22')),
+        (14.8, 21.8, "NA VIDA REAL DEMORA MAIS: O CABO", "FAZ CURVAS E CADA PARADA SOMA.", ('F9',)),
         (22.0, 28.8, "PARA COMPARAR: UM PISCAR DE OLHOS", "DURA *100 A 150 MS*.", ('F23',)),
         (29.0, 35.6, "E O OCEANO, IDA E VOLTA:", "*MENOS DE 60 MS*.", ('F14',)),
     ],
     'resumo': [
         (0.5, 7.4, "1 LETRAS VIRAM BITS. 2 OS BITS SÃO", "TRANCADOS. 3 VIRAM *PACOTES*.", ('F1', 'F3', 'F4')),
         (7.6, 14.6, "4 RÁDIO ATÉ A TORRE. 5 E 6 FIBRA,", "DE ROTEADOR EM ROTEADOR.", ('F7', 'F19')),
-        (14.8, 21.8, "7 O CABO NO FUNDO DO MAR.", "8 O SERVIDOR, SEM LER NADA.", ('F15', 'F3')),
+        (14.8, 21.8, "7 O CABO NO FUNDO DO MAR.", "8 O SERVIDOR, SEM LER O *CONTEÚDO*.", ('F15', 'F3')),
         (22.0, 29.6, "9 OUTRO CELULAR MONTA, DESTRANCA", "E MOSTRA: *OI!*", ('F4', 'F3')),
     ],
 }
@@ -240,7 +240,7 @@ Simplificado de propósito
 - A foto de 300 KB é um exemplo. Hoje os celulares usam Unicode (UTF-8), que para letras simples dá os mesmos números do ASCII; letras com acento ocupam 2 bytes.
 - "Aceso = 1, apagado = 0" é a ideia básica; as redes de verdade usam jeitos mais elaborados de pôr bits na luz e no rádio.
 - A criptografia aparece como um cadeado e uma chave. Na prática são cálculos com chaves de cada aparelho. O servidor não lê o conteúdo, mas vê para quem a mensagem vai.
-- Quem tem 4G ou 5G no celular fala com a antena por rádio; mostramos uma torre só de cada lado.
+- O celular (4G, 5G) fala com a antena por rádio; mostramos uma torre só de cada lado.
 - Os tiques de entregue e lida são genéricos; cada aplicativo mostra de um jeito.
 
 Fontes
