@@ -577,7 +577,7 @@ class Amostras(Cena):
             centro_preso(tela, sinal(n16), x, yy - 14 if v >= 0 else yy + 6, AMARELO, xmin=GX,
                          xmax=(GX + 178) if VERTICAL else GX + GW)
         if self.nyq(t) and t >= 31.0:
-            centro_preso(tela, "2 AMOSTRAS POR VAIVÉM", 150, GY + GH + 10, LARANJA, xmin=10, xmax=296)
+            centro_preso(tela, "MAIS DE 2 AMOSTRAS POR VAIVÉM", 150, GY + GH + 10, LARANJA, xmin=10, xmax=296)
         elif not VERTICAL:
             tela.texto("TEMPO", GX + GW - tela.largura_texto("TEMPO", 9), GY + GH + 8, ACO2, tam=9, contorno=PRETO)
             if t >= 7.8:
@@ -602,7 +602,7 @@ class Amostras(Cena):
                 tela.texto(f"Nº {k + 1}", PX0, y, ACO1, tam=9, contorno=PRETO)
                 tela.texto(sinal(n16), PX0 + 60, y, cor, tam=9, contorno=PRETO)
         if self.nyq(t) and not VERTICAL:
-            self.ptit(tela, "O LIMITE", 78)
+            self.ptit(tela, "LIMITE TEÓRICO", 78)
             self.ptxt(tela, "44.100 / 2 =", 94, ACO3)
             self.ptxt(tela, "22.050 HZ", 106, LARANJA, 17)
             self.ptxt(tela, "OUVIMOS ATÉ UNS", 134, ACO3)

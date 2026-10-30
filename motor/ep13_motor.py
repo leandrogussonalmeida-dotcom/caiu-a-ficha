@@ -29,7 +29,7 @@ from longo import (W, H, PALCO_H, ease, suave, dither, poligono, linha_grossa, t
 import ep13_desenho as D
 from ep13_desenho import (P, MotorCC, MotorBL, Mascara, pintar, pintar_tela, pintar_pol, pintar_ret, pintar_disco,
                           pintar_setor, brilho, fio, rotulo, barra, seta, seta_arco, fio_corte, fundo_oficina,
-                          ima_barra, linhas_dipolo, tracejar, bussola, pilha, fio_eletrico, ventoinha, maquina,
+                          ima_barra, linhas_dipolo, linhas_ima, tracejar, bussola, pilha, fio_eletrico, ventoinha, maquina,
                           carro, grade, escurecer, COR_FASE)
 import ritmo_marca as RM
 import idioma as I
@@ -151,7 +151,6 @@ def hud(tela, voltas, rpm, y=150, nota=None, cor=AMARELO):
     tela.texto(milhar(max(0, voltas)), PX0 + 74, y + 3, cor, tam=17, centro='d', contorno=PRETO)
     tela.texto('RPM', PX0 + 90, y + 6, ACO3, tam=9, contorno=PRETO)
     tela.texto(milhar(round(abs(rpm))), PX0 + 162, y + 3, BRANCO, tam=17, centro='d', contorno=PRETO)
-    tela.texto('VOLTAS POR MINUTO', PX0 + 90, y + 24, ACO1, tam=9) if False else None
     tela.texto('NO DESENHO' if nota is None else nota, PX0 + 2, y + 26, ACO1, tam=9)
 
 
@@ -242,14 +241,9 @@ class Gancho(Cena):
             barra(tela, PX0 + 2, 82, 120, 10, .85 * u, VERDE)
             tela.ret(PX0 + 2 + int(120 * .97 * u), 81, 1, 12, AMARELO)
             tela.texto('85% A 97%', PX0 + 2, 98, VERDE, tam=9, contorno=PRETO)
-            tela.texto('INDUÇÃO, CARGA TOTAL', PX0 + 64, 98, ACO2, tam=9) if False else None
         hud(tela, voltas, rpm, y=150, nota='VELOCIDADE DO DESENHO' if not rapido else 'MOTOR DE 2 POLOS A 60 HZ')
 
     def sons(self, fx):
-        k0 = 0
-        for i in range(1, 2000):
-            # instantes em que fase cruza inteiros (bobina liga)
-            pass
         ts = np.arange(0, 6.0, .002)
         ps = np.array([self.fase(t) for t in ts])
         idx = np.nonzero(np.diff(np.floor(ps)) > 0)[0]
@@ -298,7 +292,8 @@ class Titulo(Cena):
 # ============================================================ ímãs
 class Imas(Cena):
     def preparar(self):
-        self.linhas1 = linhas_dipolo(140, 100, 0, [30, 44, 60, 80], (35, 12))
+        self.linhas1 = linhas_ima(140, 100, 0, 35, n=4)
+        self.linhas2 = linhas_ima(125, 100, 0, 70, n=4, passo_a=10, passo_b=12)
         # ímã no eixo (22,6 s em diante): começa quase do avesso e se alinha
         self.T_PIV = 22.6
         self.piv = pendulo(lambda t: 0.0, self.dur - self.T_PIV + .1, 150.0, k=9.0, c=1.1)
@@ -359,6 +354,10 @@ class Imas(Cena):
                 seta(tela, xb, 76, xb - 22, 76, AMARELO, cab=4, esp=2)
                 seta(tela, ax, 76, ax + 22, 76, AMARELO, cab=4, esp=2)
             if atrai and gap1 - gap0 <= 3:
+                for pts in self.linhas2:
+                    tracejar(tela, pts, t, FUNDO3, CIANO)
+                ima_barra(tela, ax, 100, 70, 24, 0)
+                ima_barra(tela, xb, 100, 70, 24, ang_b)
                 brilho(tela, gap0, 100, 14, AMARELO, max(0, 1 - (t - 10.6) * 1.5))
             if not atrai and t > 16.4:
                 d = gap1 - gap0
@@ -537,7 +536,6 @@ class Bobina(Cena):
             u = ease((t - self.T_NUCLEO) / 1.2)
             nx = -150 + (x0 - 6 + 150) * u
             pintar_ret(tela, nx, cy - 14, (x1 - x0) + 12, 28, 'ferro')
-            if u >= 1: brilho(tela, x1 + 8, cy, 12, CIANO, .4 * forca)
         if s:
             for k in (-1, 0, 1):
                 yy = cy + k * 9
@@ -707,7 +705,7 @@ class DcMotor(Cena):
             hud_vertical(tela, [(('COM COMUTADOR' if com else 'SEM INVERTER'), AMARELO if com else VERMELHO),
                                 (f"VOLTAS {max(0, int((a - 180) / 360))}", BRANCO)])
             return
-        etiqueta(tela, 'FORÇA', 236, 30, CX + 50, CY - 20, AMARELO)
+        if self.M.ponta_forca: etiqueta(tela, 'FORÇA', 238, 30, *self.M.ponta_forca, AMARELO)
         titulo_painel(tela, 'COM COMUTADOR' if com else 'SEM INVERTER', None, AMARELO if com else VERMELHO, y=8)
         painel(tela, PX0 - 6, 30, 172, 52, borda=TRACO)
         tela.texto('LADO A DA BOBINA', PX0 + 2, 36, ACO3, tam=9, contorno=PRETO)
@@ -809,10 +807,9 @@ class Escovas(Cena):
         if t < self.T_BL:
             a = 90 + 700 * t
             s = MotorCC.sinal_A(a)
-            vis = {'estator', 'rotor', 'eixo', 'comutador', 'pilha'}
-            sai = 0.0
-            if t < self.T_SAI: vis.add('escovas')
-            self.M.desenhar(tela, t, a, s, vis=vis | ({'escovas'} if t < self.T_SAI else set()), forca=False, polos=False)
+            vis = {'estator', 'rotor', 'eixo', 'comutador'}
+            if t < self.T_SAI: vis |= {'escovas', 'pilha'}
+            self.M.desenhar(tela, t, a, s if t < self.T_SAI else 0, vis=vis, forca=False, polos=False)
             # faísca/poeira de carvão nas escovas
             if t < self.T_SAI:
                 for k in range(6):
@@ -850,20 +847,21 @@ class Escovas(Cena):
             # lupa: a escova raspando no anel
             painel(tela, PX0 - 6, 30, 172, 82, borda=TRACO)
             desg = min(1.0, t / self.T_SAI)
-            cx, cy = PX0 + 80, 104
-            Mk = Mascara()
-            Mk.disco(cx, cy + 30, 44)
-            Mk.buf[:32] = False; Mk.buf[110:] = False
-            Mk.buf[:, :PX0 - 4] = False; Mk.buf[:, PX0 + 164:] = False
-            pintar_tela(tela, Mk, 'cobre')
-            for k in range(8):
-                x = PX0 + ((k * 22 - t * 160) % 176) - 4
-                if PX0 - 2 < x < PX0 + 160: tela.ret(x, 76, 2, 8, OLEO0)
-            hb = int(30 * (1 - .45 * desg)) if t < self.T_SAI else 0
+            cx = PX0 + 80
+            ys = 92                                     # topo do anel (lupa)
+            pintar_ret(tela, PX0 - 3, ys, 166, 16, 'cobre')
+            for k in range(9):                          # vãos do comutador passando
+                x = PX0 + ((k * 20 - t * 140) % 180) - 6
+                if PX0 - 2 < x < PX0 + 158: tela.ret(x, ys + 1, 2, 14, OLEO0)
+            hb = int(26 * (1 - .45 * desg)) if t < self.T_SAI else 0
             if hb:
-                pintar_ret(tela, cx - 10, 72 - hb, 20, hb, 'carvao')
-                for k in range(3):
-                    tela.px(cx - 12 - k * 3 + (t * 37 % 3), 72 - 2 - k, ACO1)
+                tela.ret(cx - 1, 60, 3, ys - hb - 60, ACO1)          # mola
+                for yy in range(62, ys - hb, 3): tela.ret(cx - 4, yy, 9, 1, ACO2)
+                pintar_ret(tela, cx - 10, ys - hb, 20, hb, 'carvao')
+                for k in range(5):                      # pó de carvão saindo
+                    u = (t * 1.7 + k * .21) % 1.0
+                    tela.px(cx + 12 + u * 30, ys - 2 - u * 10 + k, ACO1 if k % 2 else TRACO)
+                brilho(tela, cx, ys, 8, AMARELO, .5 + .5 * math.sin(t * 40))
             tela.texto('DESGASTE', PX0 + 2, 36, ACO3, tam=9, contorno=PRETO)
             barra(tela, PX0 + 2, 48, 70, 7, .45 * desg if t < self.T_SAI else 0, VERMELHO)
             painel(tela, PX0 - 6, 120, 172, 64, borda=VERDE if t >= self.T_SAI else TRACO)
@@ -939,8 +937,8 @@ class Brushless(Cena):
         if VERTICAL:
             hud_vertical(tela, [(f"BOBINA {'ABC'[k % 3]}" if k >= 0 else 'PARADO', COR_FASE['ABC'[k % 3]] if k >= 0 else ACO2)])
             return
-        if t > 1.5:
-            etiqueta(tela, 'CAMPO', 236, 20, CX + 3, CY - 26 if k % 3 == 0 else CY, CIANO) if False else None
+        if t > 1.5 and k >= 0:
+            etiqueta(tela, 'CAMPO', 236, 176, *P(CX, CY, 24, 90 + 120 * k), CIANO)
         if t >= 26.8:
             etiqueta(tela, 'SENSOR', 244, 30, *P(CX, CY, 40, 60), VERDE)
         titulo_painel(tela, 'CONTROLADOR', None, BRANCO, y=8)
@@ -953,7 +951,7 @@ class Brushless(Cena):
             tela.ret_vazado(x, 48, 44, 26, COR_FASE[nome])
             tela.texto(nome, x + 22, 52, PRETO if on else COR_FASE[nome], tam=17, centro=True)
         if k >= 0:
-            seq = ''.join('ABC'[q % 3] for q in range(max(0, k - 7), k + 1))
+            seq = ' '.join('ABC'[q % 3] for q in range(max(0, k - 5), k + 1))
             tela.texto(seq, PX0 + 2, 78, ACO2, tam=9, contorno=PRETO)
             tela.texto('<- AGORA', PX0 + 6 + tela.largura_texto(seq, 9), 78, AMARELO, tam=9, contorno=PRETO)
         painel(tela, PX0 - 6, 98, 172, 42, borda=VERDE if aceso else TRACO)
@@ -1100,7 +1098,6 @@ class Casa(Cena):
                 x, yy = P(PX0 + 14, y + 15, 9, a + q * 60); tela.px(x, yy, PRETO)
             tela.texto('1 MARCHA,', PX0 + 48, y + 5, AMARELO, tam=9, contorno=PRETO)
             tela.texto('SEM EMBREAGEM', PX0 + 48, y + 17, BRANCO, tam=9, contorno=PRETO)
-        hud(tela, voltas, 0, y=150, nota='O MOTOR GIRA:') if False else None
         painel(tela, PX0 - 6, 152, 172, 30, borda=TRACO)
         tela.texto('VOLTAS DO ROTOR', PX0 + 2, 158, ACO3, tam=9, contorno=PRETO)
         tela.texto(milhar(voltas), PX0 + 162, 160, AMARELO, tam=17, centro='d', contorno=PRETO)
@@ -1118,20 +1115,21 @@ class Eficiencia(Cena):
     def desenhar(self, tela, t, tg):
         fundo_oficina(tela)
         gx, ex, y0 = 24, 176, 44
-        if not VERTICAL or True:
+        if VERTICAL and t < 15.8: gx = ex              # no Short, as duas grades se revezam no recorte
+        if not (VERTICAL and t >= 15.8):
             grade(tela, gx, y0, 30, 0, t, .5)
         if t >= 15.8:
             grade(tela, ex, y0, 87, 4, t, 15.9)
-        rotulo(tela, 'GASOLINA', gx + 54, 18, LARANJA, 17, centro=True)
+        if not (VERTICAL and t >= 15.8): rotulo(tela, 'GASOLINA', gx + 54, 18, LARANJA, 17, centro=True)
         if t >= 15.8: rotulo(tela, 'ELÉTRICO', ex + 54, 18, VERDE, 17, centro=True)
-        if t >= 7.8:
+        if t >= 7.8 and not (VERTICAL and t >= 15.8):
             rotulo(tela, 'CERCA DE 30%', gx + 54, 160, VERDE, 9, centro=True)
             rotulo(tela, 'VIRA MOVIMENTO', gx + 54, 172, ACO3, 9, centro=True)
         if t >= 17.6:
             rotulo(tela, '87% A 91%', ex + 54, 160, VERDE, 9, centro=True)
             rotulo(tela, 'COM A FRENAGEM', ex + 54, 172, ACO3, 9, centro=True)
         if VERTICAL:
-            hud_vertical(tela, [('ENERGIA QUE VIRA MOVIMENTO', AMARELO)], x=260)
+            hud_vertical(tela, [('ENERGIA QUE VIRA MOVIMENTO', AMARELO)], x=231)
             return
         titulo_painel(tela, 'PARA ONDE VAI', 'A ENERGIA', BRANCO, AMARELO, y=8)
         itens = ((VERDE, 'MOVIMENTO'), (CIANO, 'FAIXA (87-91%)'), (VERMELHO, 'PERDAS (CALOR)'))
@@ -1251,13 +1249,24 @@ class Historia(Cena):
             if t >= ta - .5: k = j
         u = t - self.MARCOS[k][2]
         if k == 0:
-            s = 1 if (u % 3.0) > 1.0 else 0
-            tela.ret(136, 20, 8, 140, OLEO0); tela.ret(138, 20, 4, 140, OLEO1 if not s else CHAMA1)
-            alvo = 90 if not s else 0
-            a = alvo + (90 - alvo) * math.exp(-max(0, (u % 3.0) - 1.0) * 3) * math.cos(((u % 3.0) - 1.0) * 8) if s else 90 - 30 * math.exp(-(u % 3.0) * 3)
-            pintar_ret(tela, 152, 122, 60, 30, 'acoesc')
-            bussola(tela, 182, 110, 18, a)
-            if s: seta(tela, 132, 150, 132, 30, AMARELO, cab=4)
+            # visto de cima: o fio passa POR CIMA da bússola, de sul para norte;
+            # com corrente, a agulha vira para o oeste (para a esquerda)
+            s = 1 if (u % 4.0) > 1.2 else 0
+            pintar_ret(tela, 96, 52, 88, 88, 'acoesc')
+            if s:
+                tt = (u % 4.0) - 1.2
+                a = 140 + 50 * math.exp(-tt * 2.5) * math.cos(tt * 9)
+            else:
+                a = 90 + 50 * math.exp(-(u % 4.0) * 2.5) * math.cos((u % 4.0) * 9) if u > 4 else 90
+            bussola(tela, 140, 96, 34, a)
+            tela.texto('N', 140, 40, BRANCO, tam=9, centro=True, contorno=PRETO)
+            linha_grossa(tela, 140, 14, 140, 176, 6, PRETO)
+            linha_grossa(tela, 140, 14, 140, 176, 4, OLEO1 if not s else CHAMA1)
+            if s:
+                for q in range(4):
+                    y = 176 - ((u * 60 + q * 40) % 160)
+                    tela.ret(139, y, 3, 3, AMARELO)
+                seta(tela, 154, 160, 154, 120, AMARELO, cab=3)
         elif k == 1:
             # rotação de Faraday: o fio gira em volta do ímã num copo
             pintar_pol(tela, [(96, 120), (184, 120), (176, 160), (104, 160)], 'vidro')
@@ -1385,10 +1394,9 @@ class Trifasico(Cena):
         if t >= self.T_VET and t < self.T_ACEL:
             tela.texto('SOMA: SEMPRE DO MESMO TAMANHO', PX0, 130, CIANO, tam=9, contorno=PRETO)
         elif t >= self.T_ACEL and not real:
-            tela.texto('MAIS RÁPIDO: 2, DEPOIS 4 POR BATIDA', PX0, 130, AMARELO, tam=9, contorno=PRETO) if False else \
-                tela.texto('ACELERANDO NO RITMO', PX0, 130, AMARELO, tam=9, contorno=PRETO)
+            tela.texto('ACELERANDO NO RITMO', PX0, 130, AMARELO, tam=9, contorno=PRETO)
         elif real:
-            tela.texto('2 POLOS: 3.600 RPM', PX0, 130, AMARELO, tam=9, contorno=PRETO) if t >= 31.8 else None
+            tela.texto('2 POLOS: 3.600 RPM', PX0, 130, AMARELO, tam=9, contorno=PRETO)
         hud(tela, int((rho - 75) // 360), rpm, y=146, nota='TOMADA: 60 HZ' if real else 'NO RITMO DA MÚSICA')
 
     def sons(self, fx):

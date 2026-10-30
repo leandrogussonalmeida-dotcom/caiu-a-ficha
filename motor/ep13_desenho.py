@@ -306,6 +306,27 @@ def linhas_dipolo(cx, cy, ang, Ls, meia, n=90):
     return out
 
 
+def linhas_ima(cx, cy, ang, meia, n=4, passo_a=11, passo_b=13, b0=6):
+    """Linhas de campo de um ímã em barra: saem da ponta NORTE, dão a volta
+    por cima (e por baixo) e entram na ponta SUL. Meias elipses em volta do
+    centro, a primeira encostada nas pontas."""
+    ux, uy = math.cos(math.radians(ang)), -math.sin(math.radians(ang))
+    vx, vy = -uy, ux
+    out = []
+    for j in range(n):
+        a = meia + 3 + passo_a * j
+        b = b0 + 8 + passo_b * j
+        for lado in (1, -1):
+            pts = []
+            if j > 0: pts.append((cx + ux * meia, cy + uy * meia))          # sai da ponta
+            for q in range(0, 181, 5):
+                u, v = a * math.cos(math.radians(q)), lado * b * math.sin(math.radians(q))
+                pts.append((cx + ux * u + vx * v, cy + uy * u + vy * v))
+            if j > 0: pts.append((cx - ux * meia, cy - uy * meia))
+            out.append(pts)
+    return out
+
+
 def tracejar(tela, pts, t, cor=FUNDO3, cor2=CIANO, vel=14.0, passo=10.0, forca=1.0):
     """Linha de campo pontilhada com pontos claros andando no sentido do campo."""
     s = 0.0
@@ -377,6 +398,13 @@ def fio_eletrico(tela, pts, t, ativo=True, sentido=1, cor=OLEO1):
                 if 0 <= y < PALCO_H - 1: tela.ret(x - .5, y - .5, 2, 2, AMARELO)
             k += 1.0
         s += L
+
+
+def vertical():
+    """True durante os cortes verticais (o longo_short liga ep13_motor.VERTICAL)."""
+    import sys
+    m = sys.modules.get('ep13_motor') or sys.modules.get('__main__')
+    return bool(getattr(m, 'VERTICAL', False))
 
 
 # ================================================================ motor de corrente contínua (em corte)
@@ -451,7 +479,7 @@ class MotorCC:
         # ---- pilha e ligações (atrás do rotor? não: na frente, como fiação)
         top = (cx, cy - self.rc - 9)
         bot = (cx, cy + self.rc + 9)
-        if 'pilha' in vis:
+        if 'pilha' in vis and not vertical():
             dx, dy = d('pilha')
             on = pilha_on and (dx, dy) == (0, 0)
             mais, menos = pilha(tela, 14 + dx, 72 + dy, 18, 64, True, .3 if on else 0)

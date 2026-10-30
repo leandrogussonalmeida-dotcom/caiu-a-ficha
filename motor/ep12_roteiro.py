@@ -118,8 +118,8 @@ LEGENDAS = {
         (7.8, 14.8, "MEDE-SE A ONDA MUITAS VEZES POR", "SEGUNDO. CADA MEDIDA: UMA *AMOSTRA*.", ('F5',)),
         (15.2, 22.2, "NO CD: *44.100 AMOSTRAS* POR", "SEGUNDO, EM CADA CANAL.", ('F5',)),
         (22.6, 29.6, "NO ÁUDIO E NO VÍDEO PROFISSIONAL,", "O PADRÃO É *48.000*.", ('F6',)),
-        (30.0, 36.6, "COM 44.100 POR SEGUNDO, O CD", "GUARDA SONS ATÉ *22.050 HZ*...", ('F5',)),
-        (37.0, 41.6, "...ACIMA DOS *20.000 HZ*", "QUE A GENTE OUVE.", ('F3',)),
+        (30.0, 36.6, "NA TEORIA, O CD VAI ATÉ *22.050 HZ*.", "NA PRÁTICA, ATÉ UNS *20.000 HZ*...", ('F5',)),
+        (37.0, 41.6, "...O LIMITE DO *OUVIDO*", "HUMANO, MAIS OU MENOS.", ('F3',)),
     ],
     'bits': [
         (0.5, 7.4, "CADA AMOSTRA É UM NÚMERO INTEIRO", "DE *16 BITS*: 16 ZEROS OU UNS.", ('F5',)),
@@ -144,7 +144,7 @@ LEGENDAS = {
         (15.2, 22.2, "NA FENDA FICA A *BOBINA MÓVEL*:", "UM FIO ENROLADO NUM TUBO.", ('F8',)),
         (22.6, 29.6, "A BOBINA É COLADA NO *CONE*.", "É ELE QUE EMPURRA O AR.", ('F8', 'F9')),
         (30.0, 37.0, "A *ARANHA*, DE TECIDO ONDULADO,", "PUXA O CONE DE VOLTA AO LUGAR.", ('F8',)),
-        (37.4, 44.4, "A *BORDA* FLEXÍVEL PRENDE A BEIRA", "DO CONE E O MANTÉM NO CENTRO.", ('F8',)),
+        (37.4, 44.4, "A *BORDA* (SUSPENSÃO) PRENDE A BEIRA", "DO CONE E O MANTÉM NO CENTRO.", ('F8',)),
         (44.8, 52.2, "A *CARCAÇA* SEGURA TUDO.", "DOIS *FIOS* TRAZEM O SINAL.", ('F8',)),
     ],
     'empurra': [
@@ -218,7 +218,7 @@ Simplificado de propósito
 - Os números do bumbo são os da conta do bumbo lo-fi da trilha antes da mixagem (antes do volume e do master); os números de amostra que passam no gancho são da trilha do próprio capítulo.
 - A escadinha do DAC está desenhada com poucos degraus, bem largos; na vida real são 44.100 ou 48.000 degraus por segundo.
 - Os valores de 50 a 2.000 Hz (woofer) e 2.000 a 20.000 Hz (tweeter) são faixas típicas; cada modelo tem a sua.
-- "Uns {milhoes} milhões de números": duração do vídeo x 48.000 amostras por segundo x 2 canais, no áudio que sai do código, antes da compressão do YouTube.
+- "Uns {milhoes} milhões de números": duração do vídeo x 48.000 amostras por segundo x 2 canais, no áudio que sai do código, no áudio que sai do código (WAV de 16 bits), antes da compressão em AAC do arquivo de vídeo.
 
 Fontes
 {fontes}

@@ -251,7 +251,7 @@ Fontes
 # ---------------------------------------------------------------- Shorts (cortes verticais)
 # x = coluna da tela larga onde começa o recorte de 180 px. O motor em corte
 # fica centrado em x 140 (estator 60..220); o motor sem escovas, em 140; as
-# grades da eficiência, 20..290 (o corte pega a do carro elétrico).
+# grades da eficiência: no Short as duas se revezam em x 176..286.
 PREFIXO = 'ep13-motor-eletrico'
 CORTES = [
     dict(id='c1', de=('dcmotor', 0.0), ate=('dcmotor', 36.0), x=50, gancho=['POR QUE', 'ELE GIRA?'],
@@ -269,7 +269,7 @@ CORTES = [
     dict(id='c5', de=('orsted', 0.0), ate=('orsted', 24.0), x=50, gancho=['A BÚSSOLA', 'SE MEXEU'],
          titulo='1820: a descoberta que levou ao motor elétrico 🧭',
          descricao='Oersted viu a agulha de uma bússola se mexer perto de um fio com corrente. A corrente cria um campo magnético em volta do fio; invertendo a corrente, as agulhas viram.'),
-    dict(id='c6', de=('eficiencia', 0.0), ate=('eficiencia', 30.0), x=170, gancho=['30% CONTRA', '90%'],
+    dict(id='c6', de=('eficiencia', 0.0), ate=('eficiencia', 30.0), x=141, gancho=['30% CONTRA', '90%'],
          titulo='Carro elétrico x carro a gasolina: quem aproveita a energia? 🔋',
          descricao='Segundo o Departamento de Energia dos EUA, um carro elétrico típico é 87% a 91% eficiente (contando a frenagem regenerativa), contra cerca de 30% do carro a gasolina.'),
 ]
