@@ -216,8 +216,9 @@ Fontes
 
 # ---------------------------------------------------------------- Shorts (cortes verticais)
 # x = coluna da tela larga onde começa o recorte de 180 px. Nos cortes, o
-# cilindro é desenhado compacto (passo 26 px) de x 62 a 240; a caixa da
-# fechadura ocupa 52..256 e o trinco visto de cima 60..240.
+# cilindro é desenhado compacto (passo 26 px) de x 62 a 240 (no `batida`, 78..256,
+# para o esmeril caber); a caixa da fechadura com o batente ocupa 76..264 e o
+# trinco visto de cima 60..240.
 PREFIXO = 'ep17-fechadura'
 CORTES = [
     dict(id='c1', de=('certa', 0.0), ate=('certa', 36.0), x=60, gancho=['A CHAVE', 'POR DENTRO'],
@@ -229,7 +230,7 @@ CORTES = [
     dict(id='c3', de=('errada', 0.0), ate=('errada', 30.0), x=60, gancho=['CHAVE', 'ERRADA'],
          titulo='Por que a chave errada não gira?',
          descricao='Um corte raso demais empurra o pino acima da linha de corte; um fundo demais deixa o contrapino atravessado. 3 de 5 no lugar não basta.'),
-    dict(id='c4', de=('lingueta', 0.0), ate=('lingueta', 36.0), x=60, gancho=['O QUE A', 'CHAVE GIRA?'],
+    dict(id='c4', de=('lingueta', 0.0), ate=('lingueta', 36.0), x=84, gancho=['O QUE A', 'CHAVE GIRA?'],
          titulo='Como a chave move a lingueta da porta',
          descricao='Atrás do rotor fica o came. Numa volta da chave ele engancha no dente da lingueta e empurra ela para dentro do batente.'),
     dict(id='c5', de=('trinco', 0.0), ate=('trinco', 30.0), x=60, gancho=['O CLIC DA', 'PORTA'],

@@ -28,7 +28,7 @@ from longo import (W, H, PALCO_H, ease, suave, dither, poligono, linha_grossa, p
                    FUNDO, FUNDO2, FUNDO3, TRACO, ACO0, ACO1, ACO2, ACO3, ACO4, AMARELO, CIANO, BRANCO,
                    LARANJA, VERMELHO, CHAMA0, CHAMA1, CHAMA2, BRASA, MISTURA, MISTURA2, GAS, GAS2,
                    LATAO, CERAMICA, ROXO, VERDE, PRETO, ROSA, OLEO0, OLEO1)
-from ep18_desenho import (VOO, FOG, pol, contorno, brilho, gradiente, seta_forca, barra, chama, CeuVoo,
+from ep18_desenho import (GAMA as GAMA_, VOO, FOG, pol, contorno, brilho, gradiente, seta_forca, barra, chama, CeuVoo,
                           Plataforma, fumaca, rastro, Tubeira, globo, globo_xy, terra_disco, hsh,
                           CEU0, CEU1, CEU2, CEU3, CEU4, CEU5, LOX, RP1, FUM0, FUM1, FUM2, MAR1, MAR2,
                           CASCO, CASCO2, CONCRETO, CHAO0)
@@ -105,7 +105,8 @@ def rotulo(tela, txt, x, y, ax, ay, cor=AMARELO, direita=False):
     w = tela.largura_texto(txt, 9)
     tx = x - w if direita else x
     tela.texto(txt, tx, y, cor, tam=9, contorno=PRETO)
-    lx = x + 3 if direita else x - 3
+    if direita: lx = x + 3 if ax > x else tx - 3
+    else: lx = x - 3 if ax < x else x + w + 2
     tela.linha(lx, y + 3, ax, ay, cor)
     tela.disco(ax, ay, 1.5, cor)
 
@@ -360,7 +361,8 @@ class Gancho(Cena):
         if 0 < n <= 5 and t < self.ign:
             dt = t - self.cont[n - 1]
             num = str(6 - n)
-            tela.texto(num, cx_txt, 30 - int(max(0, .12 - dt) * 60), AMARELO, tam=26, centro=True, contorno=PRETO)
+            painel(tela, cx_txt - 16, 14, 32, 34, borda=AMARELO)
+            tela.texto(num, cx_txt, 20 - int(max(0, .12 - dt) * 40), AMARELO, tam=26, centro=True, contorno=PRETO)
         elif t >= self.ign and t < self.dec + 1.5:
             tela.texto('IGNIÇÃO!' if t < self.dec else 'DECOLAGEM!', cx_txt, 30, LARANJA, tam=17, centro=True,
                        contorno=PRETO)
@@ -369,7 +371,7 @@ class Gancho(Cena):
         if tf < 0:
             fundo_painel(tela)
             tit(tela, 'CONTAGEM', 9, ACO3, 9)
-            tit(tela, f"T- {max(0, 5 - n)}" if t < self.ign else 'T- 0', 22, AMARELO, 26)
+            tit(tela, (f"T- {6 - n}" if n > 0 else 'T- 6') if t < self.ign else 'T- 0', 22, AMARELO, 26)
             tit(tela, 'NO RITMO DA MÚSICA', 52, ACO3, 9)
             tit(tela, 'ESTÁGIO 1 DE 2', 120, CIANO, 9)
             tit(tela, 'ALTITUDE 0 M', 90, BRANCO, 9)
@@ -446,7 +448,7 @@ class Newton(Cena):
             x = min(x, x1 - 60)
             cheio = max(.35, 1 - s / 6.5)
             jato = 1.0 if x < x1 - 61 else .2
-        rx, ry = 34 * cheio, 22 * cheio
+        rx, ry = 46 * cheio, 30 * cheio
         cy = yf + 4 + ry
         # canudo preso ao fio
         tela.ret(int(x - 14), yf - 2, 28, 4, PRETO); tela.ret(int(x - 13), yf - 1, 26, 2, ACO4)
@@ -590,7 +592,7 @@ PECAS = [('COIFA', 'E CARGA', (91, 0), 'cg'), ('2º ESTÁGIO', 'MOTOR PRÓPRIO',
 
 class Partes(Cena):
     TS = [0.3, 6.8, 13.6, 20.4, 27.2, 34.0, 40.8]
-    KP = 2.6
+    KP = 2.85
 
     def ativo(self, t):
         return max([k for k, a in enumerate(self.TS) if t >= a] or [0])
@@ -611,7 +613,7 @@ class Partes(Cena):
             cy = 104 + (s - 50) * k * .55
             ang = 0.0
         else:
-            k, cx, cy, ang = self.KP, 152, 104 + math.sin(t * .8) * 1.5, math.pi / 2
+            k, cx, cy, ang = self.KP, 150, 104 + math.sin(t * .8) * 1.5, math.pi / 2
         niv = (.92 + .02 * math.sin(t * 2), .92 + .02 * math.sin(t * 2 + 1), 1.0, 1.0)
         e = dict(t=t, corte=True, niveis=niv, acesos=(chave,), chama1=0.0)
         FOG.desenhar(tela, cx, cy, ang, k, e)
@@ -639,8 +641,12 @@ class Partes(Cena):
             if j == k_at:
                 tela.texto(sb, PX0 + 9, y + 11, BRANCO, tam=9, contorno=PRETO)
                 yy = y + 3
-                tela.linha(PX0 - 2, yy, ax, ay, AMARELO)
+                yb = 52 if j < 2 else 160
+                tela.linha(PX0 - 2, yy, PX0 - 8, yy, AMARELO)
+                tela.linha(PX0 - 8, yy, ax, yb, AMARELO)
+                tela.linha(ax, yb, ax, ay, AMARELO)
                 tela.disco(ax, ay, 2, AMARELO)
+                tela.disco(ax, yb, 1.5, AMARELO)
         tela.texto(f"PEÇA {k_at + 1} DE 7", PX0 + 2, 186, ACO3, tam=9)
         for j in range(7):
             tela.ret(PX0 + 96 + j * 9, 187, 7, 5, AMARELO if j <= k_at else ACO0)
@@ -656,6 +662,43 @@ class Motor(Cena):
 
     def preparar(self):
         self.tb = Tubeira(cx=150, y_cam=82, y_gar=124, y_boca=184, hw_cam=30, hw_gar=7, razao=20.0)
+
+    @staticmethod
+    def SONDA_MARCOS(T):
+        return [(0.0, T.yc + 10), (14.0, T.yc + 22), (21.0, T.yg - 3), (28.0, T.yg + 3), (35.0, T.yb - 3),
+                (37.5, T.yb + 12), (42.5, T.yb + 12)]
+
+    def gas(self, tela, t):
+        """Gás dentro do motor, colorido pela temperatura: ele esfria ao acelerar."""
+        T = self.tb
+        for y in range(T.yc, min(PALCO_H, T.yb + 26)):
+            if y <= T.yb:
+                w = T.meia(y) - .5
+            else:
+                w = T.hb * (1 - (y - T.yb) * .012)
+            M = T.M_em(min(y, T.yb))
+            tr = 1 / (1 + .5 * (GAMA_ - 1) * M * M)
+            if y > T.yb: tr *= max(.0, 1 - (y - T.yb) / 30)
+            x0, x1 = int(T.cx - w), int(T.cx + w) + 1
+            if x1 <= x0: continue
+            xs = np.arange(x0, x1)
+            b = D.BAY[y % 8, xs % 8]
+            lv = [(.97, BRANCO), (.9, CHAMA0), (.78, CHAMA1), (.6, CHAMA2), (.42, BRASA), (.2, OLEO0), (-1, FUNDO2)]
+            cores = np.full(len(xs), FUNDO2, np.uint8)
+            for (lim, cor), (lim2, cor2) in zip(lv, lv[1:]):
+                if tr >= lim:
+                    cores[:] = cor
+                    break
+                if tr >= lim2:
+                    u = (tr - lim2) / (lim - lim2)
+                    cores[:] = np.where(u > b, cor, cor2)
+                    break
+            if y < T.yg - 6:
+                cores = np.where(D.BAY[(y + int(t * 12)) % 8, xs % 8] > .8, CHAMA0, cores).astype(np.uint8)
+            if y > T.yb:
+                fora = (np.abs(xs - T.cx) / max(1.0, w)) > (1 - (y - T.yb) / 40) * .9 + b * .2
+                cores = np.where(fora, tela.buf[y, x0:x1], cores).astype(np.uint8)
+            tela.buf[y, x0:x1] = cores
 
     def acende(self, t, k):
         """Rótulos aparecem com as legendas."""
@@ -698,24 +741,14 @@ class Motor(Cena):
             a = ang * 1.3 + j * math.pi / 4
             tela.linha(cx, 44, cx + math.cos(a) * 7, 44 + math.sin(a) * 7, OLEO1)
         tela.disco(cx, 44, 2, CHAMA0)
-        # ---- câmara, garganta e sino (cortados)
-        inner_pts = [(cx - T.meia(y), y) for y in range(T.yc, T.yb + 1)] + \
-                    [(cx + T.meia(y), y) for y in range(T.yb, T.yc - 1, -1)]
-        pol(tela, inner_pts, FUNDO2, FUNDO)
+        # ---- câmara, garganta e sino (cortados), cheios de gás quente
+        self.gas(tela, t)
         self.particulas(tela, t)
         T.parede(tela, esp=6)
-        # o jato saindo embaixo
-        ex = T.hb
-        for i in range(24):
-            v = (t * 2.2 + i / 24) % 1
-            xx = cx + (hsh(i, 2) - .5) * 2 * ex * (1 + v * .5)
-            yy = T.yb + 2 + v * 26
-            tela.linha(xx, yy, xx, yy + 5, CHAMA2 if v < .5 else BRASA)
-        # sonda: uma partícula marcada que percorre o motor
-        tau = (t * .9) % (T.vida - .2)
-        yp = T.y_part(tau)
-        if yp < T.yb + 14:
-            tela.anel(cx, yp, 5, CIANO); tela.disco(cx, yp, 2, BRANCO)
+        # sonda: um pedaço de gás marcado, que anda junto com as legendas
+        yp, _ = rampa(t, self.SONDA_MARCOS(T))
+        yp += math.sin(t * 3) * .6 if yp < T.yg - 10 else 0
+        tela.anel(cx, yp, 5, CIANO); tela.anel(cx, yp, 6, PRETO, .5); tela.disco(cx, yp, 2, BRANCO)
         M = T.M_em(yp); v = T.v_em(yp)
         # rótulos (com fio)
         if not VERTICAL:
@@ -727,11 +760,12 @@ class Motor(Cena):
             if self.acende(t, 2): rotulo(tela, 'GARGANTA', 8, 124, cx - 9, T.yg, AMARELO)
             if self.acende(t, 4): rotulo(tela, 'SINO', 8, 160, cx - T.meia(160) - 3, 160, AMARELO)
             tela.texto('CÂMERA LENTA', 290, 196, CIANO, tam=9, centro='d', contorno=PRETO)
-        hud_v(tela, 'motor', [(f"MACH {dec(M, 1)}", CIANO), (f"{milhar(v)} M/S", AMARELO)], y=190)
+        mt = dec(M, 2) if M < .95 else dec(M, 1)
+        hud_v(tela, 'motor', [(f"MACH {mt}", CIANO), (f"{milhar(v)} M/S", AMARELO)], y=190)
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'O GÁS NA SONDA', 9, ACO3, 9)
-        tit(tela, f"MACH {dec(M, 1)}", 21, CIANO, 26)
+        tit(tela, f"MACH {mt}", 21, CIANO, 26)
         reg = 'MAIS LENTO QUE O SOM' if M < .95 else ('VELOCIDADE DO SOM' if M < 1.08 else 'SUPERSÔNICO')
         tit(tela, reg, 50, VERDE if M >= 1.08 else (AMARELO if M >= .95 else ACO3), 9)
         tit(tela, 'VELOCIDADE', 66, ACO3, 9)
@@ -759,17 +793,16 @@ class Motor(Cena):
         for i in range(self.N):
             tau = (t * .9 + i / self.N * T.vida) % T.vida
             y = T.y_part(tau)
-            if y > T.yb - 1: continue
+            if y > T.yb + 24 or y > PALCO_H: continue
             lat = (hsh(i, 1) * 2 - 1) * .85
             if y < T.yg - 12:
                 lat += math.sin(t * 3 + i) * .08                  # turbulência na câmara
-            x = T.cx + lat * T.meia(y)
-            M = T.M_em(y)
-            cor = BRANCO if M < .3 else (CHAMA0 if M < 1.0 else (CHAMA1 if M < 2.2 else (CHAMA2 if M < 3.2 else BRASA)))
-            Lr = min(8.0, max(1.0, M * 2.2))
+            w = T.meia(y) if y <= T.yb else T.hb * (1 + (y - T.yb) * .02)
+            x = T.cx + lat * w
+            M = T.M_em(min(y, T.yb))
+            Lr = min(9.0, max(1.0, M * 2.4))
+            cor = LARANJA if M < .5 else (BRANCO if M < 2.5 else CHAMA0)
             tela.linha(x, y - Lr, x, y, cor)
-        # brilho da queima na câmara
-        brilho(tela, T.cx, T.yc + 18, 22, CHAMA1)
 
     def sons(self, fx):
         fx.put(zumbido(self.dur - .5, 330), self.t0 + .3, .025)

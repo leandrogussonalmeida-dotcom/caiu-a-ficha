@@ -335,7 +335,7 @@ def chama(tela, x, y, ang, k, hw0, forca, t, vac=0.0, seed=0, comp=1.0):
     dx, dy = -math.sin(ang), math.cos(ang)          # -eixo
     nx, ny = math.cos(ang), math.sin(ang)
     w0 = hw0 * k
-    L = k * (26 + 8 * forca) * forca * (1 + 1.4 * vac) * comp
+    L = k * (34 + 14 * forca) * forca * (1 + 1.2 * vac) * comp
     fl = .85 + .15 * math.sin(t * 37 + seed) * math.sin(t * 23 + 1.3 * seed)
     L *= fl
     n = 12
@@ -602,7 +602,7 @@ class Tubeira:
         self.M = np.array(M)
         self.v = np.array([vel_gas(m) for m in self.M])
         # trajetória de uma partícula: dy/dtau = max(vmin, v * c)
-        c, vmin = 62.0 / vel_gas(mach_de_area(razao, True)), 7.0
+        c, vmin = 70.0 / vel_gas(mach_de_area(razao, True)), 14.0
         tau, y = [0.0], [y_cam + 2]
         while y[-1] < y_boca + 40:
             vv = max(vmin, self.v_em(y[-1]) * c)

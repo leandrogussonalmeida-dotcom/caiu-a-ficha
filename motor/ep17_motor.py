@@ -628,6 +628,7 @@ class Batida(Cena):
 
     def preparar(self):
         self.bar = 4 * self.spb
+        self.CC = Cilindro(78, 26)          # no corte vertical o esmeril (x0 - 14) tem que caber no recorte
 
     def fase(self, t):
         k = int(t / self.bar)
@@ -833,7 +834,7 @@ class Lingueta(Cena):
         fr = d / K.curso
         if VERTICAL:
             hud_vertical(tela, [('LINGUETA ' + ('PARA FORA' if fr > .99 else 'DENTRO' if fr < .01 else 'ANDANDO'),
-                                 VERDE if fr > .99 else AMARELO)])
+                                 VERDE if fr > .99 else AMARELO)], x=174)     # recorte x 84..264
             return
         A = K.ancoras(ph)
         etiqueta(tela, 'CAIXA', 8, 196, *A['caixa'], ACO3)
@@ -1039,7 +1040,7 @@ class ChaveCena(Cena):
 
 # ============================================================ combinações
 class Combinacoes(Cena):
-    REGRAS = [([0, 9, 2, 5, 4], 1), ([3, 4, 6, 5, 7], None), ([8, 1, 3, 3, 9], 0), ([2, 3, 5, 4, 4], None)]
+    REGRAS = [([0, 9, 2, 5, 4], 0), ([3, 4, 6, 5, 7], None), ([8, 1, 3, 3, 9], 0), ([2, 3, 5, 4, 4], None)]
 
     def numero(self, t):
         if t < 8.8: return int(t / .5)
