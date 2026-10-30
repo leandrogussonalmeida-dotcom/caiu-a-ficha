@@ -132,7 +132,7 @@ LEGENDAS = {
         (14.4, 21.0, "A ONDA ANDA NA *VELOCIDADE DA LUZ*:", "299.792 KM POR SEGUNDO.", ('F2', 'F5')),
         (21.4, 28.0, "DE UMA CRISTA À OUTRA, A 2,4 GHZ:", "UNS *12,5 CM*. DESENHO EM ESCALA.", ('F1', 'F18')),
         (28.4, 35.0, "A *5 GHZ*, A ONDA É MAIS CURTA: 6 CM.", "A *6 GHZ* (WI-FI 6E), 5 CM.", ('F1', 'F6', 'F18')),
-        (35.4, 41.6, "NO BRASIL, A ANATEL LIBEROU OS 6 GHZ", "PARA O WI-FI EM *2021*.", ('F7',)),
+        (35.4, 41.6, "EM 2021, A ANATEL LIBEROU OS 6 GHZ.", "EM 2027, O WI-FI FICA COM *UMA PARTE*.", ('F7', 'F20')),
     ],
     'bits': [
         (0.5, 7.4, "UMA ONDA QUE SÓ BALANÇA NÃO DIZ", "NADA. PARA LEVAR BITS, ELA *MUDA*.", ('F8',)),
@@ -151,14 +151,14 @@ LEGENDAS = {
         (0.5, 7.4, "O WI-FI 5 USA ATÉ *256-QAM*:", "8 BITS POR SÍMBOLO.", ('F11', 'F18')),
         (7.8, 15.0, "O WI-FI 6 CHEGA A *1024-QAM*:", "10 BITS POR SÍMBOLO.", ('F6', 'F12', 'F18')),
         (15.4, 22.4, "MAS OS PONTOS FICAM *APERTADOS*, E", "O RUÍDO ESPALHA CADA UM.", ('F8', 'F9')),
-        (22.8, 29.6, "SE O PONTO CAI NA CASA DO VIZINHO:", "*ERRO*. POR ISSO, LONGE, USA-SE MENOS.", ('F8', 'F9')),
+        (22.8, 29.6, "SE O PONTO CAI NA CASA DO VIZINHO:", "*ERRO*. LONGE, USAM-SE MENOS PONTOS.", ('F8', 'F9')),
     ],
     'distancia': [
         (0.5, 6.4, "O PACOTE Nº 1 SAI DO CELULAR NA", "VELOCIDADE DA LUZ.", ('F2', 'F5')),
         (6.6, 12.4, "10 METROS EM *33 NANOSSEGUNDOS*:", "33 BILIONÉSIMOS DE SEGUNDO.", ('F18',)),
         (12.6, 18.4, "A ONDA SE ESPALHA PARA TODO LADO.", "DOBROU A DISTÂNCIA? CHEGA *1/4*.", ('F13', 'F18')),
         (18.6, 24.4, "O SINAL SE MEDE EM *DBM*:", "0 DBM = 1 MILIWATT.", ('F14',)),
-        (24.6, 30.2, "CADA 10 DBM A MENOS: *10 VEZES*", "MENOS POTÊNCIA.", ('F14',)),
+        (24.6, 30.2, "CADA *10 DB* A MENOS: *10 VEZES*", "MENOS POTÊNCIA.", ('F14',)),
         (30.4, 35.8, "NO WI-FI, DE UNS *-10 DBM* (PERTO)", "ATÉ UNS *-100 DBM* (QUASE NADA).", ('F14',)),
     ],
     'paredes': [
@@ -176,7 +176,7 @@ LEGENDAS = {
     'canais': [
         (0.5, 7.4, "A FAIXA DE 2,4 GHZ É DIVIDIDA EM", "*14 CANAIS*, UM A CADA 5 MHZ.", ('F12',)),
         (7.8, 15.0, "MAS UM SINAL OCUPA *20 MHZ*:", "CANAIS VIZINHOS SE ATROPELAM.", ('F1',)),
-        (15.4, 22.4, "SÓ 3 CABEM SEM SE TOCAR,", "COMO OS CANAIS *1, 6 E 11*.", ('F1',)),
+        (15.4, 22.4, "NOS EUA, SÓ 3 NÃO SE TOCAM:", "OS CANAIS *1, 6 E 11*.", ('F1',)),
         (22.8, 29.6, "CADA PAÍS LIBERA ALGUNS: OS EUA, 11;", "A EUROPA, 13; O JAPÃO, OS 14.", ('F1',)),
     ],
     'vez': [
@@ -199,8 +199,8 @@ LEGENDAS = {
         (15.8, 23.6, "ESSA VIAGEM ESTÁ NO VÍDEO *A JORNADA*", "*DE UMA MENSAGEM DE CELULAR*.", ('F19',)),
     ],
     'resumo': [
-        (0.5, 9.4, "ELÉTRONS BALANÇAM, A ONDA VOA E", "CADA SÍMBOLO LEVA *4 A 10 BITS*.", ('F4', 'F8', 'F18')),
-        (9.8, 19.4, "PAREDES ENFRAQUECEM, CADA UM FALA", "NA SUA VEZ E TODO PACOTE GANHA *ACK*.", ('F1', 'F16')),
+        (0.5, 9.4, "ELÉTRONS BALANÇAM, A ONDA VOA E", "CADA SÍMBOLO LEVA DE *1 A 10 BITS*.", ('F4', 'F8', 'F18')),
+        (9.8, 19.4, "PAREDES ENFRAQUECEM, CADA UM FALA", "NA SUA VEZ E CADA PACOTE GANHA *ACK*.", ('F1', 'F16')),
         (19.8, 29.6, "E TUDO ISSO EMBARALHADO PELA", "*SENHA* DA SUA REDE.", ('F17',)),
     ],
 }
@@ -226,6 +226,7 @@ FONTES = {
             'https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_avoidance'),
     'F17': ('Wikipedia, "Wi-Fi Protected Access"', 'https://en.wikipedia.org/wiki/Wi-Fi_Protected_Access'),
     'F18': ('Contas: velocidade da luz / frequência; 2^4, 2^8, 2^10; 10 m / velocidade da luz; inverso do quadrado', None),
+    'F20': ('Teletime, 13/08/2026: Anatel limita o Wi-Fi à parte de baixo da faixa de 6 GHz (5.925 a 6.425 MHz) a partir de 01/03/2027', 'https://teletime.com.br/13/08/2026/anatel-wi-fi-banda-inferior-6-ghz/'),
     'F19': ('NOSSO MUNDO PIXEL, "A jornada de uma mensagem de celular" (episódio 7)', None),
 }
 
@@ -246,7 +247,9 @@ Capítulos
 
 Simplificado de propósito
 - Tudo na tela está em câmera lenta: a onda de 2,4 GHz vai e volta 2,4 bilhões de vezes por segundo; o desenho mostra poucas por segundo. Os números do painel (GHz, cm, bits por símbolo) são os de verdade.
-- O Wi-Fi de verdade não manda um símbolo de cada vez numa onda só: ele usa OFDM, dezenas ou centenas de ondas vizinhas ao mesmo tempo, cada uma com o seu símbolo QAM. Aqui mostramos uma.
+- O Wi-Fi de verdade não manda um símbolo de cada vez numa onda só: ele usa OFDM, dezenas a milhares de ondas vizinhas ao mesmo tempo, cada uma com o seu símbolo QAM. Aqui mostramos uma.
+- No Wi-Fi 6 (OFDMA), vários aparelhos podem falar ao mesmo tempo em pedaços do canal.
+- Longe do roteador, o Wi-Fi cai para modos mais simples, de 1 ou 2 bits por símbolo.
 - Os valores de sinal em dBm do painel são exemplos (a conta do inverso do quadrado a partir de -40 dBm a 1 m, e um desconto por parede e por obstáculo escolhido para o desenho). Cada casa, parede e aparelho dá um número diferente.
 - No capítulo da bolha, a onda está no espaço livre; dentro de casa os reflexos mudam a conta.
 - Os canais aparecem desenhados um a cada 5 MHz, como diz a norma; quais podem ser usados depende do país.
@@ -267,7 +270,7 @@ CORTES = [
     dict(id='c1', de=('antena', 0.0), ate=('antena', 30.8), x=26, gancho=['COMO NASCE', 'O WI-FI'],
          titulo='Como a antena do roteador faz a onda do Wi-Fi 📶',
          descricao='Elétrons balançam para cima e para baixo dentro da antena e soltam uma onda de rádio, que voa na velocidade da luz até o celular e balança os elétrons da antena dele.'),
-    dict(id='c2', de=('frequencia', 14.4), ate=('frequencia', 41.6), x=20, gancho=['A ONDA DO', 'WI-FI: 12 CM'],
+    dict(id='c2', de=('frequencia', 14.4), ate=('frequencia', 41.6), x=20, gancho=['A ONDA DO', 'WI-FI: 12,5 CM'],
          titulo='A onda do Wi-Fi em escala: 12,5 cm',
          descricao='A 2,4 GHz, a distância entre duas cristas da onda do Wi-Fi é de uns 12,5 cm (velocidade da luz dividida pela frequência). A 5 GHz, 6 cm; a 6 GHz, 5 cm.'),
     dict(id='c3', de=('qam', 0.0), ate=('qam', 38.0), x=128, gancho=['4 BITS EM', '1 PEDAÇO'],

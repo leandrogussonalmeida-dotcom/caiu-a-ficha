@@ -34,7 +34,10 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       cada queimador: 2 a 3 MW; chama-piloto; o paraquedas no topo solta ar
       quente para descer; também se desce deixando o ar esfriar; não dá para
       dirigir: o piloto muda de altitude para pegar ventos diferentes; o
-      empuxo cai ~3% a cada 1.000 m; cesto de vime; irmãos Montgolfier em 1783;
+      empuxo cai ~3% a cada 1.000 m; num dia quente o balão levanta menos que
+      num dia frio; propano liquefeito em cilindros de pressão; o queimador passa
+      o propano líquido por uma serpentina aquecida pela chama, vira gás, mistura
+      com o ar e acende; cesto de vime; irmãos Montgolfier em 1783;
       primeiro voo livre com pessoas em 21/11/1783.
   F4  Wikipedia, "Buoyancy": um objeto num fluido é empurrado para cima com
       força igual ao peso do fluido que ele desloca (Arquimedes); vale para
@@ -68,7 +71,8 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       = 0,26 kg por metro cúbico; o perfil desenhado com 2.800 m³ tem ~19,4 m de
       altura e ~17,5 m de largura; velocidade das moléculas proporcional à raiz
       da temperatura absoluta: raiz(372/293) = 1,13 (13% mais rápidas); voo
-      calculado com 700 kg: decola com o ar a ~97 °C.
+      calculado com 700 kg: decola com o ar a ~97 °C; ar de dentro a 100 °C:
+      fora a 10 °C levanta 842 kg, fora a 30 °C, 612 kg.
 """
 
 TITULO = "Como o balão de ar quente sobe? | Empuxo, queimador e vento em pixel art"
@@ -81,6 +85,7 @@ CAPITULOS = [
     dict(id='empuxo', gen='lofi', bars=12, papel='drop'),             # 36 s
     dict(id='conta', gen='lofi', bars=12, papel='drop'),              # 36 s
     dict(id='partes', gen='synthwave', bars=20, papel='drop'),        # 48 s (6 peças x 8 s)
+    dict(id='gas', gen='lofi', bars=8, papel='drop'),                 # 24 s
     dict(id='inflar', gen='lofi', bars=10, papel='drop'),             # 30 s
     dict(id='subir', gen='lofi', bars=18, papel='drop'),              # 54 s
     dict(id='descer', gen='lofi', bars=14, papel='drop'),             # 42 s
@@ -124,6 +129,12 @@ LEGENDAS = {
         (24.3, 32.0, "O *QUEIMADOR* (OU MAÇARICO) SOLTA", "UMA CHAMA DE GÁS *PROPANO*.", ('F3', 'F6')),
         (32.3, 40.0, "O GÁS VAI EM *BOTIJÕES*", "DENTRO DO CESTO.", ('F5', 'F7')),
         (40.3, 47.6, "E O *CESTO* DE VIME TRANÇADO: LEVE,", "FORTE, E AMORTECE O POUSO.", ('F5', 'F6')),
+    ],
+    'gas': [
+        (0.5, 6.4, "O PROPANO VAI NOS BOTIJÕES COMO", "*LÍQUIDO*, SOB PRESSÃO.", ('F3',)),
+        (6.6, 12.4, "NO QUEIMADOR ELE PASSA POR UMA", "*SERPENTINA* AQUECIDA PELA CHAMA...", ('F3',)),
+        (12.6, 18.4, "...VIRA *GÁS*, SE MISTURA COM O AR", "E ACENDE.", ('F3',)),
+        (18.6, 23.8, "E NUM DIA *FRIO* O BALÃO LEVANTA MAIS", "QUE NUM DIA QUENTE.", ('F3', 'F11')),
     ],
     'inflar': [
         (0.5, 7.4, "ANTES DE DECOLAR, UMA *VENTOINHA*", "ENCHE O ENVELOPE COM AR DO LUGAR.", ('F6',)),
@@ -189,20 +200,20 @@ FONTES = {
     'F9': ('Wikipedia, "Bartolomeu de Gusmão"', 'https://en.wikipedia.org/wiki/Bartolomeu_de_Gusm%C3%A3o'),
     'F10': ('SEMIL-SP, "Saiba como ajudar a combater a prática da soltura de balões" (Lei 9.605/1998, art. 42)',
             'https://semil.sp.gov.br/educacaoambiental/2024/08/saiba-como-ajudar-a-combater-a-pratica-da-soltura-de-baloes/'),
-    'F11': ('Contas e simulação deste vídeo (gás ideal a mesma pressão; balão de 2.800 m³ e 700 kg; '
+    'F11': ('Contas e simulação deste vídeo (gás ideal a mesma pressão; balão de 2.800 m³ e 700 kg; dia a 10 °C x 30 °C com o ar de dentro a 100 °C; '
             'números de F2 e F3)', None),
 }
 
 CAPITULOS_YT = {'gancho': 'Introdução', 'particulas': 'Por que o ar quente é mais leve',
                 'empuxo': 'Arquimedes no ar: o empuxo', 'conta': 'Por que o balão é tão grande',
-                'partes': 'As partes do balão', 'inflar': 'Enchendo o balão',
+                'partes': 'As partes do balão', 'gas': 'Propano: de líquido a chama', 'inflar': 'Enchendo o balão',
                 'subir': 'Como ele sobe: o queimador', 'descer': 'Como ele desce: o paraquedas',
                 'vento': 'Como "dirigir": as camadas de vento', 'historia': 'Gusmão (1709) e os Montgolfier (1783)',
                 'resumo': 'Resumo'}
 
 DESCRICAO = """Como um balão de ar quente sobe, se ele não tem motor, asa nem hélice? O segredo é o ar quente: menos denso que o ar frio em volta. E o resto é Arquimedes, o mesmo do navio, só que no ar.
 
-Neste vídeo a gente olha as moléculas do ar frio e do ar quente, faz a conta do empuxo (por que o balão precisa ser enorme), abre o balão peça por peça (envelope, paraquedas, saia, queimador, botijões e cesto), enche o envelope, decola, desce e "dirige" usando as camadas de vento. No fim, Bartolomeu de Gusmão em Lisboa (1709) e os irmãos Montgolfier (1783).
+Neste vídeo a gente olha as moléculas do ar frio e do ar quente, faz a conta do empuxo (por que o balão precisa ser enorme), abre o balão peça por peça (envelope, paraquedas, saia, queimador, botijões e cesto), segue o propano do botijão até a chama, enche o envelope, decola, desce e "dirige" usando as camadas de vento. No fim, Bartolomeu de Gusmão em Lisboa (1709) e os irmãos Montgolfier (1783).
 
 Cada quadro é pixel art desenhada por código, e a música é original. Os jatos do queimador caem nas batidas da música.
 
@@ -215,6 +226,7 @@ Simplificado de propósito
 - As contas usam ar seco a 20 °C no chão e o ar de dentro na mesma pressão do ar de fora.
 - Os 3.380 kg e 2.660 kg do capítulo do empuxo são contas a partir dos números da Wikipedia para 2.800 metros cúbicos a 99 °C (723,5 kg de sobra); arredondamos para 720 kg.
 - As camadas de vento do mapa (para a direita embaixo, para a esquerda em cima) são um exemplo inventado, e esse trecho está acelerado 20 vezes. O balão desenhado no mapa está fora de escala.
+- No capítulo do propano, os 842 kg (dia a 10 °C) e 612 kg (dia a 30 °C) são contas para 2.800 metros cúbicos com o ar de dentro a 100 °C; a serpentina e o botijão são desenhos genéricos.
 - A ventoinha, o balão de 1709 e o de 1783 são desenhos genéricos, sem pessoas.
 - O tamanho do balão saiu da conta: um envelope com o nosso perfil e 2.800 metros cúbicos tem cerca de 19,4 m de altura e 17,5 m de largura.
 

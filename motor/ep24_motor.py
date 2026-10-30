@@ -329,7 +329,7 @@ class Casa(Cena):
                 if not VERTICAL:
                     tela.ret(pl - 7, 4, 15, 1, AMARELO); tela.ret(pl - 7, 4, 1, 3, AMARELO)
                     tela.ret(pl + 7, 4, 1, 3, AMARELO)
-        self.painel(tela, t, destaque=(), nota=[("ONDAS DE RÁDIO:", OND3), ("INVISÍVEIS AO OLHO", ACO2)])
+        self.painel(tela, t, destaque=(), nota=[("MICRO-ONDAS:", OND3), ("UM TIPO DE RÁDIO", ACO2)])
         if t >= 22.2: self.vtxt(tela, "AS ONDAS, DESENHADAS", OND3, y=190)
 
     def casa_frente(self, tela, t):
@@ -556,10 +556,11 @@ class Frequencia(Cena):
         tela.texto("FAIXA DE 6 GHZ:", x + 8, y + 40, PRETO, tam=9)
         tela.texto("5,925 A 7,125 GHZ", x + 8, y + 52, AGU0, tam=9)
         tela.texto("PARA O WI-FI 6E", x + 8, y + 64, PRETO, tam=9)
+        tela.texto("DE 2027: 5,925 A 6,425", x + 8, y + 80, VERMELHO, tam=9)
         if t >= 36.6:
             v = ease((t - 36.6) / .25)
-            sx, sy = x + 140, y + 62
-            r = 34 - 6 * v
+            sx, sy = x + 152, y + 50
+            r = 30 - 6 * v
             tela.anel(sx, sy, r, ERR1, 1.5)
             tela.texto("2021", sx, sy - 7, ERR1, tam=17, centro=True)
 

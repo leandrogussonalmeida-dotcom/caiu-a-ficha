@@ -714,6 +714,135 @@ class Partes(Cena):
         fx.put(sopro(5.0), self.t0 + 9.5, .02)
 
 
+# ============================================================ o gás
+class Gas(Cena):
+    """Do botijão à chama: propano líquido -> serpentina quente -> gás -> chama."""
+    T_FRIO = 18.6
+
+    def preparar(self):
+        bs = self.batidas('batida')
+        self.js, _ = jatos_de([b for k, b in enumerate(bs) if k % 2 == 0 and b < self.T_FRIO - .5], .9)
+
+    @staticmethod
+    def _poli(pts, f):
+        ls = [math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(pts, pts[1:])]
+        d = f * sum(ls)
+        for (a, b), L in zip(zip(pts, pts[1:]), ls):
+            if d <= L or L == ls[-1] and d > L:
+                g = min(1.0, d / L) if L else 0
+                return a[0] + (b[0] - a[0]) * g, a[1] + (b[1] - a[1]) * g
+            d -= L
+        return pts[-1]
+
+    def caminho(self, u, bx, by, qx, qy):
+        """Ponto do caminho do propano (u 0..1): mangueira, serpentina em volta da chama, volta ao bico."""
+        if u < .4:
+            return self._poli([(bx, by), (bx, 60), (qx - 46, 60), (qx - 46, qy - 8), (qx - 22, qy - 8)], u / .4)
+        if u < .8:
+            f = (u - .4) / .4
+            a = math.pi + f * 3 * 2 * math.pi
+            return qx + math.cos(a) * 22, qy - 8 - f * 36 + math.sin(a) * 4
+        return self._poli([(qx - 22, qy - 44), (qx - 34, qy - 44), (qx - 34, qy + 8), (qx, qy + 8), (qx, qy)],
+                          (u - .8) / .2)
+
+    def desenhar(self, tela, t, tg):
+        tela.buf[:PALCO_H] = FUNDO
+        o = int(t * 4) % 24
+        for x in range(-o, W, 24): tela.ret(x, 0, 1, PALCO_H, FUNDO2)
+        for y in range(6, PALCO_H, 24): tela.ret(0, y, W, 1, FUNDO2)
+        frio = t >= self.T_FRIO
+        x0 = x_corte('gas') if VERTICAL else 0
+        if frio:
+            self.dias(tela, t - self.T_FRIO, x0)
+        else:
+            self.queimador(tela, t, x0)
+        if VERTICAL: return
+        fundo_painel(tela)
+        tit(tela, 'DO BOTIJÃO À CHAMA', 9, ACO3, 9)
+        etapas = [('1. LÍQUIDO SOB PRESSÃO', 0.0), ('2. SERPENTINA QUENTE', 6.6), ('3. VIRA GÁS E ACENDE', 12.6),
+                  ('4. DIA FRIO X DIA QUENTE', self.T_FRIO)]
+        for j, (txt, a0) in enumerate(etapas):
+            ativo = t >= a0 and (j == 3 or t < etapas[j + 1][1])
+            cor = AMARELO if ativo else (ACO3 if t >= a0 else ACO0)
+            tela.texto(txt, PX0, 30 + j * 16, cor, tam=9, contorno=PRETO)
+        if frio:
+            u = suave((t - self.T_FRIO) / 1.5)
+            tit(tela, 'AR DENTRO: 100 °C', 104, LARANJA, 9)
+            barra_kg(tela, PX0, 122, 156, 842 * u, 900, CIANO, 'FORA 10 °C')
+            barra_kg(tela, PX0, 148, 156, 612 * u, 900, LARANJA, 'FORA 30 °C')
+            tit(tela, '2.800 METROS CÚBICOS', 176, ACO3, 9)
+        else:
+            tit(tela, 'PROPANO', 104, ACO3, 9)
+            est = 'LÍQUIDO' if t < 6.6 else ('ESQUENTANDO' if t < 12.6 else 'GÁS')
+            tit(tela, est, 114, CIANO if t < 6.6 else (LARANJA if t < 12.6 else CHAMA1), 17)
+
+    def queimador(self, tela, t, x0):
+        # botijão em corte
+        bx, by = x0 + 46, 186
+        tela.ret(bx - 21, 96, 42, 92, PRETO)
+        tela.ret(bx - 20, 97, 40, 90, ACO2)
+        tela.ret(bx - 20, 97, 6, 90, ACO3)
+        tela.ret(bx + 14, 97, 6, 90, ACO1)
+        dither(tela, bx - 14, 104, 28, 78, FUNDO2, PRETO)
+        nv = 128 + math.sin(t * 2) * 1
+        dither(tela, bx - 14, nv, 28, 182 - nv, D.AZUL[1], D.AZUL[2])
+        tela.ret(bx - 14, int(nv), 28, 1, CIANO)
+        for i in range(5):
+            u = (t * .6 + i / 5) % 1
+            tela.px(bx - 10 + i * 5, nv + 50 - u * 50, CIANO)
+        tela.ret(bx - 3, 90, 6, 7, LATAO)
+        tela.texto('BOTIJÃO', bx, 194, ACO3, tam=9, centro=True, contorno=PRETO)
+        # mangueira, serpentina e bico
+        qx, qy = x0 + 190, 150
+        ch = chama_de(self.js, t) if t >= 12.6 else (.3 if t >= 6.6 else 0.0)
+        quente = t >= 6.6
+        pts = [self.caminho(u, bx, 94, qx, qy) for u in np.linspace(0, 1, 400)]
+        us = np.linspace(0, 1, 400)
+        def tubo(frente):
+            for (a, b), u in zip(zip(pts, pts[1:]), us):
+                na_serp = .4 <= u < .8
+                if na_serp:
+                    f = (u - .4) / .4
+                    if (math.sin(math.pi + f * 6 * math.pi) > 0) != frente: continue
+                elif not frente: continue
+                cor = (LARANJA if int(t * 6 + u * 40) % 3 else CHAMA1) if (na_serp and quente) else ACO1
+                tela.ret(a[0] - 1, a[1] - 1, 3, 3, PRETO)
+                tela.ret(a[0], a[1], 2, 2, cor)
+        tubo(False)
+        D.chama(tela, qx, qy - 2, 3.0, max(ch, .12), t, 7)
+        tubo(True)
+        tela.ret(qx - 6, qy - 3, 12, 5, PRETO)
+        tela.ret(qx - 5, qy - 2, 10, 3, ACO3)
+        for i in range(18):
+            u = (t * .1 + i / 18) % 1
+            if t < 6.6 and u > .4: continue
+            x, y = self.caminho(u, bx, 94, qx, qy)
+            gas = u > .6 and quente
+            tela.ret(x - 1, y - 1, 3, 3, PRETO)
+            tela.ret(x, y, 2, 2, BRANCO if gas else CIANO)
+        rotulo(tela, 'SERPENTINA', qx + 36, 96, qx + 22, qy - 30)
+        rotulo(tela, 'MANGUEIRA', x0 + 70, 40, x0 + 100, 60)
+        rotulo(tela, 'BICO', qx + 36, 160, qx + 5, qy)
+
+    def dias(self, tela, u, x0):
+        for j, (Tc, cor, kg) in enumerate(((10, CIANO, 842), (30, LARANJA, 612))):
+            cx = x0 + 52 + j * 96 if not VERTICAL else x0 + 48 + j * 86
+            subida = (kg - 600) / 250 * suave(u / 4) * 40
+            gradiente(tela, cx - 44, 10, 88, 186, [(0, CEU0), (1, CEU3 if j == 0 else CEU5)])
+            tela.ret(cx - 44, 186, 88, 10, CAMPO1)
+            D.balao(tela, cx, 150 - subida, .5, u + j, dict(chama=1.0 if (u % 2) < .5 else 0.0))
+            tela.texto(f"{Tc} °C", cx, 16, cor, tam=17, centro=True, contorno=PRETO)
+            tela.texto('DIA FRIO' if j == 0 else 'DIA QUENTE', cx, 36, BRANCO, tam=9, centro=True, contorno=PRETO)
+            etiqueta(tela, f"{kg} KG", cx, 176, cor)
+
+    def sons(self, fx):
+        for a, b in self.js:
+            fx.put(jato_som(b - a), self.t0 + a, .06)
+        fx.put(sopro(5.5, 2000, 5000), self.t0 + .5, .012)
+        for a in (6.6, 12.6, self.T_FRIO):
+            fx.put(fx.blip(74, .1), self.t0 + a, .1)
+
+
 # ============================================================ enchendo
 class Inflar(Cena):
     T_QUEIMA, T_LEV0, T_LEV1 = 9.0, 14.6, 23.0
@@ -1218,7 +1347,7 @@ class Fim(Cena):
 Fim.pos = Fim.fim_vinheta
 
 CENAS = dict(gancho=Gancho, titulo=Titulo, particulas=Particulas_, empuxo=Empuxo, conta=Conta, partes=Partes,
-             inflar=Inflar, subir=Subir, descer=Descer, vento=Vento, historia=Historia, resumo=Resumo, fim=Fim)
+             gas=Gas, inflar=Inflar, subir=Subir, descer=Descer, vento=Vento, historia=Historia, resumo=Resumo, fim=Fim)
 
 
 if __name__ == '__main__':
