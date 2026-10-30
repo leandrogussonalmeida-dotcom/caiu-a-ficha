@@ -32,7 +32,7 @@ EPISODIOS = [
          ideia='Subpixels vermelho/verde/azul, mistura de cor, LCD (luz de fundo + cristal líquido + '
                'filtro) contra OLED (cada subpixel acende), resolução, taxa de atualização. Meta: um '
                'canal de pixel explicando pixel.'),
-    dict(id='ep05', serie='dentro', titulo='Como a geladeira faz frio', estado='fila', onda=1,
+    dict(id='ep05', serie='dentro', titulo='Como a geladeira faz frio', estado='pronto', onda=1,
          ideia='Ciclo de refrigeração: compressor, condensador (grade quente atrás), válvula de expansão, '
                'evaporador; o fluido que ferve frio. Protagonista: uma porção do fluido dando a volta.'),
     # ---------------------------------------------------------------- onda 2

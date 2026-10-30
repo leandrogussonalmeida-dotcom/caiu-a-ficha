@@ -267,8 +267,9 @@ def amostra(tela, x, y, cor, lado=10):
 # ------------------------------------------------------------------ o corte de um pixel
 LANES = [(30, 44), (84, 44), (138, 44)]              # y e altura de cada subpixel (R, G, B)
 SLAB_Y0, SLAB_Y1 = 24, 188
-LCD = dict(luz=(8, 28), pol1=(38, 44), vid1=(52, 55), cris=(55, 121), vid2=(121, 124), pol2=(134, 140),
-           filt=(148, 156))
+# o filtro de cor fica no vidro da frente, por dentro; o 2º polarizador, por fora dele
+LCD = dict(luz=(8, 28), pol1=(38, 44), vid1=(52, 55), cris=(55, 121), vid2=(121, 124), filt=(128, 136),
+           pol2=(144, 150))
 SAIDA = (162, 176)
 OLED = dict(tft=(8, 34), anodo=(40, 45), org=(45, 96), catodo=(96, 100), vidro=(112, 117))
 NOMES_LCD = dict(luz='LUZ DE FUNDO', pol1='POLARIZADOR', cris='CRISTAL LÍQUIDO', pol2='POLARIZADOR 2',

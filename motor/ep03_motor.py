@@ -296,7 +296,7 @@ class Gancho(Cena):
             for j in range(4):
                 tela.ret(int(x - sent * (20 + j * 7)) - 3, int(y - 4 - j * 2), 6 - j, 1, ACO3)
             D.mala_lado(tela, x - 15, y, 30, 12, 'prota', t, tag=True, balanco=2)
-            D.marcador(tela, x, y - 16, t, 'SUA MALA')
+            D.marcador(tela, x, y - 16, t, 'SUA MALA', xmax=W)
         if t >= 6.0 and not VERTICAL:
             u = ease((t - 6.0) / 1.2)
             painel(tela, 352, 6, 120, 44, borda=AMARELO)
@@ -727,10 +727,10 @@ class Inspecao(Cena):
     GX = 180          # x do anel do tomógrafo (dentro da máquina)
 
     def x_prota(self, t):
-        return interp_lin([(0, -40), (4.5, 112), (16, 210), (19, 254), (31, 254), (34, 330)], t)
+        return interp_lin([(0, -40), (4.5, 112), (16, 210), (19, 254), (31, 254), (37, 300), (40, 340)], t)
 
     def x_cinza(self, t):
-        return interp_lin([(0, -120), (14, -40), (18, 112), (24, 210), (27, 220), (32, 220), (33, 254), (38, 330)], t)
+        return interp_lin([(0, -120), (14, -40), (18, 112), (24, 210), (27, 220), (33, 220), (35, 254), (39, 330)], t)
 
     def p_scan(self, x):
         return min(1.0, max(0.0, (x + 30 - self.GX) / 30.0))
@@ -740,9 +740,8 @@ class Inspecao(Cena):
         xp, xg = self.x_prota(t), self.x_cinza(t)
         # esteira de baixo (inspeção manual) e rampa de cima (liberadas)
         D.esteira(tela, -10, 300, 165, t, 30, chao=196)
-        subir = 31.0 <= t
+        subir = True
         D.rampa(tela, 254, 165, 300, 136, t, 30)
-        tx(tela, 'LIBERADAS', 252, 118, VERDE)
         tx(tela, 'INSPEÇÃO', 250, 180, VERMELHO)
         # malas fora da máquina
         def mala(x, cor, tag=True):
@@ -802,16 +801,6 @@ class Inspecao(Cena):
         # cortinas
         D.cortina(tela, 109, 129, 12, 35, t, .6 if any(100 < x + 30 and x < 120 for x in (xp, xg)) else 0)
         D.cortina(tela, 235, 129, 12, 35, t, .6 if any(220 < x + 30 and x < 248 for x in (xp, xg)) else 0)
-        # estado da nossa mala depois da saída
-        if 19.0 <= t < 34.0 and not VERTICAL:
-            ok = t >= 30.4
-            painel(tela, 252, 132 - (29 if t >= 31 else 0) * min(1, (t - 31) / 3) if t >= 31 else 132, 44, 12, borda=VERDE if ok else AMARELO)
-        if 19.0 <= t < 34.0:
-            ok = t >= 30.4
-            yy = 133 if t < 31 else 133 - int(29 * min(1.0, (t - 31) / 3.0))
-            xx = xp + 15
-            if xx < 300:
-                tx(tela, 'LIBERADA' if ok else 'AGUARDE', xx, yy - 12, VERDE if ok else AMARELO, centro=True)
         # vista de frente do tomógrafo (o anel girando de verdade)
         if dentro and not VERTICAL:
             self.vista_frente(tela, 52, 52, t, dentro, alarme)
@@ -819,7 +808,14 @@ class Inspecao(Cena):
             xc = self.xv(tg)
             if xc is not None and xc < 40:
                 self.vista_frente(tela, xc + 40, 52, t, dentro, alarme)
-        D.marcador(tela, min(xp + 15, 290), (165 if xp < 254 else 165 - 29 * min(1, (xp - 254) / 46)) - 16 if not (106 <= xp <= 236) else 60, t)
+        if xp < 300:
+            if 106 <= xp <= 236:
+                D.marcador(tela, xp + 15, 62, t)
+            else:
+                yb = 165 if xp < 254 else 165 - 29 * min(1.0, (xp - 254) / 46.0)
+                rot = None
+                if xp >= 240: rot = 'LIBERADA' if t >= 30.4 else 'AGUARDE'
+                D.marcador(tela, min(xp + 15, 290), yb - 16, t, rot, VERDE if rot == 'LIBERADA' else AMARELO)
         if self.hud(tela, t, tg, u=suave((t - 4.0) / 30.0)):
             self.miolo(tela, t, xp, xg)
 
@@ -901,9 +897,8 @@ class Inspecao(Cena):
             self.imagem(tela, X, Y, 1.0, 'prota', t, analisa=min(6.99, (t - 15.0) / 1.0))
         elif t < 30.4:
             pisca = (t * 3) % 1 < .7
-            tx(tela, 'ALARME: OUTRA MALA', PX0, 68, VERMELHO if pisca else BRASA)
+            tx(tela, 'ALARME: OUTRA MALA' if t < 26 else 'VAI PARA UM AGENTE', PX0, 68, VERMELHO if pisca else BRASA)
             self.imagem(tela, X, Y, self.p_scan(xg), 'cinza', t, alarme=self.p_scan(xg) > .7)
-            tx(tela, 'VAI PARA UM AGENTE', PX0, 140, VERMELHO) if t > 25 else None
         else:
             tx(tela, 'A NOSSA MALA', PX0, 68, ACO3)
             self.imagem(tela, X, Y, 1.0, 'prota', t)
@@ -927,7 +922,7 @@ CHUTES_B = [(150, 'LCD'), (190, 'USB'), (226, 'GIF')]                  # saem pa
 
 class Triagem(Cena):
     ETAPA, NOME = 4, ETAPAS[3]
-    X0, X1, YB, YT, R = 62, 236, 162, 50, 56
+    X0, X1, YB, YT, R = 66, 236, 158, 54, 52
     V = 23.0
     N = 38
     P_IND = 38.0
@@ -960,7 +955,7 @@ class Triagem(Cena):
         self.IND = [(-30, 186), (76, 186), (100, 168)]
         self.L_ind = comprimento(self.IND)
 
-    def pos(self, p):
+    def ponto(self, p):
         p %= self.P
         if p < self.Ls: return self.X0 + p, self.YB
         p -= self.Ls
@@ -1033,7 +1028,7 @@ class Triagem(Cena):
             if t_ind <= t < t_out + .45: ocup[k] = (t_ind, t_out, cod, cor, prota)
         for k in range(self.N):
             p = self.p_bandeja(k, t)
-            x, y = self.pos(p)
+            x, y = self.ponto(p)
             tomba = 0.0; sentido = 0
             if k in ocup:
                 t_ind, t_out, cod, cor, prota = ocup[k]
@@ -1056,16 +1051,16 @@ class Triagem(Cena):
                 if q is None: continue
                 x, y = q
             elif t < t_out:
-                x, y = self.pos(self.p_bandeja(k, t))
+                x, y = self.ponto(self.p_bandeja(k, t))
             else:
                 pj, sentido, xc = self.saidas[cod]
                 tau = t - t_out
-                xs, ys = self.pos(pj)
+                xs, ys = self.ponto(pj)
                 if prota:
-                    o = min(1.0, tau / 1.6) ** 1.6 * (self.YT - 14)
+                    o = min(1.0, tau / 1.6) ** 1.6 * (self.YT - 30)
                 else:
                     o = (tau / 1.4) ** 1.6 * 70
-                    if o > 70: continue
+                    if o > 28: continue
                 x, y = xc, ys + sentido * o
             D.mala_topo(tela, x, y, 12, 9, cor, t, tag=prota)
             if prota: prota_xy = (x, y)
@@ -1087,23 +1082,30 @@ class Triagem(Cena):
         D.caixa(tela, cx - 14, cy, 28, 12, ACO0, ACO1, FUNDO3)
         tela.disco(cx - 9, cy + 13, 3, PRETO); tela.disco(cx + 9, cy + 13, 3, PRETO)
         ca, sa = math.cos(ang), math.sin(ang)
-        def rot(px_, py_): return (cx + px_ * ca - py_ * sa, cy - 4 + px_ * sa + py_ * ca)
-        poligono(tela, [rot(-30, -3), rot(30, -3), rot(30, 2), rot(-30, 2)], PRETO)
-        poligono(tela, [rot(-29, -2), rot(29, -2), rot(29, 1), rot(-29, 1)], ACO2)
-        tela.disco(cx, cy - 2, 2, ACO3)
-        desl = 0.0 if a < 1 else min(1.0, (ciclo - 1.7) / .6) * 40
-        bx = -10 + desl
-        p0 = rot(bx - 10, -3)
-        p1 = rot(bx + 10, -3)
-        if bx < 32:
-            poligono(tela, [p0, p1, (p1[0] + sa * -9 * 0 + -sa * 9 * 0 + 0 - 9 * sa * -1 * 0 + 0, p1[1] - 9 * ca), (p0[0], p0[1] - 9 * ca)], PRETO)
-            q0 = rot(bx - 9, -4); q1 = rot(bx + 9, -4)
-            poligono(tela, [q0, q1, (q1[0] + 8 * sa, q1[1] - 8 * ca), (q0[0] + 8 * sa, q0[1] - 8 * ca)], CHAMA2)
-        tx(tela, 'TOMBA NA SAÍDA CERTA', PX0, 122, ACO2)
+        oy = cy - 6
+        def rot(u, v): return (cx + u * ca - v * sa, oy + u * sa + v * ca)
+        # calha à direita
+        poligono(tela, [(cx + 30, oy + 4), (cx + 62, oy + 22), (cx + 62, oy + 26), (cx + 30, oy + 8)], ACO0)
+        tela.linha(cx + 30, oy + 4, cx + 62, oy + 22, ACO2)
+        tela.ret(cx - 2, oy, 4, 7, ACO2)
+        poligono(tela, [rot(-31, -4), rot(31, -4), rot(31, 1), rot(-31, 1)], PRETO)
+        poligono(tela, [rot(-30, -3), rot(30, -3), rot(30, 0), rot(-30, 0)], ACO2)
+        tela.linha(*rot(-30, -3), *rot(30, -3), ACO4)
+        tela.disco(cx, oy, 2, ACO3)
+        desl = 0.0 if a < 1 else min(1.0, (ciclo - 1.7) / .5) * 44
+        bu = -8 + desl
+        if bu < 34:
+            poligono(tela, [rot(bu - 10, -3), rot(bu + 10, -3), rot(bu + 10, -13), rot(bu - 10, -13)], PRETO)
+            poligono(tela, [rot(bu - 9, -4), rot(bu + 9, -4), rot(bu + 9, -12), rot(bu - 9, -12)], CHAMA2)
+            tela.linha(*rot(bu - 8, -11), *rot(bu + 8, -11), LARANJA)
+        else:
+            k = min(1.0, (bu - 34) / 10)
+            bx_, by_ = cx + 40 + 16 * k, oy + 4 + 10 * k
+            tela.ret(int(bx_) - 9, int(by_) - 9, 18, 9, PRETO); tela.ret(int(bx_) - 8, int(by_) - 8, 16, 7, CHAMA2)
         c1 = AMARELO if 15.0 <= t < 23.0 else BRANCO
         c2 = AMARELO if 31.0 <= t < 39.0 else BRANCO
-        tx(tela, 'VELOCIDADE', PX0, 134, ACO3); tx(tela, '2 M/S', 470, 132, c1, 9, centro='d')
-        tx(tela, 'ATÉ', PX0, 144, ACO3); tx(tela, '9.000 MALAS/H', 470, 144, c2, 9, centro='d')
+        tx(tela, 'VELOCIDADE', PX0, 122, ACO3); tx(tela, '2 M/S', 470, 119, c1, 17, centro='d')
+        tx(tela, 'ATÉ', PX0, 140, ACO3); tx(tela, '9.000/H', 470, 137, c2, 17, centro='d')
 
     def sons(self, fx):
         self.zumbido(fx, 0, self.dur, .06)
@@ -1132,7 +1134,7 @@ class Montagem(Cena):
             u = ease((t - 23.0) / 4.0)
             x0, y0 = 104, self.MESA_Y
             x1, y1 = self.LD[0] + 26, self.LD[1] - 26
-            return x0 + (x1 - x0) * u, y0 + (y1 - y0) * u - math.sin(u * math.pi) * 30, 'mao'
+            return x0 + (x1 - x0) * u, y0 + (y1 - y0) * u - math.sin(u * math.pi) * 12, 'mao'
         return self.LD[0] + 26, self.LD[1] - 26, 'dentro'
 
     def desenhar(self, tela, t, tg):
@@ -1140,8 +1142,8 @@ class Montagem(Cena):
         # calha de roletes vinda da triagem
         (ax, ay), (bx, by) = self.CHUTE
         D.rampa(tela, ax, ay, bx, by, t, 50)
-        tela.ret(14, 4, 1, 1, FUNDO)
-        tx(tela, 'SAÍDA PXL', 22, 22, AMARELO)
+        painel(tela, 18, 54, 62, 13, borda=AMARELO)
+        tx(tela, 'SAÍDA PXL', 49, 57, AMARELO, centro=True)
         # mesa de montagem
         tela.ret(96, self.MESA_Y, 84, 6, PRETO); tela.ret(97, self.MESA_Y + 1, 82, 4, ACO1); tela.ret(97, self.MESA_Y + 1, 82, 1, ACO3)
         for x in (100, 172): tela.ret(x, self.MESA_Y + 6, 4, 196 - self.MESA_Y - 6, ACO0)
@@ -1164,13 +1166,13 @@ class Montagem(Cena):
         mao = None
         if 23.0 <= t < 27.0:
             braco = .9
-        fx_ = 192 if t < 22 else interp([(22, 192), (25, 196)], t)
-        hx, hy = D.funcionario(tela, fx_, 196, t, lado=lado, braco=braco, scanner=t < 22.0)
+        fx_ = 196 if t < 22 else interp([(22, 196), (25, 198)], t)
+        hx, hy = D.funcionario(tela, fx_, 197, t, lado=lado, braco=braco, scanner=t < 22.0)
         if 8.2 <= t < 14.0:
             # feixe do leitor de mão na etiqueta
             alvo = (104 + 19 + 4, self.MESA_Y - 12 + 3)
             if (t * 6) % 1 < .8:
-                tela.linha(hx - 4, hy - 2, alvo[0], alvo[1], VERMELHO)
+                tela.linha(hx - 7, hy - 3, alvo[0], alvo[1], VERMELHO)
                 tela.disco(alvo[0], alvo[1], 1.6, VERMELHO)
         if onde in ('mesa', 'rampa') or onde == 'mao':
             D.marcador(tela, mx + 15, my - 16, t)
@@ -1332,21 +1334,24 @@ class Patio(Cena):
             tx(tela, '1,63', PX0 + 70, 122, AMARELO)
         else:
             tx(tela, 'O AVIÃO EM CORTE', PX0, 68, ACO3)
-            cx, cy, R = PX0 + 80, 108, 38
+            cx, cy, R = PX0 + 42, 113, 36
             tela.disco(cx, cy, R + 2, PRETO); tela.disco(cx, cy, R, ACO2); tela.disco(cx, cy, R - 3, FUNDO2)
-            tela.ret(cx - R + 3, cy + 6, 2 * R - 6, 2, ACO3)
+            tela.ret(cx - R + 3, cy + 4, 2 * R - 6, 2, ACO3)
             for k in range(-3, 4):
-                tela.ret(cx + k * 9 - 3, cy - 6, 6, 10, MISTURA); tela.ret(cx + k * 9 - 3, cy - 6, 6, 2, MISTURA2)
-            # dois LD3 lado a lado, chanfro para fora
-            w, h = 24, 20
-            D.ld3(tela, cx + 2, cy + 9 + h, w, h, porta='fechada', nome=False)
-            salvo_x0 = cx - 2 - w
+                tela.ret(cx + k * 8 - 3, cy - 8, 6, 10, MISTURA); tela.ret(cx + k * 8 - 3, cy - 8, 6, 2, MISTURA2)
+            w, h = 22, 18
+            D.ld3(tela, cx + 1, cy + 7 + h, w, h, porta='fechada', nome=False)
+            x0 = cx - 1 - w
             tmp = tela.buf.copy()
-            D.ld3(tela, salvo_x0, cy + 9 + h, w, h, porta='fechada', nome=False)
-            reg = tela.buf[cy + 7:cy + 11 + h, salvo_x0 - 1:salvo_x0 + w + 3].copy()
-            tela.buf[cy + 7:cy + 11 + h, salvo_x0 - 1:salvo_x0 + w + 3] = tmp[cy + 7:cy + 11 + h, salvo_x0 - 1:salvo_x0 + w + 3]
-            tela.buf[cy + 7:cy + 11 + h, salvo_x0 - 1:salvo_x0 + w + 3] = reg[:, ::-1]
-            tx(tela, '2 LADO A LADO', cx, 140, AMARELO, centro=True)
+            D.ld3(tela, x0, cy + 7 + h, w, h, porta='fechada', nome=False)
+            ys, xs_ = slice(cy + 5, cy + 9 + h), slice(x0 - 1, x0 + w + 2)
+            reg = tela.buf[ys, xs_].copy()
+            tela.buf[ys, xs_] = tmp[ys, xs_]
+            tela.buf[ys, xs_] = np.where(reg[:, ::-1] != tmp[ys, xs_][:, ::-1], reg[:, ::-1], tmp[ys, xs_])
+            tx(tela, 'PASSAGEIROS', cx + R + 6, cy - 12, MISTURA2) if False else None
+            tx(tela, '2 LADO', cx + R + 8, cy + 6, AMARELO, 9)
+            tx(tela, 'A LADO', cx + R + 8, cy + 16, AMARELO, 9)
+            tx(tela, 'CABINE', cx + R + 8, cy - 10, MISTURA2, 9)
 
     def sons(self, fx):
         for k in range(int(6.5 * 12)):
@@ -1391,8 +1396,8 @@ class Voo(Cena):
             if k % 2 == 0: tela.px(xx, yc + 16 + k * .05, ACO1 if k < 12 else TRACO)
         # zoom do porão
         if not VERTICAL or True:
-            zx, zy, zw, zh = 96, 136, 124, 52
-            tela.linha(92, yc + 4, zx, zy, CIANO); tela.linha(212, yc + 4, zx + zw, zy, CIANO)
+            zx, zy, zw, zh = 150, 136, 124, 52
+            tela.linha(194, yc + 4, zx, zy, CIANO); tela.linha(250, yc + 4, zx + zw, zy, CIANO)
             tela.ret(zx - 1, zy - 1, zw + 2, zh + 2, CIANO)
             tela.ret(zx, zy, zw, zh, FUNDO)
             tela.ret(zx, zy + zh - 4, zw, 4, ACO0); tela.ret(zx, zy + zh - 4, zw, 1, ACO1)
@@ -1419,7 +1424,7 @@ class Voo(Cena):
         for k in range((x1 - x0) // 14):
             cx = x0 + 3 + k * 14
             tela.ret(cx, y0 + 3, 11, y1 - y0 - 4, ACO1); tela.ret(cx, y0 + 3, 11, 1, ACO3)
-            if k == 3: tela.ret(cx + 3, y0 + 5, 5, 3, CHAMA2)
+            if k == 1: tela.ret(cx + 3, y0 + 5, 5, 3, CHAMA2)
 
     def nuvem(self, tela, x, y, w, cor, luz):
         for k in range(4):
@@ -1430,12 +1435,12 @@ class Voo(Cena):
 
     def miolo(self, tela, t):
         tx(tela, 'ROTA DE EXEMPLO', PX0, 68, ACO3)
-        ax, ay, bx, by = PX0 + 8, 128, PX0 + 150, 88
+        ax, ay, bx, by = PX0 + 8, 116, PX0 + 150, 84
         for k in range(0, 30):
             u = k / 29
             tela.px(ax + (bx - ax) * u, ay + (by - ay) * u - math.sin(u * math.pi) * 18, ACO1)
         if t >= 29.8:
-            hx, hy = PX0 + 70, 140
+            hx, hy = PX0 + 70, 128
             for k in range(0, 20):
                 u = k / 19
                 tela.px(ax + (hx - ax) * u, ay + (hy - ay) * u, ROXO)
@@ -1444,14 +1449,14 @@ class Voo(Cena):
         u = suave(t / (self.dur - .5))
         px_, py_ = ax + (bx - ax) * u, ay + (by - ay) * u - math.sin(u * math.pi) * 18
         tela.disco(ax, ay, 3, ACO3); tela.disco(bx, by, 3, AMARELO)
-        tx(tela, 'ORIGEM', ax - 2, ay + 6, ACO3)
+        tx(tela, 'ORIGEM', ax - 2, ay + 5, ACO3)
         tx(tela, 'PXL', bx - 18, by - 12, AMARELO)
         poligono(tela, [(px_ + 5, py_), (px_ - 4, py_ - 4), (px_ - 2, py_), (px_ - 4, py_ + 4)], BRANCO)
         txts = ((7.8, 'PORÃO DA FRENTE'), (15.4, 'PESO JÁ CONHECIDO'), (23.0, 'AVIÃO GRANDE: LD3'), (99, '900 KM DE VOO'))
         s = 'PORÃO DA FRENTE'
         for a, l in ((0, 'NO PORÃO DA FRENTE'), (7.8, 'PESO JÁ CONHECIDO'), (15.4, 'AVIÃO GRANDE: LD3'), (23.0, '900 KM DE VOO')):
             if t >= a: s = l
-        tx(tela, s, PX0, 74 + 0, ACO3) if False else tx(tela, s, PX0, 140, CIANO)
+        tx(tela, s, PX0, 141, CIANO)
 
     def sons(self, fx):
         fx.put(fx.chiado(self.dur, 80, 400, ataque=1.5), self.t0, .12)
@@ -1465,45 +1470,62 @@ class Conexao(Cena):
         rng = np.random.default_rng(14)
         self.estrelas = [(int(rng.integers(0, 300)), int(rng.integers(0, 110)), float(rng.uniform(0, 6))) for _ in range(40)]
 
-    def aviao_chao(self, tela, x, t, porta_aberta=True, s=.55):
-        yc = 132
+    def aviao_chao(self, tela, x, t, porta_aberta=True, s=.72):
+        yc = 168
         D.aviao(tela, x, yc, t, s=s)
-        # trem de pouso
-        for gx in (x + 60 * s, x + 135 * s, x + 225 * s):
-            tela.ret(int(gx), int(yc + 14 * s), 2, int(196 - yc - 14 * s - 5), ACO1)
-            tela.disco(gx + 1, 191, 5, PRETO); tela.disco(gx + 1, 191, 2, ACO1)
+        # trem de pouso curto
+        for gx in (x + 60 * s, x + 140 * s, x + 222 * s):
+            tela.ret(int(gx), int(yc + 10), 2, 186 - int(yc + 10), ACO1)
+            tela.disco(gx + 1, 190, 5, PRETO); tela.disco(gx + 1, 190, 2, ACO1)
         # porta do porão
-        dx, dy = int(x + 180 * s), int(yc + 4)
-        tela.ret(dx - 1, dy - 1, 16, 9, PRETO)
-        tela.ret(dx, dy, 14, 7, FUNDO if porta_aberta else ACO2)
+        dx, dy = int(x + 196 * s), int(yc + 2)
+        tela.ret(dx - 1, dy - 1, 16, 10, PRETO)
+        tela.ret(dx, dy, 14, 8, FUNDO if porta_aberta else ACO2)
         if porta_aberta: tela.ret(dx + 1, dy + 1, 12, 1, CHAMA0)
-        return dx + 7, dy + 6
+        return dx + 7, dy + 8
 
     def desenhar(self, tela, t, tg):
         D.ceu_noite(tela, t, self.estrelas, horizonte=150)
+        # o terminal do aeroporto de conexão, ao longe
+        tela.ret(0, 112, 300, 38, FUNDO2)
+        poligono(tela, [(0, 112), (300, 112), (300, 106), (150, 98), (0, 106)], FUNDO2)
+        for x in range(6, 300, 9):
+            for y in (118, 128, 138):
+                if (x * 7 + y) % 11 > 3: tela.ret(x, y, 4, 3, CHAMA1 if (x + y) % 3 else AMARELO)
+        tela.ret(232, 46, 10, 66, FUNDO3); tela.ret(232, 46, 1, 66, TRACO)
+        poligono(tela, [(222, 46), (252, 46), (248, 34), (226, 34)], FUNDO3)
+        tela.ret(226, 37, 22, 5, AGUA1); tela.ret(226, 37, 22, 1, MISTURA2)
+        if (t * 1.2) % 1 < .3: tela.disco(237, 30, 1.6, VERMELHO)
+        painel(tela, 20, 68, 120, 14, borda=ROXO)
+        tx(tela, 'AEROPORTO DE CONEXÃO', 80, 71, ROXO, centro=True)
         tela.ret(0, 150, W, PALCO_H - 150, ACO0)
+        dither(tela, 0, 150, W, 12, TRACO, ACO0)
         dither(tela, 0, 176, W, PALCO_H - 176, ACO0, ACO1)
         tela.ret(0, 200, 300, 2, AMARELO)
-        pa = self.aviao_chao(tela, -86, t, True)
+        pa = self.aviao_chao(tela, -120, t, True)
         fecha_b = 18.0 <= t < 23.0
-        pb = self.aviao_chao(tela, 150, t, not fecha_b)
-        tx(tela, 'VOO 1', 10, 100, ACO2)
-        tx(tela, 'VOO 2', 196, 100, ACO2)
+        pb = self.aviao_chao(tela, 118, t, not fecha_b)
+        tx(tela, 'VOO 1', 24, 142, BRANCO)
+        tx(tela, 'VOO 2', 150, 124, BRANCO)
+        for (px_, py_) in (pa, pb):
+            D.rampa(tela, px_ - 30, 194, px_, py_, t, 20)
         # 1ª corrida: a nossa mala troca de avião a tempo; 2ª: outra mala perde
         for (t0, cor, chega) in ((0.0, 'prota', True), (14.0, 'cinza', False)):
             tt = t - t0
             if tt < 0 or tt > 14.0: continue
-            xc = interp([(0, -40), (2.5, 30), (4.0, 30), (10.0, 186), (14.0, 186)], tt)
+            xc = interp([(0, -60), (2.5, 4), (4.0, 4), (10.0, 172), (14.0, 172)], tt)
             D.trator(tela, xc + 30, 196, t, 20)
             D.carrinho(tela, xc - 12, 186, 38, t, 20)
             if tt < 2.5:
                 u = tt / 2.5
-                mx, my = pa[0] + (xc - 6 - pa[0]) * u, pa[1] + (186 - pa[1]) * u
+                q = ao_longo([(pa[0], pa[1]), (pa[0] - 30, 194)], u * 31.6) or (pa[0] - 30, 194)
+                mx, my = (q[0] - 13 + (xc - 6 - q[0] + 13) * max(0.0, u - .8) / .2), (q[1] if u < .8 else 186)
             elif tt < 10.0 or not chega:
                 mx, my = xc - 6, 186
             else:
                 u = min(1.0, (tt - 10.0) / 2.5)
-                mx, my = xc - 6 + (pb[0] - 15 - xc + 6) * u, 186 + (pb[1] - 186) * u
+                q = ao_longo([(pb[0] - 30, 194), (pb[0], pb[1])], u * 31.6) or (pb[0], pb[1])
+                mx, my = q[0] - 13, q[1]
             if not (chega and tt > 12.5):
                 D.mala_lado(tela, mx, my, 26, 10, cor, t, tag=True, balanco=.6)
             if cor == 'prota': D.marcador(tela, mx + 13, my - 13, t)
@@ -1516,7 +1538,7 @@ class Conexao(Cena):
             u = ease((t - 23.0) / .5)
             xc = self.xv(tg)
             cx = 150 if xc is None else xc + 90
-            painel(tela, cx - 76, 76, 152, 40, borda=VERDE)
+            painel(tela, cx - 100 if xc is None else cx - 76, 76, 200 if xc is None else 152, 40, borda=VERDE)
             tx(tela, 'VOO DIRETO', cx, 84 - int((1 - u) * 20), VERDE, 26 if xc is None else 17, centro=True)
         if self.hud(tela, t, tg, rodape=['CENA HIPOTÉTICA:', 'NA NOSSA VIAGEM', 'NÃO TEM CONEXÃO']):
             self.miolo(tela, t)

@@ -77,13 +77,15 @@ def seta_baixo(tela, x, y, cor, tam=5):
         tela.ret(int(x) - w // 2, int(y) + k, w, 1, cor)
 
 
-def marcador(tela, x, y, t, texto=None, cor=AMARELO):
-    """Setinha amarela que pula sobre a protagonista."""
+def marcador(tela, x, y, t, texto=None, cor=AMARELO, xmax=296):
+    """Setinha amarela que pula sobre a protagonista (o texto não passa de xmax)."""
     b = int(round(abs(math.sin(t * 4)) * 3))
     seta_baixo(tela, x, y - 7 - b, PRETO, 7)
     seta_baixo(tela, x, y - 6 - b, cor, 5)
     if texto:
-        tela.texto(texto, int(x), int(y - 19 - b), cor, tam=9, centro=True, contorno=PRETO)
+        w = tela.largura_texto(texto, 9)
+        xt = min(max(int(x), w // 2 + 2), xmax - w // 2 - 2)
+        tela.texto(texto, xt, int(y - 19 - b), cor, tam=9, centro=True, contorno=PRETO)
 
 
 # ===================================================================== etiqueta
@@ -554,7 +556,7 @@ def aviao(tela, x, yc, t=0.0, corte=None, s=1.0):
     poligono(tela, [(xn - 20 * s, yc - 9 * s), (xn - 9 * s, yc - 8 * s), (xn - 6 * s, yc - 4 * s), (xn - 19 * s, yc - 5 * s)], FUNDO3)
     # porão em corte
     if corte:
-        corte(tela, int(x + 70 * s), int(yc + 3 * s), int(x + 190 * s), int(yc + R - 2 * s))
+        corte(tela, int(x + 172 * s), int(yc + 3 * s), int(x + 228 * s), int(yc + R - 2 * s))
     # asa (vista de lado: perfil fino descendo para trás) e motor
     poligono(tela, [(x + 160 * s, yc + 2 * s), (x + 120 * s, yc + 4 * s), (x + 84 * s, yc + 13 * s), (x + 100 * s, yc + 13 * s), (x + 170 * s, yc + 6 * s)], PRETO)
     poligono(tela, [(x + 158 * s, yc + 3 * s), (x + 121 * s, yc + 5 * s), (x + 90 * s, yc + 12 * s), (x + 101 * s, yc + 12 * s), (x + 167 * s, yc + 6 * s)], ACO1)
@@ -572,34 +574,51 @@ def aviao(tela, x, yc, t=0.0, corte=None, s=1.0):
 
 # ===================================================================== gente genérica
 def funcionario(tela, x, yb, t=0.0, lado=1, braco=0.0, anda=0.0, scanner=False):
-    """Funcionário genérico de pátio (colete refletivo, protetor de ouvido).
-    Sem rosto. `braco` 0 = baixo, 1 = esticado para a frente."""
+    """Funcionário genérico de pátio (~60 px): colete refletivo, boné e
+    protetor de ouvido, sem rosto. `braco` 0 = baixo, 1 = esticado à frente.
+    Devolve a posição da mão."""
     x, yb = int(round(x)), int(round(yb))
-    # pernas
-    p = math.sin(anda * 8) * 2 if anda else 0
-    for dx, dp in ((-3, p), (1, -p)):
-        tela.ret(x + dx + int(dp), yb - 12, 3, 11, FUNDO3)
-        tela.ret(x + dx + int(dp) - (1 if lado < 0 else 0), yb - 2, 4, 2, PRETO)
-    # tronco com colete
-    tela.ret(x - 5, yb - 26, 11, 15, PRETO)
-    tela.ret(x - 4, yb - 25, 9, 13, LARANJA)
-    tela.ret(x - 4, yb - 25, 9, 1, CHAMA1)
-    tela.ret(x - 4, yb - 20, 9, 1, ACO4); tela.ret(x - 4, yb - 16, 9, 1, ACO4)
-    tela.ret(x - 1, yb - 25, 2, 13, CHAMA2)
-    # cabeça (boné e protetor auricular), sem feições
-    tela.ret(x - 3, yb - 33, 7, 7, PRETO)
-    tela.ret(x - 2, yb - 32, 5, 5, OLEO1)
-    tela.ret(x - 2, yb - 33, 5, 2, FUNDO3); tela.ret(x + (2 if lado > 0 else -4), yb - 32, 3, 1, FUNDO3)
-    tela.ret(x - (3 if lado > 0 else -2), yb - 31, 2, 3, ACO1)
-    # braço
-    sx, sy = x + lado * 3, yb - 24
-    ang = math.radians(-80 + 75 * braco)
-    hx, hy = sx + lado * math.cos(ang) * 0 + lado * 10 * math.sin(math.radians(10 + 80 * braco)), sy + 10 * math.cos(math.radians(10 + 80 * braco))
-    linha_grossa(tela, sx, sy, hx, hy, 3, LARANJA)
-    tela.ret(int(hx) - 1, int(hy) - 1, 3, 3, OLEO1)
+    p = int(round(math.sin(anda * 7) * 2)) if anda else 0
+    # braço de trás (mais escuro)
+    linha_grossa(tela, x - lado * 4, yb - 45, x - lado * 5, yb - 28, 5, PRETO)
+    linha_grossa(tela, x - lado * 4, yb - 45, x - lado * 5, yb - 28, 3, FUNDO3)
+    # pernas e botas
+    tela.ret(x - 7, yb - 25, 15, 22, PRETO)
+    tela.ret(x - 6 + p, yb - 24, 6, 21, FUNDO3); tela.ret(x + 1 - p, yb - 24, 6, 21, FUNDO3)
+    tela.ret(x - 6 + p, yb - 24, 1, 21, TRACO); tela.ret(x + 1 - p, yb - 24, 1, 21, TRACO)
+    tela.ret(x, yb - 24, 1, 21, PRETO)
+    for bx in (x - 7 + p + (1 if lado > 0 else -1), x + 1 - p + (1 if lado > 0 else -1)):
+        tela.ret(bx, yb - 4, 8, 4, PRETO); tela.ret(bx + 1, yb - 4, 6, 1, ACO0)
+    # tronco: camisa e colete refletivo
+    tela.ret(x - 9, yb - 49, 18, 27, PRETO)
+    tela.ret(x - 8, yb - 48, 16, 25, ACO0)
+    tela.ret(x - 8, yb - 46, 16, 21, LARANJA)
+    dither(tela, x - 8 if lado > 0 else x + 3, yb - 46, 5, 21, LARANJA, CHAMA2)
+    tela.ret(x - 8, yb - 46, 16, 1, CHAMA1)
+    for yy in (yb - 39, yb - 32):
+        tela.ret(x - 8, yy, 16, 2, ACO3); tela.ret(x - 8, yy, 16, 1, ACO4)
+    tela.ret(x, yb - 46, 1, 21, CHAMA2)
+    tela.ret(x - 8, yb - 25, 16, 2, FUNDO3)                                   # cinto
+    # pescoço e cabeça (boné, protetor de ouvido), sem feições
+    tela.ret(x - 2, yb - 52, 4, 4, OLEO1)
+    tela.ret(x - 6, yb - 62, 12, 12, PRETO)
+    tela.ret(x - 5, yb - 61, 10, 10, OLEO1)
+    tela.ret(x - 5 if lado > 0 else x + 1, yb - 57, 4, 6, LATAO)              # sombra do rosto
+    tela.ret(x - 5, yb - 61, 10, 4, FUNDO3); tela.ret(x - 5, yb - 61, 10, 1, TRACO)
+    tela.ret(x + (5 if lado > 0 else -8), yb - 58, 4, 2, FUNDO3)              # aba do boné
+    tela.ret(x - lado * 2 - 2, yb - 58, 4, 6, ACO1); tela.ret(x - lado * 2 - 1, yb - 57, 2, 4, ACO2)
+    # braço da frente
+    sx, sy = x + lado * 4, yb - 45
+    ang = math.radians(80 - 85 * braco)
+    hx = sx + lado * math.cos(ang) * 19
+    hy = sy + math.sin(ang) * 19
+    linha_grossa(tela, sx, sy, hx, hy, 6, PRETO)
+    linha_grossa(tela, sx, sy, hx, hy, 4, ACO0)
+    tela.ret(int(hx) - 2, int(hy) - 2, 5, 5, PRETO); tela.ret(int(hx) - 1, int(hy) - 1, 3, 3, OLEO1)
     if scanner:
-        tela.ret(int(hx) + (1 if lado > 0 else -5), int(hy) - 3, 5, 3, PRETO)
-        tela.px(int(hx) + (2 if lado > 0 else -4), int(hy) - 3, CIANO)
+        bx = int(hx) + (1 if lado > 0 else -8)
+        tela.ret(bx, int(hy) - 4, 8, 5, PRETO); tela.ret(bx + 1, int(hy) - 3, 6, 3, ACO1)
+        tela.px(bx + (6 if lado > 0 else 1), int(hy) - 3, CIANO)
     return hx, hy
 
 

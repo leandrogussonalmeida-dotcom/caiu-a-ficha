@@ -81,7 +81,7 @@ LEGENDAS = {
         (0.8, 7.6, "UMA GELADEIRA COMUM, NA COZINHA.", "O *CONGELADOR* FICA EM CIMA.", ()),
         (7.8, 14.6, "NA GELADEIRA: *4 °C OU MENOS*.", "NO CONGELADOR: *-18 °C OU MENOS*.", ('F1',)),
         (14.8, 21.8, "AGORA PONHA A MÃO ATRÁS DELA,", "NOS CANOS: *ESTÁ QUENTE*.", ('F3',)),
-        (22.0, 29.6, "ESSE CALOR VEIO DE DENTRO:", "DA COMIDA QUE ESTÁ ESFRIANDO.", ('F8',)),
+        (22.0, 29.6, "ESSE CALOR VEIO LÁ DE DENTRO:", "DA COMIDA, DO AR, DAS PAREDES.", ('F8',)),
     ],
     'calor': [
         (0.5, 7.6, "SOZINHO, O CALOR SÓ ANDA DO QUENTE", "PARA O FRIO. ELE VAI ENTRANDO.", ('F9',)),
@@ -101,12 +101,12 @@ LEGENDAS = {
         (48.3, 59.6, "E O *FLUIDO REFRIGERANTE*, QUE DÁ", "A VOLTA POR TUDO ISSO, SEM PARAR.", ('F4',)),
     ],
     'fluido': [
-        (0.5, 8.6, "MUITAS GELADEIRAS USAM *ISOBUTANO*.", "NO AR LIVRE ELE FERVE A -11,8 °C.", ('F2', 'F5')),
+        (0.5, 8.6, "MUITAS GELADEIRAS USAM *ISOBUTANO*.", "À PRESSÃO DO AR, FERVE A -11,8 °C.", ('F2', 'F5')),
         (8.8, 17.6, "MAS O PONTO DE FERVURA MUDA", "COM A *PRESSÃO*.", ('F6',)),
         (17.8, 26.6, "POUCA PRESSÃO: FERVE A *-25 °C*.", "MUITA PRESSÃO: SÓ A *45 °C*.", ('F6', 'F7')),
     ],
     'etapa1': [
-        (2.0, 9.6, "ETAPA 1: O GÁS FRIO CHEGA", "AO *COMPRESSOR*.", ('F4',)),
+        (2.0, 9.6, "ETAPA 1: O GÁS VOLTA, JÁ MORNO,", "E CHEGA AO *COMPRESSOR*.", ('F4',)),
         (9.8, 18.6, "O PISTÃO ESPREME O GÁS: A PRESSÃO", "SOBE *10 VEZES*, DE 0,6 PARA 6 BAR.", ('F6', 'F14')),
         (18.8, 29.6, "GÁS ESPREMIDO ESQUENTA:", "SAI DALI *MAIS QUENTE QUE 45 °C*.", ('F3', 'F4')),
     ],
@@ -132,7 +132,7 @@ LEGENDAS = {
     ],
     'termostato': [
         (0.5, 8.6, "MAS A GELADEIRA NÃO FICA", "LIGADA O TEMPO TODO.", ('F3',)),
-        (8.8, 17.6, "UM *TERMOSTATO* MEDE O FRIO. DEU?", "ELE *DESLIGA* O COMPRESSOR.", ('F3',)),
+        (8.8, 17.6, "O *TERMOSTATO* MEDE: GELOU O BASTANTE?", "ELE *DESLIGA* O COMPRESSOR.", ('F3',)),
         (17.8, 26.6, "A TEMPERATURA SOBE DEVAGAR.", "PASSOU DO PONTO? *LIGA DE NOVO*.", ('F3',)),
         (26.8, 35.6, "ASSIM ELA FICA ENTRE *3 E 5 °C*,", "A FAIXA BOA PARA A COMIDA.", ('F2',)),
     ],
@@ -140,7 +140,7 @@ LEGENDAS = {
         (0.5, 8.6, "PORTA ABERTA: O AR FRIO ESCAPA", "E O DE DENTRO *ESQUENTA*.", ('F13',)),
         (8.8, 17.6, "O TERMOSTATO PERCEBE, E O", "COMPRESSOR *TRABALHA MAIS*.", ('F13', 'F15')),
         (17.8, 26.6, "E A UMIDADE DO AR VIRA *GELO*", "NOS CANOS DO EVAPORADOR.", ('F2',)),
-        (26.8, 35.6, "ABRA POUCO E RÁPIDO. E DEIXE A", "COMIDA QUENTE ESFRIAR ANTES.", ('F11', 'F12')),
+        (26.8, 35.6, "ABRA A PORTA POUCO E FECHE LOGO.", "DEIXE A COMIDA QUENTE ESFRIAR ANTES.", ('F11', 'F12')),
         (35.8, 41.6, "E DEIXE ESPAÇO ATRÁS: O CALOR", "PRECISA DE AR PARA SAIR.", ('F11', 'F12')),
     ],
     'esfriar': [
@@ -201,6 +201,7 @@ Capítulos
 
 Simplificado de propósito
 - As pressões são absolutas e as temperaturas do fluido (-25 °C no evaporador, 45 °C no condensador) são um exemplo dentro da faixa de trabalho de um compressor de geladeira a R-600a; cada geladeira trabalha um pouco diferente.
+- O gás volta ao compressor já morno, aquecido pelo cano de volta; o painel mostra -25 °C na entrada para simplificar.
 - Na saída do compressor o gás passa de 45 °C; não damos um número exato porque ele varia com o aparelho.
 - Desenhamos um compressor de pistão e um condensador de grade nas costas; existem outros tipos (compressor rotativo, condensador embaixo ou embutido na lateral).
 - Nas geladeiras de verdade o tubo capilar costuma correr encostado no cano de volta ao compressor; aqui eles ficam separados para dar para ver.
@@ -228,7 +229,7 @@ CORTES = [
          descricao='No evaporador o fluido ferve a -25 °C e puxa o calor do ar e da comida. É isso que a gente chama de frio.'),
     dict(id='c4', de=('cozinha', 7.8), ate=('cozinha', 30.0), x=68, gancho=['POR QUE', 'É QUENTE?'],
          titulo='Por que a parte de trás da geladeira é quente?',
-         descricao='Dentro, 4 °C ou menos; no congelador, -18 °C ou menos. E atrás, os canos são quentes: é o calor que saiu da comida.'),
+         descricao='Dentro, 4 °C ou menos; no congelador, -18 °C ou menos. E atrás, os canos são quentes: é o calor que saiu lá de dentro (da comida, do ar e das paredes).'),
     dict(id='c5', de=('porta', 0.0), ate=('porta', 36.0), x=44, gancho=['PORTA', 'ABERTA?'],
          titulo='O que acontece quando a porta da geladeira fica aberta?',
          descricao='O ar frio escapa, o termostato percebe e o compressor trabalha mais. E a umidade do ar vira gelo no evaporador.'),

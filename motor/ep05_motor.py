@@ -805,7 +805,7 @@ class Porta(Cena):
             tela.texto('GELO NO EVAPORADOR', PX0, 102, MISTURA2, tam=9, contorno=PRETO)
             n = int(gelo * 20)
             for j in range(n): floco(tela, PX0 + 4 + j * 7, 116)
-        dicas = [(26.8, 'ABRA POUCO E RÁPIDO'), (30.5, 'ESFRIE A COMIDA ANTES'), (35.8, 'DEIXE ESPAÇO ATRÁS')]
+        dicas = [(26.8, 'ABRA E FECHE LOGO'), (30.5, 'ESFRIE A COMIDA ANTES'), (35.8, 'DEIXE ESPAÇO ATRÁS')]
         for j, (ta, txt) in enumerate(dicas):
             if t < ta: continue
             y = 134 + j * 22

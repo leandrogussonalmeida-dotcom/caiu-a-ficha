@@ -340,7 +340,7 @@ class Mito(Tunel):
             tela.texto('CAMINHO MAIOR', 92, 64, AMARELO, tam=9, contorno=PRETO)
             tela.texto('CAMINHO MENOR', 104, 140, ROSA, tam=9, contorno=PRETO)
             if 8.6 < t:
-                txt = 'CHEGAM JUNTOS?'
+                txt = 'JUNTOS?' if VERTICAL else 'CHEGAM JUNTOS?'
                 tela.texto(txt, 140, 22 if VERTICAL else 168, BRANCO, tam=17, centro=True, contorno=PRETO)
             if t >= 11.2:
                 u2 = ease((t - 11.2) / .25)
@@ -808,7 +808,7 @@ class Motores(Cena):
         if t >= 16.4 or True: mostrar.append('jato')
         M.desenhar(tela, t, giro=1.0, mostrar=tuple(mostrar))
         P = M.P
-        if not VERTICAL or True:
+        if not (VERTICAL and t >= 27.2):
             if 5.6 <= t:
                 rotulo(tela, 'VENTILADOR', 40, 12, *P(-48, -30), AMARELO if t < 11 else ACO3)
             if 11.0 <= t and not VERTICAL:
@@ -819,7 +819,7 @@ class Motores(Cena):
             if 21.8 <= t:
                 rotulo(tela, 'AR QUE CONTORNA', 150, 12, *P(20, -34), CIANO)
         if VERTICAL:
-            if t >= 27.2: hud_vertical(tela, 'motores', [('4 MOTORES: 29% DO PESO', AMARELO)])
+            if t >= 27.2: hud_vertical(tela, 'motores', [('4 MOTORES JUNTOS:', AMARELO), ('29% DO PESO', AMARELO)])
             return
         titulo_painel(tela, 'TURBOFAN', 10, BRANCO)
         tela.texto('CORTE DE UM MOTOR', PX0, 30, ACO3, tam=9, contorno=PRETO)

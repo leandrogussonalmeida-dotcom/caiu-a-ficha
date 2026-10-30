@@ -72,7 +72,7 @@ LEGENDAS = {
         (14.7, 21.4, "A *BIELA* LIGA O PISTÃO", "AO VIRABREQUIM.", ()),
         (21.9, 28.6, "O *VIRABREQUIM* TRANSFORMA O SOBE E", "DESCE EM GIRO.", ()),
         (29.1, 35.8, "*VÁLVULAS*: UMA DEIXA ENTRAR AR E", "COMBUSTÍVEL; A OUTRA SOLTA O GÁS.", ('F1',)),
-        (36.3, 43.0, "O *COMANDO* ABRE AS VÁLVULAS E GIRA", "NA METADE DO GIRO DO VIRABREQUIM.", ('F2',)),
+        (36.3, 43.0, "O *COMANDO* ABRE AS VÁLVULAS E", "DÁ 1 VOLTA A CADA 2 DO VIRABREQUIM.", ('F2',)),
         (43.5, 50.2, "A *VELA DE IGNIÇÃO* SOLTA UMA FAÍSCA", "QUE ACENDE A MISTURA.", ()),
     ],
     'admissao': [
@@ -123,7 +123,7 @@ LEGENDAS = {
     'resumo': [
         (0.5, 8.8, "NIKOLAUS OTTO CONSTRUIU UM MOTOR DE", "4 TEMPOS EM *1876*. A IDEIA SEGUE VIVA.", ('F10',)),
         (9.2, 17.8, "OS 4 TEMPOS: ADMISSÃO, COMPRESSÃO,", "COMBUSTÃO (OU EXPLOSÃO) E ESCAPE.", ('F12',)),
-        (18.0, 26.6, "A 3.000 RPM, TUDO ISSO SE REPETE", "1.500 VEZES POR MINUTO EM CADA CILINDRO.", ('F6',)),
+        (18.0, 26.6, "A 3.000 RPM, CADA CILINDRO REPETE", "TUDO ISSO *1.500 VEZES POR MINUTO*.", ('F6',)),
     ],
 }
 
@@ -177,7 +177,7 @@ Fontes
 # close-up ocupa x 105..225; a grade da energia, 34..194.
 PREFIXO = 'ep01-motor'
 CORTES = [
-    dict(id='c1', de=('potencia', 0.0), ate=('potencia', 24.0), x=75, gancho=['A QUEIMA', 'EM SLOW'],
+    dict(id='c1', de=('potencia', 0.0), ate=('potencia', 24.0), x=75, gancho=['A QUEIMA', 'DEVAGAR'],
          titulo='A queima dentro do motor, em câmera lenta 🔥',
          descricao='O tempo de combustão: a vela solta a faísca um pouco antes do topo e o gás quente empurra o pistão para baixo. É o único dos 4 tempos que gera força.'),
     dict(id='c2', de=('ciclo', 0.0), ate=('batidas', 24.0), x=75, gancho=['4 TEMPOS', '4 BATIDAS'],

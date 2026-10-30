@@ -301,7 +301,7 @@ class Subpixel(Cena):
 # ============================================================ 4 cores
 class Cores(Cena):
     POS_FIM = [(128, 76), (168, 76), (148, 110)]
-    POS_INI = [(60, 86), (148, 86), (236, 86)]
+    POS_INI = [(74, 86), (148, 86), (222, 86)]
     RAIO = 36
 
     def estado(self, t):
@@ -567,8 +567,8 @@ class Lcd(Cena):
 
 # ============================================================ 6 cristal
 def cabecalho_lcd(tela):
-    itens = [('LUZ', 18, ACO3), ('POL. 1', 41, ACO3), ('CRISTAL', 88, CIANO), ('POL. 2', 137, ACO3),
-             ('FILTRO', 152, ACO3)]
+    itens = [('LUZ', 18, ACO3), ('POL. 1', 41, ACO3), ('CRISTAL', 88, CIANO), ('FILTRO', 132, ACO3),
+             ('POL. 2', 147, ACO3)]
     D.cabecalhos(tela, itens)
 
 
@@ -814,7 +814,7 @@ class Densidade(Cena):
             painel(tela, bx0, by0, bx1 - bx0, by1 - by0, borda=ACO2, fundo=NEGRO)
             zz = 11.0
             xa = 100
-            fila = lev[16:21, 10:26]
+            fila = lev[20:25, 10:26]
             D.render_niveis(tela, fila, D.normal_de(fila), xa, 50, zz, (xa, 50, xa + 16 * zz, 50 + 5 * zz))
             # régua
             ry = 112
