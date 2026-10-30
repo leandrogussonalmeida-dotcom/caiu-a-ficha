@@ -681,7 +681,7 @@ class Eixos(Cena):
                 rotulo(tela, 'PONTA DO FAN', int(tx) + 30, 34, tx + 4, ty + 3, AMARELO)
         fundo_painel(tela)
         tit(tela, 'DOIS EIXOS', 9, BRANCO, 17)
-        for j, (nome, cor, rps, lig) in enumerate((('ALTA', LARANJA, 1.9, 'COMPRESSOR + TURBINA DA FRENTE'),
+        for j, (nome, cor, rps, lig) in enumerate((('ALTA', LARANJA, 1.9, 'COMPR. DE ALTA + TURBINA DA FRENTE'),
                                                     ('BAIXA', VERDE, 1.1, 'FAN + TURBINA DE TRÁS'))):
             y = 34 + j * 76
             on = (fase == 0) or (fase == 1 and j == 0) or (fase == 2 and j == 1)
@@ -731,8 +731,8 @@ class Calor(Cena):
         tit(tela, 'GÁS', 24, BRANCO, 9)
         tit(tela, '1.500 °C', 34, Q6, 17)
         tit(tela, 'O METAL DA PÁ', 58, BRANCO, 9)
-        tit(tela, 'DERRETE A', 69, BRANCO, 9)
-        tit(tela, '1.030 A 1.130 °C', 80, VERMELHO, 9)
+        tit(tela, 'AGUENTA ATÉ CERCA', 69, BRANCO, 9)
+        tit(tela, 'DE 1.100 °C', 80, VERMELHO, 9)
         escala_calor(tela, PX0 + 1, 96, 156, 4)
         for T, cor in ((1500, BRANCO), (1080, VERMELHO)):
             mx = PX0 + 1 + int(155 * (T - 15) / 1585)

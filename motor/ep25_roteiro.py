@@ -97,13 +97,13 @@ CAPITULOS = [
 
 LEGENDAS = {
     'gancho': [
-        (0.5, 7.4, "O MOTOR DO CARRO FAZ 4 TEMPOS,", "*UM DE CADA VEZ*.", ('F13',)),
+        (0.5, 7.4, "CADA CILINDRO DO CARRO FAZ 4 TEMPOS,", "*UM DE CADA VEZ*.", ('F13',)),
         (7.6, 14.6, "O MOTOR A JATO FAZ OS MESMOS 4,", "*TODOS AO MESMO TEMPO, SEM PARAR*.", ('F6', 'F1')),
     ],
     'aviao': [
         (0.5, 6.8, "UM JATO DE PASSAGEIROS VOA COM", "MOTORES *TURBOFAN* SOB AS ASAS.", ('F2', 'F10')),
         (7.0, 13.4, "OS JATOS REGIONAIS FEITOS NO BRASIL", "TAMBÉM USAM *DOIS TURBOFANS*.", ('F10',)),
-        (13.6, 19.4, "LÁ DENTRO NÃO TEM PISTÃO.", "SÓ FILEIRAS DE PÁS QUE *GIRAM*.", ('F6',)),
+        (13.6, 19.4, "LÁ DENTRO NÃO TEM PISTÃO.", "SÓ FILEIRAS DE PÁS, E MUITAS *GIRAM*.", ('F6',)),
         (19.6, 23.8, "VAMOS *ABRIR UM* AO MEIO.", "", ()),
     ],
     'pecas': [
@@ -144,7 +144,7 @@ LEGENDAS = {
     ],
     'eixos': [
         (0.3, 6.0, "SÃO *DOIS EIXOS*, UM DENTRO DO", "OUTRO, GIRANDO SEPARADOS.", ('F2', 'F14')),
-        (6.2, 12.0, "O DE *ALTA*: A TURBINA DA FRENTE", "GIRA O COMPRESSOR.", ('F14',)),
+        (6.2, 12.0, "O DE *ALTA*: A TURBINA DA FRENTE", "GIRA O COMPRESSOR DE ALTA.", ('F14',)),
         (12.2, 18.0, "O DE *BAIXA*: A TURBINA DE TRÁS", "GIRA O FAN, MAIS DEVAGAR.", ('F2', 'F14')),
         (18.2, 23.8, "DEVAGAR PARA A PONTA DO FAN, QUE", "É ENORME, NÃO PASSAR DO LIMITE.", ('F14',)),
     ],
@@ -173,12 +173,12 @@ LEGENDAS = {
         (15.6, 23.6, "POR ISSO ELE *NÃO FUNCIONA* NO", "ESPAÇO, ONDE NÃO TEM AR.", ('F8',)),
     ],
     'ritmo': [
-        (0.5, 7.6, "NO CARRO: UM TEMPO POR BATIDA,", "*UM DE CADA VEZ*.", ('F13',)),
+        (0.5, 7.6, "NO CILINDRO DO CARRO: UM TEMPO POR", "BATIDA, *UM DE CADA VEZ*.", ('F13',)),
         (8.0, 15.6, "NO JATO: OS 4 TEMPOS EM *TODAS*", "AS BATIDAS, CADA UM NO SEU LUGAR.", ('F6',)),
         (16.0, 23.6, "*SUGA, ESPREME, QUEIMA E SOPRA*.", "SEM PARAR.", ('F1', 'F11')),
     ],
     'historia': [
-        (0.5, 7.6, "EM *1930*, O INGLÊS FRANK WHITTLE", "PATENTEOU UM MOTOR A JATO.", ('F9', 'F8')),
+        (0.5, 7.6, "EM *1930*, O INGLÊS FRANK WHITTLE", "PEDIU A PATENTE DE UM MOTOR A JATO.", ('F9', 'F8')),
         (7.8, 14.6, "EM *1937*, OS PRIMEIROS MOTORES", "A JATO FUNCIONARAM EM TESTE.", ('F9', 'F8')),
         (14.8, 21.6, "NA ALEMANHA, HANS VON OHAIN FEZ O", "SEU *SEM DEPENDER* DO INGLÊS.", ('F9',)),
         (21.8, 28.4, "EM *1939*, O MOTOR DELE FEZ VOAR", "O PRIMEIRO AVIÃO A JATO.", ('F8', 'F9')),
