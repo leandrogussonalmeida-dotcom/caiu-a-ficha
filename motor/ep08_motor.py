@@ -598,9 +598,9 @@ class Camadas(Cena):
 
     def canto(self, k, u=0.0):
         """Canto da camada k na pilha (u = 1: pilha fechada)."""
-        if VERTICAL: x, y = 6 + k * 6, 124 - k * 18
+        if VERTICAL: x, y = 6 + k * 6, 92 - k * 13
         else: x, y = 10 + k * 22, 122 - k * 17
-        x0, y0 = (6 + 3 * 6, 124 - 3 * 18) if VERTICAL else (10 + 3 * 22, 122 - 3 * 17)
+        x0, y0 = (6 + 3 * 6, 92 - 3 * 13) if VERTICAL else (10 + 3 * 22, 122 - 3 * 17)
         return lerp(x, x0, u), lerp(y, y0, u)
 
     def desenhar(self, tela, t, tg):
@@ -904,7 +904,7 @@ class Profundidade(Cena):
                 self.passos.append((tt, k, i, j, pinta))
 
     def layout(self):
-        if VERTICAL: return (37, 14), (37, 116), 11
+        if VERTICAL: return (50, 14), (50, 96), 8
         return (14, 40), (162, 40), 13
 
     def desenhar(self, tela, t, tg):
@@ -914,7 +914,7 @@ class Profundidade(Cena):
         D.grade(tela, cx0, cy0, ZN, ZM, L)
         D.grade(tela, dx0, dy0, ZN, ZM, L, cor_fundo=FUNDO)
         tela.texto('COR', cx0, cy0 - 11, BRANCO, tam=9, contorno=PRETO)
-        tela.texto('PROFUNDIDADE (Z-BUFFER)', dx0, dy0 - 11, BRANCO, tam=9, contorno=PRETO)
+        tela.texto('Z-BUFFER' if VERTICAL else 'PROFUNDIDADE (Z-BUFFER)', dx0, dy0 - 11, BRANCO, tam=9, contorno=PRETO)
         z = np.full((ZM, ZN), 99); cor = np.full((ZM, ZN), -1)
         ultimo, antes = None, 99
         for (tt, k, i, j, pinta) in self.passos:
@@ -1105,7 +1105,7 @@ class Buffer(Cena):
         pronto = nc >= 7
         for n, (bx, by) in enumerate((BUF_A, BUF_B)):
             frente = (n == 0) == a_na_tela
-            if VERTICAL and n == 1: continue
+            if VERTICAL: continue
             if frente:
                 b = JOGO.quadro(q)
             else:
@@ -1117,14 +1117,14 @@ class Buffer(Cena):
             # pentes de memória embaixo da moldura
             for i in range(0, GW, 10): tela.ret(bx + i + 2, by + GH + 3, 5, 3, D.OURO1)
             nome = 'BUFFER ' + 'AB'[n]
-            estado = 'NA TELA' if frente else ('PRONTO, ESPERANDO' if pronto and t >= 29 else ('PRONTO' if pronto else 'DESENHANDO'))
+            estado = 'NA TELA' if frente else ('ESPERANDO' if pronto and t >= 29 else ('PRONTO' if pronto else 'DESENHANDO'))
             if t < 7.4 and n == 1: estado = 'VAZIO'
             if True:
                 tela.texto(nome + ': ', bx, by - 13, BRANCO, tam=9, contorno=PRETO)
                 tela.texto(estado, bx + tela.largura_texto(nome + ': ', 9) + 3, by - 13,
                            VERDE if frente else (LARANJA if pronto else AMARELO), tam=9, contorno=PRETO)
         # monitor
-        mx, my = MON if not VERTICAL else (20, 60)
+        mx, my = MON if not VERTICAL else (20, 30)
         tela.ret(mx - 6, my - 6, GW + 12, GH + 12, PRETO)
         tela.ret(mx - 5, my - 5, GW + 10, GH + 10, ACO1)
         tela.ret(mx - 5, my - 5, GW + 10, 1, ACO3)
@@ -1152,8 +1152,9 @@ class Buffer(Cena):
                 for x in range(mx - 4, mx + GW + 4, 4): tela.ret(x, yy, 2, 1, VERMELHO)
                 tela.texto('RASGO', mx + GW + 6 if not VERTICAL else mx + GW - 30, yy - 3, VERMELHO, tam=9, contorno=PRETO)
         if VERTICAL:
-            if 21.8 <= t < 29: tela.texto('SEM VSYNC', 90, 160, VERMELHO, tam=17, centro=True, contorno=PRETO)
-            elif t >= 29: tela.texto('COM VSYNC', 90, 160, VERDE, tam=17, centro=True, contorno=PRETO)
+            if 21.8 <= t < 29: tela.texto('SEM VSYNC', 90, 136, VERMELHO, tam=17, centro=True, contorno=PRETO)
+            elif t >= 29: tela.texto('COM VSYNC', 90, 136, VERDE, tam=17, centro=True, contorno=PRETO)
+            else: tela.texto('TELA', 90, 136, BRANCO, tam=17, centro=True, contorno=PRETO)
             return
         # painel
         if t < 16.0:
@@ -1198,7 +1199,7 @@ T_PULO = 2 * VY0_S / G_S
 
 class Fps(Cena):
     def caixa(self, k):
-        if VERTICAL: return 2, 4 + k * 68, 176, 64
+        if VERTICAL: return 2, 4 + k * 54, 176, 50
         return 6 + k * 97, 8, 92, 160
 
     def desenhar(self, tela, t, tg):

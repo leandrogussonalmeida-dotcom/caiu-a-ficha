@@ -834,7 +834,7 @@ class Rede(Cena):
             tela.px(int(x), int(y), VERDE if (int(t * 3 + y) % 2) else FUNDO2)
             if aceso: halo(tela, x, y, 10, VERDE)
         M.ponto(tela, 'SÃO PAULO', t, BRANCO, rot=False)
-        rotulo(tela, 'SÃO PAULO', self.P['A'][0] - 8, self.P['A'][1] + 8, BRANCO, centro='d' if False else False)
+        rotulo(tela, 'SÃO PAULO', self.P['A'][0] - 8, self.P['A'][1] + 8, BRANCO)
         M.ponto(tela, 'FORTALEZA', t, AMARELO if t >= 28.6 else BRANCO, rot=False)
         rotulo(tela, 'FORTALEZA', self.P['H'][0] - 34, self.P['H'][1] + 7, AMARELO if t >= 28.6 else BRANCO)
         luz(tela, p[0], p[1], 2.5, BRANCO, AMARELO, CHAMA1)
@@ -911,8 +911,6 @@ class Oceano(Cena):
             linha_grossa(tela, a[0], a[1], a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, 2, AMARELO)
             luz(tela, a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, 1.5, BRANCO, AMARELO)
             rotulo(tela, 'VOCÊ ESTÁ AQUI', 10, 108, ACO3)
-        if land is None or land > 120:
-            pass
         luz(tela, xp, yc(int(xp)) - 1, 3.2, BRANCO, CIANO, MISTURA)
         pacote(tela, xp - 12, yc(int(xp)) - 26, 1, t, brilho=False)
         if not VERTICAL and t < 14.8:
@@ -979,7 +977,7 @@ class Servidor(Cena):
     def caminho(self, t):
         """Caminho do pacote: entra pela calha, desce no rack do meio, sai pela direita."""
         if t < 6.0:
-            u = ease(t / 6.0) if False else min(1.0, t / 6.0)
+            u = min(1.0, t / 6.0)
             return -14 + (150 + 14) * u, 26
         if t < 8.0:
             u = ease((t - 6.0) / 2.0)
