@@ -56,3 +56,16 @@ Nome do canal: NOSSO MUNDO PIXEL. Formato longo novo: "como funciona" sem voz, m
 - Áudio: pico -0,7 dBTP depois do AAC (reprovou); capítulos rápidos 5 dB acima dos lentos; efeitos da câmera lenta inaudíveis. Limitador com folga e ganhos refeitos.
 
 **Checagem independente de fatos (agente separado, 41 legendas):** 39 OK. Corrigidas: "one cylinder is always pushing" (exagero: o impulso começa a cada meia volta, mas não dura a meia volta toda) e 12-30% na legenda contra 16-25% no gráfico (mesma fonte, medidas diferentes; ficou 16-25%). "Burns in a flash" virou "burns fast".
+
+## 29-30/10/2026 — produção em massa, PT-BR primeiro
+
+Leandro aprovou o piloto ("detalhes muito bons", música baixa funciona) e achou lento. Pedido: as 4 séries, longos + cortes, títulos e descrições em txt, tudo em português do Brasil; miniaturas e inglês depois.
+
+- Tela, títulos e descrições voltaram para PT-BR (`idioma.py`: `T(pt, en)`, `milhar`, `decimal`; fonte com acento e cedilha). O ep01 em inglês ficou guardado.
+- Catálogo de 25 episódios em 4 séries (`catalogo.py`); `canal.py` renderiza só o que está `pronto`, cada episódio no seu processo.
+- Esteira: agente de produção (`PRODUCAO.md`) → revisão das folhas → checagem de fatos por outro agente → correções → pronto.
+- Ritmo mais rápido: legenda 4 a 8 s, nada parado mais de ~8 s.
+
+**A checagem independente pegou em cada episódio de 2 a 6 legendas.** Exemplos: ep02 "mais velocidade, menos pressão"; ep06 data do iceberg; ep07 o servidor lê o envelope, não a mensagem; ep08 "60 fps é o mínimo" era opinião de coluna e virou "para muitos jogadores".
+
+**Defeitos de código pegos:** a paleta própria do ep04 vazava para os outros episódios (agora um processo por episódio); método `pos` de um agente colidia com o gancho do fim; estouro de uint8 na folha do ep08.

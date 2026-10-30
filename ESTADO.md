@@ -1,36 +1,45 @@
 # ESTADO — NOSSO MUNDO PIXEL
 
-Atualizado em 29/10/2026. Ler só isto no começo de cada sessão.
+Atualizado em 30/10/2026. Ler só isto no começo de cada sessão.
 
 ## O canal
-- Nome: **NOSSO MUNDO PIXEL** (decidido em 29/10; antes RITMO PIXEL). Público **global**: tela, títulos e descrições em inglês.
-- **Vídeo longo (o que monetiza):** "como funciona" em pixel detalhado, sem voz, com música baixa e legendas grandes. Piloto: ep01, o motor de 4 tempos.
-- **Shorts:** a série NO RITMO (jogo que a música controla) e, depois, recortes dos vídeos longos.
+- Nome: **NOSSO MUNDO PIXEL**. **Primeiro em português do Brasil** (tela, títulos, descrições). Inglês fica para depois (o ep01 em inglês está guardado).
+- **Vídeo longo (o que monetiza):** "como funciona" em pixel detalhado, sem voz, música baixa por baixo dos efeitos, legendas grandes. 7 a 9 min (8 min ou mais libera anúncio no meio).
+- **Shorts:** 5 a 6 cortes verticais de cada longo + a série NO RITMO (27, jogo que a música controla).
+- **Miniaturas:** ficam para depois (todo txt de publicação termina com "MINIATURA (a fazer)").
 
-## Teste da cena (22/10)
-Uma cena só entra se tiver: 1) protagonista que a gente acompanha; 2) objetivo que sobe na tela; 3) progressão (o mundo muda de fase); 4) a música, ou o mecanismo, é a regra (as coisas acontecem NA batida). Visualizador abstrato reprova (a cidade saiu por isso).
+## As 4 séries (25 episódios, `catalogo.py`)
+POR DENTRO (máquina aberta) · A JORNADA (seguir um protagonista) · COMO VOA / FLUTUA (força e física) · FEITO DE PIXELS (mundo digital).
 
-## Vídeo longo: como é feito
-- `longo.py`: tela 480x270 ampliada 4x (1080p), legenda 2x em faixa embaixo (até 37 letras, 2 linhas, *palavra* em amarelo), trilha baixa por capítulo, efeitos, troca em blocos.
-- `epNN_roteiro.py`: capítulos, legendas com tempo e **cada fato com fonte** (FONTES). `epNN_motor.py`: o desenho de cada capítulo.
-- Antes do render: `longo_verificar.py --roteiro epNN_roteiro`. Depois: `longo_verificar.py video.mp4 epNN_roteiro` (1080p, quadros, -17 a -15 LUFS, pico ≤ -1).
-- Toda explicação passa por uma **checagem de fatos independente** antes de publicar (no ep01 pegou 2 legendas).
-- `longo_publicar.py`: título, descrição com capítulos (0:00...) e fontes.
+## Opinião do Leandro sobre o piloto (29/10)
+Gostou dos detalhes e da música baixa. **Achou lento.** Daí em diante: câmera lenta só onde ensina, legenda 4 a 8 s, nada parado mais de ~8 s.
 
-## O que existe
-- ep01 "How a Car Engine Works" (8 min 19 s): roteiro checado, render verificado. Aguardando o Leandro julgar a qualidade.
-- 27 Shorts NO RITMO no plano (9 cenas); 7 cenas aguardando julgamento (r04, r07, r10, r13, r19, r22, r25).
-- `_motor\` ainda tem o quiz e os simuladores antigos (pode apagar: `quiz*.py`, `voice.py`, `resgatar_voz.py`, `sim_*.py`, `decks\`, `out-v0*\`).
+## Teste da cena
+Protagonista que a gente acompanha; objetivo que sobe na tela; progressão; o mecanismo (ou a música) é a regra. Visualizador abstrato reprova.
 
-## Como rodar no PC
-`2-RENDERIZAR.bat`: L (vídeo longo ep01), T (27 Shorts), U (um Short), V (verificar Shorts), P (títulos).
+## Como um episódio fica pronto
+1. Produção: `epNN_roteiro.py` + `epNN_motor.py` (+ `epNN_desenho.py`), seguindo `PRODUCAO.md`.
+2. Revisão das folhas (quadros de cada capítulo e dos cortes).
+3. Checagem de fatos por agente independente; correções aplicadas.
+4. `estado='pronto'` no `catalogo.py`. Só o que está pronto entra no render.
+
+## Situação em 30/10
+- **Prontos (8):** ep01 motor, ep02 avião, ep03 mala, ep04 tela, ep05 geladeira, ep06 navio, ep07 mensagem, ep08 videogame.
+- **Em produção:** ep09 relógio, ep10 helicóptero, ep11 água, ep12 alto-falante.
+- **Fila:** ep13 a ep25.
+
+## Como rodar no PC (`2-RENDERIZAR.bat`)
+1 lista · 2 textos (títulos e descrições em `PUBLICAR\`) · 3 longos (`VIDEOS\`) · 4 cortes (`SHORTS\CORTES\`) · 5 NO RITMO (`SHORTS\NO RITMO\`) · 6 um episódio · T tudo · V verificar.
+Pula o que já está feito e passa no verificador: dá para fechar e rodar de novo. Cada longo leva 10 a 30 min.
+
+## Regras técnicas
+- Áudio do longo -16 LUFS, limitador -2,2 dBFS; Shorts -14 LUFS.
+- Verificador: 1080p, um quadro a cada 1/30 s, ≥ 400 kb/s, duração ±1 s.
+- Cada episódio renderiza no seu próprio processo (paleta própria não vaza).
+- Método de cena chamado `pos` é reservado (gancho de pós-processamento do fim).
 
 ## O que falta
-1. Leandro julgar o ep01 (imagem, legendas, ritmo, som).
-2. Próximos temas (lista no documento do projeto): avião voando é o segundo sugerido.
-3. Biblioteca de peças reutilizáveis (engrenagem, fluido, ar, corte) para acelerar os próximos episódios.
-4. Banner, foto de perfil e marca d'água NOSSO MUNDO PIXEL; criar o canal no YouTube.
-5. Repositório próprio do canal (hoje: `caiu-a-ficha`, ramo `ritmo-pixel`).
-
-## Próximo passo
-Opinião do Leandro sobre o ep01; ajustar o que ele apontar e escolher o ep02.
+1. Terminar ep08 a ep25 e entregar no PC.
+2. Miniaturas de cada longo e de cada Short.
+3. Banner, foto de perfil, marca d'água; criar o canal.
+4. Versão em inglês.
