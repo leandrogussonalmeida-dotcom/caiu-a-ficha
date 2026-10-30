@@ -314,17 +314,29 @@ def limitar(x, teto, A=480):
 
 
 # =================================================================== render
-def renderizar_episodio(ep, saida, crf=18, so=None, quadros_amostra=None):
-    """`ep` é o módulo do episódio. `so` = lista de ids de capítulo (teste).
-    `quadros_amostra` = lista de tempos -> devolve PNGs em vez de vídeo."""
+def preparar(ep):
+    """Trilha, efeitos e cenas do episódio (o que o vídeo longo e os cortes
+    verticais compartilham)."""
     trilha = Trilha(ep.CAPITULOS, seed=ep.SEED, raiz=ep.RAIZ)
     fx = Efeitos(trilha.total)
     cenas = {}
     for c in trilha.caps:
-        cls = ep.CENAS[c['id']]
-        cenas[c['id']] = cls(c, trilha, fx)
+        cenas[c['id']] = ep.CENAS[c['id']](c, trilha, fx)
     for c in trilha.caps:                      # cada cena põe os seus sons
         cenas[c['id']].sons(fx)
+    return trilha, fx, cenas
+
+
+def mixar(ep, trilha, fx):
+    """Trilha baixa + efeitos, sem master (cada formato masteriza o seu)."""
+    n = int(trilha.total * SR)
+    return (trilha.audio[:n] * QA.g(ep.GANHO_MUSICA) + fx.buf[:n] * QA.g(ep.GANHO_EFEITOS)).astype(np.float32)
+
+
+def renderizar_episodio(ep, saida, crf=18, so=None, quadros_amostra=None):
+    """`ep` é o módulo do episódio. `so` = lista de ids de capítulo (teste).
+    `quadros_amostra` = lista de tempos -> devolve PNGs em vez de vídeo."""
+    trilha, fx, cenas = preparar(ep)
     tela = PX.Tela(W, H, paleta=PAL)
     acab = Acabamento16(trilha)
     legs = {c['id']: Legendas([(a + c['t0'], b + c['t0'], l1, l2, f) for a, b, l1, l2, f in ep.LEGENDAS.get(c['id'], [])])
@@ -346,10 +358,7 @@ def renderizar_episodio(ep, saida, crf=18, so=None, quadros_amostra=None):
         return [quadro(t) for t in quadros_amostra], trilha
 
     # ---- áudio: trilha baixa + efeitos, master a -16 LUFS
-    n = int(trilha.total * SR)
-    mus = trilha.audio[:n] * QA.g(ep.GANHO_MUSICA)
-    sfx = fx.buf[:n] * QA.g(ep.GANHO_EFEITOS)
-    mix = mus + sfx
+    mix = mixar(ep, trilha, fx)
     k = int(1.5 * SR)
     mix[-k:] *= np.linspace(1, 0, k)[:, None] ** 2
     mix, lufs, tp = QA.master(mix.astype(np.float32), ep.LUFS)

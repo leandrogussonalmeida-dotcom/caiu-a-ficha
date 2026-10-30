@@ -27,6 +27,7 @@ import ritmo_acabamento as AC
 import quizaudio as QA
 import ritmo_musica as M
 import ritmo_paletas  # noqa: registra as paletas das cenas
+from idioma import T
 
 FPS = 30
 W, H = PX.LARG, PX.ALT
@@ -174,9 +175,9 @@ class Moldura:
 
     def __init__(self, F, L, cfg):
         self.F, self.L, self.cfg = F, L, cfg
-        self.gancho = cfg.get('gancho', ['WAIT FOR', 'THE DROP'])
+        self.gancho = cfg.get('gancho', T(['ESPERA', 'O DROP'], ['WAIT FOR', 'THE DROP']))
         self.sub = cfg.get('sub_gancho', '')
-        self.pergunta = cfg.get('pergunta', 'WHICH STAGE WAS BEST?')
+        self.pergunta = cfg.get('pergunta', T('QUAL FASE FOI A MELHOR?', 'WHICH STAGE WAS BEST?'))
         self.drops = [s for s in F.secoes if s['papel'] == 'drop']
         self.t_fim = next(e['t'] for e in F.eventos if e['tipo'] == 'fim')
         sec_fim = [s for s in F.secoes if s['papel'] == 'fim']
@@ -286,7 +287,7 @@ class Moldura:
         for k, l in enumerate(linhas):
             tela.texto(l, W // 2, y + 7 + 10 * k, 11, tam=9, centro=True)
         p = L.env('kick', t, .12)
-        tela.texto('TELL ME BELOW', W // 2, y + h - 12 + int(p * 1), 9, tam=9, centro=True)
+        tela.texto(T('COMENTA AÍ', 'TELL ME BELOW'), W // 2, y + h - 12 + int(p * 1), 9, tam=9, centro=True)
         seta = y + h + 4 + int(2 * math.sin(t * 8))
         for k in range(4):
             tela.ret(W // 2 - 3 + k, seta + k, 7 - 2 * k, 1, 9)
@@ -339,7 +340,7 @@ def renderizar(cena_cls, cfg, saida, dirsaida):
     wav = os.path.join(dirsaida, saida.replace('.mp4', '.wav'))
     sf.write(wav, mix, M.SR, subtype='PCM_16')
 
-    vin_q = list(PM.encerramento(W, H, FPS, cfg.get('chamadas', ['SUBSCRIBE', 'FOR MORE BEATS']), seed))
+    vin_q = list(PM.encerramento(W, H, FPS, cfg.get('chamadas', T(['INSCREVA-SE', 'TEM MAIS NO CANAL'], ['SUBSCRIBE', 'FOR MORE BEATS'])), seed))
     acab = AC.Acabamento(L, cfg, W, H)
     scan = cfg.get('scanlines', False)
     pal_atual = [cfg['paleta']]

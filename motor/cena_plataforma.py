@@ -10,6 +10,7 @@ No drop o chão acende a cada bumbo e o fundo troca de cor no compasso.
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, Sprite, W, H, ease, hsh
 
 CORRE_A = [
@@ -174,6 +175,6 @@ class Cena(CenaBase):
         L = self.L
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = sum(1 for p in self.pulos if p['t0'] <= t)
-        txt = f"{n} JUMPS"
+        txt = T(f"{n} PULOS", f"{n} JUMPS")
         w = tela.largura_texto(txt, 11)
         tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)

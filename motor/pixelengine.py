@@ -178,7 +178,8 @@ class Tela:
         (`pixelfonte`); o corpo antigo só escolhe a escala. Sem ela, a TTF
         sem antialias (o caminho velho, mantido para comparar)."""
         if FONTE_BITMAP:
-            return (PF.mascara(txt, PF.escala_de(tam)), 0, 1)
+            esc = PF.escala_de(tam)
+            return (PF.mascara(txt, esc), 0, 1 - PF.TOPO * esc)     # a letra fica onde estava; o acento sobe
         ch = (txt, tam)
         m = self._cache.get(ch)
         if m is None:

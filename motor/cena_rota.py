@@ -17,6 +17,7 @@ O que reage a quê:
 import math
 import numpy as np
 import pixelengine as PX
+from idioma import T
 from ritmo_base import CenaBase, Sprite, W, H, ease, hsh, nova_paleta
 from cena_masmorra import HEROI
 
@@ -278,6 +279,6 @@ class Cena(CenaBase):
         # contador de passos no rodapé seguro
         nb = L.conta('batida', t)
         if nb > 0 and 2.6 < t < self.F.secoes[-1]['t0']:
-            txt = f"{nb} STEPS"
+            txt = T(f"{nb} PASSOS", f"{nb} STEPS")
             w = tela.largura_texto(txt, 10)
             tela.texto(txt, W // 2, 46, 11, tam=10, centro=True, contorno=0)

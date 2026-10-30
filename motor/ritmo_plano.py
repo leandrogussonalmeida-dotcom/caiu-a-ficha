@@ -207,6 +207,45 @@ PLANO = [
          titulo='A tunnel that speeds up to 190 BPM'),
 ]
 
+# ---------------------------------------------------------------- idioma
+# Os textos acima são os do inglês. Em PT-BR (padrão do canal desde 29/10)
+# eles são trocados por estes, e o inglês fica guardado em *_en.
+TEXTO_PT = {'r01': (['ELE SÓ ANDA', 'NA BATIDA'], 'LIGA O SOM', 'QUAL FASE FOI A MELHOR?', 'Ele só anda na batida 🎧 (112 → 174 BPM)'),
+    'r02': (['MASMORRA', 'NO PHONK'], 'SEGURA ATÉ O FIM', 'PHONK OU HARDSTYLE?', 'Masmorra no ritmo do phonk 🔥 (126 → 150 BPM)'),
+    'r03': (['NÃO MEXA', 'A CABEÇA'], '', 'BALANÇOU OU NÃO?', 'Tenta não balançar a cabeça 💀 (132 → 190 BPM)'),
+    'r04': (['DO LENTO', 'AO RÁPIDO'], '80 ATÉ 174 BPM', 'QUAL ZONA É A SUA?', 'Do gênero mais lento ao mais rápido 🎮 (80 → 174 BPM)'),
+    'r05': (['CADA ZONA', 'É UM GÊNERO'], 'ESCUTA A TROCA', 'QUAL ZONA TE PEGOU?', 'Cada zona é um gênero diferente 🗺️ (100 → 150 BPM)'),
+    'r06': (['VIAGEM POR', '5 GÊNEROS'], 'DO LO-FI AO D&B', 'QUAL GÊNERO VOCÊ PULARIA?', 'Uma viagem por 5 gêneros eletrônicos 🎧'),
+    'r07': (['BARREIRAS', 'NO BUMBO'], 'OLHA O DROP', 'QUANTAS BARREIRAS VOCÊ CONTOU?', 'Cada barreira explode no bumbo 🚀 (100 → 150 BPM)'),
+    'r08': (['ATÉ ONDE', 'ELE CHEGA?'], '', 'CHEGOU NO ESPAÇO?', 'Até onde o foguete chega no ritmo? 🚀 (124 → 174 BPM)'),
+    'r09': (['ACELERA', 'ATÉ 190 BPM'], 'AGUENTA?', 'AGUENTOU OS 190?', 'Foguete acelerando até 190 BPM 🚀'),
+    'r10': (['ADIVINHA', 'ANTES DO FIM'], '5 DESENHOS', 'QUANTOS VOCÊ ACERTOU?', 'Adivinha o desenho antes de terminar ✏️'),
+    'r11': (['O DESENHO', 'ACELERA'], 'ADIVINHA ANTES', 'QUAL FOI O MAIS DIFÍCIL?', 'O desenho acelera junto com a música ✏️ (80 → 174 BPM)'),
+    'r12': (['ACERTA OS', '5 DESENHOS?'], 'ANTES DA BATIDA', 'ACERTOU OS 5?', 'Acerta os 5 desenhos antes da batida? ✏️'),
+    'r13': (['DO ÚLTIMO', 'AO PRIMEIRO'], 'NO RITMO', 'EM QUE LUGAR VOCÊ CHEGARIA?', 'Do último ao primeiro lugar no ritmo 🏁 (100 → 174 BPM)'),
+    'r14': (['ULTRAPASSA', 'NA CAIXA'], 'CONTA COMIGO', 'TECHNO OU HARDSTYLE?', 'Cada ultrapassagem cai na caixa 🏎️'),
+    'r15': (['CORRIDA', 'NO PANCADÃO'], 'DO REGGAETON AO D&B', 'FUNK OU DRUM AND BASS?', 'Corrida no deserto no ritmo do funk 🏜️'),
+    'r19': (['ELE PULA', 'NO BUMBO'], 'NUNCA ERRA', 'CONSEGUE PULAR JUNTO?', 'Ele pula exatamente no bumbo 🎮 (132 → 174 BPM)'),
+    'r20': (['NÃO ERRA', 'UM PULO'], 'DUVIDA?', 'ERROU ALGUM?', 'Ele não erra um pulo no ritmo 🌃 (124 → 174 BPM)'),
+    'r21': (['PULA NO', 'PANCADÃO'], 'DO FUNK AO HARDSTYLE', 'FUNK, PHONK OU HARDSTYLE?', 'Pulando no ritmo do funk ao hardstyle 🎮'),
+    'r22': (['A BOLINHA', 'É A MÚSICA'], 'CADA QUIQUE É UMA NOTA', 'ESSA MELODIA GRUDOU?', 'A bolinha que toca a música 🎵'),
+    'r23': (['CADA QUIQUE', 'É UMA NOTA'], 'DO LO-FI AO FUTURE', 'LO-FI OU FUTURE BASS?', 'Cada quique é uma nota da melodia 🎵 (80 → 150 BPM)'),
+    'r24': (['OUVE', 'A MELODIA'], 'E OLHA A BOLINHA', 'CONSEGUE CANTAR JUNTO?', 'Olha a bolinha e ouve a melodia 🎵'),
+    'r25': (['CONSEGUE', 'TOCAR ISSO?'], '4 PISTAS', 'QUAL PISTA É A MAIS DIFÍCIL?', 'Consegue tocar esse ritmo? 🥁 (124 → 174 BPM)'),
+    'r26': (['O RITMO', 'DE CADA UM'], 'OLHA O CHIMBAL', 'QUAL RITMO É MAIS DIFÍCIL?', 'O ritmo de cada gênero, nota por nota 🥁'),
+    'r27': (['REGGAETON', 'FUNK TECHNO'], 'VÊ A DIFERENÇA', 'QUAL VOCÊ DANÇA?', 'Reggaeton, funk e techno: vê a diferença do ritmo 🥁'),
+    'r28': (['ENTRA', 'NO TÚNEL'], 'COM FONE', 'QUANTOS PORTAIS VOCÊ PASSOU?', 'Entra no túnel do ritmo 🌀 (138 → 150 BPM)'),
+    'r29': (['CADA PORTAL', 'É UMA BATIDA'], '', 'DUBSTEP OU DRUM AND BASS?', 'Cada portal é uma batida 🌀 (140 → 174 BPM)'),
+    'r30': (['TÚNEL', 'DE 190 BPM'], 'AGUENTA ATÉ O FIM?', 'AGUENTOU ATÉ O FIM?', 'Túnel que acelera até 190 BPM 🌀')}
+
+import idioma as _I
+for _p in PLANO:
+    for _c in ('gancho', 'sub_gancho', 'pergunta', 'titulo'):
+        _p[_c + '_en'] = _p[_c]
+    if _I.LINGUA == 'pt':
+        _p['gancho'], _p['sub_gancho'], _p['pergunta'], _p['titulo'] = _TPT = TEXTO_PT[_p['id']]
+        _p['gancho'] = list(_p['gancho'])
+
 # nenhuma combinação (cena, paleta) repete
 assert len({(p['cena'], p['paleta']) for p in PLANO}) == len(PLANO)
 assert len({p['seed'] for p in PLANO}) == len(PLANO)

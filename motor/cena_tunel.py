@@ -9,6 +9,7 @@ em Lissajous para dar a sensação de curva.
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, W, H, ease, hsh
 
 
@@ -79,6 +80,6 @@ class Cena(CenaBase):
     def sobre(self, tela, t, i):
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = sum(1 for a in self.aneis if a['t'] <= t)
-        txt = f"{n} PORTALS"
+        txt = T(f"{n} PORTAIS", f"{n} PORTALS")
         w = tela.largura_texto(txt, 11)
         tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)

@@ -83,6 +83,7 @@ _G = {
     '♪': ["..##.", "..#.#", "..#..", "..#..", "###..", "###..", "....."],
     '•': ["...", "...", "###", "###", "###", "...", "..."],
     '♥': [".....", ".#.#.", "#####", "#####", ".###.", "..#..", "....."],
+    'º': [".##.", "#..#", ".##.", "....", "####", "....", "...."],
     '°': [".##.", "#..#", ".##.", "....", "....", "....", "...."],
     '~': [".....", ".....", ".#..#", "#.##.", ".....", ".....", "....."],
     '★': ["..#..", "..#..", "#####", ".###.", ".#.#.", "#...#", "....."],
@@ -95,33 +96,75 @@ for _k, _v in _G.items():
     assert all(len(l) == w for l in _v), _k
     _BASE[_k] = np.array([[c == '#' for c in l] for l in _v], bool)
 
+# ---------------------------------------------------------------- acentos (PT-BR)
+# A grade cresce para 10 linhas: 2 em cima (acento), as 7 da letra, 1 embaixo
+# (cedilha). Toda letra ocupa as 10, então a linha de texto tem altura fixa e
+# a letra sem acento continua exatamente onde estava (o desenho desconta as 2
+# linhas de cima).
+TOPO, BAIXO = 2, 1
+ALTURA_TOTAL = TOPO + ALTURA + BAIXO
+
+
+def _acento(tipo, w):
+    a = np.zeros((TOPO, w), bool)
+    c = w // 2
+    if tipo == 'agudo':
+        a[0, min(w - 1, c + 1)] = True; a[1, c] = True
+    elif tipo == 'grave':
+        a[0, max(0, c - 1)] = True; a[1, c] = True
+    elif tipo == 'circ':
+        a[0, c] = True; a[1, max(0, c - 1)] = True; a[1, min(w - 1, c + 1)] = True
+    elif tipo == 'til':
+        for x in (c - 1, c, c + 2): a[0, max(0, min(w - 1, x))] = True
+        for x in (c - 2, c + 1): a[1, max(0, min(w - 1, x))] = True
+    return a
+
+
+_ACENTUADAS = {'Á': ('A', 'agudo'), 'À': ('A', 'grave'), 'Â': ('A', 'circ'), 'Ã': ('A', 'til'),
+               'É': ('E', 'agudo'), 'Ê': ('E', 'circ'), 'Í': ('I', 'agudo'), 'Ó': ('O', 'agudo'),
+               'Ô': ('O', 'circ'), 'Õ': ('O', 'til'), 'Ú': ('U', 'agudo'), 'Ü': ('U', 'circ'), 'Ç': ('C', 'cedilha')}
+_GRADE = {}
+for _k, _b in _BASE.items():
+    g = np.zeros((ALTURA_TOTAL, _b.shape[1]), bool)
+    g[TOPO:TOPO + ALTURA] = _b
+    _GRADE[_k] = g
+for _k, (_base, _tipo) in _ACENTUADAS.items():
+    g = _GRADE[_base].copy()
+    if _tipo == 'cedilha':
+        w = g.shape[1]
+        g[TOPO + ALTURA, w // 2] = True
+        g[TOPO + ALTURA, max(0, w // 2 - 1)] = True
+    else:
+        g[:TOPO] = _acento(_tipo, g.shape[1])
+    _GRADE[_k] = g
+
 _TROCA = {'…': '...', '—': '-', '–': '-', '‘': "'", '’': "'", '“': '"', '”': '"', '×': 'X'}
 
 
 def normalizar(txt):
-    """Maiúsculas, sem acento, com pontuação tipográfica trocada pela simples."""
+    """Maiúsculas; acento do português fica (tem glifo); o resto perde o acento."""
     out = []
     for c in txt:
         if c in _TROCA: out.append(_TROCA[c]); continue
-        if c in _G or c == ' ': out.append(c); continue
+        if c in _GRADE or c == ' ': out.append(c); continue
         u = c.upper()
-        if u in _G: out.append(u); continue
+        if u in _GRADE: out.append(u); continue
         d = unicodedata.normalize('NFKD', u)
         d = ''.join(x for x in d if not unicodedata.combining(x))
-        out.append(d if d and all(x in _G or x == ' ' for x in d) else c)
+        out.append(d if d and all(x in _GRADE or x == ' ' for x in d) else c)
     return ''.join(out)
 
 
 def faltando(txt):
     """Caracteres que a fonte não desenha (depois de normalizar)."""
-    return sorted({c for c in normalizar(txt) if c != ' ' and c not in _G})
+    return sorted({c for c in normalizar(txt) if c != ' ' and c not in _GRADE})
 
 
 _cache = {}
 
 
 def mascara(txt, esc=1):
-    """Máscara booleana do texto, com 1 linha de folga em cima e embaixo."""
+    """Máscara booleana do texto: 10 linhas (2 de acento + 7 + 1 de cedilha)."""
     ch = (txt, esc)
     m = _cache.get(ch)
     if m is not None: return m
@@ -129,12 +172,12 @@ def mascara(txt, esc=1):
     cols = []
     for i, c in enumerate(t):
         if c == ' ':
-            cols.append(np.zeros((ALTURA, LARG_BRANCO), bool))
+            cols.append(np.zeros((ALTURA_TOTAL, LARG_BRANCO), bool))
         else:
-            cols.append(_BASE.get(c, _BASE['?']))
+            cols.append(_GRADE.get(c, _GRADE['?']))
         if i < len(t) - 1:
-            cols.append(np.zeros((ALTURA, ESPACO), bool))
-    a = np.concatenate(cols, 1) if cols else np.zeros((ALTURA, 1), bool)
+            cols.append(np.zeros((ALTURA_TOTAL, ESPACO), bool))
+    a = np.concatenate(cols, 1) if cols else np.zeros((ALTURA_TOTAL, 1), bool)
     if esc > 1: a = np.repeat(np.repeat(a, esc, 0), esc, 1)
     if len(_cache) > 600: _cache.clear()
     _cache[ch] = a

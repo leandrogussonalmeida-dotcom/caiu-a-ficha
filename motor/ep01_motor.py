@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NOSSO MUNDO PIXEL ep. 01 — How a car engine works. Os capítulos desenhados.
+"""NOSSO MUNDO PIXEL ep01 — Como funciona o motor do carro (PT-BR). Os capítulos desenhados.
 
 Cada capítulo é uma classe com:
   desenhar(tela, t, tg)   t = segundos desde o começo do capítulo, tg = global
@@ -21,7 +21,7 @@ from longo import (W, H, PALCO_H, ease, suave, dither, poligono, linha_grossa, t
                    LATAO, CERAMICA, ROXO, VERDE, PRETO, ROSA, OLEO1)
 import motor_pixel as MP
 import ritmo_marca as RM
-from ep01_roteiro import CAPITULOS, LEGENDAS
+from ep01_roteiro import CAPITULOS, LEGENDAS, CORTES, PREFIXO
 
 SEED, RAIZ = 2601, 45
 GANHO_MUSICA = -10.0          # trilha baixa: o som da máquina e o texto mandam
@@ -29,7 +29,13 @@ GANHO_EFEITOS = 0.0
 LUFS = -16.0
 
 OX, OY = 165, 172             # centro do virabrequim no close-up
+NOMES = ['ADMISSÃO', 'COMPRESSÃO', 'COMBUSTÃO', 'ESCAPE']
+
+
+def milhar(n):
+    return f"{int(n):,}".replace(',', '.')
 PX0 = 302                     # coluna do painel da direita
+VERTICAL = False              # True durante os cortes verticais: some o que não cabe em 180 px
 
 
 def amostrar_teta(fn, t0, t1, passo=.001):
@@ -50,30 +56,31 @@ def cor_tempo(k): return MP.TEMPOS[k][3]
 
 def painel_ciclo(tela, teta, numero=True, y0=10):
     """Painel da direita: tempo atual, relógio do ciclo, válvulas, ângulo."""
-    k, nome, cor = MP.tempo_de(teta)
+    k, _, cor = MP.tempo_de(teta)
+    nome = NOMES[k]
     if numero:
-        tela.texto(f"STROKE {k + 1} OF 4", PX0, y0, ACO3, tam=17, contorno=PRETO)
+        tela.texto(f"TEMPO {k + 1} DE 4", PX0, y0, ACO3, tam=17, contorno=PRETO)
     tela.texto(nome, PX0, y0 + 20, cor, tam=17, contorno=PRETO)
-    MP.mostrador(tela, PX0 + 50, y0 + 86, 34, teta)
+    MP.mostrador(tela, PX0 + 50, y0 + 76, 30, teta)
     T = teta % 720
-    for j, (rot, val) in enumerate((('INTAKE', 'adm'), ('EXHAUST', 'esc'))):
+    for j, (rot, val) in enumerate((('VÁLVULA DE ADMISSÃO', 'adm'), ('VÁLVULA DE ESCAPE', 'esc'))):
         aberta = MP.abertura(T, val) > .3
-        y = y0 + 132 + j * 18
-        tela.ret(PX0, y + 3, 8, 8, VERDE if aberta else ACO0)
-        if aberta: tela.ret(PX0 + 2, y + 5, 3, 3, BRANCO)
-        tela.texto(rot, PX0 + 13, y, BRANCO, tam=17, contorno=PRETO)
-        tela.texto('OPEN' if aberta else 'CLOSED', PX0 + 13 + tela.largura_texto(rot, 17) + 7, y,
-                   VERDE if aberta else ACO2, tam=17, contorno=PRETO)
-    tela.texto(f"CRANK {int(T) % 720}°", PX0, y0 + 172, ACO3, tam=9, contorno=PRETO)
+        y = y0 + 114 + j * 30
+        tela.texto(rot, PX0, y, ACO3, tam=9, contorno=PRETO)
+        tela.ret(PX0, y + 13, 8, 8, VERDE if aberta else ACO0)
+        if aberta: tela.ret(PX0 + 2, y + 15, 3, 3, BRANCO)
+        tela.texto('ABERTA' if aberta else 'FECHADA', PX0 + 13, y + 10, VERDE if aberta else ACO2, tam=17, contorno=PRETO)
+    tela.texto(f"VIRABREQUIM {int(T) % 720}°", PX0, y0 + 176, ACO3, tam=9, contorno=PRETO)
 
 
 def rotulos_dutos(tela, ox=OX, oy=OY):
+    if VERTICAL: return
     top = MP.TOPO_CAMARA
     y = oy + top - 21
-    tela.texto('INTAKE', ox - 59 - tela.largura_texto('INTAKE', 9), y, MISTURA2, tam=9, contorno=PRETO)
-    tela.texto('IN', ox - 59 - tela.largura_texto('IN', 9), y + 9, ACO3, tam=9, contorno=PRETO)
-    tela.texto('EXHAUST', ox + 59, y, ACO3, tam=9, contorno=PRETO)
-    tela.texto('OUT', ox + 59, y + 9, ACO3, tam=9, contorno=PRETO)
+    tela.texto('ADMISSÃO', ox - 59 - tela.largura_texto('ADMISSÃO', 9), y, MISTURA2, tam=9, contorno=PRETO)
+    tela.texto('ENTRA', ox - 59 - tela.largura_texto('ENTRA', 9), y + 10, ACO3, tam=9, contorno=PRETO)
+    tela.texto('ESCAPE', ox + 59, y, ACO3, tam=9, contorno=PRETO)
+    tela.texto('SAI', ox + 59, y + 10, ACO3, tam=9, contorno=PRETO)
 
 
 def seta(tela, x, y, para_baixo, cor, tam=6):
@@ -160,9 +167,9 @@ class Gancho(Cena):
         rapido = t < 6.0
         self.cil.desenhar(tela, self.teta(t), t, borrao=6 if rapido else 0)
         if rapido:
-            tela.texto('3,000 RPM', 330, 30, AMARELO, tam=17, contorno=PRETO)
+            tela.texto('3.000 RPM', 330, 30, AMARELO, tam=17, contorno=PRETO)
         else:
-            tela.texto('SLOW MOTION', 330, 30, CIANO, tam=17, contorno=PRETO)
+            tela.texto('CÂMERA LENTA', 330, 30, CIANO, tam=17, contorno=PRETO)
 
     def sons(self, fx):
         # rápido: um pulso por ignição (25 por segundo) vira ronco
@@ -180,12 +187,13 @@ class Titulo(Cena):
         engrenagem(tela, 70, 205, 46, 14, t * .6, FUNDO2, FUNDO)
         engrenagem(tela, 148, 232, 30, 9, -t * .6 * 46 / 30 + .2, FUNDO2, FUNDO)
         engrenagem(tela, 420, 40, 38, 12, -t * .5, FUNDO2, FUNDO)
-        titulo = "HOW A CAR ENGINE WORKS"
         n = int(t / .045)
-        larg = tela.largura_texto(titulo, 26)
-        tela.texto(titulo[:n], W // 2 - larg // 2, 100, BRANCO, tam=26, contorno=PRETO, sombra=TRACO)
+        for j, linha in enumerate(("COMO FUNCIONA", "O MOTOR DO CARRO")):
+            larg = tela.largura_texto(linha, 26)
+            vis = linha[:max(0, n - j * 13)]
+            tela.texto(vis, W // 2 - larg // 2, 66 + j * 34, BRANCO, tam=26, contorno=PRETO, sombra=TRACO)
         if t > 1.2:
-            sub = "THE FOUR-STROKE CYCLE"
+            sub = "O CICLO DE 4 TEMPOS"
             tela.texto(sub, W // 2, 136, AMARELO, tam=17, centro=True, contorno=PRETO)
         if t > 2.0:
             for k in range(4):
@@ -278,9 +286,9 @@ class Carro(Cena):
             tela.ret(int(x), 156, 2, 12, ACO1)
 
     def desenhar(self, tela, t, tg):
-        if t < 18.0:
+        if t < 14.0:
             self._estrada(tela, t)
-            raiox = 1.0 if t >= 9.0 else 0.0
+            raiox = 1.0 if t >= 8.0 else 0.0
             pulo = int(math.sin(t * 7) > .9)
             self._carro(tela, 106, 85 - pulo, t, raiox)
             # fumaça do escapamento
@@ -289,12 +297,12 @@ class Carro(Cena):
                 tela.disco(110 - u * 40, 160 - u * 10, 1 + u * 4, GAS if u < .6 else GAS2)
             if raiox:
                 xm = 106 + int(140 * 1.6)
-                tela.texto('ENGINE', xm - tela.largura_texto('ENGINE', 17) // 2, 52, CIANO, tam=17, contorno=PRETO)
+                tela.texto('MOTOR', xm - tela.largura_texto('MOTOR', 17) // 2, 52, CIANO, tam=17, contorno=PRETO)
                 tela.linha(xm, 68, xm, 132, CIANO)
         else:
             self.fundo_oficina(tela, t)
-            teta = (t - 18) * 240
-            foco = t >= 28.0
+            teta = (t - 14) * 240
+            foco = t >= 19.0
             for k, c in enumerate(self.bloco4):
                 c.desenhar(tela, teta - self.desloc[k], t)
                 cor = BRANCO
@@ -302,20 +310,20 @@ class Carro(Cena):
                 if foco and k > 0:
                     escurecer(tela, c.ox - 34, 0, 68, PALCO_H)
             if foco:
-                u = (t - 28) * 3
+                u = (t - 19) * 3
                 if int(u) % 2 == 0:
                     tela.ret_vazado(self.bloco4[0].ox - 36, 52, 72, 124, AMARELO)
 
     def sons(self, fx):
         # motor em marcha lenta ao fundo enquanto o carro anda (pulsos suaves)
-        for k in range(int(18 * 27)):
+        for k in range(int(14 * 27)):
             fx.put(fx.pulso(), self.t0 + k / 27.0, .12)
 
 
 # ============================================================ 3 peças
-PECAS = [('cylinder', 'CYLINDER', (37, -66)), ('piston', 'PISTON', (28, -60)), ('rod', 'CONNECTING ROD', (6, -30)),
-         ('crankshaft', 'CRANKSHAFT', (14, 4)), ('valves', 'VALVES', (22, -102)), ('cams', 'CAMSHAFTS', (20, -150)),
-         ('spark', 'SPARK PLUG', (3, -140))]
+PECAS = [('cylinder', 'CILINDRO', (37, -66)), ('piston', 'PISTÃO', (28, -60)), ('rod', 'BIELA', (6, -30)),
+         ('crankshaft', 'VIRABREQUIM', (14, 4)), ('valves', 'VÁLVULAS', (22, -102)), ('cams', 'COMANDO', (20, -150)),
+         ('spark', 'VELA', (3, -140))]
 
 
 class Pecas(Cena):
@@ -357,8 +365,9 @@ class Pecas(Cena):
                 tela.disco(ax + 8, ay, 1.6, AMARELO)
                 tela.ret(PX0 - 6, y + 6, 3, 3, AMARELO)
         if k_atual == 4:
-            tela.texto('MANY ENGINES HAVE 4 VALVES.', PX0, 176, ACO3, tam=9, contorno=PRETO)
-            tela.texto('WE SHOW 2 TO KEEP IT CLEAR.', PX0, 186, ACO3, tam=9, contorno=PRETO)
+            tela.texto('MUITOS MOTORES TÊM 4.', PX0, 176, ACO3, tam=9, contorno=PRETO)
+            tela.texto('MOSTRAMOS 2 PARA', PX0, 186, ACO3, tam=9, contorno=PRETO)
+            tela.texto('FICAR MAIS CLARO.', PX0, 196, ACO3, tam=9, contorno=PRETO)
 
     def sons(self, fx):
         for k in range(len(PECAS)):
@@ -385,7 +394,7 @@ class Tempo(Cena):
                 if t <= b: return x + (y - x) * suave((t - a) / (b - a))
             return th[-1]
         a, b = self.faixa
-        return a + (b - a) * suave((t - 3.0) / 27.0)
+        return a + (b - a) * suave((t - 2.0) / 18.0)
 
     def desenhar(self, tela, t, tg):
         self.fundo_oficina(tela, t)
@@ -397,10 +406,11 @@ class Tempo(Cena):
         a = math.radians(th)
         desce = math.sin(a) > 0 if (th % 360) not in (0, 180) else False
         yseta = OY - MP.y_pino(th) + 16
-        if 3.0 < t < 30.0:
+        if 2.0 < t < 20.0:
             seta(tela, OX + 44, yseta - 4, desce, AMARELO, 5)
-        if t < 3.0:
-            k, nome, cor = MP.tempo_de(self.faixa[0] + 1)
+        if t < 2.0 and not VERTICAL:
+            k, _, cor = MP.tempo_de(self.faixa[0] + 1)
+            nome = NOMES[k]
             u = ease(t / .4)
             larg = tela.largura_texto(nome, 26)
             x = int(OX - larg // 2 + (1 - u) * -300)
@@ -422,13 +432,13 @@ class Compressao(Tempo):
 
 class Potencia(Tempo):
     faixa = (360.0, 540.0)
-    marcos = [(3.0, 335.0), (12.0, 368.0), (30.0, 540.0)]
+    marcos = [(2.0, 335.0), (8.0, 368.0), (20.0, 540.0)]
 
     def desenhar(self, tela, t, tg):
         super().desenhar(tela, t, tg)
         th = self.teta(t)
-        if 360 < th < 540 and t > 12:
-            tela.texto('PUSH!', OX - 108, OY - MP.y_pino(th) - 14, AMARELO, tam=17, contorno=PRETO)
+        if 360 < th < 540 and t > 8 and not VERTICAL:
+            tela.texto('EMPURRA!', OX - 146, OY - MP.y_pino(th) - 14, AMARELO, tam=17, contorno=PRETO)
 
 
 class Escape(Tempo):
@@ -450,7 +460,7 @@ class Ciclo(Cena):
         rotulos_dutos(tela)
         painel_ciclo(tela, th)
         voltas = th / 360.0
-        tela.texto(f"TURNS: {voltas:.1f}", PX0, 196, AMARELO, tam=9, contorno=PRETO)
+        tela.texto(f"VOLTAS: {voltas:.1f}".replace('.', ','), PX0, 196, AMARELO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
         self.sons_do_ciclo(fx, self.teta, 0, self.dur, lento=1.5)
@@ -470,8 +480,9 @@ class Batidas(Cena):
         th = self.teta(t)
         self.cil.desenhar(tela, th, t)
         rotulos_dutos(tela)
-        k, nome, cor = MP.tempo_de(th)
-        tela.texto("BEAT", PX0, 12, ACO3, tam=17, contorno=PRETO)
+        k, _, cor = MP.tempo_de(th)
+        nome = NOMES[k]
+        tela.texto("BATIDA", PX0, 12, ACO3, tam=17, contorno=PRETO)
         for j in range(4):
             x = PX0 + j * 40
             c = cor_tempo(j)
@@ -489,7 +500,7 @@ class Batidas(Cena):
 
 # ============================================================ 10 acelerando
 class Rpm(Cena):
-    MARCOS = [(0, 60), (1, 60), (6, 800), (14, 800), (20, 3000), (30, 3000), (35, 6000), (60, 6000)]
+    MARCOS = [(0, 60), (1, 60), (5, 800), (11, 800), (15, 3000), (23, 3000), (27, 6000), (60, 6000)]
 
     def preparar(self):
         self.cil = MP.Cilindro(OX, OY, 1.0, seed=8)
@@ -528,12 +539,12 @@ class Rpm(Cena):
         tela.linha(cx, cy, cx + math.cos(a) * (R - 6), cy - math.sin(a) * (R - 6), LARANJA)
         tela.disco(cx, cy, 3, LARANJA)
         tela.texto("X1000", cx - 14, cy + 18, ACO2, tam=9)
-        s = f"{int(round(r / 10) * 10):,} RPM"
+        s = f"{milhar(round(r / 10) * 10)} RPM"
         tela.texto(s, cx - tela.largura_texto(s, 17) // 2, 160, AMARELO, tam=17, contorno=PRETO)
         fps_ = r / 120.0
-        s2 = f"{fps_:.0f} FIRES PER SECOND" if fps_ >= 1 else f"1 FIRE EVERY {1 / fps_:.0f} S"
+        s2 = f"{fps_:.0f} QUEIMAS POR SEGUNDO" if fps_ >= 1.5 else f"1 QUEIMA A CADA {1 / fps_:.0f} S"
         tela.texto(s2, cx - tela.largura_texto(s2, 9) // 2, 182, BRANCO, tam=9, contorno=PRETO)
-        tela.texto("(ONE CYLINDER)", cx - tela.largura_texto("(ONE CYLINDER)", 9) // 2, 193, ACO3, tam=9)
+        tela.texto("(UM CILINDRO)", cx - tela.largura_texto("(UM CILINDRO)", 9) // 2, 193, ACO3, tam=9)
 
     def sons(self, fx):
         ts, th = self.ts, self.th_v
@@ -558,25 +569,25 @@ class Cilindros(Cena):
         self.desloc = [0, 540, 180, 360]
 
     def teta(self, t):
-        if t < 24.0: return 240.0 * t                   # 40 RPM: um tempo por batida da trilha (80 BPM)
-        return 160.0 + 240.0 * (t - 24.0)
+        if t < 15.0: return 240.0 * t                   # 40 RPM: um tempo por batida da trilha (80 BPM)
+        return 160.0 + 240.0 * (t - 15.0)                # faísca do cilindro 1 cai numa batida (15 s = 20 batidas)
 
     def desenhar(self, tela, t, tg):
         self.fundo_oficina(tela, t)
         th = self.teta(t)
-        if t < 24.0:
-            vol = 0.0 if t < 12.0 else min(1.0, (t - 12.0) / 1.2)
+        if t < 15.0:
+            vol = 0.0 if t < 7.5 else min(1.0, (t - 7.5) / 1.2)
             self.cil.desenhar(tela, th, t, volante=vol)
             rotulos_dutos(tela)
             k, nome, cor = MP.tempo_de(th)
             empurra = k == 2
-            tela.texto("PUSHING" if empurra else "COASTING", PX0, 20, AMARELO if empurra else ACO2, tam=17, contorno=PRETO)
+            tela.texto("EMPURRANDO" if empurra else "NO EMBALO", PX0, 20, AMARELO if empurra else ACO2, tam=17, contorno=PRETO)
             for j in range(4):
                 tela.ret(PX0 + j * 30, 44, 24, 10, cor_tempo(j) if j == k else FUNDO2)
             tela.ret(PX0 + 60, 56, 24, 2, AMARELO)
-            tela.texto("ONLY THIS ONE", PX0 + 30, 62, AMARELO, tam=9, contorno=PRETO)
+            tela.texto("SÓ ESTE", PX0 + 58, 62, AMARELO, tam=9, contorno=PRETO)
             if vol > 0:
-                tela.texto("FLYWHEEL", OX - 78, OY + 26, CIANO, tam=9, contorno=PRETO)
+                tela.texto("VOLANTE", OX - 78, OY + 26, CIANO, tam=9, contorno=PRETO)
             MP.mostrador(tela, PX0 + 50, 120, 30, th)
         else:
             ativo = None
@@ -586,24 +597,24 @@ class Cilindros(Cena):
                 kk = MP.tempo_de(tk)[0]
                 if kk == 2: ativo = k
                 tela.texto(str(k + 1), c.ox - 3, 180, AMARELO if kk == 2 else BRANCO, tam=17, contorno=PRETO)
-            tela.texto("FIRING", 388, 20, BRANCO, tam=17, contorno=PRETO)
-            tela.texto("ORDER", 388, 38, BRANCO, tam=17, contorno=PRETO)
+            tela.texto("ORDEM", 388, 20, BRANCO, tam=17, contorno=PRETO)
+            tela.texto("DE QUEIMA", 388, 38, BRANCO, tam=9, contorno=PRETO)
             for j, cil in enumerate((1, 3, 4, 2)):
                 y = 64 + j * 26
                 aceso = ativo == cil - 1
                 tela.ret(388, y, 20, 20, AMARELO if aceso else FUNDO2)
                 tela.texto(str(cil), 394, y + 3, PRETO if aceso else ACO2, tam=17)
-                if aceso: tela.texto("POWER", 414, y + 6, AMARELO, tam=9, contorno=PRETO)
+                if aceso: tela.texto("FORÇA", 414, y + 6, AMARELO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
-        self.sons_do_ciclo(fx, self.teta, 0.0, 24.0, lento=1.0, ganho=.5)
+        self.sons_do_ciclo(fx, self.teta, 0.0, 15.0, lento=1.0, ganho=.5)
         for k in range(4):
             fn = lambda t, k=k: self.teta(t) - self.desloc[k]
-            for t in cruzamentos(fn, 24.0, self.dur, MP.FAISCA):
-                if t < 24.0: continue
+            for t in cruzamentos(fn, 15.0, self.dur, MP.FAISCA):
+                if t < 15.0: continue
                 fx.put(fx.faisca(), self.t0 + t, .2)
                 fx.put(fx.explosao(.7), self.t0 + t + .015, .22)
-                if t >= 48.0:
+                if t >= 31.5:
                     fx.put(fx.sino(self.NOTAS[k]), self.t0 + t, .5, -.45 + .3 * k)
 
 
@@ -614,34 +625,34 @@ class Energia(Cena):
         x0, y0, lado = 34, 20, 16
         grupos = ([VERDE] * 20 + [VERMELHO] * 70 + [ACO1] * 10)
         for i in range(100):
-            if t < 1.0 + i * .03: continue
+            if t < .5 + i * .025: continue
             cx, cy = x0 + (i % 10) * lado, y0 + (i // 10) * lado
             cor = AMARELO
-            if t > 12.0 + (i % 10) * .05 + (i // 10) * .12:
+            if t > 8.0 + (i % 10) * .05 + (i // 10) * .12:
                 cor = grupos[i]
             tela.ret(cx, cy, lado - 3, lado - 3, cor)
             tela.px(cx, cy, BRANCO if cor == AMARELO else ACO4)
-            if cor == VERMELHO and t > 24.0:
+            if cor == VERMELHO and t > 16.0:
                 u = (t * .8 + i * .37) % 1.0
                 if (i * 7) % 3 == 0:
                     tela.px(cx + 6 + math.sin(t * 5 + i) * 2, cy - u * 14, CHAMA1 if u < .5 else BRASA)
-        if t > 3.0 and t <= 12.0:
-            tela.texto("100 UNITS OF FUEL", 220, 40, AMARELO, tam=17, contorno=PRETO)
-            tela.texto("ENERGY", 220, 60, AMARELO, tam=17, contorno=PRETO)
-        if t > 13.0:
-            itens = (("MOVES THE CAR", "16-25%", VERDE), ("ENGINE LOSSES", "68-72%", VERMELHO), ("OTHER LOSSES", "THE REST", ACO1))
+        if t > 3.0 and t <= 8.0:
+            tela.texto("100 UNIDADES DE", 220, 40, AMARELO, tam=17, contorno=PRETO)
+            tela.texto("ENERGIA", 220, 60, AMARELO, tam=17, contorno=PRETO)
+        if t > 8.5:
+            itens = (("MOVE O CARRO", "16-25%", VERDE), ("PERDAS NO MOTOR", "68-72%", VERMELHO), ("OUTRAS PERDAS", "O RESTO", ACO1))
             for j, (a, b, cor) in enumerate(itens):
-                if t < 13.0 + j * 1.6: continue
+                if t < 8.5 + j * 1.2: continue
                 y = 30 + j * 44
                 tela.ret(220, y + 2, 12, 12, cor)
                 tela.texto(a, 240, y, BRANCO, tam=17, contorno=PRETO)
                 tela.texto(b, 240, y + 18, cor, tam=17, contorno=PRETO)
-            tela.texto("COMBINED CITY + HIGHWAY DRIVING", 220, 170, ACO3, tam=9)
-            tela.texto("SOURCE: FUELECONOMY.GOV (U.S. DOE)", 220, 181, ACO3, tam=9)
+            tela.texto("USO MISTO: CIDADE + ESTRADA", 220, 170, ACO3, tam=9)
+            tela.texto("FONTE: FUELECONOMY.GOV (EUA)", 220, 181, ACO3, tam=9)
 
     def sons(self, fx):
         for i in range(0, 100, 5):
-            fx.put(fx.blip(72 + (i // 10), .05), self.t0 + 1.0 + i * .03, .08)
+            fx.put(fx.blip(72 + (i // 10), .05), self.t0 + .5 + i * .025, .08)
 
 
 # ============================================================ 13 resumo
@@ -652,7 +663,7 @@ class Resumo(Cena):
 
     def desenhar(self, tela, t, tg):
         self.fundo_oficina(tela, t)
-        if t < 12.0:
+        if t < 9.0:
             # motor de 1876: horizontal, com um volante enorme (silhueta)
             cx, cy = 300, 110
             a = t * 2.0
@@ -668,24 +679,21 @@ class Resumo(Cena):
             linha_grossa(tela, px - 60, cy, cx + math.cos(a) * 30, cy + math.sin(a) * 30, 4, ACO3)
             tela.ret(100, 128, 220, 6, ACO0)
             tela.texto("1876", 60, 30, AMARELO, tam=26, contorno=PRETO)
-            tela.texto("THE OTTO ENGINE", 60, 58, BRANCO, tam=17, contorno=PRETO)
+            tela.texto("O MOTOR DE OTTO", 60, 58, BRANCO, tam=17, contorno=PRETO)
         else:
-            palavras = ("SUCK", "SQUEEZE", "BANG", "BLOW")
             medio = (90, 270, 400, 630)
             for k, c in enumerate(self.mini):
                 th = medio[k] + 40 * math.sin(t * 2.0 + k)
                 c.desenhar(tela, th, t)
-                nome = MP.TEMPOS[k][0]
-                tela.texto(nome, c.ox - tela.largura_texto(nome, 9) // 2, 172, cor_tempo(k), tam=9, contorno=PRETO)
-                t_pal = 23.5 + k * self.spb
-                if t >= t_pal:
-                    pal = palavras[k]
-                    u = min(1.0, (t - t_pal) / .2)
-                    tela.texto(pal, c.ox - tela.largura_texto(pal, 17) // 2, 184 - int((1 - u) * 6), BRANCO, tam=17, contorno=PRETO)
+                t_k = 9.2 + k * self.spb
+                if t >= t_k:
+                    u = min(1.0, (t - t_k) / .2)
+                    tela.texto(str(k + 1), c.ox - 5, 170 - int((1 - u) * 6), cor_tempo(k), tam=17, contorno=PRETO)
+                    tela.texto(NOMES[k], c.ox - tela.largura_texto(NOMES[k], 9) // 2, 190, BRANCO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
         for k, m in enumerate((72, 74, 79, 76)):
-            fx.put(fx.blip(m, .14), self.t0 + 23.5 + k * self.spb, .3)
+            fx.put(fx.blip(m, .14), self.t0 + 9.2 + k * self.spb, .3)
 
 
 # ============================================================ 14 fim
@@ -694,7 +702,7 @@ class Fim(Cena):
     brilho = 0.0
 
     def preparar(self):
-        self.vin = list(RM.encerramento(W, H, LG.FPS, ['SUBSCRIBE', 'FOR MORE HOW-IT-WORKS'], SEED, baixo=True))
+        self.vin = list(RM.encerramento(W, H, LG.FPS, ['INSCREVA-SE', 'TEM MAIS COMO FUNCIONA'], SEED, baixo=True))
         self.cil = MP.Cilindro(240, 200, .5, seed=50)
 
     def desenhar(self, tela, t, tg):
@@ -702,7 +710,7 @@ class Fim(Cena):
         if t >= RM.OUTRO_S:
             self.fundo_oficina(tela, t)
             tela.buf[PALCO_H:] = FUNDO
-            tela.texto("THANKS FOR WATCHING!", W // 2, 24, BRANCO, tam=17, centro=True, contorno=PRETO)
+            tela.texto("OBRIGADO POR ASSISTIR!", W // 2, 24, BRANCO, tam=17, centro=True, contorno=PRETO)
             tela.texto("NOSSO MUNDO PIXEL", W // 2, 44, AMARELO, tam=9, centro=True, contorno=PRETO)
             self.cil.desenhar(tela, t * 240, t)
 

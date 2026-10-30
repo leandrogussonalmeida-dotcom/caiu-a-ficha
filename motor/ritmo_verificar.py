@@ -77,7 +77,8 @@ def textos_do_plano():
         tela_txt = ' '.join(p['gancho']) + ' ' + p['sub_gancho'] + ' ' + p['pergunta']
         f = PF.faltando(tela_txt)
         if f: erros.append(f"{p['id']} sem glifo: {f}")
-        for campo in (tela_txt, p['titulo']):
+        import idioma
+        for campo in ((tela_txt, p['titulo']) if idioma.LINGUA == 'en' else ()):
             m = PT.search(campo)
             if m: erros.append(f"{p['id']} português: '{m.group(0)}' em {campo!r}")
     return erros

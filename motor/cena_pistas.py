@@ -9,6 +9,7 @@ a caixa no 3 do dubstep, o chimbal picado do trap.
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, W, H, ease, hsh
 
 Y_LINHA = 222
@@ -22,8 +23,8 @@ class Cena(CenaBase):
         L = self.L
         v = self.v
         quarta = v.get('quarta', 'lead')
-        self.pistas = [('KICK', 'kick', 15), ('SNARE', 'costas', 9), ('HI-HAT', 'hatf', 12),
-                       ('BASS' if quarta == 'baixo' else 'LEAD', quarta, 10)]
+        self.pistas = [(T('BUMBO', 'KICK'), 'kick', 15), (T('CAIXA', 'SNARE'), 'costas', 9), (T('CHIMBAL', 'HI-HAT'), 'hatf', 12),
+                       (T('BAIXO', 'BASS') if quarta == 'baixo' else T('MELODIA', 'LEAD'), quarta, 10)]
         self.ev = []
         for k, (_, tp, _) in enumerate(self.pistas):
             ts = []
@@ -111,11 +112,11 @@ class Cena(CenaBase):
         L = self.L
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = sum(int(np.searchsorted(ts, t, 'right')) for ts in self.ev)
-        txt = f"{n} NOTES"
+        txt = T(f"{n} NOTAS", f"{n} NOTES")
         w = tela.largura_texto(txt, 11)
         tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)
         d = L.desde('drop', t)
         if t > 3 and d < .9:
             e = min(1, d / .15)
             tam = int(12 + 6 * e)
-            tela.texto('PERFECT!', W // 2, 120, 9, tam=tam, centro=True, sombra=0)
+            tela.texto(T('PERFEITO!', 'PERFECT!'), W // 2, 120, 9, tam=tam, centro=True, sombra=0)

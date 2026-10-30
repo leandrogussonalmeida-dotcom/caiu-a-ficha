@@ -16,9 +16,11 @@ são ligadas pelo caminho mais curto, também em escada.
 import math
 import numpy as np
 import tracos as TR
+from idioma import T
 from ritmo_base import CenaBase, W, H, ease, back, hsh
 
-# o desenho tem nome interno em português; na tela o canal fala inglês
+NOME_PT = {'AVIAO': 'AVIÃO', 'LAMPADA': 'LÂMPADA', 'OCULOS': 'ÓCULOS', 'RELOGIO': 'RELÓGIO', 'XICARA': 'XÍCARA'}
+# nome em inglês para a versão global
 NOME_EN = {'AMPULHETA': 'HOURGLASS', 'AVIAO': 'PLANE', 'BARCO': 'BOAT', 'BICICLETA': 'BICYCLE', 'CACTO': 'CACTUS', 'CARACOL': 'SNAIL', 'CARRO': 'CAR', 'CASA': 'HOUSE', 'CHAVE': 'KEY', 'COGUMELO': 'MUSHROOM', 'FAROL': 'LIGHTHOUSE', 'FLOR': 'FLOWER', 'FOLHA': 'LEAF', 'GARRAFA': 'BOTTLE', 'GATO': 'CAT', 'GUARDA-CHUVA': 'UMBRELLA', 'IGREJA': 'CHURCH', 'LAMPADA': 'LIGHT BULB', 'OCULOS': 'GLASSES', 'PEIXE': 'FISH', 'PONTE': 'BRIDGE', 'RELOGIO': 'CLOCK', 'XICARA': 'CUP', 'TESOURA': 'SCISSORS', 'PANELA': 'POT'}
 
 BX, BY, BW, BH = 12, 64, 156, 170          # moldura
@@ -174,13 +176,13 @@ class Cena(CenaBase):
             u = t - d['t1']
             if 0 <= u < (d['fim_sec'] - d['t1']) + .5:
                 e = back(u / .22)
-                txt = NOME_EN.get(d['nome'], d['nome']).replace('-', ' ') + '!'
+                txt = T(NOME_PT.get(d['nome'], d['nome']), NOME_EN.get(d['nome'], d['nome'])).replace('-', ' ') + '!'
                 tam = int(10 + 8 * min(1, e))
                 y = BY + 6
                 w = tela.largura_texto(txt, tam)
                 tela.texto(txt, W // 2, y, 9, tam=tam, centro=True, contorno=0)
             # contagem: "DESENHO 2/5"
             if d['t0'] <= t < d['t1'] and t > 2.6:
-                txt = f"DRAWING {k + 1}/{len(self.des)}"
+                txt = T(f"DESENHO {k + 1}/{len(self.des)}", f"DRAWING {k + 1}/{len(self.des)}")
                 w = tela.largura_texto(txt, 10)
                 tela.texto(txt, W // 2, 46, 11, tam=10, centro=True, contorno=0)

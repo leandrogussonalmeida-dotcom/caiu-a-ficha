@@ -1,134 +1,129 @@
 #!/usr/bin/env python3
-"""NOSSO MUNDO PIXEL — episódio 01: How a car engine works (o motor de 4 tempos).
+"""NOSSO MUNDO PIXEL — ep01: Como funciona o motor do carro (o ciclo de 4 tempos).
+
+Versão PT-BR (29/10/2026). A versão em inglês do piloto está guardada em
+`_en/ep01_roteiro_en.py` para quando o canal ganhar a versão global.
 
 O roteiro é dado, não código: capítulos, trilha de cada um e legendas com o
-instante (em segundos, relativos ao começo do capítulo). O desenho de cada
-capítulo mora em `ep01_motor.py`; o verificador (`longo_verificar.py`)
-reprova legenda que não cabe, caractere sem glifo e fato sem fonte.
+instante (segundos relativos ao começo do capítulo). O desenho mora em
+`ep01_motor.py`; `longo_verificar.py --roteiro ep01_roteiro` reprova legenda
+que não cabe, caractere sem glifo, legenda curta demais e fato sem fonte.
 
-Legenda: até 2 linhas, até 37 caracteres na fonte 2x (448 px). Palavra entre
-asteriscos sai em amarelo. Mínimo de leitura: 4 s por legenda.
+Legenda: até 2 linhas, até 37 caracteres (fonte 2x, 448 px). *palavra* sai
+em amarelo. Mínimo de leitura: 4 s.
 
-FATOS E FONTES (cada número na tela aponta para uma destas):
-  F1  4 tempos: admissão, compressão, combustão/potência, escape; válvula
-      de admissão aberta na admissão, as duas fechadas na compressão e na
-      potência, a de escape aberta no escape. Um ciclo = 2 voltas do
-      virabrequim.  Britannica, "four-stroke cycle"; Wikipedia, "Four-stroke engine".
-  F2  O comando de válvulas gira a metade da velocidade do virabrequim.
-      Wikipedia, "Camshaft" ("geared to rotate at half the speed of the crankshaft").
-  F3  Taxa de compressão de motor a gasolina de carro: entre 8:1 e 12:1.
-      Wikipedia, "Compression ratio".
-  F4  A faísca acontece antes do ponto morto superior (~20° antes).
-      Univ. of Windsor, "Four Stroke Cycle Engines" (manual, via courses.washington.edu).
-  F5  Marcha lenta típica: 600 a 1.000 RPM. MechanicBase, "What RPM should a car idle at?".
-  F6  A 3.000 RPM: 50 voltas/s, 1 ignição a cada 2 voltas = 25 por segundo
-      por cilindro; a 6.000, 50. (conta, a partir de F1)
-  F7  Volante: mantém o momento entre os impulsos. Univ. of Windsor (idem F4).
-  F8  Ordem de ignição mais comum do 4 cilindros em linha: 1-3-4-2.
-      Rick's Free Auto Repair Advice, "What is the firing order for a 4-cylinder engine".
-  F9  Só 12-30% da energia do combustível move o carro (combinado 16-25%, o
-      número da tela, para bater com o gráfico; checagem de 29/10);
-      perdas no motor 68-72% no uso combinado, principalmente calor.
-      fueleconomy.gov (U.S. DOE), "Where the Energy Goes: Gasoline Vehicles".
-  F10 Otto construiu um motor de quatro tempos em 1876 ("ciclo Otto").
-      Britannica, "Nikolaus Otto".
-  F11 Injeção direta: o injetor joga gasolina dentro do cilindro; e o motor
-      de Otto (1876) foi o primeiro a comprimir a mistura antes de queimar,
-      "far more efficient". Wikipedia, "Four-stroke engine".
+FATOS E FONTES
+  F1  4 tempos: admissão (válvula de admissão aberta, pistão desce),
+      compressão (as duas fechadas, sobe), combustão/potência (fechadas,
+      desce), escape (escape aberta, sobe). 1 ciclo = 2 voltas do virabrequim.
+      Britannica, "four-stroke cycle"; Wikipedia, "Four-stroke engine".
+  F2  O comando gira à metade da velocidade do virabrequim. Wikipedia, "Camshaft".
+  F3  Taxa de compressão de motor a gasolina de carro: 8:1 a 12:1. Wikipedia, "Compression ratio".
+  F4  A faísca vem antes do ponto morto superior (~20°). Univ. of Windsor, manual.
+  F5  Marcha lenta típica: 600 a 1.000 RPM. MechanicBase.
+  F6  3.000 RPM = 50 voltas/s; 1 queima a cada 2 voltas = 25/s por cilindro; 6.000 = 50/s. (conta)
+  F7  Volante: mantém o giro entre os impulsos. Univ. of Windsor, manual.
+  F8  Ordem de queima mais comum do 4 em linha: 1-3-4-2. Rick's Free Auto Repair Advice.
+      Num 4 cilindros, um impulso começa a cada 180° (meia volta). (conta, checagem de 29/10)
+  F9  16-25% da energia move o carro no uso combinado; perdas no motor 68-72%,
+      principalmente calor. fueleconomy.gov (Departamento de Energia dos EUA).
+  F10 Otto construiu um motor de 4 tempos em 1876. Britannica, "Nikolaus Otto".
+  F11 Injeção direta; e comprimir antes de queimar tornou o motor de Otto muito
+      mais eficiente. Wikipedia, "Four-stroke engine".
+  F12 No Brasil os 4 tempos aparecem como admissão, compressão, explosão e
+      escape (Prepara Enem) ou com "combustão" no 3º (InfoEscola). Lidos em 29/10.
 """
 
-TITULO = "How a Car Engine Works | The Four-Stroke Cycle in Pixel Art"
+TITULO = "Como funciona o motor do carro | O ciclo de 4 tempos em pixel art"
+LINGUA = 'pt'
 
-# trilha de cada capítulo: gênero, compassos, papel ('drop' = groove calmo do
-# gênero, 'break' = só pad e melodia). Duração do capítulo = compassos x 4 x 60/bpm.
 CAPITULOS = [
     dict(id='gancho', gen='lofi', bars=4, papel='break'),          # 12 s
     dict(id='titulo', gen='lofi', bars=2, papel='break'),          # 6 s
-    dict(id='carro', gen='lofi', bars=12, papel='drop'),           # 36 s
-    dict(id='pecas', gen='synthwave', bars=28, papel='drop'),      # 67,2 s (7 peças x 4 compassos)
-    dict(id='admissao', gen='lofi', bars=12, papel='drop'),        # 36 s
-    dict(id='compressao', gen='lofi', bars=12, papel='drop'),      # 36 s
-    dict(id='potencia', gen='lofi', bars=12, papel='drop'),        # 36 s
-    dict(id='escape', gen='lofi', bars=12, papel='drop'),          # 36 s
+    dict(id='carro', gen='lofi', bars=8, papel='drop'),            # 24 s
+    dict(id='pecas', gen='synthwave', bars=21, papel='drop'),      # 50,4 s (7 peças x 3 compassos)
+    dict(id='admissao', gen='lofi', bars=8, papel='drop'),         # 24 s
+    dict(id='compressao', gen='lofi', bars=8, papel='drop'),       # 24 s
+    dict(id='potencia', gen='lofi', bars=8, papel='drop'),         # 24 s
+    dict(id='escape', gen='lofi', bars=8, papel='drop'),           # 24 s
     dict(id='ciclo', gen='lofi', bars=4, papel='break'),           # 12 s
-    dict(id='batidas', gen='house', bars=16, papel='drop', bpm=120),   # 32 s
-    dict(id='rpm', gen='synthwave', bars=18, papel='break'),       # 43,2 s
-    dict(id='cilindros', gen='lofi', bars=20, papel='drop'),       # 60 s
-    dict(id='energia', gen='lofi', bars=12, papel='break'),        # 36 s
-    dict(id='resumo', gen='lofi', bars=12, papel='drop'),          # 36 s
-    dict(id='fim', gen='lofi', bars=5, papel='break'),             # 15 s (tela final do YouTube)
+    dict(id='batidas', gen='house', bars=12, papel='drop', bpm=120),   # 24 s
+    dict(id='rpm', gen='synthwave', bars=14, papel='break'),       # 33,6 s
+    dict(id='cilindros', gen='lofi', bars=14, papel='drop'),       # 42 s
+    dict(id='energia', gen='lofi', bars=8, papel='break'),         # 24 s
+    dict(id='resumo', gen='lofi', bars=9, papel='drop'),           # 27 s
+    dict(id='fim', gen='lofi', bars=5, papel='break'),             # 15 s
 ]
 
-# legendas: capítulo -> [(início, fim, linha1, linha2, fatos)]
 LEGENDAS = {
     'gancho': [
-        (0.6, 6.0, "INSIDE A CAR ENGINE, FUEL BURNS", "IN A FLASH, OVER AND OVER.", ()),
-        (6.0, 11.6, "AT 3,000 RPM: *25 TIMES A SECOND*", "IN EVERY CYLINDER.", ('F6',)),
+        (0.6, 6.0, "DENTRO DO MOTOR DE UM CARRO, O", "COMBUSTÍVEL QUEIMA SEM PARAR.", ()),
+        (6.0, 11.6, "A 3.000 RPM: *25 VEZES POR SEGUNDO*", "EM CADA CILINDRO.", ('F6',)),
     ],
     'carro': [
-        (1.0, 8.5, "THIS IS A GASOLINE (PETROL) CAR.", "LET'S SEE WHAT MOVES IT.", ()),
-        (9.0, 17.5, "UNDER THE HOOD: THE *ENGINE*.", "MANY CARS HAVE 4 CYLINDERS IN A ROW.", ()),
-        (18.0, 27.5, "EACH CYLINDER DOES THE SAME JOB,", "JUST AT A DIFFERENT MOMENT.", ('F8',)),
-        (28.0, 35.5, "LET'S OPEN *ONE CYLINDER*.", "", ()),
+        (0.8, 7.8, "ESTE É UM CARRO A GASOLINA.", "O QUE FAZ ELE ANDAR?", ()),
+        (8.0, 13.8, "SOB O CAPÔ: O *MOTOR*. MUITOS CARROS", "TÊM 4 CILINDROS EM LINHA.", ()),
+        (14.0, 18.8, "CADA CILINDRO FAZ O MESMO TRABALHO,", "SÓ QUE EM MOMENTOS DIFERENTES.", ('F8',)),
+        (19.0, 23.6, "VAMOS ABRIR *UM CILINDRO*.", "", ()),
     ],
     'pecas': [
-        (0.3, 9.4, "THE *CYLINDER*: A STRONG METAL TUBE.", "EVERYTHING HAPPENS IN HERE.", ()),
-        (9.9, 19.0, "THE *PISTON* SLIDES UP AND DOWN.", "RINGS AROUND IT SEAL THE GAP.", ()),
-        (19.5, 28.6, "THE *CONNECTING ROD* LINKS THE", "PISTON TO THE CRANKSHAFT.", ()),
-        (29.1, 38.2, "THE *CRANKSHAFT* TURNS UP-AND-DOWN", "MOTION INTO ROTATION.", ()),
-        (38.7, 47.8, "*VALVES*: INTAKE LETS AIR AND FUEL", "IN, EXHAUST LETS BURNT GAS OUT.", ('F1',)),
-        (48.3, 57.4, "THE *CAMSHAFTS* PUSH THE VALVES OPEN,", "TURNING AT HALF THE CRANK'S SPEED.", ('F2',)),
-        (57.9, 67.0, "THE *SPARK PLUG* MAKES A TINY SPARK", "THAT LIGHTS THE MIXTURE.", ()),
+        (0.3, 7.0, "O *CILINDRO*: UM TUBO DE METAL FORTE.", "É AQUI QUE TUDO ACONTECE.", ()),
+        (7.5, 14.2, "O *PISTÃO* SOBE E DESCE.", "ANÉIS EM VOLTA DELE VEDAM A FOLGA.", ()),
+        (14.7, 21.4, "A *BIELA* LIGA O PISTÃO", "AO VIRABREQUIM.", ()),
+        (21.9, 28.6, "O *VIRABREQUIM* TRANSFORMA O SOBE E", "DESCE EM GIRO.", ()),
+        (29.1, 35.8, "*VÁLVULAS*: UMA DEIXA ENTRAR AR E", "COMBUSTÍVEL; A OUTRA SOLTA O GÁS.", ('F1',)),
+        (36.3, 43.0, "O *COMANDO* ABRE AS VÁLVULAS E GIRA", "NA METADE DO GIRO DO VIRABREQUIM.", ('F2',)),
+        (43.5, 50.2, "A *VELA DE IGNIÇÃO* SOLTA UMA FAÍSCA", "QUE ACENDE A MISTURA.", ()),
     ],
     'admissao': [
-        (3.0, 13.5, "THE PISTON MOVES DOWN AND THE", "*INTAKE VALVE* OPENS.", ('F1',)),
-        (14.0, 24.5, "AIR AND FUEL ARE DRAWN INTO", "THE CYLINDER.", ('F1',)),
-        (25.0, 35.6, "(SOME ENGINES SPRAY THE FUEL", "STRAIGHT INTO THE CYLINDER.)", ('F11',)),
+        (2.0, 8.8, "O PISTÃO DESCE E A *VÁLVULA DE*", "*ADMISSÃO* ABRE.", ('F1',)),
+        (9.0, 15.8, "AR E COMBUSTÍVEL SÃO PUXADOS PARA", "DENTRO DO CILINDRO.", ('F1',)),
+        (16.0, 23.6, "(ALGUNS MOTORES INJETAM O COMBUSTÍVEL", "DIRETO NO CILINDRO.)", ('F11',)),
     ],
     'compressao': [
-        (3.0, 13.5, "*BOTH VALVES CLOSE.*", "THE PISTON MOVES BACK UP.", ('F1',)),
-        (14.0, 24.5, "THE MIXTURE IS SQUEEZED INTO A SPACE", "ABOUT *8 TO 12 TIMES* SMALLER.", ('F3',)),
-        (25.0, 35.6, "SQUEEZING IT FIRST MAKES THE ENGINE", "FAR MORE EFFICIENT.", ('F11',)),
+        (2.0, 8.8, "*AS DUAS VÁLVULAS FECHAM.*", "O PISTÃO SOBE.", ('F1',)),
+        (9.0, 15.8, "A MISTURA É ESPREMIDA NUM ESPAÇO", "*8 A 12 VEZES* MENOR.", ('F3',)),
+        (16.0, 23.6, "COMPRIMIR ANTES DE QUEIMAR DEIXA", "O MOTOR MUITO MAIS EFICIENTE.", ('F11',)),
     ],
     'potencia': [
-        (3.0, 12.0, "JUST BEFORE THE PISTON REACHES THE", "TOP, THE *SPARK PLUG* FIRES.", ('F4',)),
-        (12.5, 22.5, "THE MIXTURE BURNS FAST. HOT GAS", "EXPANDS AND PUSHES THE PISTON DOWN.", ('F1',)),
-        (23.0, 35.6, "THIS IS THE *ONLY STROKE*", "THAT MAKES POWER.", ('F1',)),
+        (2.0, 8.8, "LOGO ANTES DO PISTÃO CHEGAR AO TOPO,", "A *VELA* SOLTA A FAÍSCA.", ('F4',)),
+        (9.0, 15.8, "A MISTURA QUEIMA RÁPIDO. O GÁS QUENTE", "SE EXPANDE E EMPURRA O PISTÃO.", ('F1',)),
+        (16.0, 23.6, "ESTE É O *ÚNICO TEMPO*", "QUE GERA FORÇA.", ('F1',)),
     ],
     'escape': [
-        (3.0, 13.5, "THE *EXHAUST VALVE* OPENS.", "THE PISTON MOVES UP AGAIN.", ('F1',)),
-        (14.0, 24.5, "IT PUSHES THE BURNT GAS OUT", "TO THE EXHAUST PIPE.", ('F1',)),
-        (25.0, 35.6, "THEN THE WHOLE CYCLE", "STARTS AGAIN.", ()),
+        (2.0, 8.8, "A *VÁLVULA DE ESCAPE* ABRE.", "O PISTÃO SOBE DE NOVO.", ('F1',)),
+        (9.0, 15.8, "ELE EMPURRA O GÁS QUEIMADO PARA", "O CANO DE ESCAPAMENTO.", ('F1',)),
+        (16.0, 23.6, "E O CICLO INTEIRO", "COMEÇA DE NOVO.", ()),
     ],
     'ciclo': [
-        (0.5, 11.6, "4 STROKES = *2 CRANKSHAFT TURNS*.", "ONE FULL CYCLE.", ('F1',)),
+        (0.5, 11.6, "4 TEMPOS = *2 VOLTAS DO VIRABREQUIM*.", "UM CICLO COMPLETO.", ('F1',)),
     ],
     'batidas': [
-        (0.5, 10.5, "4 STROKES, 4 BEATS: ONE STROKE", "ON EVERY BEAT OF THIS MUSIC.", ()),
-        (11.0, 21.0, "AT THIS TEMPO THE CRANKSHAFT TURNS", "60 TIMES A MINUTE: *60 RPM*.", ('F1',)),
-        (21.5, 31.6, "A REAL ENGINE IS MUCH FASTER.", "LET'S SPEED IT UP.", ()),
+        (0.5, 7.8, "4 TEMPOS, 4 BATIDAS: UM TEMPO", "EM CADA BATIDA DESTA MÚSICA.", ()),
+        (8.0, 15.8, "NESSE RITMO O VIRABREQUIM DÁ", "60 VOLTAS POR MINUTO: *60 RPM*.", ('F1',)),
+        (16.0, 23.6, "UM MOTOR DE VERDADE É BEM MAIS", "RÁPIDO. VAMOS ACELERAR.", ()),
     ],
     'rpm': [
-        (6.0, 14.0, "*800 RPM*: ABOUT IDLE, LIKE WAITING", "AT A RED LIGHT (600-1,000 RPM).", ('F5',)),
-        (20.0, 29.5, "*3,000 RPM*: EACH CYLINDER FIRES", "25 TIMES EVERY SECOND.", ('F6',)),
-        (35.0, 42.8, "*6,000 RPM*: 50 TIMES A SECOND.", "TOO FAST TO SEE: WE DRAW IT BLURRED.", ('F6',)),
+        (5.0, 11.0, "*800 RPM*: MARCHA LENTA, COMO PARADO", "NO SINAL (600 A 1.000 RPM).", ('F5',)),
+        (15.0, 23.0, "*3.000 RPM*: CADA CILINDRO QUEIMA", "25 VEZES POR SEGUNDO.", ('F6',)),
+        (27.0, 33.4, "*6.000 RPM*: 50 VEZES POR SEGUNDO.", "RÁPIDO DEMAIS: DESENHAMOS BORRADO.", ('F6',)),
     ],
     'cilindros': [
-        (0.5, 11.5, "ONLY 1 STROKE IN 4 PUSHES.", "SO WHAT KEEPS IT TURNING?", ('F1',)),
-        (12.0, 23.5, "A HEAVY *FLYWHEEL* ON THE CRANKSHAFT", "KEEPS IT SPINNING BETWEEN PUSHES.", ('F7',)),
-        (24.0, 35.5, "AND *MORE CYLINDERS*: IN A 4-CYLINDER", "ENGINE, THEY TAKE TURNS.", ()),
-        (36.0, 47.5, "A COMMON FIRING ORDER IS *1-3-4-2*.", "A NEW PUSH STARTS EVERY HALF TURN.", ('F8',)),
-        (48.0, 59.6, "LISTEN: EACH CYLINDER'S SPARK", "PLAYS ITS OWN NOTE.", ()),
+        (0.5, 7.4, "SÓ 1 TEMPO EM 4 EMPURRA.", "ENTÃO O QUE MANTÉM O GIRO?", ('F1',)),
+        (7.6, 14.8, "UM *VOLANTE* PESADO NO VIRABREQUIM", "MANTÉM O GIRO ENTRE OS EMPURRÕES.", ('F7',)),
+        (15.2, 23.0, "E *MAIS CILINDROS*: NUM MOTOR DE 4,", "ELES SE REVEZAM.", ()),
+        (23.2, 31.4, "UMA ORDEM DE QUEIMA COMUM É *1-3-4-2*.", "UM NOVO EMPURRÃO A CADA MEIA VOLTA.", ('F8',)),
+        (31.6, 41.6, "ESCUTE: CADA FAÍSCA", "TOCA A SUA PRÓPRIA NOTA.", ()),
     ],
     'energia': [
-        (0.5, 11.5, "WHERE DOES THE FUEL'S ENERGY GO?", "", ()),
-        (12.0, 23.5, "IN A TYPICAL GASOLINE CAR, ONLY ABOUT", "*16-25%* MOVES IT DOWN THE ROAD.", ('F9',)),
-        (24.0, 35.6, "MOST IS LOST IN THE ENGINE,", "MAINLY AS *HEAT*.", ('F9',)),
+        (0.5, 7.6, "PARA ONDE VAI A ENERGIA", "DO COMBUSTÍVEL?", ()),
+        (8.0, 15.8, "NUM CARRO A GASOLINA TÍPICO, SÓ", "*16% A 25%* FAZEM O CARRO ANDAR.", ('F9',)),
+        (16.0, 23.6, "A MAIOR PARTE SE PERDE NO MOTOR,", "PRINCIPALMENTE COMO *CALOR*.", ('F9',)),
     ],
     'resumo': [
-        (0.5, 11.5, "NIKOLAUS OTTO BUILT A FOUR-STROKE", "ENGINE IN *1876*. THE IDEA STILL RUNS.", ('F10',)),
-        (12.0, 23.5, "MECHANICS HAVE A NICKNAME FOR IT:", "", ()),
-        (23.5, 35.6, "*SUCK, SQUEEZE, BANG, BLOW.*", "", ()),
+        (0.5, 8.8, "NIKOLAUS OTTO CONSTRUIU UM MOTOR DE", "4 TEMPOS EM *1876*. A IDEIA SEGUE VIVA.", ('F10',)),
+        (9.2, 17.8, "OS 4 TEMPOS: ADMISSÃO, COMPRESSÃO,", "COMBUSTÃO (OU EXPLOSÃO) E ESCAPE.", ('F12',)),
+        (18.0, 26.6, "E TUDO ISSO ACONTECE MILHARES", "DE VEZES POR MINUTO.", ('F6',)),
     ],
 }
 
@@ -139,31 +134,65 @@ FONTES = {
     'F4': ('University of Windsor, "Four Stroke Cycle Engines"',
            'https://courses.washington.edu/engr100/Section_Wei/engine/UofWindsorManual/Four%20Stroke%20Cycle%20Engines.htm'),
     'F5': ('MechanicBase, "What RPM Should a Car Idle at?"', 'https://mechanicbase.com/?p=34863'),
-    'F6': ('Calculation from the four-stroke cycle (1 firing every 2 crankshaft turns)', None),
+    'F6': ('Conta a partir do ciclo de 4 tempos (1 queima a cada 2 voltas do virabrequim)', None),
     'F7': ('University of Windsor, "Four Stroke Cycle Engines"',
            'https://courses.washington.edu/engr100/Section_Wei/engine/UofWindsorManual/Four%20Stroke%20Cycle%20Engines.htm'),
     'F8': ('Rick\'s Free Auto Repair Advice, "Firing order for a 4-cylinder engine"',
            'https://ricksfreeautorepairadvice.com/what-is-the-firing-order-for-a-4-cylinder-engine/'),
-    'F9': ('fueleconomy.gov (U.S. Department of Energy), "Where the Energy Goes: Gasoline Vehicles"',
+    'F9': ('fueleconomy.gov (Departamento de Energia dos EUA), "Where the Energy Goes: Gasoline Vehicles"',
            'https://www.fueleconomy.gov/feg/atv.shtml'),
     'F10': ('Encyclopaedia Britannica, "Nikolaus Otto"', 'https://www.britannica.com/biography/Nikolaus-Otto'),
     'F11': ('Wikipedia, "Four-stroke engine"', 'https://en.wikipedia.org/wiki/Four-stroke_engine'),
+    'F12': ('Prepara Enem, "Motor de combustão interna" (admissão, compressão, explosão, escape); InfoEscola, "Motor de quatro tempos" (combustão)',
+            'https://www.preparaenem.com/fisica/motor-combustao-interna.htm'),
 }
 
-DESCRICAO = """How does a car engine actually work? We take one cylinder apart, block by block, and run it in slow motion: intake, compression, power, exhaust. Then we speed it up to real engine speed, add three more cylinders, and follow where the fuel's energy really goes.
+CAPITULOS_YT = {'gancho': 'Introdução', 'carro': 'Dentro do carro', 'pecas': 'As peças de um cilindro',
+                'admissao': 'Tempo 1: admissão', 'compressao': 'Tempo 2: compressão',
+                'potencia': 'Tempo 3: combustão', 'escape': 'Tempo 4: escape', 'ciclo': 'Um ciclo completo',
+                'batidas': 'Um motor no ritmo da música', 'rpm': 'Na velocidade de verdade',
+                'cilindros': 'Volante e 4 cilindros', 'energia': 'Para onde vai a energia',
+                'resumo': 'Otto, 1876, e os 4 tempos'}
 
-Every frame is pixel art drawn by code, and the music is original. In one part, the engine runs exactly on the beat: four strokes, four beats.
+DESCRICAO = """Como um motor de carro funciona de verdade? A gente abre um cilindro, monta peça por peça e roda em câmera lenta: admissão, compressão, combustão e escape. Depois acelera até a velocidade real, junta mais três cilindros e mostra para onde vai a energia do combustível.
 
-Chapters
+Cada quadro é pixel art desenhada por código, e a música é original. Em um trecho, o motor roda exatamente no ritmo da música: 4 tempos, 4 batidas.
+
+Capítulos
 {capitulos}
 
-Simplified on purpose
-- We show 2 valves per cylinder; many engines have 4 (2 intake, 2 exhaust).
-- Real valves open a little before and close a little after the strokes; we show them opening and closing at the stroke boundaries.
-- Spark timing changes with engine speed; it is shown about 20 degrees before the top.
-- The energy split shown (about 70% engine losses, 20% to the wheels, 10% other) is the combined city and highway range from the U.S. Department of Energy.
+Simplificado de propósito
+- Mostramos 2 válvulas por cilindro; muitos motores têm 4 (2 de admissão, 2 de escape).
+- As válvulas de verdade abrem um pouco antes e fecham um pouco depois de cada tempo; aqui elas abrem e fecham na virada dos tempos.
+- O ponto da faísca muda com a rotação; ela aparece cerca de 20 graus antes do topo.
+- A divisão da energia (cerca de 70% perdas no motor, 20% nas rodas, 10% outras) é a faixa de uso combinado cidade + estrada do Departamento de Energia dos EUA.
 
-Sources
+Fontes
 {fontes}
 
-#engine #howitworks #pixelart #cars #science"""
+#motor #comofunciona #pixelart #carros #ciencia #nossomundopixel"""
+
+# ---------------------------------------------------------------- Shorts (cortes verticais)
+# x = coluna da tela larga onde começa o recorte de 180 px. O cilindro do
+# close-up ocupa x 105..225; a grade da energia, 34..194.
+PREFIXO = 'ep01-motor'
+CORTES = [
+    dict(id='c1', de=('potencia', 0.0), ate=('potencia', 24.0), x=75, gancho=['A QUEIMA', 'EM SLOW'],
+         titulo='A queima dentro do motor, em câmera lenta 🔥',
+         descricao='O tempo de combustão: a vela solta a faísca um pouco antes do topo e o gás quente empurra o pistão para baixo. É o único dos 4 tempos que gera força.'),
+    dict(id='c2', de=('ciclo', 0.0), ate=('batidas', 24.0), x=75, gancho=['4 TEMPOS', '4 BATIDAS'],
+         titulo='Um motor tocando no ritmo da música 🎵',
+         descricao='4 tempos, 4 batidas: a cada batida da música o motor faz um tempo. Nesse ritmo o virabrequim dá 60 voltas por minuto.'),
+    dict(id='c3', de=('rpm', 0.0), ate=('rpm', 33.6), x=75, gancho=['DE 60 A', '6.000 RPM'],
+         titulo='Um motor de 60 a 6.000 RPM 🏎️',
+         descricao='A 3.000 RPM cada cilindro queima combustível 25 vezes por segundo. A 6.000, 50 vezes: rápido demais para o olho.'),
+    dict(id='c4', de=('cilindros', 0.0), ate=('cilindros', 15.0), x=75, gancho=['PRA QUE', 'O VOLANTE?'],
+         titulo='Por que o motor precisa de um volante pesado?',
+         descricao='Só 1 dos 4 tempos empurra o pistão. Nos outros 3, quem mantém o giro é o volante, um disco pesado no virabrequim.'),
+    dict(id='c5', de=('energia', 0.0), ate=('energia', 24.0), x=30, gancho=['ONDE VAI A', 'GASOLINA?'],
+         titulo='Para onde vai a energia da gasolina? ⛽',
+         descricao='Num carro a gasolina típico, só 16% a 25% da energia do combustível fazem o carro andar (uso misto, Departamento de Energia dos EUA). A maior parte vira calor no motor.'),
+    dict(id='c6', de=('admissao', 0.0), ate=('compressao', 24.0), x=75, gancho=['ADMISSÃO E', 'COMPRESSÃO'],
+         titulo='Os 2 primeiros tempos do motor, por dentro',
+         descricao='Admissão: o pistão desce e a mistura de ar e combustível entra. Compressão: as válvulas fecham e o pistão espreme a mistura num espaço de 8 a 12 vezes menor.'),
+]

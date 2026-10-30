@@ -65,7 +65,7 @@ def _alvos(W, H):
             col0 += m.shape[1] + gap
         else:
             xk = W // 2 - (m.shape[1] * B) // 2
-            yk = H // 2 - 62 + k * (h * B + 7)
+            yk = H // 2 - 70 + k * (PF.ALTURA * B + 7)
         for yy, xx in zip(*np.nonzero(m)):
             out.append(dict(x=xk + xx * B, y=yk + yy * B, cor=cor, luz=luz, esc=esc,
                             col=(xk + xx * B) / B if linha else xx + k * 2))

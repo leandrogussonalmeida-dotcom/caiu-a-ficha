@@ -9,6 +9,7 @@ na escada que a bolinha deixa para trás.
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, W, H, ease, hsh
 
 CORES_NOTA = [15, 10, 9, 12, 6, 7, 11, 15, 10, 9, 12, 7]
@@ -126,6 +127,6 @@ class Cena(CenaBase):
     def sobre(self, tela, t, i):
         if t < 2.6 or t >= self.F.secoes[-1]['t0']: return
         n = int(np.searchsorted(self.ts, t, 'right'))
-        txt = f"{n} NOTES"
+        txt = T(f"{n} NOTAS", f"{n} NOTES")
         w = tela.largura_texto(txt, 11)
         tela.texto(txt, W // 2, 46, 11, tam=11, centro=True, contorno=0)

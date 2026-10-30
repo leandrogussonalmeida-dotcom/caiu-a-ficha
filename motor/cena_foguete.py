@@ -15,6 +15,7 @@ Reage:
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, Sprite, ease, hsh, nova_paleta
 
 FOG = [
@@ -170,7 +171,7 @@ class Cena(CenaBase):
         n = sum(1 for b in self.barreiras if b['t'] <= t + 1e-6)
         if n > 0 and 2.6 < t < self.F.secoes[-1]['t0']:
             p = L.env('kick', t, .1)
-            txt = f"{n} GATES"
+            txt = T(f"{n} BARREIRAS", f"{n} GATES")
             tam = 11 + (1 if p > .5 else 0)
             w = tela.largura_texto(txt, tam)
             tela.texto(txt, 90, 46, 11, tam=tam, centro=True, contorno=0)

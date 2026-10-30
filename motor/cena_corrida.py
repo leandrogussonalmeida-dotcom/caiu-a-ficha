@@ -19,11 +19,12 @@ Reage:
 """
 import math
 import numpy as np
+from idioma import T
 from ritmo_base import CenaBase, Sprite, W, H, ease, hsh, nova_paleta
 
 
 def ordinal(n):
-    return f"{n}{'ST' if n % 10 == 1 and n != 11 else 'ND' if n % 10 == 2 and n != 12 else 'RD' if n % 10 == 3 and n != 13 else 'TH'}"
+    return T(f"{n}º", f"{n}{'ST' if n % 10 == 1 and n != 11 else 'ND' if n % 10 == 2 and n != 12 else 'RD' if n % 10 == 3 and n != 13 else 'TH'}")
 
 
 CARRO = [
