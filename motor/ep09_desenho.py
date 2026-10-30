@@ -259,7 +259,6 @@ def espiral_pts(cx, cy, r0, r1, voltas, a_dentro, a_fora, n=None):
     pts = []
     for i in range(n + 1):
         s = i / n
-        a = math.radians(a_dentro + 360 * voltas * s) * (1 - s) + math.radians(a_fora + 360 * voltas * s) * s
         a = math.radians(360 * voltas * s) + math.radians(a_dentro) * (1 - s) + math.radians(a_fora) * s
         r = r0 + (r1 - r0) * s
         pts.append((cx + math.cos(a) * r, cy + math.sin(a) * r))
@@ -594,7 +593,7 @@ def tambor(tela, cx, cy, R, ang_tambor, ang_eixo, carga, catraca_ang=None):
     tela.anel(cx, cy, Rin, PRETO, .6)
     # a mola: N voltas, raio de cada ponto entre "apertada no eixo" e "na parede"
     N = 9
-    gap = max(1.6, R * .045)
+    gap = max(1.6, R * .032)
     ra = R * .16
     pts = []
     passos = N * 70
@@ -604,7 +603,7 @@ def tambor(tela, cx, cy, R, ang_tambor, ang_eixo, carga, catraca_ang=None):
         rw = Rin - 1.5 - (N - u) * gap
         q = 1 / (1 + math.exp((u - carga * N) * 2.2))
         r = rc * q + rw * (1 - q)
-        a = math.radians(360 * u) + math.radians(ang_eixo) * (1 - u / N) + math.radians(ang_tambor) * (u / N)
+        a = math.radians(360 * u + ang_eixo * q + ang_tambor * (1 - q))   # voltas presas no eixo giram com ele
         pts.append((cx + math.cos(a) * r, cy + math.sin(a) * r))
     curva(tela, pts, ACO3, sombra=ACO0)
     # brilho da mola no alto à esquerda

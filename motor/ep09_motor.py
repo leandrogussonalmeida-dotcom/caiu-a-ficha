@@ -132,10 +132,21 @@ def escurecer(tela, x, y, w, h):
     sub[(xx + yy) % 2 == 0] = FUNDO
 
 
+def tique(fx, f=3000.0, dur=.03):
+    """O tic: um "plim" metálico curtinho (senos com ataque de 1,5 ms). Sem
+    ruído branco: o clique de ruído estoura o pico entre amostras."""
+    sr = LG.SR
+    n = int(dur * sr)
+    tt = np.arange(n) / sr
+    env = np.minimum(1.0, tt / .0015) * np.exp(-tt / .006)
+    y = (np.sin(2 * np.pi * f * tt) + .5 * np.sin(2 * np.pi * f * 1.51 * tt) + .3 * np.sin(2 * np.pi * f * .5 * tt)) * env
+    return (y / (np.abs(y).max() + 1e-9)).astype(np.float32)
+
+
 def tic_tac(fx, t, k, ganho=.35, pan=-.1):
     """O tic (dente batendo na pedra): par = TIC, ímpar = TAC (um pouco mais grave)."""
-    if k % 2 == 0: fx.put(fx.clique(5200, .014), t, ganho, pan)
-    else: fx.put(fx.clique(3600, .016), t, ganho * .9, -pan)
+    if k % 2 == 0: fx.put(tique(fx, 3400), t, ganho, pan)
+    else: fx.put(tique(fx, 2600), t, ganho * .9, -pan)
 
 
 class Cena:
@@ -160,7 +171,7 @@ class Cena:
         t1 = self.dur if t1 is None else t1
         for t, k in cruzamentos(self.tau, t0 - .0015, t1):
             t = max(t, t0)
-            fx.put(fx.clique(5200 if k % 2 == 0 else 3600, .014), self.t0 + t, ganho, -.15 if k % 2 == 0 else .15)
+            fx.put(tique(fx, 3400 if k % 2 == 0 else 2600), self.t0 + t, ganho, -.15 if k % 2 == 0 else .15)
 
 
 # ============================================================ gancho
@@ -194,7 +205,7 @@ class Gancho(Cena):
             tela.texto(milhar(int(691200 * u)), PX0 + 82, 148, CIANO, tam=17, centro=True, contorno=PRETO)
 
     def sons(self, fx):
-        self.sons_tic(fx, .32)
+        self.sons_tic(fx, .15)
 
 
 # ============================================================ título
@@ -249,8 +260,6 @@ class Abrir(Cena):
         roda(tela, 150, 104, 103, 0, 0, 'acoesc', perfil='liso', furo=None)
         self.M.desenhar(tela, TIQUES_S * t)
         # reflexo do vidro
-        for k in range(14):
-            tela.px(96 + k, 34 + k * 0, CERAMICA) if False else None
         for k in range(10):
             tela.ret(84 + k * 2, 40 + k * 2, 2, 1, ACO2)
 
@@ -298,9 +307,9 @@ class Abrir(Cena):
             tela.texto('TUDO ANDANDO', PX0, 158, BRANCO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
-        fx.put(fx.chiado(1.2, 400, 3000), self.t0 + self.T_VIRA - .6, .25)
+        fx.put(fx.chiado(1.2, 400, 3000), self.t0 + self.T_VIRA - .6, .15)
         for t, k in cruzamentos(lambda t: TIQUES_S * t, self.T_VIRA + .6, self.dur):
-            fx.put(fx.clique(5200 if k % 2 == 0 else 3600, .012), self.t0 + t, .18)
+            fx.put(tique(fx, 3400 if k % 2 == 0 else 2600), self.t0 + t, .1)
 
 
 # ============================================================ peças
@@ -340,8 +349,6 @@ class Pecas(Cena):
             tela.texto(rot, PX0, y, AMARELO if atual else ACO2, tam=17, contorno=PRETO)
             if atual and t - k * self.slot > .55:
                 if nome == 'rubis':
-                    for (x, yy) in self.M.pontos_rubi():
-                        tela.linha(PX0 - 4, y + 7, x, yy, AMARELO) if False else None
                     ax, ay = self.M.pontos_rubi()[3]
                 else:
                     ax, ay = A[nome]
@@ -355,9 +362,9 @@ class Pecas(Cena):
     def sons(self, fx):
         for k in range(len(PECAS)):
             t = self.t0 + k * self.slot + .41
-            fx.put(fx.clique(1800, .05), t, .45)
-            fx.put(fx.sino(76 + k * 2, .5), t, .12)
-        self.sons_tic(fx, .2, t0=self.t_anda)
+            fx.put(fx.clique(1800, .05), t, .22)
+            fx.put(fx.sino(76 + k * 2, .5), t, .08)
+        self.sons_tic(fx, .1, t0=self.t_anda)
 
 
 # ============================================================ mola real
@@ -457,10 +464,10 @@ class Mola(Cena):
             t = a + i * .002
             k = int(self.ang_eixo(t) / passo)
             if k > ult:
-                fx.put(fx.clique(2600, .02), self.t0 + t, .4, .3)
+                fx.put(tique(fx, 2000, .04), self.t0 + t, .2, .3)
                 ult = k
         for k in range(int((self.dur - b) * 6)):
-            fx.put(fx.clique(5000, .01), self.t0 + b + k / 6, .1)
+            fx.put(tique(fx, 3400), self.t0 + b + k / 6, .06)
 
 
 # ============================================================ engrenagens
@@ -515,7 +522,7 @@ class Engrenagens(Cena):
             if larg > 1:
                 Mk = Mascara(); linha_grossa(Mk, c[0], c[1], x1, y1, larg, 1); pintar_tela(tela, Mk, 'aco')
             else:
-                tela.linha(c[0], c[1], x1, y1, PRETO if False else cor)
+                tela.linha(c[0], c[1], x1, y1, cor)
             tela.disco(c[0], c[1], 2.5, cor)
         for c in (self.Cc, self.Tc, self.Fc, self.Ec):
             rubi(tela, c[0], c[1], 2.4)
@@ -554,7 +561,7 @@ class Engrenagens(Cena):
 
     def sons(self, fx):
         for k in range(int(self.dur)):
-            fx.put(fx.clique(3000, .01), self.t0 + k + .5, .1)
+            fx.put(tique(fx, 2400), self.t0 + k + .5, .1)
 
 
 # ============================================================ escape (câmera superlenta)
@@ -625,11 +632,11 @@ class EscapeCena(Cena):
         hud(tela, n, None, y=150)
 
     def sons(self, fx):
-        self.sons_tic(fx, .45)
+        self.sons_tic(fx, .22)
         # o destrava: um clique baixinho quando o pino entra no garfo
         E = self.E
         for t, k in cruzamentos(self.tau, 0, self.dur, alvo=1 - E.x_lock - E.Dt):
-            fx.put(fx.clique(2400, .01), self.t0 + t, .12)
+            fx.put(tique(fx, 1800), self.t0 + t, .07)
 
 
 # ============================================================ balanço
@@ -697,7 +704,7 @@ class Balanco(Cena):
         tela.texto('1 POR BATIDA DA MÚSICA', PX0, 186, ACO2, tam=9)
 
     def sons(self, fx):
-        self.sons_tic(fx, .35)
+        self.sons_tic(fx, .18)
 
 
 # ============================================================ batida
@@ -708,7 +715,7 @@ class Batida(Cena):
         self.E = peca('perto')
 
     def tau(self, t):
-        if t < self.T_REAL: return 2.0 * t * (60.0 / 120.0) / self.spb      # 1 por batida
+        if t < self.T_REAL: return t / self.spb                           # 1 por batida
         return self.tau(self.T_REAL - 1e-9) + TIQUES_S * (t - self.T_REAL)
 
     def desenhar(self, tela, t, tg):
@@ -756,11 +763,10 @@ class Batida(Cena):
             tela.texto(f"{milhar(bph)}/H", PX0, y, cor, tam=9, contorno=PRETO)
             tela.texto(f"{ps} POR S", PX0 + 64, y, cor, tam=9, contorno=PRETO)
             if on and t >= 23.8: tela.texto('= 4 HZ', PX0 + 118, y, CIANO, tam=9, contorno=PRETO)
-        hud(tela, int(math.floor(tau)), None, y=176) if False else None
         tela.texto(f"TIQUES {milhar(math.floor(tau))}", PX0, 180, BRANCO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
-        self.sons_tic(fx, .38)
+        self.sons_tic(fx, .18)
 
 
 # ============================================================ rubis
@@ -955,10 +961,10 @@ class Automatico(Cena):
         for i in range(0, len(self.ts), 4):
             k = int(self.cg[i] * 400)
             if k > ult and self.cg[i] < .999:
-                fx.put(fx.clique(2200, .012), self.t0 + self.ts[i], .1, .2)
+                fx.put(tique(fx, 1900), self.t0 + self.ts[i], .1, .2)
                 ult = k
         for t, k in cruzamentos(lambda t: TIQUES_S * t, 0, self.dur):
-            if k % 2 == 0: fx.put(fx.clique(5200, .01), self.t0 + t, .08)
+            if k % 2 == 0: fx.put(tique(fx, 3400), self.t0 + t, .08)
 
 
 # ============================================================ precisão
@@ -1009,9 +1015,9 @@ class Precisao(Cena):
 
     def sons(self, fx):
         for k in range(int(self.dur)):
-            fx.put(fx.clique(3000, .012), self.t0 + k + .001, .12, .4)
+            fx.put(tique(fx, 2400), self.t0 + k + .001, .12, .4)
         for k in range(int(self.dur * 8)):
-            if k % 2 == 0: fx.put(fx.clique(5200, .008), self.t0 + k / 8, .06, -.4)
+            if k % 2 == 0: fx.put(tique(fx, 3400), self.t0 + k / 8, .06, -.4)
 
 
 # ============================================================ história
@@ -1068,7 +1074,7 @@ class Historia(Cena):
         fx.put(fx.sino(76, 1.0), self.t0 + 7.8, .25)
         fx.put(fx.sino(83, 1.0), self.t0 + 15.8, .2)
         for k in range(int(self.dur * 5 / 2)):
-            fx.put(fx.clique(3000, .014), self.t0 + k * .4, .07)
+            fx.put(tique(fx, 2400), self.t0 + k * .4, .07)
 
 
 # ============================================================ resumo
@@ -1103,7 +1109,7 @@ class Resumo(Cena):
 
     def sons(self, fx):
         for t, k in cruzamentos(lambda t: TIQUES_S * t, 0, self.dur):
-            fx.put(fx.clique(5200 if k % 2 == 0 else 3600, .012), self.t0 + t, .16)
+            fx.put(tique(fx, 3400 if k % 2 == 0 else 2600), self.t0 + t, .1)
 
 
 # ============================================================ fim
@@ -1135,7 +1141,7 @@ class Fim(Cena):
         return baixo
 
     def sons(self, fx):
-        fx.put(RM.som_encerramento(SEED), self.t0, .9)
+        fx.put(RM.som_encerramento(SEED), self.t0, .75)
 
 
 CENAS = dict(gancho=Gancho, titulo=Titulo, abrir=Abrir, pecas=Pecas, mola=Mola, engrenagens=Engrenagens,
