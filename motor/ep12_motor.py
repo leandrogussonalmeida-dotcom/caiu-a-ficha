@@ -326,7 +326,7 @@ class Velocidade(Cena):
                     tela.ret(xx, y - h // 2, 1, h, cor)
             if xf <= XB:
                 tela.ret(xf, y - h // 2 - 3, 1, h + 6, BRANCO)
-                if xf > XA + 90 and m < (C_SOM if not agua else 1481.0) - 1:
+                if not agua and xf > XA + 90 and m < (C_SOM if not agua else 1481.0) - 1:
                     tela.texto("FRENTE DA ONDA", int(xf - tela.largura_texto("FRENTE DA ONDA", 9) - 3), y - h // 2 - 12,
                                BRANCO, tam=9, contorno=PRETO)
         # régua
