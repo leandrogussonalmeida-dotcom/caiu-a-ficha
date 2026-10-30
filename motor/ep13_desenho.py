@@ -385,7 +385,7 @@ class MotorCC:
     def __init__(self, cx=140, cy=104, R=80):
         self.cx, self.cy, self.R = cx, cy, R
         self.rr = R * .56            # raio dos lados da bobina
-        self.rc = 11                 # raio do comutador
+        self.rc = 12                 # raio do comutador
         self._est = None
 
     # ------------------------------------------------ física (a mesma da legenda)
@@ -456,21 +456,31 @@ class MotorCC:
             on = pilha_on and (dx, dy) == (0, 0)
             mais, menos = pilha(tela, 14 + dx, 72 + dy, 18, 64, True, .3 if on else 0)
             if (dx, dy) == (0, 0) and 'escovas' in vis:
-                fio_eletrico(tela, [mais, (mais[0], 202), (cx, 202), (bot[0], bot[1] + 8)], t, on, 1)
-                fio_eletrico(tela, [(top[0], top[1] - 8), (cx, 6), (menos[0], 6), menos], t, on, 1)
+                fio_eletrico(tela, [mais, (mais[0], 201), (cx, 201), (cx, cy + R + 7)], t, on, 1)
+                fio_eletrico(tela, [(cx, cy - R - 7), (cx, 7), (menos[0], 7), menos], t, on, 1)
+        if 'escovas' in vis and d('escovas') == (0, 0):
+            # porta-escovas: hastes de aço presas na carcaça, pelo vão entre os ímãs
+            for y0_, y1_ in ((cy - R - 1, cy - self.rc - 10), (cy + self.rc + 10, cy + R + 1)):
+                linha_grossa(tela, cx, y0_, cx, y1_, 5, PRETO)
+                linha_grossa(tela, cx, y0_, cx, y1_, 3, ACO1)
+                for yy in range(int(min(y0_, y1_)) + 3, int(max(y0_, y1_)) - 2, 4):
+                    tela.px(cx, yy, ACO3)
         # ---- rotor (bobina vista de lado: os dois lados em corte)
         if 'rotor' in vis:
             dx, dy = d('rotor')
             ax, ay = P(cx + dx, cy + dy, self.rr, aA)
             bx, by = P(cx + dx, cy + dy, self.rr, aA + 180)
-            Mk = Mascara(); linha_grossa(Mk, ax, ay, bx, by, 5, 1)
+            tela.anel(cx + dx, cy + dy, self.rr, FUNDO3, .5)          # caminho dos lados da bobina
+            Mk = Mascara(); linha_grossa(Mk, ax, ay, bx, by, 8, 1)
             pintar_tela(tela, Mk, 'cobreq' if sA else 'cobre', cx=cx + dx, cy=cy + dy, R=self.rr)
-            # espiras: risquinhos na bobina
-            for k in range(-4, 5):
-                x, y = P(cx + dx, cy + dy, k * self.rr / 5.2, aA)
-                tela.px(x, y, OLEO0)
-            fio_corte(tela, ax, ay, 6.5, sA)
-            fio_corte(tela, bx, by, 6.5, -sA)
+            # espiras: riscos atravessados na bobina
+            ux, uy = (bx - ax) / (2 * self.rr), (by - ay) / (2 * self.rr)
+            for k in range(-7, 8):
+                if abs(k) < 2: continue
+                x, y = P(cx + dx, cy + dy, k * self.rr / 8.0, aA)
+                tela.linha(x - uy * 3, y + ux * 3, x + uy * 3, y - ux * 3, OLEO0)
+            fio_corte(tela, ax, ay, 8, sA)
+            fio_corte(tela, bx, by, 8, -sA)
             if flash > 0:
                 brilho(tela, ax, ay, 16, AMARELO, flash); brilho(tela, bx, by, 16, AMARELO, flash)
             if polos and sA:
@@ -491,23 +501,26 @@ class MotorCC:
             # metade ligada ao lado A fica em aA+90 (vai para a escova de baixo quando A está à esquerda)
             for k, meio in enumerate((aA + 90, aA - 90)):
                 lado = 1 if k == 0 else -1          # 1 = ligada ao lado A
-                M, x0, y0 = setor(cx + dx, cy + dy, 7, self.rc, meio - 90 + gap / 2, meio + 90 - gap / 2)
+                M, x0, y0 = setor(cx + dx, cy + dy, 7.5, self.rc, meio - 90 + gap / 2, meio + 90 - gap / 2)
                 pintar(tela, M, x0, y0, 'cobreq' if sA else 'cobre', cx=cx + dx, cy=cy + dy, R=self.rc)
             if not comut_corte:
                 tela.anel(cx + dx, cy + dy, 9, LATAO, .8)
             pintar_disco(tela, cx + dx, cy + dy, 5, 'aco')
         if 'escovas' in vis:
             dx, dy = d('escovas')
-            for yy, sgn in ((cy - self.rc - 9, -1), (cy + self.rc + 1, 1)):
-                pintar_ret(tela, cx - 3 + dx, yy + dy, 7, 8, 'carvao')
+            for yy, sgn in ((cy - self.rc - 10, -1), (cy + self.rc + 1, 1)):
+                pintar_ret(tela, cx - 4 + dx, yy + dy, 9, 10, 'carvao')
                 if (dx, dy) == (0, 0):
-                    tela.texto('-' if sgn < 0 else '+', cx + 8, yy + 1, BRANCO, tam=9, contorno=PRETO)
+                    tela.texto('-' if sgn < 0 else '+', cx + 10, yy + 2, BRANCO, tam=9, contorno=PRETO)
             if escova_ok and sA and (dx, dy) == (0, 0):
                 brilho(tela, cx, cy + self.rc + 1, 6, AMARELO, .5)
+        self.ponta_forca = None
         if forca and sA and 'rotor' in vis:
             for (x, y), s in ((P(cx, cy, self.rr, aA), sA), (P(cx, cy, self.rr, aA + 180), -sA)):
                 dirv = 1 if s < 0 else -1               # X desce, ponto sobe
-                seta(tela, x + (9 if x > cx else -9), y, x + (9 if x > cx else -9), y + dirv * 18, AMARELO, cab=3)
+                xs = x + (11 if x > cx else -11)
+                seta(tela, xs, y, xs, y + dirv * 20, AMARELO, cab=4, esp=2)
+                if x > cx: self.ponta_forca = (xs, y + dirv * 12)
 
 
 # ================================================================ motor sem escovas / indução / trifásico
@@ -549,7 +562,9 @@ class MotorBL:
         a = 6.0
         pts = [(cx + ux * r_in + vx * a, cy + uy * r_in + vy * a), (cx + ux * r_out + vx * a, cy + uy * r_out + vy * a),
                (cx + ux * r_out - vx * a, cy + uy * r_out - vy * a), (cx + ux * r_in - vx * a, cy + uy * r_in - vy * a)]
-        pintar_pol(tela, pts, 'ferro', cx=cx, cy=cy, R=R)
+        mat_corpo = 'ferro'
+        if intens > .55 and polo: mat_corpo = 'ima_s' if polo > 0 else 'ima_n'
+        pintar_pol(tela, pts, mat_corpo, cx=cx, cy=cy, R=R)
         # sapata (a face que olha o rotor)
         mat_face = 'ferro'
         if intens > .15 and polo:
