@@ -327,7 +327,7 @@ class Grade(Cena):
                           TIN0 if val else PAP2)
                     if aceso: tela.ret_vazado(PX0 - 3, yy - 3, 37, 37, AMARELO)
                     tela.texto(nome, PX0 + 40, yy + 8, AMARELO if aceso else ACO2, tam=17, contorno=PRETO)
-                self.ptxt(tela, "CADA MÓDULO GUARDA 1 BIT", 152, BRANCO)
+                self.ptxt(tela, "ESCURO = 1, CLARO = 0", 152, BRANCO)
         # réguas: 25 por 25
         if 14.8 <= t < 22.2:
             u = clamp((t - 14.8) / 4.0)
@@ -1498,7 +1498,7 @@ class Historia(Cena):
             tela.ret(300, 0, 1, PALCO_H, TRACO); tela.ret(301, 0, W - 301, PALCO_H, FUNDO)
             self.ptit(tela, "JAPÃO, 1994", 6)
             tela.texto("1994", PX0, 22, AMARELO, tam=26, contorno=PRETO)
-            self.ptxt(tela, "DENSO WAVE", 52, BRANCO, 17)
+            self.ptxt(tela, "DENSO", 52, BRANCO, 17)
             self.ptxt(tela, "ETIQUETAS DE PEÇAS DE CARRO", 72, ACO3)
             self.ptit(tela, "CAIXAS LIDAS", 90)
             nl = int((t * self.vel - (sx + 362) % 80) // 80) + 1

@@ -83,7 +83,7 @@ LEGENDAS = {
     ],
     'grade': [
         (0.5, 7.0, "QR VEM DE *QUICK RESPONSE*:", "RESPOSTA RÁPIDA, EM INGLÊS.", ('F1',)),
-        (7.4, 14.4, "CADA QUADRADINHO É UM *MÓDULO*.", "ESCURO OU CLARO: UM BIT CADA.", ('F1', 'F3')),
+        (7.4, 14.4, "CADA QUADRADINHO É UM *MÓDULO*.", "ESCURO VALE *1*, CLARO VALE *0*.", ('F1', 'F3')),
         (14.8, 21.8, "O NOSSO É A *VERSÃO 2*:", "25 X 25 = *625 MÓDULOS*.", ('F1', 'F8')),
         (22.2, 29.6, "EM VOLTA, UMA *MARGEM* LIMPA", "DE 4 MÓDULOS.", ('F2',)),
     ],
@@ -126,7 +126,7 @@ LEGENDAS = {
     'mascara': [
         (0.5, 7.4, "SÓ COM OS DADOS, PODEM SOBRAR", "*BLOCOS* E LISTRAS QUE CONFUNDEM.", ('F1', 'F3')),
         (7.8, 14.8, "ENTÃO ENTRA UMA *MÁSCARA*:", "ELA INVERTE ALGUNS MÓDULOS.", ('F1', 'F3')),
-        (15.2, 22.6, "SÃO *8 MÁSCARAS*. CADA UMA LEVA", "PONTOS DE CASTIGO POR BLOCOS.", ('F3',)),
+        (15.2, 22.6, "SÃO *8 MÁSCARAS*. CADA UMA LEVA", "CASTIGO POR BLOCOS E LISTRAS.", ('F3',)),
         (23.0, 30.4, "VENCE A DE *MENOS PONTOS*:", "AQUI, A *MÁSCARA 2*.", ('F3',)),
         (30.8, 35.0, "O FORMATO GUARDA O NÚMERO DELA", "E O NÍVEL DE CORREÇÃO.", ('F1',)),
         (35.2, 39.6, "*625 DE 625*:", "O CÓDIGO ESTÁ PRONTO!", ('F8',)),
@@ -152,13 +152,13 @@ LEGENDAS = {
         (31.4, 38.6, "MAIS MÓDULOS, MAIS PEÇAS DE", "ALINHAMENTO ESPALHADAS.", ('F2',)),
     ],
     'historia': [
-        (0.5, 7.4, "O QR CODE FOI INVENTADO EM *1994*", "POR MASAHIRO HARA, DA DENSO WAVE,", ('F1', 'F2')),
-        (7.8, 15.4, "UMA EMPRESA JAPONESA, PARA ETIQUETAR", "*PEÇAS DE CARRO*.", ('F1',)),
+        (0.5, 7.4, "O QR CODE FOI INVENTADO EM *1994*", "POR MASAHIRO HARA, DA *DENSO*,", ('F1', 'F2', 'F9')),
+        (7.8, 15.4, "(HOJE DENSO WAVE), NO JAPÃO, PARA", "ETIQUETAR *PEÇAS DE CARRO*.", ('F1', 'F9')),
         (15.8, 23.6, "EM 2000 ELE VIROU NORMA ISO/IEC.", "E *SAIU DA FÁBRICA*.", ('F2',)),
     ],
     'pix': [
         (0.5, 7.4, "NO BRASIL, O *PIX* USA QR CODE:", "O PADRÃO SE CHAMA *BR CODE*.", ('F4',)),
-        (7.8, 15.4, "NO QR *ESTÁTICO*, TUDO O QUE O", "PAGAMENTO PRECISA VAI NO CÓDIGO.", ('F4',)),
+        (7.8, 15.4, "NO QR *ESTÁTICO*, CHAVE, VALOR E", "TEXTO VÃO DENTRO DO CÓDIGO.", ('F4',)),
         (15.8, 23.6, "NO *DINÂMICO*, O CÓDIGO LEVA UM", "ENDEREÇO QUE O APP CONSULTA.", ('F4',)),
     ],
     'resumo': [
@@ -179,6 +179,7 @@ FONTES = {
            'https://www.thonky.com/qr-code-tutorial/error-correction-table'),
     'F6': ('Thonky, "Character Capacities"', 'https://www.thonky.com/qr-code-tutorial/character-capacities'),
     'F7': ('freeCodeCamp, "ASCII Table"', 'https://www.freecodecamp.org/news/ascii-table-hex-to-ascii-value-character-code-chart-2/'),
+    'F9': ('Britannica, "Denso Wave": em 1994 era uma divisão da Denso', 'https://britannica.com/topic/Denso-Wave'),
     'F8': ('Contas: 25 X 25; 177 X 177; 4 X versão + 17; 17 X 8; 78 e 17 em binário; 22 + 22; 11 / 44', None),
 }
 

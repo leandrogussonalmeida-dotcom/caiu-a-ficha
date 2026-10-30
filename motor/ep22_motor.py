@@ -829,44 +829,48 @@ class Subir(Cena):
 class Descer(Cena):
     R = 1.5
     H0 = 63.0
-    V0, V1 = 14.6, 22.0                 # paraquedas aberto (vídeo)
-    PILOTO = 21.0
+    V0, V1 = 14.6, 27.5                 # paraquedas entreaberto (vídeo)
+    VMAX = .2
+    PILOTO = 24.0
 
     def preparar(self):
         R = self.R
         bs = [b * R for b in self.batidas('batida')]
-        st = dict(ate=-1.0, jatos=[])
-
-        def queim(tf, h, v, Tin):
-            if tf < st['ate']: return 1.0
-            if tf < self.PILOTO * R or h <= .05: return 0.0
-            L = D.empuxo_kg(Tin, h); Ta, rho = D.ar_fora(h); m_in = D.VOLUME * rho * Ta / Tin
-            a = ((L - PESO) * 9.81 - .5 * rho * D.Voo.CDA * v * abs(v)) / (PESO + m_in)
-            alvo = -2.2 if h > 45 else -(.5 + h * .035)
-            for b in bs:
-                if abs(tf - b) < .026 and v + a * 8 < alvo:
-                    st['ate'] = b + 1.5 * R
-                    st['jatos'].append((b / R, b / R + 1.5))
-                    return 1.0
-            return 0.0
-
-        a0, a1 = self.V0 * R, self.V1 * R
-
-        def vent(tf):
-            return .3 * min(1, max(0, (tf - a0) / 1.5)) * min(1, max(0, (a1 - tf) / 1.5))
         Ta, rho = D.ar_fora(self.H0)
         Teq = Ta / (1 - PESO / (D.VOLUME * rho))
-        self.voo = D.Voo(self.dur * R + 1, queim, vent, h0=self.H0, v0=0.0, Tin0=Teq + .3, travar=True)
-        self.js = st['jatos']
-        self.t_pouso = next((float(r[0]) / R for r in self.voo.a if r[0] > 1 and r[1] <= 0), self.dur)
+        a0, a1 = self.V0 * R, self.V1 * R
+        pouso = [1e9]
+
+        def rodar():
+            st = dict(ate=-1.0, jatos=[])
+
+            def queim(tf, h, v, Tin):
+                if tf < st['ate']: return 1.0
+                if tf < self.PILOTO * R or h <= .05: return 0.0
+                L = D.empuxo_kg(Tin, h); Ta, rho = D.ar_fora(h); m_in = D.VOLUME * rho * Ta / Tin
+                a = ((L - PESO) * 9.81 - .5 * rho * D.Voo.CDA * v * abs(v)) / (PESO + m_in)
+                alvo = -2.2 if h > 45 else -(.5 + h * .035)
+                for b in bs:
+                    if abs(tf - b) < .026 and v + a * 8 < alvo:
+                        st['ate'] = b + 1.5 * R
+                        st['jatos'].append((b / R, b / R + 1.5))
+                        return 1.0
+                return 0.0
+
+            def vent(tf):
+                if tf > pouso[0] + R: return 1.0                     # pousou: abre tudo para esvaziar
+                return self.VMAX * min(1, max(0, (tf - a0) / 1.5)) * min(1, max(0, (a1 - tf) / 1.5))
+            voo = D.Voo(self.dur * R + 1, queim, vent, h0=self.H0, v0=0.0, Tin0=Teq + .3, travar=True)
+            return voo, st['jatos']
+        voo, _ = rodar()
+        pouso[0] = next((float(r[0]) for r in voo.a if r[0] > 1 and r[1] <= 0), 1e9)
+        self.voo, self.js = rodar()
+        self.t_pouso = pouso[0] / R if pouso[0] < 1e8 else self.dur
 
     def desenhar(self, tela, t, tg):
         q = self.voo.q(t * self.R)
         q['chama'] = chama_de(self.js, t)
-        vis_vent = q['vent'] / .3
-        if t > self.t_pouso + 1.0:
-            vis_vent = min(1.0, (t - self.t_pouso - 1.0) / 2)        # pousou: abre tudo para esvaziar
-            q['vent'] = .3
+        vis_vent = min(1.0, q['vent'] / self.VMAX * .6) if q['vent'] < .5 else 1.0
         cena_voo(tela, t, q['h'], .9 * t, dict(chama=q['chama'], vent=vis_vent))
         if vis_vent > .05:
             ar_quente_saindo(tela, t, CX, MY, K, vis_vent)

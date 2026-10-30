@@ -6,8 +6,8 @@ próprio (versão 2, nível Q, modo byte), em Python puro, sem biblioteca:
 monta os bytes da frase, calcula os 22 bytes de Reed–Solomon em GF(256),
 desenha os padrões fixos, põe os bits em zigue-zague, testa as 8 máscaras
 pelas 4 regras de castigo e escreve os 15 bits de formato. O resultado foi
-conferido contra a biblioteca `segno` (mesma matriz, módulo a módulo, com a
-mesma máscara) e lido por um decodificador (OpenCV) num quadro exportado;
+comparado com a biblioteca `segno` (difere só no último byte de dados e,
+por isso, nos bytes de correção; as duas versões leem) e lido por um decodificador (OpenCV) num quadro exportado;
 a matriz final também fica guardada abaixo como literal (FINAL_V2_HEX), e
 o import confere que a conta bate com ela.
 

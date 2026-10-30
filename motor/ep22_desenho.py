@@ -381,7 +381,7 @@ class Paisagem:
     def __init__(self, hy=95, cx=150, seed=4):
         self.hy, self.cx = hy, cx
         rng = np.random.default_rng(seed)
-        self.arvores = [(float(rng.uniform(-260, 260)), float(rng.uniform(30, 420)), float(rng.uniform(6, 11)))
+        self.arvores = [(float(rng.uniform(-260, 260)), float(rng.uniform(75, 420)), float(rng.uniform(6, 11)))
                         for _ in range(26)]
         self.nuvens = [(float(rng.uniform(-900, 900)), float(rng.uniform(500, 1600)), float(rng.uniform(120, 900)),
                         int(rng.integers(0, 14))) for _ in range(12)]
