@@ -715,15 +715,18 @@ def manometro(tela, cx, cy, r, u, cor=AMARELO):
     tela.disco(cx, cy, 1.6, PRETO); tela.px(cx, cy, ACO4)
 
 
-def garrafa(tela, x, y, frac, t, cor=MISTURA):
-    """Garrafa de 1 litro (10x18), cheia até frac."""
-    tela.ret(x - 1, y + 3, 12, 16, PRETO)
-    tela.ret(x + 2, y - 1, 6, 5, PRETO)
-    tela.ret(x, y + 4, 10, 14, FUNDO2)
-    tela.ret(x + 3, y, 4, 4, FUNDO2)
-    tela.ret(x + 3, y - 1, 4, 1, ACO2)
-    n = int(round(14 * max(0.0, min(1.0, frac))))
+def garrafa(tela, x, y, frac, t, cor=MISTURA, esc=1):
+    """Garrafa de 1 litro (10x18 vezes esc), cheia até frac. (x, y) = canto de cima."""
+    e = esc
+    tela.ret(x - e, y + 3 * e, 12 * e, 16 * e, PRETO)
+    tela.ret(x + 2 * e, y - e, 6 * e, 5 * e, PRETO)
+    tela.ret(x, y + 4 * e, 10 * e, 14 * e, FUNDO2)
+    tela.ret(x + 3 * e, y, 4 * e, 4 * e, FUNDO2)
+    tela.ret(x + 3 * e, y - e, 4 * e, e, ACO2)
+    n = int(round(14 * e * max(0.0, min(1.0, frac))))
     if n > 0:
-        dither(tela, x, y + 18 - n, 10, n, cor, FUNDO3)
-        tela.ret(x, y + 18 - n, 10, 1, MISTURA2)
-    tela.ret(x + 1, y + 5, 1, 11, ACO3)
+        dither(tela, x, y + 18 * e - n, 10 * e, n, cor, FUNDO3)
+        d = 1 if (frac < 1 and math.sin(t * 5) > 0) else 0
+        tela.ret(x, y + 18 * e - n - d, 10 * e, 1, MISTURA2)
+    tela.ret(x + e, y + 5 * e, e, 11 * e, ACO3)
+    tela.ret(x + 10 * e - 1, y + 4 * e, 1, 14 * e, ACO1)

@@ -128,7 +128,8 @@ LEGENDAS = {
         (7.8, 14.8, "ENTÃO ENTRA UMA *MÁSCARA*:", "ELA INVERTE ALGUNS MÓDULOS.", ('F1', 'F3')),
         (15.2, 22.6, "SÃO *8 MÁSCARAS*. CADA UMA LEVA", "PONTOS DE CASTIGO POR BLOCOS.", ('F3',)),
         (23.0, 30.4, "VENCE A DE *MENOS PONTOS*:", "AQUI, A *MÁSCARA 2*.", ('F3',)),
-        (30.8, 39.6, "O FORMATO GUARDA O NÚMERO DELA.", "*625 DE 625*: O CÓDIGO ESTÁ PRONTO!", ('F1', 'F8')),
+        (30.8, 35.0, "O FORMATO GUARDA O NÚMERO DELA", "E O NÍVEL DE CORREÇÃO.", ('F1',)),
+        (35.2, 39.6, "*625 DE 625*:", "O CÓDIGO ESTÁ PRONTO!", ('F8',)),
     ],
     'mancha': [
         (0.5, 7.4, "AGORA, UM ACIDENTE:", "CAIU *CAFÉ* NO CÓDIGO.", ()),

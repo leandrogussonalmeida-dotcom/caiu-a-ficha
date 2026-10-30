@@ -87,6 +87,7 @@ def faixa_brilho(tela, x0, x1, y0, y1, pos, larg=8, incl=.5):
 
 def lupa(tela, x, y, w, h, titulo, cor=AMARELO, alvo=None):
     """Janela de zoom com moldura; devolve a área interna (x, y, w, h)."""
+    if VERTICAL and y < 17: y = 17                 # abaixo do selo da etapa no Short
     if alvo:
         tela.linha(x + w // 2, y + h, alvo[0], alvo[1], cor)
         tela.disco(alvo[0], alvo[1], 2, cor)
@@ -726,7 +727,7 @@ class Codigo(Cena):
         if VERTICAL:
             w, gap = 32, 3
             x0 = self.VX - (5 * w + 4 * gap) // 2
-            return [(x0 + (i % 5) * (w + gap), 52 + (i // 5) * 62) for i in range(10)], w
+            return [(x0 + (i % 5) * (w + gap), 34 + (i // 5) * 54) for i in range(10)], w
         w, gap = 40, 6
         x0 = W // 2 - (10 * w + 9 * gap) // 2
         return [(x0 + i * (w + gap), 66) for i in range(10)], w
@@ -772,7 +773,11 @@ class Codigo(Cena):
                 tela.texto('AS 3 LETRAS DO DONO SÃO REGISTRADAS NO BIC', W // 2, 146, ACO3, tam=9, centro=True, contorno=PRETO)
         if 12.8 <= t < 19.0:
             cx = self.VX if VERTICAL else W // 2
-            tela.texto('QUAL É O DÍGITO?', cx, 70 if VERTICAL else 80, AMARELO, tam=17, centro=True, contorno=PRETO)
+            if VERTICAL:
+                tela.texto('QUAL É O', cx, 52, AMARELO, tam=17, centro=True, contorno=PRETO)
+                tela.texto('DÍGITO?', cx, 72, AMARELO, tam=17, centro=True, contorno=PRETO)
+            else:
+                tela.texto('QUAL É O DÍGITO?', cx, 80, AMARELO, tam=17, centro=True, contorno=PRETO)
             tela.texto('ELE SAI DE UMA CONTA COM', cx, 104, ACO3, tam=9, centro=True, contorno=PRETO)
             tela.texto('AS OUTRAS 10 POSIÇÕES', cx, 116, ACO3, tam=9, centro=True, contorno=PRETO)
             for k in range(10):
@@ -817,10 +822,10 @@ class Codigo(Cena):
                 tela.ret(x + 2, yy + dy - 2, w - 4, 1, ACO1)
                 tela.texto(f"={I.milhar(self.prods[i])}", x + w // 2, yy + dy, CHAMA0, tam=9, centro=True, contorno=PRETO)
         cx = self.VX if VERTICAL else W // 2
-        ys = 140 if not VERTICAL else 178
+        ys = 140 if not VERTICAL else 142
         if 19.0 <= t < 24.8:
-            tela.texto('M=24  P=27  U=32  X=36', cx, ys + (22 if not VERTICAL else 14), ACO3, tam=9, centro=True, contorno=PRETO)
-            tela.texto('(A=10, B=12... PULA 11, 22 E 33)', cx, ys + (34 if not VERTICAL else 24), ACO2, tam=9,
+            tela.texto('M=24  P=27  U=32  X=36', cx, ys + (22 if not VERTICAL else 0), ACO3, tam=9, centro=True, contorno=PRETO)
+            tela.texto('(A=10, B=12... PULA 11, 22 E 33)', cx, ys + (34 if not VERTICAL else 11), ACO2, tam=9,
                        centro=True, contorno=PRETO)
             if not VERTICAL:
                 k = 3 - int((t - 19.0) / 1.0) if t < 22.0 else 0
@@ -830,12 +835,12 @@ class Codigo(Cena):
             tela.texto(f"SOMA = {I.milhar(s)}", cx, ys, BRANCO if s < self.soma else AMARELO, tam=17, centro=True, contorno=PRETO)
         if t >= 31.0:
             q = self.soma // 11
-            tela.texto(f"{I.milhar(self.soma)} / 11 = {q}, SOBRA {self.resto}", cx, ys + (22 if not VERTICAL else 16), BRANCO,
+            tela.texto(f"{I.milhar(self.soma)} / 11 = {q}, SOBRA {self.resto}", cx, ys + (22 if not VERTICAL else 11), BRANCO,
                        tam=17 if not VERTICAL else 9, centro=True, contorno=PRETO)
         if t >= 33.0:
             u = fase(t, 33.0, 33.4)
-            tela.texto('DÍGITO = 5', cx - 8, ys + (44 if not VERTICAL else 28), VERDE, tam=17 if not VERTICAL else 9, centro=True, contorno=PRETO)
-            check(tela, cx + (60 if not VERTICAL else 32), ys + (48 if not VERTICAL else 28), VERDE)
+            tela.texto('DÍGITO = 5', cx - 8, ys + (44 if not VERTICAL else 21), VERDE, tam=17 if not VERTICAL else 9, centro=True, contorno=PRETO)
+            check(tela, cx + (60 if not VERTICAL else 32), ys + (48 if not VERTICAL else 21), VERDE)
 
     def tipo(self, tela, u):
         cx = self.VX if VERTICAL else W // 2
@@ -945,7 +950,7 @@ class Portao(Cena):
         if t < 6.6:
             self.rot(tela, 'O NOSSO', cx + 10, cy - 22, AMARELO, alvo=(cx + 20, cy + 2))
         if t < 6.6:
-            self.rot(tela, 'CÂMERAS', PORTAL_X + 70, 60, CIANO, alvo=(PORTAL_X + 40, 86))
+            self.rot(tela, 'CÂMERAS', PORTAL_X + 46, 60, CIANO, alvo=(PORTAL_X + 40, 86))
         if 6.8 <= t < 13.0:
             lx = self.lupa_x(6, 150)
             ix, iy, iw, ih = lupa(tela, lx, 4, 150, 52, 'CÂMERA 1: O CÓDIGO', CIANO)
@@ -1240,7 +1245,7 @@ class Plano(Cena):
         for x in range(sx0, sx0 + sw, 10): tela.ret(x, sy0, 1, sh, D.AZC0)
         for y in range(sy0, sy0 + sh, 10): tela.ret(sx0, y, sw, 1, D.AZC0)
         if u < 1: return self.fim(tela, t)
-        tela.texto('PLANO DE CARGA', sx0 + 6, sy0 + 4, BRANCO, tam=9, contorno=PRETO)
+        if not VERTICAL: tela.texto('PLANO DE CARGA', sx0 + 6, sy0 + 4, BRANCO, tam=9, contorno=PRETO)
         self.navio_mini(tela, t)
         self.grade_baia(tela, t)
         self.estabilidade(tela, t)
@@ -1430,6 +1435,8 @@ class Amarracao(Cena):
         if 14.6 <= t < 17.0:
             x, y = C.xy(*self.NOSSO)
             yy = int(lerp(-30, y, ease(fase(t, 14.6, 16.8))))
+            tela.linha(x + 10, 0, x + 10, yy - 6, ACO2)
+            D.spreader(tela, x + 10, yy - 6, 20, 1.0, t, escala=2)
             D.cont_frente(tela, x + 1, yy + 1, C.cw - 1, C.ch - 1, P_LAR, codigo=True)
         # travas entre camadas (brilham)
         if 14.6 <= t < 22.0:
@@ -1490,7 +1497,7 @@ class Amarracao(Cena):
         ang = a
         tela.linha(cx + 12, iy + 32, cx + 12 + 14 * math.cos(ang), iy + 32 + 14 * math.sin(ang), AMARELO)
         trav = gira >= 1
-        tela.texto('TRAVADO' if trav else 'GIRA 90°', ix + 66, iy + 30, VERDE if trav else ACO3, tam=9, contorno=PRETO)
+        tela.texto('TRAVADO' if trav else 'GIRA 90°', ix + 60, iy + 30, VERDE if trav else ACO3, tam=9, contorno=PRETO)
         if trav: check(tela, ix + 70, iy + 44, VERDE)
 
     def zoom_esticador(self, tela, x, y, w, h, t):
@@ -1571,7 +1578,7 @@ class Viagem(Cena):
             u = ease(fase(t, 28.4, 32))
             gx = int(lerp(300, 10, u))
             poligono(tela, [(gx, 140), (gx + 280, 140), (gx + 290, 132), (gx + 286, 156), (gx + 6, 156)], CAS0)
-            for k in range(0, 260, 5): tela.ret(gx + 10 + k, 140 - 4 - (k * 7) % 9 - 18, 4, 20 + (k * 7) % 9, CEU2)
+            for k in range(0, 250, 5): tela.ret(gx + 20 + k, 128 - (k * 7) % 5, 4, 12 + (k * 7) % 5, CEU2)
         pos = D.navio_lado(tela, 14, yw, L, t, D=max(14, int(26 * esc)), nosso=(9, 2), cores_seed=5, arfagem=arf,
                            escala=max(.6, esc))
         if pos and t < 27.6:
@@ -1603,7 +1610,7 @@ class Viagem(Cena):
             y = 150
             tela.texto('16', PX0, y - 1, ACO3, tam=9); tela.texto('25 NÓS', PX0 + 120, y - 1, ACO3, tam=9)
             tela.ret(PX0 + 16, y + 2, 100, 3, TRACO); tela.ret(PX0 + 16, y + 2, int(100 * (kn - 16) / 9), 3, AMARELO)
-            tela.texto(hora, PX0 + 178 - 8, 186, CIANO, tam=9, centro='d')
+            tela.texto(hora, PX0 + 170, 122, CIANO, tam=9, centro='d')
 
     def sons(self, fx):
         mar_som(fx, self.t0, self.dur, .07)
@@ -1626,7 +1633,7 @@ class Gigantes(Cena):
         pos = D.navio_lado(tela, x0, 150, 272, t, D=22, alturas=alt, cores_seed=8, ponte_u=.72, escala=.68)
         teu = int(24000 * suave(fase(t, 1.0, 6.0)))
         cx = self.VX if VERTICAL else 150
-        tela.texto(f"{I.milhar(teu)} TEU", cx, 8, AMARELO, tam=17, centro=True, contorno=PRETO)
+        tela.texto(f"{I.milhar(teu)} TEU", cx, 20 if VERTICAL else 8, AMARELO, tam=17, centro=True, contorno=PRETO)
         if 7.2 <= t < 14.2:
             yb = 172
             v = ease(fase(t, 7.4, 9.4))
@@ -1639,7 +1646,7 @@ class Gigantes(Cena):
                 rotulo(tela, '0', x0, yb + 6, ACO3, centro=True)
             if t > 10.0:
                 lx = self.lupa_x(196, 92)
-                ix, iy, iw, ih = lupa(tela, lx, 30, 92, 60, 'DE FRENTE', AMARELO)
+                ix, iy, iw, ih = lupa(tela, lx, 30, 92, 70, 'DE FRENTE', AMARELO)
                 wpx = int(61 * self.PXM)
                 bx = ix + (iw - wpx) // 2
                 tela.ret(bx, iy + 30, wpx, 10, CAS1)
@@ -1649,11 +1656,11 @@ class Gigantes(Cena):
                 tela.texto('61 M', ix + iw // 2, iy + 34 + 10, CIANO, tam=9, centro=True, contorno=PRETO)
         if 14.2 <= t < 21.2:
             n = min(66, int((t - 14.4) / .07) + 1)
-            yb = 176
+            yb = 176 if not VERTICAL else 164
             for k in range(n):
                 xk = x0 + k * 4
                 pal = P_LAR if k == 0 else OUTRAS[k % 6]
-                tela.ret(xk, yb, 4, 3, PRETO); tela.ret(xk, yb, 3, 2, pal[2])
+                tela.ret(xk, yb, 4, 5, PRETO); tela.ret(xk, yb, 3, 4, pal[2]); tela.ret(xk, yb, 3, 1, pal[3])
             tela.texto(f"{n} CONTÊINERES DE 20 PÉS", x0 + 136, yb + 8, BRANCO, tam=9, centro=True, contorno=PRETO)
         if t >= 21.2:
             # pilha de 11, de frente, grande
@@ -1716,7 +1723,7 @@ class Chegada(Cena):
         st = (kf(t, self.X), kf(t, self.Y), trava_de(t, [(self.tl, self.tu)]), car)
         cena_cais(tela, t, C, st, CEU_AURORA, caminhao=(P_LAR if t >= self.tu else False), amarras=t < 7.4)
         if t < 6.6 and not VERTICAL:
-            tela.texto('PORTO DE DESTINO', 150, 70, CHAMA1, tam=17, centro=True, contorno=PRETO)
+            tela.texto('PORTO DE DESTINO', 214, 18, CHAMA1, tam=9, centro=True, contorno=PRETO)
         if t < self.tl:
             x, y = C.xy(*SLOT_NOSSO); mira(tela, x + 5, y + 5, t, 8)
         elif car:
@@ -1758,10 +1765,10 @@ class Chegada(Cena):
         if u < 2.2:
             lx = self.lupa_x(150, 130)
             ix, iy, iw, ih = lupa(tela, lx, 6, 130, 60, 'O LACRE', AMARELO, alvo=(cx + 2, cy + 12))
-            lacre(tela, ix + 30, iy + 6, 1.0, rompido=u > 1.0)
+            lacre(tela, ix + 30, iy + 6, 1.0)
             tela.texto('INTEIRO', ix + 60, iy + 10, VERDE, tam=9, contorno=PRETO)
             check(tela, ix + 62, iy + 22, VERDE)
-            if u > 1.0: tela.texto('(CORTADO AGORA,', ix + 50, iy + 34, ACO3, tam=9) or tela.texto('NA ENTREGA)', ix + 56, iy + 42, ACO3, tam=9)
+            tela.texto('Nº 004217', ix + 60, iy + 34, BRANCO, tam=9, contorno=PRETO)
         if u >= 5.0:
             mira(tela, cx + cw // 2, cy + ch // 2, t, 34, 16)
             self.rot(tela, 'VAZIO, PRONTO PARA OUTRA', cx - 10, cy - 24, AMARELO)

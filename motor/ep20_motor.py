@@ -52,6 +52,13 @@ CORES_PECA = dict(LOCALIZADOR=LOC_E, SINCRONIA=SIN_E, ALINHAMENTO=ALI_E, FORMATO
 LUZ_PECA = {LOC_E: CIANO, SIN_E: VERDE, ALI_E: ROXO, FMT_E: LARANJA, DAD_E: AMARELO, ECC_E: ROSA}
 
 
+# âncoras dos rótulos (fios que não atravessam o código: passam pela margem
+# ou por faixas claras)
+def ancora_ecc_baixo():
+    xs = [x for x in range(N) if IDX[N - 1, x] >= NB_DADOS and IDX[N - 1, x] < NB_TODOS]
+    return max(xs)
+
+
 def anel_loc(x, y):
     """Anel do localizador a que o módulo pertence: 0 borda escura, 1 clara, 2 miolo."""
     ox = 0 if x < 8 else N - 7
@@ -256,15 +263,15 @@ class Gancho(Cena):
 class Titulo(Cena):
     legenda = False
 
+    def preparar(self):
+        self.loc = imagem_qr(np.where(FINAL[:7, :7], LOC_E, LOC_C).astype(np.int16), 4, 1, encaixe=False)
+
     def desenhar(self, tela, t, tg):
         tela.buf[:] = FUNDO
         grade_fundo(tela, W, t)
         # localizadores girando nos cantos (as peças do código)
         for k, (cx, cy) in enumerate(((52, 40), (428, 40), (52, 170))):
-            img = imagem_qr(cores_de(np.array([[1] * 7] + [[1, 0, 0, 0, 0, 0, 1]] + [[1, 0, 1, 1, 1, 0, 1]] * 3 +
-                                              [[1, 0, 0, 0, 0, 0, 1]] + [[1] * 7]),
-                                     np.ones((7, 7), bool), np.full((7, 7), True)), 4, 1, escuros=None)
-            colar_girado(tela, img, cx, cy, t * .5 + k, .8 + .05 * math.sin(t * 3 + k))
+            colar_girado(tela, self.loc, cx, cy, t * .5 + k, .8 + .05 * math.sin(t * 3 + k))
         n = int(t / .045)
         for j, linha in enumerate(("COMO FUNCIONA", "O QR CODE")):
             larg = tela.largura_texto(linha, 26)
@@ -416,8 +423,8 @@ class Localizador(Cena):
             ang = (t - 7.4) * .55
             dx, dy = math.cos(ang), math.sin(ang)
             L = 3.5 * S * (1 / max(abs(dx), abs(dy)))
-            tela.linha(cx - dx * (L + 6), cy - dy * (L + 6) + 1, cx + dx * (L + 6), cy + dy * (L + 6) + 1, PRETO)
-            tela.linha(cx - dx * (L + 6), cy - dy * (L + 6), cx + dx * (L + 6), cy + dy * (L + 6), VERMELHO)
+            linha_grossa(tela, cx - dx * (L + 6), cy - dy * (L + 6), cx + dx * (L + 6), cy + dy * (L + 6), 4, PRETO)
+            linha_grossa(tela, cx - dx * (L + 6), cy - dy * (L + 6), cx + dx * (L + 6), cy + dy * (L + 6), 2, VERMELHO)
             for s in (-1, 1):
                 tela.disco(cx + s * dx * (L + 6), cy + s * dy * (L + 6), 2, VERMELHO)
             if not VERTICAL:
@@ -425,10 +432,13 @@ class Localizador(Cena):
                 x = PX0
                 partes = ((1, TIN0, "1"), (1, PAP3, "1"), (3, TIN0, "3"), (1, PAP3, "1"), (1, TIN0, "1"))
                 u = 22
+                tela.ret(PX0 - 4, 78, 7 * u + 6, 28, PRETO)
+                tela.ret(PX0 - 3, 79, 7 * u + 4, 26, PAP2)
                 for k, (w, cor, rot) in enumerate(partes):
                     vis = (t - 7.6) * 3 > k
                     if not vis: x += w * u; continue
-                    bloco(tela, x, 82, x + w * u - 2, 102, cor, BRANCO if cor == PAP3 else TIN2, PAP1 if cor == PAP3 else TIN0)
+                    tela.ret(x, 82, w * u, 20, cor)
+                    tela.ret(x, 82, w * u, 1, BRANCO if cor == PAP3 else TIN2)
                     tela.texto(rot, x + (w * u) // 2 - 3, 108, AMARELO, tam=9, contorno=PRETO)
                     x += w * u
                 self.ptxt(tela, "ESCURO-CLARO-ESCURO-", 126, ACO3)
@@ -462,7 +472,7 @@ class Localizador(Cena):
                 pulso = int(t * 4) % 2
                 contorno_mods(tela, mods, AMARELO if pulso else LARANJA)
             if t >= self.tb(38):
-                self.rot(tela, "SEPARADOR", LX, 74, CX0 + 7 * S + 3, CY0 + 4 * S, AMARELO)
+                self.rot(tela, "SEPARADOR", LX, 71, CX0 + 21 * S + 3, CY0 + 7 * S + 3, AMARELO)
             if not VERTICAL:
                 self.ptit(tela, "CADA CANTO:", 64)
                 self.ptxt(tela, "7 X 7 + FAIXA = 8 X 8", 80, BRANCO, 9)
@@ -531,8 +541,8 @@ class Sincronia(Cena):
             self.codigo(tela, t, val)
         self.contador(tela, self.n_definidos(t))
         if t > .8 and t < 15.2 and not torto:
-            self.rot(tela, "SINCRONIA", LX, 30, CX0 + 15 * S, CY0 + 6 * S + 3, VERDE, cotovelo=(CX0 + 15 * S, CY0 + 3 * S + 4))
-            self.rot(tela, "SINCRONIA", LX, 120, CX0 + 6 * S + 3, CY0 + 15 * S, VERDE, cotovelo=(CX0 + 6 * S + 3, CY0 + 13 * S))
+            self.rot(tela, "SINCRONIA", LX, 71, CX0 + 16 * S + 3, CY0 + 6 * S + 3, VERDE, cotovelo=(CX0 + 16 * S + 3, CY0 + 7 * S + 3))
+            self.rot(tela, "SINCRONIA", LX, CY0 + 12 * S, CX0 + 6 * S + 5, CY0 + 12 * S + 3, VERDE)
         if t < 7.8 and not VERTICAL:
             self.ptit(tela, "PEÇA 2: SINCRONIA", 64)
             k = min(9, max(0, self.nb(t) - 1))
@@ -597,10 +607,12 @@ class Formato(Cena):
         n = self.n_definidos(t) - int(((self.ta <= t) & M_PECA[FMT]).sum())
         self.contador(tela, n)
         if t >= self.tb(1):
-            self.rot(tela, "FORMATO", LX, 86, CX0 + 8 * S + 1, CY0 + 8 * S + 3, LARANJA, cotovelo=(CX0 + 12 * S, CY0 + 9 * S - 1))
+            contorno_mods(tela, self.a, LARANJA)
+            self.rot(tela, "FORMATO", LX, 10, CX0 + 8 * S + 3, CY0 - 1, LARANJA, cotovelo=(CX0 + 8 * S + 3, 13))
         if t >= self.tb(5):
-            self.rot(tela, "CÓPIA 2", LX, 60, CX0 + 20 * S, CY0 + 8 * S + 3, LARANJA, cotovelo=(CX0 + 20 * S, CY0 + 6 * S))
-            self.rot(tela, "CÓPIA 2", LX, 170, CX0 + 9 * S, CY0 + 21 * S, LARANJA)
+            contorno_mods(tela, self.b, AMARELO)
+            self.rot(tela, "CÓPIA 2", LX, CY0 + 8 * S, CX0 + N * S + 1, CY0 + 8 * S + 3, AMARELO)
+            self.rot(tela, "CÓPIA 2", LX, 186, CX0 + 8 * S + 3, CY0 + N * S + 1, AMARELO, cotovelo=(CX0 + 8 * S + 3, 189))
         # leitura dos 15 bits, em ordem
         if t >= 15.8:
             i = int((t - 15.8) / .35) % 15
@@ -747,8 +759,9 @@ class Bytes(Cena):
         k = int(np.searchsorted(np.sort(self.tbit[:NB_DADOS]), t, side='right'))
         pts = [centro_mod(*ORDEM[i]) for i in range(k)]
         if t < self.rep0:
-            for (a, b), (c, d) in zip(pts[max(0, k - 40):], pts[max(0, k - 40) + 1:]):
-                tela.linha(a, b, c, d, AMARELO)
+            seg = list(zip(pts[max(0, k - 40):], pts[max(0, k - 40) + 1:]))
+            for (a, b), (c, d) in seg: linha_grossa(tela, a, b, c, d, 3, PRETO)
+            for (a, b), (c, d) in seg: tela.linha(a, b, c, d, CIANO)
             if k:
                 hx, hy = pts[-1]
                 tela.anel(hx, hy, 4 + math.sin(t * 10), BRANCO)
@@ -759,7 +772,8 @@ class Bytes(Cena):
             h = int(u * (NB_DADOS - 1))
             for i in range(max(0, h - 14), h):
                 (a, b), (c, d) = centro_mod(*ORDEM[i]), centro_mod(*ORDEM[i + 1])
-                tela.linha(a, b, c, d, BRANCO if i > h - 5 else AMARELO)
+                linha_grossa(tela, a, b, c, d, 3, PRETO)
+                tela.linha(a, b, c, d, BRANCO if i > h - 5 else CIANO)
             r = Q['bits'][h][1]
             if r[0] == 'letra':
                 letra = r[1]
@@ -880,7 +894,8 @@ class Correcao(Cena):
         n = self.n_definidos(t) - int(M_PECA[FMT].sum())
         self.contador(tela, n)
         if t >= self.tb(1) and t < 15.2:
-            self.rot(tela, "CORREÇÃO", LX, 100, CX0 + 10 * S, CY0 + 12 * S, ROSA, cotovelo=(CX0 + 12 * S, CY0 + 13 * S - 2))
+            xe = ancora_ecc_baixo()
+            self.rot(tela, "CORREÇÃO", LX, 186, CX0 + xe * S + 3, CY0 + N * S + 1, ROSA, cotovelo=(CX0 + xe * S + 3, 189))
         if t >= 14.4 and t < 15.2:
             self.rot(tela, "SOBRA: 7", LX, 150, CX0 + 9 * S, CY0 + 22 * S, ACO3)
         if not VERTICAL:
@@ -918,12 +933,13 @@ class Correcao(Cena):
                     y = 80 + j * 18
                     cor = AMARELO if nome == 'Q' else ACO2
                     tela.texto(nome, PX0, y, cor, tam=17, contorno=PRETO)
-                    w = int(cap * 3.2 * clamp((t - 31.4 - j * .3) / .6))
+                    w = int(cap * 2.6 * clamp((t - 31.4 - j * .3) / .6))
                     bloco(tela, PX0 + 16, y + 2, PX0 + 16 + max(1, w), y + 12, DAD_E if nome == 'Q' else ACO0,
                           AMARELO if nome == 'Q' else ACO2, TIN0)
-                    tela.texto(f"{cap} LETRAS", PX0 + 22 + w, y + 3, cor, tam=9, contorno=PRETO)
-                tela.ret(PX0 + 16 + int(17 * 3.2), 76, 1, 74, BRANCO)
-                tela.texto("NOSSAS 17", PX0 + 16 + int(17 * 3.2) - 22, 152, BRANCO, tam=9, contorno=PRETO)
+                    tela.texto(f"{cap} LETRAS", PX0 + 110, y + 3, cor, tam=9, contorno=PRETO)
+                xm = PX0 + 16 + int(17 * 2.6)
+                for yy in range(76, 150, 3): tela.ret(xm, yy, 1, 2, BRANCO)
+                tela.texto("NOSSAS 17", xm - 24, 152, BRANCO, tam=9, contorno=PRETO)
         if nv is not None:
             self.vtxt(tela, f"NÍVEL {'LMQH'[nv]}: {(7, 15, 25, 30)[nv]}%", AMARELO, y=192)
         elif t < 15.2:
@@ -954,7 +970,7 @@ class Mascara(Cena):
         self.fmt_t = {}
         for i, (x, y) in enumerate(a): self.fmt_t[(x, y)] = self.tb(62 + i // 3) + (i % 3) * .1
         for i, (x, y) in enumerate(b): self.fmt_t[(x, y)] = self.tb(62 + i // 3) + (i % 3) * .1 + .05
-        self.t_tinta = self.tb(70)
+        self.t_tinta = self.tb(68)
         # problemas do código sem máscara: fileiras de 5+ e blocos 2x2 de dados
         v = valor_cru()
         self.prob = set()
@@ -1037,44 +1053,45 @@ class Mascara(Cena):
                 self._icone(tela, 0, PX0, 80, 4)
                 self.ptxt(tela, "ONDE A MÁSCARA MARCA,", 80, BRANCO, x=PX0 + 52)
                 self.ptxt(tela, "O MÓDULO INVERTE:", 90, BRANCO, x=PX0 + 52)
-                tela.ret(PX0 + 52, 104, 10, 10, TIN0); seta(tela, PX0 + 66, 109, PX0 + 84, 109, CIANO, 1, 3)
-                tela.ret(PX0 + 88, 104, 10, 10, PAP3)
-                tela.ret(PX0 + 108, 104, 10, 10, PAP3); seta(tela, PX0 + 122, 109, PX0 + 140, 109, CIANO, 1, 3)
-                tela.ret(PX0 + 144, 104, 10, 10, TIN0)
+                for (xx, c) in ((52, TIN0), (88, PAP3), (108, PAP3), (144, TIN0)):
+                    tela.ret(PX0 + xx - 2, 102, 14, 14, PRETO); tela.ret(PX0 + xx - 1, 103, 12, 12, PAP1)
+                    tela.ret(PX0 + xx, 104, 10, 10, c)
+                seta(tela, PX0 + 66, 109, PX0 + 84, 109, CIANO, 1, 3)
+                seta(tela, PX0 + 122, 109, PX0 + 140, 109, CIANO, 1, 3)
                 self.ptxt(tela, "SÓ NOS DADOS. AS PEÇAS", 132, ACO3)
                 self.ptxt(tela, "FIXAS NÃO MUDAM.", 142, ACO3)
             else:
                 self.ptit(tela, "PONTOS DE CASTIGO", 64)
                 testadas = 8 if t >= self.ciclo0 + 8.0 else int(t - self.ciclo0) + 1
                 mx = max(self.notas)
+                fim = t >= self.ciclo0 + 8.0
                 for k in range(8):
                     x = PX0 + 2 + k * 20
                     if k >= testadas:
-                        tela.texto(str(k), x + 5, 176, ACO1, tam=9, contorno=PRETO)
+                        tela.texto(str(k), x + 5, 186, ACO1, tam=9, contorno=PRETO)
                         continue
-                    f = clamp((t - self.ciclo0 - k) / .5) if t < self.ciclo0 + 8.0 else 1.0
-                    h = int(self.notas[k] / mx * 70 * f)
-                    vence = k == MASC and t >= self.ciclo0 + 8.0
+                    f = clamp((t - self.ciclo0 - k) / .5) if not fim else 1.0
+                    h = max(1, int(self.notas[k] / mx * 44 * f))
+                    vence = k == MASC and fim
                     atual = k == mk
                     cor = VERDE if vence else (AMARELO if atual else ACO1)
-                    bloco(tela, x, 170 - h, x + 14, 170, VERDE if vence else (DAD_E if atual else ACO0), cor, TIN0)
-                    tela.texto(str(k), x + 5, 176, cor, tam=9, contorno=PRETO)
-                    if atual or vence or t >= self.ciclo0 + 8.0:
-                        num = str(int(self.notas[k] * f))
-                        tela.texto(num, x + 7 - tela.largura_texto(num, 9) // 2, 160 - h, cor, tam=9, contorno=PRETO)
+                    bloco(tela, x, 180 - h, x + 14, 180, VERDE if vence else (DAD_E if atual else ACO0), cor, TIN0)
+                    tela.texto(str(k), x + 5, 186, cor, tam=9, contorno=PRETO)
+                    num = str(int(self.notas[k] * f))
+                    tela.texto(num, x + 7 - tela.largura_texto(num, 9) // 2, 170 - h - (k % 2) * 9, cor, tam=9, contorno=PRETO)
                 if mk is not None:
-                    self._icone(tela, mk, PX0 + 120, 78, 2)
-                    tela.texto(f"MÁSCARA {mk}", PX0, 80, AMARELO if t < self.ciclo0 + 8 else VERDE, tam=17, contorno=PRETO)
-                if t >= self.ciclo0 + 8.0:
-                    self.ptxt(tela, "VENCE: MENOS PONTOS", 98, VERDE)
+                    self._icone(tela, mk, PX0 + 136, 74, 2)
+                    tela.texto(f"MÁSCARA {mk}", PX0, 80, VERDE if fim else AMARELO, tam=17, contorno=PRETO)
                 if t >= 30.8:
-                    self.ptxt(tela, "FORMATO:", 112, LARANJA)
+                    tela.texto("FORMATO", PX0, 102, LARANJA, tam=9, contorno=PRETO)
                     f = Q['formato']
+                    a0 = D.posicoes_formato()[0]
                     for i in range(15):
-                        x = PX0 + 48 + i * 7
-                        on = any(t >= tt for (xy, tt) in self.fmt_t.items() if xy == D.posicoes_formato()[0][i])
+                        on = t >= self.fmt_t[a0[14 - i]]
                         b = (f >> (14 - i)) & 1
-                        tela.texto(str(b) if on else '?', x, 112, LARANJA if on else ACO1, tam=9, contorno=PRETO)
+                        tela.texto(str(b) if on else '?', PX0 + 48 + i * 7, 102, LARANJA if on else ACO1, tam=9, contorno=PRETO)
+                elif fim:
+                    self.ptxt(tela, "VENCE: MENOS PONTOS", 102, VERDE)
         if mk is not None:
             self.vtxt(tela, f"MÁSCARA {mk}: {self.notas[mk]} PONTOS", VERDE if t >= self.ciclo0 + 8 else AMARELO, y=192)
         if t >= self.t_tinta + 2.0:
@@ -1303,10 +1320,17 @@ class Leitura(Cena):
 # ============================================================ 12 as versões
 class Versoes(Cena):
     SEQ = ((1, 0.0), (2, 4.0), (3, 7.8), (5, 10.4), (10, 13.0), (20, 15.4), (40, 18.0))
+    ZOOM = ((23.4, 2), (24.6, 3), (25.8, 4))          # a versão 40 de perto, em degraus
+    JAN = (5, 6, 196, 196)                            # janela do código na tela
+    ALIS = (6, 30, 58, 86, 114, 142, 170)             # centros dos alinhamentos da versão 40
+
     def preparar(self):
         self.mats = {v: D.versao(v) for v, _ in self.SEQ}
-        self.rng = np.random.default_rng(12)
-        self.hash = {v: self.rng.random(self.mats[v].shape) for v, _ in self.SEQ}
+        rng = np.random.default_rng(12)
+        self.hash = {v: rng.random(self.mats[v].shape) for v, _ in self.SEQ}
+        m40 = self.mats[40]
+        self.c40 = np.where(m40.astype(bool), TIN0, PAP3).astype(np.int16)
+        self.img40 = {s: imagem_qr(self.c40, s, 2, encaixe=False) for s in (2, 3, 4)}
 
     def ver(self, t):
         v, t0 = self.SEQ[0]
@@ -1314,57 +1338,87 @@ class Versoes(Cena):
             if t >= tt: v, t0 = vv, tt
         return v, t0
 
+    def escala40(self, t):
+        s = 1
+        for tt, ss in self.ZOOM:
+            if t >= tt: s = ss
+        return s
+
+    def foco40(self, t):
+        """Módulo no centro da janela: o centro, depois o alinhamento (30, 30),
+        depois anda pela fileira de alinhamentos."""
+        if t < 23.4: return 88.0, 88.0
+        if t < 31.4:
+            u = suave((t - 23.4) / 2.5)
+            return lerp(88, 24, u), lerp(88, 24, u)
+        u = suave((t - 31.4) / 7.0)
+        return lerp(24, 150, u), lerp(24, 60, u)
+
     def desenhar(self, tela, t, tg):
         self.fundo(tela, t)
         v, tv = self.ver(t)
         m = self.mats[v]
         n = m.shape[0]
-        s = max(1, min(8, 180 // n))
-        u = clamp((t - tv) / .5)
-        vis = self.hash[v] < u
-        cores = np.where(vis, np.where(m.astype(bool), TIN0, PAP3), -1).astype(np.int16)
-        img = imagem_qr(cores, s, 2, encaixe=False)
-        if u < 1:
-            img[img == PAP2] = PAP3
-        h = img.shape[0]
-        cx, cy = CARTAO[0] + 99, 104
-        x0, y0 = int(cx - h / 2), int(cy - h / 2)
-        tela.ret(x0 - 1, y0 - 1, h + 2, h + 2, PRETO)
-        colar(tela, img, x0, y0)
-        # alinhamentos espalhados na versão 40
-        if v == 40 and t >= 31.4:
-            pos = (6, 30, 58, 86, 114, 142, 170)
-            for a in pos:
-                for b in pos:
+        jx, jy, jw, jh = self.JAN
+        cx, cy = jx + jw // 2, jy + jh // 2
+        if v == 40 and self.escala40(t) > 1:
+            s = self.escala40(t)
+            img = self.img40[s]
+            fx_, fy_ = self.foco40(t)
+            ox = int(cx - (2 + fx_) * s); oy = int(cy - (2 + fy_) * s)
+            tela.ret(jx - 1, jy - 1, jw + 2, jh + 2, PRETO)
+            tela.ret(jx, jy, jw, jh, PAP3)
+            colar(tela, img, ox, oy, clip=(jx, jy, jx + jw, jy + jh))
+            for a in self.ALIS:
+                for b in self.ALIS:
                     if (a, b) in ((6, 6), (6, 170), (170, 6)): continue
-                    px, py = x0 + 2 * s + a * s, y0 + 2 * s + b * s
-                    if int(t * 3 + a + b) % 2: tela.ret_vazado(px - 3, py - 3, 7, 7, ROXO)
+                    px, py = ox + (2 + a) * s, oy + (2 + b) * s
+                    if jx + 6 < px < jx + jw - 6 and jy + 6 < py < jy + jh - 6 and t >= 31.4:
+                        r = int(3 * s + 2 + math.sin(t * 6))
+                        tela.ret_vazado(px - r + s // 2, py - r + s // 2, 2 * r, 2 * r, ROXO)
+                        tela.ret_vazado(px - r + s // 2 - 1, py - r + s // 2 - 1, 2 * r + 2, 2 * r + 2, PRETO)
+            # régua: quantos módulos cabem na janela
+        else:
+            s = max(1, min(8, 180 // n))
+            u = clamp((t - tv) / .5)
+            vis = self.hash[v] < u
+            cores = np.where(vis, np.where(m.astype(bool), TIN0, PAP3), -1).astype(np.int16)
+            img = imagem_qr(cores, s, 2, encaixe=False)
+            if u < 1: img[img == PAP2] = PAP3
+            h = img.shape[0]
+            x0, y0 = int(cx - h / 2), int(cy - h / 2)
+            tela.ret(x0 - 1, y0 - 1, h + 2, h + 2, PRETO)
+            colar(tela, img, x0, y0)
+            if u < 1:
+                tela.ret_vazado(x0 - 3, y0 - 3, h + 6, h + 6, AMARELO)
         if not VERTICAL:
             self.ptit(tela, "VERSÕES", 6)
             tela.texto(f"VERSÃO {v}", PX0, 20, AMARELO, tam=17, contorno=PRETO)
             tela.texto(f"{n} X {n}", PX0, 40, BRANCO, tam=17, contorno=PRETO)
             tela.texto(f"= {milhar(n * n)} MÓDULOS", PX0, 60, BRANCO, tam=9, contorno=PRETO)
             tela.texto(f"LADO = 4 X {v} + 17", PX0, 72, CIANO, tam=9, contorno=PRETO)
-            # quadrados de tamanho real, um dentro do outro
-            base_x, base_y = PX0 + 4, 88
+            base_x, base_y, L = PX0 + 2, 88, 72
             for vv, tt in self.SEQ:
                 if t < tt: break
                 nn = 4 * vv + 17
-                lado = int(nn / 177 * 96)
-                cor = AMARELO if vv == v else ACO1
-                tela.ret_vazado(base_x, base_y + 96 - lado, lado, lado, cor)
-            tela.texto("V1", base_x + 2, base_y + 86, ACO2, tam=9) if t < 18 else None
+                lado = max(4, int(nn / 177 * L))
+                tela.ret_vazado(base_x, base_y + L - lado, lado, lado, AMARELO if vv == v else ACO1)
+            tela.texto("DO 1 AO 40,", PX0 + 82, 90, ACO3, tam=9, contorno=PRETO)
+            if v == 40 and self.escala40(t) > 1:
+                tela.texto(f"DE PERTO: {self.escala40(t)}X", PX0 + 82, 150, BRANCO, tam=9, contorno=PRETO)
+            tela.texto("EM ESCALA", PX0 + 82, 100, ACO3, tam=9, contorno=PRETO)
             if t >= 23.4:
-                self.ptxt(tela, "VERSÃO 40-L CABE:", 104, ACO3, x=PX0 + 104 - 104 + 104)
-            if t >= 23.4:
-                tela.texto("2.953", PX0 + 104, 120, AMARELO, tam=17, contorno=PRETO)
-                tela.texto("BYTES", PX0 + 104, 140, BRANCO, tam=9, contorno=PRETO)
-                tela.texto("7.089", PX0 + 104, 154, AMARELO, tam=17, contorno=PRETO)
-                tela.texto("ALGARISMOS", PX0 + 104, 174, BRANCO, tam=9, contorno=PRETO)
+                self.ptit(tela, "A VERSÃO 40 (NÍVEL L) GUARDA", 166)
+                tela.texto("2.953 BYTES", PX0, 180, AMARELO, tam=9, contorno=PRETO)
+                tela.texto("7.089 ALGARISMOS", PX0 + 72, 180, AMARELO, tam=9, contorno=PRETO)
+            if t >= 31.4:
+                tela.texto("ALINHAMENTOS", PX0 + 82, 120, ROXO, tam=9, contorno=PRETO)
+                tela.texto("ESPALHADOS", PX0 + 82, 130, ROXO, tam=9, contorno=PRETO)
         self.vtxt(tela, f"VERSÃO {v}: {n} X {n}", AMARELO, y=192)
 
     def sons(self, fx):
         for k, (v, tt) in enumerate(self.SEQ): self.nota(fx, tt, 60 + k * 3, .14, .05)
+        for k, (tt, ss) in enumerate(self.ZOOM): self.tique(fx, tt, 900 + 300 * k, .08, .03)
 
 
 # ============================================================ 13 história
@@ -1461,7 +1515,9 @@ BRASA_ = 19
 # ============================================================ 14 Pix
 class Pix(Cena):
     def preparar(self):
-        self.plaq = imagem_qr(cores_de(FINAL, np.ones((N, N), bool), np.zeros((N, N), bool)), 2, 4, encaixe=False)
+        tinta = cores_de(FINAL, np.ones((N, N), bool), np.zeros((N, N), bool))
+        self.plaq = imagem_qr(tinta, 2, 4, encaixe=False)
+        self.mini = imagem_qr(tinta, 1, 1, encaixe=False)
 
     def desenhar(self, tela, t, tg):
         tela.buf[:PALCO_H] = FUNDO
@@ -1484,8 +1540,8 @@ class Pix(Cena):
             for k in range(6):
                 fx_ = x + 8 + k * 9; fy = 120 - (k % 2) * 4 + math.sin(t * 2 + k) * .5
                 tela.disco(fx_, fy, 5, PRETO); tela.disco(fx_, fy, 4, cor); tela.px(fx_ - 1, fy - 2, luz)
-            tela.ret(x + 10, 96, 40, 16, PRETO); tela.ret(x + 11, 97, 38, 14, PAP3)
-            tela.texto("R$ 5" if j == 0 else "R$ 7", x + 30, 101, TIN0, tam=9, centro=True)
+            tela.ret(x + 5, 96, 50, 16, PRETO); tela.ret(x + 6, 97, 48, 14, PAP3)
+            tela.texto("5 REAIS" if j == 0 else "7 REAIS", x + 30, 101, TIN0, tam=9, centro=True)
         # a placa com o código
         px, py = 190, 72
         h = self.plaq.shape[0]
@@ -1520,10 +1576,7 @@ class Pix(Cena):
                 painel(tela, PX0 - 2, y, 166, 76, borda=AMARELO if ativo else TRACO)
                 tela.texto(nome, PX0 + 4, y + 5, AMARELO if ativo else ACO2, tam=9, contorno=PRETO)
                 # mini código
-                tela.ret(PX0 + 4, y + 20, 26, 26, PAP3)
-                for a in range(0, 24, 4):
-                    for b in range(0, 24, 4):
-                        if FINAL[b, a]: tela.ret(PX0 + 5 + a, y + 21 + b, 4, 4, TIN0)
+                colar(tela, self.mini, PX0 + 4, y + 20)
                 if j == 0:
                     itens = ("CHAVE", "VALOR", "TEXTO")
                     for k, it in enumerate(itens):
@@ -1554,12 +1607,18 @@ class Pix(Cena):
 
 # ============================================================ 15 resumo
 class Resumo(Cena):
-    PECAS = (("LOCALIZADOR", LOC, CIANO, (CX0 + N * S + 1, CY0 + 21)),
-             ("SINCRONIA", SIN, VERDE, (CX0 + 15 * S, CY0 + 6 * S + 3)),
-             ("ALINHAMENTO", ALI, ROXO, (CX0 + 20.5 * S + 1, CY0 + 18.5 * S)),
-             ("FORMATO", FMT, LARANJA, (CX0 + 8 * S + 3, CY0 + 2 * S)),
-             ("DADOS", 'd', AMARELO, (CX0 + 23 * S, CY0 + 23 * S)),
-             ("CORREÇÃO", 'e', ROSA, (CX0 + 3 * S, CY0 + 12 * S)))
+    # nome, cor, y do rótulo, âncora, cotovelo
+    PECAS = (("FORMATO", LARANJA, 10, (CX0 + 8 * S + 3, CY0 - 1), (CX0 + 8 * S + 3, 13)),
+             ("LOCALIZADOR", CIANO, 44, (CX0 + N * S + 1, CY0 + 21), None),
+             ("SINCRONIA", VERDE, 71, (CX0 + 16 * S + 3, CY0 + 6 * S + 3), (CX0 + 16 * S + 3, CY0 + 7 * S + 3)),
+             ("ALINHAMENTO", ROXO, CY0 + 18 * S, (CX0 + 21 * S + 1, CY0 + 18 * S + 3), None),
+             ("DADOS", AMARELO, CY0 + 23 * S, (CX0 + N * S + 1, CY0 + 23 * S + 3), None),
+             ("CORREÇÃO", ROSA, 186, None, None))
+
+    def preparar(self):
+        self.ta = np.full((N, N), -INF)
+        xe = ancora_ecc_baixo()
+        self.ecc_anc = (CX0 + xe * S + 3, CY0 + N * S + 1), (CX0 + xe * S + 3, 189)
 
     def desenhar(self, tela, t, tg):
         self.fundo(tela, t)
@@ -1572,13 +1631,10 @@ class Resumo(Cena):
             col = np.zeros((N, N), bool)
         self.codigo(tela, t, FINAL, colorido=col, flash_on=False)
         if t < 9.8:
-            for k, (nome, p, cor, (ax, ay)) in enumerate(self.PECAS):
+            for k, (nome, cor, y, anc, cot) in enumerate(self.PECAS):
                 if t < .5 + k * 1.2: continue
-                y = 14 + k * 30
-                cot = None
-                if nome == "FORMATO": cot = (CX0 + 8 * S + 3, CY0 + 4)
-                if nome == "CORREÇÃO": cot = (CX0 + 12 * S, CY0 + 12 * S)
-                self.rot(tela, nome, LX, y, ax, ay, cor)
+                if anc is None: anc, cot = self.ecc_anc
+                self.rot(tela, nome, LX, y, anc[0], anc[1], cor, cotovelo=cot)
         self.contador(tela, TOTAL)
         if not VERTICAL:
             self.ptit(tela, "O NOSSO CÓDIGO", 64)
@@ -1587,9 +1643,9 @@ class Resumo(Cena):
             for k, l in enumerate(linhas):
                 self.ptxt(tela, l, 80 + k * 12, BRANCO if k % 2 == 0 else ACO3)
             if t >= 19.8:
-                D.celular(tela, 400 + int(4 * math.sin(t * 2)), 130, 36, 64, t)
-                seta(tela, 392, 160 + int(2 * math.sin(t * 2)), 312, 160, AMARELO)
-                tela.texto("APONTE", PX0, 140, AMARELO, tam=9, contorno=PRETO)
+                D.celular(tela, 420 + int(4 * math.sin(t * 2)), 140, 36, 64, t)
+                seta(tela, 410, 176 + int(2 * math.sin(t * 2)), 312, 176, AMARELO)
+                tela.texto("APONTE A CÂMERA", PX0, 150, AMARELO, tam=9, contorno=PRETO)
         if t >= 19.8:
             self.vtxt(tela, "APONTE A CÂMERA", AMARELO, y=8)
 
