@@ -47,7 +47,7 @@ EPISODIOS = [
     dict(id='ep13', serie='dentro', titulo='Como funciona o motor elétrico', estado='pronto', onda=3),
     # ---------------------------------------------------------------- onda 4
     dict(id='ep14', serie='voa', titulo='Como o submarino afunda e sobe', estado='pronto', onda=4),
-    dict(id='ep15', serie='jornada', titulo='A jornada de uma garfada pelo corpo', estado='fazendo', onda=4),
+    dict(id='ep15', serie='jornada', titulo='A jornada de uma garfada pelo corpo', estado='pronto', onda=4),
     dict(id='ep16', serie='pixels', titulo='Como o processador pensa', estado='fazendo', onda=4),
     dict(id='ep17', serie='dentro', titulo='Como funciona a fechadura e a chave', estado='fazendo', onda=4),
     # ---------------------------------------------------------------- onda 5

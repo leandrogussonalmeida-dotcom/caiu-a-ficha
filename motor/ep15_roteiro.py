@@ -30,7 +30,7 @@ FATOS E FONTES (todas lidas em 30/10/2026)
   F3  Intestinos: duodeno de 25,4 cm; o quimo sai do delgado em 3 a 5 h;
       segmentação mistura; 20 a 40 vilosidades por mm²; cada vilosidade tem
       capilares; o delgado absorve ~90% da água ingerida; o resíduo fica no
-      grosso 12 a 24 h; trilhões de bactérias, mais de 700 espécies; elas
+      grosso 12 a 24 h; trilhões de bactérias, centenas de espécies por pessoa; elas
       fermentam os carboidratos que sobraram (feijão: mais gás); fazem
       vitaminas como a K; as fezes têm comida não digerida, bactérias,
       células da parede, sais e água. OpenStax 23.5.
@@ -95,7 +95,7 @@ LEGENDAS = {
         (0.5, 6.4, "ESTA É A NOSSA PROTAGONISTA:", "*UMA GARFADA* DE ARROZ COM FEIJÃO.", ()),
         (6.6, 12.4, "O *ARROZ* É CHEIO DE *AMIDO*, O", "CARBOIDRATO MAIS COMUM DA COMIDA.", ('F11',)),
         (12.6, 18.2, "O *FEIJÃO* TRAZ *PROTEÍNA*, FERRO", "E MUITA *FIBRA*.", ('F10',)),
-        (18.4, 23.6, "JUNTOS, DÃO TODOS OS AMINOÁCIDOS", "*ESSENCIAIS*. BOA DUPLA.", ('F10',)),
+        (18.4, 23.6, "UM COMPLETA OS AMINOÁCIDOS", "*ESSENCIAIS* DO OUTRO. BOA DUPLA.", ('F10',)),
     ],
     'mapa': [
         (0.5, 6.4, "O CAMINHO É UM *TUBO* COMPRIDO:", "DA BOCA ATÉ O FIM DO INTESTINO.", ()),
@@ -143,7 +143,7 @@ LEGENDAS = {
     ],
     'ajudantes': [
         (0.5, 6.2, "NO DUODENO CHEGAM SUCOS DE TRÊS", "*AJUDANTES*.", ('F4',)),
-        (6.4, 12.0, "O *FÍGADO* FAZ A *BILE*:", "UNS 1 LITRO POR DIA.", ('F4',)),
+        (6.4, 12.0, "O *FÍGADO* FAZ A *BILE*:", "CERCA DE 1 LITRO POR DIA.", ('F4',)),
         (12.2, 17.8, "A *VESÍCULA* GUARDA E CONCENTRA", "A BILE ATÉ A HORA DE SOLTAR.", ('F4',)),
         (18.0, 23.6, "A BILE QUEBRA A GORDURA DO TEMPERO", "EM *GOTINHAS*. FICA MAIS FÁCIL.", ('F4',)),
         (23.8, 29.6, "O *PÂNCREAS* MANDA MAIS DE 1 LITRO", "DE SUCO POR DIA.", ('F4',)),
@@ -155,7 +155,7 @@ LEGENDAS = {
         (12.2, 17.8, "O AMIDO JÁ VIROU *GLICOSE*. A", "PROTEÍNA VIROU *AMINOÁCIDOS*.", ('F5',)),
         (18.0, 23.6, "ELES ATRAVESSAM A PAREDE E", "*CAEM NO SANGUE* DOS VASINHOS.", ('F5',)),
         (23.8, 29.6, "ABERTA, ESSA PAREDE COBRIRIA UNS", "*30 METROS QUADRADOS*.", ('F6',)),
-        (29.8, 35.8, "O DELGADO TAMBÉM ABSORVE UNS", "*90% DA ÁGUA* QUE VOCÊ INGERE.", ('F3',)),
+        (29.8, 35.8, "O DELGADO TAMBÉM ABSORVE UNS", "*90% DA ÁGUA* QUE PASSA POR ELE.", ('F3',)),
     ],
     'sangue': [
         (0.5, 6.2, "AGORA A GARFADA É *NUTRIENTE*", "VIAJANDO NO SANGUE.", ('F5',)),
@@ -165,17 +165,17 @@ LEGENDAS = {
     ],
     'grosso': [
         (0.5, 6.2, "ETAPA 6: O *INTESTINO GROSSO*.", "MAIS LARGO E MAIS CURTO.", ('F7', 'F6')),
-        (6.4, 12.0, "TEM UNS *1,8 METRO*. AQUI CHEGA", "O QUE NÃO FOI ABSORVIDO.", ('F7', 'F3')),
+        (6.4, 12.0, "TEM CERCA DE *1,8 METRO*. AQUI CHEGA", "O QUE NÃO FOI ABSORVIDO.", ('F7', 'F3')),
         (12.2, 17.8, "ELE TIRA *ÁGUA E SAIS* E DEIXA", "O RESTO MAIS FIRME.", ('F7',)),
         (18.0, 23.8, "É A PARTE MAIS LENTA: EM GERAL,", "DE *12 HORAS A 2 DIAS*.", ('F3', 'F8')),
         (24.0, 29.6, "E ISSO *VARIA MUITO* DE UMA", "PESSOA PARA OUTRA.", ('F8',)),
     ],
     'bacterias': [
-        (0.5, 6.2, "AQUI MORAM *TRILHÕES* DE BACTÉRIAS.", "MAIS DE *700 ESPÉCIES*.", ('F3',)),
+        (0.5, 6.2, "AQUI MORAM *TRILHÕES* DE BACTÉRIAS.", "DE *CENTENAS DE ESPÉCIES*.", ('F3', 'F15')),
         (6.4, 12.0, "ELAS COMEM O QUE SOBROU,", "COMO A *FIBRA* DO FEIJÃO.", ('F3', 'F10')),
         (12.2, 17.8, "ESSA FERMENTAÇÃO SOLTA *GASES*.", "É A FAMA DO FEIJÃO.", ('F3',)),
         (18.0, 23.8, "EM TROCA, ELAS FAZEM VITAMINAS,", "COMO A *VITAMINA K*.", ('F3',)),
-        (24.0, 29.6, "UM ZOOLÓGICO INTEIRO", "TRABALHANDO PARA VOCÊ.", ()),
+        (24.0, 29.6, "UMA CIDADE INTEIRA", "TRABALHANDO PARA VOCÊ.", ()),
     ],
     'saida': [
         (0.5, 6.0, "ETAPA 7: O QUE O CORPO NÃO USOU", "*SAI DO CORPO*.", ('F3',)),
@@ -220,6 +220,8 @@ FONTES = {
     'F11': ('Wikipedia, "Starch"', 'https://en.wikipedia.org/wiki/Starch'),
     'F12': ('Wikipedia, "Hepatic portal vein"', 'https://en.wikipedia.org/wiki/Hepatic_portal_vein'),
     'F13': ('Wikipedia, "Esophagus"', 'https://en.wikipedia.org/wiki/Esophagus'),
+    'F15': ('EMBL, 2019: catálogo do intestino humano com mais de 4.600 espécies no total; cada pessoa carrega algumas centenas',
+            'https://www.embl.org/news/science/inventory-of-the-human-gut-ecosystem/'),
     'F14': ('Conta a partir de F2, F3 e F8: 2 h + 3 h + 12 h = 17 h no mínimo; com o cólon levando até 48 h, passa de 2 dias', None),
 }
 
@@ -274,7 +276,7 @@ CORTES = [
          descricao='O intestino delgado é forrado de vilosidades, dedinhos com vasos de sangue. É por elas que a glicose e os aminoácidos caem no sangue.'),
     dict(id='c5', de=('bacterias', 0.0), ate=('bacterias', 30.0), x=57, gancho=['TRILHÕES DE', 'BACTÉRIAS'],
          titulo='As bactérias que moram no seu intestino 🦠',
-         descricao='No intestino grosso moram trilhões de bactérias, de mais de 700 espécies. Elas comem a fibra que sobrou (gases, olá feijão) e fazem vitaminas como a K.'),
+         descricao='No intestino grosso moram trilhões de bactérias, de centenas de espécies. Elas comem a fibra que sobrou (gases, olá feijão) e fazem vitaminas como a K.'),
     dict(id='c6', de=('boca', 0.0), ate=('boca', 36.0), x=88, gancho=['DENTRO DA', 'BOCA'],
          titulo='O que a boca faz com uma garfada de arroz com feijão 🍚',
          descricao='Os dentes trituram (um adulto tem 32), a saliva traz a amilase, que já começa a quebrar o amido do arroz, e a língua junta tudo num bolo pronto para engolir.'),

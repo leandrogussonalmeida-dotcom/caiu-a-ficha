@@ -1039,7 +1039,7 @@ class ChaveCena(Cena):
 
 # ============================================================ combinações
 class Combinacoes(Cena):
-    REGRAS = [([0, 9, 2, 5, 4], 1), ([3, 4, 6, 5, 7], None), ([8, 1, 3, 3, 9], 1), ([2, 3, 5, 4, 4], None)]
+    REGRAS = [([0, 9, 2, 5, 4], 1), ([3, 4, 6, 5, 7], None), ([8, 1, 3, 3, 9], 0), ([2, 3, 5, 4, 4], None)]
 
     def numero(self, t):
         if t < 8.8: return int(t / .5)

@@ -926,13 +926,17 @@ class Estomago(Cena):
                 u = ((t - 31.4) * .5 + k / 3) % 1.0
                 x, y = lerp(266, 300, u), lerp(124, 114, u)
                 tela.disco(x, y, 2.4, PRETO); tela.disco(x, y, 1.6, QUI2)
+        # espelha o palco: o estômago visto de frente (esôfago à direita da tela,
+        # piloro à esquerda), igual ao mapa do corpo
+        tela.buf[:PALCO_H, 0:294] = tela.buf[:PALCO_H, 0:294][:, ::-1].copy()
+        M = lambda x: 293 - x
         # rótulos
-        self.rot(tela, 'ESÔFAGO', 150, 4, MUC3, alvo=(138, 16))
-        if t > 11: self.rot(tela, 'ÁCIDO', 6, 150, ACI1, alvo=(108, 150))
-        if t > 16.2: self.rot(tela, 'MUCO', 22, 46, MUCO, alvo=(64, 56))
-        if t > 21.4: self.rot(tela, 'PEPSINA', 196, 186, ROXO, alvo=(self.cadeias[0][0] + 4, self.cadeias[0][1] - 6))
-        if t > 26.6: marca(tela, gx, gy - 4, 'QUIMO', lado=1, dy=-22)
-        self.rot(tela, 'PILORO', 236, 92, ACO3 if t < 31.4 else AMARELO, alvo=(268, 116))
+        self.rot(tela, 'ESÔFAGO', 168, 4, MUC3, alvo=(M(138), 16))
+        if t > 11: self.rot(tela, 'ÁCIDO', 236, 150, ACI1, alvo=(M(108), 150))
+        if t > 16.2: self.rot(tela, 'MUCO', 246, 46, MUCO, alvo=(M(64), 56))
+        if t > 21.4: self.rot(tela, 'PEPSINA', 20, 186, ROXO, alvo=(M(self.cadeias[0][0] + 4), self.cadeias[0][1] - 6))
+        if t > 26.6: marca(tela, M(gx), gy - 4, 'QUIMO', lado=1, dy=-22)
+        self.rot(tela, 'PILORO', 14, 92, ACO3 if t < 31.4 else AMARELO, alvo=(M(268), 116))
         # tamanho: punho x 4 litros
         if 5.8 < t < 11.0 and not VERTICAL:
             inset(tela, 190, 4, 100, 58, None, ACO3)
@@ -1413,7 +1417,7 @@ class Grosso(Cena):
         self.rot(tela, 'DELGADO (ATRÁS)', 106, 160, INT2)
         if t > 12.2: self.rot(tela, 'ÁGUA E SAIS', 196, 92, MISTURA2, alvo=(236, 100))
         est = 'FIBRA E ÁGUA' if t < 12.2 else 'MAIS FIRME'
-        self.painel(tela, t, linhas=[('TAMANHO', 'UNS 1,8 M', PAN2), ('TEMPO AQUI (EM GERAL)', '12 H A 2 DIAS', AMARELO)],
+        self.painel(tela, t, linhas=[('TAMANHO', 'CERCA DE 1,8 M', PAN2), ('TEMPO AQUI (EM GERAL)', '12 H A 2 DIAS', AMARELO)],
                     estado=('A GARFADA AGORA', est, QUI2))
 
     def sons(self, fx):
@@ -1484,7 +1488,7 @@ class Bacterias(Cena):
         if t > 12.2: self.rot(tela, 'GASES', 230, 150, ACO3)
         if t > 18: self.rot(tela, 'VITAMINA K', 8, 150, AMARELO)
         est = ('ELAS FAZEM', 'VITAMINA K', AMARELO) if t > 18 else ('ELAS COMEM', 'A FIBRA', ARROZ1)
-        self.painel(tela, t, linhas=[('BACTÉRIAS', 'TRILHÕES', VERDE), ('ESPÉCIES', 'MAIS DE 700', ROXO)], estado=est)
+        self.painel(tela, t, linhas=[('BACTÉRIAS', 'TRILHÕES', VERDE), ('ESPÉCIES', 'CENTENAS', ROXO)], estado=est)
 
     def sons(self, fx):
         rng = np.random.default_rng(10)
