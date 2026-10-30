@@ -110,7 +110,7 @@ LEGENDAS = {
         (12.8, 18.8, "AS PAREDES SÃO DE *AÇO CORRUGADO*:", "AS DOBRAS DEIXAM A CHAPA MAIS FIRME.", ('F2',)),
         (19.0, 25.0, "NOS 8 CANTOS, PEÇAS DE AÇO COM UM", "*FURO OVAL*: É POR ALI QUE ELE É PRESO.", ('F2', 'F4')),
         (25.2, 30.6, "VAZIO, PESA UNS *2.200 KG*. CHEIO,", "PODE PASSAR DE *30 TONELADAS*.", ('F2',)),
-        (30.8, 35.6, "O DE *40 PÉS* TEM O DOBRO. A MEDIDA", "É O *TEU*: UM CONTÊINER DE 20 PÉS.", ('F2',)),
+        (30.8, 35.6, "O DE *40 PÉS* É 2X MAIS LONGO. A MEDIDA", "É O *TEU*: UM CONTÊINER DE 20 PÉS.", ('F2',)),
     ],
     'codigo': [
         (0.5, 6.4, "TODO CONTÊINER TEM UM *CÓDIGO*.", "O NOSSO É INVENTADO: MPXU 190426 5.", ('F3',)),
@@ -131,7 +131,7 @@ LEGENDAS = {
         (0.5, 6.6, "ETAPA 2: O *PORTÃO* DO TERMINAL.", "O CAMINHÃO PASSA DEVAGAR.", ()),
         (6.8, 13.0, "CÂMERAS LEEM O *CÓDIGO*, A PLACA", "E PROCURAM *AVARIAS*.", ('F6',)),
         (13.2, 19.4, "E CONFEREM SE O *LACRE* ESTÁ LÁ.", "TUDO É COMPARADO COM A RESERVA.", ('F6',)),
-        (19.6, 25.6, "O *DÍGITO VERIFICADOR* CONFIRMA", "QUE A LEITURA DO CÓDIGO ESTÁ CERTA.", ('F3',)),
+        (19.6, 25.6, "O *DÍGITO VERIFICADOR* AJUDA A", "CONFERIR SE A LEITURA ESTÁ CERTA.", ('F3',)),
         (25.8, 29.9, "CANCELA ABERTA. PODE ENTRAR.", "", ()),
     ],
     'patio': [
@@ -190,7 +190,7 @@ LEGENDAS = {
         (31.2, 35.6, "VAZIO, O NOSSO CONTÊINER ESPERA", "A *PRÓXIMA VIAGEM*.", ()),
     ],
     'santos': [
-        (0.5, 7.0, "E NO BRASIL? O *PORTO DE SANTOS* (SP)", "LIDERA A AMÉRICA LATINA.", ('F15',)),
+        (0.5, 7.0, "E NO BRASIL? O *PORTO DE SANTOS* (SP)", "LIDERA A AMÉRICA LATINA EM CAIXAS.", ('F15',)),
         (7.2, 14.0, "EM 2024 PASSARAM POR LÁ", "*5,4 MILHÕES DE TEU*.", ('F15',)),
         (14.2, 20.6, "EM FILA, ESSAS CAIXAS DE 20 PÉS", "DARIAM UNS *32.700 KM*.", ('F16',)),
         (20.8, 26.6, "É UMA MÉDIA DE UNS *15 MIL TEU*", "POR DIA.", ('F16',)),
@@ -245,6 +245,7 @@ Capítulos
 {capitulos}
 
 Simplificado de propósito
+- No porto, amarrar a carga se chama "peação"; o guindaste de cais é chamado de "portêiner" e o pórtico do pátio, de "transtêiner".
 - O código MPXU 190426 5 foi inventado para o vídeo (não conferimos se MPX existe no registro do BIC, que é onde os donos de verdade registram as suas 3 letras). O dígito verificador, porém, sai da conta oficial do padrão ISO 6346.
 - O guindaste de cais, o RTG e o navio são vistos "de frente" (olhando ao longo do cais), com menos fileiras e camadas do que um navio de verdade. A lança, as pernas e os cabos estão simplificados.
 - Na vista de frente aparecem só 2 dos 4 pinos do spreader; os outros 2 ficam atrás.

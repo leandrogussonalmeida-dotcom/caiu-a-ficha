@@ -49,22 +49,29 @@ def x_corte(cap):
     return 46
 
 
-def hud_v(tela, cap, linhas, y=6):
+SH_V = 16          # no corte vertical a cena sobe 16 px: a legenda do Short cai no piso
+
+
+def hud_v(tela, cap, linhas, y=34):
+    """No corte vertical o painel some: os números vão para o alto, à esquerda,
+    no vazio em cima da bacia (coordenadas antes da subida de SH_V)."""
     if not VERTICAL: return
-    x = x_corte(cap) + 90
+    x = x_corte(cap) + 4
     for k, (txt, cor) in enumerate(linhas):
         w = tela.largura_texto(txt, 9) + 8
-        painel(tela, x - w // 2, y + k * 15 - 3, w, 14, borda=cor)
-        tela.texto(txt, x, y + k * 15, cor, tam=9, centro=True)
+        painel(tela, x, y + k * 15 - 3, w, 14, borda=cor)
+        tela.texto(txt, x + 4, y + k * 15, cor, tam=9)
 
 
 def et(tela, cap, txt, lx, ly, ponto, cor=AMARELO, centro=True):
-    """Etiqueta com fio. No corte vertical só aparece se couber no recorte."""
+    """Etiqueta com fio. No corte vertical só aparece se couber no recorte
+    e não bater no quadro de números."""
     if VERTICAL:
         x0 = x_corte(cap)
         w = tela.largura_texto(txt, 9)
         a = lx - w // 2 - 5 if centro else lx - 5
-        if a < x0 + 2 or a + w + 10 > x0 + 178: return
+        if a < x0 + 2 or a + w + 10 > x0 + 178 or ly < 24: return
+        if a < x0 + 126 and 26 < ly + 10 and ly - 3 < 80: return
     etiqueta_fio(tela, txt, lx, ly, ponto[0], ponto[1], cor, centro)
 
 
@@ -451,7 +458,7 @@ class Selo(Cena):
                 for k in range(int((ys - by) / 2)):
                     tela.ret(int(bx + math.sin(k + t * 9) * .6), int(by + k * 2), 2, 2, MISTURA2 if k % 3 else CIANO)
             et(tela, 'selo', 'CRISTA', 262, 118, P['crista'], AMARELO) if u > 2.0 else None
-        hud_v(tela, 'selo', [('FECHO HÍDRICO: MÍN. 5 CM', AMARELO)])
+        hud_v(tela, 'selo', [('FECHO HÍDRICO', AMARELO), ('MÍNIMO: 5 CM', AMARELO)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'O VASO PARADO', 9, ACO3, 9)
@@ -612,7 +619,7 @@ class Etapa(Cena):
         if self.K < 4 and not VERTICAL:
             if int(t * 1.5) % 3: rotulo(tela, 'CÂMERA LENTA', 8, 8, ACO3)
         nome = ETAPAS[self.K][0]
-        hud_v(tela, self.c['id'], [(f"ETAPA {self.K + 1}: {nome}", ETAPAS[self.K][2]),
+        hud_v(tela, self.c['id'], [(f"ETAPA {self.K + 1} DE 5", ETAPAS[self.K][2]), (nome, ETAPAS[self.K][2]),
                                     (f"CAIXA {dec(e['V'])} L", MISTURA2)])
         if VERTICAL: return
         painel_etapa(tela, e, t, self.K)
@@ -648,7 +655,7 @@ class Ciclo(Cena):
             painel(tela, 150 - w // 2 - 8, 6, w + 16, 22, borda=cor)
             tela.texto(nome, 150, 10, cor if pulso < .6 else BRANCO, tam=17, centro=True)
         n = int((t + .01) / (5 * self.bar))
-        hud_v(tela, 'ciclo', [(f"ETAPA {k + 1}: {nome}", cor)])
+        hud_v(tela, 'ciclo', [(f"ETAPA {k + 1} DE 5", cor), (nome, cor)])
         if VERTICAL: return
         painel_etapa(tela, e, t, k)
         tit(tela, f"DESCARGA {min(3, n + 1)} DE 3", 196 - 1, ACO3, 9, PX0 + 62) if False else None
@@ -677,7 +684,8 @@ class Duplo(Cena):
         if t < self.B0 - .3 and t > 4:
             tela.ret(155, int(meia), 4, 1, CIANO); tela.ret(196, int(meia), 4, 1, CIANO)
             et(tela, 'duplo', 'FECHA NA METADE', 90, 64, (156, int(meia)), CIANO)
-        hud_v(tela, 'duplo', [(f"{'MEIA' if vol < 5 else 'COMPLETA'}: {dec(e['usados'])} L", CIANO if vol < 5 else AMARELO)])
+        hud_v(tela, 'duplo', [('BOTÃO MENOR' if vol < 5 else 'BOTÃO MAIOR', CIANO if vol < 5 else AMARELO),
+                              (f"USADOS {dec(e['usados'])} L", CIANO if vol < 5 else AMARELO)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'DOIS BOTÕES', 9, AMARELO, 17)
@@ -730,6 +738,7 @@ class Litros(Cena):
             for j in range(5):
                 yy = 50 + ((t * 70 + j * 9) % 46)
                 if u < 1: tela.ret(bx + 14, int(yy), 2, 3, MISTURA2)
+            tela.ret(bx + 11, 0, 10, 44, PRETO); tela.ret(bx + 12, 0, 8, 43, ACO2); tela.ret(bx + 12, 0, 1, 43, ACO4)
             tela.ret(bx + 6, 40, 20, 8, PRETO); tela.ret(bx + 7, 41, 18, 6, ACO3); tela.ret(bx + 7, 41, 18, 1, ACO4)
         for j, (rot, n, ti, cor) in enumerate(self.LINHAS):
             if t < ti - .3: continue
@@ -832,6 +841,8 @@ class Parede(Cena):
         manometro(tela, 250, 40, 7, pres)
         if g and 1.0 <= e['p'] < 2.9: gota(tela, g[0], g[1], t)
         P = VASO_P.pontos()
+        if VERTICAL and t < 22.4:
+            et(tela, 'parede', 'VÁLVULA', 150, 92, (216, 75), AMARELO)
         if t < 15.1:
             et(tela, 'parede', 'VÁLVULA DE PAREDE', 120, 40, (216, 75), AMARELO)
             et(tela, 'parede', 'VEM DA CAIXA D\'ÁGUA', 120, 12, (230, 20), MISTURA2)
@@ -938,6 +949,19 @@ Fim.pos = Fim.fim_vinheta
 CENAS = dict(gancho=Gancho, titulo=Titulo, vaso=Vaso, pecas=Pecas, selo=Selo, sifao=SifaoDemo,
              etapa1=Etapa1, etapa2=Etapa2, etapa3=Etapa3, etapa4=Etapa4, etapa5=Etapa5,
              ciclo=Ciclo, duplo=Duplo, litros=Litros, parede=Parede, resumo=Resumo, fim=Fim)
+
+
+def _sobe(desenhar):
+    def f(self, tela, t, tg):
+        desenhar(self, tela, t, tg)
+        if VERTICAL:
+            tela.buf[0:PALCO_H - SH_V] = tela.buf[SH_V:PALCO_H].copy()
+            tela.buf[PALCO_H - SH_V:PALCO_H] = tela.buf[PALCO_H - SH_V - 1]
+    return f
+
+
+for _cls in CENAS.values():
+    _cls.desenhar = _sobe(_cls.desenhar)
 
 
 if __name__ == '__main__':

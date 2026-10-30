@@ -238,7 +238,7 @@ CORTES = [
     dict(id='c5', de=('duplo', 0.0), ate=('duplo', 36.0), x=46, gancho=['3 OU 6', 'LITROS?'],
          titulo='Para que servem os dois botões da descarga?',
          descricao='O menor solta menos água, cerca de 3 litros, para líquidos. O maior solta a caixa toda, 6 litros, para sólidos.'),
-    dict(id='c6', de=('parede', 0.0), ate=('parede', 30.0), x=56, gancho=['VÁLVULA DE', 'PAREDE'],
+    dict(id='c6', de=('parede', 0.0), ate=('parede', 30.0), x=52, gancho=['VÁLVULA DE', 'PAREDE'],
          titulo='Como funciona a válvula de descarga de parede?',
          descricao='Sem caixa: o cano vem direto da caixa d\'água e a pressão solta muita água por pouco tempo. Ela pede pelo menos 20 kPa, uns 2 metros de altura.'),
 ]

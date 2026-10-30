@@ -535,7 +535,7 @@ def pintar_mancha(tela, m, x0=0, y0=0):
     er2[1:, :] &= er[:-1, :]; er2[:-1, :] &= er[1:, :]; er2[:, 1:] &= er[:, :-1]; er2[:, :-1] &= er[:, 1:]
     yy, xx = np.mgrid[0:h, 0:w]
     escuro_baixo = np.isin(reg, [TIN0, TIN1, TIN2, LOC_E, SIN_E, ALI_E, FMT_E, DAD_E, ECC_E])
-    cor = np.where(escuro_baixo, CAF0, np.where((xx + yy) % 2 == 0, CAF1, CAF2))
+    cor = np.where(escuro_baixo, CAF0, np.where((xx + yy) % 4 == 0, CAF2, CAF1))
     reg[dentro] = cor[dentro]
     anel = m & ~er2
     reg[anel] = CAF0

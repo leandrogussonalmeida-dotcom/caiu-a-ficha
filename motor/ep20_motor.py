@@ -1240,12 +1240,14 @@ class Leitura(Cena):
         p = self.passo(t)
         ang = -.32 * (1 - suave((t - 4.2) / 2.0))
         val = FINAL.copy()
-        if p >= 4:
+        if p >= 4:                      # a câmera tira a máscara (por dentro)...
             u = clamp((t - 15.4) / 2.5)
             corte = int(u * (N + 1))
-            val[:, :corte] = valor_mascara(MASC)[:, :corte] ^ 0
             cr = CRU.copy(); cr[M_PECA[FMT]] = FINAL[M_PECA[FMT]]
             val[:, :corte] = cr[:, :corte]
+        if p >= 6:                      # ...e no fim a imagem volta a ser a de verdade
+            corte = int(clamp((t - 23.4) / 2.0) * (N + 1))
+            val[:, :corte] = FINAL[:, :corte]
         cores = cores_de(val, np.ones((N, N), bool), np.zeros((N, N), bool))
         img = imagem_qr(cores, S)
         cx, cy = CARTAO[0] + 99, CARTAO[1] + 99

@@ -193,22 +193,24 @@ def pt(mx, my, k, s, u, ang=0.0):
 
 
 # =================================================================== chama
-def chama(tela, x, y, k, forca, t, seed=0, para_cima=True):
-    """Chama do queimador saindo de (x, y) para cima."""
+def chama(tela, x, y, k, forca, t, seed=0, ang=0.0):
+    """Chama do queimador saindo de (x, y) na direção `ang` (0 = para cima)."""
     if forca <= .02: return
     fl = .82 + .18 * math.sin(t * 37 + seed) * math.sin(t * 23.3 + seed * 2)
     L = (14 + 3 * math.sin(t * 17 + seed)) * k * forca * fl
-    sg = -1 if para_cima else 1
-    brilho(tela, x, y + sg * L * .45, max(6, L * .8), LARANJA)
+    dx, dy = math.sin(ang), -math.cos(ang)          # ao longo da chama
+    nx, ny = math.cos(ang), math.sin(ang)           # de lado
+
+    def P(a, b): return (x + dx * a + nx * b, y + dy * a + ny * b)
+    brilho(tela, *P(L * .45, 0), max(6, L * .8), LARANJA)
     for frac, larg, cor in ((1.0, 3.0, CHAMA2), (.78, 2.2, CHAMA1), (.5, 1.3, CHAMA0)):
         Lc = L * frac
         w = larg * k * (.7 + .3 * forca)
-        tipx = x + math.sin(t * 13 + seed + frac * 3) * k * 1.2
-        pts = [(x - w * .45, y), (x - w * .55, y + sg * Lc * .35), (tipx - w * .15, y + sg * Lc * .8),
-               (tipx, y + sg * Lc), (tipx + w * .15, y + sg * Lc * .8), (x + w * .55, y + sg * Lc * .35),
-               (x + w * .45, y)]
+        tip = math.sin(t * 13 + seed + frac * 3) * k * 1.2
+        pts = [P(0, -w * .45), P(Lc * .35, -w * .55), P(Lc * .8, tip - w * .15), P(Lc, tip),
+               P(Lc * .8, tip + w * .15), P(Lc * .35, w * .55), P(0, w * .45)]
         pol(tela, pts, cor)
-    tela.disco(x, y + sg * 2, max(1, k * .8), BRANCO)
+    tela.disco(*P(2, 0), max(1, k * .8), BRANCO)
 
 
 def piloto(tela, x, y, t):
@@ -285,6 +287,36 @@ def cesto(tela, mx, my, k, t, chama_f=0.0, corte=False, botijoes=True, acesos=()
     else:
         piloto(tela, bico[0], bico[1], t)
     return (X0, Y0, X1, Y1)
+
+
+def cesto_girado(tela, mx, my, k, ang, t, chama_f=0.0, chao=None):
+    """Cesto e queimador presos à boca (mx, my), girados junto com o envelope
+    (na hora de encher, o cesto fica deitado de lado)."""
+    def P(s, u): return pt(mx, my, k, s, u, ang)
+    for su in (-1, 1):
+        a = P(S_CESTO, su * CESTO_HW); b = P(S_SAIA, su * 10.2)
+        tela.linha(a[0], a[1], b[0], b[1], ACO1)
+    q = [P(S_QUEIM, -3.2), P(S_QUEIM, 3.2), P(S_QUEIM + 3, 3.2), P(S_QUEIM + 3, -3.2)]
+    contorno(tela, q, PRETO); pol(tela, q, ACO2)
+    c = [P(S_CESTO, -CESTO_HW), P(S_CESTO, CESTO_HW), P(S_FUNDO, CESTO_HW), P(S_FUNDO, -CESTO_HW)]
+    contorno(tela, c, PRETO)
+    pol(tela, c, VIME0, VIME1)
+    for f in (.3, .55, .8):
+        a = P(S_CESTO + (S_FUNDO - S_CESTO) * f, -CESTO_HW); b = P(S_CESTO + (S_FUNDO - S_CESTO) * f, CESTO_HW)
+        tela.linha(a[0], a[1], b[0], b[1], VIME2)
+    a = P(S_CESTO + .6, -CESTO_HW); b = P(S_CESTO + .6, CESTO_HW)
+    tela.linha(a[0], a[1], b[0], b[1], OLEO0)
+    bx, by = P(S_QUEIM, 0)
+    if chama_f > .02:
+        chama(tela, bx, by, k * .9, chama_f, t, 0, ang=ang)
+    else:
+        piloto(tela, bx, by, t)
+    return c
+
+
+def extremos_cesto(k, ang):
+    """Deslocamentos (dx, dy) dos cantos do cesto em relação à boca."""
+    return [pt(0, 0, k, s, u, ang) for s in (S_CESTO, S_FUNDO) for u in (-CESTO_HW, CESTO_HW)]
 
 
 def balao(tela, mx, my, k, t, e=None, x0=0, x1=W):
@@ -472,13 +504,14 @@ def empuxo_kg(Tin, h=0.0, V=VOLUME):
 class Voo:
     """Voo calculado. queim(tf, h, v, Tin) e vent(tf) em 0..1. Estado: h (m), v (m/s), T (K)."""
     M = 700.0                     # balão + cesto + gás + pessoas (kg)
-    P = 2.0e6                     # calor útil de um jato do queimador (W)
+    P = 2.5e6                     # calor útil de um jato do queimador (W)
     KP = .0029                    # perda de calor pelo tecido (1/s)
-    KV = .045                     # perda extra com o paraquedas aberto (1/s)
+    KV = .015                    # perda extra com o paraquedas aberto (1/s)
     CDA = .5 * 240.0              # coeficiente de arrasto x área (m²)
 
-    def __init__(self, dur, queim, vent, h0=0.0, v0=0.0, Tin0=365.0, dt=.05):
+    def __init__(self, dur, queim, vent, h0=0.0, v0=0.0, Tin0=365.0, dt=.05, travar=False):
         h, v, Tin = h0, v0, Tin0
+        no_ar, pousou = h0 > 1.0, False
         rows = []
         t = 0.0
         n = int(dur / dt) + 2
@@ -490,14 +523,18 @@ class Voo:
             rows.append((t, h, v, Tin, L, q, ve))
             dT = q * self.P / (m_in * 1005.0) - (self.KP + self.KV * ve) * (Tin - Ta)
             Tin += dT * dt
-            inercia = self.M + m_in + .5 * rho * VOLUME
+            inercia = self.M + m_in
             Fz = (L - self.M) * G - .5 * rho * self.CDA * v * abs(v)
             a = Fz / inercia
             v += a * dt
             h += v * dt
+            if h > 1.0: no_ar = True
             if h <= 0:
+                if no_ar and travar: pousou = True
                 h = 0.0
                 v = max(0.0, v)
+            if pousou:
+                h, v = 0.0, 0.0
             t += dt
         self.a = np.array(rows)
         self.dt = dt
