@@ -1894,13 +1894,13 @@ class Resumo(Cena):
                 for x in range(0, 300, 24): tela.ret(x, 0, 1, PALCO_H, FUNDO2)
                 for y in range(12, PALCO_H, 24): tela.ret(0, y, 300, 1, FUNDO2)
             dy = int((1 - u) * 120)
-            etiqueta_grande(tela, t, dy - 8)
+            etiqueta_grande(tela, t, dy - 8 + int(round(math.sin(t * 1.3) * 1.5)), laser=((t - 17.0) / 1.6) % 1.0 if t < 24.0 else None)
             if t >= 24.4:
                 u2 = ease((t - 24.4) / .8)
-                cy_ = int(128 + 46 * u2)
+                cy_ = int(128 + 46 * u2 + math.sin(t * 2) * 1.2)
                 canhoto(tela, 226, cy_)
                 if u2 >= 1 and (t * 2) % 1 < .8:
-                    tx(tela, 'COMPROVANTE', 160, cy_ + 10, AMARELO, centro=True)
+                    tx(tela, 'COMPROVANTE', 251, cy_ - 11, AMARELO, centro=True)
         if self.hud(tela, t, tg, cab='RESUMO', nome='A JORNADA', etapa=0, u=1.0):
             self.miolo(tela, t)
 

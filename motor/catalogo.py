@@ -28,7 +28,7 @@ EPISODIOS = [
     dict(id='ep03', serie='jornada', titulo='A jornada da sua mala no aeroporto', estado='fila', onda=1,
          ideia='Do check-in (etiqueta com código de barras) às esteiras, raio-x, triagem automática, '
                'carrinho, porão do avião, esteira de chegada. Protagonista: a mala, com a etiqueta.'),
-    dict(id='ep04', serie='pixels', titulo='Como a tela do celular faz cada pixel', estado='fila', onda=1,
+    dict(id='ep04', serie='pixels', titulo='Como a tela do celular faz cada pixel', estado='pronto', onda=1,
          ideia='Subpixels vermelho/verde/azul, mistura de cor, LCD (luz de fundo + cristal líquido + '
                'filtro) contra OLED (cada subpixel acende), resolução, taxa de atualização. Meta: um '
                'canal de pixel explicando pixel.'),

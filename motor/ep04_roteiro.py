@@ -67,7 +67,7 @@ CAPITULOS = [
 LEGENDAS = {
     'gancho': [
         (0.6, 6.0, "TUDO NA TELA DO CELULAR É FEITO", "DE PONTINHOS DE LUZ: OS *PIXELS*.", ('F1',)),
-        (6.2, 11.6, "DE PERTO, CADA UM É SÓ *VERMELHO*,", "*VERDE* E *AZUL*.", ('F1',)),
+        (6.2, 11.6, "DE PERTO, CADA UM É FEITO DE", "*VERMELHO*, *VERDE* E *AZUL*.", ('F1',)),
     ],
     'zoom': [
         (0.8, 7.6, "UM CELULAR QUALQUER, MOSTRANDO", "UMA PAISAGEM.", ()),
@@ -97,7 +97,7 @@ LEGENDAS = {
         (28.6, 32.8, "E O SOL, NOSSO PIXEL: *AMARELO*.", "", ('F2',)),
     ],
     'lcd': [
-        (0.5, 5.8, "PRIMEIRO TIPO: *LCD*, A TELA DE", "CRISTAL LÍQUIDO. VAMOS ABRIR UM PIXEL.", ('F4',)),
+        (0.5, 5.8, "PRIMEIRO TIPO: *LCD*, A TELA DE", "CRISTAL LÍQUIDO. ABRINDO UM PIXEL:", ('F4',)),
         (6.2, 11.8, "O CRISTAL NÃO BRILHA SOZINHO. A LUZ", "VEM DE TRÁS: A *LUZ DE FUNDO*.", ('F4',)),
         (12.2, 17.8, "UM *POLARIZADOR*: SÓ DEIXA PASSAR", "A LUZ QUE VIBRA EM PÉ.", ('F4',)),
         (18.2, 23.8, "O *CRISTAL LÍQUIDO*: MOLÉCULAS EM", "ESPIRAL, ENTRE DOIS VIDROS.", ('F4',)),
@@ -107,7 +107,7 @@ LEGENDAS = {
     'cristal': [
         (0.5, 7.6, "SEM TENSÃO, A ESPIRAL GIRA A LUZ", "EM *90 GRAUS*...", ('F4',)),
         (8.0, 14.8, "...E ELA PASSA PELO SEGUNDO", "POLARIZADOR: *SUBPIXEL ACESO*.", ('F4',)),
-        (15.2, 22.4, "COM TENSÃO, AS MOLÉCULAS FICAM", "EM PÉ E NÃO GIRAM MAIS A LUZ.", ('F4',)),
+        (15.2, 22.4, "COM TENSÃO, AS MOLÉCULAS *DESTORCEM*", "E NÃO GIRAM MAIS A LUZ.", ('F4',)),
         (22.8, 29.6, "A LUZ BATE NO SEGUNDO POLARIZADOR", "E PARA: *SUBPIXEL APAGADO*.", ('F4',)),
         (30.0, 35.8, "TENSÃO NO MEIO: PASSA SÓ UMA PARTE.", "É ASSIM QUE SAEM OS NÍVEIS.", ('F4',)),
         (36.2, 41.8, "VERMELHO E VERDE ABERTOS, AZUL", "FECHADO: O PIXEL FICA *AMARELO*.", ('F2', 'F4')),
@@ -121,7 +121,7 @@ LEGENDAS = {
         (8.0, 15.4, "UMA CAMADA ORGÂNICA BRILHA QUANDO", "A CORRENTE PASSA POR ELA.", ('F5',)),
         (15.8, 22.8, "NÃO PRECISA DE LUZ DE FUNDO", "NEM DE CRISTAL LÍQUIDO.", ('F5',)),
         (23.2, 30.4, "PARA FAZER PRETO, O SUBPIXEL", "SIMPLESMENTE *APAGA*.", ('F5',)),
-        (30.8, 38.4, "APAGADO, NÃO DÁ LUZ NEM GASTA", "ENERGIA: *PRETO DE VERDADE*.", ('F5',)),
+        (30.8, 38.4, "APAGADO, NÃO DÁ LUZ E QUASE NÃO", "GASTA ENERGIA: *PRETO DE VERDADE*.", ('F5',)),
         (38.8, 46.6, "À NOITE, LADO A LADO: O PRETO DO LCD", "BRILHA UM POUCO. O DO OLED, NÃO.", ('F4', 'F5')),
     ],
     'resolucao': [
@@ -138,8 +138,8 @@ LEGENDAS = {
     ],
     'hz': [
         (0.5, 7.4, "A TELA NÃO MOSTRA UMA IMAGEM SÓ.", "ELA TROCA DE QUADRO SEM PARAR.", ('F9',)),
-        (7.8, 14.8, "*60 HZ*: 60 QUADROS NOVOS", "POR SEGUNDO.", ('F9',)),
-        (15.2, 22.2, "*120 HZ*: 120 POR SEGUNDO.", "O MOVIMENTO FICA MAIS LISO.", ('F9',)),
+        (7.8, 14.8, "*60 HZ*: A TELA SE REDESENHA", "60 VEZES POR SEGUNDO.", ('F9',)),
+        (15.2, 22.2, "*120 HZ*: 120 VEZES POR SEGUNDO.", "O MOVIMENTO FICA MAIS LISO.", ('F9',)),
         (22.6, 29.6, "CADA QUADRO DURA *16,7 MS* A 60 HZ", "E *8,3 MS* A 120 HZ.", ('F10',)),
         (30.0, 37.0, "A 120 HZ, A TELA PODE TROCAR ATÉ", "*311.040.000 PIXELS* POR SEGUNDO.", ('F10',)),
         (37.4, 43.6, "MUITOS AJUSTAM A TAXA SOZINHOS,", "CONFORME O QUE ESTÁ NA TELA.", ('F14',)),
@@ -147,7 +147,7 @@ LEGENDAS = {
     'meta': [
         (0.5, 7.4, "E ESTE VÍDEO? TAMBÉM É", "FEITO DE PIXELS.", ('F12',)),
         (7.8, 14.8, "NÓS DESENHAMOS CADA QUADRO COM", "*480 X 270 = 129.600 PIXELS*.", ('F12',)),
-        (15.2, 22.2, "CADA UM VIRA 4 X 4. O VÍDEO SAI COM", "1.920 X 1.080 = *2.073.600*.", ('F12',)),
+        (15.2, 22.2, "CADA PIXEL VIRA UM BLOCO 4 X 4. SAI", "1.920 X 1.080 = *2.073.600*.", ('F12',)),
         (22.6, 29.6, "30 QUADROS POR SEGUNDO. NA SUA TELA,", "VIRAM LUZ *VERMELHA, VERDE E AZUL*.", ('F12', 'F1')),
     ],
     'resumo': [
@@ -167,7 +167,7 @@ FONTES = {
            'https://9to5google.com/2023/08/23/hd-fhd-qhd-uhd-phone-meaning/'),
     'F7': ('Conta a partir da resolução 1.080 x 2.400 (F6)', None),
     'F8': ('Wikipedia, "Pixel density" (PPI = diagonal em pixels / diagonal em polegadas); conta para 6,5"',
-           'https://en.wikipedia.org/wiki/HiDPI'),
+           'https://en.wikipedia.org/wiki/Pixel_density'),
     'F9': ('Android Authority, "What is a phone refresh rate?"',
            'https://www.androidauthority.com/phone-refresh-rate-120hz-1086643/'),
     'F10': ('Conta: 1 s / 60 e 1 s / 120; 2.592.000 x 120', None),
@@ -219,7 +219,7 @@ CORTES = [
          descricao='Vermelho + verde = amarelo, verde + azul = ciano, vermelho + azul = magenta e as três juntas = branco. É assim que cada pixel da tela do celular faz as cores.'),
     dict(id='c2', de=('cristal', 0.0), ate=('cristal', 30.0), x=4, gancho=['O CRISTAL', 'QUE GIRA'],
          titulo='O cristal líquido que acende e apaga cada subpixel',
-         descricao='Numa tela LCD, sem tensão o cristal líquido gira a luz 90 graus e ela passa pelo segundo polarizador. Com tensão as moléculas ficam em pé e a luz para.'),
+         descricao='Numa tela LCD, sem tensão o cristal líquido gira a luz 90 graus e ela passa pelo segundo polarizador. Com tensão as moléculas destorcem e a luz para.'),
     dict(id='c3', de=('zoom', 8.0), ate=('zoom', 36.0), x=58, gancho=['ZOOM ATÉ', 'O PIXEL'],
          titulo='Zoom na tela do celular até o subpixel 🔍',
          descricao='Chegando perto de um ponto do sol numa foto no celular: a imagem vira quadradinhos, e cada quadradinho vira 3 luzes, vermelha, verde e azul.'),
