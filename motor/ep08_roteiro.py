@@ -83,7 +83,7 @@ CAPITULOS = [
 
 LEGENDAS = {
     'gancho': [
-        (0.6, 6.0, "NUM JOGO A 60 QUADROS POR SEGUNDO,", "CADA IMAGEM SAI EM *16,7 MS*.", ('F3',)),
+        (0.6, 6.0, "NUM JOGO A 60 QUADROS POR SEGUNDO,", "SAI UMA IMAGEM A CADA *16,7 MS*.", ('F3',)),
         (6.2, 11.6, "O QUE ACONTECE NESSE PISCAR?", "VAMOS *PAUSAR* UM QUADRO.", ()),
     ],
     'jogo': [
@@ -95,7 +95,7 @@ LEGENDAS = {
     'laco': [
         (0.5, 7.2, "POR DENTRO, TODO JOGO RODA UM *LAÇO*:", "OS MESMOS PASSOS, QUADRO A QUADRO.", ('F1',)),
         (7.6, 14.8, "1: *LER O CONTROLE*.", "2: *ATUALIZAR* O MUNDO DO JOGO.", ('F1',)),
-        (15.2, 22.0, "3: *DESENHAR* A IMAGEM.", "E COMEÇA TUDO DE NOVO.", ('F1',)),
+        (15.2, 22.0, "3: *DESENHAR* A IMAGEM.", "4: *MOSTRAR*. E DE NOVO.", ('F1',)),
         (22.4, 29.6, "VAMOS SEGUIR UM QUADRO SÓ, EM", "*CÂMERA LENTA*, DE 0 A 16,7 MS.", ('F3',)),
     ],
     'controle': [
@@ -127,7 +127,7 @@ LEGENDAS = {
     ],
     'malha': [
         (0.5, 7.0, "E NUM JOGO *3D*? O MESMO HERÓI", "VIRA UM MODELO DE *TRIÂNGULOS*.", ('F9',)),
-        (7.4, 14.2, "UMA *MALHA*: TRIÂNGULOS QUE", "DIVIDEM LADOS E CANTOS.", ('F9',)),
+        (7.4, 14.2, "UMA *MALHA*: TRIÂNGULOS QUE", "*COMPARTILHAM* LADOS E CANTOS.", ('F9',)),
         (14.6, 21.4, "CADA CANTO É UM *VÉRTICE*:", "UM PONTO COM POSIÇÃO EM 3D.", ('F9', 'F10')),
         (21.8, 28.6, "A GPU RODA UM PROGRAMA PARA CADA", "VÉRTICE: O *VERTEX SHADER*.", ('F10',)),
         (29.0, 35.6, "ELE LEVA O PONTO 3D PARA O LUGAR", "CERTO NA *TELA 2D*.", ('F10',)),
@@ -165,8 +165,8 @@ LEGENDAS = {
         (0.5, 7.0, "30 QUADROS POR SEGUNDO: CADA UM", "PODE LEVAR ATÉ *33,3 MS*.", ('F3',)),
         (7.4, 14.2, "60 POR SEGUNDO: *16,7 MS*.", "120 POR SEGUNDO: SÓ *8,3 MS*.", ('F3',)),
         (14.6, 21.4, "MAIS QUADROS, MAIS DEGRAUS NO PULO:", "O MOVIMENTO FICA MAIS *LISO*.", ('F2',)),
-        (21.8, 28.6, "60 POR SEGUNDO É VISTO HÁ TEMPOS", "COMO O MÍNIMO PARA JOGAR LISO.", ('F2',)),
-        (29.0, 35.6, "E A MÉDIA NÃO BASTA: UM QUADRO", "QUE ATRASA JÁ PARECE *TRAVADA*.", ('F2', 'F19')),
+        (21.8, 28.6, "PARA MUITOS JOGADORES, 60 POR SEGUNDO", "É O MÍNIMO PARA PARECER *LISO*.", ('F2',)),
+        (29.0, 35.6, "E A MÉDIA NÃO BASTA: QUADROS QUE", "ATRASAM DÃO *TRANCOS* NO MOVIMENTO.", ('F2', 'F19')),
     ],
     'resumo': [
         (0.5, 8.6, "LER, ATUALIZAR, DESENHAR, MOSTRAR:", "TUDO EM ATÉ *16,7 MS*.", ('F1', 'F3')),

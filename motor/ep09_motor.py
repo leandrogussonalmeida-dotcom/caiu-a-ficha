@@ -89,8 +89,6 @@ def hud(tela, tiques, carga=None, y=150, rotulo_t='TIQUES'):
     """Placar do protagonista: tiques contados e energia na mola."""
     if VERTICAL:
         s = f"{rotulo_t} {milhar(tiques)}"
-        w = tela.largura_texto(s, 9) + 10
-        painel(tela, 0, 1, 1, 1)
         return
     h = 54 if carga is not None else 32
     painel(tela, PX0 - 6, y, 172, h, borda=TRACO)
@@ -160,7 +158,8 @@ class Cena:
     def sons_tic(self, fx, ganho=.3, t0=0.0, t1=None, maximo=None):
         """Um tic por inteiro de tau (o instante em que a roda trava)."""
         t1 = self.dur if t1 is None else t1
-        for t, k in cruzamentos(self.tau, t0, t1):
+        for t, k in cruzamentos(self.tau, t0 - .0015, t1):
+            t = max(t, t0)
             fx.put(fx.clique(5200 if k % 2 == 0 else 3600, .014), self.t0 + t, ganho, -.15 if k % 2 == 0 else .15)
 
 
@@ -388,7 +387,7 @@ class Mola(Cena):
         ae, at = self.ang_eixo(t), self.ang_tambor(t)
         tambor(tela, cx, cy, R, at, ae + at, q)
         # catraca por cima, em fantasma (dá para ver a mola embaixo)
-        Rc = R * .42
+        Rc = R * .32
         a_c = ae + at
         D.fantasma(tela, lambda: roda(tela, cx, cy, Rc, self.DENTES_CATRACA, a_c, 'aco', perfil='catraca',
                                       h=4, aro=3, raios=3, cubo=7, furo=None))
@@ -406,9 +405,9 @@ class Mola(Cena):
         tela.px(px_, py_, PRETO)
         # roda de coroa + haste + coroa (à direita)
         a = math.radians(-12)
-        rx, ry = cx + math.cos(a) * (Rc + 12), cy + math.sin(a) * (Rc + 12)
+        rx, ry = cx + math.cos(a) * (Rc + 11), cy + math.sin(a) * (Rc + 11)
         Mk = Mascara(); linha_grossa(Mk, rx, ry, 262, ry, 5, 1); pintar_tela(tela, Mk, 'aco')
-        roda(tela, rx, ry, 12, 14, -a_c * Rc / 12, 'aco', furo=None)
+        roda(tela, rx, ry, 11, 14, -a_c * Rc / 11, 'aco', furo=None)
         Mk = Mascara(); Mk.ret(258, ry - 12, 16, 24); pintar_tela(tela, Mk, 'aco')
         girando = self.T_CORDA[0] <= t < self.T_CORDA[1]
         for k in range(6):
@@ -1084,7 +1083,8 @@ class Resumo(Cena):
         fundo_bancada(tela)
         tau = TIQUES_S * t
         self.M.desenhar(tela, tau)
-        k_on = min(3, int(t / 2.5)) if t < 9.8 else (int(t / self.spb) % 4)
+        if t < 19.8: k_on = (0 if t < 5.0 else 1) if t < 9.8 else (2 if t < 14.8 else 3)
+        else: k_on = int(t / self.spb) % 4
         if VERTICAL:
             hud_vertical(tela, [(f"TIQUES {milhar(math.floor(tau))}", AMARELO)], x=150)
             return
