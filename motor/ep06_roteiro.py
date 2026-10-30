@@ -115,7 +115,7 @@ LEGENDAS = {
         (0.5, 7.6, "HORA DE CARREGAR. CADA CONTÊINER", "PÕE MAIS PESO NO NAVIO.", ()),
         (7.8, 15.6, "MAIS PESO: O NAVIO *AFUNDA MAIS*", "E EMPURRA MAIS ÁGUA.", ('F1',)),
         (15.8, 23.6, "CADA TONELADA A BORDO EMPURRA", "*1 TONELADA DE ÁGUA* A MAIS.", ('F1',)),
-        (23.8, 31.6, "UM GIGANTE DESSES LEVA ATÉ", "*156.907 TONELADAS*.", ('F6',)),
+        (23.8, 31.6, "UM DESSES GIGANTES PODE LEVAR", "*156.907 TONELADAS*.", ('F6',)),
         (31.8, 39.6, "CONTA TUDO: CARGA, COMBUSTÍVEL, ÁGUA,", "COMIDA. É O *PORTE BRUTO*.", ('F5',)),
         (39.8, 46.6, "CARREGADO, O FUNDO FICA", "*16 METROS* ABAIXO DA ÁGUA.", ('F6',)),
         (46.8, 53.6, "AS MARCAS NA PROA MOSTRAM", "QUANTO ELE AFUNDOU: O *CALADO*.", ()),
@@ -129,7 +129,7 @@ LEGENDAS = {
     'doce': [
         (0.5, 7.6, "AGORA O NAVIO SAI DO MAR", "E ENTRA NUM *RIO*.", ()),
         (7.8, 15.6, "ÁGUA DOCE É MENOS DENSA:", "1 LITRO PESA 1 KG, NÃO 1,025.", ('F3',)),
-        (15.8, 23.6, "PARA EMPURRAR O MESMO PESO EM", "ÁGUA, ELE AFUNDA *2,5% MAIS*.", ('F1', 'F11')),
+        (15.8, 23.6, "NA ÁGUA DOCE, O CASCO PRECISA DE", "*2,5% MAIS* VOLUME SUBMERSO.", ('F1', 'F11')),
         (23.8, 29.6, "POR ISSO A LINHA *F*, DE ÁGUA DOCE,", "FICA MAIS ALTA NA MARCA.", ('F7',)),
         (29.8, 35.6, "NO MAR, O MESMO NAVIO", "*FLUTUA MAIS ALTO*.", ('F7',)),
     ],
@@ -187,6 +187,7 @@ Capítulos
 {capitulos}
 
 Simplificado de propósito
+- Empuxo e peso aparecem em kg (quilograma-força) para comparar com a balança.
 - O aço tem densidade de 7,75 a 8,05 g/cm³ conforme a liga; usamos 7,85 nas contas.
 - A caixa de 15 x 15 x 8 cm é uma conta: a chapa teria 1,8 mm, e a espessura da parede foi ignorada no volume.
 - Os números do navio grande (397 m, 156.907 t de porte bruto, 16 m de calado) são de um porta-contêineres real; o navio desenhado é genérico e menor na tela. O calado do navio vazio (7 m) é um exemplo.

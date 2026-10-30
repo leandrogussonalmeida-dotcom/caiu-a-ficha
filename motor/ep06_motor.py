@@ -324,7 +324,7 @@ class Empuxo(Cena):
             tela.ret(PX0 + 149, 122, 3, 22, VERDE)
         if t >= 29.8:
             tela.texto('ARQUIMEDES DE SIRACUSA', PX0, 166, ACO4, tam=9, contorno=PRETO)
-            tela.texto('212 A.C.', PX0, 178, AMARELO, tam=17, contorno=PRETO)
+            tela.texto('287-212 A.C.', PX0, 178, AMARELO, tam=17, contorno=PRETO)
 
     def sons(self, fx):
         fx.put(fx.chiado(12.0, 600, 3500), self.t0 + 3.4, .12, .4)
@@ -1104,7 +1104,7 @@ class Titanic(Cena):
         if t >= self.T_GOLPE:
             tela.texto('O ICEBERG ABRIU', PX0, 98, ACO3, tam=9, contorno=PRETO)
             tela.texto('6', PX0, 109, VERMELHO, tam=26, contorno=PRETO)
-            tela.texto('15/4/1912', PX0 + 30, 116, ACO3, tam=9, contorno=PRETO)
+            tela.texto('14/4/1912', PX0 + 30, 116, ACO3, tam=9, contorno=PRETO)
         tela.texto('ALAGADOS', PX0, 140, ACO3, tam=9, contorno=PRETO)
         tela.texto(f"{n_al} DE 16", PX0, 151, VERMELHO if n_al > 4 else BRANCO, tam=17, contorno=PRETO)
         if t >= 29.8:

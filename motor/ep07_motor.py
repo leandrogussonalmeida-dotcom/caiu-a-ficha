@@ -976,7 +976,7 @@ class Servidor(Cena):
 
     def km(self, t): return KM_SINES + (KM_LISBOA - KM_SINES) * suave((t - .5) / 7.0)
 
-    def pos(self, t):
+    def caminho(self, t):
         """Caminho do pacote: entra pela calha, desce no rack do meio, sai pela direita."""
         if t < 6.0:
             u = ease(t / 6.0) if False else min(1.0, t / 6.0)
@@ -996,7 +996,7 @@ class Servidor(Cena):
         for k, x in enumerate(self.RX):
             D.rack(tela, x, 44, 40 if k != 2 else 40, 134, t, seed=k + 1, destaque=k == 2)
         tela.ret(148, 26, 4, 18, PRETO); tela.ret(149, 26, 2, 18, CIANO)
-        x, y = self.pos(t)
+        x, y = self.caminho(t)
         grande = 8.0 <= t < 28.6
         if grande:
             halo(tela, 150, 112, 40, CHAMA1)

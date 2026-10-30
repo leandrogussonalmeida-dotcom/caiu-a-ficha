@@ -36,7 +36,7 @@ EPISODIOS = [
          ideia='Ciclo de refrigeração: compressor, condensador (grade quente atrás), válvula de expansão, '
                'evaporador; o fluido que ferve frio. Protagonista: uma porção do fluido dando a volta.'),
     # ---------------------------------------------------------------- onda 2
-    dict(id='ep06', serie='voa', titulo='Por que um navio de aço flutua', estado='fila', onda=2),
+    dict(id='ep06', serie='voa', titulo='Por que um navio de aço flutua', estado='pronto', onda=2),
     dict(id='ep07', serie='jornada', titulo='A jornada de uma mensagem de celular', estado='fila', onda=2),
     dict(id='ep08', serie='pixels', titulo='Como um videogame desenha um quadro', estado='fila', onda=2),
     dict(id='ep09', serie='dentro', titulo='Como funciona o relógio mecânico', estado='fila', onda=2),

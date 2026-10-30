@@ -553,7 +553,9 @@ class Tiles(Cena):
                 if VERTICAL:
                     tela.texto('8 X 8 PIXELS', 90, 186, AMARELO, tam=9, contorno=PRETO, centro=True)
                 else:
-                    tela.linha(x + 18, y, PX0 - 4, 150, AMARELO)
+                    tela.linha(x + 8, y - 3, x + 8, VY0 + 100, AMARELO)
+                    tela.linha(x + 8, VY0 + 100, PX0 + 8, VY0 + 100, AMARELO)
+                    tela.linha(PX0 + 8, VY0 + 100, PX0 + 8, 114, AMARELO)
         if VERTICAL: return
         y = self.cron(tela, ms, t)
         if t < 28.8:
@@ -613,7 +615,7 @@ class Camadas(Cena):
             if not VERTICAL and t > 1.0:
                 rotulo(tela, 'SPRITE: O HERÓI', VX0 + 150, VY0 + 160, x + w // 2, y + h + 2, AMARELO)
                 (x2, y2, w2, h2), _ = self.sprites(f)[1]
-                rotulo(tela, 'SPRITE: A MOEDA', VX0 + 160, VY0 + 4, x2 + w2, y2 + 4, OURO2)
+                rotulo(tela, 'SPRITE: A MOEDA', x2 + w2 + 24, y2 + 16, x2 + w2 + 2, y2 + 8, OURO2)
             k_at = -1
         elif t < 21.6:
             u = suave((t - 18.6) / 2.4)
@@ -699,7 +701,7 @@ class Malha(Cena):
     def preparar(self):
         self.R = D.Raster3D(AREA3D)
 
-    def yaw(self, t): return -.6 + t * .35
+    def yaw(self, t): return -.6 + t * .2
 
     def desenhar(self, tela, t, tg):
         self.fundo(tela, t)
@@ -791,7 +793,7 @@ class Raster(Cena):
         if t < 21.6:
             self.grade(tela, t)
         else:
-            yaw = .5 + (t - 21.6) * .25
+            yaw = .3 + .45 * math.sin((t - 21.6) * .45)       # sempre de frente: o rosto aparece
             if t < 29.0:
                 a = (t - 21.6) * .9
                 luz = np.array([math.cos(a) * .8, .6, math.sin(a) * .8]); luz /= np.linalg.norm(luz)
@@ -1116,7 +1118,8 @@ class Buffer(Cena):
             for i in range(0, GW, 10): tela.ret(bx + i + 2, by + GH + 3, 5, 3, D.OURO1)
             nome = 'BUFFER ' + 'AB'[n]
             estado = 'NA TELA' if frente else ('PRONTO, ESPERANDO' if pronto and t >= 29 else ('PRONTO' if pronto else 'DESENHANDO'))
-            if t >= 7.4 or n == 0:
+            if t < 7.4 and n == 1: estado = 'VAZIO'
+            if True:
                 tela.texto(nome + ': ', bx, by - 13, BRANCO, tam=9, contorno=PRETO)
                 tela.texto(estado, bx + tela.largura_texto(nome + ': ', 9) + 3, by - 13,
                            VERDE if frente else (LARANJA if pronto else AMARELO), tam=9, contorno=PRETO)
