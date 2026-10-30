@@ -320,7 +320,7 @@ class Cilindro:
 
     # ---------------------------------------------------------- desenho (vista lateral, em corte)
     def desenhar(self, tela, seg=None, o=0.0, theta=0.0, linha=False, marcar=False, chave_mat='chave',
-                 cabeca=True, cortes_brilho=None, so_corpo=False, vis=None, desl=None):
+                 cabeca=True, cortes_brilho=None, so_corpo=False, vis=None, desl=None, fase=0):
         """`vis`: conjunto do que aparece ('corpo', 'rotor', 'pinos', 'contra',
         'molas', 'linha') para a montagem peça por peça; `desl`: deslocamento
         vertical de entrada de cada grupo."""
@@ -417,7 +417,7 @@ class Cilindro:
                 mola(tela, X, self.Y_CT + dy, b[-1] + dy)
         # ---- linha de corte
         if linha:
-            for x in range(x0 - 6, x1 + 8, 4):
+            for x in range(x0 - 6 + int(fase) % 4, x1 + 8, 4):          # a linha "anda" (fase)
                 tela.ret(x, self.Y_S, 2, 1, CIANO)
         if marcar:
             self.marcas(tela, seg, o)

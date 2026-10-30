@@ -295,7 +295,7 @@ class Bits(Cena):
                 tela.ret(14, y0 + 46, 270, 1, FUNDO3)
                 partes = [str(1 << (7 - j)) for j in range(8) if (val >> (7 - j)) & 1]
                 centro_preso(tela, " + ".join(partes) + f" = {val}", 150, 110, BRANCO, tam=17, xmin=4, xmax=296)
-                centro_preso(tela, "CADA CASA VALE O DOBRO DA DA DIREITA", 150, 146, ACO3)
+                centro_preso(tela, "CADA CASA VALE 2X A DA DIREITA", 150, 146, ACO3)
                 for j in range(7):
                     xa = 14 + (j + 1) * 34 + 6; xb = 14 + j * 34 + 22
                     yy = 168 + 4 * math.sin(t * 3 + j)
@@ -706,11 +706,11 @@ class Somador(Cena):
             porta(tela, tp, x, y, self.S, saida=v, destaque=(k == 'x1' or k == 'x2') and 22.6 <= t < 29.6)
         for x, y in fr: bit_luz(tela, x, y, 1, 2.4)
         a, b, v = self.entradas(t)
-        for (x, y), val, nome in (((8, 29), a, "A"), ((8, 53), b, "B"), ((8, 165), v, "VEM 1")):
+        for (x, y), val, nome in (((8, 29), a, "A"), ((8, 53), b, "B"), ((8, 165), v, "VEM")):
             celula(tela, x, y, 16, 16, val, tam=9)
         tela.texto("A", 8, 19, BRANCO, tam=9, contorno=PRETO)
         tela.texto("B", 28, 53, BRANCO, tam=9, contorno=PRETO)
-        tela.texto("VEM 1", 8, 155, BRANCO, tam=9, contorno=PRETO)
+        tela.texto("VEM", 8, 155, BRANCO, tam=9, contorno=PRETO)
         s, vai = self.saidas(t)
         celula(tela, 266, 55, 18, 18, s, tam=9)
         celula(tela, 266, 116, 18, 18, vai, tam=9)
@@ -957,7 +957,7 @@ class Relogio(Cena):
             self.ptxt(tela, milhar(GHZ), 112, BRANCO, 17)
             self.ptxt(tela, "TIQUES POR SEGUNDO", 132, ACO3)
             self.ptxt(tela, "1 TIQUE = " + dec(1e9 / GHZ, 2) + " NANOSSEGUNDO", 146, ACO3)
-            self.ptxt(tela, f"{dec(GHZ / 2 / 1e9, 1)} BILHÕES DE VEZES", 164, ACO2)
+            self.ptxt(tela, f"{dec(GHZ / 2 / 1e9, 1)} {'BILHÃO' if GHZ / 2 / 1e9 < 2 else 'BILHÕES'} DE VEZES", 164, ACO2)
             self.ptxt(tela, "MAIS RÁPIDO QUE AQUI", 175, ACO2)
         elif t >= 15.0:
             self.ptxt(tela, "A CADA SUBIDA:", 100, ACO3)
@@ -1509,8 +1509,8 @@ class Escala(Cena):
                 self.ptxt(tela, milhar(TRANS_CHIP), 106, BRANCO, 17)
                 self.ptxt(tela, "28 BILHÕES", 126, AMARELO)
             if t >= 15.2:
-                self.ptxt(tela, "PASTILHA: 103,8 A 420,2 MM", 146, ACO3)
-                self.ptxt(tela, "DE ÁREA = 1 A 2 CM DE LADO", 157, ACO3)
+                self.ptxt(tela, "ÁREA: 104 A 420 MM QUADR.", 146, ACO3)
+                self.ptxt(tela, "= 1 A 2 CM DE LADO", 157, ACO3)
             if t >= 30.0:
                 self.ptxt(tela, "EM 1971: " + milhar(TRANS_1971), 176, VERDE)
                 self.ptxt(tela, f"HOJE: {dec(TRANS_CHIP / TRANS_1971 / 1e6, 1)} MILHÕES DE VEZES", 188, AMARELO)
@@ -1818,7 +1818,7 @@ class Resumo(Cena):
                                                                        herois=False)
         tela.texto("E DE NOVO, A CADA TIQUE", 96, 176, ACO2, tam=9, contorno=PRETO)
         # painel
-        self.ptit(tela, "TIQUES DESTE VÍDEO")
+        self.ptit(tela, "TIQUES ATÉ AGORA")
         self.ptxt(tela, "SE FOSSE UM CHIP DE 3 GHZ:", 20, ACO3)
         self.ptxt(tela, milhar(int(tg * 3)), 32, AMARELO, 17)
         self.ptxt(tela, "BILHÕES DE TIQUES", 52, BRANCO)

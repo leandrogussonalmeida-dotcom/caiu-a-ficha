@@ -451,6 +451,10 @@ class Pecas(Cena):
                 brilho(tela, xs, C.Y_S, 10, CIANO, 1.0)
             else:
                 ax, ay = A[{'pinos': 'pino', 'contra': 'contra', 'molas': 'mola'}.get(nome, nome)]
+                if nome == 'corpo':
+                    brilho(tela, C.X[0] - 18 + (C.X[-1] - C.X[0] + 36) * u, C.Y_CT - 4, 12, CHAMA0, .9)
+                if nome == 'rotor':
+                    brilho(tela, C.x0 + (C.xp1 - C.x0) * u, C.Y_S + 6, 12, BRANCO, .9)
                 if nome in ('pinos', 'contra', 'molas'):
                     i = int(u * 5) % 5
                     b = C.pilha(None, i, 0)
@@ -496,7 +500,7 @@ class SemChave(Cena):
         fundo_bancada(tela)
         C = self.C
         seg, o = self.seg(t), self.o(t)
-        C.desenhar(tela, seg, o, 0.0, linha=t > 4.0, marcar=t > 4.0)
+        C.desenhar(tela, seg, o, 0.0, linha=t > 4.0, marcar=t > 4.0, fase=t * 6)
         foco = None
         if 7.8 <= t < 15.6:
             foco = int((t - 7.8) / 1.56) % 5
@@ -550,7 +554,7 @@ class Errada(Cena):
         C = self.C
         o = self.o(t)
         foco = 1 if 7.8 <= t < 15.6 else (3 if 15.8 <= t < 22.8 else None)
-        C.desenhar(tela, ERRADA, o, 0.0, linha=t > 6.5, marcar=t > 6.5,
+        C.desenhar(tela, ERRADA, o, 0.0, linha=t > 6.5, marcar=t > 6.5, fase=t * 6,
                    cortes_brilho={foco: .6 + .4 * math.sin(t * 6)} if foco is not None else None)
         travou = any(0 <= t - a < .5 for a in self.tentativas())
         if foco is not None:
@@ -595,7 +599,7 @@ class Certa(Cena):
         C = self.C
         o, th = self.o(t), self.theta(t)
         alinhado = C.pode_girar(CERTA, o)
-        C.desenhar(tela, CERTA, o, th, linha=t > 8.8, marcar=17.8 <= t < self.T_GIRA[0] or (t > 8.8 and th == 0))
+        C.desenhar(tela, CERTA, o, th, fase=t * 6, linha=t > 8.8, marcar=17.8 <= t < self.T_GIRA[0] or (t > 8.8 and th == 0))
         if alinhado and th == 0:
             u = (t - self.T_IN) * 2
             for x in range(C.x0 - 6, C.xp1 + 8, 4):

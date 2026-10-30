@@ -169,8 +169,8 @@ def estado_voo(tf, t, corte=False, niveis=None):
     if tf >= TF_SEP:
         d = tf - TF_SEP
         acc = max(0.0, tf - VOO.t2)
-        ds = -(1.2 * d + .5 * 8.7 * acc * acc) / M_POR_U
-        e['sep'] = (ds, -.25 * d, .05 * d)
+        ds = -(3.0 * d + .5 * 8.7 * acc * acc) / M_POR_U
+        e['sep'] = (ds, -.4 * d, .09 * d)
         e['st1'] = ds > -260
     if VOO.t2 <= tf < VOO.tfim:
         e['chama2'] = min(1.0, (tf - VOO.t2) / .5)
@@ -999,10 +999,10 @@ class Separacao(Cena):
             dt_now = min(dmax, (tf - VOO.tsep) * 12)          # o desenho do inset anda 12x
             for i in range(0, int(dt_now), 6):
                 xa, ya, hh = ponto(i)
-                if hh < 0: break
+                if hh < 0 or xa > x0 + w - 3: break
                 if (i // 6) % 2 == 0: tela.px(xa, ya, VERMELHO)
             xa, ya, hh = ponto(dt_now)
-            if hh >= 0: tela.disco(xa, ya, 1.5, VERMELHO)
+            if hh >= 0 and xa < x0 + w - 3: tela.disco(xa, ya, 1.5, VERMELHO)
             tela.texto('CAI', x0 + w - 4, y0 + 4, VERMELHO, tam=9, centro='d')
 
     def sons(self, fx):

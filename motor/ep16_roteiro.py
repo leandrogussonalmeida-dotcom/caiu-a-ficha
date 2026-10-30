@@ -106,7 +106,7 @@ LEGENDAS = {
     ],
     'transistor': [
         (0.5, 7.4, "O *TRANSISTOR*: UMA CHAVE QUE LIGA", "E DESLIGA COM ELETRICIDADE.", ('F3',)),
-        (7.8, 14.6, "ELE TEM 3 PONTAS: *FONTE*, *DRENO*", "E, EM CIMA, A *PORTA* (GATE).", ('F3',)),
+        (7.8, 14.6, "ELE TEM 3 TERMINAIS PRINCIPAIS:", "*FONTE*, *DRENO* E, EM CIMA, A *PORTA*.", ('F3',)),
         (15.0, 22.0, "PORTA SEM TENSÃO: NÃO HÁ CAMINHO.", "A CORRENTE *NÃO PASSA*.", ('F3',)),
         (22.4, 29.4, "TENSÃO NA PORTA: ABRE UM *CANAL*", "E A CORRENTE ATRAVESSA.", ('F3',)),
         (29.8, 37.8, "É O TRANSISTOR MAIS COMUM DOS CHIPS", "DIGITAIS: O *MOSFET*, DE 1959.", ('F3',)),
@@ -159,7 +159,7 @@ LEGENDAS = {
         (0.5, 7.4, "QUANTOS TRANSISTORES CABEM NUM", "PROCESSADOR DE VERDADE?", ()),
         (7.8, 14.8, "UM CHIP RECENTE DE COMPUTADOR TEM", "*28 BILHÕES* DE TRANSISTORES.", ('F8',)),
         (15.2, 22.2, "E A PASTILHA TEM SÓ *1 A 2 CM*", "DE LADO.", ('F10', 'F13')),
-        (22.6, 29.6, "O NOME *3 NM* É COMERCIAL: AS PORTAS", "FICAM A UNS *45 A 54 NM* DE DISTÂNCIA.", ('F8', 'F9')),
+        (22.6, 29.6, "*3 NM* É SÓ NOME: A PORTA DE UM", "TRANSISTOR FICA A *45-54 NM* DA OUTRA.", ('F8', 'F9')),
         (30.0, 36.8, "EM 1971, O PRIMEIRO MICROPROCESSADOR", "TINHA *2.250* TRANSISTORES.", ('F10',)),
         (37.2, 41.6, "HOJE: MAIS DE *12 MILHÕES*", "DE VEZES ISSO.", ('F8', 'F10', 'F13')),
     ],
@@ -217,7 +217,7 @@ Simplificado de propósito
 - Tudo está em câmera lenta: o relógio da tela bate 2 vezes por segundo e os bits andam devagar pelos fios. Num chip de verdade são bilhões de tiques por segundo.
 - O transistor é um MOSFET de canal N desenhado em corte, plano. Os transistores de hoje têm formato em 3D (aletas e folhas) e as medidas não estão em escala.
 - A porta NÃO é desenhada com 2 transistores, como no CMOS. As portas E e OU, o somador e o processador aparecem como símbolos; por dentro, também são transistores.
-- O processador de brinquedo tem 4 bits de endereço, 2 registradores e 5 instruções inventadas para o vídeo (carrega, soma, guarda, pula). Processadores reais têm centenas de instruções, memória rápida (cache), fazem várias etapas ao mesmo tempo (pipeline) e nem toda instrução leva um tique por etapa.
+- O processador de brinquedo tem 4 bits de endereço, 2 registradores e 5 instruções inventadas para o vídeo (carrega A, carrega B, soma, guarda, pula). Processadores reais têm centenas de instruções, memória rápida (cache), fazem várias etapas ao mesmo tempo (pipeline) e nem toda instrução leva um tique por etapa.
 - "3 GHz" e "28 bilhões de transistores" são números de chips recentes, mostrados sem marca. A pastilha de 1 a 2 cm de lado vem das áreas de pastilhas recentes (103,8 e 420,2 mm²).
 - Os 10 cm por tique são a distância da luz no vácuo; num fio de chip o sinal é mais lento ainda.
 

@@ -193,22 +193,22 @@ class Foguete:
         t = e.get('t', 0.0)
         f = eixo(cx, cy, ang, k)
         vac = e.get('vacuo', 0.0)
+        sep_longe = (not e.get('st1', True)) or e.get('sep', (0.0,))[0] < -1.0
+        # ---- chama do 2º estágio (atrás do 1º estágio que ficou para trás)
+        if e.get('chama2', 0) > 0 and sep_longe:
+            bx, by = f(53, 0)
+            chama(tela, bx, by, ang, k, 3.5, e['chama2'], t, vac, seed=2)
         # ---- 1º estágio (pode estar se afastando)
         if e.get('st1', True):
             ds, du, giro = e.get('sep', (0.0, 0.0, 0.0))
             ang1 = ang + giro
-            # centro do 1º estágio: gira em volta do seu meio (s=32)
-            pc = f(32 + ds, du)
+            pc = f(32 + ds, du)                       # gira em volta do seu meio (s=32)
             f1 = eixo(pc[0], pc[1], ang1, k, ref=32)
             if e.get('chama1', 0) > 0:
                 bx, by = f1(0, 0)
                 chama(tela, bx, by, ang1, k, 4.1, e['chama1'], t, vac, seed=1)
             self._estagio1(tela, f1, e, k)
         # ---- 2º estágio + coifa
-        sep_longe = (not e.get('st1', True)) or e.get('sep', (0.0,))[0] < -1.0
-        if e.get('chama2', 0) > 0 and sep_longe:
-            bx, by = f(53, 0)
-            chama(tela, bx, by, ang, k, 3.5, e['chama2'], t, vac, seed=2)
         self._estagio2(tela, f, e, k, sino=sep_longe)
 
     # ------------------------------------------------------------------
