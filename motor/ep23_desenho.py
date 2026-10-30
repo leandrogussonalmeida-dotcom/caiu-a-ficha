@@ -147,10 +147,11 @@ def prota(tela, cx, cy, r, t, achata=0.0, covo=0.0):
     tela.px(sx, sy + 1, AMARELO); tela.px(sx, sy - 1, AMARELO)
 
 
-def vapor_prota(tela, cx, cy, t, r=2.0):
+def vapor_prota(tela, cx, cy, t, r=2.6):
     """A nossa molécula como vapor: ponto de luz com aura (sem rosto)."""
     p = 1 + .2 * math.sin(t * 7.0)
-    aura(tela, cx, cy, r + .5, (r + 4.5) * p, CHAMA0, int(t * 8) % 2)
+    aura(tela, cx, cy, r + .5, (r + 5.5) * p, CHAMA0, int(t * 8) % 2)
+    aura(tela, cx, cy, r + .5, r + 2.5, AMARELO, int(t * 8 + 1) % 2)
     tela.disco(cx, cy, r + 1, PRETO)
     tela.disco(cx, cy, r, CIANO)
     tela.disco(cx - .4, cy - .4, max(.6, r * .5), BRANCO)
@@ -375,7 +376,7 @@ def arvore_grande(tela, cx, yb, t, h=150, xilema=0.0, fluxo=0.0):
     for dx, dy in ((-40, -18), (36, -22), (-14, -34), (18, -38)):
         linha_grossa(tela, cx, top + 6, cx + dx, top + dy, 4, PRETO)
         linha_grossa(tela, cx, top + 6, cx + dx, top + dy, 2.5, TRO1)
-    bolas = [(-48, -24, 17), (-24, -36, 20), (4, -44, 22), (30, -34, 19), (52, -22, 16), (-6, -20, 18), (22, -16, 15)]
+    bolas = [(-48, -18, 17), (-24, -27, 20), (4, -33, 22), (30, -26, 19), (52, -17, 16), (-6, -15, 18), (22, -12, 15)]
     for dx, dy, r in bolas:
         tela.disco(cx + dx, top + dy, r + 1, PRETO)
     for dx, dy, r in bolas:

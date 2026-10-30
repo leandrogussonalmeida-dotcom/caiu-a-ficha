@@ -143,9 +143,9 @@ LEGENDAS = {
     'descer': [
         (0.5, 7.4, "PARA DESCER, O PILOTO *PARA OS JATOS*.", "O AR ESFRIA DEVAGAR.", ('F8',)),
         (7.6, 14.4, "EMPUXO MENOR QUE O PESO:", "O BALÃO *DESCE*.", ('F4', 'F11')),
-        (14.6, 21.4, "PARA DESCER MAIS RÁPIDO, ELE PUXA A", "CORDA DO *PARAQUEDAS*, NO TOPO.", ('F3', 'F5')),
-        (21.6, 28.4, "O AR QUENTE ESCAPA POR CIMA E O", "AR FRIO ENTRA PELA BOCA.", ('F6',)),
-        (28.6, 35.4, "PERTO DO CHÃO, UM JATO CURTO", "*FREIA* A DESCIDA.", ('F11',)),
+        (14.6, 21.4, "PARA DESCER MAIS RÁPIDO, ELE ABRE O", "*PARAQUEDAS*: O AR QUENTE ESCAPA.", ('F3', 'F5', 'F6')),
+        (21.6, 28.4, "PARAQUEDAS FECHADO, O PILOTO JÁ", "COMEÇA A *FREAR* COM JATOS.", ('F11',)),
+        (28.6, 35.4, "PERTO DO CHÃO, A DESCIDA", "FICA *MAIS LENTA*.", ('F11',)),
         (35.6, 41.6, "E O CESTO DE VIME", "*AMORTECE* O POUSO.", ('F5',)),
     ],
     'vento': [
@@ -242,7 +242,7 @@ CORTES = [
          descricao='Cada jato do queimador solta 2 a 3 megawatts de calor. Quando o empuxo passa do peso, o balão decola. Voo calculado: 700 kg, ar a uns 97 °C na decolagem.'),
     dict(id='c5', de=('descer', 7.6), ate=('descer', 42.0), x=60, gancho=['COMO O BALÃO', 'DESCE?'],
          titulo='Como o balão desce: o paraquedas no topo',
-         descricao='Para descer mais rápido, o piloto puxa a corda do paraquedas, no topo do envelope: o ar quente escapa por cima e o ar frio entra pela boca. Perto do chão, um jato curto freia a descida.'),
+         descricao='Para descer mais rápido, o piloto puxa a corda do paraquedas, no topo do envelope: o ar quente escapa por cima e o ar frio entra pela boca. Depois, jatos do queimador freiam a descida até o pouso.'),
     dict(id='c6', de=('vento', 7.8), ate=('vento', 47.6), x=60, gancho=['BALÃO', 'TEM VOLANTE?'],
          titulo='Como um balão "dirige" sem leme? 🌬️',
          descricao='O balão não tem leme: vai para onde o vento vai. Mas o vento muda de direção em alturas diferentes, e o piloto sobe ou desce para pegar a camada certa.'),

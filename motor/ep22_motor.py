@@ -497,8 +497,9 @@ class Empuxo(Cena):
         if 7.6 <= t < 14.6 or t >= 28.6:
             u = (t * .8) % 1
             L = 30 if t < 14.6 else 44
-            seta(tela, cx - 64, my - 30 + 10, cx - 64, my - 30 - L + 10 - u * 3, VERDE, 4, 7)
-            tela.texto('EMPUXO' if t < 28.6 else '720 KG', cx - 64, my - 30 - L - 2, VERDE, tam=9, centro=True,
+            xs_ = cx - (56 if VERTICAL else 64)
+            seta(tela, xs_, my - 30 + 10, xs_, my - 30 - L + 10 - u * 3, VERDE, 4, 7)
+            tela.texto('EMPUXO' if t < 28.6 else '720 KG', xs_, my - 30 - L - 2, VERDE, tam=9, centro=True,
                        contorno=PRETO)
         if 14.6 <= t < 21.6:
             etiqueta(tela, 'AR FRIO: 3.380 KG', cx, my - 108 * k - 8, CIANO)
@@ -740,7 +741,7 @@ class Inflar(Cena):
         x1 = W if VERTICAL else PX0 - 8
         PAIS.desenhar(tela, 0, 0, t, x1)
         ch = chama_de(self.js, t)
-        xb = 236 if not VERTICAL else x_corte('inflar') + 140
+        xb = 236 if not VERTICAL else x_corte('inflar') + 118
         mx, my, a = self.boca(t, K, xb)
         f = self.fill(t)
         chao = int(PAIS.y_cesto()) + 1
@@ -828,10 +829,10 @@ class Subir(Cena):
 # ============================================================ descer
 class Descer(Cena):
     R = 1.5
-    H0 = 63.0
-    V0, V1 = 14.6, 27.5                 # paraquedas entreaberto (vídeo)
-    VMAX = .2
-    PILOTO = 24.0
+    H0 = 58.0
+    V0, V1 = 14.6, 21.5                 # paraquedas entreaberto (vídeo)
+    VMAX = .15
+    PILOTO = 21.5
 
     def preparar(self):
         R = self.R
@@ -957,8 +958,9 @@ class Vento(Cena):
                 if v > 0: tela.px(xx, yy - 1, BRANCO); tela.px(xx, yy + 1, BRANCO)
                 else: tela.px(xx - L, yy - 1, BRANCO); tela.px(xx - L, yy + 1, BRANCO)
             tela.ret(0, ya, x1, 1, cor)
-            tela.texto(nome, 8, ya + 4, cor, tam=9, contorno=PRETO)
-        tela.texto('QUASE SEM VENTO', 8, self.y_de(430), ACO4, tam=9, contorno=PRETO)
+            xl = x_corte('vento') + 4 if VERTICAL else 8
+            tela.texto(nome, xl, ya + 4, cor, tam=9, contorno=PRETO)
+        tela.texto('QUASE SEM VENTO', x_corte('vento') + 4 if VERTICAL else 8, self.y_de(430), ACO4, tam=9, contorno=PRETO)
         # chão
         dither(tela, 0, self.Y0, x1, PALCO_H - self.Y0, CAMPO1, CAMPO2)
         tela.ret(0, self.Y0, x1, 1, CAMPO0)
@@ -1046,30 +1048,33 @@ class Historia(Cena):
     def lisboa(self, tela, t):
         # uma sala: paredes, arcos, piso xadrez (genérico, sem pessoas)
         tela.buf[:PALCO_H] = FUNDO2
-        dither(tela, 0, 30, W, 120, CERAMICA, ACO4)
+        dither(tela, 0, 30, W, 120, CERAMICA, VIME0)
+        dither(tela, 0, 132, W, 18, OLEO1, OLEO0)
+        tela.ret(0, 131, W, 1, LATAO)
         tela.ret(0, 26, W, 6, OLEO0)
         tela.ret(0, 30, W, 1, LATAO)
         for x in range(40, W, 100):
-            tela.ret(x - 20, 60, 40, 80, FUNDO3)
+            tela.ret(x - 20, 60, 40, 70, FUNDO3)
             tela.disco(x, 60, 20, FUNDO3)
-            dither(tela, x - 16, 62, 32, 76, CEU2, CEU3)
+            dither(tela, x - 16, 62, 32, 66, CEU2, CEU3)
             tela.disco(x, 62, 16, CEU3)
-            tela.ret(x - 1, 46, 2, 94, OLEO0)
+            tela.ret(x - 1, 46, 2, 82, OLEO0)
             tela.ret(x - 16, 98, 32, 2, OLEO0)
         for j in range(8):
             yy = 150 + j * 7
             for i in range(-2, 34):
                 xx = i * 16 + (j % 2) * 8 - j * 2
-                tela.ret(xx, yy, 8, 7, ACO3 if (i + j) % 2 else ACO1)
+                tela.ret(xx, yy, 8, 7, TRACO if (i + j) % 2 else FUNDO3)
         tela.ret(0, 150, W, 1, PRETO)
         # o balãozinho: sobe até o teto
         cx = 210 if not VERTICAL else x_corte('historia') + 90
         u = suave((t - 1.5) / 10)
-        y = 140 - u * (140 - 46) + (math.sin(t * 6) * 1.5 if u >= .99 else 0)
+        y = 140 - u * (140 - 60) + (math.sin(t * 6) * 1.5 if u >= .99 else 0)
+        cx += math.sin(max(0.0, t - 11.5) * .5) * 26 * suave((t - 11.5) / 2)
         tela.disco(cx, y - 14, 13, PRETO)
-        tela.disco(cx, y - 14, 12, CERAMICA)
-        tela.disco(cx - 4, y - 18, 5, BRANCO)
-        dither(tela, cx - 11, y - 10, 22, 6, CERAMICA, ACO3)
+        tela.disco(cx, y - 14, 12, VIME0)
+        tela.disco(cx - 4, y - 18, 5, CERAMICA)
+        dither(tela, cx - 11, y - 10, 22, 6, VIME0, VIME1)
         tela.linha(cx - 9, y - 6, cx - 4, y + 4, ACO1)
         tela.linha(cx + 9, y - 6, cx + 4, y + 4, ACO1)
         tela.ret(cx - 5, y + 4, 10, 3, LATAO)
@@ -1088,19 +1093,19 @@ class Historia(Cena):
             pol(tela, [(x - 2, PAIS.hy - hh + 4), (x + 11, PAIS.hy - hh - 6), (x + 24, PAIS.hy - hh + 4)], MORRO1)
         cx = 210 if not VERTICAL else x_corte('historia') + 90
         sobe = suave((t - 1) / 12)
-        y = 150 - sobe * 55
-        # balão redondo, azul com enfeites dourados (desenho genérico)
-        R = 36
-        tela.disco(cx, y - R, R + 1, PRETO)
-        tela.disco(cx, y - R, R, D.AZUL[1])
-        tela.disco(cx - 9, y - R - 10, R * .55, D.AZUL[0])
-        dither(tela, cx + 10, y - R - 20, 24, 40, D.AZUL[1], D.AZUL[2])
-        for j in range(-3, 4):
-            tela.disco(cx + j * 9, y - R + 4 + abs(j) * 1.5, 2, AMARELO)
-        tela.anel(cx, y - R, R - 6, LATAO, .5)
-        pol(tela, [(cx - 16, y - 6), (cx + 16, y - 6), (cx + 10, y + 6), (cx - 10, y + 6)], D.AZUL[2])
-        tela.ret(cx - 10, y + 6, 20, 4, OLEO0)
-        D.chama(tela, cx, y + 5, .55, .8, t, 5)
+        y = 160 - sobe * 50
+        # balão de 1783: azul e dourado, com uma galeria em volta da boca (desenho genérico)
+        k = .8
+        my = y - 4
+        D.envelope(tela, cx, my, k, t, padrao=[D.AZUL, D.AZUL, D.AMAR, D.AZUL], banda=D.AMAR, rot=.1)
+        gx0, gx1 = cx - 13 * k, cx + 13 * k
+        tela.ret(gx0 - 1, my + 8 * k - 1, gx1 - gx0 + 2, 5, PRETO)
+        tela.ret(gx0, my + 8 * k, gx1 - gx0, 3, OLEO1)
+        tela.ret(gx0, my + 8 * k, gx1 - gx0, 1, VIME0)
+        for xx in (gx0 + 2, gx1 - 3):
+            tela.linha(xx, my + 8 * k, cx + (xx - cx) * .6, my + 2, OLEO0)
+        tela.ret(cx - 3, my + 6 * k, 6, 3, ACO1)
+        D.chama(tela, cx, my + 6 * k, .5, .8, t, 5)
         if t >= 7.0:
             etiqueta(tela, '21/11/1783: PRIMEIRO VOO LIVRE', W // 2, 168, BRANCO)
 

@@ -27,7 +27,7 @@ from ep11_desenho import (CEU0, CEU1, CEU2, GRAMA0, GRAMA1, GRAMA2, TERRA0, TERR
                           AGP, AGM, AGC, ESPUMA, NUVEM0, NUVEM1,
                           rotulo, fio, halo, caixa, grad_v, agua, chuva, morro, interp, ao_longo, arvore, lerp)
 from ep23_desenho import (CEUD0, CEUD1, CEUD2, CEUD3, SOL0, SOL1, MAR0, MAR1, MAR2, FOL0, FOL1, FOL2, FOL3, FOL4,
-                          TRO0, TRO1, TRO2, SOLO0, SOLO1, SOLO2, SAL0, SAL1, NUVD0, NUVD1, NUVD2, AND0, AND1, AND2,
+                          TRO0, TRO1, TRO2, SOLO0, SOLO1, SOLO2, SAL0, SAL1, NUVD0, NUVD1, NUVD2, AND0, AND1, AND2, CER0, CER1,
                           ETAPAS, um, seta, aura, gota, prota, vapor_prota, rastro, gotinha, molecula, sal,
                           ceu_dia, sol, mar, nuvem_dia, vento, copa, lupa, recortar_disco, termometro,
                           fmt_num, fmt_alt, fmt_temp, fmt_mm, fmt_dias)
@@ -49,6 +49,11 @@ BASE_NUVEM = 1000.0           # base da nuvem neste exemplo (m)
 
 
 def fase(t, a, b): return um((t - a) / max(1e-6, b - a))
+
+
+def dv(n=36):
+    """No Short a legenda cobre o pé do palco: o que fica embaixo sobe."""
+    return -n if VERTICAL else 0
 
 
 def temp_de(alt):
@@ -178,10 +183,11 @@ class Gancho(Cena):
 
     def folha(self, tela, t):
         grad_v(tela, 0, 0, W, PALCO_H, [FOL0, FOL1, FOL0, FOL0])
-        for k in range(7):                                  # folhas do fundo (fora de foco)
-            cx = (k * 83 + 30) % W; cy = 40 + (k * 47) % 140
-            tela.disco(cx, cy, 22 + (k % 3) * 6, FOL1)
-            LG.dither(tela, cx - 10, cy - 6, 20, 12, FOL1, FOL2)
+        for k in range(9):                                  # folhas do fundo (fora de foco)
+            cx = (k * 83 + 30) % W + math.sin(t * .7 + k) * 2; cy = 30 + (k * 47) % 130
+            r = 20 + (k % 3) * 7
+            aura(tela, cx, cy, 0, r, FOL1, k % 2)
+            aura(tela, cx - r * .25, cy - r * .3, 0, r * .55, FOL2, k % 2)
         chuva(tela, 0, W, 0, PALCO_H, t, n=50, vel=120, cor=FOL3, seed=4)
         # a folha grande, em diagonal
         pts = [(60, 176), (150, 140), (250, 132), (340, 146), (420, 178), (330, 196), (200, 194), (110, 190)]
@@ -199,7 +205,7 @@ class Gancho(Cena):
             rastro(tela, self.p_gota, t, n=8, dt=.05)
             x, y = self.p_gota(t)
             prota(tela, x, y, 10, t, achata=.15)
-            if t > .8: self.rot(tela, 'A NOSSA GOTA', int(x) + 22, int(y) - 20, AMARELO, alvo=(x + 9, y - 6))
+            if t > .8: self.rot(tela, 'A NOSSA GOTA', int(x) + 22, max(4, int(y) - 20), AMARELO, alvo=(x + 9, y - 6))
         else:
             u = t - self.T_BATE
             x0, y0 = self.p_gota(self.T_BATE)
@@ -261,10 +267,10 @@ class Titulo(Cena):
                 c = cor if t > 2.0 + k * .3 else FUNDO2
                 tela.ret(x, 146, 14, 14, PRETO); tela.ret(x + 1, 147, 12, 12, c)
                 tela.texto(str(k + 1), x + 7, 150, PRETO, tam=9, centro=True)
-        fn = lambda tt: (60 + 4 * math.sin(tt * 2), 30 + (tt * 34) % 160)
+        fn = lambda tt: (26 + 4 * math.sin(tt * 2), 30 + (tt * 34) % 160)
         rastro(tela, fn, t, n=7, dt=.05)
         prota(tela, *fn(t), 6, t)
-        gota(tela, 420, 30 + (t * 34 + 80) % 160, 4)
+        gota(tela, 456, 30 + (t * 34 + 80) % 160, 4)
 
     def sons(self, fx):
         for k in range(9):
@@ -284,7 +290,7 @@ class Oceano(Cena):
         """Depois de escapar: o vapor sobe devagar e o vento o puxa para a terra (esquerda)."""
         if t < self.T_ESCAPA: return None
         u = t - self.T_ESCAPA
-        return 150 - 2.2 * u - 3 * math.sin(u * .9), SUP - 3 - 3.6 * u + 2 * math.sin(u * 1.7)
+        return 150 - 2.6 * u - 3 * math.sin(u * .9), SUP - 3 - 3.4 * u + 2 * math.sin(u * 1.7)
 
     def desenhar(self, tela, t, tg):
         ceu_dia(tela, SUP + 4)
@@ -316,31 +322,33 @@ class Oceano(Cena):
             u = ((t + k * 1.37) % per) / per
             x = (k * 29 + 13) % 280 + 6 - u * 40
             y = SUP - 2 - u * 100 + math.sin(t * 2 + k) * 2
-            if (k + int(t * 6)) % 3 and y > 6: tela.px(x, y, ESPUMA if u < .5 else CEUD3)
-        if t > 19.5 and not VERTICAL:
-            self.rot(tela, 'VAPOR (PINTADO)', 160, 70, ESPUMA, alvo=(140, 86))
+            if y > 6 and (k + int(t * 6)) % 5:
+                tela.disco(x, y, 1.3 if u < .6 else .8, ESPUMA if u < .6 else CEUD3)
+                tela.px(x, y, BRANCO)  # vapor do mar
+        if 19.5 < t < 26 and not VERTICAL:
+            self.rot(tela, 'VAPOR (PINTADO)', 196, 64, ESPUMA)
         # a nossa molécula, já vapor
         p = self.p_gota(t)
         if p:
             rastro(tela, self.p_gota, t, n=12, dt=.12, r0=1.6)
             vapor_prota(tela, p[0], p[1], t)
-            if t > 15 and p[1] > 14:
+            if 15 < t < 25.9 and p[1] > 14:
                 self.rot(tela, 'A NOSSA MOLÉCULA', int(p[0]) + 12, int(p[1]) - 18, AMARELO, alvo=(p[0] + 4, p[1] - 4))
         if t < 22.0:
             self.lupa(tela, t)
         if not VERTICAL:
             self.rot(tela, 'BRASIL', 6, 74, GRAMA2)
-            self.rot(tela, 'OCEANO ATLÂNTICO', 70, 190 if t < 22 else 186, MAR2)
+            if t < 25.9: self.rot(tela, 'OCEANO ATLÂNTICO', 70, 190 if t < 22 else 186, MAR2)
             if t > 6.7: self.rot(tela, 'SOL', 230, 48, SOL0, alvo=(244, 38))
         # números do planeta
         if t >= 25.9:
             self.barras(tela, t)
         tam = 'MOLÉCULA' if t < self.T_ESCAPA else 'VAPOR'
-        self.painel(tela, t, alt='0 M' if t < self.T_ESCAPA else fmt_alt(max(0, (SUP - self.p_gota(t)[1]) * 2)),
+        self.painel(tela, t, alt='0 M' if t < self.T_ESCAPA else fmt_alt(min(80, max(0, (SUP - self.p_gota(t)[1]) * .95))),
                     temp=fmt_temp(T_MAR), tam=tam, dias=fmt_dias(0))
 
     def barras(self, tela, t):
-        x0, y0, w = 14, 10, 150
+        x0, y0, w = 120, 132, 150
         n = 2 if t >= 31.9 else 1
         painel(tela, x0, y0, w + 16, 22 + n * 24, borda=MAR2)
         itens = [('EVAPORAÇÃO NO MAR', 86, 25.9, MAR2), ('ÁGUA NOS OCEANOS', 97, 31.9, AGC)]
@@ -366,16 +374,16 @@ class Oceano(Cena):
         for x in range(int(cx - r), int(cx + r)):
             tela.px(x, sup + round(math.sin(x * .2 + t * 2)), MAR2)
         calor = .6 + 2.6 * fase(t, 6.0, 13.0)
-        for i in range(4):
-            for j in range(5):
-                bx, by = cx - 30 + j * 15 + (i % 2) * 7, sup + 9 + i * 10
-                k = i * 5 + j
+        for i in range(3):
+            for j in range(4):
+                bx, by = cx - 27 + j * 18 + (i % 2) * 8, sup + 10 + i * 13
+                k = i * 4 + j
                 a = math.sin(t * (5 + k % 3) + k * 1.9) * calor
                 b = math.cos(t * (6 + k % 4) + k * 1.3) * calor
-                if (i, j) == (0, 2): continue
-                molecula(tela, bx + a, by + b, t * 1.5 + k, .75, AGC)
+                if (i, j) == (0, 1): continue
+                molecula(tela, bx + a, by + b, t * 1.5 + k, 1.0, AGC)
         # a nossa
-        bx, by = cx, sup + 9
+        bx, by = cx - 9 + 8, sup + 10
         if t < self.T_ESCAPA:
             a = math.sin(t * 9) * calor; b = math.cos(t * 11) * calor
             molecula(tela, bx + a, by + b, t * 3, .85, prota_=True, t=t)
@@ -422,6 +430,10 @@ class Subida(Cena):
         for k in range(7):
             y = 30 + k * 20
             vento(tela, 292, y, 292, t + k * .7, CEUD3 if k % 2 else BRANCO, vel=60 + k * 6)
+            vento(tela, 292, y + 1, 292, t + k * .7, CEUD3 if k % 2 else BRANCO, vel=60 + k * 6)
+            u = ((t + k * .7) * (60 + k * 6)) % (292 + 30)
+            xa = 292 - (u - 30) - 17
+            if 4 < xa < 288: seta(tela, int(xa), y + 1, -1, 0, BRANCO, 3)
         # régua da altitude
         for a in range(0, 1501, 100):
             y = Y0_SUB - a / 1000 * PX_KM
@@ -433,8 +445,10 @@ class Subida(Cena):
         x, y = self.p_gota(t)
         R = 15 + 7 * (self.alt(t) - 80) / 920
         satura = fase(t, 31.5, 34.0)
-        aura(tela, x, y, R - 2, R, BRANCO if satura > .5 else CEUD3, int(t * 6) % 2)
-        tela.anel(x, y, R, ACO4 if satura < .5 else NUVD2, .5)
+        aura(tela, x, y, 0, R, CEUD3, int(t * 2) % 2)
+        aura(tela, x - R * .3, y - R * .3, 0, R * .45, BRANCO, int(t * 2) % 2)
+        tela.anel(x, y, R + .5, PRETO, .5)
+        tela.anel(x, y, R - .5, BRANCO if satura > .5 else ESPUMA, .5)
         for k in range(9):
             a = k * .7 + t * .8
             rr = (k * 37 % 11) / 11 * (R - 4)
@@ -464,7 +478,7 @@ class Subida(Cena):
         if t > 6.7: self.rot(tela, 'AR QUENTE E ÚMIDO', int(x - 50), int(y + R + 5), ESPUMA)
         if 13.1 < t < 25.7: self.rot(tela, 'O AR SE EXPANDE', int(x - 44), int(y - R - 14), BRANCO)
         if t >= 19.5 and t < 31.9:
-            self.caixa_txt(tela, [('SOBE 1 KM:', 9, BRANCO), ('-10 °C', 17, CIANO)], 40, 22)
+            self.caixa_txt(tela, [('SOBE 1 KM:', 9, BRANCO), ('-10 °C', 17, CIANO)], 200, 104)
         if not VERTICAL:
             self.rot(tela, 'MAR', 250, Y0_SUB + 10, MAR2)
             self.rot(tela, 'CONTINENTE', 60, Y0_SUB + 12, FOL4)
@@ -551,7 +565,6 @@ class Nucleo(Cena):
             tela.disco(cx - rc * .35, cy - rc * .35, rc * .28, AGC)
             tela.disco(cx - rc * .45, cy - rc * .45, max(1, rc * .1), ESPUMA)
         sal(tela, cx, cy, 8 * z, t)
-        if t > 1.5 and z > .5: self.rot(tela, 'GRÃO DE SAL', cx + 22, cy + 46, SAL0, alvo=(cx + 6, cy + 4))
         # a nossa molécula
         if t < self.T_GRUDA - 1.2:
             a = t * .55 + 1.0
@@ -563,10 +576,14 @@ class Nucleo(Cena):
             ex, ey = cx - 6 * z, cy - 6 * z - (self.raio_casca(t) * z - 12 * z) * .5
             px, py = lerp(sx, ex, u), lerp(sy, ey, u)
         molecula(tela, px, py, t * 3, .9 * max(.5, z), prota_=True, t=t)
-        if t > 3 and t < self.T_GRUDA + 3:
-            self.rot(tela, 'A NOSSA MOLÉCULA', int(px) - 40, int(py) - 22, AMARELO)
         # calor da condensação
         if 25.9 <= t < 31.5:
+            for k in range(10):                               # calor saindo sempre
+                a = k * math.pi / 5 + .3
+                u = (t * .8 + k * .37) % 1.0
+                d = rc + 3 + u * 22
+                x, y = cx + math.cos(a) * d, cy + math.sin(a) * d
+                tela.px(x + math.sin(u * 9) * 1.5, y, CHAMA1 if u < .5 else LARANJA)
             for i, b in enumerate(self.beats(25.9, 31.5)):
                 if b <= t < b + .6:
                     u = (t - b) / .6
@@ -575,7 +592,6 @@ class Nucleo(Cena):
                         d = rc + 4 + u * 18
                         x, y = cx + math.cos(a) * d, cy + math.sin(a) * d
                         tela.px(x, y, CHAMA1); tela.px(x + 1, y - 1, LARANJA)
-            self.rot(tela, 'CALOR', cx + 50, cy - 60, CHAMA1)
         # zoom out: outras gotinhas formando a nuvem
         if t > 31.0:
             for k in range(26):
@@ -583,9 +599,13 @@ class Nucleo(Cena):
                 gotinha(tela, cx + math.cos(a) * rr * (1.2 - z), cy + math.sin(a) * rr * (1.2 - z), 3 * (1 - z) + .5)
         recortar_disco(tela, cx, cy, R, fundo)
         lupa(tela, cx, cy, R)
+        if t > 1.5 and z > .5: self.rot(tela, 'GRÃO DE SAL', cx + 30, cy + 28, SAL0, alvo=(cx + 7, cy + 5))
+        if t > 3 and t < self.T_GRUDA + 3:
+            self.rot(tela, 'A NOSSA MOLÉCULA', int(px) - 44, int(py) - 22, AMARELO)
+        if 25.9 <= t < 31.5: self.rot(tela, 'CALOR', cx + 44, cy - 58, CHAMA1)
         # régua do tamanho
         if 19.5 <= t < 31:
-            y = cy + R - 14
+            y = cy + R - 14 + dv()
             w = int(2 * self.raio_casca(t) * z)
             tela.ret(cx - w // 2, y, w, 1, AMARELO)
             tela.ret(cx - w // 2, y - 2, 1, 5, AMARELO); tela.ret(cx + w // 2, y - 2, 1, 5, AMARELO)
@@ -654,26 +674,33 @@ class Colisao(Cena):
         rastro(tela, self.p_gota, t, n=8, dt=.05, r0=R * .4)
         prota(tela, gx, gy, R, t, achata=.1 * fase(t, self.TC1, self.TC1 + 2))
         if t < 6.5:
-            self.rot(tela, 'GOTINHA DE NUVEM', 66, 150, BRANCO, alvo=(98, 166))
-            self.rot(tela, 'CAI A ~1 CM/S', 66, 140, AMARELO)
+            gx2, gy2 = 100 + math.sin(t) * 2, 172 + dv() + t * .3
+            aura(tela, gx2, gy2, 2, 6, CHAMA0, int(t * 6) % 2)
+            gotinha(tela, gx2, gy2, 2.0, AGC, AGM)
+            self.rot(tela, 'GOTINHA DE NUVEM', 66, 146 + dv(), BRANCO, alvo=(gx2, gy2 - 3))
+            self.rot(tela, 'CAI A ~1 CM/S', 66, 134 + dv(), AMARELO)
         if 6.7 <= t < 13 and gy > 20:
             self.rot(tela, 'A NOSSA GOTA', int(gx) + 20, int(gy) - 30, AMARELO, alvo=(gx + R * .7, gy - R * .7))
         # contador
         if t >= self.TC0 and t < 32.5:
             n = int(self.conta(t))
-            self.caixa_txt(tela, [('GOTINHAS JUNTADAS', 9, BRANCO), (fmt_num(n), 17, AMARELO)], 146, 6, centro=True)
+            self.caixa_txt(tela, [('GOTINHAS JUNTADAS', 9, BRANCO), (fmt_num(n), 17, AMARELO)], 146, 6 + (12 if VERTICAL else 0), centro=True)
         if 25.9 <= t < 31.9:
             self.comparacao(tela, t)
         if not VERTICAL and t >= 13.1 and t < 25.9:
-            self.rot(tela, 'MAIOR CAI MAIS RÁPIDO', 186, 150, CIANO)
-            seta(tela, 238, 140, 0, 1, CIANO, 5)
+            gx, gy = self.p_gota(t)
+            R = self.raio(t)
+            self.rot(tela, 'CAI MAIS RÁPIDO', int(gx + R + 14), int(gy + R + 4), CIANO)
+            for k in range(3):
+                yy = gy + R + 2 + ((t * 20 + k * 6) % 18)
+                seta(tela, int(gx + R + 8), int(yy), 0, 1, CIANO, 3)
         mm = .02 * self.conta(t) ** (1 / 3)
         altm = 1400 - 400 * ease(fase(t, self.T_CAI, 36))
         self.painel(tela, t, alt=fmt_alt(altm), temp=fmt_temp(temp_de(altm)), tam=fmt_mm(mm),
                     dias=fmt_dias(2 if t < 20 else 3))
 
     def comparacao(self, tela, t):
-        x0, y0 = 74, 140
+        x0, y0 = 74, 140 + dv()
         painel(tela, x0, y0, 146, 62, borda=AMARELO)
         gotinha(tela, x0 + 18, y0 + 30, 1.5, AGC, AGM)
         tela.texto('0,02', x0 + 18, y0 + 40, BRANCO, tam=9, centro=True, contorno=PRETO)
@@ -722,22 +749,24 @@ class Queda(Cena):
         gx, gy = self.p_gota(t)
         # forma de lágrima? não
         if t < 6.5:
-            E11.gota(tela, 80, 154, 2.4, t, prota=False)
+            E11.gota(tela, 80, 154 + dv(24), 2.4, t, prota=False)
             xa = fase(t, 1.5, 2.0)
             if xa > 0:
-                linha_grossa(tela, 66, 132, 66 + 28 * xa, 132 + 32 * xa, 3, VERMELHO)
-                linha_grossa(tela, 94, 132, 94 - 28 * xa, 132 + 32 * xa, 3, VERMELHO)
-            self.rot(tela, 'LÁGRIMA? NÃO', 54, 178, VERMELHO)
-            gota(tela, 214, 154, 8)
+                linha_grossa(tela, 66, 132 + dv(24), 66 + 28 * xa, 132 + dv(24) + 32 * xa, 3, VERMELHO)
+                linha_grossa(tela, 94, 132 + dv(24), 94 - 28 * xa, 132 + dv(24) + 32 * xa, 3, VERMELHO)
+            self.rot(tela, 'LÁGRIMA? NÃO', 54, 178 + dv(24), VERMELHO)
+            gota(tela, 214, 154 + dv(24), 8)
             if t > 2.5:
-                tela.linha(204, 170, 210, 176, VERDE); tela.linha(210, 176, 224, 162, VERDE)
-                self.rot(tela, 'DE VERDADE', 186, 178, VERDE)
+                linha_grossa(tela, 226, 150 + dv(24), 231, 156 + dv(24), 2.5, VERDE); linha_grossa(tela, 231, 156 + dv(24), 241, 142 + dv(24), 2.5, VERDE)
+                self.rot(tela, 'DE VERDADE', 186, 178 + dv(24), VERDE)
         elif t < 25.9:
             self.formas(tela, t)
         elif t < 31.9:
-            self.caixa_txt(tela, [('VELOCIDADE', 9, BRANCO), ('6,5 M/S', 17, AMARELO), ('= 23 KM/H', 9, BRANCO)], 146, 128, centro=True)
-        else:
+            self.caixa_txt(tela, [('VELOCIDADE', 9, BRANCO), ('6,5 M/S', 17, AMARELO), ('= 23 KM/H', 9, BRANCO)], 146, 128 + dv(24), centro=True)
+        elif t < 37.8:
             self.corrida(tela, t)
+        else:
+            self.rot(tela, 'FLORESTA AMAZÔNICA', 146, 150, FOL4, centro=True)
         rastro(tela, self.p_gota, t, n=6, dt=.05)
         # linhas de vento grudadas na gota
         for k in range(5):
@@ -753,12 +782,12 @@ class Queda(Cena):
 
     def formas(self, tela, t):
         """A régua das formas: redonda, pão de hambúrguer, rasgando."""
-        y = 160
-        painel(tela, 60, 118, 172, 84, borda=ACO2)
-        tela.texto('FORMA DA GOTA CAINDO', 146, 122, ACO3, tam=9, centro=True, contorno=PRETO)
-        gota(tela, 84, y, 5)
-        tela.texto('PEQUENA', 84, y + 18, BRANCO, tam=9, centro=True, contorno=PRETO)
-        tela.texto('REDONDA', 84, y + 28, AGC, tam=9, centro=True, contorno=PRETO)
+        y = 160 + dv(24)
+        painel(tela, 57, 118 + dv(24), 178, 84, borda=ACO2)
+        tela.texto('FORMA DA GOTA CAINDO', 146, 122 + dv(24), ACO3, tam=9, centro=True, contorno=PRETO)
+        gota(tela, 82, y, 5)
+        tela.texto('PEQUENA', 82, y + 18, BRANCO, tam=9, centro=True, contorno=PRETO)
+        tela.texto('REDONDA', 82, y + 28, AGC, tam=9, centro=True, contorno=PRETO)
         if t >= 13.1:
             a = .55 + .05 * math.sin(t * 6)
             gota(tela, 144, y, 11, achata=a)
@@ -767,22 +796,22 @@ class Queda(Cena):
         if t >= 19.5:
             u = ((t - 19.5) % 3.0) / 3.0
             if u < .55:
-                gota(tela, 204, y, 12 + 3 * u, achata=.7, covo=u * 1.2)
+                gota(tela, 210, y, 12 + 3 * u, achata=.7, covo=u * 1.2)
             else:
                 v = (u - .55) / .45
                 for k in range(5):
                     a = -math.pi / 2 + (k - 2) * .55
-                    gota(tela, 204 + math.cos(a) * 14 * v, y + 2 - math.sin(a) * 6 * v + 10 * v, 3 + (k % 2), .2)
-            tela.texto('GRANDE', 204, y + 18, BRANCO, tam=9, centro=True, contorno=PRETO)
-            tela.texto('SE PARTE', 204, y + 28, VERMELHO, tam=9, centro=True, contorno=PRETO)
+                    gota(tela, 210 + math.cos(a) * 14 * v, y + 2 - math.sin(a) * 6 * v + 10 * v, 3 + (k % 2), .2)
+            tela.texto('GRANDE', 210, y + 18, BRANCO, tam=9, centro=True, contorno=PRETO)
+            tela.texto('SE PARTE', 210, y + 28, VERMELHO, tam=9, centro=True, contorno=PRETO)
 
     def corrida(self, tela, t):
         """1 km de queda: a gota de 2 mm leva ~2,5 min; a gotinha, mais de 1 dia."""
-        painel(tela, 60, 118, 172, 84, borda=ACO2)
-        tela.texto('PARA CAIR 1 KM', 146, 122, ACO3, tam=9, centro=True, contorno=PRETO)
+        painel(tela, 60, 118 + dv(24), 172, 84, borda=ACO2)
+        tela.texto('PARA CAIR 1 KM', 146, 122 + dv(24), ACO3, tam=9, centro=True, contorno=PRETO)
         u = ease(fase(t, 32.2, 35.5))
         for j, (nm, val, f, cor) in enumerate((('GOTA 2 MM', '~2,5 MIN', 1.0, AGC), ('GOTINHA', '+ DE 1 DIA', .0016, NUVD2))):
-            y = 140 + j * 28
+            y = 140 + dv(24) + j * 28
             tela.texto(nm, 68, y, BRANCO, tam=9, contorno=PRETO)
             tela.texto(val, 226, y, AMARELO, tam=9, centro='d', contorno=PRETO)
             tela.ret(68, y + 11, 156, 7, PRETO)
@@ -803,20 +832,20 @@ class Queda(Cena):
 YB = 150                      # chão (base do tronco)
 TX = 146                      # x do tronco
 FOLHA_ALVO = (186, 26)        # folha onde fica o estômato
-LUPA_F = (196, 120, 38)
+LUPA_F = (194, 118, 46)
 
 
 class Floresta(Cena):
     K = 5
     CAM = [(0.0, 128, -12), (2.6, 116, 28), (3.4, 112, 36), (4.2, 104, 60), (5.0, 100, 70),
-           (6.4, 98, YB - 1), (9.5, 106, 164), (10.5, 110, 168), (13.1, TX, YB), (19.0, TX, YB - 106),
+           (6.4, 98, YB - 1), (9.5, 106, 164), (10.5, 110, 168), (13.1, TX, YB), (19.0, TX, YB - 100),
            (21.0, FOLHA_ALVO[0], FOLHA_ALVO[1])]
 
     def p_gota(self, t):
         if t >= 21.0:
             if t < 28.0: return FOLHA_ALVO
             u = t - 28.0
-            return FOLHA_ALVO[0] - 1.5 * u + 2 * math.sin(u), FOLHA_ALVO[1] - 3.2 * u
+            return FOLHA_ALVO[0] - 2.2 * u + 3 * math.sin(u * .8), FOLHA_ALVO[1] + 4 - 1.1 * u
         for (ta, xa, ya), (tb, xb, yb) in zip(self.CAM, self.CAM[1:]):
             if ta <= t < tb:
                 u = (t - ta) / (tb - ta)
@@ -845,7 +874,7 @@ class Floresta(Cena):
             a = fase(t, 6.4, 8.0) * (1 - fase(t, 12.0, 13.5))
             aura(tela, 104, 162, 0, 6 + 8 * a, AGM, 0)
         E11.arvore  # (só leitura)
-        D.arvore_grande(tela, TX, YB, t, h=106, xilema=fase(t, 12.0, 13.0), fluxo=1.0 if t > 13 else 0.0)
+        D.arvore_grande(tela, TX, YB, t, h=100, xilema=fase(t, 12.0, 13.0), fluxo=1.0 if t > 13 else 0.0)
         # a protagonista
         x, y = self.p_gota(t)
         if t < 6.4:
@@ -862,14 +891,16 @@ class Floresta(Cena):
         # vapor saindo de toda a floresta
         if t > 26.0:
             dens = fase(t, 26, 30) + fase(t, 37.9, 40)
-            for k in range(int(26 * dens)):
+            for k in range(int(40 * dens)):
                 per = 5.0 + k % 4
                 u = ((t + k * .73) % per) / per
-                px = (k * 37) % 292 - u * 20
-                py = 60 - u * 70 + (k * 13) % 30
-                if py > 2 and (k + int(t * 8)) % 2: tela.px(px, py, ESPUMA)
+                px = (k * 37) % 292 - u * 24
+                py = 96 - u * 90 + (k * 13) % 24
+                if py > 2 and (k + int(t * 8)) % 4:
+                    tela.disco(px, py, 1.3 if u < .6 else .8, ESPUMA if u < .6 else CEUD3)
+                    tela.px(px, py, BRANCO)
         # rótulos
-        if 6.7 <= t < 13.1: self.rot(tela, 'RAIZ', 70, 186, TRO2, alvo=(112, 168))
+        if 6.7 <= t < 13.1: self.rot(tela, 'RAIZ', 70, 186 + dv(), TRO2, alvo=(112, 168))
         if 13.1 <= t < 19.5: self.rot(tela, 'XILEMA', 160, 100, ESPUMA, alvo=(TX + 1, 104))
         if t < 6.4 and t > .8:
             self.rot(tela, 'A NOSSA GOTA', int(x) - 80, int(y) - 4, AMARELO, alvo=(x - 6, y))
@@ -880,12 +911,12 @@ class Floresta(Cena):
         if 37.9 <= t < 43.8:
             n = int(1000 * ease(fase(t, 38.1, 42.5)))
             self.caixa_txt(tela, [('ESTA ÁRVORE, HOJE:', 9, BRANCO),
-                                  (('+ DE ' if n >= 1000 else '') + f"{fmt_num(n)} L", 17, ESPUMA)], 146, 158, centro=True)
+                                  (('+ DE ' if n >= 1000 else '') + f"{fmt_num(n)} L", 17, ESPUMA)], 146, 158 + dv(), centro=True)
         dias = 3 + int(9 * fase(t, 6.4, 13.1))
-        tam = '2 MM' if t < 6.4 else ('MOLÉCULA' if t >= 21 else 'MISTURADA')
-        if t >= 28: tam = 'VAPOR'
+        forma_ = ('GOTA DE 2 MM' if t < 6.4 else 'ÁGUA DO SOLO' if t < 13.1 else 'SEIVA' if t < 21
+                  else 'MOLÉCULA' if t < 26 else 'VAPOR')
         self.painel(tela, t, linhas=[('ONDE ESTÁ', self.onde(t), FOL4), ('TEMPERATURA', fmt_temp(T_MAR), CHAMA1),
-                                     ('TAMANHO DA GOTA', tam, AGC), ('DIAS DE VIAGEM', fmt_dias(dias), AMARELO)])
+                                     ('FORMA DA ÁGUA', forma_, AGC), ('DIAS DE VIAGEM', fmt_dias(dias), AMARELO)])
 
     def lupa(self, tela, t):
         cx, cy, r = LUPA_F
@@ -895,7 +926,7 @@ class Floresta(Cena):
         fundo = tela.buf[:PALCO_H].copy()
         LG.dither(tela, cx - r, cy - r, 2 * r, 2 * r, CEUD3, CEUD2)
         abre = fase(t, 21.5, 24.5)
-        sx, sy = D.folha_corte(tela, int(cx - 36), int(cy - 30), 72, 34, t, abre)
+        sx, sy = D.folha_corte(tela, int(cx - 44), int(cy - 34), 88, 40, t, abre)
         if t < 26.0:
             u = fase(t, 20.4, 25.0)
             mx, my = lerp(cx - 18, sx, u), lerp(cy - 20, sy - 6, u)
@@ -910,11 +941,11 @@ class Floresta(Cena):
         recortar_disco(tela, cx, cy, r, fundo)
         lupa(tela, cx, cy, r, alvo=FOLHA_ALVO)
         if r > 30:
-            self.rot(tela, 'ESTÔMATO', int(cx - 24), int(cy + r - 13), FOL4)
-            self.rot(tela, 'FOLHA', int(cx - 14), int(cy - r + 4), FOL4)
+            self.rot(tela, 'ESTÔMATO', int(cx - 24), int(cy + r - 16), FOL4)
+            self.rot(tela, 'FOLHA POR DENTRO', int(cx - 44), int(cy - r + 3), FOL4)
 
     def barra(self, tela, t):
-        x0, y0, w = 62, 160, 168
+        x0, y0, w = 62, 160 + dv(), 168
         painel(tela, x0 - 6, y0 - 6, w + 12, 46, borda=ESPUMA)
         tela.texto('ÁGUA QUE A RAIZ PUXA', x0, y0 - 2, BRANCO, tam=9, contorno=PRETO)
         u = ease(fase(t, 32.2, 34.5))
@@ -966,13 +997,20 @@ class Rios(Cena):
         # o rio voador: faixa pontilhada que corre
         rev = um(.38 + .62 * ease(fase(t, 1.0, 26.0)))
         n = 120
-        for i in range(int(n * rev)):
+        for i in range(0, int(n * rev), 2):
             u = i / n
             x, y = caminho(pts, u)
-            w = 4 + 2 * math.sin(u * 9)
-            if (i + int(t * 12)) % 3 != 0:
-                for dy in range(-int(w), int(w) + 1, 2):
-                    tela.px(x + (dy % 3) - 1, y + dy, ESPUMA if abs(dy) < w * .5 else CIANO)
+            w = 4.5 + 1.5 * math.sin(u * 9)
+            aura(tela, x, y, 0, w, CIANO, 0)
+        for i in range(0, int(n * rev), 2):
+            x, y = caminho(pts, i / n)
+            aura(tela, x, y, 0, 2.2, ESPUMA, 1)
+        for k in range(40):                                     # correnteza
+            u = ((t * .03 + k / 40) % 1.0)
+            if u > rev: continue
+            x, y = caminho(pts, u)
+            off = ((k * 5) % 7 - 3)
+            tela.px(x, y + off, BRANCO); tela.px(x - 1, y + off, ESPUMA)
         for k in range(14):                                     # bolinhas de vapor correndo
             u = ((t * .045 + k / 14) % 1.0) * rev
             x, y = caminho(pts, u)
@@ -1008,15 +1046,15 @@ class Rios(Cena):
         if 25.9 <= t < 39.4:
             self.barras(tela, t, M)
         dias = 12 + int(6 * fase(t, 0, 45))
-        onde = 'AMAZÔNIA' if t < 17 else ('ANDES' if t < 21 else ('CENTRO-OESTE' if t < 39.5 else 'SUDESTE'))
+        onde = 'AMAZÔNIA' if t < 18 else ('ANDES' if t < 24 else ('CENTRO-OESTE' if t < 40 else 'SUDESTE'))
         self.painel(tela, t, linhas=[('ONDE ESTÁ', onde, ESPUMA),
                                      ('RIO VOADOR', '20 BI T/DIA' if t >= 25.9 else '?', ESPUMA if t >= 25.9 else ACO2),
                                      ('RIO AMAZONAS', '17 BI T/DIA' if t >= 32.7 else '?', AGC if t >= 32.7 else ACO2),
                                      ('DIAS DE VIAGEM', fmt_dias(dias), AMARELO)])
 
     def barras(self, tela, t, M):
-        x0 = 150 if not VERTICAL else 124
-        y0, w = 150, 110
+        x0 = 150 if not VERTICAL else 120
+        y0, w = 150 + dv(), (110 if not VERTICAL else 104)
         painel(tela, x0 - 6, y0 - 6, w + 12, 54, borda=ESPUMA)
         tela.texto('TONELADAS DE ÁGUA/DIA', x0, y0 - 2, BRANCO, tam=9, contorno=PRETO)
         for j, (nm, v, ta, cor) in enumerate((('NO CÉU', 20, 25.9, ESPUMA), ('NO RIO', 17, 32.7, AGC))):
@@ -1026,7 +1064,7 @@ class Rios(Cena):
             tela.texto(nm, x0, y + 1, BRANCO, tam=9, contorno=PRETO)
             tela.ret(x0 + 40, y, int((w - 40) * f), 8, PRETO)
             tela.ret(x0 + 41, y + 1, max(0, int((w - 40) * f) - 2), 6, cor)
-            tela.texto(f"{v} BI", x0 + 42 + int((w - 40) * f) - 30, y + 10, cor, tam=9, contorno=PRETO) if f > .9 else None
+            if t > ta + 1.8: tela.texto(f"{v} BI", x0 + 40 + int((w - 40) * f) - 26, y + 9, cor, tam=9, contorno=PRETO)
 
     def sons(self, fx):
         for k in range(8):
@@ -1079,10 +1117,10 @@ class Sudeste(Cena):
             p = ao_longo(CORR_SE, (k / 18 + t * .1) % 1.0)
             tela.px(p[0], p[1] - 1, ESPUMA if k % 3 == 0 else AGC)
         # represa e barragem
-        agua(tela, 200, DAM_X, 156, 178, t, onda=.6)
+        agua(tela, 198, DAM_X + 2, 156, 202, t, onda=.6)
         E11.concreto(tela, [(DAM_X, 140), (DAM_X + 10, 140), (DAM_X + 26, 196), (DAM_X, 196)], t)
         agua(tela, DAM_X + 26, 292, 186, 198, t, onda=.4)
-        tela.ret(200, 178, DAM_X - 200, PALCO_H - 178, TERRA0)
+        tela.ret(198, 202, DAM_X - 196, PALCO_H - 202, TERRA0)
         # nuvem crescendo e chovendo
         g = fase(t, 0, 9)
         dx = math.sin(t * .2) * 5
@@ -1114,28 +1152,35 @@ class Sudeste(Cena):
         if 19.5 <= t: self.rot(tela, 'REPRESA', 206, 182, ESPUMA)
         if 19.5 <= t: self.rot(tela, 'BARRAGEM', 238, 124, CONC2, alvo=(DAM_X + 4, 142))
         if 25.9 <= t:
-            E11.lampada(tela, 280, 100, .5 + .5 * math.sin(t * 3) ** 2 if t > 27 else 0.0, t, fio_ate=86)
-            tela.linha(DAM_X + 20, 180, 280, 112, AMARELO) if t > 27 and int(t * 4) % 2 else None
+            acesa = t > 27.4
+            casinha(tela, 277, 102, acesa, t)
+            for k in range(8):                                  # o fio da usina até a casa
+                u = k / 7
+                tela.px(lerp(DAM_X + 6, 270, u), lerp(140, 96, u) + 3 * math.sin(u * math.pi), ACO2)
+            if t > 26.4:
+                u = ((t - 26.4) * .8) % 1.0
+                tela.disco(lerp(DAM_X + 6, 270, u), lerp(140, 96, u) + 3 * math.sin(u * math.pi), 1.5, AMARELO)
+            if t < 32.7: self.rot(tela, 'TURBINA → LUZ', 196, 88, AMARELO)
         if 32.7 <= t:
             self.cartao(tela, t)
         dias = 18 + int(fase(t, 13, 26))
-        tam = 'VAPOR' if t < 8 else ('0,02 MM' if t < 11 else '2 MM')
-        if t >= 16: tam = 'NO RIO'
-        self.painel(tela, t, linhas=[('ONDE ESTÁ', self.onde(t), CHAMA1), ('TAMANHO DA GOTA', tam, AGC),
+        tam = 'VAPOR' if t < 8 else ('GOTINHA' if t < 11 else 'GOTA DE 2 MM')
+        if t >= 16: tam = 'ÁGUA DO RIO'
+        self.painel(tela, t, linhas=[('ONDE ESTÁ', self.onde(t), CHAMA1), ('FORMA DA ÁGUA', tam, AGC),
                                      ('DIAS DE VIAGEM', fmt_dias(dias), AMARELO), ('PRÓXIMA PARADA', 'O MAR', MAR2)])
 
     def cartao(self, tela, t):
         u = ease(fase(t, 32.7, 33.4))
-        x0, y0, w, h = 54, 50 + int((1 - u) * 160), 186, 64
+        x0, y0, w, h = 54, 44 + int((1 - u) * 160), 186, 78
         painel(tela, x0, y0, w, h, borda=AMARELO)
         tela.texto('A JORNADA CONTINUA', x0 + w // 2, y0 + 6, ACO3, tam=9, centro=True, contorno=PRETO)
         tela.texto('EPISÓDIO DA ÁGUA', x0 + w // 2, y0 + 18, AMARELO, tam=17, centro=True, contorno=PRETO)
         tela.texto('DA REPRESA ATÉ A SUA TOMADA', x0 + w // 2, y0 + 40, BRANCO, tam=9, centro=True, contorno=PRETO)
-        prota(tela, x0 + 16, y0 + 50, 3, t)
-        k = int(t * 3) % 3
-        for j in range(3):
-            seta(tela, x0 + 132 + j * 10, y0 + 50, 1, 0, AMARELO if j == k else ACO1, 4)
-        E11.lampada(tela, x0 + w - 14, y0 + 44, 1.0, t, fio_ate=y0 + 38)
+        prota(tela, x0 + 30, y0 + 62, 4, t)
+        k = int(t * 3) % 4
+        for j in range(4):
+            seta(tela, x0 + 70 + j * 14, y0 + 62, 1, 0, AMARELO if j == k else ACO1, 4)
+        casinha(tela, x0 + w - 40, y0 + 72, True, t)
 
     def sons(self, fx):
         fx.put(fx.chiado(6.0, 200, 800, ataque=1.0), self.t0, .06)
@@ -1148,8 +1193,20 @@ class Sudeste(Cena):
         fx.put(tique(1320, .1), self.t0 + 33.0, .14)
 
 
+def casinha(tela, cx, yb, acesa, t):
+    """Casa genérica com a janela acesa (a luz que a represa ajudou a gerar)."""
+    poligono(tela, [(cx - 13, yb - 13), (cx, yb - 24), (cx + 13, yb - 13)], PRETO)
+    poligono(tela, [(cx - 11, yb - 14), (cx, yb - 22), (cx + 11, yb - 14)], VERMELHO)
+    caixa(tela, cx - 9, yb - 13, 18, 13, CERAMICA, BRANCO, ACO3)
+    tela.ret(cx + 3, yb - 8, 4, 8, TRO1)
+    if acesa:
+        aura(tela, cx - 4, yb - 7, 3, 7, CHAMA0, int(t * 4) % 2)
+    tela.ret(cx - 7, yb - 10, 6, 5, PRETO)
+    tela.ret(cx - 6, yb - 9, 4, 3, CHAMA0 if acesa else FUNDO3)
+
+
 # ============================================================ 9 de volta ao mar
-RIO_MAR = [(-4, 44), (30, 52), (60, 70), (84, 64), (110, 78), (140, 96), (164, 104), (184, 118)]
+RIO_MAR = [(-4, 60), (30, 66), (60, 80), (84, 76), (110, 90), (140, 102), (164, 108), (184, 118)]
 COSTA_X = 186
 SUP_M = 118
 
@@ -1164,9 +1221,9 @@ class Mar(Cena):
             return lerp(184, 214, u), SUP_M + 4 + 4 * u
         if t < 25.9:
             u = suave(fase(t, 19.5, 24.5))
-            return 214 + 20 * u + 3 * math.sin(t), lerp(126, 186, u)
+            return 214 + 20 * u + 3 * math.sin(t), lerp(126, 168, u)
         u = ease(fase(t, 25.9, 30.0))
-        if t < 30.0: return 234 - 10 * u, lerp(186, SUP_M + 2, u)
+        if t < 30.0: return 234 - 10 * u, lerp(168, SUP_M + 2, u)
         v = t - 30.0
         return 224 - 2 * v, SUP_M - 2 - 9 * v
 
@@ -1174,7 +1231,7 @@ class Mar(Cena):
         ceu_dia(tela, SUP_M + 2, 0, 292)
         sol(tela, 262, 22, 10, t)
         # planície e o rio
-        terra = [(-2, 40), (60, 54), (120, 80), (170, 104), (COSTA_X, SUP_M + 2)]
+        terra = [(-2, 36), (60, 46), (120, 70), (170, 98), (COSTA_X, SUP_M + 2)]
         poligono(tela, [(-2, PALCO_H)] + terra + [(COSTA_X, PALCO_H)], GRAMA1)
         grad_v(tela, 0, 60, COSTA_X, PALCO_H - 60, [GRAMA1, GRAMA0, TERRA0], mascara=lambda xx, yy: yy > np.array([interp(terra, x) + 8 for x in range(0, COSTA_X)])[np.minimum(xx, COSTA_X - 1)])
         for x in (14, 40, 70, 100, 130):
@@ -1197,8 +1254,8 @@ class Mar(Cena):
         rastro(tela, self.p_gota, t, n=10, dt=.12, r0=2)
         if t < 30.0: prota(tela, x, y, 3, t)
         else: vapor_prota(tela, x, y, t)
-        if t < 13.1 and t > 1: self.rot(tela, 'RIO', 40, 74, AGC)
-        if t > 13.1: self.rot(tela, 'OCEANO ATLÂNTICO', 196, 134, MAR2)
+        if t < 13.1 and t > 1: self.rot(tela, 'RIO', 40, 84, AGC)
+        if t > 13.1: self.rot(tela, 'OCEANO ATLÂNTICO', 196, 196, MAR2)
         if 19.5 <= t < 26:
             self.caixa_txt(tela, [('AQUI, EM MÉDIA:', 9, BRANCO), ('3.200 ANOS', 17, AMARELO)], 30, 140)
         if 6.7 <= t < 13:
@@ -1241,10 +1298,10 @@ class Tempo(Cena):
     def desenhar(self, tela, t, tg):
         grade(tela)
         if VERTICAL:
-            x0, x1, y0, dy, tit_y = self.VX - 84, self.VX + 84, 22, 30, 4
+            x0, x1, y0, dy, tit_y = self.VX - 84, self.VX + 84, 30, 27, 4
         else:
-            x0, x1, y0, dy, tit_y = 176, 462, 30, 26, 6
-        tela.texto('TEMPO MÉDIO DA ÁGUA EM CADA LUGAR', self.VX if VERTICAL else W // 2, tit_y + (14 if VERTICAL else 0),
+            x0, x1, y0, dy, tit_y = 180, 404, 28, 24, 6
+        tela.texto('TEMPO MÉDIO EM CADA LUGAR' if VERTICAL else 'TEMPO MÉDIO DA ÁGUA EM CADA LUGAR', self.VX if VERTICAL else W // 2, tit_y,
                    ACO3, tam=9, centro=True, contorno=PRETO)
         if not VERTICAL:
             # eixo (escala de 10 em 10 vezes)
@@ -1253,7 +1310,16 @@ class Tempo(Cena):
                 x = x0 + (x1 - x0) * math.log10(d) / DEC_MAX
                 tela.ret(int(x), y0 - 4, 1, ya - y0 + 4, FUNDO3)
                 tela.texto(nm, int(x), ya + 4, ACO2, tam=9, centro=True, contorno=PRETO)
-            tela.texto('CADA PASSO DA ESCALA = MUITO MAIS TEMPO', W // 2, ya + 18, ACO1, tam=9, centro=True)
+            tela.texto('ESCALA QUE ESTICA: CADA MARCA É MUITO MAIS TEMPO', W // 2, ya + 17, ACO1, tam=9, centro=True)
+        if t < 6.7:                                     # as perguntas: um lugar de cada vez
+            for i, r in enumerate(RESID):
+                if t < .8 + i * .8: continue
+                y = y0 + i * dy
+                if VERTICAL: tela.texto(r[0], x0, y - 10, BRANCO, tam=9, contorno=PRETO)
+                else: tela.texto(r[0], x0 - 6, y - 1, BRANCO, tam=9, centro='d', contorno=PRETO)
+                tela.texto('?', x0 + 4, y - 1, AMARELO if int(t * 3 + i) % 2 else ACO2, tam=9, contorno=PRETO)
+            k = min(len(RESID) - 1, int(max(0, t - .8) / .8))
+            prota(tela, x0 + 20 + 3 * math.sin(t * 4), y0 + k * dy + 3, 3, t)
         for i, (nm, val, a, b, ta, cor) in enumerate(RESID):
             if t < ta: continue
             y = y0 + i * dy
@@ -1283,10 +1349,10 @@ class Tempo(Cena):
             i = vis[int(t * .6) % len(vis)]
             r = RESID[i]
             xa = x0 + (x1 - x0) * math.log10(r[2]) / DEC_MAX
-            prota(tela, xa, y0 + i * dy + 4, 3, t)
-        if t >= 25.9:
-            y = y0
-            tela.anel(x0 + (x1 - x0) * math.log10(9) / DEC_MAX, y + 4, 8 + 2 * math.sin(t * 5), AMARELO, .6)
+            if t >= 6.7: prota(tela, xa - 6, y0 + i * dy + 4, 3, t)
+        if t >= 25.9 and int(t * 3) % 2:
+            xa = x0 + (x1 - x0) * math.log10(9) / DEC_MAX
+            tela.ret_vazado(x0 - 3, y0 - 3, int(xa - x0) + 6, 14, AMARELO)
 
     def sons(self, fx):
         for i, r in enumerate(RESID):
@@ -1308,7 +1374,10 @@ class Resumo(Cena):
         for i in range(9):
             a = -math.pi / 2 + (i + .5) * 2 * math.pi / 9
             if t >= self.LIGA[i]:
-                seta(tela, int(self.CX + math.cos(a) * self.RR), int(self.CY + math.sin(a) * self.RR), -math.sin(a) > 0 and -1 or 1, 0, ETAPAS[i][1], 3)
+                px, py = self.CX + math.cos(a) * self.RR, self.CY + math.sin(a) * self.RR
+                tx, ty = -math.sin(a), math.cos(a)
+                poligono(tela, [(px + tx * 4, py + ty * 4), (px - tx * 3 + ty * 3.5, py - ty * 3 - tx * 3.5),
+                                (px - tx * 3 - ty * 3.5, py - ty * 3 + tx * 3.5)], ETAPAS[i][1])
         for i in range(9):
             x, y = self.p_ic(i)
             D.icone(tela, i, x, y, t, aceso=t >= self.LIGA[i])

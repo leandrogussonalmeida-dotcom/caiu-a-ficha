@@ -98,7 +98,7 @@ LARGURA_M = 90 * M_POR_U
 
 # =================================================================== envelope
 def envelope(tela, mx, my, k, t, ang=0.0, fill=1.0, vent=0.0, corte=0.0, quente=0.0, rot=None, chama=0.0,
-             chao=None, x0=0, x1=W, sem_contorno=False):
+             chao=None, x0=0, x1=W, sem_contorno=False, padrao=None, banda=TEAL):
     """Desenha o envelope com a boca (s = 100) em (mx, my). `ang` gira em volta
     da boca (0 = de pé; -pi/2 = deitado com o topo à esquerda). Devolve a
     máscara (tela inteira) do que é envelope."""
@@ -135,12 +135,12 @@ def envelope(tela, mx, my, k, t, ang=0.0, fill=1.0, vent=0.0, corte=0.0, quente=
     bay = BAY[yy % 8, xx % 8]
     lvl = np.clip(np.floor((1.08 - luz) * 2.7 + bay - .2), 0, 2).astype(int)
     out = np.zeros(m.shape, np.uint8)
-    pad = np.array([c for c in PADRAO])                      # (6, 3)
-    cores = pad[g % len(PADRAO)]                             # (..., 3)
+    pad = np.array([c for c in (padrao or PADRAO)])
+    cores = pad[g % len(pad)]
     # faixa em zigue-zague
     zz = 1 - np.abs(((gf * 2) % 2) - 1)
-    banda = (s > 52 + 3 * zz) & (s < 60 + 3 * zz)
-    cores = np.where(banda[..., None], np.array(TEAL)[None, None, :], cores)
+    banda_m = (s > 52 + 3 * zz) & (s < 60 + 3 * zz)
+    cores = np.where(banda_m[..., None], np.array(banda)[None, None, :], cores)
     out = np.take_along_axis(cores, lvl[..., None], axis=2)[..., 0].astype(np.uint8)
     esc = cores[..., 2].astype(np.uint8)
     # costuras dos gomos (mais finas na borda, onde o gomo fica de lado)
