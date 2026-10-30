@@ -120,7 +120,7 @@ def envelope(tela, mx, my, k, t, ang=0.0, fill=1.0, vent=0.0, corte=0.0, quente=
     r = r_env(np.clip(s, 0, S_SAIA))
     if fill < 1:
         f = .12 + .88 * fill
-        rug = (1 - fill) * (1.6 * np.sin(s * .9 + t * 2.0) + 1.0 * np.sin(s * 2.3 - t * 1.3))
+        rug = (1 - fill) * (.8 * np.sin(s * .45 + t * 2.0) + .4 * np.sin(s * 1.1 - t * 1.3))
         r = np.where(s < 100, r * f + rug, r)
     m = (s >= 0) & (s <= S_SAIA) & (np.abs(u) <= r)
     if chao is not None: m &= yy < chao
@@ -202,7 +202,7 @@ def chama(tela, x, y, k, forca, t, seed=0, ang=0.0):
     nx, ny = math.cos(ang), math.sin(ang)           # de lado
 
     def P(a, b): return (x + dx * a + nx * b, y + dy * a + ny * b)
-    brilho(tela, *P(L * .45, 0), max(6, L * .8), LARANJA)
+    brilho(tela, *P(L * .45, 0), max(6, min(L * .8, 16)), LARANJA)
     for frac, larg, cor in ((1.0, 3.0, CHAMA2), (.78, 2.2, CHAMA1), (.5, 1.3, CHAMA0)):
         Lc = L * frac
         w = larg * k * (.7 + .3 * forca)
@@ -328,7 +328,7 @@ def balao(tela, mx, my, k, t, e=None, x0=0, x1=W):
     # a chama entra pela boca: o brilho aparece na boca
     if ch > .05:
         bx, by = pt(mx, my, k, 104, 0)
-        brilho(tela, bx, by, 6 * k * ch, CHAMA1)
+        brilho(tela, bx, by, min(6 * k, 12) * ch, CHAMA1)
     cesto(tela, mx, my, k, t, chama_f=ch, corte=e.get('corte_cesto', False), acesos=e.get('acesos', ()),
           seed=e.get('seed', 0))
     return m
@@ -428,7 +428,7 @@ class Paisagem:
         ys = np.arange(y0, PALCO_H)[:, None].astype(float)
         xs = np.arange(0, x1)[None, :].astype(float)
         z = self.F * He / (ys - self.hy + .5)
-        wx = (xs - self.cx) * z / self.F + X
+        wx = (xs - self.cx) * z / self.F + X + 23.0
         ix = np.floor(wx / 70.0)
         iz = np.floor(z / 55.0)
         hv = hsh_np(ix, iz)
@@ -438,7 +438,7 @@ class Paisagem:
         bz = (z / 55.0 - iz) * 55.0 < z * z / (self.F * He) * 1.0
         cor = np.where(bx | bz, CAMPO0, cor)
         # estrada
-        cor = np.where(np.abs(wx - 35) < 3.5, ESTRADA, cor)
+        cor = np.where(np.abs(wx - 58) < 3.5, ESTRADA, cor)
         # névoa ao longe
         yy = ys.astype(int); xx = xs.astype(int)
         b = BAY[yy % 8, xx % 8]

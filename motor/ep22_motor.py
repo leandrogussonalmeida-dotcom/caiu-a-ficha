@@ -650,6 +650,18 @@ class Partes(Cena):
         bs = self.batidas('batida')
         self.js, _ = jatos_de([b for k, b in enumerate(bs) if (24.3 <= b < 32 and k % 2 == 0) or k % 16 == 0], .6)
 
+    VISTAS = {'env': (1.42, 154.0), 'par': (3.0, 320.0), 'saia': (4.0, 100.0), 'queimador': (4.0, 100.0),
+              'botijoes': (4.0, 100.0), 'cesto': (4.0, 100.0)}
+
+    def vista(self, t):
+        """Zoom na peça: a vista anterior desliza para a nova em 0,8 s."""
+        k_at = self.ativo(t)
+        novo = self.VISTAS[PECAS[k_at][3]]
+        velho = self.VISTAS[PECAS[max(0, k_at - 1)][3]]
+        u = ease((t - self.TS[k_at]) / .8)
+        k = velho[0] * (novo[0] / velho[0]) ** u
+        return k, velho[1] + (novo[1] - velho[1]) * u
+
     def ativo(self, t):
         return max([k for k, a in enumerate(self.TS) if t >= a] or [0])
 
@@ -660,9 +672,8 @@ class Partes(Cena):
         for y in range(6, PALCO_H, 24): tela.ret(0, y, W, 1, FUNDO2)
         k_at = self.ativo(t)
         nome, sub, (s, u), chave = PECAS[k_at]
-        k = self.KP
         cx = 140 if not VERTICAL else x_corte('partes') + 90
-        my = 12 + 100 * k
+        k, my = self.vista(t)
         vent = 0.0
         if chave == 'par':
             vent = .7 * max(0.0, math.sin((t - 8.3) * 1.2)) ** 2 if t > 9 else 0.0
@@ -712,7 +723,7 @@ class Inflar(Cena):
                               + [b for k, b in enumerate(bs) if b >= self.T_LEV1 + 3 and k % 8 == 0], .9)
 
     def fill(self, t):
-        return rampa(t, [(0, .08), (self.T_QUEIMA, .6), (self.T_LEV0, .95), (self.T_LEV1, 1.0)])
+        return rampa(t, [(0, .22), (self.T_QUEIMA, .6), (self.T_LEV0, .95), (self.T_LEV1, 1.0)])
 
     def ang(self, t):
         return (-math.pi / 2 + .08) * (1 - suave((t - self.T_LEV0) / (self.T_LEV1 - self.T_LEV0)))
@@ -764,7 +775,7 @@ class Inflar(Cena):
         tit(tela, 'ENVELOPE CHEIO', 26, ACO3, 9)
         tit(tela, f"{milhar(f * 100)}%", 36, CIANO, 17)
         barra(tela, PX0, 58, 156, 6, f, CIANO)
-        T = rampa(t, [(0, 20), (self.T_QUEIMA, 20), (self.T_LEV1, 85), (30, 92)])
+        T = rampa(t, [(0, 20), (self.T_QUEIMA, 20), (self.T_LEV1, 88), (30, 95)])
         tit(tela, 'AR DENTRO', 76, ACO3, 9)
         tit(tela, f"{milhar(T)} °C", 86, temp_cor(T), 17)
         barra(tela, PX0, 108, 156, 6, (T - 20) / 100, temp_cor(T))

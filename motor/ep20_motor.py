@@ -1534,6 +1534,7 @@ BRASA_ = 19
 
 # ============================================================ 14 Pix
 class Pix(Cena):
+    XV = 118 + 90                # o corte vertical deste capítulo começa em x = 118
     def preparar(self):
         tinta = cores_de(FINAL, np.ones((N, N), bool), np.zeros((N, N), bool))
         self.plaq = imagem_qr(tinta, 2, 4, encaixe=False)
