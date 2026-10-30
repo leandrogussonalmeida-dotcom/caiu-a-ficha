@@ -97,11 +97,11 @@ LEGENDAS = {
         (6.6, 14.6, "EM CERCA DE 8 MINUTOS ELE ESTARÁ", "A *28.000 KM/H*. COMO?", ('F14', 'F9')),
     ],
     'newton': [
-        (0.5, 7.4, "SOLTE UM BALÃO CHEIO: O AR SAI", "PARA UM LADO E O BALÃO VAI PARA O OUTRO.", ()),
+        (0.5, 7.4, "SOLTE UM BALÃO CHEIO: O AR SAI PARA", "UM LADO E O BALÃO VAI PARA O OUTRO.", ()),
         (7.6, 14.4, "É A *TERCEIRA LEI DE NEWTON*: TODA AÇÃO", "TEM UMA REAÇÃO IGUAL E CONTRÁRIA.", ('F1',)),
         (14.6, 21.4, "O FOGUETE FAZ O MESMO: JOGA *GÁS*", "*QUENTE* PARA BAIXO, MUITO RÁPIDO.", ('F1',)),
         (21.6, 28.4, "O FOGUETE EMPURRA O GÁS, E O GÁS", "EMPURRA O FOGUETE *PARA CIMA*.", ('F1',)),
-        (28.6, 35.4, "ELE NÃO PRECISA DE AR PARA", "SE APOIAR. NO ESPAÇO, O GÁS SAI LIVRE.", ('F1',)),
+        (28.6, 35.4, "ELE NÃO PRECISA DE AR PARA SE", "APOIAR. NO ESPAÇO O GÁS SAI LIVRE.", ('F1',)),
         (35.6, 41.6, "POR ISSO O FOGUETE FUNCIONA", "*ATÉ MELHOR NO VÁCUO*.", ('F1', 'F2')),
     ],
     'partes': [
@@ -117,7 +117,7 @@ LEGENDAS = {
         (0.5, 6.8, "VAMOS ABRIR O MOTOR. CÂMERA LENTA.", "AS TURBOBOMBAS GIRAM...", ('F3',)),
         (7.0, 13.8, "...E OS DOIS LÍQUIDOS ENTRAM NA", "*CÂMARA*, ONDE QUEIMAM.", ('F3',)),
         (14.0, 20.8, "O GÁS QUENTE CORRE PARA O PONTO", "MAIS ESTREITO: A *GARGANTA*.", ('F3', 'F4')),
-        (21.0, 27.8, "NA GARGANTA ELE CHEGA À", "*VELOCIDADE DO SOM*.", ('F4',)),
+        (21.0, 27.8, "NA GARGANTA ELE CHEGA À", "*VELOCIDADE DO SOM* NO GÁS QUENTE.", ('F4',)),
         (28.0, 34.8, "NO SINO ELE SE EXPANDE E FICA", "CADA VEZ MAIS RÁPIDO: *SUPERSÔNICO*.", ('F4',)),
         (35.0, 41.6, "SAI A *2,9 A 4,5 KM/S*.", "AQUI: CERCA DE 2.900 M/S.", ('F4', 'F14')),
     ],
@@ -172,7 +172,7 @@ LEGENDAS = {
         (7.6, 14.4, "NO EQUADOR, O CHÃO ANDA A", "*465 M/S*: CERCA DE 1.675 KM/H.", ('F10',)),
         (14.6, 21.4, "LANÇANDO PARA O LESTE, O FOGUETE", "JÁ SAI COM ESSE *EMPURRÃO*.", ('F11',)),
         (21.6, 28.4, "NO MARANHÃO, O *CENTRO DE LANÇAMENTO*", "*DE ALCÂNTARA* FICA A 2° DO EQUADOR.", ('F12',)),
-        (28.6, 35.6, "É A BASE DE LANÇAMENTO", "*MAIS PERTO DO EQUADOR*.", ('F12',)),
+        (28.6, 35.6, "É A BASE EM TERRA", "*MAIS PERTO DO EQUADOR*.", ('F12',)),
     ],
     'resumo': [
         (0.5, 7.0, "O FOGUETE JOGA GÁS PARA BAIXO", "E O GÁS O EMPURRA PARA *CIMA*.", ('F1',)),
@@ -243,7 +243,7 @@ CORTES = [
          descricao='O foguete joga gás quente para baixo, muito rápido, e o gás empurra o foguete para cima (3ª lei de Newton). Ele não precisa de ar para se apoiar: funciona até melhor no vácuo.'),
     dict(id='c2', de=('motor', 14.0), ate=('motor', 42.0), x=60, gancho=['GÁS', 'SUPERSÔNICO'],
          titulo='Dentro do motor do foguete: o gás fica supersônico 🔥',
-         descricao='Na garganta da tubeira o gás chega à velocidade do som; no sino ele se expande e sai supersônico, a 2,9 a 4,5 km/s.'),
+         descricao='Na garganta da tubeira o gás chega à velocidade do som no gás quente (bem mais que os 340 m/s do ar); no sino ele se expande e sai supersônico, a 2,9 a 4,5 km/s.'),
     dict(id='c3', de=('decolagem', 0.0), ate=('decolagem', 36.0), x=60, gancho=['POR QUE', 'ELE SOBE?'],
          titulo='Por que o foguete sobe? Empuxo maior que o peso',
          descricao='Na plataforma as forças estão equilibradas. O foguete só sobe quando o empuxo dos motores fica maior que o peso dele.'),
@@ -255,5 +255,5 @@ CORTES = [
          descricao='Em órbita baixa a cerca de 7,8 km/s (28.000 km/h), o foguete continua caindo, mas a Terra se curva e ele sempre erra o chão.'),
     dict(id='c6', de=('equador', 0.0), ate=('equador', 36.0), x=40, gancho=['O EMPURRÃO', 'DO EQUADOR'],
          titulo='Por que Alcântara é um ótimo lugar para lançar foguetes? 🇧🇷',
-         descricao='No equador o chão anda a 465 m/s para o leste. Lançando para o leste, o foguete já sai com esse empurrão. O Centro de Lançamento de Alcântara, no Maranhão, é a base mais perto do equador.'),
+         descricao='No equador o chão anda a 465 m/s para o leste. Lançando para o leste, o foguete já sai com esse empurrão. O Centro de Lançamento de Alcântara, no Maranhão, é a base em terra mais perto do equador.'),
 ]

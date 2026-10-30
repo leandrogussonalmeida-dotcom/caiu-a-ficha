@@ -77,7 +77,7 @@ def tique(f=3000.0, dur=.03, dec=.006):
     sr = LG.SR
     n = int(dur * sr)
     tt = np.arange(n) / sr
-    env = np.minimum(1.0, tt / .0015) * np.exp(-tt / dec)
+    env = np.minimum(1.0, tt / .003) * np.exp(-tt / dec)      # ataque de 3 ms: o AAC não estoura o pico
     y = (np.sin(2 * np.pi * f * tt) + .5 * np.sin(2 * np.pi * f * 1.5 * tt) + .3 * np.sin(2 * np.pi * f * .5 * tt)) * env
     return (y / (np.abs(y).max() + 1e-9)).astype(np.float32)
 
@@ -86,7 +86,7 @@ def baque(f=80.0, dur=.18):
     sr = LG.SR
     n = int(dur * sr)
     tt = np.arange(n) / sr
-    y = np.sin(2 * np.pi * (f * tt + 30 * (1 - np.exp(-tt / .03)))) * np.minimum(1, tt / .002) * np.exp(-tt / .05)
+    y = np.sin(2 * np.pi * (f * tt + 30 * (1 - np.exp(-tt / .03)))) * np.minimum(1, tt / .006) * np.exp(-tt / .05)
     return (y / (np.abs(y).max() + 1e-9)).astype(np.float32)
 
 
@@ -282,7 +282,7 @@ class Gancho(Cena):
         self.sons_pinos(fx, 0, 8.4, .14)
         fx.put(fx.sino(81, .7), self.t0 + 3.3, .14)
         fx.put(giro_som(1.1), self.t0 + 3.9, .12)
-        fx.put(baque(110, .15), self.t0 + 5.0, .25)
+        fx.put(baque(110, .15), self.t0 + 5.0, .16)
         fx.put(giro_som(.7), self.t0 + 7.6, .1)
 
 
@@ -632,8 +632,8 @@ class Certa(Cena):
     def sons(self, fx):
         self.sons_pinos(fx, 0, self.T_IN + .1, .16)
         fx.put(fx.sino(84, 1.0), self.t0 + self.T_IN, .16)
-        fx.put(giro_som(3.0), self.t0 + self.T_GIRA[0], .1)
-        fx.put(baque(110, .15), self.t0 + self.T_GIRA[1], .25)
+        fx.put(giro_som(2.9), self.t0 + self.T_GIRA[0], .08)
+        fx.put(baque(110, .15), self.t0 + self.T_GIRA[1], .14)
 
 
 # ============================================================ batida (1 pino por compasso)

@@ -51,7 +51,7 @@ EPISODIOS = [
     dict(id='ep16', serie='pixels', titulo='Como o processador pensa', estado='pronto', onda=4),
     dict(id='ep17', serie='dentro', titulo='Como funciona a fechadura e a chave', estado='fazendo', onda=4),
     # ---------------------------------------------------------------- onda 5
-    dict(id='ep18', serie='voa', titulo='Como um foguete chega ao espaço', estado='fazendo', onda=5),
+    dict(id='ep18', serie='voa', titulo='Como um foguete chega ao espaço', estado='pronto', onda=5),
     dict(id='ep19', serie='jornada', titulo='A jornada de um contêiner pelo porto', estado='fazendo', onda=5),
     dict(id='ep20', serie='pixels', titulo='Como funciona o QR code', estado='fazendo', onda=5),
     dict(id='ep21', serie='dentro', titulo='Como funciona a descarga do vaso', estado='fazendo', onda=5),

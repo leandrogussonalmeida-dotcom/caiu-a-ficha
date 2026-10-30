@@ -35,7 +35,8 @@ _EXTRA = ['#0d1430', '#1a2652', '#33447a', '#6b5583', '#d98a6c',   # 32..36 céu
           '#3a3e47', '#6a707d', '#a3aab7',                         # 56..58 contêiner cinza
           '#17191f', '#262932', '#3a3e4a',                         # 59..61 asfalto
           '#565b66', '#8a8f9a', '#b8bcc4',                         # 62..64 concreto
-          '#12161f', '#232a38']                                    # 65..66 casco
+          '#12161f', '#232a38',                                    # 65..66 casco
+          '#3d74b4', '#8cc2ea', '#fff4c8']                         # 67..69 céu de dia e sol
 PX.PALETAS['ep19'] = _BASE + _EXTRA
 LG.PAL = 'ep19'
 CEU0, CEU1, CEU2, CEU3, CEU4 = 32, 33, 34, 35, 36
@@ -48,6 +49,7 @@ CIN0, CIN1, CIN2 = 56, 57, 58
 ASF0, ASF1, ASF2 = 59, 60, 61
 CON0, CON1, CON2 = 62, 63, 64
 CAS0, CAS1 = 65, 66
+CEUD0, CEUD1, SOL = 67, 68, 69
 
 # tons de cada contêiner: (mais escuro, escuro, meio, claro, brilho)
 P_LAR = (LAR0, LAR1, LAR2, LAR3, LAR4)            # o NOSSO (laranja)

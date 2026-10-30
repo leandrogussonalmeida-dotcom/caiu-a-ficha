@@ -765,7 +765,7 @@ class Motor(Cena):
         fundo_painel(tela)
         tit(tela, 'O GÁS NA SONDA', 9, ACO3, 9)
         tit(tela, f"MACH {mt}", 21, CIANO, 26)
-        reg = 'MAIS LENTO QUE O SOM' if M < .95 else ('VELOCIDADE DO SOM' if M < 1.08 else 'SUPERSÔNICO')
+        reg = 'MAIS LENTO QUE O SOM' if M < .95 else ('SOM NO GÁS QUENTE' if M < 1.08 else 'SUPERSÔNICO')
         tit(tela, reg, 50, VERDE if M >= 1.08 else (AMARELO if M >= .95 else ACO3), 9)
         tit(tela, 'VELOCIDADE', 66, ACO3, 9)
         tit(tela, f"{milhar(v)} M/S", 76, BRANCO, 17)
