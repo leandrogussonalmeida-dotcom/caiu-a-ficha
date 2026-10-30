@@ -69,3 +69,11 @@ Leandro aprovou o piloto ("detalhes muito bons", música baixa funciona) e achou
 **A checagem independente pegou em cada episódio de 2 a 6 legendas.** Exemplos: ep02 "mais velocidade, menos pressão"; ep06 data do iceberg; ep07 o servidor lê o envelope, não a mensagem; ep08 "60 fps é o mínimo" era opinião de coluna e virou "para muitos jogadores".
 
 **Defeitos de código pegos:** a paleta própria do ep04 vazava para os outros episódios (agora um processo por episódio); método `pos` de um agente colidia com o gancho do fim; estouro de uint8 na folha do ep08.
+
+## 30/10/2026 — catálogo completo
+
+Os 25 episódios das 4 séries passaram pela esteira (produção → revisão das folhas → checagem independente → correções). Exemplos do que a checagem pegou: gerador de Itaipu é 18 kV (não 13,8); ep13 dizia 30% de eficiência da gasolina contra 16-25% do ep01; "60 fps é o mínimo" era opinião; Wi-Fi de 6 GHz mudou em 2026 (Anatel limita a faixa a partir de 2027); "lado mais comprido do sifão" é mito; o estômago aparecia espelhado; Alcântara é a base *em terra* mais perto do equador.
+
+Ritmo: todos entre 480 e 503 s. Dois saíram curtos (balão 7:42, gota 7:30) e ganharam um capítulo novo, sem desacelerar nada. O piloto ep01 (6:06 depois de acelerado) está ganhando 2 min de conteúdo.
+
+Gosto: na garfada, a saída virou uma esteira neutra até a porta (o tubo cor de pele podia ser lido de outro jeito). Na fechadura, nada ensina a abrir sem chave.

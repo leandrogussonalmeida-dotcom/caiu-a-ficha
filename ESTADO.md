@@ -23,10 +23,10 @@ Protagonista que a gente acompanha; objetivo que sobe na tela; progressão; o me
 3. Checagem de fatos por agente independente; correções aplicadas.
 4. `estado='pronto'` no `catalogo.py`. Só o que está pronto entra no render.
 
-## Situação em 30/10
-- **Prontos (8):** ep01 motor, ep02 avião, ep03 mala, ep04 tela, ep05 geladeira, ep06 navio, ep07 mensagem, ep08 videogame.
-- **Em produção:** ep09 relógio, ep10 helicóptero, ep11 água, ep12 alto-falante.
-- **Fila:** ep13 a ep25.
+## Situação em 30/10 (fim do dia)
+- **Os 25 episódios estão prontos** (roteiro + desenho + checagem de fatos independente): ep01 a ep25, 8 a 8,5 min cada, todos com 5 a 6 cortes verticais.
+- ep01 (piloto) está ganhando ~2 min de conteúdo novo para passar de 8 min (anúncio no meio).
+- Nada foi renderizado no PC ainda: o computador estava desconectado. Render estimado: 15 a 30 min por longo.
 
 ## Como rodar no PC (`2-RENDERIZAR.bat`)
 1 lista · 2 textos (títulos e descrições em `PUBLICAR\`) · 3 longos (`VIDEOS\`) · 4 cortes (`SHORTS\CORTES\`) · 5 NO RITMO (`SHORTS\NO RITMO\`) · 6 um episódio · T tudo · V verificar.
