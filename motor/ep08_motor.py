@@ -533,7 +533,7 @@ class Tiles(Cena):
                     r, c = cheios[nt]
                     x, y = VX0 + c * 16 - off, VY0 + r * 16
                     tela.ret_vazado(x - 2, y - 2, 20, 20, AMARELO)
-                    tid = D.MAPA[r, (c0 + c) % D.MW]
+                    tid = int(D.MAPA[r, (c0 + c) % D.MW])
                     if not VERTICAL:            # de onde ele vem: o tile da lista à direita
                         tela.linha(x + 18, y + 8, PX0 + tid * 40 + 12, 127, AMARELO)
             if t >= 21.6:                       # o mapa é uma tabela de números
