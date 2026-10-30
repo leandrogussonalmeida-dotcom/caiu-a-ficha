@@ -17,7 +17,7 @@ FATOS E FONTES (todas lidas em 29/10/2026)
       Depois, o código de 3 dígitos da companhia e o número da mala. A etiqueta
       traz o código IATA de 3 letras do aeroporto de chegada. O número liga a
       mala à mensagem BSM (voo e passageiro); o sistema automático lê o código
-      de barras e separa as malas. Leitura por código de barras pode ser só 85%;
+      de barras e separa as malas. Leitura com leitor a laser pode ser só 85%;
       câmeras chegam a 99,5% em condições ideais; algumas companhias usam chip
       RFID. O passageiro fica com o canhoto, prova de que a mala é dele.
       Wikipedia, "Bag tag".
@@ -83,7 +83,7 @@ LEGENDAS = {
     ],
     'etiqueta': [
         (0.5, 7.0, "A ETIQUETA TEM UM NÚMERO DE", "*10 DÍGITOS*: A PLACA DA MALA.", ('F1',)),
-        (7.4, 14.0, "O 1º DÍGITO DIZ O TIPO: 0 É NORMAL,", "1 É RESERVA, 2 É URGENTE.", ('F1',)),
+        (7.4, 14.0, "O 1º DÍGITO DIZ O TIPO: 0 É NORMAL,", "1 É RESERVA, 2 É MALA *REENVIADA*.", ('F1',)),
         (14.4, 21.0, "OS 3 SEGUINTES: A *COMPANHIA*.", "O RESTO: O NÚMERO DA MALA.", ('F1',)),
         (21.4, 28.6, "AS BARRAS GUARDAM O NÚMERO. AS", "3 LETRAS: O *AEROPORTO* DE CHEGADA.", ('F1',)),
         (29.0, 35.6, "O NÚMERO APONTA PARA UMA *MENSAGEM*", "COM O VOO E O PASSAGEIRO.", ('F1',)),
@@ -91,7 +91,7 @@ LEGENDAS = {
     'esteira': [
         (0.6, 7.0, "ETAPA 2: A *ESTEIRA*. A MALA ENTRA", "NUM RIO DE MALAS.", ()),
         (7.4, 14.6, "UM PÓRTICO LÊ A ETIQUETA", "SEM NINGUÉM ENCOSTAR NELA.", ('F1',)),
-        (15.0, 22.0, "SÓ COM CÓDIGO DE BARRAS, A LEITURA", "PODE ACERTAR SÓ *85%* DAS MALAS.", ('F1',)),
+        (15.0, 22.0, "COM LEITOR A *LASER*, A LEITURA PODE", "ACERTAR SÓ *85%* DAS ETIQUETAS.", ('F1',)),
         (22.4, 29.6, "COM CÂMERAS, ATÉ *99,5%*. ALGUMAS", "ETIQUETAS TÊM ATÉ UM CHIP.", ('F1',)),
     ],
     'inspecao': [
@@ -118,8 +118,8 @@ LEGENDAS = {
     'patio': [
         (0.6, 7.4, "ETAPA 6: O *PÁTIO*. UM TRATOR LEVA", "OS CONTÊINERES ATÉ O AVIÃO.", ()),
         (7.8, 15.0, "UM ELEVADOR ERGUE O CONTÊINER", "ATÉ A PORTA DO PORÃO.", ()),
-        (15.4, 22.6, "UM MODELO MUITO USADO, O *LD3*:", "4,5 METROS CÚBICOS E 1,63 M DE ALTO.", ('F5',)),
-        (23.0, 30.0, "NO PORÃO CABEM *2 LADO A LADO*,", "EMBAIXO DO PISO DOS PASSAGEIROS.", ('F5',)),
+        (15.4, 22.6, "UM MODELO MUITO USADO, O *LD3*:", "4,5 METROS CÚBICOS, 1,63 M DE ALTURA.", ('F5',)),
+        (23.0, 30.0, "NO PORÃO VÃO *2 POR FILEIRA*,", "EMBAIXO DO PISO DOS PASSAGEIROS.", ('F5',)),
         (30.4, 35.6, "PORTA FECHADA. PRÓXIMA PARADA:", "O CÉU.", ()),
     ],
     'voo': [
@@ -192,7 +192,7 @@ Capítulos
 Simplificado de propósito
 - O aeroporto é genérico. A distância e o relógio do painel são de uma viagem de exemplo (voo de 900 km, sem conexão); cada aeroporto tem o seu caminho.
 - Os códigos PXL, BIT, RGB, CPU, LCD, USB e GIF, o voo 314 e o número 0 042 314159 são de exemplo, não de aeroporto ou companhia de verdade.
-- O 1º dígito da etiqueta: 0 é a etiqueta normal (interline/online), 1 é a de reserva (fallback) e 2 é a de mala urgente (rush). Os outros números ficam a critério da companhia.
+- O 1º dígito da etiqueta: 0 é a etiqueta normal (interline/online), 1 é a de reserva (fallback) e 2 é a de mala reenviada ao dono depois de um extravio (rush). Os outros números ficam a critério da companhia.
 - A triagem real tem várias voltas, desvios e depósitos; aqui mostramos um circuito só. Em muitos aeroportos a triagem e a inspeção ficam em ordem diferente.
 - O tomógrafo de verdade gira muito mais rápido; mostramos em câmera lenta.
 - No porão, o contêiner LD3 entra pela porta e é empurrado para a sua posição; o desenho mostra essa entrada de lado.

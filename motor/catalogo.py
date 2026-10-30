@@ -25,7 +25,7 @@ EPISODIOS = [
          ideia='Sustentação (asa desvia o ar para baixo, diferença de pressão), empuxo, arrasto, peso; '
                'flaps na decolagem; ângulo de ataque; o que acontece no estol. Protagonista: o avião da '
                'pista ao cruzeiro, com o ar em partículas passando pela asa.'),
-    dict(id='ep03', serie='jornada', titulo='A jornada da sua mala no aeroporto', estado='fila', onda=1,
+    dict(id='ep03', serie='jornada', titulo='A jornada da sua mala no aeroporto', estado='pronto', onda=1,
          ideia='Do check-in (etiqueta com código de barras) às esteiras, raio-x, triagem automática, '
                'carrinho, porão do avião, esteira de chegada. Protagonista: a mala, com a etiqueta.'),
     dict(id='ep04', serie='pixels', titulo='Como a tela do celular faz cada pixel', estado='pronto', onda=1,

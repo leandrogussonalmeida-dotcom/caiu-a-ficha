@@ -600,7 +600,7 @@ class Etiqueta(Cena):
             tx(tela, '(NÚMERO DE EXEMPLO)', PX0, 130, ACO2)
         elif t < 14.4:
             tx(tela, '1º DÍGITO: O TIPO', PX0, 68, ACO3)
-            for k, (n, s) in enumerate((('0', 'NORMAL'), ('1', 'RESERVA'), ('2', 'URGENTE'))):
+            for k, (n, s) in enumerate((('0', 'NORMAL'), ('1', 'RESERVA'), ('2', 'REENVIADA'))):
                 y = 82 + k * 20
                 c = AMARELO if k == 0 else ACO2
                 tela.ret(PX0, y, 14, 16, c if k == 0 else FUNDO2)
@@ -714,7 +714,7 @@ class Esteira(Cena):
                     tx(tela, num, PX0, y, c); tx(tela, 'OK', 468, y, VERDE, centro='d')
         else:
             tx(tela, 'MALAS LIDAS', PX0, 68, ACO3)
-            barras = (('CÓDIGO DE BARRAS', 85.0, '85%', ACO3, 15.0, '(PODE CAIR A)'),
+            barras = (('LEITOR A LASER', 85.0, '85%', ACO3, 15.0, '(PODE CAIR A)'),
                       ('CÂMERAS', 99.5, '99,5%', VERDE, 22.4, '(CHEGA A)'))
             for k, (rot, v, s, c, t_on, obs) in enumerate(barras):
                 if t < t_on: continue
