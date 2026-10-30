@@ -41,13 +41,13 @@ EPISODIOS = [
     dict(id='ep08', serie='pixels', titulo='Como um videogame desenha um quadro', estado='pronto', onda=2),
     dict(id='ep09', serie='dentro', titulo='Como funciona o relógio mecânico', estado='pronto', onda=2),
     # ---------------------------------------------------------------- onda 3
-    dict(id='ep10', serie='voa', titulo='Como o helicóptero voa', estado='fazendo', onda=3),
+    dict(id='ep10', serie='voa', titulo='Como o helicóptero voa', estado='pronto', onda=3),
     dict(id='ep11', serie='jornada', titulo='A jornada da água: da represa até a sua tomada', estado='pronto', onda=3),
     dict(id='ep12', serie='pixels', titulo='Como o alto-falante faz som', estado='fazendo', onda=3),
     dict(id='ep13', serie='dentro', titulo='Como funciona o motor elétrico', estado='fazendo', onda=3),
     # ---------------------------------------------------------------- onda 4
     dict(id='ep14', serie='voa', titulo='Como o submarino afunda e sobe', estado='fazendo', onda=4),
-    dict(id='ep15', serie='jornada', titulo='A jornada de uma garfada pelo corpo', estado='fila', onda=4),
+    dict(id='ep15', serie='jornada', titulo='A jornada de uma garfada pelo corpo', estado='fazendo', onda=4),
     dict(id='ep16', serie='pixels', titulo='Como o processador pensa', estado='fila', onda=4),
     dict(id='ep17', serie='dentro', titulo='Como funciona a fechadura e a chave', estado='fila', onda=4),
     # ---------------------------------------------------------------- onda 5

@@ -160,8 +160,8 @@ def setor(cx, cy, r0, r1, a0, a1):
     return (r >= r0) & (r <= r1) & (np.abs(d) <= larg), x0, y0
 
 
-def pintar_setor(tela, cx, cy, r0, r1, a0, a1, mat, **kw):
-    M, x0, y0 = setor(cx, cy, r0, r1, a0, a1)
+def pintar_setor(tela, ox, oy, r0, r1, a0, a1, mat, **kw):
+    M, x0, y0 = setor(ox, oy, r0, r1, a0, a1)
     pintar(tela, M, x0, y0, mat, **kw)
 
 
