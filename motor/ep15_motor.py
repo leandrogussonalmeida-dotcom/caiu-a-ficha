@@ -231,7 +231,7 @@ class Gancho(Cena):
 
     def rota(self, tela, u):
         grade(tela)
-        dx = 93
+        dx = -30
         prog = um(u / 4.6)
         D.corpo(tela, u, atual=None, dx=dx)
         n = int(prog * 120)
@@ -240,11 +240,11 @@ class Gancho(Cena):
             tela.px(x + dx, y, AMARELO if k % 2 else CHAMA1)
         x, y = ao_longo(ROTA, prog)
         luz(tela, x + dx, y, 2.4, BRANCO, AMARELO, CHAMA1)
-        self.rot(tela, 'ENTRA AQUI', 40, 30, AMARELO, alvo=(232, 37))
+        self.rot(tela, 'ENTRA AQUI', 170, 30, AMARELO, alvo=(122, 37))
         if prog >= 1:
-            self.rot(tela, 'SAI LÁ NO FIM', 40, 190, AMARELO, alvo=(236, 204))
-        tela.texto('QUANTOS METROS?', 370, 92, BRANCO, tam=17, centro=True, contorno=PRETO)
-        tela.texto('QUANTAS HORAS?', 370, 116, AMARELO, tam=17, centro=True, contorno=PRETO)
+            self.rot(tela, 'SAI LÁ NO FIM', 170, 190, AMARELO, alvo=(122, 204))
+        if u > .6: tela.texto('QUANTOS METROS?', 330, 80, BRANCO, tam=17, centro=True, contorno=PRETO)
+        if u > 1.6: tela.texto('QUANTAS HORAS?', 330, 108, AMARELO, tam=17, centro=True, contorno=PRETO)
 
     def sons(self, fx):
         fx.put(tique(1800, .05, .01), self.t0 + 2.3, .25)
@@ -296,9 +296,9 @@ class Prato(Cena):
     def preparar(self):
         rng = np.random.default_rng(11)
         self.graos = []
-        for k in range(22):
+        for k in range(34):
             a = rng.random() * 6.28; r = math.sqrt(rng.random())
-            self.graos.append((math.cos(a) * r * 42, math.sin(a) * r * 18 - 6, rng.random() * 3.1, rng.random()))
+            self.graos.append((math.cos(a) * r * 40, math.sin(a) * r * 17 - 6, rng.random() * 3.1, rng.random()))
         self.feijoes = [(-20, 6, .3), (8, 10, 1.2), (28, -2, .7), (-4, -14, 2.0), (36, 14, 2.6)]
 
     def desenhar(self, tela, t, tg):
@@ -314,15 +314,15 @@ class Prato(Cena):
             tela.px(cx + fx_ - 2, cy + fy - 3, ARROZ1); tela.px(cx + fx_ - 1, cy + fy - 3, ARROZ1)
         for gx, gy, a, v in self.graos:
             c, s = math.cos(a), math.sin(a)
-            f = tubo([(cx + gx - c * 5, cy + gy - s * 5), (cx + gx + c * 5, cy + gy + s * 5)], 3.4)
-            f.pintar(tela, [ARROZ0, ARROZ1, CERAMICA, BRANCO])
+            f = tubo([(cx + gx - c * 3.2, cy + gy - s * 3.2), (cx + gx + c * 3.2, cy + gy + s * 3.2)], 3.0)
+            f.pintar(tela, [ARROZ0, ARROZ1, ARROZ1, CERAMICA], contorno=QUI0)
         vapor(tela, cx - 20, cy - 30, t, 4, 40)
         brilho_estrela(tela, cx + 52, cy - 34, t)
         # rótulos e zoom
         if t > 6.6:
             gx, gy = self.graos[3][0] + cx, self.graos[3][1] + cy
             self.rot(tela, 'ARROZ', 20, 40, ARROZ1, alvo=(gx, gy))
-            self.zoom_amido(tela, 8, 140, t - 6.6)
+            if t < 18.4: self.zoom_amido(tela, 8, 140, t - 6.6)
         if t > 12.6:
             fx_, fy, _ = self.feijoes[3]
             self.rot(tela, 'FEIJÃO', 220, 40, FEI2, alvo=(cx + fx_, cy + fy))
@@ -440,7 +440,7 @@ JANELA_BOCA = [(116, 52), (248, 50), (262, 66), (262, 82), (254, 92), (256, 130)
 
 
 class Boca(Cena):
-    K, VX = 0, 170
+    K, VX = 0, 178
 
     def abre(self, t):
         if t < .4: return 0.0
@@ -524,13 +524,15 @@ class Boca(Cena):
         if t > 25.4: marca(tela, bx, by - 4, 'BOLO ALIMENTAR', lado=-1, dy=-30)
         # rótulos
         if not VERTICAL or True:
-            self.rot(tela, 'DENTES', 196, 18, BRANCO, alvo=(218, 90))
+            if not (VERTICAL and 6.8 < t < 25.2): self.rot(tela, 'DENTES', 196, 26, BRANCO, alvo=(218, 90))
             if t > 12.8: self.rot(tela, 'GLÂNDULA SALIVAR', 12, 140, PAN2, alvo=(70, 110))
             if t > 12.8: self.rot(tela, 'SALIVA', 204, 176, MISTURA2, alvo=(214, 118))
             if t > 25.4 or t < 12.8: self.rot(tela, 'LÍNGUA', 150, 176, MUC3, alvo=(170, ly + 2))
         # zoom (canto de cima)
-        if 6.8 < t < 12.6: self.arcada(tela, 6, 4, t - 6.8)
-        if 12.8 < t < 25.2: self.amilase(tela, 6, 4, t - 12.8)
+        ix = self.VX - 88 if VERTICAL else 6
+        iy = 18 if VERTICAL else 4
+        if 6.8 < t < 12.6: self.arcada(tela, ix, iy, t - 6.8)
+        if 12.8 < t < 25.2: self.amilase(tela, ix, iy, t - 12.8)
         est = ('A GARFADA AGORA', 'INTEIRA' if t < 4 else ('TRITURADA' if t < 25.4 else 'BOLO'), QUI2)
         self.painel(tela, t, linhas=[('DENTES (ADULTO)', '32', BRANCO), ('ENZIMA DA SALIVA', 'AMILASE', MISTURA2)],
                     estado=est)
@@ -700,11 +702,8 @@ class Engolir(Cena):
         self.rot(tela, 'LÍNGUA', 236, 84, MUC3, alvo=(214, 60))
         self.rot(tela, 'EPIGLOTE', 226, 104, AMARELO if 6.4 < t < 19 else MUCO,
                  alvo=(hx + math.cos(a) * 14, hy + math.sin(a) * 14))
-        self.rot(tela, 'AR', 224, 168, CIANO, alvo=(198, 172))
-        self.rot(tela, 'COMIDA', 66, 168, QUI2, alvo=(116, 170))
-        if t > 6.4 and not VERTICAL:
-            tela.texto('TRAQUEIA', 224, 180, ACO3, tam=9, contorno=PRETO)
-            tela.texto('ESÔFAGO', 66, 180, ACO3, tam=9, contorno=PRETO)
+        self.rot(tela, 'TRAQUEIA: AR', 214, 186, CIANO, alvo=(198, 176))
+        self.rot(tela, 'ESÔFAGO: COMIDA', 30, 186, QUI2, alvo=(116, 176))
         self.painel(tela, t, linhas=[('CANO DO AR', 'FECHADO' if fe > .5 else 'ABERTO', VERMELHO if fe > .5 else VERDE),
                                      ('QUEM FECHA', 'EPIGLOTE', CIANO)],
                     estado=('A GARFADA AGORA', 'BOLO', QUI2))
@@ -815,8 +814,9 @@ class Esofago(Cena):
             seta(tela, rx + 6, int(ym), -1, 0, AMARELO, 4)
             tela.texto(f"{int(round(cm))} CM", rx + 10, int(ym) - 3, AMARELO, tam=9, contorno=PRETO)
         # rótulos
-        self.rot(tela, 'ESÔFAGO', 196, 24, MUC3, alvo=(160, 30))
-        if 6.0 < t < tq + .4:
+        mostra_anel = 6.0 < t < tq + .4
+        if not mostra_anel or anel_y > 70: self.rot(tela, 'ESÔFAGO', 196, 24, MUC3, alvo=(160, 30))
+        if mostra_anel:
             self.rot(tela, 'ANEL APERTA', 200, max(8, anel_y - 24), AMARELO, alvo=(164, anel_y - 2))
         if t > tq - 2:
             self.rot(tela, 'ESFÍNCTER', 200, 150, MUCO if ab_esf > .3 else ACO3, alvo=(162, ESO_Y1 + 3))
@@ -864,7 +864,7 @@ class Estomago(Cena):
         P = np.array(EST_SP, np.float32)
         segs = np.hypot(np.diff(P[:, 0]), np.diff(P[:, 1]))
         S = np.concatenate([[0], np.cumsum(segs)]) / segs.sum()
-        R = [r * (1 - .14 * math.exp(-((s - sw) / .06) ** 2)) * (1 + .015 * math.sin(t * 2)) for r, s in zip(EST_R, S)]
+        R = [r * (1 - .22 * math.exp(-((s - sw) / .06) ** 2)) * (1 + .015 * math.sin(t * 2)) for r, s in zip(EST_R, S)]
         return tubo(EST_SP, R)
 
     def desenhar(self, tela, t, tg):
@@ -875,19 +875,18 @@ class Estomago(Cena):
         f = self.campo(t)
         dn = f.dn
         # parede (fora), muco (faixa clara), luz (dentro)
-        parede = f.m & (dn >= .84)
         val = f.cilindro()
         pintar(tela, f.ox, f.oy, f.m, val, C_MUC, PRETO)
-        muco = f.m & (dn >= .78) & (dn < .86)
+        muco = f.m & (dn >= .64) & (dn < .72)
         destaque_muco = 16.2 < t < 21.4 and int(t * 3) % 2 == 0
         pintar(tela, f.ox, f.oy, muco, .5 + .5 * destaque_muco, [MUC3, MUCO], None)
-        luz_ = f.m & (dn < .78)
+        luz_ = f.m & (dn < .66)
         Y = f.Y
         q = fase(t, 8, 31)                           # o quanto virou quimo
         conteudo = luz_ & (Y > NIVEL + 3 * np.sin(f.X * .08 + t * 2.0))
         ar = luz_ & ~conteudo
         pintar(tela, f.ox, f.oy, ar, np.clip((Y - 30) / 80, 0, 1), [CAV0, CAV1], None)
-        cv = np.clip(.3 + .4 * np.sin(f.X * .15 + f.Y * .1 + t) * (1 - q) + .3 * q, 0, 1)
+        cv = np.clip(.35 + .45 * np.sin(f.X * .21 + t) * np.sin(f.Y * .27 - t * .7) * (1 - q) + .3 * q, 0, 1)
         pintar(tela, f.ox, f.oy, conteudo, cv, [QUI0, QUI1, QUI2] if q > .5 else [FEI1, QUI0, QUI1, QUI2], None)
         # pregas (rugas) na parede interna
         for k in range(14):
@@ -986,7 +985,7 @@ class Delgado(Cena):
 
     def preparar(self):
         self.P = reamostrar(SERP, 140)
-        self.Lr = [(lerp(16, 276, k / 139), 96.0) for k in range(140)]
+        self.Lr = [(lerp(16, 16 + 260 * .8, k / 139), 96.0) for k in range(140)]   # termina em 4 m, no meio da faixa
 
     def desenrola(self, t):
         return suave(fase(t, 6.8, 8.8)) * (1 - suave(fase(t, 11.6, 13.0)))
@@ -1216,7 +1215,7 @@ class Vilosidades(Cena):
             topo = (x + sway, base - h)
             r = larg * .36
             f = tubo([(x, base + 2), (x + sway * .5, base - h * .5), topo], [r * 1.1, r, r * .95])
-            f.pintar(tela, [MUC1, MUC2, MUC3, MUCO])
+            f.pintar(tela, [MUC0, MUC1, MUC2, MUC3])
             # borda em escova (microvilosidades)
             if s > .6:
                 for j in range(14):
@@ -1260,9 +1259,11 @@ class Vilosidades(Cena):
             self.rot(tela, 'VILOSIDADE', 210, 22, MUC3, alvo=(vs[5][0] - 4, base - h + 4))
             self.rot(tela, 'VASINHOS DE SANGUE', 6, 186, SANG2, alvo=(vs[0][0] - 4, base - 30))
             if 12.2 < t < 24:
-                tela.texto('GLICOSE', 12, 14, AMARELO, tam=9, contorno=PRETO); glicose(tela, 6, 17)
-                tela.texto('AMINOÁCIDOS', 12, 26, VERDE, tam=9, contorno=PRETO); aminoacido(tela, 6, 29)
-                tela.texto('FIBRA: PASSA RETO', 12, 38, ARROZ1, tam=9, contorno=PRETO)
+                lx = 66 if VERTICAL else 12
+                dyv = 8 if VERTICAL else 0
+                tela.texto('GLICOSE', lx, 14 + dyv, AMARELO, tam=9, contorno=PRETO); glicose(tela, lx - 6, 17 + dyv)
+                tela.texto('AMINOÁCIDOS', lx, 26 + dyv, VERDE, tam=9, contorno=PRETO); aminoacido(tela, lx - 6, 29 + dyv)
+                tela.texto('FIBRA: PASSA RETO', lx, 38 + dyv, ARROZ1, tam=9, contorno=PRETO)
             if t > 18: self.rot(tela, 'PARA O FÍGADO →', 196, 178, BRANCO)
         else:
             self.rot(tela, 'PAREDE DO DELGADO', 6, 6, MUC3)
@@ -1407,13 +1408,13 @@ class Grosso(Cena):
         u = .05 + .55 * fase(t, 0, 30)
         x, y = ao_longo(GR_SP, u)
         garfada(tela, x, y, 1.2, t, 'resto')
-        marca(tela, x, y, 'O QUE SOBROU', lado=1, dy=-22 if y > 40 else 18)
+        marca(tela, x, y, 'O QUE SOBROU', lado=1, dy=-22 if y > 60 else 18)
         self.rot(tela, 'INTESTINO GROSSO', 92, 96, PAN2, alvo=(64, 110))
-        self.rot(tela, 'DELGADO', 120, 136, INT2)
+        self.rot(tela, 'DELGADO (ATRÁS)', 104, 64, INT2)
         if t > 12.2: self.rot(tela, 'ÁGUA E SAIS', 196, 92, MISTURA2, alvo=(236, 100))
         est = 'FIBRA E ÁGUA' if t < 12.2 else 'MAIS FIRME'
         self.painel(tela, t, linhas=[('TAMANHO', 'UNS 1,8 M', PAN2), ('TEMPO AQUI (EM GERAL)', '12 H A 2 DIAS', AMARELO)],
-                    estado=('A GARFADA AGORA', est, RES1))
+                    estado=('A GARFADA AGORA', est, QUI2))
 
     def sons(self, fx):
         rng = np.random.default_rng(9)
@@ -1540,7 +1541,7 @@ class Saida(Cena):
             tela.texto('FIM DA', 98, 160, BRANCO, tam=17, centro=True, contorno=PRETO)
             tela.texto('JORNADA', 98, 180, AMARELO, tam=17, centro=True, contorno=PRETO)
         est = ('A JORNADA', 'TERMINOU', VERDE) if t > 12 else ('A GARFADA AGORA', 'O RESTO', RES1)
-        self.painel(tela, t, linhas=[('O QUE SAI', 'O QUE NÃO SERVIU', RES1)], estado=est)
+        self.painel(tela, t, linhas=[('O QUE SAI', 'O QUE SOBROU', QUI2)], estado=est)
 
     def sons(self, fx):
         fx.put(tique(300, .1, .03), self.t0 + 5.0, .2)
@@ -1565,7 +1566,7 @@ class Relogio(Cena):
     def desenhar(self, tela, t, tg):
         grade(tela, 0, 294)
         # relógio grande girando
-        cx, cy, r = 50, 46, 34
+        cx, cy, r = 36, 40, 28
         tela.disco(cx, cy, r + 2, PRETO); tela.disco(cx, cy, r, FUNDO2); tela.anel(cx, cy, r, ACO3, 1.5)
         for k in range(12):
             a = k * math.pi / 6
@@ -1573,30 +1574,31 @@ class Relogio(Cena):
         tela.linha(cx, cy, cx + math.sin(t * 6) * (r - 6), cy - math.cos(t * 6) * (r - 6), AMARELO)
         tela.linha(cx, cy, cx + math.sin(t * .5) * (r - 14), cy - math.cos(t * .5) * (r - 14), BRANCO)
         tela.disco(cx, cy, 2, BRANCO)
-        tela.texto('EM GERAL', 160, 14, ACO3, tam=17, centro=True, contorno=PRETO)
-        tela.texto('(VARIA MUITO)', 160, 34, ACO2, tam=9, centro=True, contorno=PRETO)
+        tela.texto('EM GERAL', 172, 14, ACO3, tam=17, centro=True, contorno=PRETO)
+        tela.texto('(VARIA MUITO)', 172, 34, ACO2, tam=9, centro=True, contorno=PRETO)
         # eixo (escala que cresce rápido: segundos, minutos, horas, dias)
         ya = 186
         tela.ret(96, ya, 191, 1, ACO2)
-        for s, nm in ((1, '1 S'), (60, '1 MIN'), (3600, '1 H'), (86400, '1 DIA'), (2 * 86400, '2 DIAS')):
+        for s, nm in ((1, '1 S'), (60, '1 MIN'), (3600, '1 H'), (86400, '1 DIA')):
             x = int(x_tempo(s))
             tela.ret(x, ya - 3, 1, 7, ACO3)
             tela.texto(nm, x, ya + 6, ACO3, tam=9, centro=True, contorno=PRETO)
         for k, (nm, a, b, cor, t_in) in enumerate(FAIXAS):
             if t < t_in: continue
-            y = 70 + k * 22
+            y = 82 + k * 19
             u = ease(fase(t, t_in, t_in + 1.2))
             xa, xb = x_tempo(a), x_tempo(b)
             xb = lerp(xa, xb, u)
             tela.texto(nm, 92, y + 2, cor, tam=9, centro='d', contorno=PRETO)
-            tela.ret(int(xa), y, max(2, int(xb - xa)), 10, PRETO)
-            tela.ret(int(xa) + 1, y + 1, max(1, int(xb - xa) - 2), 8, cor)
-            for x in range(int(xa), int(xb), 4): tela.ret(x, y + 7, 2, 2, PRETO)
+            tela.ret(int(xa), y, max(6, int(xb - xa)), 12, PRETO)
+            tela.ret(int(xa) + 1, y + 1, max(4, int(xb - xa) - 2), 10, cor)
+            tela.ret(int(xa) + 1, y + 1, max(4, int(xb - xa) - 2), 1, BRANCO)
             if k == 1 and t > 18.8:
                 # comida gordurosa: 6 h ou mais
                 x6 = x_tempo(6 * 3600)
                 for x in range(int(xb), int(x6), 3): tela.ret(x, y + 4, 2, 2, cor)
-                tela.texto('GORDUROSA: 6 H+', int(x6) + 4, y + 2, cor, tam=9, contorno=PRETO)
+                tela.texto('GORDUROSA: 6 H OU MAIS', 172, 52, cor, tam=9, centro=True, contorno=PRETO)
+                tela.linha(172, 61, int(x6), y, cor)
         # a garfada andando no eixo do tempo
         ts = [0.5, 6.8, 9.6, 12.8, 24.8, 36]
         alvo = [6, 3 * 3600, 7 * 3600, 30 * 3600, 30 * 3600, 30 * 3600]

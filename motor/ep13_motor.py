@@ -1117,14 +1117,14 @@ class Eficiencia(Cena):
         gx, ex, y0 = 24, 176, 44
         if VERTICAL and t < 15.8: gx = ex              # no Short, as duas grades se revezam no recorte
         if not (VERTICAL and t >= 15.8):
-            grade(tela, gx, y0, 30, 0, t, .5)
+            grade(tela, gx, y0, 16, 9, t, .5)
         if t >= 15.8:
             grade(tela, ex, y0, 87, 4, t, 15.9)
         if not (VERTICAL and t >= 15.8): rotulo(tela, 'GASOLINA', gx + 54, 18, LARANJA, 17, centro=True)
         if t >= 15.8: rotulo(tela, 'ELÉTRICO', ex + 54, 18, VERDE, 17, centro=True)
         if t >= 7.8 and not (VERTICAL and t >= 15.8):
-            rotulo(tela, 'CERCA DE 30%', gx + 54, 160, VERDE, 9, centro=True)
-            if not VERTICAL: rotulo(tela, 'VIRA MOVIMENTO', gx + 54, 172, ACO3, 9, centro=True)
+            rotulo(tela, '16% A 25%', gx + 54, 160, VERDE, 9, centro=True)
+            if not VERTICAL: rotulo(tela, 'CHEGA ÀS RODAS', gx + 54, 172, ACO3, 9, centro=True)
         if t >= 17.6:
             rotulo(tela, '87% A 91%', ex + 54, 160, VERDE, 9, centro=True)
             if not VERTICAL: rotulo(tela, 'COM A FRENAGEM', ex + 54, 172, ACO3, 9, centro=True)

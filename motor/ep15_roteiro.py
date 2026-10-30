@@ -256,13 +256,14 @@ Fontes
 
 # ---------------------------------------------------------------- Shorts (cortes verticais)
 # x = coluna da tela larga onde começa o recorte de 180 px. Nas cenas de close
-# o protagonista fica entre x 60 e 240 (centro ~150).
+# o protagonista fica entre x 60 e 240 (centro ~150); a boca, entre 90 e 268.
+# O relógio (linha do tempo larga) não tem corte vertical.
 PREFIXO = 'ep15-garfada'
 CORTES = [
     dict(id='c1', de=('engolir', 0.0), ate=('engolir', 24.0), x=60, gancho=['A TAMPINHA', 'DA GARGANTA'],
          titulo='Por que a comida não vai para o pulmão? 🫁',
          descricao='Na garganta há dois canos: um do ar e um da comida. Quando você engole, a epiglote, uma tampinha, dobra e fecha o caminho do ar.'),
-    dict(id='c2', de=('esofago', 0.0), ate=('esofago', 30.0), x=57, gancho=['ESÔFAGO NO', 'RITMO'],
+    dict(id='c2', de=('esofago', 0.0), ate=('esofago', 30.0), x=50, gancho=['ESÔFAGO NO', 'RITMO'],
          titulo='O esôfago empurra a comida em ondas 🎵',
          descricao='O esôfago tem uns 25 cm. Anéis de músculo apertam em ondas e empurram a comida: é a peristalse. Aqui, cada aperto cai numa batida da música.'),
     dict(id='c3', de=('estomago', 0.0), ate=('estomago', 36.0), x=60, gancho=['DENTRO DO', 'ESTÔMAGO'],
@@ -274,7 +275,7 @@ CORTES = [
     dict(id='c5', de=('bacterias', 0.0), ate=('bacterias', 30.0), x=57, gancho=['TRILHÕES DE', 'BACTÉRIAS'],
          titulo='As bactérias que moram no seu intestino 🦠',
          descricao='No intestino grosso moram trilhões de bactérias, de mais de 700 espécies. Elas comem a fibra que sobrou (gases, olá feijão) e fazem vitaminas como a K.'),
-    dict(id='c6', de=('relogio', 0.0), ate=('relogio', 36.0), x=57, gancho=['QUANTO', 'TEMPO LEVA?'],
-         titulo='Quanto tempo a comida leva para atravessar o corpo? ⏱️',
-         descricao='Segundos até o estômago, 2 a 4 horas no estômago, 3 a 5 no delgado e de 12 horas a 2 dias no grosso. Em geral: varia muito de pessoa para pessoa.'),
+    dict(id='c6', de=('boca', 0.0), ate=('boca', 36.0), x=88, gancho=['DENTRO DA', 'BOCA'],
+         titulo='O que a boca faz com uma garfada de arroz com feijão 🍚',
+         descricao='Os dentes trituram (um adulto tem 32), a saliva traz a amilase, que já começa a quebrar o amido do arroz, e a língua junta tudo num bolo pronto para engolir.'),
 ]

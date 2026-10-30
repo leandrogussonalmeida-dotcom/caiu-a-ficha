@@ -65,7 +65,7 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       campo magnético que gira, com sentido definido e intensidade constante.
       Wikipedia, "Three-phase electric power".
   F9  Um carro elétrico típico é 87%-91% eficiente (contando a frenagem
-      regenerativa), contra cerca de 30% de um carro a gasolina convencional.
+      regenerativa), (gasolina: 16-25% no uso misto, F13).
       Departamento de Energia dos EUA, Fact of the Week #1360 (2024).
   F10 Motores elétricos dão torque alto desde a largada; a maioria dos carros
       elétricos usa câmbio de relação fixa e não tem embreagem. Wikipedia,
@@ -163,19 +163,19 @@ LEGENDAS = {
         (7.0, 13.6, "OS ÍMÃS GIRAM COM AS PÁS, EM VOLTA", "DAS BOBINAS PARADAS NO MEIO.", ('F6',)),
         (14.2, 20.8, "EM MUITAS *MÁQUINAS DE LAVAR*, ELE", "GIRA O CESTO DIRETO.", ('F6',)),
         (21.0, 27.6, "SEM CORREIA E SEM CAIXA DE", "ENGRENAGENS: *TRAÇÃO DIRETA*.", ('F6',)),
-        (28.2, 34.8, "NO *CARRO ELÉTRICO*, MOTORES ASSIM", "MOVEM AS RODAS.", ('F5', 'F6')),
+        (28.2, 34.8, "MUITOS *CARROS ELÉTRICOS* USAM MOTORES", "ASSIM PARA MOVER AS RODAS.", ('F5', 'F6')),
         (35.0, 41.6, "A MAIORIA TEM CÂMBIO DE *1 MARCHA*", "E NÃO TEM EMBREAGEM.", ('F10',)),
     ],
     'eficiencia': [
         (0.5, 7.6, "NO MOTOR A GASOLINA, A MAIOR PARTE", "DA ENERGIA SE PERDE COMO *CALOR*.", ('F9',)),
-        (7.8, 15.6, "CARRO A GASOLINA: CERCA DE *30%*", "DA ENERGIA VIRA MOVIMENTO.", ('F9',)),
+        (7.8, 15.6, "CARRO A GASOLINA: SÓ *16% A 25%*", "DA ENERGIA CHEGA ÀS RODAS.", ('F13',)),
         (15.8, 22.6, "CARRO ELÉTRICO: *87% A 91%*, CONTANDO", "A ENERGIA QUE A FRENAGEM DEVOLVE.", ('F9',)),
         (22.8, 29.6, "SEM QUEIMA, SOBRAM PERDAS PEQUENAS:", "ATRITO E CALOR NOS FIOS E NO FERRO.", ('F7',)),
     ],
     'torque': [
-        (0.5, 7.6, "E ELE JÁ TEM FORÇA *PARADO*: O", "TORQUE É MÁXIMO COM O EIXO PARADO.", ('F4',)),
+        (0.5, 7.6, "E ELE JÁ TEM FORÇA *PARADO*: NESTE", "MOTOR, O TORQUE É MÁXIMO NO ZERO.", ('F4',)),
         (7.8, 15.6, "TORQUE É A FORÇA DE GIRO. QUANTO MAIS", "RÁPIDO ELE GIRA, *MENOS TORQUE* SOBRA.", ('F4',)),
-        (15.8, 23.6, "POR ISSO O CARRO ELÉTRICO SAI", "*FORTE JÁ DA LARGADA*.", ('F10',)),
+        (15.8, 23.6, "NO CARRO ELÉTRICO, O TORQUE MÁXIMO", "JÁ VEM DO ZERO: *SAI FORTE NA LARGADA*.", ('F10',)),
     ],
     'historia': [
         (0.5, 5.8, "*1820*: OERSTED VÊ A CORRENTE", "MEXER NA BÚSSOLA.", ('F2',)),
@@ -184,10 +184,10 @@ LEGENDAS = {
         (17.8, 23.6, "*1885 E 1887*: FERRARIS E TESLA", "MOSTRAM O CAMPO QUE GIRA.", ('F7',)),
     ],
     'trifasico': [
-        (0.5, 7.6, "O FINAL, NO RITMO: 3 BOBINAS, 3 FASES,", "*A, B E C*, UMA EM CADA BATIDA.", ()),
+        (0.5, 7.6, "O FINAL NO RITMO: 3 BOBINAS, 3 FASES,", "*A, B E C*, UMA EM CADA BATIDA.", ()),
         (7.8, 15.6, "AS CORRENTES SOBEM E DESCEM, CADA", "UMA *1/3 DE CICLO* DEPOIS DA OUTRA.", ('F8',)),
         (15.8, 23.6, "JUNTAS, FAZEM UM CAMPO QUE *GIRA*", "LISO E SEMPRE DO MESMO TAMANHO.", ('F8',)),
-        (23.8, 31.6, "NA TOMADA, NO BRASIL: *60 CICLOS*", "*POR SEGUNDO*, 60 HZ.", ('F11',)),
+        (23.8, 31.6, "NA REDE DO BRASIL: *60 CICLOS*", "*POR SEGUNDO*, 60 HZ.", ('F11',)),
         (31.8, 39.6, "COM 2 POLOS, O CAMPO DÁ 60 VOLTAS", "POR SEGUNDO: *3.600 RPM*.", ('F12',)),
     ],
     'resumo': [
@@ -211,6 +211,8 @@ FONTES = {
            'https://www.energy.gov/node/4844725'),
     'F10': ('Wikipedia, "Electric car"', 'https://en.wikipedia.org/wiki/Electric_car'),
     'F11': ('Wikipedia, "Mains electricity by country"', 'https://en.wikipedia.org/wiki/Mains_electricity_by_country'),
+    'F13': ('fueleconomy.gov (Departamento de Energia dos EUA), "Where the Energy Goes: Gasoline Vehicles"',
+            'https://www.fueleconomy.gov/feg/atv.shtml'),
     'F12': ('Conta a partir de F11 e F7: 60 ciclos por segundo x 60 s = 3.600 RPM com 2 polos (1.800 com 4)', None),
 }
 
@@ -241,7 +243,8 @@ Simplificado de propósito
 - No trifásico, mostramos o motor de 2 polos e o campo girando 1/3 de volta por batida; depois aceleramos até a velocidade da tomada só no texto e no borrão, já que 60 voltas por segundo não dá para ver.
 - No motor de indução, a velocidade do rotor e o escorregamento do painel são um exemplo dentro da faixa de 0,5% a 5%; o campo da animação gira bem mais devagar que na vida real.
 - Os 85% a 97% são a eficiência em plena carga de motores de indução; motores pequenos e baratos podem ser bem menos eficientes (os de polo sombreado ficam em 15% a 20%).
-- A comparação de 30% (gasolina) e 87% a 91% (elétrico, contando a frenagem regenerativa) é a do Departamento de Energia dos EUA e depende do trajeto.
+- Gasolina: 16% a 25% da energia chega às rodas no uso misto (o mesmo número do nosso vídeo do motor a combustão). Elétrico: 87% a 91%, contando a frenagem regenerativa. Ambos do Departamento de Energia dos EUA; dependem do trajeto.
+- O gráfico de torque é o de um motor simples de ímã permanente. No carro elétrico, o controlador mantém o torque máximo quase constante até uma certa velocidade; só depois ele cai.
 
 Fontes
 {fontes}
@@ -269,7 +272,7 @@ CORTES = [
     dict(id='c5', de=('orsted', 0.0), ate=('orsted', 24.0), x=50, gancho=['A BÚSSOLA', 'SE MEXEU'],
          titulo='1820: a descoberta que levou ao motor elétrico 🧭',
          descricao='Oersted viu a agulha de uma bússola se mexer perto de um fio com corrente. A corrente cria um campo magnético em volta do fio; invertendo a corrente, as agulhas viram.'),
-    dict(id='c6', de=('eficiencia', 3.0), ate=('eficiencia', 30.0), x=141, gancho=['30% CONTRA', '90%'],
+    dict(id='c6', de=('eficiencia', 3.0), ate=('eficiencia', 30.0), x=141, gancho=['25% CONTRA', '90%'],
          titulo='Carro elétrico x carro a gasolina: quem aproveita a energia? 🔋',
-         descricao='Segundo o Departamento de Energia dos EUA, um carro elétrico típico é 87% a 91% eficiente (contando a frenagem regenerativa), contra cerca de 30% do carro a gasolina.'),
+         descricao='Segundo o Departamento de Energia dos EUA, um carro elétrico típico é 87% a 91% eficiente (contando a frenagem regenerativa), contra 16% a 25% da energia que chega às rodas num carro a gasolina típico (uso misto).'),
 ]

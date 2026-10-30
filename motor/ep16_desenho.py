@@ -180,16 +180,25 @@ class Fio:
             d -= s
         return self.pts[-1]
 
-    def desenhar(self, tela, val, t=0.0, esp=2, fluxo=True):
+    def desenhar(self, tela, val, t=0.0, esp=2, fluxo=True, herois=True, r=2.4):
+        """Pinta o fio e devolve as frentes de subida (onde um 1 novo está
+        chegando): lá o bit protagonista brilha."""
+        vs = [val(u) for _, _, u in self.am]
         for x, y, u in self.am:
             tela.ret(int(x) - 1, int(y) - 1, esp + 2, esp + 2, PRETO)
         for k, (x, y, u) in enumerate(self.am):
-            v = val(u)
-            if v:
+            if vs[k]:
                 cor = CHAMA0 if (fluxo and (k - int(t * 40)) % 9 == 0) else FIO1
             else:
                 cor = FIO0
             tela.ret(int(x), int(y), esp, esp, cor)
+        frentes = []
+        for k in range(len(vs) - 1):
+            if vs[k] and not vs[k + 1]:
+                frentes.append((self.am[k][0] + esp / 2 - .5, self.am[k][1] + esp / 2 - .5))
+        if herois:
+            for x, y in frentes: bit_luz(tela, x, y, 1, r)
+        return frentes
 
 
 # ------------------------------------------------------------------ o circuito (a lógica de verdade)
@@ -298,8 +307,7 @@ def porta_forma(tipo, x0, y, s=1.0):
         for k in range(1, 20):
             v = 1 - k / 20
             pts.append((x0 + dx + 5 * s * math.sin(math.pi * v), y0 + 2 * hh * v))
-        ent = [(x0 + 5 * s * math.sin(math.pi * (6 * s / (2 * hh) + .5 - 6 * s / (2 * hh))) * 0 + 3 * s, y - 6 * s),
-               (x0 + 3 * s, y + 6 * s)]
+        ent = [(x0 + 3 * s, y - 6 * s), (x0 + 3 * s, y + 6 * s)]
         return pts, ent, (x0 + dx + 28 * s, y)
     if tipo == 'NAO':
         pts = [(x0, y0 + 2 * s), (x0 + 20 * s, y), (x0, y1 - 2 * s)]
@@ -447,14 +455,14 @@ def chave_mos(tela, x, y, tipo, ligado, s=1.0, val_porta=0):
 
 
 # ------------------------------------------------------------------ tabela-verdade
-def tabela(tela, x, y, cab, linhas, atual=-1, vistos=(), larg=None, alto=12):
+def tabela(tela, x, y, cab, linhas, atual=-1, vistos=(), larg=None, alto=12, n_out=1):
     """cab: títulos das colunas; linhas: listas de valores (0/1). Linha atual
     em amarelo; linhas ainda não vistas ficam apagadas, com '?'."""
     n = len(cab)
     larg = larg or [22] * n
     xx = x
     for j, c in enumerate(cab):
-        tela.texto(c, xx + larg[j] // 2, y, ACO3 if j < n - 1 else LARANJA, tam=9, centro=True, contorno=PRETO)
+        tela.texto(c, xx + larg[j] // 2, y, ACO3 if j < n - n_out else LARANJA, tam=9, centro=True, contorno=PRETO)
         xx += larg[j]
     tela.ret(x, y + 10, sum(larg), 1, FUNDO3)
     for i, ln in enumerate(linhas):
@@ -463,12 +471,12 @@ def tabela(tela, x, y, cab, linhas, atual=-1, vistos=(), larg=None, alto=12):
             tela.ret(x - 2, yy - 2, sum(larg) + 4, alto - 1, FUNDO3)
         xx = x
         for j, v in enumerate(ln):
-            if j == n - 1 and i not in vistos and i != atual:
+            if j >= n - n_out and i not in vistos and i != atual:
                 txt, cor = '?', ACO1
             else:
                 txt = str(v)
                 cor = (AMARELO if v else ACO2) if i == atual else (ACO4 if v else ACO1)
-                if j == n - 1 and i == atual: cor = CHAMA0 if v else ACO3
+                if j >= n - n_out and i == atual: cor = CHAMA0 if v else ACO3
             tela.texto(txt, xx + larg[j] // 2, yy, cor, tam=9, centro=True, contorno=PRETO)
             xx += larg[j]
 
