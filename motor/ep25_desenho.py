@@ -544,7 +544,10 @@ class Turbofan:
         k = cam.k
         P = cam.P
         if chama > .2:
-            for i in range(30):
+            for lado in (-1, 1):
+                pl = cam.L([(68, 16.6), (110, 18), (150, 20), (150, 0), (84, 0), (70, 6.4)], lado)
+                pol(tela, pl, Q2, FUNDO, fase=int(t * 12))
+            for i in range(60):
                 u = (hsh(i, 3) + t * 1.4) % 1.0
                 x = 70 + u * 90
                 r = (hsh(i, 4) - .5) * 2 * (6 + u * 10)
@@ -688,7 +691,7 @@ PERFIL = [(-30, 6), (-26, 1), (-18, -3.5), (-6, -6.5), (8, -7), (20, -5), (30, -
           (6, 1.6), (-6, 4.2), (-18, 6.6), (-26, 7.8)]
 
 
-def pa_corte(tela, cx, cy, s, t, frio=1.0, furos=1.0, camada=1.0, gas=1.0):
+def pa_corte(tela, cx, cy, s, t, frio=1.0, furos=1.0, camada=1.0, gas=1.0, perigo=False):
     """A pá de turbina vista em corte (perfil de asa), com o gás quente passando,
     os canais de ar frio por dentro e o filme de ar saindo pelos furos."""
     def P(x, y): return (cx + x * s, cy + y * s)
@@ -696,15 +699,19 @@ def pa_corte(tela, cx, cy, s, t, frio=1.0, furos=1.0, camada=1.0, gas=1.0):
     def L(pts): return [P(x, y) for x, y in pts]
     # gás quente passando em volta (da esquerda para a direita)
     if gas > 0:
-        for i in range(160):
+        # o gás quente em faixas que contornam a pá (desvia por cima e por baixo)
+        x0, x1 = int(cx - 72 * s), int(cx + 82 * s)
+        dither(tela, x0, int(cy - 30 * s), x1 - x0, int(60 * s), FUNDO, BRASA if gas > .5 else FUNDO2)
+        for i in range(260):
             u = (hsh(i, 31) + t * .55) % 1.0
-            x = -70 + u * 150
-            y = (hsh(i, 32) - .5) * 52
-            yb = y + (-8 if abs(y) < 9 and -32 < x < 40 else 0) * (1 if y < 0 else -1)
+            x = -72 + u * 154
+            y0 = (hsh(i, 32) - .5) * 58
+            desvio = math.exp(-((x - 4) / 34) ** 2) * 9 * max(0.0, 1 - abs(y0) / 29)
+            y = y0 + (desvio if y0 > 0 else -desvio)
+            if abs(y) < 9.5 and -33 < x < 40: continue
             a = P(x, y)
-            if abs(y) < 9 and -32 < x < 40: continue
-            c = cor_calor(1500 - u * 150, hsh(i, 33))
-            tela.ret(int(a[0]), int(a[1]), max(1, int(s * 1.6)), 1, c)
+            c = cor_calor(1550 - u * 200 - abs(y0) * 6, hsh(i, 33))
+            tela.ret(int(a[0]), int(a[1]), max(2, int(s * 2.4)), 1, c)
     # camada isolante (cerâmica) por fora
     if camada > 0:
         maior = [(x * 1.06, y * 1.25 + (.4 if y > 0 else -.4)) for x, y in PERFIL]
@@ -713,6 +720,12 @@ def pa_corte(tela, cx, cy, s, t, frio=1.0, furos=1.0, camada=1.0, gas=1.0):
     contorno(tela, L(PERFIL), PRETO)
     pol(tela, L(PERFIL), ACO2, ACO3)
     pol(tela, L([(x, y) for x, y in PERFIL if y < 0] + [(30, -.6), (-26, -.6)]), ACO3, ACO4)
+    if perigo:
+        # sem proteção: o metal fica em brasa e pisca (derreteria)
+        quente = .5 + .5 * math.sin(t * 6)
+        pol(tela, L(PERFIL), VERMELHO if quente > .5 else BRASA, LARANJA)
+        brilho(tela, cx, cy, 34 * s * .5, VERMELHO)
+        return
     # canais por dentro
     canais = [(-20, -14), (-10, -4), (0, 6), (10, 16), (20, 25)]
     for a, b in canais:

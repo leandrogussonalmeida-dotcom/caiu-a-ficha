@@ -626,6 +626,98 @@ class Nucleo(Cena):
             fx.put(tique(330, .12), self.t0 + b, .12)
 
 
+# ============================================================ por que a nuvem flutua
+class Flutua(Cena):
+    K = 2
+    CX, CY, LADO = 146, 96, 104       # o "cubo" de 1 km em volta da nuvem
+
+    def p_gota(self, t):
+        """A nossa gotinha boia: cai devagar e o ar que sobe a devolve para cima."""
+        y = self.CY + 8 + 10 * math.sin(t * .9) - 30 * ease(fase(t, 31.9, 35.6)) * 0
+        if t > 31.9: y += 110 * ease(fase(t, 32.6, 35.9)) ** 2
+        return self.CX + 20 * math.sin(t * .37), y
+
+    def desenhar(self, tela, t, tg):
+        ceu_dia(tela, PALCO_H, 0, 292)
+        copa(tela, 0, 292, PALCO_H + 8, t, seed=3, alt=10)
+        cx, cy, L = self.CX, self.CY, self.LADO
+        # ar que sobe por baixo da nuvem (térmica)
+        if t >= 19.5:
+            for k in range(8):
+                x = cx - 56 + k * 16
+                u = (t * .7 + k * .29) % 1.0
+                y = PALCO_H - 6 - u * 150
+                seta(tela, int(x), int(y), 0, -1, AMARELO if k % 2 else BRANCO, 5)
+                tela.ret(int(x), int(y) + 4, 1, 12, AMARELO if k % 2 else BRANCO)
+            self.rot(tela, 'AR QUE SOBE', cx + 64, 176, AMARELO)
+        nuvem_dia(tela, cx, cy, 120)
+        nuvem_dia(tela, cx + 40, cy + 6, 70)
+        # gotinhas lá dentro, boiando
+        for k in range(18):
+            a = k * 2.39
+            x = cx + math.cos(a) * (14 + (k * 7) % 40)
+            y = cy + math.sin(a) * 16 + 2 * math.sin(t * 1.5 + k)
+            gotinha(tela, x, y, 1.6, AGC, AGM)
+        # o cubo de 1 km
+        if 6.7 <= t < 19.3:
+            u = ease(fase(t, 6.7, 7.6))
+            h = int(L / 2 * u)
+            for (ax, ay, bx, by) in ((cx - h, cy - h, cx + h, cy - h), (cx + h, cy - h, cx + h, cy + h),
+                                     (cx + h, cy + h, cx - h, cy + h), (cx - h, cy + h, cx - h, cy - h)):
+                n = int(max(abs(bx - ax), abs(by - ay)))
+                for i in range(0, n):
+                    if (i // 4 + int(t * 6)) % 2: continue
+                    tela.px(ax + (bx - ax) * i / max(1, n), ay + (by - ay) * i / max(1, n), AMARELO)
+            if u >= 1:
+                self.rot(tela, '1 KM', cx - 10, cy + L // 2 + 3, AMARELO)
+                self.rot(tela, '1 KM', cx + L // 2 + 4, cy - 4, AMARELO)
+            if t < 13.1:
+                kg = int(500000 * ease(fase(t, 7.6, 11.0)))
+                self.caixa_txt(tela, [('ÁGUA NESTA NUVEM', 9, BRANCO), (f"{fmt_num(kg)} KG", 17, AMARELO)], cx, 4, centro=True)
+        # 1 metro cúbico: meio grama
+        if 13.1 <= t < 19.3:
+            u = ease(fase(t, 13.1, 13.9))
+            bx, by, bl = 196, 118, int(52 * u)
+            if bl > 6:
+                tela.linha(cx + 4, cy + 4, bx, by, ACO4)
+                painel(tela, bx, by, bl, bl, borda=AMARELO)
+                if u >= 1:
+                    gota(tela, bx + 26, by + 26 + 2 * math.sin(t * 3), 3)
+                    tela.texto('1 M', bx + 26, by + 4, BRANCO, tam=9, centro=True, contorno=PRETO)
+                    tela.texto('0,5 G', bx + 26, by + 38, AMARELO, tam=9, centro=True, contorno=PRETO)
+            self.rot(tela, 'UMA CAIXA DE 1 METRO', 150, 182, BRANCO)
+        # densidade: ar úmido (leve) sobe, ar seco (pesado) em volta
+        if 25.9 <= t < 31.7:
+            for k, (x, cor, nm) in enumerate(((44, CEUD3, 'AR SECO'), (248, CEUD3, 'AR SECO'))):
+                self.rot(tela, nm, x - 18, 150, ACO4)
+                seta(tela, x, 140 + int(2 * math.sin(t * 3)), 0, 1, ACO4, 5)
+            self.rot(tela, 'AR ÚMIDO: MAIS LEVE', cx - 50, 150, ESPUMA)
+        # a nossa gotinha
+        x, y = self.p_gota(t)
+        R = 3.5 + 3 * ease(fase(t, 31.9, 33.0))
+        rastro(tela, self.p_gota, t, n=8, dt=.12, r0=1.6)
+        prota(tela, x, y, R, t)
+        if 19.5 <= t < 25.9:
+            self.rot(tela, 'CAI ~1 CM/S', int(x) + 12, int(y) + 8, AMARELO, alvo=(x + 3, y + 3))
+        if t < 6.5 and t > .8:
+            self.rot(tela, 'A NOSSA GOTINHA', int(x) + 12, int(y) - 22, AMARELO, alvo=(x + 3, y - 3))
+        linhas = [('ÁGUA NA NUVEM', '500.000 KG' if t >= 11 else '?', AMARELO if t >= 11 else ACO2),
+                  ('POR METRO CÚBICO', '0,5 G' if t >= 14 else '?', AGC if t >= 14 else ACO2),
+                  ('GOTINHA CAI A', '~1 CM/S' if t >= 20 else '?', CIANO if t >= 20 else ACO2),
+                  ('DIAS DE VIAGEM', fmt_dias(2), AMARELO)]
+        self.painel(tela, t, cab=('ETAPA 3 DE 9', 'POR QUE FLUTUA', NUVD2), linhas=linhas)
+
+    def sons(self, fx):
+        fx.put(fx.chiado(6.0, 200, 800, ataque=1.0), self.t0, .05)
+        fx.put(tique(1320, .1), self.t0 + 7.6, .14)
+        for k in range(8):
+            fx.put(tique(700 + k * 90, .05), self.t0 + 7.6 + k * .42, .07)
+        fx.put(tique(1480, .1), self.t0 + 13.9, .14)
+        fx.put(fx.chiado(6.0, 250, 1100, ataque=1.5), self.t0 + 19.5, .07)
+        fx.put(pop(420, .12), self.t0 + 31.9, .2)
+        fx.put(fx.chiado(3.0, 300, 1500, ataque=.6), self.t0 + 32.6, .08)
+
+
 # ============================================================ 4 colisão
 class Colisao(Cena):
     K = 3
@@ -1438,7 +1530,7 @@ class Fim(Cena):
         fx.put(RM.som_encerramento(SEED), self.t0, .9)
 
 
-CENAS = dict(gancho=Gancho, titulo=Titulo, oceano=Oceano, subida=Subida, nucleo=Nucleo, colisao=Colisao,
+CENAS = dict(gancho=Gancho, titulo=Titulo, oceano=Oceano, subida=Subida, nucleo=Nucleo, flutua=Flutua, colisao=Colisao,
              queda=Queda, floresta=Floresta, rios=Rios, sudeste=Sudeste, mar=Mar, tempo=Tempo,
              resumo=Resumo, fim=Fim)
 

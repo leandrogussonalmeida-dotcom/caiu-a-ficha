@@ -263,7 +263,7 @@ CORTES = [
     dict(id='c4', de=('admissao', 7.0), ate=('admissao', 36.0), x=60, gancho=['O AR QUE', 'PASSA POR FORA'],
          titulo='A maior parte do ar nem entra no motor a jato 🌀',
          descricao='Para cada 1 kg de ar que entra no miolo do turbofan, de 5 a 12 kg passam por fora, soprados pelo fan. Esse ar de fora dá a maior parte do empurrão.'),
-    dict(id='c5', de=('bocal', 7.0), ate=('bocal', 36.0), x=60, gancho=['A 3ª LEI', 'DE NEWTON'],
+    dict(id='c5', de=('bocal', 7.0), ate=('bocal', 36.0), x=60, gancho=['AÇÃO E', 'REAÇÃO'],
          titulo='Como o motor a jato empurra o avião: a terceira lei de Newton',
          descricao='O motor empurra o ar para trás, e o ar empurra o motor para a frente. Esse empurrão se chama empuxo.'),
     dict(id='c6', de=('ritmo', 0.0), ate=('ritmo', 24.0), x=60, gancho=['CARRO', 'X JATO'],

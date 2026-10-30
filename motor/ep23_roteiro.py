@@ -59,6 +59,10 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       1 milhão de vezes mais água.
   F14 Conta (F2): exemplo com 25 °C no nível do mar; a 1 km, 25 - 9,8 = 15 °C;
       acima, ~5 °C a menos por km.
+  F16 Nuvem de 1 km cúbico com 0,5 g de água por m cúbico: ~500.000 kg; o ar da nuvem é
+      menos denso que o ar seco. USGS, "How Much Does a Cloud Weigh?".
+  F17 Gotinhas pequenas são seguras pela circulação do ar; grandes e pesadas
+      demais, caem como chuva. Wikipedia, "Cloud".
   F15 Na hidrelétrica, a água represada move a turbina e o gerador.
       Wikipedia, "Hydroelectricity" (o mesmo do ep11).
 """
@@ -72,6 +76,7 @@ CAPITULOS = [
     dict(id='oceano', gen='lofi', bars=12, papel='drop'),          # 36 s
     dict(id='subida', gen='lofi', bars=12, papel='drop'),          # 36 s
     dict(id='nucleo', gen='lofi', bars=12, papel='drop'),          # 36 s
+    dict(id='flutua', gen='lofi', bars=12, papel='drop'),          # 36 s
     dict(id='colisao', gen='synthwave', bars=15, papel='drop'),    # 36 s
     dict(id='queda', gen='lofi', bars=14, papel='drop'),           # 42 s
     dict(id='floresta', gen='lofi', bars=16, papel='drop'),        # 48 s
@@ -111,6 +116,14 @@ LEGENDAS = {
         (19.5, 25.7, "NASCEU UMA *GOTINHA DE NUVEM*:", "UNS *0,02 MM*. MINÚSCULA.", ('F3',)),
         (25.9, 31.7, "AO CONDENSAR, O VAPOR *SOLTA CALOR*.", "O AR SEGUE SUBINDO, MAIS DEVAGAR.", ('F2',)),
         (31.9, 35.9, "JUNTAS, AS GOTINHAS", "FORMAM A *NUVEM*.", ('F3',)),
+    ],
+    'flutua': [
+        (0.5, 6.5, "SE A NUVEM É FEITA DE ÁGUA,", "POR QUE ELA *NÃO CAI*?", ()),
+        (6.7, 12.9, "UMA NUVEM DE 1 KM DE LADO TEM UNS", "*500.000 KG* DE ÁGUA.", ('F16',)),
+        (13.1, 19.3, "MAS ESSA ÁGUA ESTÁ ESPALHADA: SÓ", "*MEIO GRAMA* POR METRO CÚBICO.", ('F16',)),
+        (19.5, 25.7, "CADA GOTINHA CAI A ~1 CM/S, E O AR", "QUE SOBE *SEGURA* AS GOTINHAS NO ALTO.", ('F8', 'F17')),
+        (25.9, 31.7, "E O AR ÚMIDO DA NUVEM É *MENOS*", "*DENSO* QUE O AR SECO EM VOLTA.", ('F16',)),
+        (31.9, 35.9, "ATÉ A GOTA FICAR GRANDE", "E PESADA DEMAIS...", ('F17',)),
     ],
     'colisao': [
         (0.5, 6.5, "ETAPA 4: GOTINHAS DE NUVEM SÃO TÃO", "LEVES QUE QUASE NÃO CAEM: *1 CM/S*.", ('F8',)),
@@ -204,16 +217,21 @@ FONTES = {
     'F13': ('Conta a partir de F3: 2 mm / 0,02 mm = 100; 100 x 100 x 100 = 1.000.000', None),
     'F14': ('Conta a partir de F2: exemplo com 25 °C no nível do mar; 25 - 9,8 = 15 °C a 1 km', None),
     'F15': ('Wikipedia, "Hydroelectricity"', 'https://en.wikipedia.org/wiki/Hydroelectricity'),
+    'F16': ('USGS Water Science School, "How Much Does a Cloud Weigh?" (1 km cúbico, 0,5 g por m cúbico, ~500.000 kg; menos denso que o ar seco)',
+            'https://www.usgs.gov/water-science-school/science/how-much-does-a-cloud-weigh'),
+    'F17': ('Wikipedia, "Cloud" (gotinhas seguras pela circulação do ar; grandes e pesadas demais, caem como chuva)',
+            'https://en.wikipedia.org/wiki/Cloud'),
 }
 
 CAPITULOS_YT = {'gancho': 'Introdução', 'oceano': 'Etapa 1: a evaporação no Atlântico',
                 'subida': 'Etapa 2: o ar sobe e esfria', 'nucleo': 'Etapa 3: o núcleo de sal e a gotinha',
+                'flutua': 'Por que a nuvem não cai?',
                 'colisao': 'Etapa 4: 1 milhão de gotinhas', 'queda': 'Etapa 5: a queda (e a forma da gota)',
                 'floresta': 'Etapa 6: dentro de uma árvore da Amazônia', 'rios': 'Etapa 7: o rio voador',
                 'sudeste': 'Etapa 8: chuva no Sudeste e a represa', 'mar': 'Etapa 9: de volta ao mar',
                 'tempo': 'Quanto tempo a água fica em cada lugar', 'resumo': 'Resumo'}
 
-DESCRICAO = """Por onde passa uma gota de chuva antes de cair na sua cidade? Neste vídeo a gente segue UMA molécula de água: o Sol a faz evaporar do Oceano Atlântico, o ar sobe e esfria, ela gruda num grãozinho de sal e vira gotinha de nuvem, se junta com um milhão de outras e vira gota de chuva. A gota cai na Amazônia (e não tem forma de lágrima!), entra numa árvore pela raiz, sai pela folha como vapor e viaja num rio voador até o Sudeste. Lá ela chove de novo, desce o rio, passa pela represa e volta para o mar.
+DESCRICAO = """Por onde passa uma gota de chuva antes de cair na sua cidade? Neste vídeo a gente segue UMA molécula de água: o Sol a faz evaporar do Oceano Atlântico, o ar sobe e esfria, ela gruda num grãozinho de sal e vira gotinha de nuvem (e a gente mostra por que uma nuvem de 500 toneladas não cai), se junta com um milhão de outras e vira gota de chuva. A gota cai na Amazônia (e não tem forma de lágrima!), entra numa árvore pela raiz, sai pela folha como vapor e viaja num rio voador até o Sudeste. Lá ela chove de novo, desce o rio, passa pela represa e volta para o mar.
 
 Um painel mostra a etapa (de 1 a 9), a altitude, a temperatura, o tamanho da gota e os dias de viagem.
 
@@ -224,6 +242,7 @@ Capítulos
 
 Simplificado de propósito
 - A molécula, a gotinha e a gota estão fora de escala: uma gota de 2 mm tem 100 vezes a largura de uma gotinha de nuvem, e as moléculas são bilhões de vezes menores do que aparecem.
+- A nuvem de 500.000 kg é o exemplo do USGS (1 km cúbico com 0,5 g de água por metro cúbico); cada nuvem tem a sua quantidade de água.
 - O vapor d'água é invisível; pintamos o vapor e o rio voador para você ver o caminho.
 - As temperaturas são um exemplo: 25 °C no nível do mar, esfriando 9,8 °C por km até a base da nuvem (1 km neste exemplo) e cerca de 5 °C por km dentro dela. No mundo real a base da nuvem e as temperaturas mudam todo dia.
 - O contador de dias é ilustrativo: ele segue as médias (cerca de 9 dias no ar, meses no rio), mas uma molécula de verdade pode levar de horas a anos em cada etapa. Também mostramos poucas colisões; para uma gota de 2 mm são cerca de 1 milhão.

@@ -157,6 +157,32 @@ def cam_vertical(cap, x_alvo, cy, k):
     return Camera(x_corte(cap) + 90 - x_alvo * k, cy, k)
 
 
+ZONAS = [(-100, -63), (-63, 3), (3, 24), (24, 90)]
+
+
+def jato_4tempos(tela, cam, t, aceso, pulso, y_txt=26, x_txt=None, passo=56, faixas=True):
+    """O jato com as 4 zonas dos tempos: faixa colorida embaixo e o nome em cima, com fio
+    até o caminho do ar. `aceso` False = tudo apagado (antes da virada)."""
+    TF.desenhar(tela, cam, t, zonas=(1.0 if pulso > .3 else .5) if aceso else 0.0, jato=1.0)
+    x_txt = x_txt if x_txt is not None else cam.cx - 1.5 * passo
+    for j, ((xa, xb), (nome, cor)) in enumerate(zip(ZONAS, TEMPOS)):
+        c = cor if aceso else ACO1
+        if faixas:
+            a, b = cam.P(xa + .8, 58, 1), cam.P(min(xb, 84) - .8, 58, 1)
+            hh = 5 + (3 if pulso > .5 else 0)
+            tela.ret(int(a[0]), int(a[1]), max(2, int(b[0] - a[0])), hh, PRETO)
+            tela.ret(int(a[0]) + 1, int(a[1]) + 1, max(1, int(b[0] - a[0]) - 2), hh - 2, c if aceso else ACO0)
+            if aceso and pulso > .5:
+                tela.ret(int(a[0]) + 1, int(a[1]) + 1, max(1, int(b[0] - a[0]) - 2), 1, BRANCO)
+        xm = (xa + min(xb, 80)) / 2
+        px, py = cam.P(xm, D.r_meio(xm), -1)
+        cx = x_txt + j * passo
+        tela.texto(nome, int(cx), y_txt, (BRANCO if pulso > .5 else c), tam=9, centro=True, contorno=PRETO)
+        if aceso:
+            tela.linha(cx, y_txt + 10, px, py - 2, c)
+            tela.disco(px, py - 2, 1.5, c)
+
+
 # ----------------------------------------------------------------- sons
 _RNG = np.random.default_rng(25)
 
@@ -229,7 +255,7 @@ def linear(t, marcos):
 # ============================================================ 0 gancho: carro x jato
 class Gancho(Cena):
     def preparar(self):
-        self.cil = MP.Cilindro(118, 176, .62, seed=3)
+        self.cil = MP.Cilindro(120, 182, .72, seed=3)
         self.bs = self.batidas('batida')
         self.spb = 60.0 / self.c['bpm']
 
@@ -251,25 +277,13 @@ class Gancho(Cena):
             tela.ret(64 + j * 30, 49, 24, 4, MP.TEMPOS[j][3] if j == k else ACO0)
         # ---- o jato: os 4 ao mesmo tempo
         aceso = t >= 7.6
-        cam = Camera(352, 116, .78)
-        pulso = 0.0
-        if aceso:
-            pulso = math.exp(-((t % self.spb) / .25))
-        TF.desenhar(tela, cam, t, zonas=1.0 if aceso else 0.0, giro=1.0, jato=1.0)
+        cam = Camera(362, 122, .9)
+        pulso = math.exp(-((t % self.spb) / .25)) if aceso else 0.0
         painel(tela, 244, 6, 232, 40, borda=AMARELO if aceso else TRACO)
         tela.texto('MOTOR A JATO', 360, 11, ACO3, tam=9, centro=True)
-        xs = (-82, -30, 13, 50)
-        for j, (nome, cor) in enumerate(TEMPOS):
-            px, py = cam.P(xs[j], 44)
-            cx = 272 + j * 56
-            on = aceso
-            c = cor if on else ACO1
-            tela.texto(nome, cx, 26, BRANCO if (on and pulso > .5) else c, tam=9, centro=True, contorno=PRETO)
-            if on:
-                tela.linha(cx, 36, px, py - 4, c)
-                tela.disco(px, py - 4, 1.5, c)
+        jato_4tempos(tela, cam, t, aceso, pulso, x_txt=276)
         if not aceso:
-            escurecer(tela, 246, 48, 232, 158)
+            escurecer(tela, 246, 48, 232, 160)
         else:
             tela.texto('TODOS AO MESMO TEMPO', 360, 196, AMARELO, tam=9, centro=True, contorno=PRETO)
 
@@ -285,7 +299,7 @@ class Titulo(Cena):
 
     def desenhar(self, tela, t, tg):
         fundo_oficina(tela, t)
-        cam = Camera(330, 140, 1.0)
+        cam = Camera(395, 132, 1.0)
         TF.desenhar(tela, cam, t + 3, giro=1.0)
         escurecer(tela, 0, 0, W, PALCO_H)
         n = int(t / .045)
@@ -327,10 +341,8 @@ class AviaoCena(Cena):
         cam = Camera(176 - u * 1.2, 100, 1.5)
         ceu_dia(tela, t, desloc=t * 30)
         if t < 19.6:
+            asa_pilone(tela, cam)
             TF.desenhar(tela, cam, t, fechado=True)
-            # pilone até a asa
-            a, b = cam.P(-40, 55), cam.P(20, 52)
-            pol(tela, [(a[0], 0), (b[0] + 30, 0), (b[0], b[1]), (a[0], a[1])], CASCO2, CASCO)
             return
         v = suave((t - 19.6) / 3.0)
         corte = int(v * W)
@@ -338,9 +350,8 @@ class AviaoCena(Cena):
         self.tmp.buf[:] = 0
         tmp = self.tmp
         ceu_dia(tmp, t, desloc=t * 30)
+        asa_pilone(tmp, cam)
         TF.desenhar(tmp, cam, t, fechado=True)
-        a, b = cam.P(-40, 55), cam.P(20, 52)
-        pol(tmp, [(a[0], 0), (b[0] + 30, 0), (b[0], b[1]), (a[0], a[1])], CASCO2, CASCO)
         tela.buf[:PALCO_H, corte:] = tmp.buf[:PALCO_H, corte:]
         if 0 < corte < W:
             tela.ret(corte, 0, 2, PALCO_H, AMARELO)
@@ -349,6 +360,20 @@ class AviaoCena(Cena):
     def sons(self, fx):
         fx.put(ronco(self.dur, 90, 1.5, 1.0), self.t0, .05)
         fx.put(sopro(2.6, 600, 2400), self.t0 + 19.6, .05)
+
+
+def asa_pilone(tela, cam):
+    """A asa por cima (faixa no alto da tela) e o pilone que segura o motor."""
+    a, b = cam.P(-34, 50), cam.P(18, 47)
+    pil = [(a[0] + 10, a[1] + 4), (a[0] + 4, 30), (b[0] + 40, 30), (b[0], b[1] + 4)]
+    contorno(tela, pil, PRETO)
+    pol(tela, pil, CASCO2, CASCO3)
+    tela.linha(a[0] + 4, 31, a[0] + 10, a[1] + 4, CASCO)
+    asa = [(0, 0), (W, 0), (W, 22), (0, 34)]
+    contorno(tela, asa, PRETO)
+    pol(tela, asa, CASCO3)
+    pol(tela, [(0, 26), (W, 14), (W, 22), (0, 34)], CASCO2, CASCO3)
+    tela.linha(0, 34, W, 22, ACO1)
 
 
 # ============================================================ 3 as peças
@@ -403,7 +428,7 @@ class Admissao(Cena):
     def desenhar(self, tela, t, tg):
         fundo_oficina(tela, t)
         k = 2.15
-        cam = Camera(100 + 77 * k, 104, k) if not VERTICAL else cam_vertical('admissao', -80, 104, k)
+        cam = Camera(100 + 77 * k, 112, k) if not VERTICAL else cam_vertical('admissao', -80, 112, k)
         TF.desenhar(tela, cam, t, x1=PX0 - 8 if not VERTICAL else W)
         x = self.x(t)
         px, py = parcela(tela, cam, x, t)
@@ -425,8 +450,11 @@ class Admissao(Cena):
                 for a in np.linspace(-1.2, 1.2, 14):
                     tela.px(int(tx + 6 + math.cos(a) * r), int(ty + 6 + math.sin(a) * r), BRANCO if j == 0 else ACO4)
             brilho(tela, tx, ty + 4, 6, BRANCO)
-            rotulo(tela, 'PONTA: MAIS RÁPIDA QUE O SOM', 8 if not VERTICAL else x_corte('admissao') + 4, 190,
-                   tx + 2, ty + 6, AMARELO)
+            if VERTICAL:
+                rotulo(tela, 'MAIS RÁPIDA', x_corte('admissao') + 100, 40, tx + 8, ty + 4, AMARELO)
+                rotulo(tela, 'QUE O SOM', x_corte('admissao') + 100, 56, tx + 8, ty + 4, AMARELO)
+            else:
+                rotulo(tela, 'PONTA: MAIS RÁPIDA QUE O SOM', int(tx) + 26, 30, tx + 8, ty + 4, AMARELO)
         if VERTICAL:
             hud_v(tela, 'admissao', [(f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO), (f"{milhar(MOD.T(x))} °C", CIANO)])
             return
@@ -562,7 +590,7 @@ class Combustao(Cena):
         """Inset: no carro, uma queima de cada vez (estouros)."""
         x0 = 8 if not VERTICAL else x_corte('combustao') + 4
         painel(tela, x0, 124, 74, 80, borda=TRACO)
-        cil = MP.Cilindro(x0 + 37, 196, .4, seed=7)
+        cil = MP.Cilindro(x0 + 37, 188, .4, seed=7)
         th = (t - 7.0) * 2.2 * 360
         cil.desenhar(tela, th, t)
         tela.texto('CARRO', x0 + 37, 128, ACO3, tam=9, centro=True, contorno=PRETO)
@@ -650,7 +678,7 @@ class Eixos(Cena):
             if t >= 18.2:
                 tx, ty = cam.P(-76, 46, -1)
                 tela.anel(tx, ty, 5 + math.sin(t * 6), AMARELO)
-                rotulo(tela, 'PONTA DO FAN', 150, 190, tx + 3, ty + 4, AMARELO)
+                rotulo(tela, 'PONTA DO FAN', int(tx) + 30, 34, tx + 4, ty + 3, AMARELO)
         fundo_painel(tela)
         tit(tela, 'DOIS EIXOS', 9, BRANCO, 17)
         for j, (nome, cor, rps, lig) in enumerate((('ALTA', LARANJA, 1.9, 'COMPRESSOR + TURBINA DA FRENTE'),
@@ -686,10 +714,8 @@ class Calor(Cena):
         camada = 1.0 if t >= 21.6 else 0.0
         s = 3.1 if not VERTICAL else 2.3
         cx = 150 if not VERTICAL else x_corte('calor') + 90
-        pa_corte(tela, cx, 104, s, t, frio=frio, furos=furos, camada=camada)
         perigo = t < 7.6
-        if perigo:
-            brilho(tela, cx, 104, 40 * (1 + .1 * math.sin(t * 7)), VERMELHO)
+        pa_corte(tela, cx, 104, s, t, frio=frio, furos=furos, camada=camada, perigo=perigo)
         xl = 8 if not VERTICAL else x_corte('calor') + 4
         tela.texto('GÁS A 1.500 °C', xl, 8, Q6, tam=9, contorno=PRETO)
         if t >= 7.6:
@@ -736,44 +762,67 @@ class Calor(Cena):
 # ============================================================ 10 bocal: SOPRA + Newton
 class Bocal(Cena):
     def x(self, t):
-        return rampa(t, [(0, 48.0), (4.0, 64.0), (6.8, 120.0), (7.0, 150.0)])
+        return rampa(t, [(0, 50.0), (4.0, 66.0), (6.8, 135.0)])
 
     def desenhar(self, tela, t, tg):
         fundo_oficina(tela, t)
         k = 2.2
         emp = 0.0
-        if t >= 28.0: emp = -3 * suave((t - 28.0) / 2.0)          # o motor anda um pouquinho para a frente
-        cam = Camera(150 - 50 * k + emp, 104, k) if not VERTICAL else cam_vertical('bocal', 46, 104, k)
+        if t >= 28.0: emp = -4 * suave((t - 28.0) / 2.0)          # o motor anda um pouquinho para a frente
+        cam = Camera(150 - 66 * k + emp, 100, k) if not VERTICAL else cam_vertical('bocal', 66, 100, k)
         TF.desenhar(tela, cam, t, x1=PX0 - 8 if not VERTICAL else W)
         x = self.x(t)
-        if t < 7.0:
+        if t < 6.8:
             parcela(tela, cam, x, t)
         xc = x_corte('bocal') if VERTICAL else 0
+        x_lim = (PX0 - 12) if not VERTICAL else xc + 176
+        x_min = 6 if not VERTICAL else xc + 4
         if 7.0 <= t < 14.0:
-            a = cam.P(50, 31, -1)
-            rotulo(tela, 'AR DO FAN: FRIO', int(a[0]) - 10, 8, a[0], a[1], CIANO)
-            a2 = cam.P(80, 6, -1)
-            rotulo(tela, 'GÁS QUENTE', int(a2[0]) + 14, 30, a2[0], a2[1], LARANJA)
+            a = cam.P(40, 33, -1)
+            rotulo(tela, 'AR DO FAN: FRIO', max(x_min + 4, int(a[0]) - 40), 8, a[0], a[1], CIANO)
+            a2 = cam.P(96, 4, 1)
+            rotulo(tela, 'GÁS QUENTE', min(x_lim - 60, int(a2[0]) - 10), 190, a2[0], a2[1], LARANJA)
         if t >= 14.0:
             # ação: o motor empurra o ar para trás (direita)
-            gx, gy = cam.P(86, 0, 1)
-            x_lim = (PX0 - 14) if not VERTICAL else xc + 176
-            seta(tela, gx, 176, min(gx + 58, x_lim), 176, CIANO, 5, 8)
-            tela.texto('AR PARA TRÁS', min(gx + 58, x_lim), 188, CIANO, tam=9, centro='d', contorno=PRETO)
+            gx, gy = cam.P(88, 26, 1)
+            seta(tela, gx, gy, min(gx + 52, x_lim), gy, CIANO, 5, 8)
+            tela.texto('AR PARA TRÁS', min(gx + 52, x_lim), int(gy) + 8, CIANO, tam=9, centro='d', contorno=PRETO)
             # reação: o ar empurra o motor para a frente (esquerda)
-            mx, my = cam.P(20, 0, 1)
-            x_min = 8 if not VERTICAL else xc + 6
             if t >= 15.0:
-                seta(tela, mx, 18, max(mx - 70, x_min), 18, AMARELO, 6, 9)
-                tela.texto('MOTOR PARA A FRENTE', max(mx - 70, x_min), 30, AMARELO, tam=9, contorno=PRETO)
-        if t >= 21.0 and not VERTICAL:
-            self.foguete_mini(tela, 250, 120, t)
+                ax_, ay_ = cam.P(62, 0, 1)
+                bx_ = max(cam.P(16, 0, 1)[0], x_min + 4)
+                seta(tela, ax_, ay_, bx_, ay_, AMARELO, 7, 11)
+                tela.texto('MOTOR PARA A FRENTE', int(bx_), int(ay_) - 16, AMARELO, tam=9, contorno=PRETO)
         if t >= 28.0:
-            mx, my = cam.P(20, 0, 1)
-            etiqueta(tela, 'EMPUXO', int(mx) - 12 if not VERTICAL else xc + 50, 46, AMARELO, tam=17)
+            etiqueta(tela, 'EMPUXO', x_min + 40, 178, AMARELO, tam=17)
+        if t >= 21.0 and not VERTICAL:
+            self.foguete_mini(tela, 274, 56, t)
         if VERTICAL:
+            if t < 6.8:
+                hud_v(tela, 'bocal', [(f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO)], y=PALCO_H - 18)
             return
-        painel_ar(tela, min(x, 150.0), tempo=3, extra=self.extra(t))
+        if t < 6.8:
+            painel_ar(tela, x, tempo=3)
+        else:
+            self.painel_newton(tela, t)
+
+    def painel_newton(self, tela, t):
+        fundo_painel(tela)
+        tit(tela, 'TEMPO 4 DE 4', 9, ACO3, 9)
+        tit(tela, 'SOPRA', 20, ROXO, 17)
+        tit(tela, 'O AR ENTRA', 46, ACO3, 9)
+        barra(tela, PX0, 58, 156, 5, MOD.v(-110) / 165, BRANCO)
+        tit(tela, 'E SAI BEM MAIS RÁPIDO', 70, ACO3, 9)
+        barra(tela, PX0, 82, 156, 5, MOD.v(100) / 165, CIANO)
+        if t >= 14.0:
+            tit(tela, 'AÇÃO', 100, CIANO, 9)
+            tit(tela, 'O MOTOR EMPURRA O AR', 111, BRANCO, 9)
+        if t >= 15.0:
+            tit(tela, 'REAÇÃO', 128, AMARELO, 9)
+            tit(tela, 'O AR EMPURRA O MOTOR', 139, BRANCO, 9)
+        if t >= 21.0:
+            tit(tela, 'TERCEIRA LEI', 160, AMARELO, 17)
+            tit(tela, 'DE NEWTON', 180, AMARELO, 17)
 
     def foguete_mini(self, tela, x, y, t):
         corpo = [(x - 4, y - 22), (x + 4, y - 22), (x + 4, y + 8), (x - 4, y + 8)]
@@ -785,14 +834,8 @@ class Bocal(Cena):
         for i in range(10):
             u = (hsh(i, 41) + t * 3) % 1.0
             tela.px(int(x + (hsh(i, 42) - .5) * 6 * (1 + u)), int(y + 10 + u * 16), CHAMA0 if u < .3 else CHAMA1)
-        tela.texto('FOGUETE', x, y + 30, ACO3, tam=9, centro=True, contorno=PRETO)
-
-    def extra(self, t):
-        def f(tela):
-            if t >= 14.0:
-                tit(tela, 'AÇÃO E REAÇÃO', 182, AMARELO, 9)
-                tit(tela, '3ª LEI DE NEWTON', 193, BRANCO, 9)
-        return f
+        tela.texto('IGUAL AO', x, y + 32, ACO3, tam=9, centro=True, contorno=PRETO)
+        tela.texto('FOGUETE', x, y + 43, ACO3, tam=9, centro=True, contorno=PRETO)
 
     def sons(self, fx):
         self.ronco_fundo(fx, .05, 95)
@@ -811,7 +854,7 @@ class Decolagem(Cena):
         self.ts = ts
         self.xm = np.concatenate([[0], np.cumsum((v[1:] + v[:-1]) / 2 / 30)])
         self.v = v
-        alt = np.where(ts > 16.0, (ts - 16.0) ** 1.6 * 4.0, 0.0)
+        alt = np.clip(ts - 16.0, 0, None) ** 1.6 * 4.0
         self.alt = alt
 
     def desenhar(self, tela, t, tg):
@@ -819,7 +862,8 @@ class Decolagem(Cena):
         xm, v, alt = self.xm[i], self.v[i], self.alt[i]
         ang = -min(.16, max(0.0, (t - 15.0) / 1.2) * .16) if t >= 15.0 else 0.0
         ceu_dia(tela, t, desloc=xm * .1)
-        gy = 168 + alt * .5
+        sobe = min(alt, 46.0)                       # a câmera segue o avião depois de 46 px
+        gy = 168 + alt - sobe * .2
         if gy < PALCO_H:
             tela.ret(0, int(gy), W, PALCO_H - int(gy), GRAMA0)
             dither(tela, 0, int(gy), W, 3, GRAMA1, GRAMA0)
@@ -831,25 +875,25 @@ class Decolagem(Cena):
             for j in range(-1, W // 70 + 2):
                 xx = (j * 70 + xm * 1.0) % (W + 70) - 70
                 tela.disco(xx, int(gy) + 4, 1.5, AMARELO)
-        ox, oy = 170, 140 - alt
+        ox, oy = 150, 146 - sobe * .8
         trem = 1.0 if t < 22 else max(0.0, 1 - (t - 22) / 2)
         forca = min(1.0, t / 2.0)
-        P = AV.desenhar(tela, ox, oy, 2.6, ang=ang, t=t, giro=.5 + forca, trem=trem, empuxo=forca)
+        P = AV.desenhar(tela, ox, oy, 2.2, ang=ang, t=t, giro=.5 + forca, trem=trem, empuxo=forca)
         mx, my = P(5.0, 8.2)
         # forças: empuxo (para a frente = esquerda), atrito/ar (para trás)
         if t >= 2.0:
             seta(tela, mx, my, mx - 30 - 30 * forca, my, AMARELO, 4, 7)
-            tela.texto('EMPUXO', int(mx - 60 - 30 * forca), int(my) + 8, AMARELO, tam=9, contorno=PRETO)
+            tela.texto('EMPUXO', int(mx - 60 - 30 * forca), int(my) - 16, AMARELO, tam=9, contorno=PRETO)
         if 7.6 <= t < 21.0:
             arr = 10 + v / 460 * 26
-            tx, ty = P(52, -2)
-            seta(tela, tx + 4, ty, tx + 4 + arr, ty, VERMELHO, 3, 5)
-            tela.texto('ATRITO E AR', int(tx + 6), int(ty) - 12, VERMELHO, tam=9, contorno=PRETO)
+            tx, ty = P(24, 6)
+            seta(tela, tx, ty + 8, tx + arr, ty + 8, VERMELHO, 3, 5)
+            tela.texto('ATRITO E AR', int(tx), int(ty) + 15, VERMELHO, tam=9, contorno=PRETO)
         if t >= 14.6:
             wx, wy = P(6, 4)
             sust = min(1.0, (t - 14.6) / 2.0)
-            seta(tela, wx, wy, wx, wy - 26 - 22 * sust, VERDE, 4, 7)
-            tela.texto('ASA: SUSTENTAÇÃO', int(wx) + 6, int(wy - 48 - 22 * sust), VERDE, tam=9, contorno=PRETO)
+            seta(tela, wx, wy, wx, wy - 20 - 18 * sust, VERDE, 4, 7)
+            tela.texto('ASA: SUSTENTAÇÃO', int(wx) + 8, int(wy - 34 - 18 * sust), VERDE, tam=9, contorno=PRETO)
         fundo_painel(tela)
         tit(tela, 'DECOLAGEM', 9, BRANCO, 17)
         tit(tela, 'EMPUXO DOS MOTORES', 36, ACO3, 9)
@@ -872,9 +916,14 @@ class Foguete(Cena):
         # esquerda: espaço e foguete
         tela.ret(0, 0, meio, PALCO_H, PRETO)
         for i in range(60):
-            x, y = int(hsh(i, 1) * meio), int(hsh(i, 2) * PALCO_H)
-            if math.sin(t * 1.5 + i) > -.5: tela.px(x, y, BRANCO if i % 4 == 0 else ACO2)
-        fx_, fy = 80, 96 + math.sin(t * 2) * 2
+            x, y = int(hsh(i, 1) * meio), int((hsh(i, 2) * PALCO_H + t * (20 + 30 * hsh(i, 3))) % PALCO_H)
+            tela.px(x, y, BRANCO if i % 4 == 0 else ACO2)
+            if i % 4 == 0: tela.px(x, y - 1, ACO1)
+        fx_, fy = 80, 92 + math.sin(t * 2) * 2
+        comp = 52 + 6 * math.sin(t * 23) + 4 * math.sin(t * 37)
+        for larg, ll, cor in ((9, 1.0, CHAMA2), (7, .8, CHAMA1), (4, .55, CHAMA0)):
+            pol(tela, [(fx_ - larg, fy + 31), (fx_ + larg, fy + 31), (fx_ + 2, fy + 31 + comp * ll),
+                       (fx_ - 2, fy + 31 + comp * ll)], cor)
         corpo = [(fx_ - 10, fy - 50), (fx_ + 10, fy - 50), (fx_ + 10, fy + 30), (fx_ - 10, fy + 30)]
         contorno(tela, corpo, PRETO)
         pol(tela, corpo, CASCO, CASCO2)
@@ -884,9 +933,9 @@ class Foguete(Cena):
         tela.ret(fx_ - 7, fy - 12, 14, 34, LATAO)
         for i in range(14):
             u = (hsh(i, 51) + t * 2.4) % 1.0
-            tela.disco(fx_ + (hsh(i, 52) - .5) * 10 * (1 + u), fy + 34 + u * 40, 3 - u * 2,
-                       CHAMA0 if u < .3 else (CHAMA1 if u < .6 else BRASA))
-        brilho(tela, fx_, fy + 40, 12, CHAMA1)
+            tela.disco(fx_ + (hsh(i, 52) - .5) * 12 * (1 + u), fy + 60 + u * 40, 2.5 - u * 2,
+                       CHAMA1 if u < .3 else BRASA)
+        brilho(tela, fx_, fy + 44, 16, CHAMA1)
         rotulo(tela, 'OXIDANTE', 128, 46, fx_ + 7, fy - 30, CIANO)
         rotulo(tela, 'COMBUSTÍVEL', 128, 76, fx_ + 7, fy + 6, LATAO)
         tela.texto('FOGUETE', 120, 8, BRANCO, tam=17, centro=True, contorno=PRETO)
@@ -900,11 +949,13 @@ class Foguete(Cena):
         ar = max(0.0, 1 - sobe)
         TF.desenhar(tela, cam, t, ar=ar, chama=ar, giro=.3 + .7 * ar, jato=ar)
         if t >= 7.6 and ar > .2:
-            for j in range(6):
-                u = (t * .8 + j / 6) % 1.0
-                x = meio + 8 + u * 40
-                y = 70 + j * 14
-                tela.texto('O2', int(x), int(y), CIANO, tam=9, contorno=PRETO)
+            for j in range(9):
+                u = (t * .8 + j / 9) % 1.0
+                x = meio + 6 + u * 44
+                y = 80 + (j % 5) * 12
+                tela.ret(int(x), int(y), 5, 1, CIANO)
+                tela.ret(int(x) + 5, int(y), 2, 1, BRANCO)
+            rotulo(tela, 'AR COM OXIGÊNIO', meio + 10, 40, meio + 30, 80, CIANO)
         tela.texto('MOTOR A JATO', 360, 8, BRANCO, tam=17, centro=True, contorno=PRETO)
         tela.texto('USA O AR DE FORA' if sobe < .5 else 'SEM AR: APAGA', 360, 186, AMARELO if sobe < .5 else VERMELHO,
                    tam=9, centro=True, contorno=PRETO)
@@ -933,26 +984,18 @@ class Ritmo(Cena):
             cil = MP.Cilindro(xc, 96, .42, seed=4)
             cil.desenhar(tela, th, t)
             tela.texto(NOMES_CARRO[k], xc, 6, MP.TEMPOS[k][3], tam=9, centro=True, contorno=PRETO)
-            cam = Camera(xc + 14, 160, .5)
-            TF.desenhar(tela, cam, t, zonas=1.0 if pulso > .3 else .5, jato=1.0)
-            for j, (nome, cor) in enumerate(TEMPOS):
-                tela.texto(nome, xc - 84 + j * 44 + 20, 192, BRANCO if pulso > .5 else cor, tam=9, centro=True, contorno=PRETO)
+            cam = Camera(xc + 10, 166, .5)
+            jato_4tempos(tela, cam, t, True, pulso, y_txt=124, x_txt=xc - 66, passo=44, faixas=True)
             return
-        cil = MP.Cilindro(118, 178, .62, seed=4)
+        cil = MP.Cilindro(120, 182, .72, seed=4)
         cil.desenhar(tela, th, t)
         painel(tela, 22, 6, 196, 40, borda=MP.TEMPOS[k][3] if pulso > .4 else TRACO)
         tela.texto('CARRO: 1 POR BATIDA', 120, 11, ACO3, tam=9, centro=True)
         tela.texto(f"{k + 1}. {NOMES_CARRO[k]}", 120, 24, MP.TEMPOS[k][3], tam=17, centro=True, contorno=PRETO)
-        cam = Camera(352, 116, .78)
-        TF.desenhar(tela, cam, t, zonas=1.0 if pulso > .3 else .5, jato=1.0)
+        cam = Camera(362, 122, .9)
         painel(tela, 244, 6, 232, 40, borda=AMARELO if pulso > .4 else TRACO)
         tela.texto('JATO: OS 4 EM TODA BATIDA', 360, 11, ACO3, tam=9, centro=True)
-        xs = (-82, -30, 13, 50)
-        for j, (nome, cor) in enumerate(TEMPOS):
-            px, py = cam.P(xs[j], 44)
-            cx = 272 + j * 56
-            tela.texto(nome, cx, 26, BRANCO if pulso > .5 else cor, tam=9, centro=True, contorno=PRETO)
-            tela.linha(cx, 36, px, py - 4, cor)
+        jato_4tempos(tela, cam, t, True, pulso, x_txt=276)
         tela.texto(f"BATIDA {n + 1}", 360, 196, ACO3, tam=9, centro=True, contorno=PRETO)
 
     def sons(self, fx):
@@ -995,8 +1038,6 @@ class Historia(Cena):
             notas[1] = ['WHITTLE (ABRIL)', 'VON OHAIN (SET.),', 'NA ALEMANHA']
         for j, l in enumerate(notas[i]):
             tit(tela, l, 64 + j * 12, ACO3, 9)
-        tit(tela, 'SÓ MÁQUINAS:', 170, ACO2, 9)
-        tit(tela, 'NINGUÉM DESENHADO', 181, ACO2, 9)
 
     def patente(self, tela, t):
         x0, y0 = 40, 22
@@ -1023,7 +1064,7 @@ class Historia(Cena):
     def bancada(self, tela, t, dois=False):
         """Motor a jato antigo (compressor centrífugo) numa bancada de teste."""
         for j in range(2 if dois else 1):
-            cx, cy, s = (150, 100, 1.0) if not dois else ((90, 88, .7) if j == 0 else (220, 132, .7))
+            cx, cy, s = (150, 100, 1.4) if not dois else ((92, 70, .9) if j == 0 else (210, 136, .9))
             tela.ret(cx - 60 * s, cy + 30 * s, 120 * s, 6 * s, ACO1)
             for q in (-40, 40): tela.ret(cx + q * s, cy + 18 * s, 4 * s, 14 * s, ACO0)
             corpo = [(cx - 50 * s, cy - 22 * s), (cx + 20 * s, cy - 16 * s), (cx + 55 * s, cy - 10 * s),
@@ -1045,9 +1086,32 @@ class Historia(Cena):
             tela.texto('INGLATERRA' if j == 0 else 'ALEMANHA', cx, cy - 38 * s, ACO3, tam=9, centro=True, contorno=PRETO)
 
     def jatinho(self, tela, u):
-        ceu_dia(tela, u, y1=176, desloc=u * 40)
-        P = AV.desenhar(tela, 170 - u * 6, 100 + math.sin(u) * 3, 1.6, t=u, giro=1.0, empuxo=.8)
-        tela.texto('UM PRIMEIRO JATO (GENÉRICO)', 150, 12, BRANCO, tam=9, centro=True, contorno=PRETO)
+        """Um jato pioneiro genérico: pequeno, asa reta, entrada de ar no nariz."""
+        ceu_dia(tela, u, y1=176, desloc=u * 60)
+        tela.ret(0, 176, 300, 32, FUNDO)
+        ox, oy, s = 160 - u * 3, 96 + math.sin(u * 1.3) * 3, 3.0
+
+        def P(x, y): return (ox + x * s, oy + y * s)
+
+        def L(pts): return [P(x, y) for x, y in pts]
+        fus = L([(-22, 0), (-20, -3.2), (-12, -4.4), (14, -3.6), (26, -2.0), (30, -1.0), (30, 1.0), (14, 2.6),
+                 (-12, 3.6), (-20, 3.0)])
+        contorno(tela, fus, PRETO)
+        pol(tela, fus, ACO3)
+        pol(tela, L([(-20, -3.2), (-12, -4.4), (14, -3.6), (26, -2.0), (26, -1.0), (-20, -1.2)]), ACO4, ACO3)
+        leme = L([(20, -2.6), (27, -9), (31, -9), (30, -1.4)])
+        contorno(tela, leme, PRETO); pol(tela, leme, ACO3)
+        asa = L([(-6, .6), (6, .6), (8, 2.0), (-7, 2.4)])
+        contorno(tela, asa, PRETO); pol(tela, asa, ACO2)
+        tela.disco(*P(-21.6, 0), 1.6 * s, FUNDO)                     # boca de ar no nariz
+        tela.disco(*P(-21.6, 0), 1.0 * s, PRETO)
+        cab = L([(-14, -4.2), (-10, -6.6), (-5, -6.4), (-3, -4.2)])
+        contorno(tela, cab, PRETO); pol(tela, cab, CEU1, CEU2)
+        for i in range(16):
+            q = (hsh(i, 71) + u * 2.2) % 1.0
+            p = P(30 + q * 22, (hsh(i, 72) - .5) * (1.6 + q * 3))
+            tela.px(int(p[0]), int(p[1]), CHAMA1 if q < .2 else (GAS2 if q < .6 else ACO3))
+        tela.texto('UM JATO PIONEIRO (GENÉRICO)', 150, 12, BRANCO, tam=9, centro=True, contorno=PRETO)
 
     def sons(self, fx):
         for a, _, _ in self.MARCOS:

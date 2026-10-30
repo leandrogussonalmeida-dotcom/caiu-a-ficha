@@ -121,7 +121,9 @@ class Cena:
 
     def vtxt(self, tela, txt, cor=BRANCO, y=8, tam=9):
         """Leitura curta no topo do recorte vertical (só nos Shorts)."""
-        if VERTICAL: centro_preso(tela, txt, self.XV, y, cor, tam=tam, xmin=self.XV - 88, xmax=self.XV + 88)
+        if VERTICAL:
+            if y > 170: y = 4                  # embaixo fica a legenda do Short
+            centro_preso(tela, txt, self.XV, y, cor, tam=tam, xmin=self.XV - 88, xmax=self.XV + 88)
 
     def rot(self, tela, *a, **k):
         if not VERTICAL or (self.XV - 90 <= a[1] and a[1] + tela.largura_texto(a[0], k.get('tam', 9)) <= self.XV + 90):
@@ -363,7 +365,7 @@ class Antena(Cena):
         # a caixa do roteador
         bloco(tela, 26, 160, 108, 188, PLA1, PLA2, PLA0)
         for k in range(4): tela.ret(40 + k * 12, 172, 3, 3, VERDE if (k + int(t * 4)) % 3 else ACO1)
-        tela.texto("ROTEADOR", 67, 192, ACO3, tam=9, contorno=PRETO, centro=True)
+        if not VERTICAL: tela.texto("ROTEADOR", 67, 192, ACO3, tam=9, contorno=PRETO, centro=True)
         # a antena: um tubo de metal com elétrons dentro
         tela.ret(ax - 6, self.Y0 - 2, 13, self.Y1 - self.Y0 + 4, PRETO)
         tela.ret(ax - 5, self.Y0, 11, self.Y1 - self.Y0, ACO2)
@@ -515,7 +517,8 @@ class Frequencia(Cena):
         # duas cristas e a medida entre elas
         k0 = math.ceil(((x0 + 30 - x0) / lam - (fase + math.pi / 2) / (2 * math.pi)))
         xc = x0 + lam * (k0 + (fase + math.pi / 2) / (2 * math.pi))
-        if xc + lam > x1 - 4: xc -= lam
+        lim = (self.XV + 84) if VERTICAL else x1 - 4
+        while xc + lam > lim and xc - lam > x0: xc -= lam
         a, b = int(round(xc)), int(round(xc + lam))
         for xx in (a, b):
             tela.ret(xx, yc - 40, 1, 12, AMARELO); tela.ret(xx, yc - 26, 1, 2, AMARELO)
@@ -714,15 +717,14 @@ class Qam(Cena):
         # coluna da esquerda: o pacote e o pedaço de onda
         if not VERTICAL:
             self.coluna(tela, t, I, Q, s, kp)
-        else:
-            self.onda_baixo(tela, t, I, Q, 140, 290, 184, 14)
+
         bits_txt = B16 if t >= 15.2 else None
         nota = [("AMPLITUDE: " + dec(math.hypot(I, Q) / (3 * math.sqrt(2)) * 100, 0) + "%", OND3),
                 ("FASE: " + str(int(round(math.degrees(fase)) % 360)) + "°", CIANO)]
         if kp is not None: nota = [(f"SÍMBOLO {kp + 1} DE 8", AMARELO), ("BITS: " + bits4(s), AMARELO)]
         self.painel(tela, t, bits=bits_txt, destaque=('bits',) if t >= 15.2 else (), nota=nota)
-        if t >= 15.2: self.vtxt(tela, "16 PONTOS = 4 BITS", AMARELO, y=6)
-        if kp is not None: self.vtxt(tela, f"SÍMBOLO {kp + 1} DE 8: {bits4(s)}", AMARELO, y=196)
+        if kp is not None: self.vtxt(tela, f"SÍMBOLO {kp + 1} DE 8: {bits4(s)}", AMARELO, y=6)
+        elif t >= 15.2: self.vtxt(tela, "16 PONTOS = 4 BITS", AMARELO, y=6)
 
     def onda_baixo(self, tela, t, I, Q, x0, x1, yc, amp):
         def fn(xs):
@@ -812,6 +814,14 @@ class Pontos(Cena):
             for j in range(k):
                 px = int(cx - R + passo * (i + .5)); py = int(cy - R + passo * (j + .5))
                 tela.ret(px - sz // 2, py - sz // 2, max(1, sz), max(1, sz), OND3 if k < 32 else OND2)
+        # antes do ruído: um símbolo por batida acende no mapa (o ponto da vez)
+        if t < 15.4:
+            kb = self.nb(t)
+            ii = int(self.amostras[kb % len(self.amostras), 0] * k)
+            jj = int(self.amostras[kb % len(self.amostras), 1] * k)
+            px = int(cx - R + passo * (ii + .5)); py = int(cy - R + passo * (jj + .5))
+            halo(tela, px, py, 7 - 4 * min(1, self.desde_batida(t) / .4), CHAMA1, int(t * 8) % 2)
+            tela.ret(px - 1, py - 1, 3, 3, AMARELO)
         # ruído: amostras recebidas = ponto certo + espalhamento
         erros, total = 0, 0
         if t >= 15.4:
@@ -857,6 +867,8 @@ class Pontos(Cena):
         self.nota(fx, 2.0, 76, .15, .04)
         self.nota(fx, 7.8, 83, .15, .04)
         self.tique(fx, 15.4, 2400, .3, .015)
+        for b in self.bt:
+            if b < 15.4: self.tique(fx, b, 1800, .04, .015, .2)
         self.nota(fx, 26.4, 72, .2, .04)
 
 
@@ -1177,7 +1189,7 @@ class Microondas(Cena):
                     ack(tela, self.RX, self.RY - 14, self.PX_, self.PY_ - 24, ease((u - 1) / .6), t)
         self.rot(tela, "MICRO-ONDAS", 40, 24, 60, 86, AMARELO)
         if t >= .5:
-            tela.texto("2,45 GHZ", 70, 158, LARANJA, tam=17, contorno=PRETO, centro=True)
+            tela.texto("2,45 GHZ", 70 if not VERTICAL else 160, 158 if not VERTICAL else 40, LARANJA, tam=17, contorno=PRETO, centro=True)
         perdas = sum(1 for s in self.saidas if s + .7 < t and self.vaza(s + .35))
         self.painel(tela, t, destaque=('freq',) if t >= 15.8 else (),
                     nota=[("FORNO: 2,45 GHZ", LARANJA), (f"PACOTES PERDIDOS: {perdas}", VERMELHO if perdas else ACO2)])
@@ -1351,9 +1363,10 @@ class Vez(Cena):
             st = "OCUPADO" if self.ocupado(t) else "LIVRE"
             tela.texto(st, cx + 34, cy + 16, VERMELHO if st == "OCUPADO" else VERDE, tam=9, contorno=PRETO)
         # balão de estado do celular
-        w = tela.largura_texto(nome, 9) + 8
-        tela.ret(cx + 14, cy - 30, w + 2, 13, PRETO); tela.ret(cx + 15, cy - 29, w, 11, FUNDO2)
-        tela.texto(nome, cx + 19, cy - 27, cor_e, tam=9)
+        if not VERTICAL:
+            w = tela.largura_texto(nome, 9) + 8
+            tela.ret(cx + 14, cy - 30, w + 2, 13, PRETO); tela.ret(cx + 15, cy - 29, w, 11, FUNDO2)
+            tela.texto(nome, cx + 19, cy - 27, cor_e, tam=9)
         # o que está no ar
         acks = 0
         for q, a, b, tp, n in self.E:
