@@ -132,6 +132,16 @@ def cliques_pinos(C, seg_de, o_de, t0, t1, dt=1 / 240.0):
     return sorted(ev)
 
 
+def faixa_luz(tela, x, y0, y1, cor, larg=5):
+    """Reflexo que corre pela peça: faixa inclinada em xadrez, só sobre a
+    peça (não pinta o fundo)."""
+    for y in range(int(y0), int(y1)):
+        for dx in range(larg):
+            xx = int(x + dx - (y - y0) * .3)
+            if 0 <= xx < W and 0 <= y < PALCO_H and (xx + y) % 2 == 0 and tela.buf[y, xx] > TRACO:
+                tela.buf[y, xx] = cor
+
+
 # ------------------------------------------------------------ painel e rótulos
 def etiqueta(tela, txt, x, y, ax, ay, cor=AMARELO, tam=9, direita=False):
     """Rótulo com fio até a peça. `direita`: o texto termina em x."""
@@ -452,9 +462,9 @@ class Pecas(Cena):
             else:
                 ax, ay = A[{'pinos': 'pino', 'contra': 'contra', 'molas': 'mola'}.get(nome, nome)]
                 if nome == 'corpo':
-                    brilho(tela, C.X[0] - 18 + (C.X[-1] - C.X[0] + 36) * u, C.Y_CT - 4, 12, CHAMA0, .9)
+                    faixa_luz(tela, C.x0 + (C.xp1 - C.x0) * u, C.Y_CT - 8, C.Y_PB + 10, CHAMA0)
                 if nome == 'rotor':
-                    brilho(tela, C.x0 + (C.xp1 - C.x0) * u, C.Y_S + 6, 12, BRANCO, .9)
+                    faixa_luz(tela, C.x0 + (C.xp1 - C.x0) * u, C.Y_S, C.Y_PB, BRANCO)
                 if nome in ('pinos', 'contra', 'molas'):
                     i = int(u * 5) % 5
                     b = C.pilha(None, i, 0)
