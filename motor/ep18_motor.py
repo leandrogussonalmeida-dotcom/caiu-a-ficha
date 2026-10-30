@@ -380,9 +380,9 @@ class Gancho(Cena):
 
     def sons(self, fx):
         for k, b in enumerate(self.cont):
-            fx.put(tique(1400 if k < 4 else 1900, .05), self.t0 + b, .22)
-        fx.put(baque(55, .9), self.t0 + self.ign, .25)
-        fx.put(ronco(self.dur - self.ign, 95, 1.2, 1.0), self.t0 + self.ign, .12)
+            fx.put(tique(1400 if k < 4 else 1900, .05), self.t0 + b, .16)
+        fx.put(baque(55, .9), self.t0 + self.ign, .14)
+        fx.put(ronco(self.dur - self.ign, 95, 1.2, 1.0), self.t0 + self.ign, .07)
 
 
 # ============================================================ título
@@ -507,11 +507,11 @@ class Newton(Cena):
             gy = by + 8 + v * 120
             tela.disco(gx, gy, 1.2 + v, CHAMA1 if v < .25 else (CHAMA2 if v < .5 else FUM1))
         FOG.desenhar(tela, cx, cy, 0.0, K, e)
-        if u > 1.0:
+        if u > 1.0 and not VERTICAL:
             seta(tela, cx - 26, by + 18, cx - 26, by + 70, LARANJA, 5, 9)
             tela.texto('AÇÃO', cx - 34, by + 46, LARANJA, tam=9, centro='d', contorno=PRETO)
             tela.texto('GÁS P/ BAIXO', cx - 34, by + 58, LARANJA, tam=9, centro='d', contorno=PRETO)
-        if u > 7.6:
+        if u > 7.6 and not VERTICAL:
             seta(tela, cx + 26, cy + 40, cx + 26, cy - 20, AMARELO, 5, 9)
             tela.texto('REAÇÃO', cx + 34, cy + 2, AMARELO, tam=9, contorno=PRETO)
             tela.texto('FOGUETE P/ CIMA', cx + 34, cy + 14, AMARELO, tam=9, contorno=PRETO)
@@ -562,7 +562,7 @@ class Newton(Cena):
             etiqueta(tela, rot, cxl, 10, AMARELO if tipo == 'vac' else CIANO, 9)
         if not VERTICAL:
             tela.ret(meio, 0, 1, PALCO_H, PRETO); tela.ret(meio + 1, 0, 1, PALCO_H, ACO1)
-        hud_v(tela, 'newton', [], y=200)
+        
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'PRECISA DE AR?', 9, AMARELO, 17)
@@ -579,7 +579,7 @@ class Newton(Cena):
     def sons(self, fx):
         for k in range(2):
             fx.put(fx.chiado(5.5, 400, 2500), self.t0 + 1.0 + k * 7, .05, -.3)
-        ronco_voo(fx, self.t0 + 14.0, self.t0 + self.dur, lambda t: .07)
+        ronco_voo(fx, self.t0 + 14.0, self.t0 + self.dur, lambda t: .04)
 
 
 # ============================================================ partes
@@ -760,7 +760,7 @@ class Motor(Cena):
             if self.acende(t, 4): rotulo(tela, 'SINO', 8, 160, cx - T.meia(160) - 3, 160, AMARELO)
             tela.texto('CÂMERA LENTA', 290, 196, CIANO, tam=9, centro='d', contorno=PRETO)
         mt = dec(M, 2) if M < .95 else dec(M, 1)
-        hud_v(tela, 'motor', [(f"MACH {mt}", CIANO), (f"{milhar(v)} M/S", AMARELO)], y=190)
+        hud_v(tela, 'motor', [(f"MACH {mt}", CIANO), (f"{milhar(v)} M/S", AMARELO)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'O GÁS NA SONDA', 9, ACO3, 9)
@@ -805,7 +805,7 @@ class Motor(Cena):
 
     def sons(self, fx):
         fx.put(zumbido(self.dur - .5, 330), self.t0 + .3, .025)
-        ronco_voo(fx, self.t0 + .2, self.t0 + self.dur - .3, lambda t: .06)
+        ronco_voo(fx, self.t0 + .2, self.t0 + self.dur - .3, lambda t: .035)
 
 
 # ============================================================ decolagem
@@ -869,8 +869,8 @@ class Decolagem(Cena):
             tit(tela, 'O PESO: ELE SOBE', 142, ACO3, 9)
 
     def sons(self, fx):
-        fx.put(baque(55, .9), self.t0 + self.ign, .22)
-        fx.put(ronco(self.dur - self.ign, 95, 3.0, 1.0), self.t0 + self.ign, .13)
+        fx.put(baque(55, .9), self.t0 + self.ign, .13)
+        fx.put(ronco(self.dur - self.ign, 95, 3.0, 1.0), self.t0 + self.ign, .075)
         fx.put(tique(1900, .05), self.t0 + self.dec, .2)
 
 
@@ -907,7 +907,7 @@ class Massa(Cena):
         hud_v(tela, 'massa', [(f"MASSA {milhar(massa_vis(q) / 1e3)} T", BRANCO)])
 
     def sons(self, fx):
-        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .11)
+        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .065)
 
 
 # ============================================================ subida
@@ -940,7 +940,7 @@ class Subida(Cena):
                                (f"INCLINAÇÃO {int(round(math.degrees(q['ang'])))}°", AMARELO)])
 
     def sons(self, fx):
-        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .11 * (1 - .5 * (t - self.t0) / self.dur))
+        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .065 * (1 - .5 * (t - self.t0) / self.dur))
 
 
 # ============================================================ separação
@@ -975,7 +975,7 @@ class Separacao(Cena):
             etiqueta(tela, 'SEPARAÇÃO!', cx_txt, 10, AMARELO, 9)
         elif self.t_ign <= t < self.t_ign + 2.5:
             etiqueta(tela, 'IGNIÇÃO DO 2º ESTÁGIO', cx_txt, 10, LARANJA, 9)
-        hud_v(tela, 'separacao', [(f"ESTÁGIO {1 if tf < TF_SEP else 2} DE 2", CIANO)], y=190)
+        hud_v(tela, 'separacao', [(f"ESTÁGIO {1 if tf < TF_SEP else 2} DE 2", CIANO)])
 
     def inset(self, tela, tf):
         """O 1º estágio, solto, sobe um pouco e cai de volta (balístico)."""
@@ -1006,12 +1006,12 @@ class Separacao(Cena):
             tela.texto('CAI', x0 + w - 4, y0 + 4, VERMELHO, tam=9, centro='d')
 
     def sons(self, fx):
-        ronco_voo(fx, self.t0, self.t0 + self.t_meco, lambda t: .09)
+        ronco_voo(fx, self.t0, self.t0 + self.t_meco, lambda t: .05)
         fx.put(tique(1200, .05), self.t0 + self.t_meco, .2)
-        fx.put(baque(80, .4), self.t0 + self.t_sep, .3)
+        fx.put(baque(80, .4), self.t0 + self.t_sep, .14)
         fx.put(tique(2200, .04), self.t0 + self.t_sep, .15, .2)
-        fx.put(baque(50, .7), self.t0 + self.t_ign, .2)
-        ronco_voo(fx, self.t0 + self.t_ign, self.t0 + self.dur, lambda t: .06)
+        fx.put(baque(50, .7), self.t0 + self.t_ign, .12)
+        ronco_voo(fx, self.t0 + self.t_ign, self.t0 + self.dur, lambda t: .035)
 
 
 # ============================================================ Kármán
@@ -1046,10 +1046,10 @@ class Karman(Cena):
                 tela.texto(nome, xt, int(y) - 10, cor, tam=9, contorno=PRETO)
         if TF_COIFA <= tf < TF_COIFA + 5 and not VERTICAL:
             etiqueta(tela, 'COIFA SOLTA', FX, 10, AMARELO, 9)
-        hud_v(tela, 'karman', [(f"ALTITUDE {dec(q['h'] / 1e3, 1)} KM", AMARELO)], y=190)
+        hud_v(tela, 'karman', [(f"ALTITUDE {dec(q['h'] / 1e3, 1)} KM", AMARELO)])
 
     def sons(self, fx):
-        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .05)
+        ronco_voo(fx, self.t0, self.t0 + self.dur, lambda t: .03)
         t100 = VOO.t100 - 167.0
         fx.put(fx.sino(84, .9), self.t0 + t100, .12)
         fx.put(tique(1500, .05), self.t0 + TF_COIFA - 167.0, .2)
@@ -1096,8 +1096,8 @@ class Orbita(Cena):
             if tf >= VOO.tfim:
                 tit(tela, 'MOTOR DESLIGADO', 176, VERDE, 9)
                 tit(tela, 'EM ÓRBITA', 188, VERDE, 9)
-        q, e = cena_voo(tela, t, tf, r, extra=extra)
-        hud_v(tela, 'orbita', [(f"{milhar(q['v'] * 3.6)} KM/H", BRANCO)], y=190)
+        q, e = cena_voo(tela, t, tf, r, extra=extra, k=1.6, cx=175)
+        hud_v(tela, 'orbita', [(f"{milhar(q['v'] * 3.6)} KM/H", BRANCO)])
 
     def canhao(self, tela, t):
         u = t - self.T_DIAG
@@ -1143,7 +1143,7 @@ class Orbita(Cena):
                 ang = math.atan2(vx_, vy_) if (abs(vx_) + abs(vy_)) > 1e-6 else 0.0
                 # foguete pequeno, nariz na direção do movimento
                 ang_tela = math.atan2(vx_, vy_)
-                FOG.desenhar(tela, px, py, ang_tela, .22, dict(t=t, st1=False, coifa=False, chama2=0.0))
+                FOG.desenhar(tela, px, py, ang_tela, .36, dict(t=t, st1=False, coifa=False, chama2=0.0))
                 if nome == 'orbita' and prog >= 1:
                     # gravidade puxa para o centro; a velocidade é de lado
                     rr = math.hypot(a[0], a[1])
@@ -1155,7 +1155,7 @@ class Orbita(Cena):
         tela.disco(cx, cy - self.r0 * S, 2, BRANCO)
         if not VERTICAL:
             tela.texto('FORA DE ESCALA', 8, 196, ACO2, tam=9, contorno=PRETO)
-        hud_v(tela, 'orbita', [('CAINDO EM VOLTA DA TERRA' if u > 15.6 else 'O CANHÃO DE NEWTON', VERDE)], y=190)
+        hud_v(tela, 'orbita', [('CAINDO EM VOLTA DA TERRA' if u > 15.6 else 'O CANHÃO DE NEWTON', VERDE)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'SE ELE ANDAR...', 9, ACO3, 9)
@@ -1173,7 +1173,7 @@ class Orbita(Cena):
             tit(tela, 'E ELE ERRA O CHÃO', 184, ACO3, 9)
 
     def sons(self, fx):
-        ronco_voo(fx, self.t0, self.t0 + self.T_SECO, lambda t: .05)
+        ronco_voo(fx, self.t0, self.t0 + self.T_SECO, lambda t: .03)
         fx.put(tique(1200, .05), self.t0 + self.T_SECO, .2)
         fx.put(fx.sino(88, 1.0), self.t0 + self.T_SECO + .1, .1)
         for ta in (0.0, 7.8, 11.0, 15.6):
@@ -1225,7 +1225,7 @@ class Equador(Cena):
             pk = globo_xy(cx, cy, R, lon0, *D.KENNEDY)
             tela.texto('EQUADOR', cx - R - 4, cy - 4, AMARELO, tam=9, centro='d', contorno=PRETO)
             tela.texto('28,6° N', cx - R * .86 - 4, cy - R * .48 - 4, LARANJA, tam=9, centro='d', contorno=PRETO)
-        hud_v(tela, 'equador', [('NO EQUADOR: 465 M/S', AMARELO)] if t > 7.6 else [('A TERRA GIRA PARA O LESTE', AMARELO)], y=190)
+        hud_v(tela, 'equador', [('NO EQUADOR: 465 M/S', AMARELO)] if t > 7.6 else [('A TERRA GIRA PARA O LESTE', AMARELO)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'VELOCIDADE DO CHÃO', 9, ACO3, 9)
@@ -1239,6 +1239,10 @@ class Equador(Cena):
             barra(tela, PX0, y + 12, 100, 7, kmh / 1700, cor)
             tela.texto(f"{milhar(kmh)} KM/H", PX0 + 104, y + 12, BRANCO, tam=9, contorno=PRETO)
             y += 34
+        if t < 7.6:
+            tit(tela, 'A TERRA GIRA', 50, BRANCO, 17)
+            tit(tela, 'PARA O LESTE', 70, AMARELO, 17)
+            seta(tela, PX0 + 10, 104, PX0 + 140, 104, AMARELO)
         if t > 7.6:
             tit(tela, '465 M/S NO EQUADOR', 150, AMARELO, 9)
         if t > 14.6:

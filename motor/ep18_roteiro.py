@@ -50,7 +50,8 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       a gravidade vai deitando a trajetória; o motor segue empurrando e o
       veículo chega com altitude e velocidade horizontal para a órbita.
   F8  Wikipedia, "Kármán line": FAI: 100 km; as Forças Armadas dos EUA usam
-      50 milhas (80 km) para dar asas de astronauta.
+      50 milhas (80 km) para dar asas de astronauta; a atmosfera não acaba de
+      repente, vai ficando menos densa com a altitude.
   F9  Wikipedia, "Low Earth orbit": cerca de 7,8 km/s = 28.000 km/h em órbita
       baixa; quem está em órbita está em queda livre permanente em volta da Terra.
   F10 Wikipedia, "Earth's rotation": a Terra gira para o leste; no equador o
@@ -66,7 +67,8 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       490 t de propelente (89%), empuxo 1,4 vez o peso, motor do 1º estágio
       desliga aos 2 min 25 s, 100 km aos 2 min 56 s, órbita (~7,8 km/s a ~190 km)
       aos ~8 min; 7,8 km/s x 3.600 = 28.080 km/h; na tubeira, área de saída 20
-      vezes a da garganta -> Mach ~3,7, gás a ~2.900 m/s (dentro da faixa de F4).
+      vezes a da garganta -> Mach ~3,7, gás a ~2.900 m/s (dentro da faixa de F4);
+      Alcântara (2,34° S): 1.674,7 x cos(2,34°) = cerca de 1.673 km/h (de F10).
 """
 
 TITULO = "Como um foguete chega ao espaço | Empuxo, estágios e órbita em pixel art"
@@ -140,7 +142,7 @@ LEGENDAS = {
         (23.8, 31.6, "O OBJETIVO NÃO É SÓ SUBIR:", "É GANHAR *VELOCIDADE DE LADO*.", ('F2', 'F7')),
         (31.8, 39.6, "OLHE O PAINEL: A VELOCIDADE", "SOBE CADA VEZ MAIS RÁPIDO.", ('F14',)),
         (39.8, 47.6, "E A MASSA DESPENCA: O TANQUE DO", "1º ESTÁGIO ESTÁ QUASE *VAZIO*.", ('F14',)),
-        (47.8, 57.0, "O AR LÁ FORA É CADA VEZ MAIS RALO", "E O CÉU VAI FICANDO *PRETO*.", ()),
+        (47.8, 57.0, "O AR LÁ FORA É CADA VEZ MAIS RALO", "E O CÉU VAI FICANDO *PRETO*.", ('F8',)),
     ],
     'separacao': [
         (0.5, 5.8, "TANQUES DO 1º ESTÁGIO VAZIOS:", "O MOTOR *DESLIGA*.", ('F6', 'F14')),
@@ -157,7 +159,7 @@ LEGENDAS = {
         (28.8, 35.6, "MAS CHEGAR AO ESPAÇO NÃO BASTA", "PARA FICAR LÁ EM CIMA...", ('F9',)),
     ],
     'orbita': [
-        (0.5, 7.6, "O 2º ESTÁGIO EMPURRA QUASE NA", "*HORIZONTAL*. ACELERADO 14 VEZES.", ('F2', 'F14')),
+        (0.5, 7.6, "O 2º ESTÁGIO EMPURRA QUASE NA", "*HORIZONTAL*. ACELERADO 18 VEZES.", ('F2', 'F14')),
         (7.8, 14.6, "EM ÓRBITA BAIXA SÃO CERCA DE", "*7,8 KM/S*: *28.000 KM/H*.", ('F9',)),
         (14.8, 21.8, "ATINGIU A VELOCIDADE:", "O MOTOR *DESLIGA*.", ('F2',)),
         (22.0, 29.6, "SE ELE PARASSE LÁ EM CIMA,", "*CAIRIA* DE VOLTA.", ('F9',)),
@@ -196,7 +198,7 @@ FONTES = {
     'F12': ('Wikipedia, "Alcântara Space Center"', 'https://en.wikipedia.org/wiki/Alc%C3%A2ntara_Space_Center'),
     'F13': ('Wikipedia, "Payload fairing"', 'https://en.wikipedia.org/wiki/Payload_fairing'),
     'F14': ('Conta / simulação deste vídeo: foguete genérico de 2 estágios (548 t, 490 t de propelente, '
-            'empuxo 1,4 vez o peso), gravidade e Terra redonda, sem arrasto do ar', None),
+            'empuxo 1,4 vez o peso), gravidade e Terra redonda, sem arrasto do ar; Alcântara: 1.674,7 km/h x cos(2,34°) = 1.673 km/h', None),
 }
 
 CAPITULOS_YT = {'gancho': 'Introdução', 'newton': 'Ação e reação: o balão e o foguete',
