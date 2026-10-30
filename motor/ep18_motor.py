@@ -439,15 +439,15 @@ class Newton(Cena):
         tela.ret(14, yf - 1, x1 - 28, 1, ACO3)
         tela.ret(14, yf, x1 - 28, 1, ACO1)
         # o balão: enche (0-1 s), solto em 1 s, acelera para a direita e murcha
+        xa, xb = 112, x1 - 62
         if u < 1.0:
-            x, cheio = 50, .5 + .5 * u
+            x, cheio = xa, .5 + .5 * u
             jato = 0.0
         else:
             s = u - 1.0
-            x = 50 + 22 * s * s
-            x = min(x, x1 - 60)
-            cheio = max(.35, 1 - s / 6.5)
-            jato = 1.0 if x < x1 - 61 else .2
+            x = xa + (xb - xa) * min(1.0, (s / 5.2) ** 2)
+            cheio = max(.45, 1 - s / 9)
+            jato = 1.0 if s < 5.2 else max(0.0, 1 - (s - 5.2) * 2)
         rx, ry = 46 * cheio, 30 * cheio
         cy = yf + 4 + ry
         # canudo preso ao fio
@@ -465,13 +465,12 @@ class Newton(Cena):
         bx = x - rx - 3
         poligono(tela, [(x - rx + 2, cy - 4), (bx, cy - 2), (bx, cy + 2), (x - rx + 2, cy + 4)], VERMELHO)
         if jato > 0:
-            for i in range(14):
-                v = (u * 3 + i / 14) % 1
-                ax = bx - v * 70
-                ay = cy + (hsh(i, 3) - .5) * 10 * v
-                tela.px(ax, ay, MISTURA2 if v < .5 else CIANO)
-                tela.px(ax - 1, ay, MISTURA2 if v < .5 else FUNDO3)
-            if t > 3.0:
+            for i in range(22):
+                v = (u * 2.5 + i / 22) % 1
+                ax = bx - 2 - v * 80
+                ay = cy + (hsh(i, 3) - .5) * 16 * v
+                tela.linha(ax, ay, ax + 3 + 4 * (1 - v), ay, MISTURA2 if v < .5 else CIANO)
+            if t > 2.0:
                 seta(tela, bx - 8, cy + 30, bx - 48, cy + 30, CIANO)
                 tela.texto('AR', bx - 30, cy + 38, CIANO, tam=9, centro=True, contorno=PRETO)
                 seta(tela, x + rx * .2, cy + 30, x + rx * .2 + 40, cy + 30, AMARELO)
@@ -559,7 +558,7 @@ class Newton(Cena):
                 vac = 1.0
                 rot = 'NO VÁCUO'
             e = dict(t=t, chama1=1.0, vacuo=vac)
-            FOG.desenhar(tela, cxl, 70, 0.0, .95, e)
+            FOG.desenhar(tela, cxl, 68 + 2 * math.sin(t * 1.3 + cxl), 0.0, .95, e)
             etiqueta(tela, rot, cxl, 10, AMARELO if tipo == 'vac' else CIANO, 9)
         if not VERTICAL:
             tela.ret(meio, 0, 1, PALCO_H, PRETO); tela.ret(meio + 1, 0, 1, PALCO_H, ACO1)
@@ -835,17 +834,18 @@ class Decolagem(Cena):
         f = D.eixo(FX, cy, 0.0, K)
         cgx, cgy = f(38, 0)
         pw = 40
-        xs = FX - 30 if not VERTICAL else FX - 28
-        seta(tela, xs, cgy, xs, cgy + pw, VERMELHO)
-        tela.texto('PESO', xs - 4, cgy + pw - 4, VERMELHO, tam=9, centro='d', contorno=PRETO)
+        pp = pw * massa_vis(q) / VOO.M0
+        xs = FX - 34
+        seta(tela, xs, cgy, xs, cgy + pp, VERMELHO)
+        tela.texto('PESO', xs - 6, cgy + 4, VERMELHO, tam=9, centro='d', contorno=PRETO)
         if emp > .02:
             bx, by = f(0, 0)
             seta(tela, FX + 30, by, FX + 30, by - pw * emp, AMARELO)
             tela.texto('EMPUXO', FX + 36, by - pw * emp, AMARELO, tam=9, contorno=PRETO)
         apoio = max(0.0, 1 - emp) if tf <= 0 else 0.0
         if apoio > .02 and not VERTICAL:
-            seta(tela, FX - 52, gy, FX - 52, gy - pw * apoio, VERDE, 3, 6)
-            tela.texto('APOIO', FX - 58, gy - pw * apoio, VERDE, tam=9, centro='d', contorno=PRETO)
+            seta(tela, FX - 70, gy, FX - 70, gy - pw * apoio, VERDE, 3, 6)
+            tela.texto('APOIO', FX - 76, gy - pw * apoio - 2, VERDE, tam=9, centro='d', contorno=PRETO)
         hud_v(tela, 'decolagem', [(f"EMPUXO / PESO: {dec(emp, 2)}", AMARELO if emp > 1 else BRANCO)])
         if VERTICAL: return
         if tf < 0:

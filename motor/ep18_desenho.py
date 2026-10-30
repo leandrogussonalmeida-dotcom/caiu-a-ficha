@@ -543,7 +543,7 @@ def rastro(tela, voo, tf, cx, cy, esc, t, x1=W, dur=2.0):
     q = voo.q(tf)
     if q['h'] > 40e3 or tf <= 0: return
     a = 1 - q['h'] / 40e3
-    n = 26
+    n = 44
     for i in range(n):
         tau = tf - (i + 1) / n * dur - (t * 30 % 1) / n * dur
         if tau < 0: break
@@ -554,7 +554,7 @@ def rastro(tela, voo, tf, cx, cy, esc, t, x1=W, dur=2.0):
         ex = -math.sin(p['ang']) * 30 * 1.1; ey = math.cos(p['ang']) * 30 * 1.1
         x = cx + dx + ex; y = cy + dy + ey
         if x < -20 or x > x1 + 20 or y < -20 or y > PALCO_H + 20: continue
-        r = (2 + 7 * (i / n)) * a
+        r = (3.2 + 7 * (i / n)) * a
         if r < 1: continue
         tela.disco(x, y + 1, r + .8, FUM2)
         tela.disco(x, y, r, FUM1 if i > n // 3 else FUM0)
