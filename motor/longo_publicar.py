@@ -27,7 +27,7 @@ def montar(nome):
     for c in R.CAPITULOS:
         bpm = c.get('bpm', M.GENEROS[c['gen']]['bpm'])
         dur = c['bars'] * 4 * 60.0 / bpm
-        rot = NOMES.get(c['id'])
+        rot = getattr(R, 'CAPITULOS_YT', NOMES).get(c['id'])
         if rot: caps.append((0.0 if not caps else t, rot, dur))
         elif caps:                                     # capítulo sem nome soma no anterior
             a, r, d = caps[-1]; caps[-1] = (a, r, d + dur)
@@ -53,6 +53,6 @@ def montar(nome):
 
 if __name__ == '__main__':
     tit, desc = montar(sys.argv[1])
-    txt = f"TITLE\n{tit}\n\nDESCRIPTION\n{desc}\n"
+    txt = f"TÍTULO\n{tit}\n\nDESCRIÇÃO\n{desc}\n"
     open(sys.argv[2], 'w', encoding='utf-8').write(txt)
     print(txt)
