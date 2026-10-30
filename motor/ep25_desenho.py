@@ -544,16 +544,13 @@ class Turbofan:
         k = cam.k
         P = cam.P
         if chama > .2:
-            for lado in (-1, 1):
-                pl = cam.L([(68, 16.6), (110, 18), (150, 20), (150, 0), (84, 0), (70, 6.4)], lado)
-                pol(tela, pl, Q2, FUNDO, fase=int(t * 12))
-            for i in range(60):
+            for i in range(90):
                 u = (hsh(i, 3) + t * 1.4) % 1.0
                 x = 70 + u * 90
                 r = (hsh(i, 4) - .5) * 2 * (6 + u * 10)
                 px, py = P(x, r, 1)
                 c = cor_calor(MOD.T(x), hsh(i, 5))
-                tela.ret(int(px), int(py), max(1, int(k * (1.8 - u))), 1, c)
+                tela.ret(int(px), int(py), max(2, int(k * (3.0 - 1.5 * u))), 1, c)
 
 
 def _escurecer(tela, x, y, w, h):
@@ -723,8 +720,9 @@ def pa_corte(tela, cx, cy, s, t, frio=1.0, furos=1.0, camada=1.0, gas=1.0, perig
     if perigo:
         # sem proteção: o metal fica em brasa e pisca (derreteria)
         quente = .5 + .5 * math.sin(t * 6)
+        for d in (2, 1):
+            contorno(tela, [(x, y + (d if y > 0 else -d)) for x, y in L(PERFIL)], BRASA if d == 2 else LARANJA)
         pol(tela, L(PERFIL), VERMELHO if quente > .5 else BRASA, LARANJA)
-        brilho(tela, cx, cy, 34 * s * .5, VERMELHO)
         return
     # canais por dentro
     canais = [(-20, -14), (-10, -4), (0, 6), (10, 16), (20, 25)]

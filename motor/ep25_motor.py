@@ -530,7 +530,7 @@ class Compressor(Cena):
                 tela.texto(str(j + 1), int(px), int(py) - 10, cor, tam=9, centro=True, contorno=PRETO)
         if VERTICAL:
             hud_v(tela, 'compressor', [(f"ESTÁGIO {max(1, n)} DE 13", CIANO), (f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO),
-                                       (f"{milhar(MOD.T(x))} °C", cor_calor(MOD.T(x)))], y=PALCO_H - 46)
+                                       (f"{milhar(MOD.T(x))} °C", cor_calor(MOD.T(x)))], y=6)
             return
         painel_ar(tela, x, tempo=1, extra=self.grafico(t), sem_vel=True)
 
@@ -582,7 +582,7 @@ class Combustao(Cena):
             self.carro(tela, t)
         if VERTICAL:
             hud_v(tela, 'combustao', [(f"{milhar(MOD.T(x))} °C", cor_calor(MOD.T(x))),
-                                      (f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO)], y=PALCO_H - 32)
+                                      (f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO)], y=6)
             return
         painel_ar(tela, x, tempo=2, extra=self.extra(t))
 
@@ -718,7 +718,7 @@ class Calor(Cena):
         pa_corte(tela, cx, 104, s, t, frio=frio, furos=furos, camada=camada, perigo=perigo)
         xl = 8 if not VERTICAL else x_corte('calor') + 4
         tela.texto('GÁS A 1.500 °C', xl, 8, Q6, tam=9, contorno=PRETO)
-        if t >= 7.6:
+        if t >= 7.6 and not VERTICAL:
             seta(tela, cx - 20 * s, 190, cx - 20 * s, 162, FRIO1, 3, 5)
             tela.texto('AR DO COMPRESSOR', xl, 194, FRIO1, tam=9, contorno=PRETO)
         if t >= 21.6:
@@ -781,7 +781,7 @@ class Bocal(Cena):
             a = cam.P(40, 33, -1)
             rotulo(tela, 'AR DO FAN: FRIO', max(x_min + 4, int(a[0]) - 40), 8, a[0], a[1], CIANO)
             a2 = cam.P(96, 4, 1)
-            rotulo(tela, 'GÁS QUENTE', min(x_lim - 60, int(a2[0]) - 10), 190, a2[0], a2[1], LARANJA)
+            rotulo(tela, 'GÁS QUENTE', min(x_lim - 60, int(a2[0]) - 10), 190 if not VERTICAL else 150, a2[0], a2[1], LARANJA)
         if t >= 14.0:
             # ação: o motor empurra o ar para trás (direita)
             gx, gy = cam.P(88, 26, 1)
@@ -794,12 +794,12 @@ class Bocal(Cena):
                 seta(tela, ax_, ay_, bx_, ay_, AMARELO, 7, 11)
                 tela.texto('MOTOR PARA A FRENTE', int(bx_), int(ay_) - 16, AMARELO, tam=9, contorno=PRETO)
         if t >= 28.0:
-            etiqueta(tela, 'EMPUXO', x_min + 40, 178, AMARELO, tam=17)
+            etiqueta(tela, 'EMPUXO', x_min + 40, 178 if not VERTICAL else 146, AMARELO, tam=17)
         if t >= 21.0 and not VERTICAL:
             self.foguete_mini(tela, 274, 56, t)
         if VERTICAL:
             if t < 6.8:
-                hud_v(tela, 'bocal', [(f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO)], y=PALCO_H - 18)
+                hud_v(tela, 'bocal', [(f"PRESSÃO {dec(MOD.p(x), 1)} X", AMARELO)], y=6)
             return
         if t < 6.8:
             painel_ar(tela, x, tempo=3)
@@ -981,11 +981,11 @@ class Ritmo(Cena):
         pulso = math.exp(-dt / .15)
         if VERTICAL:
             xc = x_corte('ritmo') + 90
-            cil = MP.Cilindro(xc, 96, .42, seed=4)
+            cil = MP.Cilindro(xc, 88, .36, seed=4)
             cil.desenhar(tela, th, t)
             tela.texto(NOMES_CARRO[k], xc, 6, MP.TEMPOS[k][3], tam=9, centro=True, contorno=PRETO)
-            cam = Camera(xc + 10, 166, .5)
-            jato_4tempos(tela, cam, t, True, pulso, y_txt=124, x_txt=xc - 66, passo=44, faixas=True)
+            cam = Camera(xc + 8, 142, .45)
+            jato_4tempos(tela, cam, t, True, pulso, y_txt=104, x_txt=xc - 66, passo=44, faixas=True)
             return
         cil = MP.Cilindro(120, 182, .72, seed=4)
         cil.desenhar(tela, th, t)
