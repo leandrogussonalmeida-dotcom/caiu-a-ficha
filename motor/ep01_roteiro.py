@@ -52,7 +52,7 @@ FATOS E FONTES
       (a marca não aparece no vídeo); a sonda lambda diz à central qual
       mistura está queimando. Wikipedia, "Flexible-fuel vehicles in Brazil".
   F19 Flex funciona com qualquer proporção de gasolina com etanol e etanol
-      puro; a gasolina do posto tem 30% de etanol anidro desde agosto de 2025.
+      puro; a gasolina comum tem 32% de etanol anidro desde 1º/8/2026 (a premium, 25%).
       Jornal da USP.
   F20 Bateria de carro: 6 células em série, sistema nominal de 12 V
       (partida, luz e ignição). Wikipedia, "Automotive battery".
@@ -123,7 +123,7 @@ LEGENDAS = {
         (0.5, 7.4, "AGORA FALTA A FAÍSCA. A BATERIA", "DO CARRO TEM SÓ *12 VOLTS*.", ('F20',)),
         (7.6, 14.4, "A VELA PRECISA DE *12.000 A 25.000*", "VOLTS OU MAIS PARA FAISCAR.", ('F13',)),
         (14.6, 22.0, "A *BOBINA* SOBE A TENSÃO: POUCAS", "VOLTAS DE UM LADO, MILHARES DO OUTRO.", ('F14',)),
-        (22.2, 30.8, "A CORRENTE É CORTADA E O CHOQUE PULA", "A FOLGA DA VELA: *0,6 A 1,8 MM*.", ('F14', 'F13')),
+        (22.2, 30.8, "A CORRENTE É CORTADA E A FAÍSCA PULA", "A FOLGA DA VELA: *0,6 A 1,8 MM*.", ('F14', 'F13')),
     ],
     'potencia': [
         (2.0, 8.8, "LOGO ANTES DO PISTÃO CHEGAR AO TOPO,", "A *VELA* SOLTA A FAÍSCA.", ('F4',)),
@@ -205,6 +205,7 @@ FONTES = {
     'F18': ('Wikipedia, "Flexible-fuel vehicles in Brazil"', 'https://en.wikipedia.org/wiki/Flexible-fuel_vehicles_in_Brazil'),
     'F19': ('Jornal da USP, "Gasolina mais verde: agora com 30% de etanol sem prejudicar o seu carro"',
             'https://jornal.usp.br/noticias/gasolina-mais-verde-agora-com-30-de-etanol-sem-prejudicar-o-seu-carro/'),
+    'F21': ('Campo Grande News, "Gasolina com 32% de etanol passa a valer a partir de hoje" (01/08/2026)', 'https://www.campograndenews.com.br/economia/gasolina-com-32-de-etanol-passa-a-valer-a-partir-de-hoje'),
     'F20': ('Wikipedia, "Automotive battery"', 'https://en.wikipedia.org/wiki/Automotive_battery'),
 }
 
@@ -234,7 +235,7 @@ Simplificado de propósito
 - Desenhamos a bobina com os dois enrolamentos lado a lado; na bobina de verdade um fica em volta do outro. A faísca sai a cada 2 batidas da música; a 3.000 RPM são 25 por segundo em cada cilindro.
 - Chamamos de "água" o líquido de arrefecimento (água com aditivo). Não mostramos a válvula termostática nem a ventoinha. A bomba parada no começo do capítulo é só para mostrar o motor esquentando.
 - O jato de óleo embaixo do pistão existe em alguns motores, não em todos.
-- No carro flex, a central usa a sonda lambda e outros sensores; o atraso do ajuste está exagerado para dar para ver. Os 30% de etanol na gasolina do posto valem desde agosto de 2025.
+- No carro flex, a central usa a sonda lambda e outros sensores; o atraso do ajuste está exagerado para dar para ver. A gasolina comum do posto tem 32% de etanol desde 1º de agosto de 2026 (a premium, 25%).
 
 Fontes
 {fontes}
@@ -266,5 +267,5 @@ CORTES = [
          descricao='Admissão: o pistão desce e a mistura de ar e combustível entra. Compressão: as válvulas fecham e o pistão espreme a mistura num espaço de 8 a 12 vezes menor.'),
     dict(id='c7', de=('faisca', 0.0), ate=('faisca', 31.2), x=105, gancho=['DE 12 VOLTS', 'A 25.000'],
          titulo='Como 12 volts viram a faísca da vela ⚡',
-         descricao='A bateria do carro tem 12 volts, mas a vela precisa de 12.000 a 25.000 volts ou mais. Quem faz o salto é a bobina: poucas voltas de fio de um lado, milhares do outro. Cortou a corrente, o choque pula a folga da vela.'),
+         descricao='A bateria do carro tem 12 volts, mas a vela precisa de 12.000 a 25.000 volts ou mais. Quem faz o salto é a bobina: poucas voltas de fio de um lado, milhares do outro. Cortou a corrente, a faísca pula a folga da vela.'),
 ]

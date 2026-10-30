@@ -835,7 +835,7 @@ class Injetor(Cena):
                 tela.disco(px_, py_, 2, AMARELO)
         # rótulos
         rotulo(tela, 'COMBUSTÍVEL SOB PRESSÃO', 8, 4, an['tubo'][0], an['tubo'][1], ACO4, AMARELO)
-        rotulo(tela, 'BOBINA', 20, 48, an['bobina'][0], an['bobina'][1], BRANCO, AMARELO)
+        rotulo(tela, 'SOLENOIDE', 20, 48, an['bobina'][0], an['bobina'][1], BRANCO, AMARELO)
         rotulo(tela, 'AGULHA', 20, 70, self.CX - 2, an['agulha'][1], BRANCO, AMARELO)
         rotulo(tela, 'BICO', 40, 92, bx - 6, by - 4, BRANCO, AMARELO)
         tela.texto('SINAL ELÉTRICO', 166, cyn - 12, ACO4, tam=9, contorno=PRETO)
@@ -1144,7 +1144,7 @@ class Calor(Cena):
 
 # ============================================================ extra: carro flex
 class Flex(Cena):
-    """O carro flex brasileiro. O tanque começa com gasolina do posto (30%
+    """O carro flex brasileiro. O tanque começa com gasolina comum (32%
     de etanol, F19) e o bico verde põe etanol: o contador sobe. A sonda
     lambda no escape vê que sobra ar e avisa a central, que deixa o injetor
     aberto mais tempo (o ajuste chega com atraso, como na vida real)."""
@@ -1170,7 +1170,7 @@ class Flex(Cena):
 
     def etanol(self, t):
         L = self.nivel(t)
-        return (.30 * .30 + (L - .30)) / L
+        return (.32 * .30 + (L - .30)) / L
 
     def ajuste(self, t):
         return float(np.interp(t, self.ts, self.aj))
@@ -1242,8 +1242,8 @@ class Flex(Cena):
                 for yy in range(y0 + 30, yt, 2):
                     tela.ret(31 + int(math.sin(yy * .5 + t * 20)), yy, 2, 2, EX.ETANOL if yy % 4 else CHAMA0)
         if t < a - .6:
-            tela.texto('GASOLINA DO POSTO', 8, 94, EX.GASOLINA, tam=9, contorno=PRETO)
-            tela.texto('(30% DE ETANOL)', 8, 104, EX.GASOLINA, tam=9, contorno=PRETO)
+            tela.texto('GASOLINA COMUM', 8, 94, EX.GASOLINA, tam=9, contorno=PRETO)
+            tela.texto('(32% DE ETANOL)', 8, 104, EX.GASOLINA, tam=9, contorno=PRETO)
         tela.texto('TANQUE', 65, 194, BRANCO, tam=9, centro=True, contorno=PRETO)
         rotulo(tela, 'INJETOR', 110, 50, 168, 64, BRANCO, AMARELO)
         rotulo(tela, 'SONDA', 248, 98, 265, 80, BRANCO, AMARELO)
