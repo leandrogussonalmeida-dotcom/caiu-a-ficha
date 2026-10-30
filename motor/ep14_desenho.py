@@ -559,7 +559,7 @@ class Vertical:
         for t in self.ts:
             Wt = Wfn(t)
             B = min(1.0, max(0.0, z / Hm))
-            a = 9.8 * (Wt - B) - cd * v * abs(v) - (cl * v if z < Hm * 1.05 else 0.0)
+            a = 9.8 * (Wt - B) - cd * v * abs(v) - (cl * v if z < Hm else 0.0)
             v += a * dt
             z += v * dt
             if zmin is not None and z < zmin: z, v = zmin, 0.0

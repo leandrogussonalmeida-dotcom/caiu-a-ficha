@@ -45,7 +45,11 @@ SUB_G = Sub(262, 38)          # grande, para as peças
 SUB_V = Sub(150, 22)          # nos cortes verticais
 SUB_P = Sub(110, 16)          # pequeno (limite, sonar)
 SUB_M = Sub(70, 11)           # miniatura (resumo, painel)
+SUB_MINI = Sub(40, 8)         # ícone do painel
+SUB_LIM = Sub(56, 9)          # na régua de limites
 HM, DM = SUB.Hm, SUB.Dm       # alturas (m) do protagonista: quilha->vela, diâmetro
+W0 = .75                      # peso com os tanques vazios (fração do empuxo todo submerso)
+F_SOPRO = .86                 # o quanto de água fica nos tanques depois do sopro no fundo
 
 
 def milhar(n): return f"{int(round(n)):,}".replace(',', '.')
@@ -126,8 +130,8 @@ def painel_sub(tela, t, zk, v, lastro, Wt, Bt, extra=()):
     D.medidor_tanque(tela, PX0 + 2, 80, 24, 46, lastro, None, t)
     tela.texto(f"{int(round(lastro * 100))}%", PX0 + 14, 130, MISTURA2, tam=9, centro=True, contorno=PRETO)
     tela.texto('ÁGUA', PX0 + 14, 141, ACO3, tam=9, centro=True, contorno=PRETO)
-    D.barra_forca(tela, PX0 + 64, 58, 100, Wt - .8, .25, VERMELHO, 'PESO', '')
-    D.barra_forca(tela, PX0 + 64, 84, 100, Bt - .8, .25, VERDE, 'EMPUXO', '')
+    D.barra_forca(tela, PX0 + 64, 58, 100, Wt - .6, .48, VERMELHO, 'PESO', '')
+    D.barra_forca(tela, PX0 + 64, 84, 100, Bt - .6, .48, VERDE, 'EMPUXO', '')
     est, cor = estado_txt(zk, v)
     tit(tela, est, 110, cor, 17, PX0 + 64)
     for k, (txt, c) in enumerate(extra):
@@ -146,7 +150,8 @@ def respiro_ar(tela, S, cx, cy, ang, ys, t, forca_=1.0, seed=0):
     if forca_ <= .02: return
     for k, nome in enumerate(('respiro_proa', 'respiro_popa')):
         x, y = S.tela_xy(nome, cx, cy, ang)
-        if ys is not None and y < ys + 1:
+        if ys is not None and y < ys + 9:
+            y = min(y, ys - 1)
             n = int(4 + 10 * forca_)
             for j in range(n):
                 u = (t * 2.2 + j / n + k * .3) % 1.0
@@ -263,19 +268,18 @@ def cena_vertical(tela, t, cap, sim, cx, est, ang=0.0, xoff=0.0, y_alvo=110, ys0
 # ============================================================ gancho
 class Gancho(Cena):
     def W(self, t):
-        f = rampa(t, [(2.0, 0.0), (6.0, 1.0), (9.3, 1.0), (11.5, 0.0)])
-        return .9 + .13 * f
+        return W0 + .35 * self.lastro(t)
 
-    def lastro(self, t): return rampa(t, [(2.0, 0.0), (6.0, 1.0), (9.3, 1.0), (11.5, .1)])
+    def lastro(self, t): return rampa(t, [(1.8, 0.0), (4.6, 1.0), (9.3, 1.0), (11.3, .1)])
 
     def preparar(self):
-        self.sim = Vertical(self.W, self.dur, .9 * HM, HM)
+        self.sim = Vertical(self.W, self.dur, W0 * HM, HM)
 
     def desenhar(self, tela, t, tg):
         S = sub()
-        cx = cx_de('gancho', 130)
+        cx = cx_de('gancho', 140)
         est = dict(corte=False, respiros=2.0 <= t < 7.5, valvulas=True, helice=t * 4, lemes=0)
-        ys, cy, cam = cena_vertical(tela, t, 'gancho', self.sim, cx, est, 0.0, xoff=t * 2, ys0=64)
+        ys, cy, cam = cena_vertical(tela, t, 'gancho', self.sim, cx, est, 0.0, xoff=t * 2, ys0=64, regua_x=4)
         if 2.0 <= t < 7.0:
             respiro_ar(tela, S, cx, cy, 0, ys, t, 1 - (t - 2) / 6)
         if 9.3 <= t < 12.5:
@@ -287,14 +291,7 @@ class Gancho(Cena):
             etiqueta(tela, est_, cx, 12 if ys is None or ys > 30 else ys + 8, cor, 17)
         hud_v(tela, 'gancho', [(f"PROFUNDIDADE {prof_txt(zk)}", AMARELO)])
         if VERTICAL: return
-        fundo_painel(tela)
-        tit(tela, 'PROFUNDIDADE', 9, ACO3, 9)
-        p = prof_txt(zk)
-        tit(tela, p, 21 if len(p) > 6 else 19, AMARELO, 17 if len(p) > 6 else 26)
-        tit(tela, 'TANQUES DE LASTRO', 60, ACO3, 9)
-        D.medidor_tanque(tela, PX0 + 2, 74, 40, 70, self.lastro(t), None, t)
-        tit(tela, f"{int(round(self.lastro(t) * 100))}% ÁGUA", 110, MISTURA2, 9, PX0 + 52)
-        D.regua(tela, PX0 + 120, cam if cam > 0 else 0, 10, 50)
+        painel_sub(tela, t, zk, v, self.lastro(t), self.W(t), self.sim.emp(t))
 
     def sons(self, fx):
         mar_som(fx, self.t0, self.t0 + self.dur)
@@ -339,7 +336,7 @@ class Arquimedes(Cena):
     def desenhar(self, tela, t, tg):
         S = sub()
         cx = cx_de('arquimedes', 140)
-        zk = .9 * HM + .15 * math.sin(t * 1.3)
+        zk = W0 * HM + .15 * math.sin(t * 1.3)
         cam = -self.YS / PXM
         ys = D.mar(tela, cam, t)
         D.neve(tela, cam, t * .5, t, ys)
@@ -356,8 +353,8 @@ class Arquimedes(Cena):
         D.superficie(tela, ys, t)
         bc = cy + (S.D * .5)
         if t < 7.8:
-            rotulo(tela, 'ÁGUA EMPURRADA', cx - 40, ys + 46, MISTURA2)
-            fio(tela, cx - 10, ys + 44, cx - 10, cy + 6, MISTURA2)
+            rotulo(tela, 'ÁGUA EMPURRADA', cx - 120, ys + 46, MISTURA2)
+            fio(tela, cx - 60, ys + 44, cx - 50, cy + 4, MISTURA2)
         # forças: iguais na superfície
         pulso = 1 + (.15 * math.sin(t * 6) if 7.8 <= t < 14.6 else 0)
         forca(tela, cx + 18, cy, 30, False, VERMELHO)
@@ -383,6 +380,9 @@ class Arquimedes(Cena):
         D.barra_forca(tela, PX0, 58, 160, .9 * pulso if t < 14.6 else .9, 1.0, VERDE, 'EMPUXO', '')
         if t < 7.8:
             tit(tela, 'LEMBRA DO EP. 6,', 86, ACO3, 9); tit(tela, 'O DO NAVIO?', 98, ACO3, 9)
+        elif t < 14.6:
+            tit(tela, 'A ÁGUA EMPURRADA', 86, MISTURA2, 9); tit(tela, 'PESA O MESMO QUE', 98, MISTURA2, 9)
+            tit(tela, 'O SUBMARINO', 110, MISTURA2, 9)
         elif t >= 14.8:
             tit(tela, '= IGUAIS: FLUTUA', 84, CIANO, 9)
         if t >= 21.8:
@@ -395,7 +395,7 @@ class Arquimedes(Cena):
                 tela.ret_vazado(PX0 - 1, y - 1, 48, 22, cor if ativo == k else ACO1)
                 ph = ((t * .5 + k * .3) % 1.0)
                 yy = y + 10 + (s * (ph * 14 - 7) if s else math.sin(t * 2) * .6)
-                SUB_M.desenhar(tela, PX0 + 23, yy, 0, dict(helice=t), t)
+                SUB_MINI.desenhar(tela, PX0 + 23, yy, 0, dict(helice=t), t)
                 tela.ret(PX0, y - 1, 46, 1, MISTURA2)
                 tit(tela, 'EMPUXO', y + 1, ACO3 if not on else BRANCO, 9, PX0 + 54)
                 tit(tela, txt, y + 11, cor if on else ACO1, 9, PX0 + 54)
@@ -464,7 +464,7 @@ class Partes(Cena):
         fundo_painel(tela)
         for k, (nm, rot, desc) in enumerate(PECAS):
             if t < k * self.slot: continue
-            y = 8 + k * 28
+            y = 8 + k * 25
             atual = k == k_at
             tela.ret(PX0 - 2, y + 1, 5, 5, AMARELO if atual else ACO1)
             tit(tela, rot, y, AMARELO if atual else ACO2, 9, PX0 + 8)
@@ -473,6 +473,9 @@ class Partes(Cena):
                 if u > .4:
                     for p in PONTOS[nm]:
                         fio(tela, PX0 - 4, y + 4, *S.tela_xy(p, cx, cy))
+        tit(tela, f"PEÇA {k_at + 1} DE {len(PECAS)}", 186, ACO3, 9)
+        for k in range(len(PECAS)):
+            tela.ret(PX0 + 90 + k * 10, 188, 7, 5, AMARELO if k <= k_at else FUNDO3)
 
     def sons(self, fx):
         bolhas_som(fx, self.t0, self.t0 + self.dur, 1.2, .025, 4)
@@ -491,10 +494,10 @@ class Mergulho(Cena):
 
     def f(self, t): return rampa(t, [(self.T_ABRE + .3, 0.0), (self.T_CHEIO, 1.0)])
     def aj(self, t): return rampa(t, [(self.T_AJ0, .3), (self.T_AJ1, .7)])
-    def W(self, t): return .9 + .1 * self.f(t) + .04 * (self.aj(t) - .3) / .4
+    def W(self, t): return W0 + (1 - W0) * self.f(t) + .05 * (self.aj(t) - .3) / .4
 
     def preparar(self):
-        self.sim = Vertical(self.W, self.dur, .9 * HM, HM)
+        self.sim = Vertical(self.W, self.dur, W0 * HM, HM)
 
     def desenhar(self, tela, t, tg):
         S = sub()
@@ -582,13 +585,14 @@ class Equilibrio(Cena):
             x, y = S.tela_xy('sonar', cx, 104, a)
             seta_dir(tela, x + 6, y + 14, 0, 1, 16, VERMELHO)
             rotulo(tela, 'MAIS PESO', x - 4, y + 22, VERMELHO, centro='d')
+        if 0.5 <= t < 7.6 and not VERTICAL:
+            etiqueta(tela, 'PESO = EMPUXO', cx, 26, AMARELO)
         hud_v(tela, 'equilibrio', [(f"{milhar(e)} M", AMARELO),
                                    ('NIVELADO' if abs(a) < 1 else f"NARIZ {dec(a, 0)} GRAUS", BRANCO)])
         if VERTICAL: return
         fundo_painel(tela)
         tit(tela, 'PROFUNDIDADE', 9, ACO3, 9)
         tit(tela, f"{milhar(e)} M", 19, AMARELO, 26)
-        tit(tela, 'PESO = EMPUXO', 50, AMARELO if t >= .5 else ACO3, 9)
         D.barra_forca(tela, PX0, 60, 160, .2, .25, VERMELHO, 'PESO', '')
         D.barra_forca(tela, PX0, 84, 160, .2, .25, VERDE, 'EMPUXO', '')
         tit(tela, 'NÍVEL', 110, ACO3, 9)
@@ -611,9 +615,9 @@ class Subir(Cena):
     T_FECHA, T_SOPRA0, T_SOPRA1, T_FIM0, T_FIM1 = 2.5, 8.5, 22.0, 33.0, 38.0
 
     def f(self, t):
-        return rampa(t, [(self.T_SOPRA0, 1.0), (self.T_SOPRA1, .62), (self.T_FIM0, .62), (self.T_FIM1, 0.0)])
+        return rampa(t, [(self.T_SOPRA0, 1.0), (self.T_SOPRA1, F_SOPRO), (self.T_FIM0, F_SOPRO), (self.T_FIM1, 0.0)])
 
-    def W(self, t): return .9 + .1 * self.f(t)
+    def W(self, t): return W0 + (1 - W0) * self.f(t)
 
     def preparar(self):
         self.sim = Vertical(self.W, self.dur, 50 + DM / 2, HM)
@@ -772,7 +776,7 @@ class Lemes(Cena):
 # ============================================================ pressão
 class Pressao(Cena):
     def eixo(self, t):
-        s0 = .9 * HM - DM / 2 + .15 * math.sin(t * 1.3)
+        s0 = W0 * HM - DM / 2 + .15 * math.sin(t * 1.3)
         return rampa(t, [(7.8, s0), (14.0, 30.0), (21.0, 100.0), (28.4, 104.0), (33.5, 300.0), (54, 302.0)])
 
     def ang(self, t):
@@ -781,24 +785,24 @@ class Pressao(Cena):
 
     def desenhar(self, tela, t, tg):
         S = sub()
-        cx = cx_de('pressao', 150)
+        cx = cx_de('pressao', 172)
         e = self.eixo(t)
         cam = camera(e, 104, 70)
         ys = D.mar(tela, cam, t)
         D.neve(tela, cam, t * 3, t, ys)
-        if not VERTICAL:
-            D.regua(tela, 4, cam, 10, 50 if e > 60 else 10, ysurf=ys)
-            # atmosferas na régua
-            for d in range(0, 401, 10):
-                y = (d - cam) * PXM
-                if 0 <= y < PALCO_H and (d % 50 == 0 or (e < 60 and d <= 50)):
-                    tela.texto(f"{milhar(1 + d / 10)} ATM", 60, int(y) - 3, CIANO, tam=9, contorno=PRETO)
         cy = (e - cam) * PXM
         a = self.ang(t)
         corte = t >= 42.8
         est = dict(corte=corte, lastro=1.0 if t > 8 else 0.0, helice=t * 5, lemes=-10 if a < -3 else 0)
         S.desenhar(tela, cx, cy, a, est, t)
         D.superficie(tela, ys, t)
+        if not VERTICAL:
+            D.regua(tela, 4, cam, 10, 50 if e > 60 else 10, ysurf=ys)
+            # atmosferas na régua (por cima de tudo)
+            for d in range(0, 401, 10):
+                y = (d - cam) * PXM
+                if 0 <= y < PALCO_H and (d % 50 == 0 or (e < 60 and d <= 50)):
+                    tela.texto(f"{milhar(1 + d / 10)} ATM", 50, int(y) - 3, CIANO, tam=9, contorno=PRETO)
         agua = max(0.0, e) / 10.0
         if t >= 28.8 or corte:
             # a água apertando o casco por todos os lados
@@ -1011,7 +1015,7 @@ class Limite(Cena):
         x1 = W if VERTICAL else 298
         yy, xx = np.mgrid[0:PALCO_H, 0:x1]
         m = (yy - self.Y0) / (self.Y1 - self.Y0) * self.MAXM
-        lev = np.clip(np.interp(m, [-1, 0, 40, 150, 350, 500], [-1, 0, 1, 2, 3, 3.6]), -1, 3.99)
+        lev = np.clip(np.interp(m, [-1, 0, 120, 300, 500], [-1, 0, 1, 2, 2.8]), -1, 3.99)
         i = np.floor(np.maximum(lev, 0)).astype(int); f = np.maximum(lev, 0) - i
         idx = np.clip(i + (D.B4[yy % 4, xx % 4] < f), 0, 4)
         cor = D.RAMPA[idx]
@@ -1033,12 +1037,12 @@ class Limite(Cena):
             if b - a < 2:
                 tela.ret(xs + 2, a, xr - xs + 140, 1, cor)
             else:
-                dither(tela, xs + 2, a, 70, b - a, cor, FUNDO2)
-                tela.ret(xs + 2, a, 70, 1, cor); tela.ret(xs + 2, b, 70, 1, cor)
-            rotulo(tela, txt, xs + 6 + lado, a - 10 if b - a < 2 else a + 2, cor)
+                tela.ret(xs + 2, a, 4, b - a + 1, PRETO); tela.ret(xs + 3, a, 2, b - a + 1, cor)
+                tela.ret(xs + 2, a, 10, 1, cor); tela.ret(xs + 2, b, 10, 1, cor)
+            rotulo(tela, txt, xs + 6 + lado, a - 10 if b - a < 2 else (a + b) // 2 - 4, cor)
         faixa(100, 100, AMARELO, 'PRIMEIRA GUERRA: ATÉ 100 M', 7.8)
         faixa(200, 200, LARANJA, 'SEGUNDA GUERRA: ATÉ 200 M', 10.5)
-        faixa(250, 400, VERDE, 'AÇO, HOJE: 250 A 400 M', 14.8)
+        faixa(250, 400, VERDE, 'AÇO, HOJE: 250 A 400 M', 14.8, 10)
         if t >= 17.0 and not VERTICAL:
             rotulo(tela, 'TITÂNIO: TESTE A 1.000 M', 150, 182, CIANO, centro=True)
             seta(tela, 150, 196, 0, 1, CIANO, 5)
@@ -1046,33 +1050,33 @@ class Limite(Cena):
         if t >= 21.8:
             yt = int(self.y(300))
             tela.ret(xs + 2, yt, 250 if not VERTICAL else 170, 1, BRANCO)
-            rotulo(tela, 'TESTE (EXEMPLO)', 210 if not VERTICAL else 190, yt - 10, BRANCO, centro=True)
+            rotulo(tela, 'TESTE (EXEMPLO)', 150 if not VERTICAL else 120, yt - 10, BRANCO, centro=True)
         if t >= 28.8:
             yp = int(self.y(450))
             tela.ret(xs + 2, yp, 250 if not VERTICAL else 170, 1, VERMELHO)
-            rotulo(tela, 'PROJETO', 210 if not VERTICAL else 190, yp - 10, VERMELHO, centro=True)
-            xb = 252 if not VERTICAL else 214
+            rotulo(tela, 'PROJETO: ???' if t >= 35.8 else 'PROJETO', 150 if not VERTICAL else 120, yp - 10,
+                   VERMELHO, centro=True)
+            xb = 282 if not VERTICAL else 214
             tela.ret(xb, int(self.y(0)) + 2, 1, yp - int(self.y(0)) - 2, ACO3)
             tela.ret(xb + 4, int(self.y(0)) + 2, 1, yt - int(self.y(0)) - 2, AMARELO)
-            rotulo(tela, '2/3', xb + 8, int(self.y(150)), AMARELO)
+            rotulo(tela, '2/3', xb - 6, int(self.y(150)), AMARELO, centro='d')
         if t >= 35.8:
             yp = int(self.y(450))
             k = int(t * 4) % 2
             dither(tela, xs + 2, yp + 1, 250 if not VERTICAL else 170, self.Y1 - yp, VERMELHO if k else BRASA, FUNDO)
-            rotulo(tela, 'ESMAGAMENTO', 160 if not VERTICAL else 150, yp + 4, BRANCO, centro=True)
-            etiqueta(tela, 'SEGREDO', 180 if not VERTICAL else 150, 40, VERMELHO, 17)
+            rotulo(tela, 'ESMAGAMENTO', 150 if not VERTICAL else 120, yp + 5, BRANCO, centro=True)
         # o submarino descendo a régua
         pm = self.prof(t)
         ys = self.y(pm)
-        sx = 175 if not VERTICAL else 150
+        sx = 238 if not VERTICAL else 150
         ang = -10 if self.prof(t + .1) > pm + .2 else 0
         crush = t >= 39.0
-        SUB_P.desenhar(tela, sx, ys, ang, dict(helice=t * 4), t)
+        SUB_LIM.desenhar(tela, sx, ys, ang, dict(helice=t * 4), t)
         if crush and int(t * 6) % 2 == 0:
-            tela.anel(sx, ys, 30, VERMELHO, .6)
+            tela.anel(sx, ys, 20, VERMELHO, .6)
         tela.ret(xs - 2, int(ys), 5, 1, AMARELO)
         if not VERTICAL:
-            rotulo(tela, f"{milhar(pm)} M", sx + 60, int(ys) - 4, AMARELO)
+            rotulo(tela, f"{milhar(pm)} M", sx, int(ys) - 22, AMARELO, centro=True)
         hud_v(tela, 'limite', [(f"{milhar(pm)} M", AMARELO)])
         if VERTICAL: return
         fundo_painel(tela)
@@ -1107,25 +1111,38 @@ class Sonar(Cena):
     def geo(self):
         if VERTICAL:
             xc = x_corte('sonar')
-            return xc + 55, 112, xc + 165       # submarino, y, rocha
-        return 75, 112, 280
+            return xc + 42, 112, xc + 150       # submarino, y, rocha
+        return 75, 112, 236
 
     def desenhar(self, tela, t, tg):
         cam = 250.0
         D.mar(tela, cam, t, raios=False)
         D.neve(tela, cam, t * .6, t)
         sx, sy, rx = self.geo()
-        S = SUB_P
+        S = SUB_LIM if VERTICAL else SUB_P
         # rocha (monte submarino)
-        pts = [(rx - 18, PALCO_H), (rx - 10, 120), (rx - 2, 96), (rx + 10, 60), (rx + 30, 40), (rx + 60, 30),
-               (rx + 80, PALCO_H)]
-        poligono(tela, [(x + 1, y + 1) for x, y in pts], PRETO)
+        x1 = rx + 40 if VERTICAL else 298
+        # fundo do mar
+        for x in range(0, x1, 1):
+            h = 8 + int(3 * math.sin(x * .07) + 2 * math.sin(x * .19))
+            tela.ret(x, PALCO_H - h, 1, h, FUNDO3 if x % 2 else ACO0)
+        pts = [(rx - 14, PALCO_H), (rx - 8, 130), (rx, 100), (rx + 6, 70), (rx + 18, 48), (rx + 40, 34),
+               (rx + 70, 28), (x1, 28), (x1, PALCO_H)]
+        poligono(tela, [(x - 1, y) for x, y in pts], PRETO)
         poligono(tela, pts, FUNDO3)
-        for k in range(30):
-            x = rx - 6 + (k * 37) % 70; y = 50 + (k * 53) % 150
-            tela.px(x + (y - 50) * 0 + max(0, 30 - y // 4), y, ACO0)
+        poligono(tela, [(x + 5, y + 4) for x, y in pts[:-2]] + [(x1, 32), (x1, PALCO_H)], FUNDO2)
+        for k in range(40):
+            x = rx + (k * 37) % 62; y = 60 + (k * 53) % 140
+            tela.px(x, y, ACO0)
         S.desenhar(tela, sx, sy, 0, dict(helice=t * 3), t)
         bx, by = S.tela_xy('sonar', sx, sy)
+        if t < 7.8:                                      # o farol só alcança um pouquinho
+            for k in range(60):
+                u = ((k * 0.618) % 1.0)
+                d = 4 + u * 34
+                a2 = ((k * 0.377) % 1.0 - .5) * .5
+                if (k + int(t * 8)) % 3 and d < 30 + 4 * math.sin(t * 2):
+                    tela.px(bx + 3 + d * math.cos(a2), by + d * math.sin(a2), LATAO if d > 20 else CHAMA0)
         dist_px = rx - 6 - bx
         v_px = dist_px / self.LENTO                      # px por segundo de tela (1 s real = LENTO)
         # escuro: só o que o sonar "acende"
@@ -1154,11 +1171,14 @@ class Sonar(Cena):
                 tela.anel(bx, by, 8, AMARELO, .6)
         if t >= 28.8:
             # passivo: barulho de hélice de longe chegando
-            ox, oy = (rx + 40, 18) if not VERTICAL else (rx + 5, 20)
+            ox, oy = (rx - 30, 12) if not VERTICAL else (rx - 30, 14)
             u = t - 28.8
             for j in range(4):
-                r = ((u * 24 + j * 14) % 70) + 3
-                arco(tela, ox, oy, r, 180, 300, ACO3)
+                r = ((u * 24 + j * 18) % 90) + 3
+                arco(tela, ox, oy, r, 190, 320, ACO3 if r < 60 else ACO1)
+            tela.ret(ox - 12, oy - 3, 24, 4, PRETO); tela.ret(ox - 11, oy - 2, 22, 2, ACO1)
+            rotulo(tela, 'BARULHO DE HÉLICE', ox, oy + 6, ACO3, centro=True)
+            if int(t * 3) % 2 == 0: tela.anel(bx - 2, by, 6, VERDE, .5)
             tela.disco(ox, oy, 2.5, ACO2)
         cor_txt = CIANO
         if not VERTICAL and 8 < t < self.T_PING - .5:
@@ -1263,7 +1283,7 @@ class Fim(Cena):
             ys = D.mar(tela, cam, t)
             u = t - RM.OUTRO_S
             x = -120 + u * 45
-            zk = .9 * HM + .15 * math.sin(t * 1.3)
+            zk = W0 * HM + .15 * math.sin(t * 1.3)
             SUB.desenhar(tela, x, ys + (zk - DM / 2) * PXM, 0, dict(helice=t * 3), t)
             D.superficie(tela, ys, t)
             tela.texto("OBRIGADO POR ASSISTIR!", W // 2, 30, BRANCO, tam=17, centro=True, contorno=PRETO)

@@ -621,7 +621,7 @@ class Pecas(Cena):
         self.S = simular_cc(self.dur - self.t_liga + .2, a0=180.0, k=120, c=1.0)
 
     def rotor(self, t):
-        if t < self.t_liga: return 180.0 + 4 * math.sin(t * 1.3) * (t > self.slot), 0.0, 0
+        if t < self.t_liga: return 180.0, 0.0, 0
         return ler_sim(self.S, t - self.t_liga)
 
     def desenhar(self, tela, t, tg):
@@ -1124,10 +1124,10 @@ class Eficiencia(Cena):
         if t >= 15.8: rotulo(tela, 'ELÉTRICO', ex + 54, 18, VERDE, 17, centro=True)
         if t >= 7.8 and not (VERTICAL and t >= 15.8):
             rotulo(tela, 'CERCA DE 30%', gx + 54, 160, VERDE, 9, centro=True)
-            rotulo(tela, 'VIRA MOVIMENTO', gx + 54, 172, ACO3, 9, centro=True)
+            if not VERTICAL: rotulo(tela, 'VIRA MOVIMENTO', gx + 54, 172, ACO3, 9, centro=True)
         if t >= 17.6:
             rotulo(tela, '87% A 91%', ex + 54, 160, VERDE, 9, centro=True)
-            rotulo(tela, 'COM A FRENAGEM', ex + 54, 172, ACO3, 9, centro=True)
+            if not VERTICAL: rotulo(tela, 'COM A FRENAGEM', ex + 54, 172, ACO3, 9, centro=True)
         if VERTICAL:
             hud_vertical(tela, [('ENERGIA QUE VIRA MOVIMENTO', AMARELO)], x=231)
             return
@@ -1185,7 +1185,8 @@ class Torque(Cena):
             self.B.desenhar(tela, t, 90 + a, corr, letras=False)
             if tq > .05:
                 seta_arco(tela, 110, 100, 80, 200, 200 + 120 * tq, AMARELO, cab=5)
-                rotulo(tela, 'TORQUE', 200, 180, AMARELO, 9)
+                lx, ly = P(110, 100, 86, 205)
+                rotulo(tela, 'TORQUE', max(3, lx - 34), ly + 8, AMARELO, 9)
         else:
             u = t - self.T_CARRO
             vel = min(1.0, u / 6.0) ** .8
@@ -1194,21 +1195,21 @@ class Torque(Cena):
             dist = 160 * (u ** 2) / 12 if u < 6 else 160 * (3 + (u - 6))
             for k in range(8):
                 x = ((k * 60 - dist) % 360) - 40
-                tela.ret(x, 188, 26, 3, ACO1)
+                if x < 274: tela.ret(x, 188, 26, 3, ACO1)
             # semáforo
-            sx = 250 - dist * .5
+            sx = 262 - dist * 1.5
             if sx > -10:
-                tela.ret(sx, 110, 4, 60, ACO1)
-                pintar_ret(tela, sx - 6, 92, 16, 22, 'plast')
-                tela.disco(sx + 2, 98, 3, FUNDO3 if u > .3 else VERMELHO)
-                tela.disco(sx + 2, 107, 3, VERDE if u > .3 else FUNDO3)
+                tela.ret(sx, 58, 4, 112, ACO1)
+                pintar_ret(tela, sx - 6, 36, 16, 24, 'plast')
+                tela.disco(sx + 2, 43, 3, FUNDO3 if u > .3 else VERMELHO)
+                tela.disco(sx + 2, 52, 3, VERDE if u > .3 else FUNDO3)
             carro(tela, 30, 170, -dist * 2.2, t, 1.0, .9 * (1 - vel) + .2)
         if VERTICAL:
             hud_vertical(tela, [('FORÇA DESDE O ZERO', AMARELO)])
             return
         titulo_painel(tela, 'TORQUE', None, BRANCO, y=8)
         # gráfico torque x velocidade (reta: máximo parado)
-        gx, gy, gw, gh = PX0 + 14, 34, 140, 96
+        gx, gy, gw, gh = PX0 + 14, 34, 140, 86
         painel(tela, PX0 - 6, 28, 172, 122, borda=TRACO)
         tela.ret(gx, gy, 1, gh, ACO2); tela.ret(gx, gy + gh, gw, 1, ACO2)
         tela.linha(gx, gy + 6, gx + gw - 6, gy + gh, AMARELO)
