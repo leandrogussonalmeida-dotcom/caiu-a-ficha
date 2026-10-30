@@ -525,7 +525,8 @@ def mascara_mancha(cx, cy, r, seed=3, x0=0, y0=0, w=W, h=PALCO_H, gotas=True):
 
 
 def pintar_mancha(tela, m, x0=0, y0=0):
-    """Café: escuro na borda (o anel que seca), mais claro dentro, em xadrez."""
+    """Café: escuro na borda (o anel que seca), xadrez por dentro e uns pontos
+    de brilho. Opaca: a câmera vê a mancha toda como escura."""
     h, w = m.shape
     reg = tela.buf[y0:y0 + h, x0:x0 + w]
     dentro = m.copy()
@@ -535,12 +536,12 @@ def pintar_mancha(tela, m, x0=0, y0=0):
     er2[1:, :] &= er[:-1, :]; er2[:-1, :] &= er[1:, :]; er2[:, 1:] &= er[:, :-1]; er2[:, :-1] &= er[:, 1:]
     yy, xx = np.mgrid[0:h, 0:w]
     escuro_baixo = np.isin(reg, [TIN0, TIN1, TIN2, LOC_E, SIN_E, ALI_E, FMT_E, DAD_E, ECC_E])
-    cor = np.where(escuro_baixo, CAF0, np.where((xx + yy) % 4 == 0, CAF2, CAF1))
+    cor = np.where((xx + yy) % 2 == 0, CAF0, CAF1)          # opaca: esconde o que está embaixo
     reg[dentro] = cor[dentro]
     anel = m & ~er2
     reg[anel] = CAF0
     luz = er2 & ~np.roll(er2, 2, 0) & ((xx + yy) % 3 == 0)
-    reg[luz & ~escuro_baixo] = CAF2
+    reg[luz] = CAF2
 
 
 def mods_sob_mancha(m_tela):

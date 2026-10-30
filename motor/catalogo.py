@@ -58,7 +58,7 @@ EPISODIOS = [
     # ---------------------------------------------------------------- onda 6
     dict(id='ep22', serie='voa', titulo='Como o balão de ar quente sobe', estado='fazendo', onda=6),
     dict(id='ep23', serie='jornada', titulo='A jornada de uma gota de chuva', estado='fazendo', onda=6),
-    dict(id='ep24', serie='pixels', titulo='Como funciona o Wi-Fi', estado='fila', onda=6),
+    dict(id='ep24', serie='pixels', titulo='Como funciona o Wi-Fi', estado='fazendo', onda=6),
     dict(id='ep25', serie='dentro', titulo='Como funciona o motor a jato', estado='fila', onda=6),
 ]
 

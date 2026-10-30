@@ -280,11 +280,13 @@ class Titulo(Cena):
         if t > 1.2:
             tela.texto("FEITO DE PIXELS", W // 2, 140, AMARELO, tam=17, centro=True, contorno=PRETO)
         if t > 1.8:
+            x0 = W // 2 - 75
+            tela.ret(x0 - 7, 159, 164, 20, PRETO); tela.ret(x0 - 6, 160, 162, 18, PAP3)
+            tela.ret(x0 - 6, 176, 162, 2, PAP2)
             for k in range(25):
-                v = FINAL[12, k]
-                x = W // 2 - 75 + k * 6
-                if (t - 1.8) * 30 > k:
-                    tela.ret(x, 166, 5, 5, TIN0 if v else PAP3)
+                if (t - 1.8) * 30 <= k: break
+                if FINAL[12, k]: tela.ret(x0 + k * 6, 163, 6, 12, TIN0)
+                tela.ret(x0 + k * 6, 163, 6, 1, TIN1 if FINAL[12, k] else PAP3)
 
     def sons(self, fx):
         self.nota(fx, 1.2, 79, .2, .05)
@@ -622,7 +624,7 @@ class Formato(Cena):
         if not VERTICAL:
             self.ptit(tela, "PEÇA 4: FORMATO (15 BITS)", 64)
             for k in range(15):
-                x = PX0 + k * 11 - (0 if k < 2 else -3) + (3 if k >= 5 else 0)
+                x = PX0 + k * 10 + (3 if k >= 2 else 0) + (3 if k >= 5 else 0)
                 if k < 2:
                     v = (D.EC_BITS >> (1 - k)) & 1
                     if t >= 7.8: celula_bit(tela, x, 82, v, 8, 11, cor1=LARANJA)
@@ -630,8 +632,8 @@ class Formato(Cena):
                 else:
                     self._interroga(tela, x, 82)
             tela.texto("NÍVEL", PX0, 98, LARANJA if t >= 7.8 else ACO2, tam=9, contorno=PRETO)
-            tela.texto("MÁSCARA", PX0 + 25, 108, ACO2, tam=9, contorno=PRETO)
-            tela.texto("PROTEÇÃO", PX0 + 64, 98, ACO2, tam=9, contorno=PRETO)
+            tela.texto("MÁSCARA", PX0 + 23, 108, ACO2, tam=9, contorno=PRETO)
+            tela.texto("PROTEÇÃO", PX0 + 56, 98, ACO2, tam=9, contorno=PRETO)
             if t >= 7.8:
                 self.ptxt(tela, "NÍVEL Q = 11", 124, BRANCO, 17)
                 self.ptxt(tela, "MÁSCARA: AINDA NÃO", 146, ACO3)
@@ -678,6 +680,17 @@ class Texto(Cena):
             if ch != ' ': tela.texto(ch, x + 2, 18 + dy, TIN0, tam=9)
             else: tela.ret(x + 4, 27 + dy, 6, 1, PAP0)
             if feito: tela.ret(x + 3, 35, 8, 2, VERDE)
+        if k_at < 0 and n_tipo > 0:
+            tela.texto(str(n_tipo), 20, 56, AMARELO, tam=26, contorno=PRETO)
+            tela.texto("LETRAS", 20 + tela.largura_texto(str(n_tipo), 26) + 8, 64, BRANCO, tam=17, contorno=PRETO)
+            if t > 3.6:
+                tela.texto("CONTANDO OS 2 ESPAÇOS", 20, 92, ACO3, tam=9, contorno=PRETO)
+                for i in (5, 11):
+                    xx = 12 + i * 16
+                    tela.ret_vazado(xx - 2, 12, 18, 23, CIANO if int(t * 3) % 2 else BRANCO)
+            if t > 4.5:
+                tela.texto("O COMPUTADOR GUARDA CADA LETRA", 20, 112, ACO3, tam=9, contorno=PRETO)
+                tela.texto("COMO UM NÚMERO.", 20, 122, ACO3, tam=9, contorno=PRETO)
         if k_at >= 0:
             ch = TEXTO[k_at]; c = self.cods[k_at]
             tela.texto("'" + (ch if ch != ' ' else 'ESPAÇO') + "'", 20, 52, AMARELO, tam=17, contorno=PRETO)
@@ -820,7 +833,7 @@ class Bytes(Cena):
                 self.ptit(tela, "ONDE FICOU CADA LETRA", 64)
                 ch = TEXTO[letra]
                 tela.texto(ch if ch != ' ' else '_', PX0, 80, BRANCO, tam=26, contorno=PRETO)
-                self.ptxt(tela, f"LETRA {letra + 1} DE 17", 84, AMARELO, 17, x=PX0 + 30)
+                self.ptxt(tela, f"{letra + 1} DE 17", 84, AMARELO, 17, x=PX0 + 30)
                 texto_marcado(tela, ''.join(('*' + c + '*') if j == letra else c for j, c in enumerate(TEXTO)).replace('**', ''),
                               PX0, 118, 9)
             elif t >= self.rep0:
@@ -1043,11 +1056,12 @@ class Mascara(Cena):
         if not VERTICAL:
             if t < 7.8:
                 self.ptit(tela, "SEM MÁSCARA", 64)
-                self.ptxt(tela, "BLOCOS E FILEIRAS", 80, VERMELHO, 17)
-                self.ptxt(tela, "DO MESMO TOM", 98, VERMELHO, 17)
-                self.ptxt(tela, "PODEM CONFUNDIR A CÂMERA", 124, ACO3)
-                self.ptxt(tela, "(E ATÉ PARECER UM", 134, ACO3)
-                self.ptxt(tela, "LOCALIZADOR)", 144, ACO3)
+                self.ptxt(tela, "BLOCOS E", 80, VERMELHO, 17)
+                self.ptxt(tela, "FILEIRAS", 98, VERMELHO, 17)
+                self.ptxt(tela, "DO MESMO TOM", 116, VERMELHO)
+                self.ptxt(tela, "PODEM CONFUNDIR A CÂMERA", 134, ACO3)
+                self.ptxt(tela, "(E ATÉ PARECER UM", 144, ACO3)
+                self.ptxt(tela, "LOCALIZADOR)", 154, ACO3)
             elif t < self.ciclo0:
                 self.ptit(tela, "MÁSCARA 0", 64)
                 self._icone(tela, 0, PX0, 80, 4)
@@ -1144,7 +1158,7 @@ class Mancha(Cena):
         if t < self.t_cai: return 0.0
         if t < self.t_cresce: return self.R1 * ease((t - self.t_cai) / 1.2)
         u = clamp((t - self.t_cresce) / 6.0)
-        return self.R1 + (self.r_lim + 1.0 - self.R1) * suave(u)
+        return self.R1 + (self.r_lim + 5.0 - self.R1) * suave(u)
 
     def estado(self, r):
         if r <= 0: return 0, []
@@ -1479,6 +1493,7 @@ class Historia(Cena):
         tela.disco(sx + 10, 68, 2, VERDE if ativo else ACO0)
         # painel: o diário da fábrica
         if not VERTICAL:
+            tela.ret(300, 0, 1, PALCO_H, TRACO); tela.ret(301, 0, W - 301, PALCO_H, FUNDO)
             self.ptit(tela, "JAPÃO, 1994", 6)
             tela.texto("1994", PX0, 22, AMARELO, tam=26, contorno=PRETO)
             self.ptxt(tela, "DENSO WAVE", 52, BRANCO, 17)
@@ -1497,6 +1512,8 @@ class Historia(Cena):
             u = suave((t - 15.8) / .5)
             x = 60; y = 80
             if u > 0:
+                y = int(lerp(-30, 80, ease(u)))
+                tela.linha(x + 14, 0, x + 14, y, ACO1); tela.linha(x + 86, 0, x + 86, y, ACO1)
                 tela.ret(x - 2, y - 2, 104, 24, PRETO)
                 tela.ret(x, y, 100, 20, VERMELHO); tela.ret(x + 2, y + 2, 96, 16, BRANCO); tela.ret(x + 3, y + 3, 94, 14, VERMELHO)
                 tela.texto("ISO/IEC 2000", x + 50, y + 7, BRANCO, tam=9, centro=True, contorno=PRETO)

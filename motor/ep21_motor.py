@@ -666,18 +666,18 @@ class Ciclo(Cena):
 
 # ============================================================ dois botões
 class Duplo(Cena):
-    A0, B0, PASSO = 1.0, 18.3, 3.2
+    A0, B0, PA, PB = 1.0, 15.4, 2.9, 3.4
 
     def estado(self, t):
         if t < self.B0 - .3:
-            return ciclo(min(4.99, max(0, (t - self.A0) / self.PASSO)), 3.0), 3.0
-        return ciclo(min(4.99, max(0, (t - self.B0) / self.PASSO)), 6.0), 6.0
+            return ciclo(min(4.99, max(0, (t - self.A0) / self.PA)), 3.0), 3.0
+        return ciclo(min(4.99, max(0, (t - self.B0) / self.PB)), 6.0), 6.0
 
     def desenhar(self, tela, t, tg):
         e, vol = self.estado(t)
         cenario(tela, t, e)
         P = VASO.pontos()
-        if t < 15.1:
+        if t < self.B0 + 3:
             et(tela, 'duplo', 'MENOR: 3 L', 120, 14, P['botao_meio'], CIANO)
             et(tela, 'duplo', 'MAIOR: 6 L', 262, 14, P['botao'], AMARELO)
         meia = D.FUNDO_CX - 3 * D.PX_L
@@ -707,8 +707,8 @@ class Duplo(Cena):
             tit(tela, 'DA COMPLETA (USP)', 184, ACO3, 9)
 
     def sons(self, fx):
-        sons_descarga(fx, self.t0 + self.A0, self.B0 - .3 - self.A0, lambda t: min(4.99, t / self.PASSO), 3.0)
-        sons_descarga(fx, self.t0 + self.B0, self.dur - self.B0, lambda t: min(4.99, t / self.PASSO), 6.0)
+        sons_descarga(fx, self.t0 + self.A0, self.B0 - .3 - self.A0, lambda t: min(4.99, t / self.PA), 3.0)
+        sons_descarga(fx, self.t0 + self.B0, self.dur - self.B0, lambda t: min(4.99, t / self.PB), 6.0)
 
 
 # ============================================================ quantos litros

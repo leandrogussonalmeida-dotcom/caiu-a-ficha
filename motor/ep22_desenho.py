@@ -172,7 +172,7 @@ def envelope(tela, mx, my, k, t, ang=0.0, fill=1.0, vent=0.0, corte=0.0, quente=
         out = np.where(dentro, it, out)
     # paraquedas aberto: fresta perto do topo, mostra o fundo escuro de dentro
     if vent > 0:
-        gap = (s > 11.2) & (s < 11.2 + 7 * vent) & (np.abs(u) < r * .9)
+        gap = (s > 11.2) & (s < 11.2 + 3.5 * vent) & (np.abs(u) < r * .88)
         out = np.where(gap, np.where((xx + yy) % 2 == 0, INTQ0, PRETO), out)
     reg = tela.buf[by0:by1, bx0:bx1]
     if not sem_contorno:

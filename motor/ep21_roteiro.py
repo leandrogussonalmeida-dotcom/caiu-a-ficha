@@ -144,10 +144,10 @@ LEGENDAS = {
         (29.7, 35.6, "E A ÁGUA NUNCA PASSA DO *LADRÃO*:", "A BOIA FECHA ANTES.", ('F2',)),
     ],
     'duplo': [
-        (0.5, 7.5, "MUITAS CAIXAS TÊM *DOIS BOTÕES*.", "", ('F4',)),
-        (7.8, 14.8, "O MENOR, PARA LÍQUIDOS, SOLTA", "MENOS ÁGUA: CERCA DE *3 LITROS*.", ('F4',)),
-        (15.1, 22.1, "AQUI A COMPORTA FECHA NA METADE", "DA CAIXA: É A *MEIA DESCARGA*.", ()),
-        (22.4, 29.4, "O MAIOR, PARA SÓLIDOS, SOLTA", "A CAIXA TODA: *6 LITROS*.", ('F4', 'F3')),
+        (0.5, 5.4, "MUITAS CAIXAS TÊM *DOIS BOTÕES*.", "O MENOR É PARA LÍQUIDOS.", ('F4',)),
+        (5.6, 12.6, "A COMPORTA FECHOU NA METADE:", "SAÍRAM CERCA DE *3 LITROS*.", ('F4',)),
+        (15.1, 22.1, "O MAIOR, PARA SÓLIDOS, SOLTA", "A CAIXA TODA: *6 LITROS*.", ('F4', 'F3')),
+        (22.4, 29.4, "AGORA A COMPORTA SÓ FECHA", "QUANDO A CAIXA ESVAZIA.", ()),
         (29.7, 35.6, "UMA ESPECIFICAÇÃO DA USP ACEITA MEIA", "DESCARGA DE ATÉ *2/3* DA COMPLETA.", ('F3',)),
     ],
     'litros': [
