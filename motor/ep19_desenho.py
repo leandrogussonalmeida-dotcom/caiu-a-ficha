@@ -286,7 +286,8 @@ def cont_lado(tela, x, y, w, h, pal=P_LAR, t=0.0, codigo=False, raiox=None, port
         # sombra embaixo (degradê pontilhado)
         dither(tela, x, y + h - max(2, h // 4), w, max(2, h // 4), pal[1], pal[0] if pal[0] != PRETO else pal[1])
         # trilhos de cima e de baixo, colunas de canto
-        tela.ret(x, y, w, max(1, h // 12), pal[4]); tela.ret(x, y + max(1, h // 12), w, 1, pal[1])
+        tr_ = min(3, max(1, h // 12))
+        tela.ret(x, y, w, tr_, pal[4]); tela.ret(x, y + tr_, w, 1, pal[1])
         tela.ret(x, y + h - max(1, h // 10), w, max(1, h // 10), pal[0] if pal[0] != PRETO else pal[1])
         cw = max(1, w // 40)
         tela.ret(x, y, cw, h, pal[1]); tela.ret(x + w - cw, y, cw, h, pal[1])

@@ -875,7 +875,7 @@ class Lingueta(Cena):
             tela.texto('O TRINCO: A LINGUETA', PX0, 168, BRANCO, tam=9, contorno=PRETO)
             tela.texto('FICA ONDE ESTÁ', PX0, 180, AMARELO, tam=9, contorno=PRETO)
         elif t >= 26.8:
-            tela.texto('SEM MOLA: SÓ VOLTA', PX0, 156, BRANCO, tam=9, contorno=PRETO)
+            tela.texto('NÃO RECUA: SÓ VOLTA', PX0, 156, BRANCO, tam=9, contorno=PRETO)
             tela.texto('COM A CHAVE', PX0, 168, AMARELO, tam=9, contorno=PRETO)
 
     def sons(self, fx):
@@ -1296,7 +1296,7 @@ class Historia(Cena):
         etiqueta(tela, 'FERROLHO', 200, 160, *A['ferrolho'], AMARELO)
         etiqueta(tela, 'CHAVE', 8, 160, *A['chave'], AMARELO)
         titulo_painel(tela, 'HISTÓRIA', None, BRANCO, y=8)
-        cards = [(0.5, 'EGITO ANTIGO', 'PINOS DE MADEIRA', LATAO), (7.8, 'PODE TER', '4.000 ANOS', AMARELO),
+        cards = [(0.5, 'EGITO ANTIGO', 'PINOS DE MADEIRA', LATAO), (7.8, 'HÁ MILHARES', 'DE ANOS', AMARELO),
                  (15.8, '1848: LINUS YALE', 'O MESMO PRINCÍPIO', CIANO), (22.8, 'ANOS 1860: O FILHO', 'CILINDRO, CHAVE CHATA', VERDE)]
         for j, (ta, a, b, cor) in enumerate(cards):
             if t < ta: continue

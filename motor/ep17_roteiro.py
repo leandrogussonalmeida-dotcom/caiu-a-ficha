@@ -28,7 +28,7 @@ FATOS E FONTES (todas lidas em 30/10/2026)
       "Pin tumbler lock".
   F2  Britannica, "lock": fechadura egípcia de madeira, pinos que caem em furos
       do ferrolho, chave erguida que levanta os pinos; o exemplo mais antigo,
-      achado em Khorsabad perto de Nínive, pode ter 4.000 anos; Linus Yale
+      achado em Khorsabad perto de Nínive, talvez 2.700 a 4.000 anos; Linus Yale
       patenteou em 1848 uma fechadura de pinos baseada no princípio egípcio;
       nos anos 1860 o filho, Linus Yale Jr., criou o cilindro com a chave
       pequena e chata de borda serrilhada; os dentes erguem os pinos à altura
@@ -98,7 +98,7 @@ LEGENDAS = {
     ],
     'semchave': [
         (0.5, 7.6, "SEM CHAVE, AS MOLAS EMPURRAM", "OS PINOS PARA BAIXO.", ('F1',)),
-        (7.8, 15.6, "CADA CONTRAPINO FICA *ATRAVESSADO*", "NA LINHA: METADE DE CADA LADO.", ('F1',)),
+        (7.8, 15.6, "CADA CONTRAPINO FICA *ATRAVESSADO*", "NA LINHA: PARTE EM CADA LADO.", ('F1',)),
         (15.8, 23.6, "É COMO UMA TRAVA EM CADA FURO:", "O ROTOR *NÃO CONSEGUE GIRAR*.", ('F1',)),
     ],
     'errada': [
@@ -128,12 +128,12 @@ LEGENDAS = {
         (0.5, 8.6, "A FECHADURA ABERTA: O CILINDRO", "FICA NO MEIO DA *CAIXA*.", ()),
         (8.8, 17.6, "AO GIRAR, O *CAME* ENGANCHA NUM", "DENTE DA LINGUETA E EMPURRA.", ('F1',)),
         (17.8, 26.6, "UMA VOLTA DA CHAVE: A *LINGUETA*", "SAI E ENTRA NO BATENTE.", ('F6',)),
-        (26.8, 35.6, "ELA NÃO TEM MOLA: SÓ VOLTA", "*COM A CHAVE* OU UM BOTÃO DE GIRAR.", ('F6',)),
+        (26.8, 35.6, "NÃO RECUA SE EMPURRADA: SÓ VOLTA", "*COM A CHAVE* OU UM BOTÃO DE GIRAR.", ('F6',)),
     ],
     'trinco': [
         (0.5, 7.6, "O *TRINCO* É DIFERENTE: TEM MOLA", "E A PONTA INCLINADA.", ('F5',)),
         (7.8, 15.6, "AO FECHAR, A RAMPA BATE NA CHAPA", "DO BATENTE E O TRINCO *ENTRA*.", ('F5',)),
-        (15.8, 22.6, "PASSOU, A MOLA EMPURRA ELE PARA", "O BURACO: *CLIC*. PORTA FECHADA.", ('F5',)),
+        (15.8, 22.6, "PASSOU, A MOLA O EMPURRA PARA", "O BURACO: *CLIC*. PORTA FECHADA.", ('F5',)),
         (22.8, 29.6, "PARA ABRIR, A *MAÇANETA* PUXA", "O TRINCO PARA DENTRO.", ('F5',)),
     ],
     'chave': [
@@ -148,19 +148,19 @@ LEGENDAS = {
         (26.8, 35.6, "NA PRÁTICA SÃO MENOS: HÁ REGRAS", "PARA DENTES VIZINHOS.", ('F4',)),
     ],
     'mestra': [
-        (0.5, 7.6, "PRÉDIOS USAM *CHAVE MESTRA*:", "UMA SÓ CHAVE ABRE VÁRIAS PORTAS.", ('F3',)),
+        (0.5, 7.6, "MUITOS PRÉDIOS USAM *CHAVE MESTRA*:", "UMA SÓ CHAVE ABRE VÁRIAS PORTAS.", ('F3',)),
         (7.8, 15.6, "O TRUQUE: UMA PEÇA *EXTRA*, FININHA,", "ENTRE O PINO E O CONTRAPINO.", ('F1',)),
         (15.8, 22.6, "ELA CRIA *2 VÃOS*: UM PARA A SUA", "CHAVE, OUTRO PARA A MESTRA.", ('F1',)),
         (22.8, 29.6, "AS DUAS GIRAM O MESMO ROTOR,", "CADA UMA COM O SEU VÃO NA LINHA.", ('F1',)),
     ],
     'tetra': [
         (0.5, 7.6, "E A CHAVE *TETRA*? ELA É CRUZADA:", "O SEGREDO FICA EM *4 FACES*.", ('F7',)),
-        (7.8, 15.6, "MAIS FACES, MAIS DENTES PARA CASAR:", "UM SEGREDO *MAIS COMPLEXO*.", ('F7',)),
+        (7.8, 15.6, "MAIS FACES, MAIS DENTES PARA CASAR:", "UM SEGREDO *MAIS COMPLEXO*.", ('F7', 'F9')),
         (15.8, 23.6, "MAS A SEGURANÇA DEPENDE DE TUDO:", "PORTA, BATENTE E LINGUETA.", ('F7',)),
     ],
     'historia': [
         (0.5, 7.6, "A IDEIA É ANTIGA. NO EGITO, PINOS", "DE *MADEIRA* PRENDIAM O FERROLHO.", ('F2',)),
-        (7.8, 15.6, "A CHAVE ERGUIA OS PINOS. UMA", "DESSAS PODE TER *4.000 ANOS*.", ('F2',)),
+        (7.8, 15.6, "A CHAVE ERGUIA OS PINOS. A IDEIA", "TEM *MILHARES DE ANOS*.", ('F2',)),
         (15.8, 22.6, "EM *1848*, LINUS YALE PATENTEOU", "UMA FECHADURA DE PINOS.", ('F2', 'F3')),
         (22.8, 29.6, "NOS ANOS *1860*, O FILHO CRIOU O", "CILINDRO DE CHAVE CHATA.", ('F2', 'F3')),
     ],
@@ -180,6 +180,7 @@ FONTES = {
     'F6': ('Wikipedia, "Dead bolt"', 'https://en.wikipedia.org/wiki/Dead_bolt'),
     'F7': ('Olhar Digital, "Fechadura tetra pode reforçar a segurança da porta, mas há um detalhe mais importante que o formato da chave"',
            'https://olhardigital.com.br/curiosidades/?p=18008'),
+    'F9': ('Guia Fácil, chave tetra: quatro fileiras de dentes ou segredos, com pinos em diferentes posições', 'https://guiafacil.com/blog/?p=4869'),
     'F8': ('Conta a partir de F4: 10 x 10 x 10 x 10 x 10 = 100.000; 10 elevado a 6 = 1.000.000', None),
 }
 

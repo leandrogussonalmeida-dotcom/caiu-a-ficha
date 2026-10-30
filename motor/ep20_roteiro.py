@@ -132,7 +132,7 @@ LEGENDAS = {
     ],
     'mancha': [
         (0.5, 7.4, "AGORA, UM ACIDENTE:", "CAIU *CAFÉ* NO CÓDIGO.", ()),
-        (7.8, 15.0, "A MANCHA ESTRAGOU *{n1} DOS 44 BYTES*.", "E A CÂMERA AINDA LÊ A FRASE!", ('F5',)),
+        (7.8, 15.0, "A MANCHA ESTRAGOU *6 DOS 44 BYTES*.", "E A CÂMERA AINDA LÊ A FRASE!", ('F5',)),
         (15.4, 23.4, "A CORREÇÃO DE ERRO REFAZ OS BYTES", "QUE O CAFÉ COBRIU.", ('F1', 'F2')),
         (23.8, 31.0, "MAS TEM LIMITE: NO NÍVEL Q, ATÉ", "*UM QUARTO* DO CÓDIGO.", ('F2', 'F8')),
         (31.4, 38.6, "MANCHA DEMAIS E A FRASE", "*NÃO VOLTA MAIS*.", ('F2',)),
